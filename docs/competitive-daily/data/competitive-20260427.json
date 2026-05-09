@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "date": "2026-04-27",
+    "dateCompact": "20260427",
+    "weekday": "星期一",
+    "extractedAt": "2026-04-27T01:40:07.575Z",
+    "sourceFile": "CODM_Competitive_Daily_20260427.md",
+    "version": "1.0.0"
+  },
+  "overview": "猛攻节全面福利倒计时 3 天、CODM S4 巩固期、暗区 S5 长尾运营三线并进。三角洲姜文代言 5 分钟完整宣传片释出，集齐《让子弹飞》名台词 + 猛攻节福利预告，社媒热度持续攀升；4/30 将一次性释放 2600 三角券 + 古墓丽影·劳拉传说皮肤，形成「月末双杀」攻势。CODM S4「永恒监狱」+ MonsterVerse 联动上线第 5 天，海外社区围绕哥斯拉×金刚皮肤与重生岛双模式持续发酵；国服 4/22 同步更新后热度稳定。暗区 S5「异变」持续长尾，4/21 热更调整 Famas 手感 + 异变山谷大金爆率。BF6 2026 路线图细节（S3 五月 Golmud + Grand Bazaar 经典重制双图）进一步官方确认，社区信心建设进入执行期。",
+  "highlights": [
+    {
+      "text": "三角洲：姜文×《让子弹飞》5 分钟完整宣传片社媒引爆，4/30 猛攻节全面福利倒计时 3 天",
+      "priority": 3
+    },
+    {
+      "text": "CODM：S4 MonsterVerse 联动第 5 天，哥斯拉×金刚皮肤 + 重生岛 BR/DMZ 双模式热度巩固",
+      "priority": 3
+    },
+    {
+      "text": "暗区突围：无限 S5「异变」热更后进入长尾运营，异变山谷大金爆率调优",
+      "priority": 2
+    },
+    {
+      "text": "BF6：2026 S3 路线图官方确认 Golmud Railway + Grand Bazaar 双经典重制图，5 月上线",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔀",
+      "nameCN": "横向维度对比",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🔽",
+      "nameCN": "竞品详情",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "端游赛道 + S3 5 月路线图预热",
+      "attentionLevel": "⚡⚡⚡",
+      "highlights": [
+        {
+          "text": "姜文代言完整宣传片释出：5 分钟长片集合《让子弹飞》全系经典台词（「翻译翻译什么叫惊喜」「让子弹飞一会」等），与三角洲干员场景无缝融合，社媒单日讨论量破纪录",
+          "priority": 3
+        },
+        {
+          "text": "4/30 猛攻节全面福利倒计时 3 天：2600 限时三角券 + 14 张定制装备券 + 猛攻节限定大红 + 猛攻节主题武器外观 + 限定成就勋章 + 姜文定制外观三件套（头像/军牌/喷漆）",
+          "priority": 3
+        },
+        {
+          "text": "古墓丽影联动「露娜-劳拉·克劳馥」传说级外观 4/30 商城上架，与姜文双线并行",
+          "priority": 2
+        },
+        {
+          "text": "S4「永恒监狱」(Eternal Prison) 上线第 5 天：哥斯拉×金刚 MonsterVerse 联动持续运营，重生岛 BR + DMZ 双模式热度稳定",
+          "priority": 2
+        },
+        {
+          "text": "海外社媒 Godzilla x Kong 皮肤实战视频 持续发酵：原子吐息武器特效 + 金刚巨兽人 setter 皮肤成为社区 TOP 话题",
+          "priority": 2
+        },
+        {
+          "text": "4/21 不停服热更：Famas 手感异常修复回调（玩家反馈后快速响应）、异变山谷大金爆率调优",
+          "priority": 2
+        },
+        {
+          "text": "S9「Echo」赛季 Morse 干员 + 声纹战术体系持续引流，Zero Dam 地图 rework 进入玩家实战磨合期",
+          "priority": 1
+        },
+        {
+          "text": "Mythic DP27 LMG 首周实战数据出炉，进入主流 BR 武器梯队",
+          "priority": 1
+        },
+        {
+          "text": "S5「异变」自 4/2 上线以来持续长尾运营，异变山谷、首领集结、战神锦标赛三线并行",
+          "priority": 1
+        },
+        {
+          "text": "S3 2026 年 5 月官方确认：Golmud Railway（BF4 经典）+ Grand Bazaar（BF3 经典）双图重制，5-7 月窗口期",
+          "priority": 1
+        },
+        {
+          "text": "服务器浏览器 + REDSEC Ranked Play 5 月首发，社区最期待功能落地",
+          "priority": 1
+        },
+        {
+          "text": "全面战场国际邀请赛 4/27 今日报名开放，电竞线承接流量",
+          "priority": 0
+        },
+        {
+          "text": "五一假期前（4/30）全面福利释放，精准卡位黄金档期",
+          "priority": 0
+        },
+        {
+          "text": "BP 4 款新干员外观持续曝光，玩家进度分布健康",
+          "priority": 0
+        },
+        {
+          "text": "新 BR 职业 Toxic Overload 毒气战术成形，与重生岛毒圈机制产生玩法化学反应",
+          "priority": 0
+        },
+        {
+          "text": "DMZ：侦察模式重生岛作为第二张提取地图持续承接中老玩家",
+          "priority": 0
+        },
+        {
+          "text": "混沌质产出概率 UP 活动延续（4/21 起），红色品质收藏品掉率提高",
+          "priority": 0
+        },
+        {
+          "text": "战神锦标赛 TV Station 电视台地图专项赛事持续进行中",
+          "priority": 0
+        },
+        {
+          "text": "新武器坠星者（近战）玩家社区实战视频持续产出",
+          "priority": 0
+        },
+        {
+          "text": "S4（7 月）Wake Island + Naval Warfare 海战模式已进入细节宣发",
+          "priority": 0
+        },
+        {
+          "text": "全年路线图 7 张新地图承诺（含 3 张经典重制），社区信心继续积累",
+          "priority": 0
+        },
+        {
+          "text": "🎬 姜文代言《三角洲行动》猛攻节完整宣传片（5 分钟版）（三角洲行动）",
+          "priority": 0
+        },
+        {
+          "text": "📺 链接：https://news.qq.com/rain/a/20260424A036MK00",
+          "priority": 0
+        },
+        {
+          "text": "🖼️ 封面：姜文站在猛攻节战术高地，手持 A 达步枪瞄准远方，背景是让子弹飞式的阳光大漠配色（电影《让子弹飞》经典色调 + 三角洲现代军事美学融合）",
+          "priority": 0
+        },
+        {
+          "text": "📝 简介：5 分钟完整宣传片，集合《让子弹飞》全系经典台词（「翻译翻译什么叫惊喜」「让子弹飞一会」等），穿插猛攻节福利预告，是 2026 年中国战术射击游戏代言合作的年度标杆之作",
+          "priority": 0
+        },
+        {
+          "text": "⏱️ 时长：约 5 分钟",
+          "priority": 0
+        },
+        {
+          "text": "📅 发布时间：2026-04-24（4/27 仍为本周宣发核心资产）",
+          "priority": 0
+        },
+        {
+          "text": "🎬 Delta Force - Season 'Echo' Cinematic Trailer（Delta Force 国际版）",
+          "priority": 0
+        },
+        {
+          "text": "📺 链接：https://www.gamereactor.eu/video/801683/Delta+Force+-+Season+Echo+Cinematic+Trailer+PS5/",
+          "priority": 0
+        },
+        {
+          "text": "🖼️ 封面：新干员 Morse 在暴雨城市中使用声纹扫描器追踪目标，深蓝紫色冷调构图",
+          "priority": 0
+        },
+        {
+          "text": "📝 简介：S9「Echo」赛季 CG 动画，主打「声音即视野」概念，展示 Morse 干员声纹战术能力",
+          "priority": 0
+        },
+        {
+          "text": "⏱️ 时长：约 2 分",
+          "priority": 0
+        },
+        {
+          "text": "📅 发布时间：2026-04-21",
+          "priority": 0
+        },
+        {
+          "text": "🎬 使命召唤®：手游 - 第 4 赛季：永恒监狱 官方预告片（CODM）",
+          "priority": 0
+        },
+        {
+          "text": "📺 链接：https://www.bilibili.com/video/BV1trd1B7Eqc/",
+          "priority": 0
+        },
+        {
+          "text": "🖼️ 封面：重生岛监狱背景 + 哥斯拉原子吐息冲击波，暗红色调 + 黑金强调",
+          "priority": 0
+        },
+        {
+          "text": "📝 简介：S4「永恒监狱」赛季预告，MonsterVerse 怪兽与干员并肩作战，展示重生岛 BR/DMZ 双模式与 Mythic DP27",
+          "priority": 0
+        },
+        {
+          "text": "⏱️ 时长：约 2 分 30 秒",
+          "priority": 0
+        },
+        {
+          "text": "📅 发布时间：2026-04-21（持续高热度）",
+          "priority": 0
+        },
+        {
+          "text": "🎬 COD Mobile x Godzilla x Kong Collab Trailer（CODM 国际版）",
+          "priority": 0
+        },
+        {
+          "text": "📺 链接：https://bloody-disgusting.com/video-games/3946933/call-of-duty-mobile-gets-godzilla-x-kong-crossover-for-season-4-update-trailer/",
+          "priority": 0
+        },
+        {
+          "text": "🖼️ 封面：哥斯拉与金刚同框站位，背景是被摧毁的监狱岛战场，冷蓝 + 熔岩橙的高反差",
+          "priority": 0
+        },
+        {
+          "text": "📝 简介：MonsterVerse 官方联动预告片，展示两大泰坦皮肤 + 联动任务 + 限定活动玩法",
+          "priority": 0
+        },
+        {
+          "text": "⏱️ 时长：约 1 分 30 秒",
+          "priority": 0
+        },
+        {
+          "text": "📅 发布时间：2026-04-17（联动期持续热推）",
+          "priority": 0
+        }
+      ],
+      "tempo": "路线图细节执行 + 经典 IP 情怀 + 海战差异化亮点",
+      "sources": [
+        "https://news.qq.com/rain/a/20260424A036MK00",
+        "https://www.gamersky.com/news/202604/2129551.shtml",
+        "https://www.bilibili.com/video/BV1AhdZBCE5x/",
+        "https://www.callofduty.com/blog/2026/04/call-of-duty-mobile-season-4-2026-eternal-prison",
+        "https://gamingonphone.com/news/cod-mobile-season-4-2026-eternal-prison-brings-rebirth-island-mythic-dp27-and-godzilla-x-kong-collaboration/",
+        "https://www.bilibili.com/video/BV1trd1B7Eqc/",
+        "https://news.17173.com/content/04202026/141125868.shtml",
+        "https://www.bilibili.com/video/BV1trd1B7Eqc/",
+        "https://store.steampowered.com/news/app/2073620/view/516363250012521577",
+        "https://www.ea.com/games/battlefield/battlefield-6/seasons/battlefield-2026-roadmap",
+        "https://www.psu.com/news/battlefield-6-2026-roadmap-confirms-season-3-to-launch-in-may-with-railway-to-golmud-cairo-bazaar-maps/",
+        "https://www.gameinformer.com/2026/04/16/battlefield-6-2026-roadmap-reveals-new-maps-ranked-play-naval-warfare-and-more"
+      ]
+    }
+  ],
+  "intensityTable": [
+    {
+      "name": "三角洲行动",
+      "event": "⭐⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "CODM",
+      "event": "⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "暗区突围",
+      "event": "⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "BF6",
+      "event": "⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    }
+  ],
+  "insights": [
+    {
+      "title": "4/30 「三角洲核弹日」预警 — CODM 必须备好承接炮火",
+      "body": "三角洲把姜文完整宣传片、2600 券、劳拉传说皮肤、猛攻节限定大红全部押注在 4/30 同一天释放，精准卡位五一假期前窗口；这是一次典型的「集中压强式宣发」，目的是把所有社媒声量、商城流水、登录曲线在 24 小时内达峰。CODM S4 虽已上线第 5 天进入巩固期，但 4/30 如果没有明确的承接动作，会在自然流量下被对手单日超越。",
+      "codmActions": [
+        "4/30 同步释放联动第二阶段专属内容（如 Mythic 级怪兽皮肤、哥斯拉/金刚终极 Boss 模式、限定电影级 CG），与三角洲正面错位",
+        "提前 48 小时启动社媒预告矩阵，利用「五一长假七日挑战」把玩家锁在 CODM 内",
+        "KOL 合作策略：主攻「联动第二波独家内容」实机内容，避免与姜文宣传片正面硬碰"
+      ]
+    },
+    {
+      "title": "完整宣传片 vs 短预告 — 长视频回归的宣发趋势",
+      "body": "三角洲这次姜文5 分钟完整宣传片的传播力，证明在抖音/短视频当道的 2026 年，长视频凭借「名台词密度 + 经典 IP 致敬 + 游戏场景融合」依然能引爆社媒。CODM 的 MonsterVerse 联动目前仍以短视频切片为主，在「一口气看完的沉浸叙事」层面没有正面对标作品。",
+      "codmActions": [
+        "下一个 S 级联动（如 S4 中后期，或 S5 筹备期）应投资 1 支 3-5 分钟级别的完整 CG（好莱坞级）",
+        "把哥斯拉/金刚 IP 的「城市废墟 + 巨兽视角」拍成沉浸式短片，而不只是碎片化皮肤展示",
+        "参考三角洲「电影桥段 + 游戏场景无缝融合」的手法，建立 CODM 自己的视觉叙事标签"
+      ]
+    },
+    {
+      "title": "暗区「快速响应式热更」— CODM 售后口碑借鉴",
+      "body": "暗区 Famas 手感玩家反馈当日就被官方用不停服热更回调，这种「玩家说 → 官方修 → 24h 内上线」的响应速度，在售后口碑建设上极具杀伤力。CODM S4 目前 Mythic DP27 强度/毒气战术职业平衡仍在争议期，快速响应能大幅提升社区信任。",
+      "codmActions": [
+        "对 S4 重点武器（DP27、Toxic Overload）建立「48 小时内快速响应」机制，出现强度争议立刻走热更调整",
+        "在社媒公开「玩家反馈 → 调整决策」的处置记录，把响应过程本身做成宣发内容",
+        "用「快速响应」建立 CODM「最听玩家意见的头部竞技手游」心智，与三角洲的「大牌代言」形成差异化"
+      ]
+    }
+  ],
+  "stats": {
+    "totalCompetitors": 2,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 2,
+    "totalInsights": 3,
+    "totalActions": 9,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

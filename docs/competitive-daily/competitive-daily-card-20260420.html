@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>CODM 竞品日报 · 2026.04.20</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #0D0D0D;
+    color: #FFFFFF;
+  }
+
+  .page {
+    width: 1080px;
+    height: 1920px;
+    background: #0D0D0D;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── 背景装饰 ── */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,230,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .side-mark {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-lr;
+    font-size: 11px;
+    letter-spacing: 0.6em;
+    color: rgba(255,255,255,0.04);
+    font-weight: 300;
+    pointer-events: none;
+  }
+
+  /* ── Cover 区 ── */
+  .cover {
+    height: 220px;
+    padding: 40px 56px 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .cover-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-bar {
+    width: 4px;
+    height: 22px;
+    background: #FFE600;
+  }
+
+  .brand-label {
+    background: #FFE600;
+    color: #0D0D0D;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .brand-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+    margin-left: 8px;
+  }
+
+  .cover-date {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .cover-date .brand-name {
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .cover-title .hl { color: #FFE600; }
+
+  .cover-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+
+  /* ── 分隔线 ── */
+  .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 0 56px;
+    flex-shrink: 0;
+  }
+
+  /* ── 概览区 ── */
+  .overview {
+    padding: 22px 56px 16px;
+    flex-shrink: 0;
+  }
+
+  .overview-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .overview-text .hl { color: #FFE600; font-weight: 500; }
+
+  /* ── 威胁条 ── */
+  .threat-bar {
+    display: flex;
+    gap: 8px;
+    padding: 0 56px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  .threat-pill {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+  }
+
+  .threat-pill-high {
+    border-color: #FFE600;
+    color: #FFE600;
+    background: rgba(255,230,0,0.06);
+  }
+
+  .threat-pill-mid {
+    border-color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ── 内容区 ── */
+  .content {
+    flex: 1;
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* ── 竞品卡片 ── */
+  .comp-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+
+  .comp-card {
+    background: #141414;
+    border: 0.5px solid rgba(255,255,255,0.06);
+    border-left: 3px solid #888;
+    padding: 16px 20px;
+  }
+
+  .comp-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .comp-icon { font-size: 16px; }
+
+  .comp-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .comp-threat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    text-transform: uppercase;
+  }
+
+  .threat-critical {
+    background: #FFE600;
+    color: #0D0D0D;
+  }
+
+  .threat-warning {
+    background: rgba(255,230,0,0.12);
+    color: #FFE600;
+    border: 0.5px solid rgba(255,230,0,0.3);
+  }
+
+  .threat-normal {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.5);
+    border: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  .comp-highlight {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+
+  .comp-highlight::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── 宣发节奏对比 ── */
+  .tempo-section {
+    margin-bottom: 22px;
+    flex-shrink: 0;
+  }
+
+  .tempo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 9px;
+  }
+
+  .tempo-name {
+    width: 90px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .tempo-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+  }
+
+  .tempo-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, #FFE600, rgba(255,230,0,0.4));
+  }
+
+  .tempo-stars {
+    font-size: 10px;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  /* ── CODM 运营启发 ── */
+  .insights-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .insights-box {
+    background: rgba(255,230,0,0.03);
+    border: 1px solid rgba(255,230,0,0.12);
+    padding: 24px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 0;
+  }
+
+  .insights-header {
+    font-size: 17px;
+    font-weight: 800;
+    color: #FFE600;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .insights-header::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: #FFE600;
+    flex-shrink: 0;
+  }
+
+  .insight-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 6px 0;
+  }
+
+  .insight-num {
+    width: 28px;
+    height: 28px;
+    background: rgba(255,230,0,0.12);
+    color: #FFE600;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .insight-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .insight-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+  }
+
+  .insight-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    height: 72px;
+    padding: 0 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-dot {
+    width: 8px;
+    height: 8px;
+    background: #FFE600;
+  }
+
+  .footer-team {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  .footer-team strong {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-right {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: right;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-deco {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    justify-content: flex-end;
+  }
+
+  .footer-sq {
+    width: 6px;
+    height: 6px;
+    background: #FFE600;
+  }
+
+  .footer-sq:nth-child(2) { opacity: 0.4; }
+  .footer-sq:nth-child(3) { opacity: 0.15; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="side-mark">CALL OF DUTY MOBILE · COMPETITIVE INTEL</div>
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <span class="brand-bar"></span>
+        <span class="brand-label">竞品日报</span>
+        <span class="brand-sub">COMPETITIVE INTEL</span>
+      </div>
+      <div class="cover-date">
+        <div class="brand-name">CALL OF DUTY</div>
+        <div>使命召唤手游</div>
+      </div>
+    </div>
+    <div class="cover-title">CODM 竞品<span class="hl">日报</span></div>
+    <div class="cover-sub">2026.04.20 · 星期一 · DAILY INTEL</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 概览 -->
+  <div class="overview">
+    <div class="overview-text">本周末竞品赛道大事密集，而 CODM 自身同样处于版本迭代关键窗口：S4「永恒囚牢」将于4/22正式上线，带来重生岛、哥斯拉×金刚联动、全新泰坦混战模式等重磅内容，叠加 Warzone Mobile 4/17 关服的用户回流机遇，形成 COD 手游赛道历史级承接窗口。外部竞品方面，三角洲「回声」赛季已上线+古墓丽影联动4/30，ABI 周年庆4500债券持续发力，BF6 公布全年路线图。 📌 重</div>
+  </div>
+
+  <!-- 威胁条 -->
+  <div class="threat-bar">
+    
+    
+    <span class="threat-pill threat-pill-mid">[ 运营中 ×5 ]</span>
+  </div>
+
+  <div class="content">
+
+    <!-- 竞品卡片 -->
+    <div class="section-label">竞品动态 · INTEL</div>
+    <div class="comp-cards">
+      
+      <div class="comp-card" style="border-left-color: #FFE600;">
+        <div class="comp-header">
+          <span class="comp-icon">🎯</span>
+          <span class="comp-name">三角洲行动</span>
+          <span class="comp-threat threat-normal">NORMAL</span>
+        </div>
+        <div class="comp-highlight">新干员莫尔斯（Morse）：侦察型干员，4/21正式上线，高射速高机动的近战专精角色</div><div class="comp-highlight">新武器 M82 狙击步枪：大口径反器材狙，远距离一击致命定位</div><div class="comp-highlight">烽火地带新玩法：跑酷模式加入，拓展休闲玩法矩阵</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #00E5FF;">
+        <div class="comp-header">
+          <span class="comp-icon">🏙️</span>
+          <span class="comp-name">暗区突围（Arena Breakout: Infinite）</span>
+          <span class="comp-threat threat-normal">NORMAL</span>
+        </div>
+        <div class="comp-highlight">4500债券（Bonds）免费领：周年主活动核心奖励，折合约 $45 价值</div><div class="comp-highlight">3×3保险箱：稀缺永久仓储道具赠送</div><div class="comp-highlight">精英特工套装：全套角色皮肤 + S级武器涂装</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #FF6B35;">
+        <div class="comp-header">
+          <span class="comp-icon">🔫</span>
+          <span class="comp-name">CODM / 战区手游</span>
+          <span class="comp-threat threat-normal">NORMAL</span>
+        </div>
+        <div class="comp-highlight">Rebirth Island（重生岛）：Warzone 经典 BR 地图首次登陆 CODM，同时支持 BR 和 DMZ:Recon 双模式——直击 Warzo…</div><div class="comp-highlight">Alcatraz（恶魔岛）回归：经典快节奏 BR 地图限时回归，搭配重生岛形成 BR 地图矩阵</div><div class="comp-highlight">Grind（碾磨）：新增 MP 多人地图，中型对称设计适合竞技</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #4CAF50;">
+        <div class="comp-header">
+          <span class="comp-icon">🪖</span>
+          <span class="comp-name">Battlefield（战地系列）</span>
+          <span class="comp-threat threat-normal">NORMAL</span>
+        </div>
+        <div class="comp-highlight">Season 3（5月）：经典地图 Grand Bazaar 回归 + 新地图</div><div class="comp-highlight">海战模式（Naval Warfare）：超大型海战地图，社区期待已久</div><div class="comp-highlight">REDSEC排位系统：正式排位赛上线</div>
+      </div>
+    </div>
+
+    <!-- 宣发节奏对比 -->
+    
+
+    <!-- CODM 运营启发 -->
+    <div class="insights-section">
+      <div class="section-label">CODM 运营启发 · ACTION ITEMS</div>
+      <div class="insights-box">
+        <div class="insights-header">结合竞品动态，CODM 可以这样做</div>
+        
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <div class="insight-body">
+          <div class="insight-title">Warzone关服黄金窗口——3大承接动作建议</div>
+          <div class="insight-text">① 老玩家回归礼包：针对 30 天+ 未登录用户推送专属福利（重生岛主题道具 + CP 折扣券）
+② 重生岛预热视频：4/21 发布重生岛 CODM 版 vs Warzone 版对比视频，精准击中情怀
+③ "COD手游唯一正统"定位：所有…</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <div class="insight-body">
+          <div class="insight-title">三角洲「赛季+联动」双线战术值得借鉴</div>
+          <div class="insight-text">CODM S4 哥斯拉×金刚联动应在赛季中期追加第二波联动活动，避免首周热度后断崖
+关注 30 周年/重要纪念节点的 IP 联动窗口，提前锁定优质 IP（如《生化危机》30周年在2026年）</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <div class="insight-body">
+          <div class="insight-title">ABI 周年庆大额福利拉高行业送礼基线</div>
+          <div class="insight-text">CODM 下一个大型节庆活动（周年庆/暑期档）需在福利力度上对标 ABI 的"4500+永久"组合
+周年庆配套电竞赛事（Warlord锦标赛）是提升社区粘性的好策略</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-dot"></span>
+      <span class="footer-team"><strong>J3 宣发设计组</strong> · 小柒运营日报</span>
+    </div>
+    <div class="footer-right">
+      2026.04.20<br>
+      POWERED BY CODEBUDDY
+      <div class="footer-deco">
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

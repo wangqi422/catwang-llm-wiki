@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 干货周报 · 2026.04.26</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  width:1080px;
+  background:#f5f5f7;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif;
+  color:#1d1d1f;
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  width:1080px;
+  padding:60px 70px 50px;
+}
+
+/* ========== Header ========== */
+.header{
+  text-align:center;
+  margin-bottom:48px;
+  padding-bottom:36px;
+  border-bottom:1px solid #e5e5ea;
+}
+.badge-top{
+  display:inline-block;
+  padding:6px 14px;
+  background:#fff;
+  border:1px solid #d2d2d7;
+  border-radius:100px;
+  font-size:13px;
+  color:#6e6e73;
+  margin-bottom:18px;
+  font-weight:500;
+}
+.badge-top::before{
+  content:"●";
+  color:#ff9500;
+  margin-right:6px;
+}
+.main-title{
+  font-size:46px;
+  font-weight:700;
+  letter-spacing:-0.5px;
+  line-height:1.15;
+  margin-bottom:12px;
+  color:#1d1d1f;
+}
+.sub-title{
+  font-size:22px;
+  font-weight:600;
+  color:#424245;
+  margin-bottom:18px;
+}
+.desc{
+  font-size:15px;
+  color:#6e6e73;
+  line-height:1.7;
+  max-width:820px;
+  margin:0 auto;
+}
+.header-meta{
+  margin-top:18px;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.chip{
+  display:inline-block;
+  padding:4px 12px;
+  background:#fff;
+  border:1px solid #e5e5ea;
+  border-radius:6px;
+  font-size:12px;
+  color:#424245;
+  font-weight:500;
+}
+.chip.blue{background:#e8f0fe;color:#1a73e8;border-color:#d2e3fc;}
+.chip.green{background:#e6f4ea;color:#137333;border-color:#ceead6;}
+.chip.orange{background:#fef7e0;color:#b06000;border-color:#feefc3;}
+
+/* ========== Section ========== */
+.section{margin-bottom:44px;}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.section-num{font-size:18px;font-weight:700;color:#1d1d1f;display:inline-flex;align-items:center;gap:8px;}
+.section-num::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#1d1d1f;}
+.section-title{font-size:26px;font-weight:700;color:#1d1d1f;letter-spacing:-0.3px;}
+.section-sub{font-size:13px;color:#86868b;margin-bottom:20px;padding-left:20px;}
+
+/* ========== Card ========== */
+.card{background:#fff;border:1px solid #e5e5ea;border-radius:14px;padding:24px 26px;margin-bottom:14px;}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.card-idx{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1d1d1f;color:#fff;font-size:13px;font-weight:600;}
+.card-idx.c1{background:#0071e3;}
+.card-idx.c2{background:#5856d6;}
+.card-idx.c3{background:#af52de;}
+.card-idx.c4{background:#ff2d55;}
+.card-idx.c5{background:#ff9500;}
+.card-idx.c6{background:#34c759;}
+.card-idx.c7{background:#00c7be;}
+.card-idx.c8{background:#ff3b30;}
+.card-idx.c9{background:#5ac8fa;}
+.card-title{font-size:18px;font-weight:700;color:#1d1d1f;flex:1;}
+.card-tag{display:inline-block;padding:3px 10px;background:#f5f5f7;border-radius:6px;font-size:11px;color:#6e6e73;font-weight:500;letter-spacing:0.3px;}
+.card-desc{font-size:14px;color:#424245;line-height:1.7;margin-bottom:14px;}
+.card-desc strong{color:#1d1d1f;font-weight:600;}
+
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.sub-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;}
+.sub-card{background:#f9f9fb;border:1px solid #e5e5ea;border-radius:10px;padding:12px 14px;}
+.sub-card-title{font-size:12px;color:#6e6e73;font-weight:600;margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase;}
+.sub-card-body{font-size:13px;color:#1d1d1f;line-height:1.55;font-weight:500;}
+.sub-card.accent-blue{background:#eff6ff;border-color:#dbeafe;}
+.sub-card.accent-blue .sub-card-title{color:#1d4ed8;}
+.sub-card.accent-green{background:#f0fdf4;border-color:#dcfce7;}
+.sub-card.accent-green .sub-card-title{color:#15803d;}
+.sub-card.accent-orange{background:#fff7ed;border-color:#ffedd5;}
+.sub-card.accent-orange .sub-card-title{color:#c2410c;}
+.sub-card.accent-purple{background:#faf5ff;border-color:#f3e8ff;}
+.sub-card.accent-purple .sub-card-title{color:#7e22ce;}
+
+.source{margin-top:12px;padding-top:10px;border-top:1px dashed #e5e5ea;font-size:11px;color:#86868b;font-weight:500;letter-spacing:0.3px;}
+.source::before{content:"◉ ";color:#ff9500;}
+
+.code-block{background:#1d1d1f;border-radius:10px;padding:18px 20px;margin-top:12px;font-family:"SF Mono","JetBrains Mono","Menlo",monospace;font-size:11.5px;color:#e8e8ed;line-height:1.7;overflow:hidden;white-space:pre-wrap;}
+.code-block .cmt{color:#6e6e73;}
+.code-block .key{color:#ff9500;}
+.code-block .str{color:#34c759;}
+
+/* ========== 结论卡 ========== */
+.conclusion-card{background:linear-gradient(135deg,#1d1d1f 0%,#2d2d30 100%);border-radius:16px;padding:28px 30px;color:#fff;margin-bottom:40px;}
+.conclusion-title{font-size:20px;font-weight:700;margin-bottom:6px;}
+.conclusion-sub{font-size:13px;color:#a1a1a6;margin-bottom:18px;}
+.conclusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.conclusion-item{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px;}
+.conclusion-item-label{font-size:10px;color:#ff9500;font-weight:600;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;}
+.conclusion-item-body{font-size:13px;line-height:1.5;color:#f5f5f7;}
+.conclusion-item-body b{color:#fff;}
+.tagline{margin-top:18px;padding:14px 16px;background:rgba(255,149,0,0.1);border-left:3px solid #ff9500;border-radius:6px;font-size:14px;color:#fff;font-weight:500;line-height:1.6;}
+
+/* ========== Gallery ========== */
+.gallery{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.gallery-item{background:#fff;border:1px solid #e5e5ea;border-radius:10px;padding:16px 14px;text-align:left;}
+.gallery-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#0071e3;color:#fff;font-size:11px;font-weight:700;margin-bottom:10px;}
+.gallery-title{font-size:13px;font-weight:700;color:#1d1d1f;margin-bottom:4px;line-height:1.35;}
+.gallery-desc{font-size:11px;color:#6e6e73;line-height:1.5;}
+
+/* ========== Footer ========== */
+.footer{margin-top:40px;padding-top:24px;border-top:1px solid #e5e5ea;text-align:center;font-size:12px;color:#86868b;}
+.footer strong{color:#1d1d1f;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================= Header ================= -->
+  <div class="header">
+    <div class="badge-top">AI 干货周报 · Issue #05</div>
+    <h1 class="main-title">AI 干货周报</h1>
+    <div class="sub-title">团队级 Agent + 1M 上下文周 · 9 条立刻能用的干货</div>
+    <p class="desc">
+      自动扫描 65 个顶级 AI Builder 的 X 账号近 7 天推文（2026.04.20 – 04.26），按「立刻能用 / 工作流 / 方法论」三层筛选。<br>
+      宁缺毋滥，只留今天就能试的东西。
+    </p>
+    <div class="header-meta">
+      <span class="chip">扫描范围 65 信源</span>
+      <span class="chip blue">精选 9 条</span>
+      <span class="chip green">3 大板块</span>
+      <span class="chip orange">2026.04.20 – 04.26</span>
+    </div>
+  </div>
+
+  <!-- ================= 本期结论 ================= -->
+  <div class="conclusion-card">
+    <div class="conclusion-title">📢 本期先说结论</div>
+    <div class="conclusion-sub">这周是名副其实的 —— 团队级 Agent + 1M 上下文周</div>
+    <div class="conclusion-grid">
+      <div class="conclusion-item">
+        <div class="conclusion-item-label">OpenAI</div>
+        <div class="conclusion-item-body">ChatGPT 推 <b>Workspace Agents</b>，Codex 驱动 7×24 云端替团队跑工作流；GPTs 进入退役倒计时</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="conclusion-item-label">DeepSeek</div>
+        <div class="conclusion-item-body">沉寂 15 个月 <b>V4 预览版</b> 上线，全系 <b>1M 上下文</b>，Agentic Coding 开源最佳，权重同开源</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="conclusion-item-label">Anthropic</div>
+        <div class="conclusion-item-body">Claude Code 官方讲透 <b>Subagents vs Agent Teams</b> 多 Agent 协作选型</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="conclusion-item-label">Karpathy</div>
+        <div class="conclusion-item-body"><b>LLM Wiki</b> 方法论继续发酵，<b>andrej-karpathy-skills</b> 一周涨 44K star</div>
+      </div>
+    </div>
+    <div class="tagline">
+      一句话总结：AI 不再是给一个人当副驾，而是直接替你和团队把一整套 SOP 跑完。
+    </div>
+  </div>
+
+  <!-- ================= § 1 实用工具箱 ================= -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">§ 1</span>
+      <span class="section-title">🛠️ 实用工具箱 · Tools & Apps</span>
+    </div>
+    <div class="section-sub">3 个立刻能用的 AI 工具 / Agent 平台</div>
+
+    <!-- 1. Workspace Agents -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c1">1</span>
+        <span class="card-title">OpenAI Workspace Agents · 团队级 7×24 云端替身</span>
+        <span class="card-tag">GPTs 进化版</span>
+      </div>
+      <div class="card-desc">
+        4月23日上线的团队级协作 Agent，Codex 驱动，<strong>云端 7×24 小时运行，跨工具自动执行复杂长周期任务</strong>。被 OpenAI 官方定位为 GPTs 的进化形态——0 代码搭 Agent，全团队共用。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card accent-blue">
+          <div class="sub-card-title">适合谁</div>
+          <div class="sub-card-body">宣发 / 运营 / 市场团队里"一条工作流要跑好多次"的人</div>
+        </div>
+        <div class="sub-card accent-green">
+          <div class="sub-card-title">最快路径</div>
+          <div class="sub-card-body">自然语言描述 SOP → 挂文件/工具 → 让 Agent 后台跑</div>
+        </div>
+        <div class="sub-card accent-orange">
+          <div class="sub-card-title">免费期</div>
+          <div class="sub-card-body">5月6日前 Team / Enterprise 免费体验</div>
+        </div>
+      </div>
+      <div class="source">Source: @OpenAI, @sama, @gdb · openai.com/blog/workspace-agents</div>
+    </div>
+
+    <!-- 2. DeepSeek V4 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c2">2</span>
+        <span class="card-title">DeepSeek V4 预览版 · 开源 1M 上下文 + 最强 Agentic Coding</span>
+        <span class="card-tag">开源权重</span>
+      </div>
+      <div class="card-desc">
+        4月24日 DeepSeek 沉寂 15 个月后发布 V4 预览版，分 <strong>V4-Pro / V4-Flash</strong> 两版，<strong>全系标配 1M 百万字上下文</strong>，Agentic Coding 达开源最佳，<strong>权重同步开源</strong>在 Hugging Face。开源 1M 不再是闭源专利。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card accent-blue">
+          <div class="sub-card-title">V4-Flash</div>
+          <div class="sub-card-body">高并发省钱档，替代日常任务立刻降本</div>
+        </div>
+        <div class="sub-card accent-purple">
+          <div class="sub-card-title">V4-Pro</div>
+          <div class="sub-card-body">深度推理 + Agentic Coding 研发主力</div>
+        </div>
+      </div>
+      <div class="source">Source: @deepseek_ai · huggingface.co/deepseek-ai/DeepSeek-V4-Pro</div>
+    </div>
+
+    <!-- 3. andrej-karpathy-skills -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c3">3</span>
+        <span class="card-title">andrej-karpathy-skills · 一个 CLAUDE.md 一周涨 44K star</span>
+        <span class="card-tag">AI 编程稳定器</span>
+      </div>
+      <div class="card-desc">
+        把 Karpathy 对 LLM 编码常见坑的观察，整理成<strong>一份可直接放到项目根目录的 CLAUDE.md</strong>，适用于 Claude Code / Cursor / Codebuddy 等所有读 CLAUDE.md 的 AI 编程工具。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card accent-orange">
+          <div class="sub-card-title">Step 1</div>
+          <div class="sub-card-body">cp CLAUDE.md 到你的项目根目录</div>
+        </div>
+        <div class="sub-card accent-purple">
+          <div class="sub-card-title">Step 2</div>
+          <div class="sub-card-body">按项目实际情况删掉不相关小节</div>
+        </div>
+        <div class="sub-card accent-green">
+          <div class="sub-card-title">Step 3</div>
+          <div class="sub-card-body">AI 每次先读规则 → 破坏性改动显著下降</div>
+        </div>
+      </div>
+      <div class="source">Source: @karpathy（原观察）· github.com/forrestchang/andrej-karpathy-skills</div>
+    </div>
+  </div>
+
+  <!-- ================= § 2 高效工作流 ================= -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">§ 2</span>
+      <span class="section-title">⚡ 高效工作流 · Workflows & Hacks</span>
+    </div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <!-- 4. Subagents vs Agent Teams -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c4">4</span>
+        <span class="card-title">Claude Code 多 Agent 选型 · Subagents vs Agent Teams</span>
+        <span class="card-tag">多 Agent 协作</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：复杂任务塞给单个 Agent → 上下文爆炸；多开 Agent 又不知怎么分工。<strong>Anthropic 官方给出明确选型</strong>：能并行无依赖 → Subagents；需要讨论和交叉验证 → Agent Teams。实证：Code Review 覆盖率 <strong>16% → 54%</strong>。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card accent-blue">
+          <div class="sub-card-title">Subagents（独立分身）</div>
+          <div class="sub-card-body">主派发 → 子 Agent 独立上下文完成 → 只回摘要。适合并行研究 / 独立任务</div>
+        </div>
+        <div class="sub-card accent-purple">
+          <div class="sub-card-title">Agent Teams（对等协作）</div>
+          <div class="sub-card-body">多实例共享邮箱、互相讨论。适合架构师+实现者+审查者的博弈场景</div>
+        </div>
+      </div>
+      <div class="code-block"><span class="cmt"># 最小落地模板</span>
+<span class="key">Step 1</span> 主 Agent 读 README + CLAUDE.md，写任务拆解
+<span class="key">Step 2</span> Task() 派发 <span class="str">3 个 Subagent</span>：Explore / Plan / Implement
+<span class="key">Step 3</span> 结果合并 → 交 <span class="str">Agent Team Review</span></div>
+      <div class="source">Source: @AnthropicAI, @alexalbert__ · claude.com/blog/subagents-in-claude-code</div>
+    </div>
+
+    <!-- 5. Follow-Builders -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c5">5</span>
+        <span class="card-title">Follow-Builders · 每天 5 分钟读完 25 位 AI Builder 的干货</span>
+        <span class="card-tag">信息蒸馏</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：刷 X、听播客一天过去，摘要工具只抓热门不抓有用。Zara Zhang 开源的 Follow-Builders 是 Claude Code <strong>Skill</strong>：订阅 25 位 Builder（Karpathy / swyx / rauchg 等）+ 顶级 AI 播客 → Claude 按「工程师视角」蒸馏出结构化日报。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card accent-orange">
+          <div class="sub-card-title">输入</div>
+          <div class="sub-card-body">25 位 Builder X 推文 + 顶级 AI 播客</div>
+        </div>
+        <div class="sub-card accent-purple">
+          <div class="sub-card-title">处理</div>
+          <div class="sub-card-body">Builders vs Influencers 分类筛选</div>
+        </div>
+        <div class="sub-card accent-green">
+          <div class="sub-card-title">输出</div>
+          <div class="sub-card-body">带原链接的 5 分钟可读摘要</div>
+        </div>
+      </div>
+      <div class="source">Source: @zarazhangrui · github.com/zarazhangrui/follow-builders</div>
+    </div>
+
+    <!-- 6. n8n Content Creator -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c6">6</span>
+        <span class="card-title">n8n Content Creator Agent · 内容创作者一天的工作流</span>
+        <span class="card-tag">半天→10分钟</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：选题 / 写稿 / 配图 / 排版 / 发布要切换 6 个工具，最痛的是<strong>切换与粘贴</strong>。n8n 把整条链路拼成可视化工作流，每一步都能独立调试 / 替换模型。
+      </div>
+      <div class="code-block"><span class="cmt"># Content Creator Agent 工作流</span>
+<span class="key">1)</span> Webhook 触发 → 输入周主题
+<span class="key">2)</span> AI 节点 Claude / GPT → 生成大纲 + 标题
+<span class="key">3)</span> AI 节点 Perplexity / Tavily → 补最新资料
+<span class="key">4)</span> AI 节点 Midjourney v7 / Hailuo → 按段落配图
+<span class="key">5)</span> AI 节点 → 排版成 <span class="str">HTML / 微信草稿</span>
+<span class="key">6)</span> 发布分叉：<span class="str">飞书 Doc + 企微推送 + Notion 备份</span></div>
+      <div class="sub-grid">
+        <div class="sub-card accent-blue">
+          <div class="sub-card-title">官方模板</div>
+          <div class="sub-card-body">aiautomationgenerator.com/templates/content-creator-agent</div>
+        </div>
+        <div class="sub-card accent-green">
+          <div class="sub-card-title">中文模板站</div>
+          <div class="sub-card-body">n8ncn.io 提供 300+ 可直接导入 JSON</div>
+        </div>
+      </div>
+      <div class="source">Source: @n8n_io, @Ronald_vanLoon · n8ncn.io</div>
+    </div>
+  </div>
+
+  <!-- ================= § 3 方法论 & Prompt ================= -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">§ 3</span>
+      <span class="section-title">🧠 方法论与 Prompt · Methods & Prompts</span>
+    </div>
+    <div class="section-sub">3 套最有 ROI 的一次性投入</div>
+
+    <!-- 7. LLM Wiki -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c7">7</span>
+        <span class="card-title">Karpathy LLM Wiki · 让 AI 自我进化的个人知识库</span>
+        <span class="card-tag">252K 浏览</span>
+      </div>
+      <div class="card-desc">
+        不要让 AI 每次从零翻你的 Obsidian / Notion——<strong>先让 LLM 把原始内容"编译"成结构化 Wiki</strong>（摘要 + 百科 + 双向链接），以后它只读 Wiki，<strong>Token 成本降 10×，答案一致性显著提升</strong>。原帖 252K 浏览 / 4.1 万收藏。
+      </div>
+      <div class="code-block"><span class="cmt"># LLM Wiki 知识库架构师 Prompt</span>
+
+<span class="key">目录约定</span>
+<span class="str">raw/</span>      ：原始材料（只读）
+<span class="str">wiki/</span>     ：结构化知识（平铺 + 标签）
+<span class="str">index.md</span>  ：索引（自动维护）
+<span class="str">log.md</span>    ：操作日志
+
+<span class="key">加入新材料后执行</span>
+1) 生成摘要 → wiki/summaries/[title].md
+2) 提炼知识页 → wiki/[slug].md
+3) 更新 index.md + log.md
+4) 添加 <span class="str">[[wikilinks]]</span> 双向交叉引用
+
+<span class="key">硬约束</span>
+- 每页 ≤ 150 行，根目录 ≤ 150 页
+- Related 链接 ≤ 10（超限触发蒸馏）</div>
+      <div class="source">Source: @karpathy · llm-wiki.md gist（2026.04.04）</div>
+    </div>
+
+    <!-- 8. Meta Prompting -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c8">8</span>
+        <span class="card-title">Meta Prompting · 让 LLM 帮你写 Prompt 的脚手架</span>
+        <span class="card-tag">2026 行业共识</span>
+      </div>
+      <div class="card-desc">
+        与其手写内容丰富的 Prompt，不如让 LLM 先<strong>生成结构化脚手架</strong>再填空。核心转变：从「内容驱动」到「结构驱动」。<strong>填一次脚手架 ≈ 过去改 5 轮 Prompt，且脚手架本身可沉淀为团队模板 10 倍复用。</strong>
+      </div>
+      <div class="code-block"><span class="cmt"># Prompt 架构师脚手架</span>
+你是 Prompt 架构师。任务：<span class="str">[一句话任务描述]</span>
+先不要给答案，按 <span class="key">6 要素</span>生成 Prompt 脚手架：
+
+<span class="key">1) ROLE</span>     AI 最合适的身份？
+<span class="key">2) TASK</span>     任务精确边界？
+<span class="key">3) CONTEXT</span>  必须提供的背景？
+<span class="key">4) EXAMPLES</span> 几条 input→output 示范？
+<span class="key">5) OUTPUT</span>   结构 / 字段 / 长度？
+<span class="key">6) CONSTRAINTS</span> 禁止什么 / 必须什么？
+
+每一项都留成 <span class="str">[占位符]</span>，由我来填。</div>
+      <div class="sub-grid">
+        <div class="sub-card accent-orange">
+          <div class="sub-card-title">实战案例</div>
+          <div class="sub-card-body">输入：「给 CODM 英雄 LTM 写 30s 短视频文案」→ 脚手架自动生成镜头脚本 JSON 格式 + 禁用词约束</div>
+        </div>
+        <div class="sub-card accent-green">
+          <div class="sub-card-title">沉淀价值</div>
+          <div class="sub-card-body">脚手架成为团队 Prompt 库，后续新任务直接复用</div>
+        </div>
+      </div>
+      <div class="source">Source: @karpathy, @GaryMarcus · genaimlinstitute.com/blog/meta-prompting</div>
+    </div>
+
+    <!-- 9. MJ v7 Prompt -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-idx c9">9</span>
+        <span class="card-title">Midjourney v7 电影感 Prompt 公式 · 3 段式 + 参数三件套</span>
+        <span class="card-tag">出图良率翻倍</span>
+      </div>
+      <div class="card-desc">
+        MJ v7 已经不能再靠堆关键词"赌出图"——<strong>自然语言主导 + 结构化参数精修</strong>才是正解。公式 = 主体描述 + 镜头光线 + 风格 + <code>--sref --cref --ar</code>。弱 Prompt 10 张能用 1 张，结构化后 10 张有 6-7 张可进初审。
+      </div>
+      <div class="code-block"><span class="cmt"># Midjourney v7 结构化 Prompt 公式</span>
+<span class="key">[主体]</span> 谁 / 什么 / 在做什么 +
+<span class="key">[环境]</span> 具体地点 / 时间 / 天气 +
+<span class="key">[镜头]</span> low angle / 85mm / anamorphic +
+<span class="key">[光线]</span> golden hour / rim light / volumetric fog +
+<span class="key">[质感]</span> shot on ARRI Alexa 65 / film grain,
+style of <span class="str">[导演 / 摄影师]</span>
+
+<span class="key">--ar</span> 21:9 <span class="key">--sref</span> <span class="str">[风格锁]</span> <span class="key">--cref</span> <span class="str">[角色锁]</span> <span class="key">--stylize</span> 300 <span class="key">--v</span> 7</div>
+      <div class="sub-grid-3">
+        <div class="sub-card accent-blue">
+          <div class="sub-card-title">--sref</div>
+          <div class="sub-card-body">锁风格，最大杀招</div>
+        </div>
+        <div class="sub-card accent-purple">
+          <div class="sub-card-title">--cref</div>
+          <div class="sub-card-body">锁角色，人物一致性</div>
+        </div>
+        <div class="sub-card accent-orange">
+          <div class="sub-card-title">--stylize</div>
+          <div class="sub-card-body">200 写实 / 400 偏艺术</div>
+        </div>
+      </div>
+      <div class="source">Source: @midjourney, @alliekmiller · masonaibase.com/midjourney-v7-ultimate-guide-2026</div>
+    </div>
+  </div>
+
+  <!-- ================= § 4 推荐上手顺序 ================= -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">§ 4</span>
+      <span class="section-title">📋 本周最值得先试的顺序</span>
+    </div>
+    <div class="section-sub">按学习成本 × 价值收益从高到低排序</div>
+    <div class="gallery">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">抄 CLAUDE.md 规则</div>
+        <div class="gallery-desc">5 分钟复制到项目根，AI 编程立刻变稳</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">搭 LLM Wiki 目录</div>
+        <div class="gallery-desc">10 分钟投入，长期 Token 降 10×</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">写 Meta Prompt 脚手架</div>
+        <div class="gallery-desc">一个模板，团队所有 Prompt 都能复用</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">MJ v7 三件套公式</div>
+        <div class="gallery-desc">看完即抄，次日出图良率立刻翻倍</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">切 DeepSeek V4 API</div>
+        <div class="gallery-desc">替换日常任务，立刻降本 + 开源权重自由</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">试 Workspace Agents</div>
+        <div class="gallery-desc">5/6 免费期内体验，判断是否团队采购</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Footer ================= -->
+  <div class="footer">
+    <strong>AI 干货周报 · 2026.04.20 – 04.26</strong> &nbsp;·&nbsp;
+    扫描 65 个顶级 AI 信源 &nbsp;·&nbsp;
+    精选 9 条立刻能用 &nbsp;·&nbsp;
+    宁缺毋滥<br>
+    <span style="margin-top:8px;display:inline-block;">—— 小柒AI速递 · 每周一上午推送</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "date": "2026-05-06",
+    "dateCompact": "20260506",
+    "weekday": "星期三",
+    "extractedAt": "2026-05-06T02:56:17.670Z",
+    "sourceFile": "CODM_Competitive_Daily_20260506.md",
+    "version": "1.0.0"
+  },
+  "overview": "五一假期结束后首个工作日，各竞品进入活动运营中期节点。三角洲行动「猛攻节」（4.30-5.29）持续释放姜文+古墓丽影双 IP 内容，CODM S4「永恒囚笼」哥斯拉×金刚联动已进入第二周活跃期，暗区突围无限「黄金月」周年庆活动继续发放3000点券福利。BF6 则释出重磅信号：S2 收官更新已上线，S3（含经典地图回归）定档 5 月 12 日。",
+  "highlights": [
+    {
+      "text": "BF6 Season 3 定档 5.12：Railway to Golmud + Cairo Bazaar 两张经典地图回归，Naval Warfare 海战模式首秀",
+      "priority": 3
+    },
+    {
+      "text": "三角洲行动猛攻节第二周：姜文定制三件套+古墓丽影劳拉皮肤上线，「大红砖」+「烽火挑战」新玩法持续",
+      "priority": 3
+    },
+    {
+      "text": "CODM S4 哥斯拉×金刚联动第二周：传说级 HVK30+Chopper 武器皮肤热卖",
+      "priority": 2
+    },
+    {
+      "text": "暗区突围无限「黄金月」进入后半段：独狼行动模式+阈限零元购限时活动",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔀",
+      "nameCN": "横向维度对比",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🔽",
+      "nameCN": "竞品详情",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "medium",
+      "threatEmoji": "🟡",
+      "threatReason": "S3定档5.12，经典地图回归引爆情怀",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "姜文「让子弹飞」定制三件套（载具外观+武器涂装+专属称号）已于5月初上线，TVC 在抖音、B站投放",
+          "priority": 3
+        },
+        {
+          "text": "古墓丽影劳拉联动角色已开放获取，配合猛攻节任务体系深度绑定",
+          "priority": 3
+        },
+        {
+          "text": "S2 最终更新 Patch 1.2.3.5 今日（5/5）上线：修复镜头反同步、进度XP Bug、UI优化",
+          "priority": 3
+        },
+        {
+          "text": "S3 定档 5月12日：Railway to Golmud（戈尔穆德铁路）+ Cairo Bazaar（开罗集市）两张系列经典地图回归",
+          "priority": 3
+        },
+        {
+          "text": "「大红砖」新玩法（开砖必出红色品质奖励）+ 「烽火挑战」无负担PVE模式上线",
+          "priority": 2
+        },
+        {
+          "text": "暗区突围无限「黄金月」活动持续至5.14，累计登录送枪械涂装+军需卡+金币",
+          "priority": 2
+        },
+        {
+          "text": "S4「永恒囚笼」+ 哥斯拉×金刚联动已进入第二周，传说级武器皮肤（HVK30、Chopper）引发社区热议",
+          "priority": 2
+        },
+        {
+          "text": "2026 Roadmap 确认：S3 海战模式（Naval Warfare）、S4 REDSEC Ranked 全面开放",
+          "priority": 2
+        },
+        {
+          "text": "「埋宝赠礼」社交裂变玩法持续，拉动DAU和社交传播",
+          "priority": 0
+        },
+        {
+          "text": "「独狼行动」模式强调个人技巧，吸引硬核用户群",
+          "priority": 0
+        },
+        {
+          "text": "「阈限零元购」限时玩法（4.30-5.14）：入场费1000柯恩币，高风险高回报",
+          "priority": 0
+        },
+        {
+          "text": "抖音内容运营活跃：#暗区端游上暗黄金月 话题持续出圈（单条视频61.6万赞）",
+          "priority": 0
+        },
+        {
+          "text": "Rebirth Island 登陆 BR 和 DMZ: Recon 模式，丰富了地图池",
+          "priority": 0
+        },
+        {
+          "text": "CODM 大师赛 Spring 2026 线下总决赛（上海）正在进行，电竞内容持续产出",
+          "priority": 0
+        },
+        {
+          "text": "联动质量获得玩家认可：\"金刚品质比哥斯拉高\"成为社区共识",
+          "priority": 0
+        },
+        {
+          "text": "长线预期管理优秀：一次性公布 S3/S4/S5 三季内容，给玩家明确期待",
+          "priority": 0
+        }
+      ],
+      "tempo": "S3 前最后一周预热期，社区热度正在攀升，5.12 将是年度重要节点",
+      "sources": [
+        "https://www.taptap.cn/moment/798952046051986872",
+        "https://news.17173.com/content/04302026/131108291.shtml",
+        "https://pd.qq.com/g/7b3rgm5vr2/post/B_8cd2f2694f830b001441152187388734490X60",
+        "https://www.taptap.cn/app/221322/topic?type=official",
+        "https://www.wegame.com.cn/act/release/aqwx202504291/index.html",
+        "https://www.douyin.com/video/7636053752563813638",
+        "https://www.callofduty.com/blog/2026/04/call-of-duty-mobile-season-4-2026-eternal-prison",
+        "https://post.smzdm.com/p/am9g9wvk/",
+        "https://gamingonphone.com/news/cod-mobile-season-4-2026-eternal-prison-brings-rebirth-island-mythic-dp27-and-godzilla-x-kong-collaboration/",
+        "https://gamerant.com/battlefield-6-update-patch-notes-may-2026/",
+        "https://comicbook.com/gaming/news/bf6-battlefield-6-update-patch-notes-may-5/",
+        "https://dotesports.com/battlefield/news/battlefield-6-2026-roadmap"
+      ]
+    }
+  ],
+  "intensityTable": [
+    {
+      "name": "三角洲行动",
+      "event": "⭐⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "BF6",
+      "event": "⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "CODM",
+      "event": "⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "暗区突围无限",
+      "event": "⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    }
+  ],
+  "insights": [
+    {
+      "title": "BF6 S3 经典地图回归策略 — \"情怀+创新\"双驱动值得学习",
+      "body": "BF6 用\"经典地图重制+全新模式（海战）\"组合拳做 S3 发布，既唤醒老玩家情怀又制造新鲜感。一次性公布三季路线图的做法有效管理了社区预期。",
+      "codmActions": [
+        "CODM 同样拥有丰富的经典地图资产（Nuketown、Crash、Crossfire），可考虑\"经典地图重制+新模式\"作为赛季卖点",
+        "长线路线图公布能有效稳定核心玩家群，减少\"没内容\"焦虑"
+      ]
+    },
+    {
+      "title": "三角洲\"代言人+IP+福利\"三位一体模式的持续碾压效应",
+      "body": "猛攻节已持续一周，但姜文+古墓丽影+2600券的组合仍然保持高话题度。核心在于：代言人制造声量（圈外破圈）→ IP提供内容深度（联动任务线）→ 福利保底参与率（29天每日登录）。",
+      "codmActions": [
+        "当前哥斯拉×金刚联动在\"IP内容深度\"方面表现不错，但缺少代言人层级的圈外破圈点",
+        "下一次大型联动可考虑\"IP+明星/KOL\"双重加持，放大传播杠杆"
+      ]
+    },
+    {
+      "title": "5月中旬将迎来\"竞品换挡潮\" — CODM的窗口期",
+      "body": "三角洲猛攻节5.14结算、暗区黄金月5.14结束、BF6 S3在5.12上线 —— 5月12-14日是竞品集体换挡的时间窗口。竞品注意力分散时，正是 CODM 释放联动第二弹的最佳时机。",
+      "codmActions": [
+        "建议将哥斯拉联动第二弹内容锁定在 5.12-5.15 窗口释放",
+        "此时段竞品忙于自身节点收尾/切换，CODM 可抢夺用户注意力"
+      ]
+    },
+    {
+      "title": "内容运营\"短视频化\"趋势加速",
+      "body": "暗区突围无限单条抖音视频获61.6万赞（#暗区端游上暗黄金月），三角洲行动在QQ频道/抖音/B站多平台同步内容运营。短视频已成为FPS游戏获客和维持活跃的核心渠道。",
+      "codmActions": [
+        "CODM 哥斯拉联动的抖音内容运营节奏需加强，联动武器皮肤的\"炫酷展示\"类短视频是高传播品类",
+        "建议参考暗区突围\"路明非级别操作\"的UGC激励模式，刺激玩家自发内容产出"
+      ]
+    }
+  ],
+  "stats": {
+    "totalCompetitors": 2,
+    "highThreat": 0,
+    "mediumThreat": 1,
+    "lowThreat": 1,
+    "totalInsights": 4,
+    "totalActions": 8,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

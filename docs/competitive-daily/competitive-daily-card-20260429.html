@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>CODM 竞品日报 · 2026.04.29</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    overflow-x: hidden;
+    font-family: 'Inter', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #0D0D0D;
+    color: #FFFFFF;
+  }
+
+  .page {
+    width: 1080px;
+    min-height: 1920px;
+    background: #0D0D0D;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 0;
+  }
+
+  /* ── 背景装饰 ── */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 400px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,230,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .side-mark {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-lr;
+    font-size: 11px;
+    letter-spacing: 0.6em;
+    color: rgba(255,255,255,0.04);
+    font-weight: 300;
+    pointer-events: none;
+  }
+
+  /* ── Cover 区 ── */
+  .cover {
+    padding: 40px 56px 24px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .cover-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-bar { width: 4px; height: 22px; background: #FFE600; }
+
+  .brand-label {
+    background: #FFE600;
+    color: #0D0D0D;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .brand-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+    margin-left: 8px;
+  }
+
+  .cover-date {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .cover-date .brand-name {
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .cover-title .hl { color: #FFE600; }
+
+  .cover-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+
+  /* ── 分隔线 ── */
+  .divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 0 56px;
+    flex-shrink: 0;
+  }
+
+  /* ── 概览区 ── */
+  .overview {
+    padding: 20px 56px 14px;
+    flex-shrink: 0;
+  }
+
+  .overview-text {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* ── 威胁条 ── */
+  .threat-bar {
+    display: flex;
+    gap: 8px;
+    padding: 0 56px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+
+  .threat-pill {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+  }
+
+  .threat-pill-high {
+    border-color: #FF3B3B;
+    color: #FF3B3B;
+    background: rgba(255,59,59,0.10);
+  }
+
+  .threat-pill-mid {
+    border-color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ── Section Label ── */
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* ════════════════════════════════════════════════
+     横向维度对比
+     ════════════════════════════════════════════════ */
+  .horiz-section {
+    padding: 0 56px;
+    margin-bottom: 16px;
+  }
+
+  .horiz-dim {
+    background: #141414;
+    border: 0.5px solid rgba(255,255,255,0.06);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+
+  .horiz-dim-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFE600;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .horiz-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .horiz-table tr {
+    border-bottom: 0.5px solid rgba(255,255,255,0.06);
+  }
+
+  .horiz-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .horiz-name {
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    padding: 8px 10px 8px 12px;
+    white-space: nowrap;
+    width: 100px;
+    border-left: 3px solid #888;
+  }
+
+  .horiz-cell {
+    padding: 8px 8px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  .horiz-insight {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255,230,0,0.03);
+    border-left: 3px solid #FFE600;
+    margin-top: 4px;
+  }
+
+  .horiz-insight-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .horiz-insight-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  /* ════════════════════════════════════════════════
+     纵向竞品卡片
+     ════════════════════════════════════════════════ */
+  .content {
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comp-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .comp-card {
+    background: #141414;
+    border: 0.5px solid rgba(255,255,255,0.06);
+    border-left: 3px solid #888;
+    padding: 14px 18px;
+  }
+
+  .comp-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .comp-icon { font-size: 15px; }
+
+  .comp-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .comp-threat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    text-transform: uppercase;
+  }
+
+  .threat-critical { background: #FF3B3B; color: #FFFFFF; }
+  .threat-warning { background: rgba(255,230,0,0.12); color: #FFE600; border: 0.5px solid rgba(255,230,0,0.3); }
+  .threat-normal { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 0.5px solid rgba(255,255,255,0.1); }
+
+  .comp-highlight {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .comp-highlight::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7px;
+    width: 4px; height: 4px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── 宣发强度 ── */
+  .tempo-section {
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  .tempo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .tempo-name {
+    width: 90px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .tempo-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+  }
+
+  .tempo-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, #FFE600, rgba(255,230,0,0.4));
+  }
+
+  .tempo-stars {
+    font-size: 10px;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  /* ── CODM 运营启发 ── */
+  .insights-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  .insights-box {
+    background: rgba(255,230,0,0.03);
+    border: 1px solid rgba(255,230,0,0.12);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .insights-header {
+    font-size: 16px;
+    font-weight: 800;
+    color: #FFE600;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .insights-header::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: #FFE600;
+    flex-shrink: 0;
+  }
+
+  .insight-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 5px 0;
+  }
+
+  .insight-num {
+    width: 26px;
+    height: 26px;
+    background: rgba(255,230,0,0.12);
+    color: #FFE600;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .insight-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .insight-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+  }
+
+  .insight-text {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    height: 72px;
+    padding: 0 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+    margin-top: 20px;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-dot { width: 8px; height: 8px; background: #FFE600; }
+
+  .footer-team {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  .footer-team strong { color: rgba(255,255,255,0.6); }
+
+  .footer-right {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-align: right;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-deco {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    justify-content: flex-end;
+  }
+
+  .footer-sq { width: 6px; height: 6px; background: #FFE600; }
+  .footer-sq:nth-child(2) { opacity: 0.4; }
+  .footer-sq:nth-child(3) { opacity: 0.15; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="side-mark">CALL OF DUTY MOBILE · COMPETITIVE INTEL</div>
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <span class="brand-bar"></span>
+        <span class="brand-label">竞品日报</span>
+        <span class="brand-sub">COMPETITIVE INTEL v3</span>
+      </div>
+      <div class="cover-date">
+        <div class="brand-name">CALL OF DUTY</div>
+        <div>使命召唤手游</div>
+      </div>
+    </div>
+    <div class="cover-title">CODM 竞品<span class="hl">日报</span></div>
+    <div class="cover-sub">2026.04.29 · 星期三 · DAILY INTEL</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 概览 -->
+  <div class="overview">
+    <div class="overview-text">今日射击游戏圈迎来"三国杀"高潮：三角州猛攻节进入第6天，4月30日核弹日（姜文代言+古墓丽影联动）倒计时最后1天；暗区突围端游迎来上线一周年庆，淘金节收官在即；CODM S4 MonsterVerse 联动持续发酵，五一假期福利加码；BF6 公布2026路线图，S3最大地图预告。CODM 需要在五一黄金周窗口期打出声量，否则被竞品宣发淹没。</div>
+  </div>
+
+  <!-- 威胁条 -->
+  <div class="threat-bar">
+    <span class="threat-pill threat-pill-high">[ 高威胁 ×1 ]</span>
+    <span class="threat-pill threat-pill-mid">[ 关注 ×2 ]</span>
+    <span class="threat-pill threat-pill-mid">[ 运营中 ×1 ]</span>
+  </div>
+
+  <!-- ═══ 横向维度对比 ═══ -->
+  
+  <div class="horiz-section">
+    <div class="section-label">🔀 横向维度对比 · CROSS COMPARISON</div>
+    
+        <div class="horiz-dim">
+          <div class="horiz-dim-title">🎬 IP联动 / 代言人</div>
+          <table class="horiz-table">
+            <tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">三角州行动</td>
+          <td class="horiz-cell">姜文×古墓丽影</td><td class="horiz-cell">⭐×5</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #FF6B35;">CODM</td>
+          <td class="horiz-cell">MonsterVerse哥斯拉</td><td class="horiz-cell">⭐×4</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #00E5FF;">暗区突围</td>
+          <td class="horiz-cell">周年庆限定</td><td class="horiz-cell">⭐×3</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">BF6</td>
+          <td class="horiz-cell">暂无IP联动</td><td class="horiz-cell">⭐×1</td>
+        </tr>
+          </table>
+          
+        <div class="horiz-insight">
+          <span class="horiz-insight-icon">🔍</span>
+          <span class="horiz-insight-text">三角州完胜：姜文+古墓丽影双IP叠加，一线导演+经典冒险IP，碾压式牌面</span>
+        </div>
+        </div>
+        <div class="horiz-dim">
+          <div class="horiz-dim-title">📅 赛季节奏</div>
+          <table class="horiz-table">
+            <tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">三角州行动</td>
+          <td class="horiz-cell">S9「回声」· 猛攻节第6天</td><td class="horiz-cell">4/30 核弹日</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #FF6B35;">CODM</td>
+          <td class="horiz-cell">S4 MonsterVerse · 第8天</td><td class="horiz-cell">5/1 五一黄金周</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #00E5FF;">暗区突围</td>
+          <td class="horiz-cell">S5长尾 · 周年庆</td><td class="horiz-cell">4/30 淘金节收官</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">BF6</td>
+          <td class="horiz-cell">S3规划中</td><td class="horiz-cell">S3 大地图</td>
+        </tr>
+          </table>
+          
+        <div class="horiz-insight">
+          <span class="horiz-insight-icon">🔍</span>
+          <span class="horiz-insight-text">4/30是关键节点：三角州和暗区同日祭出大招，CODM需在5/1抢先发声</span>
+        </div>
+        </div>
+        <div class="horiz-dim">
+          <div class="horiz-dim-title">💰 福利策略</div>
+          <table class="horiz-table">
+            <tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">三角州行动</td>
+          <td class="horiz-cell">2600三角券+联动皮肤</td><td class="horiz-cell">限时+品牌联动双重刺激</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #FF6B35;">CODM</td>
+          <td class="horiz-cell">外星人角色+幸运币</td><td class="horiz-cell">五一假期登录即送</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #00E5FF;">暗区突围</td>
+          <td class="horiz-cell">周年庆涂装+海量福利</td><td class="horiz-cell">情怀+实惠并重</td>
+        </tr><tr>
+          <td class="horiz-name" style="border-left: 3px solid #888;">BF6</td>
+          <td class="horiz-cell">Portal入门指南</td><td class="horiz-cell">内容创作引导</td>
+        </tr>
+          </table>
+          
+        <div class="horiz-insight">
+          <span class="horiz-insight-icon">🔍</span>
+          <span class="horiz-insight-text">三角州最激进：2600三角券+联动皮肤组合，付费+免费双重获客</span>
+        </div>
+        </div>
+  </div>
+  
+
+  <div class="content">
+
+    <!-- 宣发强度对比 -->
+    
+    <div class="tempo-section">
+      <div class="section-label">宣发强度 · TEMPO</div>
+      
+        <div class="tempo-row">
+          <span class="tempo-name">三角州行动</span>
+          <div class="tempo-bar-bg">
+            <div class="tempo-bar-fill" style="width:20%"></div>
+          </div>
+          <span class="tempo-stars">⭐</span>
+        </div>
+        <div class="tempo-row">
+          <span class="tempo-name">暗区突围</span>
+          <div class="tempo-bar-bg">
+            <div class="tempo-bar-fill" style="width:20%"></div>
+          </div>
+          <span class="tempo-stars">⭐</span>
+        </div>
+        <div class="tempo-row">
+          <span class="tempo-name">CODM</span>
+          <div class="tempo-bar-bg">
+            <div class="tempo-bar-fill" style="width:20%"></div>
+          </div>
+          <span class="tempo-stars">⭐</span>
+        </div>
+        <div class="tempo-row">
+          <span class="tempo-name">BF6</span>
+          <div class="tempo-bar-bg">
+            <div class="tempo-bar-fill" style="width:20%"></div>
+          </div>
+          <span class="tempo-stars">⭐</span>
+        </div>
+    </div>
+
+    <!-- 纵向竞品详情 -->
+    <div class="section-label">🔽 竞品详情 · COMPETITOR DETAIL</div>
+    <div class="comp-cards">
+      
+      <div class="comp-card" style="border-left-color: #888888;">
+        <div class="comp-header">
+          <span class="comp-icon">📋</span>
+          <span class="comp-name">三角州行动（Delta Force）</span>
+          <span class="comp-threat threat-critical">HIGH THREAT</span>
+        </div>
+        <div class="comp-highlight">猛攻节4/30福利高峰：全员可领2600限时三角券+古墓丽影联动皮肤，4/30当日登录量预计创赛季新高</div><div class="comp-highlight">古墓丽影联动4/30上线：「露娜-劳拉·克劳馥」传说级外观准时登场，4/30前完成预热蓄水</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #00E5FF;">
+        <div class="comp-header">
+          <span class="comp-icon">🏙️</span>
+          <span class="comp-name">暗区突围（手游+端游）</span>
+          <span class="comp-threat threat-warning">ACTIVE</span>
+        </div>
+        <div class="comp-highlight">淘金节4/30收官：4/24起的海量福利活动最后一天，完成活跃任务领【奇迹球·T13】涂装</div><div class="comp-highlight">4/29端游一周年庆：暗区突围：无限国服上线一周年，魔方工作室总裁 Enzo 发布周年寄语</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #FF6B35;">
+        <div class="comp-header">
+          <span class="comp-icon">🔫</span>
+          <span class="comp-name">CODM / 使命召唤手游</span>
+          <span class="comp-threat threat-warning">ACTIVE</span>
+        </div>
+        <div class="comp-highlight">五一登录活动4/29-5/5：五一假期登录领取外星人角色+使命卡片幸运币，DMZ模式4/27更新（打击者削弱、DP27增强）</div><div class="comp-highlight">S4 MonsterVerse联动持续：哥斯拉大战金刚联动第三周，DP27 LMG新武器上线，五一假期持续发酵</div>
+      </div>
+      <div class="comp-card" style="border-left-color: #4CAF50;">
+        <div class="comp-header">
+          <span class="comp-icon">🪖</span>
+          <span class="comp-name">Battlefield 6</span>
+          <span class="comp-threat threat-normal">NORMAL</span>
+        </div>
+        <div class="comp-highlight">2026路线图4/21公布：S3赛季最大地图"Railway to Golmud"预告，海战玩法确认回归</div><div class="comp-highlight">S4更大地图规划中：BF工作室持续与玩家社区沟通，以玩家反馈为核心优化方向</div>
+      </div>
+    </div>
+
+    <!-- CODM 运营启发 -->
+    <div class="insights-section">
+      <div class="section-label">CODM 运营启发 · ACTION ITEMS</div>
+      <div class="insights-box">
+        <div class="insights-header">结合横向对比 + 竞品动态，CODM 可以这样做</div>
+        
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <div class="insight-body">
+          <div class="insight-title">代言人破圈策略：三角州的双王炸打法值得借鉴</div>
+          <div class="insight-text">CODM 的 MonsterVerse 联动已有一定声量，但缺少"姜文式"的国内顶流代言人
+建议：S4 下半程引入国内头部主播/明星作为"特邀指挥官"，形成IP联动+明星代言的双重刺激
+预算有限的情况下，可以考虑与国内独立游戏/影视的联动…</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <div class="insight-body">
+          <div class="insight-title">五一定黄金周窗口：4/30是防守节点，5/1是进攻节点</div>
+          <div class="insight-text">4/30：发布"五一倒计时海报"，不正面硬刚三角州/暗区的大招，而是强调"CODM 玩家专属"
+5/1早8点：抢先发布五一登录活动主视觉，配合"早起的CODMer有福利"话题标签
+5/1全天：每小时一个"CODM五一专属内容"，保持持续曝…</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <div class="insight-body">
+          <div class="insight-title">福利货币直送策略：三角州的"限时+品牌"双重刺激</div>
+          <div class="insight-text">CODM 五一登录活动的"外星人角色+幸运币"组合可以优化为"货币直送+限定外观"
+建议：5/1-5/7 期间，每日登录额外赠送 CP（付费货币），配合限定外观增加付费意愿
+参考三角州的"限时"策略，设置5/7 24:00下架的紧迫感，刺…</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-dot"></span>
+      <span class="footer-team"><strong>J3 宣发设计组</strong> · 小柒运营日报</span>
+    </div>
+    <div class="footer-right">
+      2026.04.29<br>
+      POWERED BY CODEBUDDY
+      <div class="footer-deco">
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

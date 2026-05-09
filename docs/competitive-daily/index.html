@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODM 竞品日报归档中心</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --bg-soft: #131313;
+      --card: #171717;
+      --card-hover: #1d1d1d;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,230,0,0.35);
+      --text: #ffffff;
+      --text-secondary: #c7c7c7;
+      --text-muted: #8b8b8b;
+      --yellow: #ffe600;
+      --yellow-soft: rgba(255,230,0,0.12);
+      --shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(255,230,0,0.08), transparent 28%),
+        linear-gradient(180deg, #0b0b0b 0%, #0d0d0d 45%, #111111 100%);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: rgba(12,12,12,0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--text-secondary);
+    }
+
+    .topbar-brand::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: var(--yellow);
+      box-shadow: 0 0 20px rgba(255,230,0,0.55);
+    }
+
+    .topbar-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .topbar-link {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      color: var(--text-secondary);
+      font-size: 13px;
+      transition: all .2s ease;
+    }
+
+    .topbar-link:hover {
+      border-color: var(--line-strong);
+      color: var(--yellow);
+      background: var(--yellow-soft);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .archive-card,
+    .rules,
+    .empty-state {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: 'ARCHIVE';
+      position: absolute;
+      right: -18px;
+      top: 18px;
+      font-size: 70px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.035);
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      color: var(--yellow);
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--yellow);
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .hl { color: var(--yellow); }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat-item {
+      padding: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .stat-note {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 28px 0 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .archive-card {
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+      background: linear-gradient(180deg, rgba(255,230,0,0.06), rgba(255,255,255,0.02));
+    }
+
+    .archive-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .archive-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .archive-card h2 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+
+    .archive-date {
+      font-size: 12px;
+      color: var(--yellow);
+      border: 1px solid var(--line-strong);
+      background: var(--yellow-soft);
+      padding: 6px 10px;
+      white-space: nowrap;
+    }
+
+    .archive-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .meta-badge {
+      border: 1px solid var(--line);
+      padding: 4px 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.03);
+      letter-spacing: 0.08em;
+    }
+
+    .meta-badge-highlight {
+      border-color: var(--line-strong);
+      color: var(--yellow);
+      background: var(--yellow-soft);
+    }
+
+    .archive-desc {
+      min-height: 72px;
+      margin: 0 0 16px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .archive-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .action-primary,
+    .action-secondary,
+    .action-disabled {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      padding: 10px 14px;
+      font-size: 13px;
+      border: 1px solid var(--line);
+    }
+
+    .action-primary {
+      background: var(--yellow);
+      color: #121212;
+      border-color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .action-secondary:hover {
+      border-color: var(--line-strong);
+      color: var(--yellow);
+    }
+
+    .action-disabled {
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .archive-footer {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .archive-footer a {
+      color: var(--text-secondary);
+    }
+
+    .archive-footer a:hover {
+      color: var(--yellow);
+    }
+
+    .rules {
+      margin-top: 18px;
+      padding: 24px;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .rule-item {
+      padding: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+    }
+
+    .rule-item h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--yellow);
+    }
+
+    .rule-item p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state {
+      margin-top: 16px;
+      padding: 36px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      color: var(--yellow);
+      letter-spacing: 0.24em;
+      font-size: 12px;
+    }
+
+    code {
+      padding: 2px 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      color: var(--yellow);
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .topbar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(100vw - 20px, 1120px); padding-top: 18px; }
+      .topbar, .hero-main, .hero-side, .archive-card, .rules { padding-left: 16px; padding-right: 16px; }
+      .hero-main { padding-top: 24px; padding-bottom: 24px; }
+      .archive-card h2 { font-size: 22px; }
+      .archive-card-head { flex-direction: column; }
+      .archive-footer { flex-direction: column; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-brand">CODM DARK OPS / COMPETITIVE DAILY ARCHIVE</div>
+      <nav class="topbar-links">
+        <a class="topbar-link" href="../../index.html">返回首页</a>
+        <a class="topbar-link" href="./README.md">README</a>
+        <a class="topbar-link" href="#archive-list">日报列表</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-kicker">Codm Design Intel</div>
+        <h1>竞品日报 <span class="hl">归档中心</span></h1>
+        <p>把每天的 <code>competitive-daily-card-YYYYMMDD.html</code> 自动归入同一个 H5 入口，统一查看历史日报、原始 Markdown 与长图截图，作为 CODM 宣发设计团队的持续情报索引。</p>
+
+      </div>
+
+      <aside class="hero-side">
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-label">Total Reports</div>
+            <div class="stat-value">17</div>
+            <div class="stat-note">已归档日报总数</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Latest Date</div>
+            <div class="stat-value">0501</div>
+            <div class="stat-note">最新日报日期</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Coverage</div>
+          <div class="stat-note">2026-04-13 → 2026-05-01</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Generated At</div>
+          <div class="stat-note">2026/5/1 09:44:26</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="rules">
+      <div class="section-head">
+        <h2>归档规则</h2>
+        <p>自动扫描当前目录下符合命名规范的日报文件</p>
+      </div>
+      <div class="rules-grid">
+        <div class="rule-item">
+          <h3>HTML 收录</h3>
+          <p>文件名必须符合 <code>competitive-daily-card-YYYYMMDD.html</code>，归档页会按日期倒序展示。</p>
+        </div>
+        <div class="rule-item">
+          <h3>原文联动</h3>
+          <p>同日期的 <code>CODM_Competitive_Daily_YYYYMMDD.md</code> 会自动挂到卡片操作区，方便回溯原始日报。</p>
+        </div>
+        <div class="rule-item">
+          <h3>长图联动</h3>
+          <p>同日期的 <code>competitive-daily-card-YYYYMMDD.png</code> 会自动显示为可查看资源，适配群发截图复盘。</p>
+        </div>
+        <div class="rule-item">
+          <h3>更新方式</h3>
+          <p>可手动运行 <code>node _deploy/generate-competitive-archive.js</code>，也可在日报发布脚本中自动刷新。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="archive-list">
+      <div class="section-head">
+        <h2>日报列表</h2>
+        <p>最新日报优先显示，点击即可进入对应 H5</p>
+      </div>
+      <div class="archive-grid">
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-05-01</h2>
+          </div>
+          <div class="archive-date">2026.05.01</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge meta-badge-highlight">LATEST</span><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">23 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260501.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260501.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260501.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/5/1 09:43:49</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260501.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-30</h2>
+          </div>
+          <div class="archive-date">2026.04.30</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">13 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260430.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260430.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260430.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/5/1 09:39:38</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260430.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-29</h2>
+          </div>
+          <div class="archive-date">2026.04.29</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260429.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260429.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260429.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/29 13:23:45</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260429.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-28</h2>
+          </div>
+          <div class="archive-date">2026.04.28</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">23 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260428.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260428.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260428.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/28 09:42:36</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260428.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-27</h2>
+          </div>
+          <div class="archive-date">2026.04.27</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260427.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260427.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260427.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/27 09:40:07</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260427.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-24</h2>
+          </div>
+          <div class="archive-date">2026.04.24</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260424.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260424.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260424.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/24 09:41:02</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260424.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-23</h2>
+          </div>
+          <div class="archive-date">2026.04.23</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">21 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260423.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260423.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260423.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/23 12:17:21</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260423.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-22</h2>
+          </div>
+          <div class="archive-date">2026.04.22</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260422.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260422.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260422.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/22 09:39:28</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260422.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-21</h2>
+          </div>
+          <div class="archive-date">2026.04.21</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260421.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260421.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260421.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/21 19:25:10</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260421.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-20</h2>
+          </div>
+          <div class="archive-date">2026.04.20</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260420.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260420.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260420.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/20 16:54:43</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260420.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-19</h2>
+          </div>
+          <div class="archive-date">2026.04.19</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">16 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260419.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260419.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260419.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/19 19:59:07</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260419.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-18</h2>
+          </div>
+          <div class="archive-date">2026.04.18</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">16 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260418.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260418.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260418.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/18 13:19:24</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260418.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-17</h2>
+          </div>
+          <div class="archive-date">2026.04.17</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">49 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260417.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260417.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260417.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/17 20:47:41</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260417.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-16</h2>
+          </div>
+          <div class="archive-date">2026.04.16</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260416.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260416.md">查看 MD</a>
+          <a class="action-secondary" href="./competitive-daily-card-20260416.png">查看 PNG</a>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/17 14:55:09</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260416.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-15</h2>
+          </div>
+          <div class="archive-date">2026.04.15</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">24 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260415.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260415.md">查看 MD</a>
+          <span class="action-disabled">缺少 PNG</span>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/15 20:15:30</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260415.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-14</h2>
+          </div>
+          <div class="archive-date">2026.04.14</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">11 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260414.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260414.md">查看 MD</a>
+          <span class="action-disabled">缺少 PNG</span>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/15 18:39:45</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260414.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    
+      <article class="archive-card">
+        <div class="archive-card-head">
+          <div>
+            <div class="archive-label">COMPETITIVE DAILY</div>
+            <h2>2026-04-13</h2>
+          </div>
+          <div class="archive-date">2026.04.13</div>
+        </div>
+        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
+        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
+        <div class="archive-actions">
+          <a class="action-primary" href="./competitive-daily-card-20260413.html">打开 H5</a>
+          <a class="action-secondary" href="./CODM_Competitive_Daily_20260413.md">查看 MD</a>
+          <span class="action-disabled">缺少 PNG</span>
+        </div>
+        <div class="archive-footer">
+          <span>页面更新时间：2026/4/13 17:03:57</span>
+          <a href="https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-20260413.html" target="_blank" rel="noreferrer">GitHub Pages</a>
+        </div>
+      </article>
+    </div>
+    </section>
+
+    <div class="footer">
+      Archive generated by <code>_deploy/generate-competitive-archive.js</code>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODM 视觉工坊 v2.2 | Dark Ops Edition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0D0D0D;
+  --card-bg: #141414;
+  --accent: #FFE600;
+  --danger: #FF3B3B;
+  --cyan: #00E5FF;
+  --orange: #FF6B35;
+  --green: #4CAF50;
+  --text-100: #FFFFFF;
+  --text-85: rgba(255,255,255,0.85);
+  --text-65: rgba(255,255,255,0.65);
+  --text-55: rgba(255,255,255,0.55);
+  --text-40: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.08);
+  --ghost: rgba(255,255,255,0.04);
+  --accent-bg: rgba(255,230,0,0.03);
+  --accent-border: rgba(255,230,0,0.12);
+  --accent-glow: rgba(255,230,0,0.06);
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Inter', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+  color: var(--text-100);
+}
+
+/* ── Top Glow ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 400px;
+  background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Side Watermark ── */
+.side-mark {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-lr;
+  font-size: 10px;
+  letter-spacing: 0.6em;
+  color: var(--ghost);
+  font-weight: 300;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ── Header ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,13,13,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-bar { width: 4px; height: 20px; background: var(--accent); }
+
+.header-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.header-title .hl { color: var(--accent); }
+
+.header-version {
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 2px 8px;
+  letter-spacing: 0.06em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-btn {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-40);
+  padding: 6px 12px;
+  border: 0.5px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.header-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+/* ── Model Navigation Cards ── */
+.model-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 12px 32px;
+  background: rgba(16,16,16,0.8);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.model-nav-card {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.model-nav-card::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 0.5px;
+  background: var(--border);
+}
+
+.model-nav-card:last-child::after { display: none; }
+
+.model-nav-card:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.model-nav-card.active {
+  background: var(--card-bg);
+  border: 0.5px solid rgba(255,230,0,0.2);
+  border-left: 3px solid var(--accent);
+}
+
+.mnc-icon { font-size: 22px; flex-shrink: 0; }
+
+.mnc-info { display: flex; flex-direction: column; gap: 2px; }
+
+.mnc-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-85);
+}
+
+.model-nav-card.active .mnc-name { color: var(--text-100); }
+
+.mnc-desc {
+  font-size: 10px;
+  color: var(--text-40);
+  line-height: 1.3;
+}
+
+/* ── Steps Navigation ── */
+.steps-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(20,20,20,0.6);
+}
+
+.step-item {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-40);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.step-item:hover { color: var(--text-65); }
+
+.step-item.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.step-item .step-num {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.06);
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 6px;
+}
+
+.step-item.active .step-num {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Main Layout ── */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  min-height: calc(100vh - 100px);
+}
+
+/* ── Left Panel ── */
+.panel-left {
+  padding: 24px 32px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+  border-right: 1px solid var(--border);
+}
+
+/* ── Section Label ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-40);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 14px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--border);
+}
+
+.section-label:first-child { margin-top: 0; }
+
+/* ── Presets Grid ── */
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.preset-card {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.preset-card:hover {
+  border-color: rgba(255,230,0,0.3);
+  background: rgba(255,230,0,0.02);
+}
+
+.preset-card.active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.preset-icon { font-size: 16px; margin-bottom: 4px; }
+
+.preset-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-85);
+  line-height: 1.3;
+}
+
+/* ── Tag Groups ── */
+.tag-group {
+  margin-bottom: 16px;
+}
+
+.tag-group-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-65);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag-group-title .tg-icon { font-size: 14px; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-55);
+  padding: 5px 10px;
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.tag:hover {
+  color: var(--text-85);
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+
+.tag.selected {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.tag.cat-cyan.selected { background: var(--cyan); border-color: var(--cyan); }
+.tag.cat-orange.selected { background: var(--orange); border-color: var(--orange); }
+.tag.cat-green.selected { background: var(--green); border-color: var(--green); }
+
+/* ── Slider ── */
+.slider-group {
+  margin-bottom: 16px;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-40);
+  margin-bottom: 6px;
+}
+
+.slider-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  cursor: pointer;
+}
+
+.slider-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--accent), rgba(255,230,0,0.4));
+  transition: width 0.2s;
+}
+
+.slider-thumb {
+  position: absolute;
+  top: -5px;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  cursor: grab;
+}
+
+/* ── Textarea ── */
+.prompt-input {
+  width: 100%;
+  min-height: 100px;
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-left: 3px solid var(--accent);
+  color: var(--text-85);
+  font-family: 'Inter', 'Noto Sans SC', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 14px 16px;
+  resize: vertical;
+  outline: none;
+}
+
+.prompt-input:focus {
+  border-color: rgba(255,230,0,0.3);
+}
+
+.prompt-input::placeholder {
+  color: var(--text-40);
+}
+
+/* ── Right Panel (Output) ── */
+.panel-right {
+  padding: 24px 24px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+  background: rgba(10,10,10,0.5);
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.output-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.output-title::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: var(--accent);
+}
+
+.output-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.output-btn {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--text-40);
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.output-btn:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.output-btn.primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.output-box {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  padding: 16px;
+  font-size: 12px;
+  color: var(--text-65);
+  line-height: 1.8;
+  font-family: 'Inter', monospace;
+  min-height: 200px;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── Score Card ── */
+.score-card {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.score-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.score-grade {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.score-label {
+  font-size: 11px;
+  color: var(--text-40);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.score-bars { display: flex; flex-direction: column; gap: 8px; }
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-dim {
+  width: 60px;
+  font-size: 10px;
+  color: var(--text-55);
+  text-align: right;
+}
+
+.score-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+}
+
+.score-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--accent);
+}
+
+.score-val {
+  width: 30px;
+  font-size: 10px;
+  color: var(--text-40);
+  font-weight: 600;
+}
+
+/* ── Model Tabs ── */
+.model-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 16px;
+  border: 0.5px solid var(--border);
+}
+
+.model-tab {
+  flex: 1;
+  padding: 8px 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-40);
+  cursor: pointer;
+  border-right: 0.5px solid var(--border);
+  transition: all 0.2s;
+}
+
+.model-tab:last-child { border-right: none; }
+
+.model-tab:hover { color: var(--text-65); background: rgba(255,255,255,0.02); }
+
+.model-tab.active {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 800;
+}
+
+/* ── Token Counter ── */
+.token-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  margin-bottom: 16px;
+  font-size: 11px;
+}
+
+.token-count {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.token-label { color: var(--text-40); }
+
+/* ── Compliance Badge ── */
+.compliance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--green);
+  background: rgba(76,175,80,0.03);
+  font-size: 11px;
+  color: rgba(76,175,80,0.8);
+  margin-bottom: 16px;
+}
+
+.compliance.warning {
+  border-left-color: var(--danger);
+  background: rgba(255,59,59,0.03);
+  color: rgba(255,59,59,0.8);
+}
+
+/* ── Footer ── */
+.app-footer {
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-dot { width: 8px; height: 8px; background: var(--accent); }
+
+.footer-team {
+  font-size: 11px;
+  color: var(--text-40);
+}
+
+.footer-team strong { color: var(--text-65); }
+
+.footer-right {
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-deco {
+  display: flex;
+  gap: 3px;
+}
+
+.footer-sq { width: 5px; height: 5px; background: var(--accent); }
+.footer-sq:nth-child(2) { opacity: 0.4; }
+.footer-sq:nth-child(3) { opacity: 0.15; }
+
+/* ── Keyboard Shortcuts Hint ── */
+.shortcuts-bar {
+  display: flex;
+  gap: 16px;
+  padding: 8px 32px;
+  background: rgba(20,20,20,0.4);
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--text-40);
+}
+
+.shortcut-item kbd {
+  background: rgba(255,255,255,0.06);
+  padding: 2px 5px;
+  font-family: 'Inter', monospace;
+  font-size: 9px;
+  margin-right: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .main { grid-template-columns: 1fr; }
+  .panel-right { border-top: 1px solid var(--border); max-height: none; }
+  .panel-left { max-height: none; border-right: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="side-mark">CODM VISUAL WORKSHOP · AAA CINEMATIC PROMPT STUDIO</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <div class="header-brand">
+      <span class="header-bar"></span>
+      <span class="header-title">CODM 视觉<span class="hl">工坊</span></span>
+      <span class="header-version">v2.2</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <button class="header-btn" onclick="randomInspire()">🎲 随机灵感</button>
+    <button class="header-btn" onclick="toggleLang()">EN / 中</button>
+    <button class="header-btn">🕘 历史</button>
+    <button class="header-btn">📌 收藏夹</button>
+  </div>
+</header>
+
+<!-- Model Navigation Cards -->
+<nav class="model-nav">
+  <div class="model-nav-card active" onclick="selectNavModel(this)" data-model="seedance">
+    <span class="mnc-icon">🎬</span>
+    <div class="mnc-info">
+      <div class="mnc-name">Seedance 2.0</div>
+      <div class="mnc-desc">文生视频 · 预告片 / 干员动态</div>
+    </div>
+  </div>
+  <div class="model-nav-card" onclick="selectNavModel(this)" data-model="nano">
+    <span class="mnc-icon">🍌</span>
+    <div class="mnc-info">
+      <div class="mnc-name">Nano Banana</div>
+      <div class="mnc-desc">Gemini 主图 · 精修 / 海报 / 文字</div>
+    </div>
+  </div>
+  <div class="model-nav-card" onclick="selectNavModel(this)" data-model="mj">
+    <span class="mnc-icon">💎</span>
+    <div class="mnc-info">
+      <div class="mnc-name">Midjourney V7</div>
+      <div class="mnc-desc">气氛图 · 概念图 / Key Art</div>
+    </div>
+  </div>
+  <div class="model-nav-card" onclick="selectNavModel(this)" data-model="wiki">
+    <span class="mnc-icon">📖</span>
+    <div class="mnc-info">
+      <div class="mnc-name">CODM 百科</div>
+      <div class="mnc-desc">武器 / 连杀 / BR / 地图 / 载具</div>
+    </div>
+  </div>
+  <div class="model-nav-card" onclick="selectNavModel(this)" data-model="vault">
+    <span class="mnc-icon">🎞️</span>
+    <div class="mnc-info">
+      <div class="mnc-name">COD 影库</div>
+      <div class="mnc-desc">历代 Cinematics · 预告片 · 参考</div>
+    </div>
+  </div>
+</nav>
+
+<!-- Steps Navigation -->
+<nav class="steps-nav">
+  <div class="step-item active" data-step="1"><span class="step-num">1</span>角色</div>
+  <div class="step-item" data-step="2"><span class="step-num">2</span>摄影</div>
+  <div class="step-item" data-step="3"><span class="step-num">3</span>内容</div>
+  <div class="step-item" data-step="4"><span class="step-num">4</span>场景</div>
+  <div class="step-item" data-step="5"><span class="step-num">5</span>完成</div>
+</nav>
+
+<!-- Shortcuts Bar -->
+<div class="shortcuts-bar">
+  <span class="shortcut-item"><kbd>Ctrl</kbd><kbd>Enter</kbd> 复制提示词</span>
+  <span class="shortcut-item"><kbd>Ctrl</kbd><kbd>S</kbd> 保存</span>
+  <span class="shortcut-item"><kbd>Ctrl</kbd><kbd>G</kbd> 随机灵感</span>
+  <span class="shortcut-item"><kbd>Ctrl</kbd><kbd>L</kbd> 切换语言</span>
+</div>
+
+<!-- Main Layout -->
+<main class="main">
+
+  <!-- Left Panel: Builder -->
+  <div class="panel-left">
+
+    <!-- Presets -->
+    <div class="section-label">PRESETS 预设模板</div>
+    <div class="presets-grid">
+      <div class="preset-card active" onclick="selectPreset(this)">
+        <div class="preset-icon">🎖️</div>
+        <div class="preset-name">CODM 军事写实</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🎬</div>
+        <div class="preset-name">电影预告片</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🏆</div>
+        <div class="preset-name">周年庆史诗</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🎥</div>
+        <div class="preset-name">电影联动</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🌸</div>
+        <div class="preset-name">二次元联动</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">💜</div>
+        <div class="preset-name">霓虹赛博</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🧧</div>
+        <div class="preset-name">春节</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">🎃</div>
+        <div class="preset-name">万圣节</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">📋</div>
+        <div class="preset-name">实战样本</div>
+      </div>
+      <div class="preset-card" onclick="selectPreset(this)">
+        <div class="preset-icon">⚖️</div>
+        <div class="preset-name">A/B 对比</div>
+      </div>
+    </div>
+
+    <!-- Creative Content -->
+    <div class="section-label">✍️ 创作内容 CREATIVE CONTENT</div>
+    <textarea class="prompt-input" placeholder="描述你的画面... 例如：一名精英干员身着暗黑战术装甲，手持战术装置，站在废墟城市的楼顶，背后是燃烧的天际线..." oninput="updateOutput()"></textarea>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">🎬</span>内容类型</div>
+      <div class="tags">
+        <span class="tag selected" onclick="toggleTag(this)">干员亮相</span>
+        <span class="tag" onclick="toggleTag(this)">战术行动</span>
+        <span class="tag" onclick="toggleTag(this)">皮肤展示</span>
+        <span class="tag" onclick="toggleTag(this)">场景氛围</span>
+        <span class="tag" onclick="toggleTag(this)">载具展示</span>
+        <span class="tag" onclick="toggleTag(this)">电影级人像</span>
+        <span class="tag" onclick="toggleTag(this)">海报 Key Art</span>
+        <span class="tag" onclick="toggleTag(this)">武器蓝图</span>
+      </div>
+    </div>
+
+    <!-- Character Reference -->
+    <div class="section-label">🎭 角色引用 @CHARACTERS</div>
+    <div class="tag-group">
+      <div class="tags">
+        <span class="tag cat-cyan" onclick="toggleTag(this)">@图一 锁脸</span>
+        <span class="tag cat-cyan" onclick="toggleTag(this)">@图二 锁装备</span>
+        <span class="tag cat-cyan" onclick="toggleTag(this)">@图三 锁场景</span>
+        <span class="tag cat-cyan" onclick="toggleTag(this)">@图四 锁色调</span>
+        <span class="tag cat-cyan" onclick="toggleTag(this)">@图五 锁动作</span>
+      </div>
+    </div>
+
+    <!-- Cinematography -->
+    <div class="section-label">🎞️ 全局摄影 CINEMATOGRAPHY</div>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">📷</span>电影相机</div>
+      <div class="tags">
+        <span class="tag selected" onclick="toggleTag(this)">ARRI Alexa 35</span>
+        <span class="tag" onclick="toggleTag(this)">RED V-Raptor 8K</span>
+        <span class="tag" onclick="toggleTag(this)">Sony Venice 2</span>
+        <span class="tag" onclick="toggleTag(this)">IMAX 65mm</span>
+        <span class="tag" onclick="toggleTag(this)">35mm Film</span>
+      </div>
+    </div>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">🎨</span>色调分级</div>
+      <div class="tags">
+        <span class="tag" onclick="toggleTag(this)">冷蓝灰 MW系</span>
+        <span class="tag selected" onclick="toggleTag(this)">青橙好莱坞</span>
+        <span class="tag" onclick="toggleTag(this)">银漂</span>
+        <span class="tag" onclick="toggleTag(this)">沙漠暖棕</span>
+        <span class="tag" onclick="toggleTag(this)">战损高反差</span>
+        <span class="tag" onclick="toggleTag(this)">夜视绿</span>
+      </div>
+    </div>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">💡</span>光影质感</div>
+      <div class="tags">
+        <span class="tag" onclick="toggleTag(this)">硬战术光</span>
+        <span class="tag" onclick="toggleTag(this)">变形镜头光晕</span>
+        <span class="tag selected" onclick="toggleTag(this)">丁达尔光束</span>
+        <span class="tag" onclick="toggleTag(this)">边缘光剪影</span>
+        <span class="tag" onclick="toggleTag(this)">枪口实光</span>
+        <span class="tag" onclick="toggleTag(this)">体积光</span>
+      </div>
+    </div>
+
+    <!-- Shot Size -->
+    <div class="section-label">🎬 景别 & 运动 SHOT</div>
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">📐</span>景别</div>
+      <div class="tags">
+        <span class="tag" onclick="toggleTag(this)">大远景</span>
+        <span class="tag" onclick="toggleTag(this)">远景</span>
+        <span class="tag" onclick="toggleTag(this)">全景</span>
+        <span class="tag selected" onclick="toggleTag(this)">中景</span>
+        <span class="tag" onclick="toggleTag(this)">特写</span>
+        <span class="tag" onclick="toggleTag(this)">大特写</span>
+        <span class="tag" onclick="toggleTag(this)">仰拍</span>
+        <span class="tag" onclick="toggleTag(this)">俯拍</span>
+        <span class="tag" onclick="toggleTag(this)">FPS视角</span>
+      </div>
+    </div>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">🎥</span>镜头运动</div>
+      <div class="tags">
+        <span class="tag" onclick="toggleTag(this)">固定</span>
+        <span class="tag selected" onclick="toggleTag(this)">缓推</span>
+        <span class="tag" onclick="toggleTag(this)">跟踪</span>
+        <span class="tag" onclick="toggleTag(this)">手持</span>
+        <span class="tag" onclick="toggleTag(this)">稳定器</span>
+        <span class="tag" onclick="toggleTag(this)">航拍</span>
+        <span class="tag" onclick="toggleTag(this)">穿越机 FPV</span>
+      </div>
+    </div>
+
+    <!-- Focal Length Slider -->
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>🔭 焦距 Focal Length</span>
+        <span id="focal-val">50mm</span>
+      </div>
+      <div class="slider-track" onclick="setSlider(event, this)">
+        <div class="slider-fill" style="width: 30%"></div>
+        <div class="slider-thumb" style="left: 30%"></div>
+      </div>
+      <div class="slider-label" style="margin-top:4px;">
+        <span>16mm</span><span>200mm</span>
+      </div>
+    </div>
+
+    <!-- Environment -->
+    <div class="section-label">🌍 战场环境 ENVIRONMENT</div>
+    <div class="tag-group">
+      <div class="tags">
+        <span class="tag selected" onclick="toggleTag(this)">废墟城市</span>
+        <span class="tag" onclick="toggleTag(this)">沙漠</span>
+        <span class="tag" onclick="toggleTag(this)">丛林</span>
+        <span class="tag" onclick="toggleTag(this)">雪山</span>
+        <span class="tag" onclick="toggleTag(this)">军事基地</span>
+        <span class="tag" onclick="toggleTag(this)">航母甲板</span>
+        <span class="tag" onclick="toggleTag(this)">摩天楼顶</span>
+        <span class="tag" onclick="toggleTag(this)">地下隧道</span>
+        <span class="tag" onclick="toggleTag(this)">核电废墟</span>
+      </div>
+    </div>
+
+    <div class="tag-group">
+      <div class="tag-group-title"><span class="tg-icon">🌫️</span>天气/粒子</div>
+      <div class="tags">
+        <span class="tag" onclick="toggleTag(this)">暴雨</span>
+        <span class="tag" onclick="toggleTag(this)">浓雾</span>
+        <span class="tag" onclick="toggleTag(this)">沙尘暴</span>
+        <span class="tag selected" onclick="toggleTag(this)">硝烟</span>
+        <span class="tag" onclick="toggleTag(this)">灰烬飞散</span>
+        <span class="tag" onclick="toggleTag(this)">尘埃光柱</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right Panel: Output -->
+  <div class="panel-right">
+
+    <!-- Model Tabs -->
+    <div class="model-tabs">
+      <div class="model-tab active" onclick="selectModel(this)">Seedance 2.0</div>
+      <div class="model-tab" onclick="selectModel(this)">Nano Banana</div>
+      <div class="model-tab" onclick="selectModel(this)">Midjourney V7</div>
+    </div>
+
+    <!-- Output Header -->
+    <div class="output-header">
+      <div class="output-title">最终提示词</div>
+      <div class="output-actions">
+        <button class="output-btn" onclick="copyPrompt()">COPY</button>
+        <button class="output-btn primary" onclick="copyPrompt()">📋 复制</button>
+      </div>
+    </div>
+
+    <!-- Output Box -->
+    <div class="output-box" id="output-text">A elite operator in dark tactical armor, standing atop a ruined urban rooftop. Behind them, a burning skyline illuminates the scene with warm destruction glow. Shot on ARRI Alexa 35, medium shot, slow dolly in, Tyndall light beams cutting through smoke particles. Teal-orange Hollywood color grading, cinematic anamorphic flare. Devastated cityscape environment with smoke and debris. 50mm lens, shallow depth of field. --ar 16:9 --style raw</div>
+
+    <!-- Token Counter -->
+    <div class="token-counter">
+      <span class="token-label">TOKEN COUNT</span>
+      <span class="token-count">67 tokens</span>
+    </div>
+
+    <!-- Compliance -->
+    <div class="compliance">
+      ✅ 合规通过 — 无敏感词检出
+    </div>
+
+    <!-- Score Card -->
+    <div class="score-card">
+      <div class="score-header">
+        <div>
+          <div class="score-grade">A</div>
+          <div class="score-label">PROMPT QUALITY</div>
+        </div>
+      </div>
+      <div class="score-bars">
+        <div class="score-row">
+          <span class="score-dim">结构</span>
+          <div class="score-bar-bg"><div class="score-bar-fill" style="width:90%"></div></div>
+          <span class="score-val">90</span>
+        </div>
+        <div class="score-row">
+          <span class="score-dim">密度</span>
+          <div class="score-bar-bg"><div class="score-bar-fill" style="width:82%"></div></div>
+          <span class="score-val">82</span>
+        </div>
+        <div class="score-row">
+          <span class="score-dim">视觉</span>
+          <div class="score-bar-bg"><div class="score-bar-fill" style="width:95%"></div></div>
+          <span class="score-val">95</span>
+        </div>
+        <div class="score-row">
+          <span class="score-dim">合规</span>
+          <div class="score-bar-bg"><div class="score-bar-fill" style="width:100%"></div></div>
+          <span class="score-val">100</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div style="background: var(--accent-bg); border: 1px solid var(--accent-border); padding: 14px 16px; margin-bottom: 16px;">
+      <div style="font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+        <span style="width:3px; height:14px; background: var(--accent); display:inline-block;"></span>
+        TIPS
+      </div>
+      <div style="font-size: 11px; color: var(--text-55); line-height: 1.7;">
+        Seedance 2.0 推荐 40-80 tokens，使用 Subject → Action → Camera → Style 结构。避免"枪/射击/爆炸"→ 用"战术装置""能量冲击"替代。
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="app-footer">
+  <div class="footer-left">
+    <span class="footer-dot"></span>
+    <span class="footer-team"><strong>CODM</strong> · 宣发设计团队 · SawyerCGI</span>
+  </div>
+  <div class="footer-right">
+    <span>DARK OPS EDITION</span>
+    <div class="footer-deco">
+      <span class="footer-sq"></span>
+      <span class="footer-sq"></span>
+      <span class="footer-sq"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Model Nav Card ──
+function selectNavModel(el) {
+  document.querySelectorAll('.model-nav-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  // Sync right-panel model tabs
+  const model = el.dataset.model;
+  const tabMap = { seedance: 0, nano: 1, mj: 2 };
+  if (model in tabMap) {
+    const tabs = document.querySelectorAll('.model-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    if (tabs[tabMap[model]]) tabs[tabMap[model]].classList.add('active');
+  }
+}
+
+// ── Tag Toggle ──
+function toggleTag(el) {
+  el.classList.toggle('selected');
+  updateOutput();
+}
+
+// ── Preset Select ──
+function selectPreset(el) {
+  document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Model Tab ──
+function selectModel(el) {
+  document.querySelectorAll('.model-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Step Nav ──
+document.querySelectorAll('.step-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.step-item').forEach(s => s.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// ── Slider ──
+function setSlider(e, track) {
+  const rect = track.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+  track.querySelector('.slider-fill').style.width = pct + '%';
+  track.querySelector('.slider-thumb').style.left = pct + '%';
+  const focal = Math.round(16 + (pct / 100) * 184);
+  document.getElementById('focal-val').textContent = focal + 'mm';
+}
+
+// ── Copy Prompt ──
+function copyPrompt() {
+  const text = document.getElementById('output-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.output-btn.primary');
+    btn.textContent = '✓ COPIED';
+    setTimeout(() => { btn.textContent = '📋 复制'; }, 1500);
+  });
+}
+
+// ── Random Inspire ──
+function randomInspire() {
+  const presets = document.querySelectorAll('.preset-card');
+  const rand = Math.floor(Math.random() * presets.length);
+  selectPreset(presets[rand]);
+}
+
+// ── Toggle Language (placeholder) ──
+function toggleLang() {
+  const output = document.getElementById('output-text');
+  if (output.dataset.lang === 'zh') {
+    output.textContent = 'A elite operator in dark tactical armor, standing atop a ruined urban rooftop. Behind them, a burning skyline illuminates the scene with warm destruction glow. Shot on ARRI Alexa 35, medium shot, slow dolly in, Tyndall light beams cutting through smoke particles. Teal-orange Hollywood color grading, cinematic anamorphic flare. Devastated cityscape environment with smoke and debris. 50mm lens, shallow depth of field. --ar 16:9 --style raw';
+    output.dataset.lang = 'en';
+  } else {
+    output.textContent = '一名精英干员身着暗黑战术装甲，站在废墟城市楼顶。身后燃烧的天际线以温暖的毁灭光芒照亮场景。ARRI Alexa 35 拍摄，中景，缓慢推镜，丁达尔光束穿透硝烟粒子。青橙好莱坞色调分级，电影变形镜头光晕。废墟城市环境，硝烟弥漫。50mm 镜头，浅景深。--ar 16:9 --style raw';
+    output.dataset.lang = 'zh';
+  }
+}
+
+// ── Update Output (simplified) ──
+function updateOutput() {
+  const selected = [...document.querySelectorAll('.tag.selected')].map(t => t.textContent).join(', ');
+  // In production this would rebuild the full prompt
+}
+</script>
+
+</body>
+</html>

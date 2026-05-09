@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI Daily · 20 条设计师速报 · 2026.04.13</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', 'Noto Sans SC', ui-sans-serif, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #ffffff;
+    color: rgb(55, 53, 47);
+  }
+
+  /* ── Page 1 ── */
+  .page {
+    width: 1080px;
+    height: 1920px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    height: 180px;
+    background: linear-gradient(135deg, #6940a5 0%, #2383e2 40%, #0f7b6c 80%, #d44c47 100%);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 60%, rgba(255,255,255,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 30%, rgba(255,255,255,0.12) 0%, transparent 50%);
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 28px;
+    right: 48px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .cover-date {
+    position: absolute;
+    bottom: 24px;
+    right: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+  }
+
+  .cover-page-num {
+    position: absolute;
+    bottom: 24px;
+    left: 48px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+  }
+
+  /* ── Content ── */
+  .content {
+    flex: 1;
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgb(233, 233, 231);
+    flex-shrink: 0;
+  }
+
+  .page-icon {
+    font-size: 48px;
+    margin-top: -42px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+  }
+
+  .page-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: rgb(55, 53, 47);
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+    color: rgba(55, 53, 47, 0.4);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+
+  .prop-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .notion-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+  }
+
+  .tag-blue    { background: rgb(211, 229, 239); color: rgb(24, 51, 71); }
+  .tag-purple  { background: rgb(232, 222, 238); color: rgb(65, 36, 84); }
+  .tag-green   { background: rgb(219, 237, 219); color: rgb(28, 56, 41); }
+  .tag-orange  { background: rgb(250, 222, 201); color: rgb(73, 41, 14); }
+  .tag-red     { background: rgb(255, 226, 221); color: rgb(93, 23, 21); }
+  .tag-yellow  { background: rgb(253, 236, 200); color: rgb(64, 44, 27); }
+  .tag-pink    { background: rgb(245, 224, 233); color: rgb(76, 35, 55); }
+  .tag-gray    { background: rgb(227, 226, 224); color: rgb(50, 48, 44); }
+  .tag-teal    { background: rgb(211, 229, 226); color: rgb(15, 49, 44); }
+
+  /* ── Section Heading ── */
+  .section-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(55, 53, 47, 0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgb(241, 241, 239);
+    flex-shrink: 0;
+  }
+
+  .section-heading .sec-emoji {
+    margin-right: 6px;
+  }
+
+  /* ── News List ── */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 6px;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.04);
+  }
+
+  .news-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .num-hot {
+    background: linear-gradient(135deg, #d44c47, #e8590c);
+    color: #fff;
+  }
+
+  .num-feat {
+    background: linear-gradient(135deg, #2383e2, #6940a5);
+    color: #fff;
+  }
+
+  .num-default {
+    background: rgba(55, 53, 47, 0.06);
+    color: rgba(55, 53, 47, 0.5);
+  }
+
+  .news-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .news-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(55, 53, 47);
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+  }
+
+  .news-title .hl { color: rgb(35, 131, 226); }
+  .news-title .hl-red { color: rgb(212, 76, 71); }
+  .news-title .hl-purple { color: rgb(105, 64, 165); }
+  .news-title .hl-orange { color: rgb(217, 115, 13); }
+  .news-title .hl-teal { color: rgb(0, 135, 107); }
+
+  .news-desc {
+    font-size: 14px;
+    color: rgba(55, 53, 47, 0.45);
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+
+  .inline-tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 6px;
+    position: relative;
+    top: -1px;
+  }
+
+  /* ── Callout ── */
+  .notion-callout {
+    display: flex;
+    gap: 10px;
+    padding: 14px 14px;
+    border-radius: 4px;
+    background: rgb(241, 241, 239);
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .callout-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  .callout-text {
+    font-size: 14px;
+    color: rgba(55, 53, 47, 0.65);
+    line-height: 1.6;
+  }
+
+  .callout-text strong {
+    font-weight: 700;
+    color: rgb(55, 53, 47);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    height: 60px;
+    background: rgb(251, 251, 250);
+    border-top: 1px solid rgb(233, 233, 231);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .footer-logo { font-size: 20px; }
+  .footer-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(55, 53, 47, 0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .sep-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(55, 53, 47, 0.15);
+    display: inline-block;
+  }
+
+  /* ── Bottom Tags ── */
+  .bottom-bar {
+    flex-shrink: 0;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(233, 233, 231);
+    margin-top: 10px;
+  }
+
+  .bottom-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .bottom-tag {
+    font-size: 11px;
+    color: rgba(55, 53, 47, 0.3);
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: rgba(55, 53, 47, 0.04);
+    font-weight: 500;
+  }
+
+  .bottom-source {
+    font-size: 11px;
+    color: rgba(55, 53, 47, 0.2);
+  }
+
+  /* ── Page 2 Header (simplified) ── */
+  .header-p2 {
+    padding: 18px 0 14px;
+    border-bottom: 1px solid rgb(233, 233, 231);
+    flex-shrink: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .header-p2 .p2-icon { font-size: 36px; margin-top: -38px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); }
+  .header-p2 .p2-title { font-size: 34px; font-weight: 800; letter-spacing: -1px; }
+  .header-p2 .p2-sub { font-size: 15px; color: rgba(55,53,47,0.4); }
+
+  /* ── Data Strip ── */
+  .data-strip {
+    display: flex;
+    gap: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: 14px;
+  }
+
+  .data-cell {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    border-right: 1px solid rgba(55, 53, 47, 0.06);
+  }
+
+  .data-cell:last-child { border-right: none; }
+  .data-cell:nth-child(odd) { background: rgb(251, 251, 250); }
+  .data-cell:nth-child(even) { background: rgb(247, 246, 243); }
+
+  .data-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(55, 53, 47, 0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .data-value {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .dv-red { color: rgb(212, 76, 71); }
+  .dv-blue { color: rgb(35, 131, 226); }
+  .dv-orange { color: rgb(217, 115, 13); }
+  .dv-purple { color: rgb(105, 64, 165); }
+  .dv-teal { color: rgb(0, 135, 107); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ PAGE 1 ═══════════════════════════════════════ -->
+<div class="page">
+
+  <div class="cover">
+    <div class="cover-badge">AI DAILY · DESIGNER EDITION</div>
+    <div class="cover-date">2026 · 04 · 13 SUN</div>
+    <div class="cover-page-num">PAGE 1 / 2</div>
+  </div>
+
+  <div class="content">
+
+    <div class="header">
+      <div class="page-icon">🎨</div>
+      <h1 class="page-title">AI Daily · 设计师 20 条速报</h1>
+      <div class="page-subtitle">2026年4月13日 · 星期日 · 导演 & 美术设计师特辑</div>
+      <div class="prop-tags">
+        <span class="notion-tag tag-purple">🎬 视频生成</span>
+        <span class="notion-tag tag-blue">🖼️ 图像工具</span>
+        <span class="notion-tag tag-teal">🎨 设计工具</span>
+        <span class="notion-tag tag-orange">🎯 游戏宣发</span>
+        <span class="notion-tag tag-red">🔥 行业大事</span>
+        <span class="notion-tag tag-pink">🎵 音频/3D</span>
+      </div>
+    </div>
+
+    <!-- ═══ Section: 视频生成 ═══ -->
+    <div class="section-heading"><span class="sec-emoji">🎬</span>AI 视频生成 · 导演必看</div>
+
+    <div class="news-list">
+
+      <div class="news-item">
+        <div class="news-num num-hot">1</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-red">HappyHorse 1.0 空降双榜 #1</span>，阿里开源视频模型炸场<span class="inline-tag tag-red">🔥 头条</span></div>
+          <div class="news-desc">150 亿参数，文/图生视频双冠，720P/1080P 输出，音视频联合生成，完全开源可商用</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-feat">2</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">Seedance 2.0</span> 称霸音频视频榜，广告级画质标杆</div>
+          <div class="news-desc">字节即梦旗舰，2K 原生 + 音画同步，物理模拟最强，单片 $0.12，商业交付首选</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">3</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">Google Veo 3.1</span> 免费开放，720P 广播级画质</div>
+          <div class="news-desc">Google 账户即用，渲染仅 48 秒/片段，适合快速社交素材和演示文稿</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">4</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-red">Sora 已于 3/25 正式关停</span>，可灵 3.0 成最佳替代</div>
+          <div class="news-desc">上线仅 6 个月宣告失败，可灵以 $3 亿 ARR 接棒；Runway Gen-4.5 和 Veo 3.1 并列推荐</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">5</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">PikaStream 1.0</span> 发布：实时互动视频 <2s 延迟</div>
+          <div class="news-desc">专为 AI Agent 设计，实时对话式虚拟形象，唇形同步精确，Beta 期间免费</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">6</div>
+        <div class="news-content">
+          <div class="news-title">爱奇艺首部 AIGC 电影<span class="hl-orange">《天问》</span>登顶飙升榜</div>
+          <div class="news-desc">科幻机甲题材，纳逗Pro 整合即梦/可灵/Vidu 多模型，零专业背景导演 AI 全流程制作</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">7</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-teal">Wan 2.7</span> 专业级视频模型：精确运动控制 + 多视角一致</div>
+          <div class="news-desc">支持精确的角色运动和镜头调度，多镜头叙事连贯性领先，适合短剧/分镜制作</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══ Section: 图像生成 ═══ -->
+    <div class="section-heading"><span class="sec-emoji">🖼️</span>AI 图像生成 · 美术必看</div>
+
+    <div class="news-list">
+
+      <div class="news-item">
+        <div class="news-num num-feat">8</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">Midjourney V8 Alpha</span> 正式发布：原生 2K + 架构重建</div>
+          <div class="news-desc">3/17 发布，全新底层架构，原生 2K 分辨率输出，风格一致性和文字渲染大幅提升</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">9</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">Nano Banana 2</span>：4 秒出图，专业级 4K + 精准文字渲染</div>
+          <div class="news-desc">4-6 秒生成 4K 图像，文字渲染精确，主题一致性强，极适合海报/Banner 快速出图</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">10</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-teal">GLM Image</span> 混合架构出图：文字渲染能力"逆天"</div>
+          <div class="news-desc">智谱 AR+扩散混合模型，中英文字渲染准确率极高，适合含文字的宣传物料设计</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Callout -->
+    <div class="notion-callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">
+        <strong>P1 编者按</strong> — 视频生成进入<strong>「音视频联合生成」</strong>时代：HappyHorse 开源炸场、Seedance 商用封王、Sora 黯然离场。设计师的核心动作：<strong>立即测试 HappyHorse + Seedance 双引擎工作流</strong>。
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-tags">
+        <span class="bottom-tag">#HappyHorse</span>
+        <span class="bottom-tag">#Seedance2</span>
+        <span class="bottom-tag">#Veo3</span>
+        <span class="bottom-tag">#可灵3</span>
+        <span class="bottom-tag">#MidjourneyV8</span>
+        <span class="bottom-tag">#GLMImage</span>
+      </div>
+      <span class="bottom-source">Page 1/2</span>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">🎨</span>
+    <span class="footer-text">AI Daily · Designer Edition</span>
+    <span class="sep-dot"></span>
+    <span class="footer-text" style="font-weight:500; letter-spacing:1px;">Powered by CodeBuddy</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 2 ═══════════════════════════════════════ -->
+<div class="page" style="margin-top: 0;">
+
+  <div class="cover" style="height: 140px; background: linear-gradient(135deg, #0f7b6c 0%, #2383e2 35%, #6940a5 70%, #d44c47 100%);">
+    <div class="cover-badge">AI DAILY · DESIGNER EDITION</div>
+    <div class="cover-date">2026 · 04 · 13 SUN</div>
+    <div class="cover-page-num">PAGE 2 / 2</div>
+  </div>
+
+  <div class="content">
+
+    <div class="header-p2">
+      <div class="p2-icon">🎨</div>
+      <h1 class="p2-title">速报 #11-20</h1>
+      <span class="p2-sub">设计工具 · 3D/音频 · 行业动态</span>
+    </div>
+
+    <!-- ═══ Section: 设计工具 ═══ -->
+    <div class="section-heading"><span class="sec-emoji">🎨</span>设计工具 & 工作流</div>
+
+    <div class="news-list">
+
+      <div class="news-item">
+        <div class="news-num num-feat">11</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">Adobe Firefly</span> 整合 Google/OpenAI 顶级模型</div>
+          <div class="news-desc">Firefly 现可调用 GPT、Gemini 等外部模型，支持 100+ 语言，设计师工作流深度整合</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">12</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">Figma AI + Canva AI + Framer</span> 三强格局定型</div>
+          <div class="news-desc">Figma 擅长 UI/协作，Canva 适合快速营销物料，Framer 主打交互原型，各有所长</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">13</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-teal">Recraft</span>：矢量 + 品牌规范 AI 设计新星</div>
+          <div class="news-desc">唯一支持原生矢量输出的 AI 设计工具，自定义品牌色/字体/风格指南，游戏宣发适配度极高</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">14</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-orange">UNI-1 AI</span>：视觉推理 + 高保真合成统一模型</div>
+          <div class="news-desc">理解画面语义后再生成，构图逻辑远超传统扩散模型，概念设计新利器</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══ Section: 3D & 音频 ═══ -->
+    <div class="section-heading"><span class="sec-emoji">✨</span>3D · 音频 · 动画</div>
+
+    <div class="news-list">
+
+      <div class="news-item">
+        <div class="news-num num-default">15</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">Hitem3D</span>：单图秒转生产级 3D 模型</div>
+          <div class="news-desc">上传一张图即可生成高分辨率 3D 模型，支持直接导入 Unity/UE，游戏资产制作加速</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">16</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-teal">AnimeShorts</span>：尖端 AI 一键制作动漫短片</div>
+          <div class="news-desc">输入剧本自动生成动漫视频，风格化创作零门槛，适合二次元宣发场景</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">17</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-orange">BeatMV</span>：歌曲→电影感 MV 一键生成</div>
+          <div class="news-desc">上传音乐自动生成视觉风格匹配的 MV，节奏同步精准，适合游戏 OST 宣传</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══ Section: 行业大事 ═══ -->
+    <div class="section-heading"><span class="sec-emoji">🔥</span>行业大事 · 设计师必知</div>
+
+    <div class="news-list">
+
+      <div class="news-item">
+        <div class="news-num num-hot">18</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-red">GPT-6 明天（4/14）发布</span>，性能 +40%</div>
+          <div class="news-desc">代号 Spud，多模态能力全面升级，DALL·E 集成预计同步加强，设计师关注图像能力</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">19</div>
+        <div class="news-content">
+          <div class="news-title">AI 视频市场<span class="hl">突破 $15 亿</span>，Runway/可灵/Seedance 三强割据</div>
+          <div class="news-desc">2026 年 AI 视频创作市场爆发，Sora 退场后三足鼎立格局清晰，工具选型影响产能</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">20</div>
+        <div class="news-content">
+          <div class="news-title">AI 短剧产业报告：<span class="hl-orange">从技术萌芽到工业化生产</span></div>
+          <div class="news-desc">AI 漫剧 + AI 仿真短剧两大品类爆发，可灵/即梦/Wan 成为核心生产工具</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Strip -->
+    <div class="data-strip">
+      <div class="data-cell">
+        <div class="data-label">HappyHorse</div>
+        <div class="data-value dv-red">双榜 #1</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">MJ V8</div>
+        <div class="data-value dv-purple">原生 2K</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">AI视频市场</div>
+        <div class="data-value dv-blue">$15亿+</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">可灵 ARR</div>
+        <div class="data-value dv-teal">$3亿</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">GPT-6</div>
+        <div class="data-value dv-orange">明日发布</div>
+      </div>
+    </div>
+
+    <!-- Callout -->
+    <div class="notion-callout" style="margin-top: 14px;">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text">
+        <strong>设计师行动清单</strong> — ① 测试 HappyHorse 开源模型，评估宣发视频产能提升 ② Midjourney V8 切换 2K 输出工作流 ③ 关注明日 GPT-6 发布会的 DALL·E 集成更新 ④ 用 Seedance 2.0 替代已关停的 Sora 做商业视频交付
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-tags">
+        <span class="bottom-tag">#Adobe</span>
+        <span class="bottom-tag">#Figma</span>
+        <span class="bottom-tag">#Hitem3D</span>
+        <span class="bottom-tag">#GPT6</span>
+        <span class="bottom-tag">#AI短剧</span>
+        <span class="bottom-tag">#BeatMV</span>
+        <span class="bottom-tag">#Recraft</span>
+        <span class="bottom-tag">#UNI1</span>
+      </div>
+      <span class="bottom-source">smol.ai · creati.ai · mornai.cn</span>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">🎨</span>
+    <span class="footer-text">AI Daily · Designer Edition</span>
+    <span class="sep-dot"></span>
+    <span class="footer-text" style="font-weight:500; letter-spacing:1px;">Powered by CodeBuddy</span>
+  </div>
+
+</div>
+
+</body>
+</html>

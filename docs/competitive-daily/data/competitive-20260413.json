@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "date": "2026-04-13",
+    "dateCompact": "20260413",
+    "weekday": "星期一",
+    "extractedAt": "2026-04-23T02:21:19.212Z",
+    "sourceFile": "CODM_Competitive_Daily_20260413.md",
+    "version": "1.0.0"
+  },
+  "overview": "",
+  "highlights": [
+    {
+      "text": "三角洲行动S9「回声」前瞻直播（4.11晚）刷屏：官宣联动《古墓丽影》、烽火地带全新模式、多栖战场新地图、2026全面战场国际邀请赛落地武汉（6月）。4月16日开服，猛攻节4月24日启动。这是本周竞品最大动作。",
+      "priority": 1
+    },
+    {
+      "text": "⚔️ Battlefield 6 \"Hunter/Prey\"更新定档4月14日：Season 2最终内容+进度系统大改+网络延迟优化，Season 3即将公布。",
+      "priority": 0
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔫",
+      "nameCN": "使命召唤手游",
+      "nameEN": "",
+      "isSelf": true,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：无重大新动态。近期以4月体验服招募（新技能芯片、被动技能等）为主要宣发内容。",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态。2026春季大师杯常规赛持续进行中（4.9 SPG vs GLRS等赛事回放更新），赛事官方直播间活跃。4.11有直播回放《神人天降中》。",
+          "priority": 0
+        },
+        {
+          "text": "YouTube：无近24h新视频。当前版本为Season 3「Paranoia」，Season 4测试服已于4月3日开放（泄露含DMZ模式、新武器等）。",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🎯",
+      "nameCN": "三角洲行动",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：有动态。4月11日晚进行S9「回声」赛季前瞻直播，多平台同步推送。",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态。前瞻直播回放视频上线（BV1PtD1BbEXj），内容包括：①烽火地带全新模式及玩法 ②全面战场多栖新地图 ③联动《古墓丽影》劳拉角色/藏品 ④第15位新干员（声纹特色）⑤2026全面战场国际邀请赛6月武汉举办 ⑥猛攻节4.24开启、4.30全面上线福利 ⑦烽火职业联赛春季赛进行中（JDG首周冠、狼队第二周冠）。",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🏙️",
+      "nameCN": "暗区突围",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：无近24h新动态。当前处于S17「迷雾」赛季运营期（4月2日已开服），近期内容为诡雾山谷限时双倍爆率、PVE合作模式。",
+          "priority": 0
+        },
+        {
+          "text": "B站：无官方近24h新视频。社区内容以S17赛季攻略、优化教程为主。近期官方重点宣发：黑暗秩序主题军需（多斯首领外观返场）。",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🪖",
+      "nameCN": "Battlefield",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "YouTube：无近24h新视频。重大预告：4月14日发布\"Hunter/Prey\"更新——Season 2最终内容投放、进度系统重大校准（XP/解锁节奏/挑战结构）、网络延迟优化。Season 3详情即将公布。",
+          "priority": 0
+        },
+        {
+          "text": "X：无法获取近期推文（平台限制）。据行业媒体报道，Battlefield 6已于FY2026内上线，当前处于Season 2运营期。",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    }
+  ],
+  "intensityTable": [],
+  "insights": [],
+  "stats": {
+    "totalCompetitors": 3,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 4,
+    "totalInsights": 0,
+    "totalActions": 0,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

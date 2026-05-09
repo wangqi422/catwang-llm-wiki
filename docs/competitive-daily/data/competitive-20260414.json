@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "date": "2026-04-14",
+    "dateCompact": "20260414",
+    "weekday": "星期二",
+    "extractedAt": "2026-04-23T02:21:19.214Z",
+    "sourceFile": "CODM_Competitive_Daily_20260414.md",
+    "version": "1.0.0"
+  },
+  "overview": "",
+  "highlights": [
+    {
+      "text": "三角洲行动S9「回声」赛季4月16日上线倒计时，联动《古墓丽影》30周年，劳拉传说外观4月30日实装，武汉国际邀请赛6月落地——宣发火力全开",
+      "priority": 1
+    },
+    {
+      "text": "Battlefield 6今日推送1.2.3.0大版本更新（Hunter/Prey终章），新载具LTV+新模式Operation Augur+除颤器经典机制回归",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔫",
+      "nameCN": "使命召唤手游",
+      "nameEN": "",
+      "isSelf": true,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：有动态｜持续推广S3「Paranoia」赛季内容，4月11日「奇喵新世界」抽奖活动返场，5把传说级猫系武器上线（ICR-喵叽俱乐部等），\"赛博养猫\"趣味营销",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态｜2026春季大师杯常规赛持续直播（4/12狼队VSElv），赛事内容稳定更新",
+          "priority": 0
+        },
+        {
+          "text": "YouTube：有动态｜S3 Paranoia赛季持续运营中，DMZ:Recon快速模式+NieR联动内容发酵",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🎯",
+      "nameCN": "三角洲行动",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：高频动态｜4/11前瞻直播回顾全量传播，S9「回声」赛季4月16日上线定档宣传，与《古墓丽影》联动官宣（劳拉外观4月30日上线），2026全面战场国际邀请赛落地武汉（6/17-21）",
+          "priority": 0
+        },
+        {
+          "text": "B站：高频动态｜前瞻直播完整回顾视频上线，S9赛季内容解读视频密集发布，新干员\"回响\"声波侦察玩法、M82重狙、末世求生丧尸模式全方位预热",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🏙️",
+      "nameCN": "暗区突围",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：有动态｜S17「迷雾」赛季运营中，暗区突围×闪魂收藏卡「锋刃出金」4月17日发售预热（黑卡蒂角色卡面+枪械涂装），跨界实体周边营销",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态｜S17赛季持续内容更新，诡雾山谷玩法+PVE合作模式+阈限空间玩法攻略发布",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🪖",
+      "nameCN": "Battlefield",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "YouTube：有动态｜BF6更新1.2.3.0今日(4/14)上线预告，新模式Operation Augur+新载具LTV+Ripper开山刀近战武器+战斗通行证奖励路径",
+          "priority": 0
+        },
+        {
+          "text": "X：有动态｜配合1.2.3.0更新的补丁说明传播，除颤器经典机制回归引发社区热议，XP系统全面调优",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    }
+  ],
+  "intensityTable": [],
+  "insights": [],
+  "stats": {
+    "totalCompetitors": 3,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 4,
+    "totalInsights": 0,
+    "totalActions": 0,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

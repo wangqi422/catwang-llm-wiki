@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# IDE & Tool configs
+.codebuddy/
+.claude/
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Sensitive
+.env
+*.token
+token-cache/
+
+# Large media (track with Git LFS if needed)
+*.psd
+*.ai
+*.mp4
+*.mov
+*.avi
+
+# Temp
+*.tmp
+.obsidian-skills-temp/

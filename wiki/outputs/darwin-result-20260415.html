@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darwin Skill - 全量优化报告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: #FAFAF5;
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    padding: 0;
+  }
+
+  .card {
+    width: 900px;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #FAFAF5;
+    color: #1A1A1A;
+  }
+
+  /* ===== 1. 顶部品牌条 ===== */
+  .brand-bar {
+    background: #1A1A1A;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.02em;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  }
+  .brand-name .dot { color: #E8590C; }
+  .brand-date {
+    font-size: 15px;
+    font-weight: 500;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== 2. 核心成就区 ===== */
+  .hero-section {
+    padding: 40px 48px 36px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    background: linear-gradient(180deg, #FAFAF5 0%, #F5F0E8 100%);
+    position: relative;
+  }
+
+  .ring-container {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
+    position: relative;
+  }
+  .ring-bg {
+    fill: none;
+    stroke: #E8E0D4;
+    stroke-width: 16;
+    stroke-dasharray: 8 8;
+  }
+  .ring-progress {
+    fill: none;
+    stroke: url(#orangeGradient);
+    stroke-width: 18;
+    stroke-linecap: round;
+    stroke-dasharray: 534;
+    /* 81.8/100 → offset = 534 * (1 - 0.818) = 97.2 */
+    stroke-dashoffset: 97;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    filter: drop-shadow(0 2px 8px rgba(232,89,12,0.3));
+  }
+  .ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .ring-score {
+    font-size: 88px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.04em;
+  }
+  .ring-max {
+    font-size: 24px;
+    font-weight: 600;
+    color: #B0A898;
+    font-family: 'Inter', sans-serif;
+    margin-left: 2px;
+  }
+  .ring-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #999;
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero-title {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.25;
+    color: #1A1A1A;
+  }
+  .hero-skill-name {
+    color: #E8590C;
+  }
+  .hero-journey {
+    font-size: 18px;
+    font-weight: 500;
+    color: #666;
+    line-height: 1.5;
+  }
+  .hero-journey strong {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
+  .delta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #E8590C;
+    color: #fff;
+    padding: 10px 28px;
+    border-radius: 12px;
+    font-size: 42px;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+    width: fit-content;
+    box-shadow: 0 4px 16px rgba(232,89,12,0.3);
+  }
+  .delta-badge-label {
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 0.9;
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0;
+  }
+
+  /* ===== 3. Skill 得分卡片组 ===== */
+  .skills-section {
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .skill-card {
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #E0D8CC;
+    background: #F8F4ED;
+  }
+  .skill-card.best {
+    background: linear-gradient(135deg, #E8590C 0%, #FF8A4C 100%);
+    color: #fff;
+    border: none;
+  }
+  .skill-card-name {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .skill-card-desc {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .skill-card .skill-card-desc { color: #999; }
+  .skill-card.best .skill-card-desc { color: rgba(255,255,255,0.7); }
+  .skill-card-scores {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .skill-card-from {
+    font-size: 28px;
+    font-weight: 400;
+    opacity: 0.4;
+    font-family: 'Inter', sans-serif;
+    text-decoration: line-through;
+  }
+  .skill-card-arrow {
+    font-size: 16px;
+    opacity: 0.4;
+  }
+  .skill-card-to {
+    font-size: 44px;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+  }
+  .skill-card:not(.best) .skill-card-to { color: #E8590C; }
+  .skill-card-delta {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+  }
+  .skill-card:not(.best) .skill-card-delta {
+    background: rgba(232,89,12,0.12);
+    color: #E8590C;
+  }
+  .skill-card.best .skill-card-delta {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+  .skill-card-fix {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .skill-card:not(.best) .skill-card-fix { color: #777; }
+  .skill-card.best .skill-card-fix { color: rgba(255,255,255,0.85); }
+
+  /* ===== 4. 改进摘要 ===== */
+  .summary-section {
+    padding: 28px 48px 0;
+  }
+  .summary-header {
+    font-size: 15px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .summary-item {
+    font-size: 15px;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 20px;
+    position: relative;
+  }
+  .summary-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    background: #E8590C;
+    border-radius: 50%;
+  }
+
+  /* ===== 5. 统计条 ===== */
+  .stats-bar {
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-around;
+    background: #F0EBE3;
+    margin: 24px 48px 0;
+    border-radius: 12px;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    color: #1A1A1A;
+  }
+  .stat-value .accent { color: #E8590C; }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* ===== 6. 底部品牌区 ===== */
+  .footer {
+    margin-top: auto;
+    background: #1A1A1A;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer-brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  }
+  .footer-brand .dot { color: #E8590C; }
+  .footer-slogan {
+    font-size: 14px;
+    color: #777;
+    font-weight: 500;
+  }
+  .footer-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .footer-url {
+    font-size: 14px;
+    color: #aaa;
+    font-family: 'Inter', monospace;
+    font-weight: 600;
+  }
+  .footer-by {
+    font-size: 13px;
+    color: #666;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at top right, rgba(232,89,12,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .card > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- 1. 顶部品牌条 -->
+  <div class="brand-bar">
+    <div class="brand-name">Darwin<span class="dot">.</span>skill</div>
+    <div class="brand-date">2026.04.15</div>
+  </div>
+
+  <!-- 2. 核心成就区 -->
+  <div class="hero-section">
+    <div class="ring-container">
+      <svg viewBox="0 0 200 200" width="280" height="280">
+        <defs>
+          <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E8590C"/>
+            <stop offset="100%" stop-color="#FF8A4C"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="85" class="ring-bg"/>
+        <circle cx="100" cy="100" r="85" class="ring-progress"/>
+      </svg>
+      <div class="ring-center">
+        <div>
+          <span class="ring-score">81.8</span><span class="ring-max">/100</span>
+        </div>
+        <div class="ring-label">平均质量分</div>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-title">
+        全量 Skill 优化报告<br>
+        <span class="hero-skill-name">4 个 Skills 集体进化</span>
+      </div>
+      <div class="hero-journey">
+        平均分从 <strong>69.7</strong> 进化到 <strong>81.8</strong><br>
+        <span style="color:#999;font-size:14px;">ingest · distill · publish · daily-card</span>
+      </div>
+      <div class="delta-badge">
+        <span>+12.2</span>
+        <span class="delta-badge-label">平均提升</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 四个 Skill 得分卡片 -->
+  <div class="skills-section">
+    <div class="skill-card best">
+      <div class="skill-card-name">📝 distill.md</div>
+      <div class="skill-card-desc">知识蒸馏 · 最大涨幅</div>
+      <div class="skill-card-scores">
+        <span class="skill-card-from">64.8</span>
+        <span class="skill-card-arrow">&rarr;</span>
+        <span class="skill-card-to">81.3</span>
+      </div>
+      <div class="skill-card-delta">+16.5</div>
+      <div class="skill-card-fix">添加2个用户确认检查点 + 合并去重规则 + 回滚机制</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-name">🎨 publish.md</div>
+      <div class="skill-card-desc">图文美化发布</div>
+      <div class="skill-card-scores">
+        <span class="skill-card-from">71.3</span>
+        <span class="skill-card-arrow">&rarr;</span>
+        <span class="skill-card-to">82.8</span>
+      </div>
+      <div class="skill-card-delta">+11.5</div>
+      <div class="skill-card-fix">配图计划确认 + 生成失败 fallback + 重复 publish 检测</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-name">📰 daily-card.md</div>
+      <div class="skill-card-desc">每日速报卡片</div>
+      <div class="skill-card-scores">
+        <span class="skill-card-from">69.5</span>
+        <span class="skill-card-arrow">&rarr;</span>
+        <span class="skill-card-to">80.9</span>
+      </div>
+      <div class="skill-card-delta">+11.4</div>
+      <div class="skill-card-fix">LLM 触发 5 步细化 + Node/Puppeteer 错误处理</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-name">📥 ingest.md</div>
+      <div class="skill-card-desc">摄取新资料</div>
+      <div class="skill-card-scores">
+        <span class="skill-card-from">73.0</span>
+        <span class="skill-card-arrow">&rarr;</span>
+        <span class="skill-card-to">82.2</span>
+      </div>
+      <div class="skill-card-delta">+9.2</div>
+      <div class="skill-card-fix">修正 4 处模板路径 + 增加文件格式/过大异常处理</div>
+    </div>
+  </div>
+
+  <!-- 4. 共性改进摘要 -->
+  <div class="summary-section">
+    <div class="summary-header">全局共性改进</div>
+    <div class="summary-items">
+      <div class="summary-item">4 个 Skill 全部添加标准 YAML Frontmatter（name + description + 触发词）</div>
+      <div class="summary-item">distill / publish 新增用户确认检查点，避免破坏性操作未经确认</div>
+      <div class="summary-item">全部 Skill 补充边界条件处理和错误恢复 fallback 路径</div>
+    </div>
+  </div>
+
+  <!-- 5. 统计条 -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value"><span class="accent">4</span></div>
+      <div class="stat-label">优化 SKILLS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span class="accent">4</span>/4</div>
+      <div class="stat-label">全部保留改进</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span class="accent">0</span></div>
+      <div class="stat-label">回滚次数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">69.7→<span class="accent">81.8</span></div>
+      <div class="stat-label">平均分变化</div>
+    </div>
+  </div>
+
+  <!-- 6. 底部品牌区 -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="footer-brand">Darwin<span class="dot">.</span>skill</div>
+      <div class="footer-slogan">像训练模型一样进化你的Skills</div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-url">github.com/alchaincyf/darwin-skill</div>
+      <div class="footer-by">CODM AIGC Wiki · 全量优化</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

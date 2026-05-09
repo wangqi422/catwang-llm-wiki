@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "date": "2026-04-29",
+    "dateCompact": "20260429",
+    "weekday": "星期三",
+    "extractedAt": "2026-04-29T05:23:46.123Z",
+    "sourceFile": "CODM_Competitive_Daily_20260429.md",
+    "version": "1.0.0"
+  },
+  "overview": "今日射击游戏圈迎来\"三国杀\"高潮：三角州猛攻节进入第6天，4月30日核弹日（姜文代言+古墓丽影联动）倒计时最后1天；暗区突围端游迎来上线一周年庆，淘金节收官在即；CODM S4 MonsterVerse 联动持续发酵，五一假期福利加码；BF6 公布2026路线图，S3最大地图预告。CODM 需要在五一黄金周窗口期打出声量，否则被竞品宣发淹没。",
+  "highlights": [
+    {
+      "text": "[三角州] 4/30核弹日倒计时1天：姜文代言+古墓丽影联动同日登场",
+      "priority": 3
+    },
+    {
+      "text": "[暗区] 端游一周年庆+淘金节收官，今日最大福利窗口",
+      "priority": 3
+    },
+    {
+      "text": "[CODM] S4 MonsterVerse五一定档+五一登录活动（外星人角色+幸运币）",
+      "priority": 2
+    },
+    {
+      "text": "[BF6] 2026路线图公布，S3最大地图+海战回归",
+      "priority": 2
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔀",
+      "nameCN": "横向维度对比",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🔽",
+      "nameCN": "竞品详情",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "路线图稳定，暂无爆点",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "姜文代言官宣+《让子弹飞》彩蛋：姜文以\"张麻子\"造型亮相，官方预告片释出\"让子弹飞一会儿\"经典台词，五一档期锁定",
+          "priority": 3
+        },
+        {
+          "text": "古墓丽影联动4/30上线：「露娜-劳拉·克劳馥」传说级外观准时登场，4/30前完成预热蓄水",
+          "priority": 3
+        },
+        {
+          "text": "猛攻节4/30福利高峰：全员可领2600限时三角券+古墓丽影联动皮肤，4/30当日登录量预计创赛季新高",
+          "priority": 3
+        },
+        {
+          "text": "4/29端游一周年庆：暗区突围：无限国服上线一周年，魔方工作室总裁 Enzo 发布周年寄语",
+          "priority": 3
+        },
+        {
+          "text": "淘金节4/30收官：4/24起的海量福利活动最后一天，完成活跃任务领【奇迹球·T13】涂装",
+          "priority": 2
+        },
+        {
+          "text": "S4 MonsterVerse联动持续：哥斯拉大战金刚联动第三周，DP27 LMG新武器上线，五一假期持续发酵",
+          "priority": 2
+        },
+        {
+          "text": "五一登录活动4/29-5/5：五一假期登录领取外星人角色+使命卡片幸运币，DMZ模式4/27更新（打击者削弱、DP27增强）",
+          "priority": 2
+        },
+        {
+          "text": "2026路线图4/21公布：S3赛季最大地图\"Railway to Golmud\"预告，海战玩法确认回归",
+          "priority": 1
+        },
+        {
+          "text": "S4更大地图规划中：BF工作室持续与玩家社区沟通，以玩家反馈为核心优化方向",
+          "priority": 1
+        },
+        {
+          "text": "新赛季S9「回声」烽火挑战模式持续运营，零号大坝跑酷玩法热度稳定",
+          "priority": 0
+        },
+        {
+          "text": "S5赛季长尾运营，手游+端游双线并行，4月整体声量稳定",
+          "priority": 0
+        },
+        {
+          "text": "4月22日发布端游S5新赛季内容，铜墙铁壁+新地图持续运营",
+          "priority": 0
+        },
+        {
+          "text": "五一定档悬念：S4赛季手册暗示新内容，5月是否会有新联动待官宣",
+          "priority": 0
+        },
+        {
+          "text": "DMZ模式平衡性调整：打击者削弱，DP27增强，核心玩家反馈积极",
+          "priority": 0
+        },
+        {
+          "text": "4月14日Portal入门指南发布，SDK工具+规则编辑器开放，吸引UGC内容创作者",
+          "priority": 0
+        },
+        {
+          "text": "Steam数据显示玩家流失超90%，但EA表示路线图将持续更新",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": [
+        "https://www.msn.cn/zh-cn/news/other/三角洲行动猛攻节上线时间",
+        "https://www.qieyou.com/game/6749/news",
+        "https://www.taptap.cn/app/221322/topic?type=official",
+        "https://news.17173.com/content/04022025/091821624.shtml",
+        "https://codm.qq.com/gicp/news/887/18771079.html",
+        "https://www.bilibili.com/video/BV12toCBGE7S/",
+        "https://news.17173.com/content/04212026/063543980.shtml",
+        "https://www.ea.com/zh-hans/games/battlefield/battlefield-6/news"
+      ]
+    }
+  ],
+  "intensityTable": [
+    {
+      "name": "三角州行动",
+      "event": "⭐×5",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "暗区突围",
+      "event": "⭐×4",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "CODM",
+      "event": "⭐×3",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "BF6",
+      "event": "⭐×2",
+      "score": 0,
+      "means": ""
+    }
+  ],
+  "insights": [
+    {
+      "title": "代言人破圈策略：三角州的双王炸打法值得借鉴",
+      "body": "三角州同时启用\"国内一线导演（姜文）+ 国际经典IP（古墓丽影）\"，形成\"名人效应+游戏情怀\"的双重破圈。这种组合既能吸引姜文的影迷群体，又能触达古墓丽影的全球玩家粉丝群。",
+      "codmActions": [
+        "CODM 的 MonsterVerse 联动已有一定声量，但缺少\"姜文式\"的国内顶流代言人",
+        "建议：S4 下半程引入国内头部主播/明星作为\"特邀指挥官\"，形成IP联动+明星代言的双重刺激",
+        "预算有限的情况下，可以考虑与国内独立游戏/影视的联动，扩大受众圈层"
+      ]
+    },
+    {
+      "title": "五一定黄金周窗口：4/30是防守节点，5/1是进攻节点",
+      "body": "三角州和暗区都选择在4/30祭出大招，CODM 如在4/30被动跟进容易被淹没。建议在4/30保持低调观察，5/1早8点抢先发布\" CODMer 的五一专属礼\"，打时间差。",
+      "codmActions": [
+        "4/30：发布\"五一倒计时海报\"，不正面硬刚三角州/暗区的大招，而是强调\"CODM 玩家专属\"",
+        "5/1早8点：抢先发布五一登录活动主视觉，配合\"早起的CODMer有福利\"话题标签",
+        "5/1全天：每小时一个\"CODM五一专属内容\"，保持持续曝光，避免被竞品声量淹没"
+      ]
+    },
+    {
+      "title": "福利货币直送策略：三角州的\"限时+品牌\"双重刺激",
+      "body": "三角州的2600三角券+古墓丽影皮肤组合，本质是\"通用货币+品牌溢价\"的捆绑销售。玩家既获得了实际游戏价值（货币），又获得了社交展示价值（品牌联动皮肤）。 --- CODM 运营启发（核心行动项） 1. 5/1早8点抢占先机：抢先发布五一登录活动主视觉，打时间差 2. S4下半程引入顶流：考虑国内头部主播/明星联动，扩大受众圈层 3. 货币直送+限定外观：优化福利策略，增加付费转化",
+      "codmActions": [
+        "CODM 五一登录活动的\"外星人角色+幸运币\"组合可以优化为\"货币直送+限定外观\"",
+        "建议：5/1-5/7 期间，每日登录额外赠送 CP（付费货币），配合限定外观增加付费意愿",
+        "参考三角州的\"限时\"策略，设置5/7 24:00下架的紧迫感，刺激玩家回流"
+      ]
+    }
+  ],
+  "stats": {
+    "totalCompetitors": 2,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 2,
+    "totalInsights": 3,
+    "totalActions": 9,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

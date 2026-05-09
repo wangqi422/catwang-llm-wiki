@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="hyperframes:duration" content="45" />
+    <meta name="hyperframes:fps" content="30" />
+    <meta name="hyperframes:width" content="1920" />
+    <meta name="hyperframes:height" content="1080" />
+    <title>人类编程进化史</title>
+    <style>
+      :root {
+        --ink: #12141b;
+        --muted: #676a78;
+        --paper: #fffaf5;
+        --line: rgba(18, 20, 27, 0.12);
+        --pink: #ff4fa3;
+        --coral: #ff7658;
+        --mint: #42d9a9;
+        --sky: #4ca7ff;
+        --violet: #7557ff;
+        --yellow: #ffcf4a;
+        --green: #1fbe7a;
+        --shadow: 0 30px 100px rgba(40, 30, 80, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #f7efe7;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--ink);
+      }
+
+      .stage {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        isolation: isolate;
+        transform-origin: center center;
+        background:
+          radial-gradient(circle at 14% 15%, rgba(255, 79, 163, 0.26), transparent 23%),
+          radial-gradient(circle at 87% 20%, rgba(66, 217, 169, 0.28), transparent 24%),
+          radial-gradient(circle at 80% 86%, rgba(76, 167, 255, 0.27), transparent 26%),
+          linear-gradient(132deg, #fff7ee 0%, #f8fbff 45%, #fff4fb 100%);
+      }
+
+      .stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(18, 20, 27, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 20, 27, 0.045) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: linear-gradient(180deg, transparent, #000 14%, #000 84%, transparent);
+        opacity: 0.8;
+      }
+
+      .stage::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(255,255,255,0.54), transparent 22%, transparent 78%, rgba(255,255,255,0.42)),
+          linear-gradient(180deg, rgba(255,255,255,0.5), transparent 24%, rgba(255,255,255,0.36));
+        pointer-events: none;
+        z-index: 30;
+      }
+
+      .chrome {
+        position: absolute;
+        inset: 56px;
+        z-index: 3;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.34);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        pointer-events: none;
+      }
+
+      .brand {
+        position: absolute;
+        top: 76px;
+        left: 86px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 30px;
+        font-weight: 820;
+        letter-spacing: 0;
+      }
+
+      .spark {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, #111318 0 42%, transparent 43%),
+          linear-gradient(135deg, var(--pink), var(--coral) 48%, var(--yellow));
+        box-shadow: 0 16px 32px rgba(255, 79, 163, 0.28);
+      }
+
+      .pill {
+        position: absolute;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 54px;
+        padding: 0 18px;
+        border: 1px solid rgba(18, 20, 27, 0.11);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: 0 16px 42px rgba(28, 25, 42, 0.1);
+        font-size: 22px;
+        font-weight: 720;
+      }
+
+      .pill::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 6px rgba(31, 190, 122, 0.14);
+      }
+
+      .pill.top {
+        top: 76px;
+        right: 86px;
+      }
+
+      .rail {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        bottom: 94px;
+        z-index: 24;
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(18, 20, 27, 0.1);
+        overflow: hidden;
+      }
+
+      .rail span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        transform-origin: left center;
+        background: linear-gradient(90deg, var(--pink), var(--coral), var(--yellow), var(--mint), var(--sky), var(--violet));
+        animation: grow 45s linear both;
+      }
+
+      .year-strip {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        bottom: 122px;
+        z-index: 24;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 18px;
+      }
+
+      .year-strip div {
+        color: rgba(18, 20, 27, 0.62);
+        font-size: 20px;
+        font-weight: 760;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
+        animation: scene 45s linear both;
+      }
+
+      .content {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        top: 172px;
+        bottom: 178px;
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        align-items: center;
+        gap: 70px;
+      }
+
+      .headline {
+        max-width: 760px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+        padding: 12px 16px;
+        border: 1px solid rgba(18, 20, 27, 0.11);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--muted);
+        font-size: 24px;
+        font-weight: 760;
+        box-shadow: 0 14px 38px rgba(28, 25, 42, 0.08);
+      }
+
+      .eyebrow i {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-weight: 920;
+        letter-spacing: 0;
+        line-height: 0.96;
+      }
+
+      h1 {
+        font-size: 142px;
+      }
+
+      h2 {
+        font-size: 104px;
+      }
+
+      .sub {
+        margin-top: 32px;
+        max-width: 710px;
+        color: #494c59;
+        font-size: 34px;
+        line-height: 1.34;
+        font-weight: 620;
+      }
+
+      .accent {
+        background: linear-gradient(90deg, var(--pink), var(--coral), var(--sky));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .panel {
+        position: relative;
+        min-height: 520px;
+        border: 1px solid rgba(18, 20, 27, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.82), transparent 28%),
+          linear-gradient(135deg, rgba(255,79,163,0.1), rgba(66,217,169,0.08), rgba(76,167,255,0.1));
+        pointer-events: none;
+      }
+
+      .toolbar {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 24px;
+        border-bottom: 1px solid rgba(18, 20, 27, 0.1);
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+      }
+
+      .dot:nth-child(1) { background: #ff5f57; }
+      .dot:nth-child(2) { background: #ffbd2e; }
+      .dot:nth-child(3) { background: #28c840; }
+
+      .code {
+        position: relative;
+        padding: 34px 38px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 26px;
+        line-height: 1.56;
+        color: #1b1d27;
+      }
+
+      .code b {
+        color: var(--pink);
+        font-weight: 800;
+      }
+
+      .code em {
+        color: var(--sky);
+        font-style: normal;
+      }
+
+      .code strong {
+        color: var(--green);
+      }
+
+      .card-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        padding: 30px;
+      }
+
+      .mini-card {
+        min-height: 150px;
+        border: 1px solid rgba(18, 20, 27, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.66);
+        padding: 24px;
+        box-shadow: 0 12px 38px rgba(28, 25, 42, 0.08);
+      }
+
+      .mini-card .label {
+        color: var(--muted);
+        font-size: 20px;
+        font-weight: 760;
+      }
+
+      .mini-card .value {
+        margin-top: 16px;
+        font-size: 34px;
+        font-weight: 880;
+      }
+
+      .punch {
+        position: absolute;
+        right: 58px;
+        bottom: 40px;
+        width: 520px;
+        height: 340px;
+        border: 1px solid rgba(18, 20, 27, 0.12);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle, rgba(18, 20, 27, 0.32) 0 12px, transparent 13px) 28px 28px / 62px 54px,
+          linear-gradient(135deg, rgba(255,255,255,0.86), rgba(255,243,225,0.88));
+        box-shadow: 0 28px 70px rgba(91, 65, 38, 0.16);
+        transform: rotate(-5deg);
+      }
+
+      .terminal {
+        position: relative;
+        padding: 28px 34px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .terminal-line {
+        height: 42px;
+        border-radius: 8px;
+        background: rgba(18, 20, 27, 0.1);
+      }
+
+      .terminal-line:nth-child(1) { width: 78%; background: linear-gradient(90deg, rgba(255,79,163,0.38), rgba(255,118,88,0.22)); }
+      .terminal-line:nth-child(2) { width: 56%; background: linear-gradient(90deg, rgba(76,167,255,0.34), rgba(66,217,169,0.18)); }
+      .terminal-line:nth-child(3) { width: 84%; }
+      .terminal-line:nth-child(4) { width: 48%; background: linear-gradient(90deg, rgba(117,87,255,0.28), rgba(255,207,74,0.2)); }
+
+      .orbit {
+        position: absolute;
+        left: 44px;
+        right: 44px;
+        bottom: 44px;
+        height: 250px;
+        border: 1px dashed rgba(18, 20, 27, 0.16);
+        border-radius: 8px;
+      }
+
+      .node {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 112px;
+        height: 112px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 880;
+        box-shadow: 0 24px 42px rgba(28, 25, 42, 0.16);
+      }
+
+      .node.a { left: 50px; top: 34px; background: var(--pink); }
+      .node.b { left: 240px; bottom: 30px; background: var(--sky); }
+      .node.c { right: 260px; top: 42px; background: var(--mint); color: var(--ink); }
+      .node.d { right: 54px; bottom: 32px; background: var(--violet); }
+
+      .prompt-box {
+        position: absolute;
+        left: 42px;
+        right: 42px;
+        bottom: 42px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        height: 92px;
+        padding: 0 26px;
+        border: 1px solid rgba(18, 20, 27, 0.12);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 22px 46px rgba(28, 25, 42, 0.14);
+        font-size: 28px;
+        font-weight: 760;
+      }
+
+      .send {
+        margin-left: auto;
+        width: 54px;
+        height: 54px;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        display: grid;
+        place-items: center;
+      }
+
+      .send::before {
+        content: ">";
+        transform: translateY(-2px);
+      }
+
+      .flow {
+        position: relative;
+        height: 450px;
+        margin: 34px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .flow-card {
+        position: relative;
+        border: 1px solid rgba(18, 20, 27, 0.11);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 28px;
+        overflow: hidden;
+      }
+
+      .flow-card span {
+        display: inline-grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        margin-bottom: 42px;
+        color: #fff;
+        font-weight: 860;
+        font-size: 24px;
+      }
+
+      .flow-card:nth-child(1) span { background: var(--pink); }
+      .flow-card:nth-child(2) span { background: var(--mint); color: var(--ink); }
+      .flow-card:nth-child(3) span { background: var(--sky); }
+
+      .flow-card h3 {
+        margin: 0 0 18px;
+        font-size: 40px;
+        letter-spacing: 0;
+      }
+
+      .flow-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 24px;
+        line-height: 1.35;
+        font-weight: 620;
+      }
+
+      .cursor {
+        position: absolute;
+        right: 255px;
+        top: 238px;
+        z-index: 22;
+        width: 64px;
+        height: 64px;
+        transform: rotate(-12deg);
+        filter: drop-shadow(0 18px 18px rgba(18, 20, 27, 0.16));
+        animation: cursor 45s linear both;
+      }
+
+      .cursor::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 4px;
+        width: 0;
+        height: 0;
+        border-left: 22px solid transparent;
+        border-right: 22px solid transparent;
+        border-bottom: 58px solid #111318;
+      }
+
+      .caption {
+        position: absolute;
+        left: 50%;
+        bottom: 22px;
+        z-index: 28;
+        transform: translateX(-50%);
+        min-width: 720px;
+        max-width: 1240px;
+        padding: 16px 28px;
+        border: 1px solid rgba(18, 20, 27, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        color: #2b2e38;
+        text-align: center;
+        font-size: 25px;
+        line-height: 1.28;
+        font-weight: 720;
+        box-shadow: 0 18px 48px rgba(28, 25, 42, 0.12);
+        opacity: 0;
+        animation: caption 45s linear both;
+      }
+
+      .float-code {
+        position: absolute;
+        z-index: 2;
+        color: rgba(18, 20, 27, 0.14);
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 42px;
+        font-weight: 800;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+
+      .float-code.one { left: 126px; top: 800px; }
+      .float-code.two { right: 160px; top: 148px; animation-delay: -3s; }
+      .float-code.three { left: 800px; top: 78px; animation-delay: -6s; }
+
+      .s0 { animation-delay: 0s; }
+      .s1 { animation-delay: -5s; }
+      .s2 { animation-delay: -10s; }
+      .s3 { animation-delay: -16s; }
+      .s4 { animation-delay: -22s; }
+      .s5 { animation-delay: -29s; }
+      .s6 { animation-delay: -36s; }
+      .s7 { animation-delay: -42s; }
+
+      .s0 .scene, .s1 .scene, .s2 .scene, .s3 .scene,
+      .s4 .scene, .s5 .scene, .s6 .scene, .s7 .scene {
+        animation-name: none;
+      }
+
+      .scene:nth-of-type(1) { animation-name: show0; }
+      .scene:nth-of-type(2) { animation-name: show1; }
+      .scene:nth-of-type(3) { animation-name: show2; }
+      .scene:nth-of-type(4) { animation-name: show3; }
+      .scene:nth-of-type(5) { animation-name: show4; }
+      .scene:nth-of-type(6) { animation-name: show5; }
+      .scene:nth-of-type(7) { animation-name: show6; }
+      .scene:nth-of-type(8) { animation-name: show7; }
+
+      @keyframes grow {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+
+      @keyframes show0 {
+        0%, 9.8% { opacity: 1; transform: translateY(0) scale(1); }
+        11.5%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show1 {
+        0%, 9.7% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        11.2%, 20.9% { opacity: 1; transform: translateY(0) scale(1); }
+        22.6%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show2 {
+        0%, 20.9% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        22.3%, 34.4% { opacity: 1; transform: translateY(0) scale(1); }
+        36%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show3 {
+        0%, 34.3% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        35.7%, 47.8% { opacity: 1; transform: translateY(0) scale(1); }
+        49.2%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show4 {
+        0%, 47.7% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        49.1%, 63.4% { opacity: 1; transform: translateY(0) scale(1); }
+        64.8%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show5 {
+        0%, 63.3% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        64.7%, 78.9% { opacity: 1; transform: translateY(0) scale(1); }
+        80.3%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show6 {
+        0%, 78.8% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        80.2%, 92.9% { opacity: 1; transform: translateY(0) scale(1); }
+        94.2%, 100% { opacity: 0; transform: translateY(-18px) scale(1.018); }
+      }
+
+      @keyframes show7 {
+        0%, 92.8% { opacity: 0; transform: translateY(18px) scale(0.985); }
+        94.1%, 100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      @keyframes cursor {
+        0%, 9% { transform: translate(-600px, 330px) rotate(-12deg); }
+        20% { transform: translate(-120px, 210px) rotate(-12deg); }
+        36% { transform: translate(-520px, -20px) rotate(-12deg); }
+        52% { transform: translate(40px, 150px) rotate(-12deg); }
+        72% { transform: translate(-210px, 20px) rotate(-12deg); }
+        88%, 100% { transform: translate(70px, 300px) rotate(-12deg); }
+      }
+
+      @keyframes drift {
+        from { transform: translate3d(0, 0, 0) rotate(-2deg); }
+        to { transform: translate3d(26px, -18px, 0) rotate(2deg); }
+      }
+
+      @keyframes caption {
+        0%, 10% { opacity: 1; }
+        10.4%, 11.2% { opacity: 0; }
+        11.3%, 20.8% { opacity: 1; }
+        21.2%, 22.1% { opacity: 0; }
+        22.2%, 34.5% { opacity: 1; }
+        34.9%, 35.6% { opacity: 0; }
+        35.7%, 47.8% { opacity: 1; }
+        48.2%, 49% { opacity: 0; }
+        49.1%, 63.4% { opacity: 1; }
+        63.8%, 64.6% { opacity: 0; }
+        64.7%, 78.9% { opacity: 1; }
+        79.3%, 80.1% { opacity: 0; }
+        80.2%, 92.9% { opacity: 1; }
+        93.3%, 94% { opacity: 0; }
+        94.1%, 100% { opacity: 1; }
+      }
+
+      @media (width: 1920px) and (height: 1080px) {
+        .stage {
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage" aria-label="人类编程进化史视频">
+      <div class="chrome"></div>
+      <div class="brand"><span class="spark"></span><span>Human Code Evolution</span></div>
+      <div class="pill top">45s Timeline Film</div>
+      <div class="float-code one">0101 -> hello()</div>
+      <div class="float-code two">build(intent)</div>
+      <div class="float-code three">while humanity: invent()</div>
+      <div class="cursor"></div>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>从机器语言到自然语言</div>
+            <h1>人类编程<br /><span class="accent">进化史</span></h1>
+            <p class="sub">从“告诉机器每一步”到“定义目标与品味”，编程一直在靠近人类表达。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="code">
+              <b>era</b>.start(<em>"punch cards"</em>)<br />
+              <b>human</b>.learn(<em>"machine logic"</em>)<br />
+              <strong>future</strong> = intent + systems + taste<br />
+              <br />
+              <b>compile</b>(story).to(<em>"video"</em>)
+            </div>
+            <div class="prompt-box">把“人类如何编程”变成一条清晰的时间线 <span class="send"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>1840s - 1950s</div>
+            <h2>纸带、打孔卡<br />和第一批算法</h2>
+            <p class="sub">早期程序不是屏幕上的文字，而是物理介质上的孔洞、顺序和严格规则。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="card-grid">
+              <div class="mini-card"><div class="label">核心动作</div><div class="value">编码机器步骤</div></div>
+              <div class="mini-card"><div class="label">代表符号</div><div class="value">Ada / Cards</div></div>
+              <div class="mini-card"><div class="label">人机距离</div><div class="value">非常近硬件</div></div>
+              <div class="mini-card"><div class="label">表达方式</div><div class="value">孔位与序列</div></div>
+            </div>
+            <div class="punch"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>1950s - 1970s</div>
+            <h2>指令拥有名字<br />语言开始升维</h2>
+            <p class="sub">汇编、FORTRAN、COBOL 让程序从二进制细节中抬头，开始服务科学计算与商业流程。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="code">
+              <b>LOAD</b> R1, VALUE<br />
+              <b>ADD</b> R1, TAX<br />
+              <b>PRINT</b> RESULT<br />
+              <br />
+              <em>FORTRAN</em>: formula translation<br />
+              <em>COBOL</em>: business language
+            </div>
+            <div class="terminal">
+              <div class="terminal-line"></div>
+              <div class="terminal-line"></div>
+              <div class="terminal-line"></div>
+              <div class="terminal-line"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>1970s - 1990s</div>
+            <h2>C、Unix<br />和个人电脑</h2>
+            <p class="sub">可移植、可组合、可分享的系统思想出现。编程从机房走向办公室、学校和家庭。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="flow">
+              <article class="flow-card"><span>1</span><h3>系统</h3><p>用 C 构造操作系统、工具链和性能关键路径。</p></article>
+              <article class="flow-card"><span>2</span><h3>组合</h3><p>Unix 管道把小工具连成强大的工作流。</p></article>
+              <article class="flow-card"><span>3</span><h3>个人</h3><p>PC 让更多人第一次拥有自己的计算空间。</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>1990s - 2010s</div>
+            <h2>Web 让代码<br />成为公共语言</h2>
+            <p class="sub">浏览器、JavaScript、开源社区和版本控制，把编程变成全球协作的网络。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="card-grid">
+              <div class="mini-card"><div class="label">HTML</div><div class="value">结构</div></div>
+              <div class="mini-card"><div class="label">CSS</div><div class="value">表达</div></div>
+              <div class="mini-card"><div class="label">JavaScript</div><div class="value">交互</div></div>
+              <div class="mini-card"><div class="label">Open Source</div><div class="value">协作</div></div>
+            </div>
+            <div class="orbit">
+              <div class="node a">Git</div>
+              <div class="node b">Web</div>
+              <div class="node c">API</div>
+              <div class="node d">OSS</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>2010s - 2020s</div>
+            <h2>云、移动<br />和数据时代</h2>
+            <p class="sub">开发者不再只写单机程序，而是在云平台、移动端、数据管道与机器学习系统中编排能力。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="flow">
+              <article class="flow-card"><span>A</span><h3>Cloud</h3><p>弹性资源、服务化架构、持续交付。</p></article>
+              <article class="flow-card"><span>B</span><h3>Mobile</h3><p>软件进入口袋，体验成为核心竞争力。</p></article>
+              <article class="flow-card"><span>C</span><h3>Python</h3><p>数据科学、AI 原型和自动化加速普及。</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>Now</div>
+            <h2>自然语言进入<br />开发流程</h2>
+            <p class="sub">AI pair programming 把需求、上下文、约束和反馈纳入同一个循环。编程开始像对话。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="code">
+              <b>user</b>: 做一个订阅页，像产品发布一样轻盈<br />
+              <b>agent</b>: 我会生成结构、状态和交互<br />
+              <b>review</b>: 调整信息层级和视觉节奏<br />
+              <strong>ship</strong>: human intent -> working software
+            </div>
+            <div class="prompt-box">用目标、限制和审美来编程 <span class="send"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene">
+        <div class="content">
+          <div class="headline">
+            <div class="eyebrow"><i></i>Next</div>
+            <h2>未来的程序<br />更像意图设计</h2>
+            <p class="sub">人类提出方向，AI 生成结构；人类判断价值，系统完成迭代。编程不会消失，它会继续变得更人类。</p>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="card-grid">
+              <div class="mini-card"><div class="label">Human</div><div class="value">目标 / 品味</div></div>
+              <div class="mini-card"><div class="label">AI</div><div class="value">生成 / 验证</div></div>
+              <div class="mini-card"><div class="label">System</div><div class="value">运行 / 反馈</div></div>
+              <div class="mini-card"><div class="label">Future</div><div class="value accent">共同迭代</div></div>
+            </div>
+            <div class="prompt-box">The new language is intent. <span class="send"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="year-strip">
+        <div>1843</div>
+        <div>1957</div>
+        <div>1972</div>
+        <div>1981</div>
+        <div>1995</div>
+        <div>2008</div>
+        <div>2022</div>
+        <div>Next</div>
+      </div>
+      <div class="rail"><span></span></div>
+      <div class="caption" id="caption">人类编程的演化，是抽象层不断上移的历史。</div>
+    </main>
+    <script>
+      const stage = document.querySelector(".stage");
+      const caption = document.querySelector("#caption");
+      const captions = [
+        [0, "人类编程的故事，从来不只是代码的故事。"],
+        [5, "早期程序写在纸带和打孔卡里，像是在和硬件逐字谈判。"],
+        [10, "汇编、FORTRAN、COBOL，让机器指令第一次接近人的句子。"],
+        [16, "C、Unix 和个人电脑，把编程从机房带到每一张桌子前。"],
+        [22, "Web、JavaScript 与开源社区，让代码成为全球协作的公共语言。"],
+        [29, "云、移动应用、Python 与数据科学，把编程推向更高层抽象。"],
+        [36, "AI 编程工具让自然语言进入开发循环，人类开始表达目标与约束。"],
+        [42, "下一站，编程会更像意图设计：人类定方向，机器生成结构。"]
+      ];
+
+      function fitStage() {
+        const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+        stage.style.transform = `scale(${scale})`;
+      }
+
+      function updateCaption() {
+        const elapsed = (performance.now() / 1000) % 45;
+        let current = captions[0][1];
+        for (const [time, text] of captions) {
+          if (elapsed >= time) current = text;
+        }
+        caption.textContent = current;
+        requestAnimationFrame(updateCaption);
+      }
+
+      window.addEventListener("resize", fitStage);
+      fitStage();
+      updateCaption();
+    </script>
+  </body>
+</html>

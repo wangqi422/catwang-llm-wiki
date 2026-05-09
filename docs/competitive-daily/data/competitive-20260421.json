@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "date": "2026-04-21",
+    "dateCompact": "20260421",
+    "weekday": "星期二",
+    "extractedAt": "2026-04-23T02:21:19.220Z",
+    "sourceFile": "CODM_Competitive_Daily_20260421.md",
+    "version": "1.0.0"
+  },
+  "overview": "本周为射击手游IP联动交锋周：三角洲行动「回声」赛季今日上线，携古墓丽影联动+新干员+M82巴雷特；CODM S4「永恒监狱」明日开启，哥斯拉×金刚MonsterVerse联动+重生岛回归；暗区突围无限一周年庆送4500点券；Battlefield 6公布2026全年路线图。Warzone Mobile已于4/17永久关服，CODM成为唯一COD手游。",
+  "highlights": [
+    {
+      "text": "三角洲行动「回声」赛季今日全球上线 — 古墓丽影联动×新干员回响×M82巴雷特×猛攻节",
+      "priority": 3
+    },
+    {
+      "text": "CODM S4「永恒监狱」明日(4/22)上线 — 哥斯拉×金刚联动×重生岛回归×Mythic DP27",
+      "priority": 2
+    },
+    {
+      "text": "暗区突围：无限 一周年庆火热进行 — 4500免费点券+无人区门票+战神锦标赛",
+      "priority": 2
+    },
+    {
+      "text": "Warzone Mobile 已于4/17永久关服 — CODM成为唯一COD手游",
+      "priority": 1
+    },
+    {
+      "text": "Battlefield 6 公布2026全年路线图 — S3五月Golmud Railway重制+海战模式",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🎯",
+      "nameCN": "三角洲行动",
+      "nameEN": "Delta Force",
+      "isSelf": false,
+      "threatLevel": "high",
+      "threatEmoji": "🔴",
+      "threatReason": "今日赛季更新+IP联动+电竞赛事三重攻势",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "「回声」(Echo)赛季今日(4/21)全球上线，跨PC/移动端同步更新",
+          "priority": 3
+        },
+        {
+          "text": "古墓丽影联动正式官宣，劳拉·克劳馥传说外观「露娜」4/30实装商城",
+          "priority": 2
+        },
+        {
+          "text": "新干员「回响」(Morse)侦察型定位，靠声音感知+信息标记在室内作战中优势明显",
+          "priority": 1
+        },
+        {
+          "text": "新武器M82巴雷特重型反器材狙击枪加入，另有AR-57冲锋枪和激光刀「坠星者」",
+          "priority": 0
+        },
+        {
+          "text": "猛攻节(4/24起)大型限时活动叠加联动，新手/回归玩家福利+三角券免费发放",
+          "priority": 0
+        },
+        {
+          "text": "2026全球电竞计划公布，全面战场国际邀请赛规模升级",
+          "priority": 0
+        }
+      ],
+      "tempo": "「赛季+IP联动+电竞+大型活动」四线并行饱和式宣发",
+      "sources": [
+        "https://soren.com/zh-CN/news/delta-force--1/2026-04-19-echom82",
+        "https://www.gcores.com/articles/213223",
+        "https://www.taptap.cn/moment/792162446788788916"
+      ]
+    },
+    {
+      "icon": "🏙️",
+      "nameCN": "暗区突围：无限",
+      "nameEN": "Arena Breakout: Infinite",
+      "isSelf": false,
+      "threatLevel": "medium",
+      "threatEmoji": "🟡",
+      "threatReason": "周年庆福利轰炸期",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "一周年庆典火热进行中(4/17起)，总计4500免费点券分批发放",
+          "priority": 2
+        },
+        {
+          "text": "第二波奖励4/23开放：15张「无人区」门票+S级武器涂装+AK102涂装+3X3安全箱",
+          "priority": 1
+        },
+        {
+          "text": "战神锦标赛周年庆竞技赛事上线，提升硬核玩家留存",
+          "priority": 0
+        },
+        {
+          "text": "混沌质金皮概率UP(4/21起)，红色品质收藏品产出概率提高",
+          "priority": 0
+        },
+        {
+          "text": "S5「异变」赛季稳定运营中，近距离语音已上线",
+          "priority": 0
+        }
+      ],
+      "tempo": "「周年庆福利+限时赛事+概率UP」组合拳维持DAU",
+      "sources": [
+        "https://soren.com/zh-CN/news/arena-breakout-infinite/2026-04-15-arena-breakout-infinite",
+        "https://news.17173.com/content/04172026/190424164.shtml"
+      ]
+    },
+    {
+      "icon": "🔫",
+      "nameCN": "CODM / 使命召唤手游",
+      "nameEN": "",
+      "isSelf": true,
+      "threatLevel": "self",
+      "threatEmoji": "",
+      "threatReason": "自家重大窗口期",
+      "attentionLevel": "⚡",
+      "highlights": [
+        {
+          "text": "S4「永恒监狱」(Eternal Prison)明日4/22上线，哥斯拉×金刚MonsterVerse联动",
+          "priority": 2
+        },
+        {
+          "text": "重生岛(Rebirth Island)回归BR大逃杀和DMZ：侦察双模式",
+          "priority": 2
+        },
+        {
+          "text": "新武器DP27 LMG含Mythic品质版本，Toxic Overload全新BR职业",
+          "priority": 1
+        },
+        {
+          "text": "Warzone Mobile已于4/17永久关服，CODM成为唯一COD手游产品线",
+          "priority": 0
+        },
+        {
+          "text": "DMZ：侦察模式大版本更新，重生岛作为DMZ新地图",
+          "priority": 0
+        }
+      ],
+      "tempo": "Warzone关服5天即推S4重磅赛季，精准承接流失玩家",
+      "sources": [
+        "https://www.callofduty.com/blog/2026/04/call-of-duty-mobile-season-4-2026-eternal-prison",
+        "https://support.activision.com/warzone-mobile/articles/warzone-mobile-service-changes"
+      ]
+    },
+    {
+      "icon": "🪖",
+      "nameCN": "Battlefield 6",
+      "nameEN": "战地6",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "端游赛道，路线图释放长线信心",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "2026全年路线图正式公布，3个赛季含更大地图+服务器浏览器+海战模式+REDSEC天梯",
+          "priority": 1
+        },
+        {
+          "text": "Update 1.2.3.0已于4/14上线，电击器改为3次充能限制回归经典BF风格",
+          "priority": 0
+        },
+        {
+          "text": "Operation Augur：新丛林地图+LTV轻型战术载具+社区共建地图",
+          "priority": 0
+        },
+        {
+          "text": "S3五月定档Golmud Railway经典BF4地图重制+海战模式同步上线",
+          "priority": 0
+        }
+      ],
+      "tempo": "「经典重制+社区共建+长线路线图」稳固端游核心用户",
+      "sources": [
+        "https://dotesports.com/battlefield/news/battlefield-6-2026-roadmap",
+        "https://www.ign.com/articles/battlefield-6-2026-roadmap-confirmed"
+      ]
+    }
+  ],
+  "intensityTable": [
+    {
+      "name": "三角洲行动",
+      "event": "回声赛季今日上线+古墓丽影联动+猛攻节+电竞",
+      "score": 5,
+      "means": "IP联动+赛季+活动+电竞"
+    },
+    {
+      "name": "CODM",
+      "event": "S4明日上线+哥斯拉金刚+重生岛+承接WZM玩家",
+      "score": 5,
+      "means": "S级IP+经典地图+玩家迁移"
+    },
+    {
+      "name": "暗区突围：无限",
+      "event": "一周年庆+4500点券+战神锦标赛+概率UP",
+      "score": 4,
+      "means": "周年庆福利+赛事+付费刺激"
+    },
+    {
+      "name": "Battlefield 6",
+      "event": "年度路线图+4/14大更新+S3预热",
+      "score": 2,
+      "means": "路线图信心+经典重制预告"
+    }
+  ],
+  "insights": [
+    {
+      "title": "S级IP联动窗口正面交锋",
+      "body": "三角洲行动×古墓丽影 vs CODM×哥斯拉金刚，本周IP联动宣发正面对撞。",
+      "codmActions": [
+        "MonsterVerse联动在影视IP热度上具有大众传播优势，宣发素材应强化「怪兽级视觉冲击」差异化",
+        "联动素材需在4/22上线首日集中释放，抢占三角洲行动赛季上线后的舆论窗口"
+      ]
+    },
+    {
+      "title": "Warzone Mobile关服后5天黄金窗口",
+      "body": "4/17关服→4/22 S4上线，这是吸收WZM流失玩家的最佳时机。",
+      "codmActions": [
+        "制作「从Warzone无缝过渡到CODM」的回归引导素材，重点宣传重生岛这一两产品共有的经典地图",
+        "重生岛同时进入BR和DMZ是精准的内容复用策略，宣发可强调「一张地图，两种玩法」"
+      ]
+    },
+    {
+      "title": "DMZ提取玩法差异化机遇",
+      "body": "三角洲行动和暗区突围都主打搜打撤提取玩法，CODM的DMZ以更轻量手游体验切入同赛道。",
+      "codmActions": [
+        "S4将重生岛同时放入BR和DMZ双模式，降低了DMZ新玩家门槛",
+        "宣发可对标暗区突围的硬核定位，突出CODM DMZ「轻量上手+经典地图」的差异化卖点"
+      ]
+    },
+    {
+      "title": "竞品饱和式宣发节奏值得参考",
+      "body": "三角洲行动「赛季+IP联动+限时活动+电竞」四线并行的饱和式宣发值得学习。",
+      "codmActions": [
+        "S4周期内可叠加社区赛事和创作者生态活动，避免IP联动热度首周后快速衰减",
+        "暗区突围4500点券的周年庆力度表明免费货币大放送仍是DAU拉升的有效手段"
+      ]
+    }
+  ],
+  "stats": {
+    "totalCompetitors": 3,
+    "highThreat": 1,
+    "mediumThreat": 1,
+    "lowThreat": 1,
+    "totalInsights": 4,
+    "totalActions": 8,
+    "maxIntensity": 5,
+    "codmIntensity": 5
+  }
+}

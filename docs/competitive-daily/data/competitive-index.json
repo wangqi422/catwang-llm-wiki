@@ -1,0 +1,641 @@
+[
+  {
+    "date": "2026-04-13",
+    "dateCompact": "20260413",
+    "weekday": "星期一",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 4,
+      "totalInsights": 0,
+      "totalActions": 0,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "使命召唤手游",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-14",
+    "dateCompact": "20260414",
+    "weekday": "星期二",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 4,
+      "totalInsights": 0,
+      "totalActions": 0,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "使命召唤手游",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-15",
+    "dateCompact": "20260415",
+    "weekday": "星期三",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 3,
+      "totalInsights": 0,
+      "totalActions": 0,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "使命召唤手游",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-16",
+    "dateCompact": "20260416",
+    "weekday": "星期四",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 1,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 4,
+      "totalActions": 4,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "high",
+        "threatEmoji": "🔴",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "CODM 官方",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-18",
+    "dateCompact": "20260418",
+    "weekday": "星期六",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 1,
+      "mediumThreat": 2,
+      "lowThreat": 1,
+      "totalInsights": 4,
+      "totalActions": 6,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield 6",
+        "isSelf": false,
+        "threatLevel": "high",
+        "threatEmoji": "🔴",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "CODM 官方",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-19",
+    "dateCompact": "20260419",
+    "weekday": "星期日",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 0,
+      "mediumThreat": 3,
+      "lowThreat": 1,
+      "totalInsights": 4,
+      "totalActions": 6,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield 6",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "CODM 官方",
+        "isSelf": true,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-20",
+    "dateCompact": "20260420",
+    "weekday": "星期一",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 4,
+      "totalInsights": 4,
+      "totalActions": 7,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "暗区突围",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "CODM / 战区手游",
+        "isSelf": true,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-21",
+    "dateCompact": "20260421",
+    "weekday": "星期二",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 1,
+      "mediumThreat": 1,
+      "lowThreat": 1,
+      "totalInsights": 4,
+      "totalActions": 8,
+      "maxIntensity": 5,
+      "codmIntensity": 5
+    },
+    "competitors": [
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "high",
+        "threatEmoji": "🔴",
+        "intensityScore": 5
+      },
+      {
+        "nameCN": "暗区突围：无限",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 4
+      },
+      {
+        "nameCN": "CODM / 使命召唤手游",
+        "isSelf": true,
+        "threatLevel": "self",
+        "threatEmoji": "",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "Battlefield 6",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 2
+      }
+    ]
+  },
+  {
+    "date": "2026-04-22",
+    "dateCompact": "20260422",
+    "weekday": "星期三",
+    "stats": {
+      "totalCompetitors": 3,
+      "highThreat": 1,
+      "mediumThreat": 1,
+      "lowThreat": 1,
+      "totalInsights": 4,
+      "totalActions": 10,
+      "maxIntensity": 5,
+      "codmIntensity": 5
+    },
+    "competitors": [
+      {
+        "nameCN": "CODM / 使命召唤手游",
+        "isSelf": true,
+        "threatLevel": "self",
+        "threatEmoji": "",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "三角洲行动",
+        "isSelf": false,
+        "threatLevel": "high",
+        "threatEmoji": "🔴",
+        "intensityScore": 5
+      },
+      {
+        "nameCN": "暗区突围：无限",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 4
+      },
+      {
+        "nameCN": "Battlefield 6",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 3
+      }
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "dateCompact": "20260423",
+    "weekday": "星期四",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 3,
+      "totalActions": 7,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-24",
+    "dateCompact": "20260424",
+    "weekday": "星期五",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 1,
+      "lowThreat": 1,
+      "totalInsights": 3,
+      "totalActions": 8,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-27",
+    "dateCompact": "20260427",
+    "weekday": "星期一",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 3,
+      "totalActions": 9,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-28",
+    "dateCompact": "20260428",
+    "weekday": "星期二",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 3,
+      "totalActions": 9,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-29",
+    "dateCompact": "20260429",
+    "weekday": "星期三",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 3,
+      "totalActions": 9,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-04-30",
+    "dateCompact": "20260430",
+    "weekday": "星期四",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 4,
+      "totalActions": 12,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-05-01",
+    "dateCompact": "20260501",
+    "weekday": "星期五",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 0,
+      "lowThreat": 2,
+      "totalInsights": 4,
+      "totalActions": 12,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-05-06",
+    "dateCompact": "20260506",
+    "weekday": "星期三",
+    "stats": {
+      "totalCompetitors": 2,
+      "highThreat": 0,
+      "mediumThreat": 1,
+      "lowThreat": 1,
+      "totalInsights": 4,
+      "totalActions": 8,
+      "maxIntensity": 0,
+      "codmIntensity": 0
+    },
+    "competitors": [
+      {
+        "nameCN": "横向维度对比",
+        "isSelf": false,
+        "threatLevel": "low",
+        "threatEmoji": "🟢",
+        "intensityScore": 0
+      },
+      {
+        "nameCN": "竞品详情",
+        "isSelf": false,
+        "threatLevel": "medium",
+        "threatEmoji": "🟡",
+        "intensityScore": 0
+      }
+    ]
+  }
+]

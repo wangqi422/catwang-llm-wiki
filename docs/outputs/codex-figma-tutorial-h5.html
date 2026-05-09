@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex 使用教程互动 H5</title>
+    <style>
+      :root {
+        --ink: #111111;
+        --muted: #64666f;
+        --line: #e6e6ea;
+        --paper: #ffffff;
+        --canvas: #f7f7fb;
+        --red: #f24e1e;
+        --purple: #a259ff;
+        --blue: #1abcfe;
+        --green: #0acf83;
+        --pink: #ff63c3;
+        --yellow: #ffcf33;
+        --shadow: 0 22px 70px rgba(13, 16, 35, 0.13);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .app {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background:
+          linear-gradient(#eef0f6 1px, transparent 1px),
+          linear-gradient(90deg, #eef0f6 1px, transparent 1px),
+          radial-gradient(circle at 18% 20%, rgba(162, 89, 255, 0.13), transparent 26%),
+          radial-gradient(circle at 82% 24%, rgba(26, 188, 254, 0.13), transparent 24%),
+          radial-gradient(circle at 76% 82%, rgba(10, 207, 131, 0.12), transparent 26%),
+          var(--canvas);
+        background-size: 36px 36px, 36px 36px, auto, auto, auto, auto;
+      }
+
+      .topbar {
+        position: absolute;
+        top: 22px;
+        left: 50%;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        height: 58px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 12px 38px rgba(15, 18, 32, 0.08);
+        transform: translateX(-50%);
+        backdrop-filter: blur(16px);
+      }
+
+      .logo {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 1fr);
+      }
+
+      .logo span {
+        width: 17px;
+        height: 17px;
+      }
+
+      .logo span:nth-child(1) { background: var(--red); border-radius: 8px 0 0 8px; }
+      .logo span:nth-child(2) { background: var(--purple); border-radius: 0 8px 8px 0; }
+      .logo span:nth-child(3) { background: var(--blue); border-radius: 8px 0 0 8px; }
+      .logo span:nth-child(4) { background: var(--green); border-radius: 50%; }
+      .logo span:nth-child(5) { background: var(--green); border-radius: 8px 0 8px 8px; }
+
+      .topbar strong {
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+
+      .topbar small {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .stage {
+        position: absolute;
+        inset: 104px 58px 92px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: minmax(360px, 0.92fr) minmax(460px, 1.08fr);
+        gap: 48px;
+        align-items: center;
+        padding: clamp(34px, 5vw, 84px);
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+        pointer-events: none;
+        transition: opacity 420ms ease, transform 520ms cubic-bezier(.2, .8, .2, 1);
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .copy {
+        position: relative;
+        z-index: 2;
+        max-width: 660px;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--muted);
+        font-size: clamp(13px, 1.4vw, 16px);
+        font-weight: 800;
+      }
+
+      .kicker i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent, var(--purple));
+        box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, var(--purple)) 18%, transparent);
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        letter-spacing: 0;
+        line-height: 0.98;
+        font-weight: 900;
+      }
+
+      h1 {
+        font-size: clamp(54px, 7.4vw, 116px);
+      }
+
+      h2 {
+        font-size: clamp(42px, 5.7vw, 86px);
+      }
+
+      .copy p {
+        margin: 26px 0 0;
+        color: #484b55;
+        font-size: clamp(18px, 2vw, 29px);
+        line-height: 1.38;
+        font-weight: 650;
+      }
+
+      .canvas-card {
+        position: relative;
+        z-index: 2;
+        min-height: 520px;
+        border: 1px solid #dedee5;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 28px 90px rgba(21, 24, 42, 0.13);
+        overflow: hidden;
+      }
+
+      .card-head {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfbfd;
+      }
+
+      .tool-dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+      }
+
+      .tool-dot:nth-child(1) { background: var(--red); }
+      .tool-dot:nth-child(2) { background: var(--yellow); }
+      .tool-dot:nth-child(3) { background: var(--green); }
+
+      .card-title {
+        margin-left: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .board {
+        position: relative;
+        min-height: 460px;
+        padding: 30px;
+      }
+
+      .frame {
+        position: absolute;
+        border: 2px solid var(--accent, var(--purple));
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--accent, var(--purple)) 8%, white);
+        box-shadow: 0 16px 42px rgba(20, 24, 42, 0.08);
+      }
+
+      .frame::before {
+        content: attr(data-label);
+        position: absolute;
+        top: -29px;
+        left: -2px;
+        height: 24px;
+        padding: 0 9px;
+        display: flex;
+        align-items: center;
+        border-radius: 6px 6px 0 0;
+        background: var(--accent, var(--purple));
+        color: #fff;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .note {
+        position: absolute;
+        max-width: 260px;
+        padding: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        background: var(--note, #fff3a3);
+        color: #1e1e23;
+        font-size: clamp(15px, 1.5vw, 20px);
+        line-height: 1.28;
+        font-weight: 760;
+        box-shadow: 0 14px 32px rgba(26, 20, 20, 0.12);
+        transform: rotate(var(--rot, -2deg));
+      }
+
+      .prompt {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        bottom: 30px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 16px;
+        min-height: 74px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(20, 24, 42, 0.1);
+        color: #252831;
+        font-size: clamp(15px, 1.5vw, 20px);
+        line-height: 1.26;
+        font-weight: 760;
+      }
+
+      .send {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .chip-row {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        font-size: 15px;
+        font-weight: 800;
+        box-shadow: 0 10px 24px rgba(20, 24, 42, 0.07);
+      }
+
+      .chip i {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        background: var(--accent, var(--purple));
+      }
+
+      .flow-line {
+        position: absolute;
+        height: 3px;
+        background: var(--accent, var(--purple));
+        transform-origin: left center;
+        border-radius: 999px;
+      }
+
+      .flow-line::after {
+        content: "";
+        position: absolute;
+        right: -7px;
+        top: -5px;
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 10px solid var(--accent, var(--purple));
+      }
+
+      .cursor {
+        position: absolute;
+        z-index: 7;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        transform: translate(var(--x), var(--y));
+      }
+
+      .cursor::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 34px solid var(--c, var(--purple));
+        transform: rotate(-20deg);
+        filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12));
+      }
+
+      .cursor span {
+        margin-top: 24px;
+        padding: 5px 8px;
+        border-radius: 6px;
+        background: var(--c, var(--purple));
+        color: #fff;
+        font-size: 12px;
+        font-weight: 850;
+        white-space: nowrap;
+      }
+
+      .code-list {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        top: 96px;
+        display: grid;
+        gap: 12px;
+        font-family: "SFMono-Regular", Consolas, monospace;
+      }
+
+      .code-line {
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fafaff;
+        color: #1d2230;
+        font-size: clamp(14px, 1.4vw, 18px);
+        font-weight: 700;
+      }
+
+      .code-line b {
+        color: var(--accent, var(--purple));
+      }
+
+      .diff {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        top: 96px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .diff div {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        border-radius: 8px;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: clamp(14px, 1.35vw, 18px);
+        font-weight: 760;
+      }
+
+      .minus {
+        background: #fff0f0;
+        color: #b42318;
+      }
+
+      .plus {
+        background: #ebfff7;
+        color: #027a48;
+      }
+
+      .browser {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        top: 102px;
+        bottom: 114px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .browser-bar {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 13px;
+        border-bottom: 1px solid var(--line);
+        background: #f7f7fb;
+      }
+
+      .url {
+        flex: 1;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        border: 1px solid #ddddE7;
+        border-radius: 6px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .browser-page {
+        padding: 22px;
+        display: grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 18px;
+      }
+
+      .hero-block,
+      .side-block,
+      .bar-block {
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--accent, var(--purple)) 14%, white);
+      }
+
+      .hero-block {
+        height: 150px;
+      }
+
+      .side-block {
+        height: 150px;
+        background: color-mix(in srgb, var(--blue) 16%, white);
+      }
+
+      .bar-block {
+        grid-column: 1 / -1;
+        height: 56px;
+        background: color-mix(in srgb, var(--green) 14%, white);
+      }
+
+      .bottom {
+        position: absolute;
+        left: 58px;
+        right: 58px;
+        bottom: 26px;
+        z-index: 30;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .nav {
+        display: flex;
+        gap: 10px;
+      }
+
+      .icon-btn {
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        color: var(--ink);
+        box-shadow: 0 10px 26px rgba(15, 18, 32, 0.07);
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .progress {
+        display: flex;
+        justify-content: center;
+        gap: 9px;
+      }
+
+      .dot-btn {
+        width: 12px;
+        height: 12px;
+        border: 0;
+        border-radius: 50%;
+        background: #d2d4dc;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .dot-btn.active {
+        width: 34px;
+        border-radius: 999px;
+        background: var(--active, var(--purple));
+      }
+
+      .hint {
+        min-width: 156px;
+        color: var(--muted);
+        text-align: right;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .floating-label {
+        position: absolute;
+        z-index: 1;
+        padding: 8px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .l1 { left: 6%; top: 12%; transform: rotate(-4deg); }
+      .l2 { right: 8%; top: 14%; transform: rotate(3deg); }
+      .l3 { left: 12%; bottom: 12%; transform: rotate(2deg); }
+
+      .end-badge {
+        position: absolute;
+        left: 50%;
+        bottom: 86px;
+        z-index: 6;
+        transform: translateX(-50%);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(15, 18, 32, 0.1);
+        font-weight: 850;
+      }
+
+      .end-badge i {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      @media (max-width: 860px) {
+        .topbar {
+          top: 12px;
+          height: 50px;
+          width: calc(100vw - 24px);
+          justify-content: center;
+        }
+
+        .stage {
+          inset: 76px 12px 78px;
+        }
+
+        .slide {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+          gap: 24px;
+          padding: 28px;
+          align-items: start;
+        }
+
+        .copy {
+          max-width: none;
+        }
+
+        .copy p {
+          margin-top: 16px;
+        }
+
+        .canvas-card {
+          min-height: 420px;
+        }
+
+        .board {
+          min-height: 360px;
+        }
+
+        .bottom {
+          left: 12px;
+          right: 12px;
+          bottom: 15px;
+          grid-template-columns: auto 1fr;
+        }
+
+        .hint {
+          display: none;
+        }
+
+        .progress {
+          justify-content: flex-end;
+          gap: 7px;
+        }
+
+        .dot-btn {
+          width: 9px;
+          height: 9px;
+        }
+
+        .dot-btn.active {
+          width: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar" aria-label="标题栏">
+        <div class="logo" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <strong>Codex 使用教程</strong>
+        <small>Interactive H5</small>
+      </header>
+
+      <section class="stage" id="stage" aria-live="polite">
+        <div class="floating-label l1">Frame / tutorial</div>
+        <div class="floating-label l2">Prototype / click</div>
+        <div class="floating-label l3">Codex / workflow</div>
+
+        <article class="slide active" style="--accent: var(--purple)">
+          <div class="copy">
+            <div class="kicker"><i></i>01 / Welcome</div>
+            <h1>用 Codex<br />把想法变成作品</h1>
+            <p>这是一条可点击推进的互动教程。每一页都是一个工作场景，像在 Figma 原型里走完整个开发流程。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">Codex onboarding.fig</span></div>
+            <div class="board">
+              <div class="frame" data-label="Idea" style="left: 42px; top: 72px; width: 220px; height: 140px;"></div>
+              <div class="frame" data-label="Codex" style="left: 310px; top: 148px; width: 250px; height: 170px;"></div>
+              <div class="frame" data-label="Preview" style="right: 42px; top: 84px; width: 220px; height: 220px;"></div>
+              <div class="flow-line" style="left: 255px; top: 154px; width: 92px; transform: rotate(18deg);"></div>
+              <div class="flow-line" style="right: 250px; top: 220px; width: 92px; transform: rotate(-12deg);"></div>
+              <div class="note" style="left: 72px; bottom: 112px; --note: #fff3a3;">点击任意位置进入下一页</div>
+              <div class="cursor" style="--x: 560px; --y: 310px; --c: var(--purple)"><span>You</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--blue)">
+          <div class="copy">
+            <div class="kicker"><i></i>02 / What is Codex</div>
+            <h2>Codex 是你的<br />本地协作工程师</h2>
+            <p>它能读项目、改文件、运行检查、解释代码，也能帮你把网页、文档、演示和数据工作打包成可交付成果。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">workspace map</span></div>
+            <div class="board">
+              <div class="chip-row">
+                <div class="chip"><i></i>读代码</div>
+                <div class="chip"><i></i>写文件</div>
+                <div class="chip"><i></i>跑检查</div>
+                <div class="chip"><i></i>开浏览器</div>
+                <div class="chip"><i></i>做素材</div>
+              </div>
+              <div class="frame" data-label="User request" style="left: 58px; top: 132px; width: 250px; height: 150px;"></div>
+              <div class="frame" data-label="Workspace" style="left: 360px; top: 198px; width: 240px; height: 164px;"></div>
+              <div class="frame" data-label="Result" style="right: 58px; top: 132px; width: 240px; height: 210px;"></div>
+              <div class="flow-line" style="left: 302px; top: 208px; width: 96px; transform: rotate(14deg);"></div>
+              <div class="flow-line" style="right: 292px; top: 242px; width: 118px; transform: rotate(-8deg);"></div>
+              <div class="note" style="right: 78px; bottom: 76px; --note: #dff8ff; --rot: 2deg;">你描述目标，它处理执行细节。</div>
+              <div class="cursor" style="--x: 236px; --y: 278px; --c: var(--blue)"><span>Codex</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--green)">
+          <div class="copy">
+            <div class="kicker"><i></i>03 / Start</div>
+            <h2>第一步：说清楚<br />你要的结果</h2>
+            <p>最好的请求不是“帮我看看”，而是包含目标、边界、素材、格式和验收标准。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">prompt components</span></div>
+            <div class="board">
+              <div class="chip-row">
+                <div class="chip"><i></i>目标</div>
+                <div class="chip"><i></i>上下文</div>
+                <div class="chip"><i></i>限制</div>
+                <div class="chip"><i></i>交付格式</div>
+              </div>
+              <div class="prompt">把这个 H5 做成点击翻页的 Codex 教程，使用 Figma 风格包装，并给我可打开的页面。<span class="send">›</span></div>
+              <div class="note" style="left: 64px; top: 132px; --note: #e5fff5;">目标越清楚，第一次成稿越接近你想要的样子。</div>
+              <div class="note" style="right: 66px; top: 160px; --note: #fff3a3; --rot: 3deg;">把文件名、参考风格、受众都说出来。</div>
+              <div class="cursor" style="--x: 520px; --y: 300px; --c: var(--green)"><span>You</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--red)">
+          <div class="copy">
+            <div class="kicker"><i></i>04 / Good requests</div>
+            <h2>三种高效<br />请求模板</h2>
+            <p>用“做成什么”“怎么判断好”“要不要动文件”来控制协作节奏。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">request templates</span></div>
+            <div class="board">
+              <div class="code-list">
+                <div class="code-line"><b>创建：</b>帮我做一个登录页，要有移动端适配，风格参考 Apple。</div>
+                <div class="code-line"><b>修改：</b>把首页 CTA 改明显一点，不要动导航和底部。</div>
+                <div class="code-line"><b>排查：</b>这个按钮点击没反应，找原因并修复，最后跑测试。</div>
+                <div class="code-line"><b>解释：</b>用产品经理能听懂的话解释这段逻辑。</div>
+              </div>
+              <div class="prompt">公式：目标 + 上下文 + 限制 + 验收方式<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--purple)">
+          <div class="copy">
+            <div class="kicker"><i></i>05 / Files</div>
+            <h2>把素材和文件<br />交给 Codex</h2>
+            <p>你可以指定本地文件、截图、设计说明、数据表或已有页面。Codex 会围绕这些素材工作。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">source materials</span></div>
+            <div class="board">
+              <div class="frame" data-label="design-md" style="left: 42px; top: 82px; width: 230px; height: 150px;"></div>
+              <div class="frame" data-label="screenshot" style="left: 330px; top: 122px; width: 230px; height: 180px;"></div>
+              <div class="frame" data-label="workspace" style="right: 42px; top: 78px; width: 250px; height: 230px;"></div>
+              <div class="note" style="left: 78px; bottom: 104px; --note: #efe1ff;">例：用 figma.md 的设计包装风格生成。</div>
+              <div class="note" style="right: 80px; bottom: 92px; --note: #e3f7ff; --rot: 2deg;">文件越具体，风格越稳定。</div>
+              <div class="cursor" style="--x: 416px; --y: 248px; --c: var(--purple)"><span>Designer</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--blue)">
+          <div class="copy">
+            <div class="kicker"><i></i>06 / Edit</div>
+            <h2>让 Codex<br />直接改项目</h2>
+            <p>当目标明确时，不必停在建议。让它读结构、找到位置、修改文件，并保持改动范围可控。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">diff preview</span></div>
+            <div class="board">
+              <div class="diff">
+                <div class="minus">- const title = "Untitled"</div>
+                <div class="plus">+ const title = "Codex 使用教程"</div>
+                <div class="minus">- button.disabled = true</div>
+                <div class="plus">+ button.addEventListener("click", nextSlide)</div>
+                <div class="plus">+ verifyResponsiveLayout()</div>
+              </div>
+              <div class="prompt">可以直接说：实现它，并在完成后告诉我改了哪些文件。<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--green)">
+          <div class="copy">
+            <div class="kicker"><i></i>07 / Verify</div>
+            <h2>不要只看成稿<br />还要做验证</h2>
+            <p>让 Codex 跑测试、检查页面、看截图、修布局问题。靠谱的交付来自最后这一轮。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">quality checklist</span></div>
+            <div class="board">
+              <div class="chip-row">
+                <div class="chip"><i></i>功能可用</div>
+                <div class="chip"><i></i>移动端不溢出</div>
+                <div class="chip"><i></i>没有报错</div>
+                <div class="chip"><i></i>交互符合预期</div>
+              </div>
+              <div class="browser">
+                <div class="browser-bar"><div class="url">localhost / preview</div></div>
+                <div class="browser-page">
+                  <div class="hero-block"></div>
+                  <div class="side-block"></div>
+                  <div class="bar-block"></div>
+                  <div class="bar-block"></div>
+                </div>
+              </div>
+              <div class="prompt">请打开预览，检查桌面和手机尺寸，发现问题直接修。<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--red)">
+          <div class="copy">
+            <div class="kicker"><i></i>08 / Review</div>
+            <h2>需要审查时<br />直接说 Review</h2>
+            <p>如果你想知道代码风险，让 Codex 用审查模式找 bug、回归风险和缺少的测试，而不是泛泛评价。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">review board</span></div>
+            <div class="board">
+              <div class="frame" data-label="P1" style="left: 54px; top: 94px; width: 220px; height: 128px;"></div>
+              <div class="frame" data-label="P2" style="left: 318px; top: 154px; width: 220px; height: 128px;"></div>
+              <div class="frame" data-label="Tests" style="right: 64px; top: 94px; width: 230px; height: 190px;"></div>
+              <div class="note" style="left: 86px; bottom: 104px; --note: #ffe3de;">让问题排在前面，摘要放后面。</div>
+              <div class="prompt">帮我 review 这次改动，重点看真实 bug 和测试缺口。<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--purple)">
+          <div class="copy">
+            <div class="kicker"><i></i>09 / Handoff</div>
+            <h2>交付时看三件事</h2>
+            <p>改了什么、怎么验证、还有什么风险。好的结尾让你能立刻继续决策。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">handoff card</span></div>
+            <div class="board">
+              <div class="code-list">
+                <div class="code-line"><b>已完成：</b>新增互动 H5，点击推进章节。</div>
+                <div class="code-line"><b>验证：</b>检查桌面和移动端布局。</div>
+                <div class="code-line"><b>位置：</b>index.html 可直接打开。</div>
+                <div class="code-line"><b>建议：</b>上传静态托管后发给别人。</div>
+              </div>
+              <div class="cursor" style="--x: 612px; --y: 120px; --c: var(--purple)"><span>PM</span></div>
+              <div class="prompt">最后一条消息，应该让你知道下一步怎么走。<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" style="--accent: var(--green)">
+          <div class="copy">
+            <div class="kicker"><i></i>10 / Ready</div>
+            <h2>现在你可以<br />这样使用 Codex</h2>
+            <p>把它当成一个会读上下文、能动手、会验证的协作者。你负责方向、判断和品味，它负责推进细节。</p>
+          </div>
+          <div class="canvas-card">
+            <div class="card-head"><span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span><span class="card-title">next prompt</span></div>
+            <div class="board">
+              <div class="frame" data-label="Goal" style="left: 64px; top: 84px; width: 214px; height: 132px;"></div>
+              <div class="frame" data-label="Context" style="left: 334px; top: 122px; width: 222px; height: 150px;"></div>
+              <div class="frame" data-label="Ship" style="right: 68px; top: 84px; width: 236px; height: 204px;"></div>
+              <div class="flow-line" style="left: 274px; top: 158px; width: 86px; transform: rotate(10deg);"></div>
+              <div class="flow-line" style="right: 292px; top: 190px; width: 112px; transform: rotate(-9deg);"></div>
+              <div class="end-badge"><i></i>教程结束，可以继续点击回到开头</div>
+              <div class="prompt">下一次，直接告诉 Codex：我要什么、参考什么、做到什么程度。<span class="send">›</span></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="bottom">
+        <div class="nav">
+          <button class="icon-btn" id="prev" aria-label="上一页">‹</button>
+          <button class="icon-btn" id="next" aria-label="下一页">›</button>
+        </div>
+        <div class="progress" id="progress" aria-label="章节导航"></div>
+        <div class="hint" id="hint">点击进入下一页</div>
+      </footer>
+    </main>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const stage = document.querySelector("#stage");
+      const progress = document.querySelector("#progress");
+      const prevButton = document.querySelector("#prev");
+      const nextButton = document.querySelector("#next");
+      const hint = document.querySelector("#hint");
+      let index = 0;
+
+      const colors = [
+        "#a259ff",
+        "#1abcfe",
+        "#0acf83",
+        "#f24e1e",
+        "#a259ff",
+        "#1abcfe",
+        "#0acf83",
+        "#f24e1e",
+        "#a259ff",
+        "#0acf83"
+      ];
+
+      slides.forEach((_, i) => {
+        const button = document.createElement("button");
+        button.className = "dot-btn";
+        button.type = "button";
+        button.setAttribute("aria-label", `跳转到第 ${i + 1} 页`);
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          go(i);
+        });
+        progress.appendChild(button);
+      });
+
+      function go(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+        const dots = Array.from(progress.children);
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+        document.documentElement.style.setProperty("--active", colors[index]);
+        hint.textContent = index === slides.length - 1 ? "再次点击回到开头" : "点击进入下一页";
+      }
+
+      function next() {
+        go(index + 1);
+      }
+
+      function prev() {
+        go(index - 1);
+      }
+
+      stage.addEventListener("click", next);
+      nextButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        next();
+      });
+      prevButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        prev();
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") {
+          event.preventDefault();
+          next();
+        }
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          prev();
+        }
+      });
+
+      go(0);
+    </script>
+  </body>
+</html>

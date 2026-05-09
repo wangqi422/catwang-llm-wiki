@@ -1,0 +1,252 @@
+{
+  "main": {
+    "id": "8250be055747157f",
+    "type": "split",
+    "children": [
+      {
+        "id": "44d2700edbbcb26b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e0c1e8e81a95c9ad",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "raw/worksheets/CODM项目资料.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CODM项目资料"
+            }
+          },
+          {
+            "id": "97be07f145fbcc8d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "raw/worksheets/CODM项目资料.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CODM项目资料"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "43513cff72093d1e",
+    "type": "split",
+    "children": [
+      {
+        "id": "5051baf6df6a0f30",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e06058bbc8587841",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "af87951350d5bff2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "73cc91c15c1bcc45",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "be781f04446b60db",
+    "type": "split",
+    "children": [
+      {
+        "id": "6a3a051a4d2384d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9b3bf2b507fa06b2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "raw/worksheets/CODM项目资料.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "CODM项目资料 的反向链接列表"
+            }
+          },
+          {
+            "id": "98d2bee1cf0ec1e3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "raw/articles/MemPalace × Harness Engineering：让 AI 团队拥有持续记忆 - 腾讯游戏知识库 - KM平台.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "MemPalace × Harness Engineering：让 AI 团队拥有持续记忆 - 腾讯游戏知识库 - KM平台 的出链列表"
+            }
+          },
+          {
+            "id": "aa07df7d4c3d4f4c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "f0ad002da1dcc9aa",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "e0e50f18751eb34d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "raw/articles/MemPalace × Harness Engineering：让 AI 团队拥有持续记忆 - 腾讯游戏知识库 - KM平台.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "MemPalace × Harness Engineering：让 AI 团队拥有持续记忆 - 腾讯游戏知识库 - KM平台 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "markdown-table-editor:Open Markdown Table Editor": false,
+      "marp-slides:Show Slide Preview": false,
+      "pexels-banner:🚩 Pixel Banner Menu": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "e0c1e8e81a95c9ad",
+  "lastOpenFiles": [
+    "_skills/codm-taozi.md",
+    "_skills/codm-links.md",
+    "CODEBUDDY.md",
+    "wiki/people/territory-studio.md",
+    "wiki/people/platige-image.md",
+    "wiki/iw-engine.md",
+    "wiki/pbr-rendering.md",
+    "wiki/cod-cg-production.md",
+    "wiki/codm-vfx-system.md",
+    "wiki/codm-asset-pipeline.md",
+    "wiki/summaries/2026-04-11-cod-cg-technology.md",
+    "wiki/summaries/2026-04-11-codm-vfx-analysis.md",
+    "wiki/summaries/2026-05-09-codm-project-resources.md",
+    "raw/worksheets/CODM项目资料.md",
+    "_templates/comparison-template.md",
+    "_temp_obsidian_skills/skills/defuddle/SKILL.md",
+    "log.md",
+    "index.md",
+    "glossary.md",
+    "learn/diary/3.19.md",
+    "learn/diary/3.27.md",
+    "work/codm-version-visual-guides-index.md",
+    "_templates/work-doc-template.md",
+    "assets/ppt-workspace/codm-t2/node_modules/util-deprecate/README.md",
+    "assets/ppt-workspace/codm-t2/node_modules/util-deprecate/node.js",
+    "assets/ppt-workspace/codm-t2/node_modules/util-deprecate/LICENSE",
+    "assets/ppt-workspace/codm-t2/node_modules/util-deprecate/History.md",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/pool-stats.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/patch.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/package.json",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/mock-pool.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/mock-interceptor.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/mock-errors.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/mock-client.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/undici-types/mock-agent.d.ts",
+    "assets/ppt-workspace/codm-t2/node_modules/string_decoder/README.md",
+    "assets/ppt-workspace/codm-t2/node_modules/jszip/graph.svg",
+    "_deploy/city-visual-guide-work/final_pdf_contact_sheet.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-12.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-11.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-10.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-09.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-08.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-07.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-06.png",
+    "_deploy/city-visual-guide-work/final_pdf_pages/page-05.png"
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "date": "2026-04-15",
+    "dateCompact": "20260415",
+    "weekday": "星期三",
+    "extractedAt": "2026-04-23T02:21:19.215Z",
+    "sourceFile": "CODM_Competitive_Daily_20260415.md",
+    "version": "1.0.0"
+  },
+  "overview": "",
+  "highlights": [
+    {
+      "text": "三角洲行动S9「回声」赛季明日(4/16)上线——最后一天倒计时预热全开，古墓丽影联动持续造势，猛攻节活动4/24上线预告（送2600三角券）",
+      "priority": 2
+    },
+    {
+      "text": "暗区突围×闪魂收藏卡「锋刃出金」4/17发售倒计时D-2，黑卡蒂卡面+枪械涂装持续预热",
+      "priority": 1
+    },
+    {
+      "text": "⚠️ 使命召唤：战区手游4/17正式停服倒计时D-2，CODM成为唯一在运使命召唤移动端产品",
+      "priority": 0
+    },
+    {
+      "text": "Battlefield 6 1.2.3.0更新后首日社区反馈热议：Operation Augur模式+除颤器回归好评",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔫",
+      "nameCN": "使命召唤手游",
+      "nameEN": "",
+      "isSelf": true,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：有动态｜S3「Paranoia」赛季持续运营，「奇喵新世界」猫系武器返场活动进行中",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态｜2026春季大师杯常规赛第五周持续直播",
+          "priority": 0
+        },
+        {
+          "text": "战区手游停服倒计时：《使命召唤：战区手游》4/17正式停服（D-2），CODM将成唯一移动端COD产品",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🎯",
+      "nameCN": "三角洲行动",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：高频动态｜S9「回声」赛季明日上线最终倒计时宣传，古墓丽影30周年联动（劳拉传说外观4/30上线）持续造势，猛攻节4/24上线预告（赠送2600三角券）",
+          "priority": 0
+        },
+        {
+          "text": "B站：高频动态｜S9赛季前瞻直播完整回顾视频热度持续，新干员「回响」技能演示+M82重狙试玩+核电站新地图预览",
+          "priority": 0
+        },
+        {
+          "text": "游民星空：S9赛季更新公告全文发布",
+          "priority": 0
+        },
+        {
+          "text": "IT之家：联动古墓丽影+武汉邀请赛报道",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🏙️",
+      "nameCN": "暗区突围",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [
+        {
+          "text": "微博：有动态｜S17「迷雾」赛季运营中，闪魂收藏卡「锋刃出金」4/17发售D-2倒计时预热——黑卡蒂角色卡面+枪械涂装",
+          "priority": 0
+        },
+        {
+          "text": "B站：有动态｜S17赛季内容持续更新，诡雾山谷玩法攻略",
+          "priority": 0
+        },
+        {
+          "text": "TapTap：闪魂收藏卡官方预告帖",
+          "priority": 0
+        },
+        {
+          "text": "17173：闪魂收藏卡发售详情报道",
+          "priority": 0
+        },
+        {
+          "text": "EA官网：1.2.3.0更新已于4/14上线，Operation Augur新模式+Hunter/Prey终章+除颤器经典机制回归",
+          "priority": 0
+        },
+        {
+          "text": "ComicBook：Operation Augur完整补丁说明",
+          "priority": 0
+        },
+        {
+          "text": "MP1st：Patch 1.000.018详细更新日志",
+          "priority": 0
+        },
+        {
+          "text": "MSN：Battlefield 6与Marathon同日推大更新引发行业关注",
+          "priority": 0
+        }
+      ],
+      "tempo": "",
+      "sources": []
+    }
+  ],
+  "intensityTable": [],
+  "insights": [],
+  "stats": {
+    "totalCompetitors": 2,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 3,
+    "totalInsights": 0,
+    "totalActions": 0,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}

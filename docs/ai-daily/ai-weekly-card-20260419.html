@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>AI 干货周报 · 2026.04.13 - 04.19</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', 'Noto Sans SC', ui-sans-serif, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #ffffff;
+    color: rgb(55, 53, 47);
+  }
+
+  .page {
+    width: 1080px;
+    height: 1920px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    height: 150px;
+    background: linear-gradient(135deg, #0f766e 0%, #2383e2 35%, #6940a5 70%, #d44c47 100%);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 22px;
+    right: 48px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  .cover-week {
+    position: absolute;
+    bottom: 18px;
+    left: 48px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+  }
+
+  .cover-date {
+    position: absolute;
+    bottom: 18px;
+    right: 48px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+  }
+
+  /* ── Content ── */
+  .content {
+    flex: 1;
+    padding: 0 48px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid rgb(233, 233, 231);
+    flex-shrink: 0;
+  }
+
+  .page-icon {
+    font-size: 44px;
+    margin-top: -36px;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+  }
+
+  .page-title {
+    font-size: 34px;
+    font-weight: 900;
+    color: rgb(55, 53, 47);
+    letter-spacing: -1.3px;
+    line-height: 1.18;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    color: rgba(55, 53, 47, 0.4);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+
+  .prop-tags {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .notion-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+  }
+
+  .tag-blue    { background: rgb(211, 229, 239); color: rgb(24, 51, 71); }
+  .tag-purple  { background: rgb(232, 222, 238); color: rgb(65, 36, 84); }
+  .tag-green   { background: rgb(219, 237, 219); color: rgb(28, 56, 41); }
+  .tag-orange  { background: rgb(250, 222, 201); color: rgb(73, 41, 14); }
+  .tag-red     { background: rgb(255, 226, 221); color: rgb(93, 23, 21); }
+  .tag-pink    { background: rgb(245, 224, 233); color: rgb(76, 35, 55); }
+  .tag-teal    { background: rgb(211, 229, 226); color: rgb(15, 49, 44); }
+
+  /* ── TL;DR Section ── */
+  .tldr-section {
+    flex-shrink: 0;
+    margin-top: 12px;
+  }
+
+  .tldr-box {
+    background: linear-gradient(135deg, rgba(211,229,239,0.45) 0%, rgba(232,222,238,0.35) 100%);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 6px;
+  }
+
+  .tldr-box p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: rgba(55, 53, 47, 0.78);
+  }
+
+  .tldr-box p strong {
+    color: rgb(55, 53, 47);
+    font-weight: 700;
+  }
+
+  .tldr-box .hl-blue { color: rgb(35, 131, 226); font-weight: 700; }
+  .tldr-box .hl-teal { color: rgb(0, 135, 107); font-weight: 700; }
+  .tldr-box .hl-purple { color: rgb(105, 64, 165); font-weight: 700; }
+  .tldr-box .hl-red { color: rgb(212, 76, 71); font-weight: 700; }
+  .tldr-box .hl-orange { color: rgb(217, 115, 13); font-weight: 700; }
+
+  /* ── Section Heading ── */
+  .section-heading {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(55, 53, 47, 0.45);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    margin-bottom: 3px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid rgb(241, 241, 239);
+    flex-shrink: 0;
+  }
+
+  .section-heading .sec-emoji { margin-right: 5px; }
+
+  /* ── News List ── */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 4px;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.04);
+  }
+
+  .news-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .num-hot {
+    background: linear-gradient(135deg, #0f766e, #2383e2);
+    color: #fff;
+  }
+
+  .num-feat {
+    background: linear-gradient(135deg, #6940a5, #d44c47);
+    color: #fff;
+  }
+
+  .num-default {
+    background: linear-gradient(135deg, #d44c47, #e8590c);
+    color: #fff;
+  }
+
+  .news-content { flex: 1; min-width: 0; }
+
+  .news-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: rgb(55, 53, 47);
+    line-height: 1.32;
+    letter-spacing: -0.2px;
+  }
+
+  .news-title .hl { color: rgb(35, 131, 226); }
+  .news-title .hl-red { color: rgb(212, 76, 71); }
+  .news-title .hl-purple { color: rgb(105, 64, 165); }
+  .news-title .hl-orange { color: rgb(217, 115, 13); }
+  .news-title .hl-teal { color: rgb(0, 135, 107); }
+
+  .news-desc {
+    font-size: 13.5px;
+    color: rgba(55, 53, 47, 0.5);
+    line-height: 1.5;
+    margin-top: 3px;
+  }
+
+  .inline-tag {
+    display: inline-block;
+    padding: 0px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    vertical-align: middle;
+    margin-left: 5px;
+    position: relative;
+    top: -1px;
+  }
+
+  .tag-teal-inline {
+    background: rgb(211, 229, 226);
+    color: rgb(15, 49, 44);
+  }
+
+  .tag-red-inline {
+    background: rgb(255, 226, 221);
+    color: rgb(93, 23, 21);
+  }
+
+  .tag-orange-inline {
+    background: rgb(250, 222, 201);
+    color: rgb(73, 41, 14);
+  }
+
+  /* ── Action Order ── */
+  .action-section {
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .action-box {
+    background: rgb(251, 251, 250);
+    border-radius: 8px;
+    padding: 13px 18px;
+    margin-top: 6px;
+    border: 1px solid rgb(241, 241, 239);
+  }
+
+  .action-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .action-list li {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: rgba(55, 53, 47, 0.72);
+    padding: 2px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .action-list li .step-num {
+    font-size: 12px;
+    font-weight: 800;
+    color: rgb(35, 131, 226);
+    flex-shrink: 0;
+    min-width: 18px;
+  }
+
+  .action-list li strong {
+    color: rgb(55, 53, 47);
+    font-weight: 700;
+  }
+
+  /* ── Data Strip ── */
+  .data-strip {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-top: 12px;
+  }
+
+  .data-cell {
+    flex: 1;
+    padding: 14px 5px;
+    text-align: center;
+    border-right: 1px solid rgba(55, 53, 47, 0.06);
+  }
+
+  .data-cell:last-child { border-right: none; }
+  .data-cell:nth-child(odd) { background: rgb(251, 251, 250); }
+  .data-cell:nth-child(even) { background: rgb(247, 246, 243); }
+
+  .data-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(55, 53, 47, 0.38);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .data-value {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .dv-red { color: rgb(212, 76, 71); }
+  .dv-blue { color: rgb(35, 131, 226); }
+  .dv-orange { color: rgb(217, 115, 13); }
+  .dv-purple { color: rgb(105, 64, 165); }
+  .dv-teal { color: rgb(0, 135, 107); }
+
+  /* ── Bottom ── */
+  .bottom-bar {
+    flex-shrink: 0;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(233, 233, 231);
+    margin-top: 10px;
+  }
+
+  .bottom-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  .bottom-tag {
+    font-size: 11.5px;
+    color: rgba(55, 53, 47, 0.28);
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: rgba(55, 53, 47, 0.04);
+    font-weight: 500;
+  }
+
+  .bottom-source {
+    font-size: 11.5px;
+    color: rgba(55, 53, 47, 0.18);
+    white-space: nowrap;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    height: 54px;
+    background: rgb(251, 251, 250);
+    border-top: 1px solid rgb(233, 233, 231);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .footer-logo { font-size: 17px; }
+  .footer-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(55, 53, 47, 0.28);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .sep-dot {
+    width: 3px; height: 3px; border-radius: 50%;
+    background: rgba(55, 53, 47, 0.12);
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="cover">
+    <div class="cover-badge">AI WEEKLY · PRACTICAL EDITION</div>
+    <div class="cover-week">WEEK 16 · 2026</div>
+    <div class="cover-date">2026.04.13 — 04.19</div>
+  </div>
+
+  <div class="content">
+
+    <div class="header">
+      <div class="page-icon">📦</div>
+      <h1 class="page-title">AI 干货周报 · 桌面 Agent 元年开局周</h1>
+      <div class="page-subtitle">扫描 65 个顶级 AI Builder 信号 · 9 条绝对干货 · 今天就能上手</div>
+      <div class="prop-tags">
+        <span class="notion-tag tag-blue">🎨 Claude Design</span>
+        <span class="notion-tag tag-purple">🤖 Codex Agent</span>
+        <span class="notion-tag tag-teal">💻 Mac AI 操作员</span>
+        <span class="notion-tag tag-orange">🎵 Music 2.6</span>
+        <span class="notion-tag tag-red">📐 CLAUDE.md</span>
+      </div>
+    </div>
+
+    <!-- TL;DR -->
+    <div class="tldr-section">
+      <div class="section-heading"><span class="sec-emoji">💡</span>本期结论</div>
+      <div class="tldr-box">
+        <p>本周是名副其实的 <strong>"桌面 Agent 元年开局周"</strong>：<span class="hl-purple">Anthropic</span> 同日发 Opus 4.7 + Claude Design；<span class="hl-blue">OpenAI</span> 把 Codex 升级为"几乎能干一切"的 Mac Agent；<span class="hl-teal">Perplexity</span> 让 Mac 变成 24/7 AI 操作员。AI 不再只是"给建议"，<strong>它真的能替你把一整条工作流跑完</strong>。</p>
+      </div>
+    </div>
+
+    <!-- 🛠️ 实用工具箱 -->
+    <div class="section-heading"><span class="sec-emoji">🛠️</span>实用工具箱 TOOLS & APPS</div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-num num-hot">1</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">Claude Design</span>：对话式出原型/PPT/落地页 — 直接对标 Figma<span class="inline-tag tag-teal-inline">⚡ 先试</span></div>
+          <div class="news-desc">Opus 4.7 视觉模型驱动，不是"AI 画图"，而是生成可交互原型、幻灯片、品牌 Mockup · 分钟级出提案</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-hot">2</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">OpenAI Codex for (Almost) Everything</span>：把 Mac 交给 Agent<span class="inline-tag tag-red-inline">🔥</span></div>
+          <div class="news-desc">新增 Computer Use + 90+ 插件（CircleCI/GitLab/微软全家桶）+ Memory + 长时任务 · 能自己开浏览器点按钮切 App</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-hot">3</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-teal">Perplexity Personal Computer for Mac</span>：让 Mac 变成 24/7 AI 操作员</div>
+          <div class="news-desc">常驻 Mac 的 Agent，可访问本地文件+App+跑长时任务 · 和 Codex 互补：做研究选它，做工程选 Codex</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-hot">4</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-orange">MiniMax Music 2.6</span>：20 秒出整首歌 + AI 翻唱 Cover</div>
+          <div class="news-desc">首包延迟 20s 内，独家 Cover 翻唱功能（换声线/风格重演绎）· 短视频二创和版权规避意义重大</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-hot">5</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">Gemini × Nano Banana 2</span>：用你的 Google Photos 记忆做个性化 AI 配图</div>
+          <div class="news-desc">可直接调用你相册里的自己/家人/宠物生成图像 · 过去训 LoRA 才能做的角色一致性，现在一句话搞定</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚡ 高效工作流 -->
+    <div class="section-heading"><span class="sec-emoji">⚡</span>高效工作流 WORKFLOWS</div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-num num-feat">6</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl">NotebookLM</span> 进入 Gemini Ultra — 研究助手嵌进主工作流</div>
+          <div class="news-desc">主界面直接唤起 Audio/Video Overview + Deep Research 自动找源 + 跨笔记本查询 · 做竞品分析一次抵 3 小时</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-feat">7</div>
+        <div class="news-content">
+          <div class="news-title">从 <span class="hl-red">Vibe Coding</span> 走向 <span class="hl-teal">Agentic Engineering</span> — 给 AI 搭工程纪律<span class="inline-tag tag-orange-inline">💎 新共识</span></div>
+          <div class="news-desc">Spec 先行 → 拆任务 → 关键节点人工审核 → Harness 包住 Agent · LangChain 数据：换 Harness 能力翻倍</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🧠 方法论 -->
+    <div class="section-heading"><span class="sec-emoji">🧠</span>方法论与 PROMPT</div>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-num num-default">8</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-purple">CLAUDE.md</span> 项目契约：让 Claude Code 真正懂你的代码库</div>
+          <div class="news-desc">项目根目录写清技术栈/目录约定/必须与禁止/验收标准 · 返工率下降 60%+，最高 ROI 的一次性投入</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-num num-default">9</div>
+        <div class="news-content">
+          <div class="news-title"><span class="hl-orange">MCP</span> 生态已破 9700 万安装 — 该把工具"外挂化"了</div>
+          <div class="news-desc">一次写 MCP Server，Claude Code/Codex/Cursor 都能用 · 官方已支持 GitHub/Notion/Slack/Postgres</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🎯 推荐上手顺序 -->
+    <div class="action-section">
+      <div class="section-heading"><span class="sec-emoji">🎯</span>本周推荐上手顺序</div>
+      <div class="action-box">
+        <ol class="action-list">
+          <li><span class="step-num">①</span><strong>先试 Claude Design</strong> — 5 分钟就能出第一版原型，提案效率立竿见影</li>
+          <li><span class="step-num">②</span><strong>搭 CLAUDE.md + Claude Code</strong> — 30 分钟投入，长期复利最高</li>
+          <li><span class="step-num">③</span><strong>升级 Codex 开 Computer Use</strong> — 体会 Agent 真能跑完碎活的震撼</li>
+          <li><span class="step-num">④</span><strong>订 Gemini Ultra 玩 NotebookLM + Nano Banana</strong> — 目前最划算的 AI 组合拳</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Data Strip -->
+    <div class="data-strip">
+      <div class="data-cell">
+        <div class="data-label">扫描信源</div>
+        <div class="data-value dv-blue">65</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">精选干货</div>
+        <div class="data-value dv-teal">9</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">桌面 Agent</div>
+        <div class="data-value dv-purple">×3</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">Codex 插件</div>
+        <div class="data-value dv-orange">90+</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-label">MCP 安装</div>
+        <div class="data-value dv-red">97M</div>
+      </div>
+    </div>
+
+    <!-- Bottom Tags -->
+    <div class="bottom-bar">
+      <div class="bottom-tags">
+        <span class="bottom-tag">#ClaudeDesign</span>
+        <span class="bottom-tag">#Codex桌面</span>
+        <span class="bottom-tag">#Perplexity</span>
+        <span class="bottom-tag">#Music2.6</span>
+        <span class="bottom-tag">#CLAUDE.md</span>
+        <span class="bottom-tag">#MCP</span>
+        <span class="bottom-tag">#AgenticEngineering</span>
+      </div>
+      <span class="bottom-source">AI 干货周报 · 小柒AI速递</span>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">📦</span>
+    <span class="footer-text">AI Weekly · Practical Edition</span>
+    <span class="sep-dot"></span>
+    <span class="footer-text" style="font-weight:500; letter-spacing:1px;">Powered by 小柒AI速递</span>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+timestamp	commit	skill	old_score	new_score	status	dimension	note	eval_mode
+2026-04-15T00:43	baseline	ingest	-	73.0	baseline	-	初始评估：Frontmatter缺失+模板路径错误	dry_run
+2026-04-15T00:43	baseline	distill	-	64.8	baseline	-	初始评估：检查点缺失+合并操作模糊	dry_run
+2026-04-15T00:43	baseline	publish	-	71.3	baseline	-	初始评估：检查点缺失+边界条件不足	dry_run
+2026-04-15T00:43	baseline	daily-card	-	69.5	baseline	-	初始评估：Frontmatter缺失+LLM触发简略	dry_run
+2026-04-15T00:50	optimize-r1	ingest	73.0	82.2	keep	Frontmatter+资源整合	添加YAML frontmatter+修正4处模板路径+增加边界条件	dry_run
+2026-04-15T00:50	optimize-r1	distill	64.8	81.3	keep	检查点+具体性	添加YAML frontmatter+2个检查点+合并去重规则+回滚机制+异常处理	dry_run
+2026-04-15T00:50	optimize-r1	publish	71.3	82.8	keep	检查点+边界条件	添加YAML frontmatter+2个检查点+fallback策略+重复publish检查	dry_run
+2026-04-15T00:50	optimize-r1	daily-card	69.5	80.9	keep	Frontmatter+工作流	添加YAML frontmatter+LLM触发5步细化+错误处理+数据栏规则	dry_run
+2026-04-20T09:00	baseline-r2	archive	-	80.0	baseline	-	首次基线：边界条件不足+URL获取步骤缺失	dry_run
+2026-04-20T09:00	baseline-r2	design-style	-	86.0	baseline	-	首次基线：检查点设计缺失	dry_run
+2026-04-20T09:00	baseline-r2	distill	81.3	79.0	baseline	-	重评基线（更严格标准）：工作流+指令具体性+资源整合度偏低	dry_run
+2026-04-20T09:00	baseline-r2	ingest	82.2	87.0	baseline	-	重评基线：边界条件+实测表现仍有提升空间	dry_run
+2026-04-20T09:00	baseline-r2	publish	82.8	84.0	baseline	-	重评基线：资源整合度+边界条件偏低	dry_run
+2026-04-20T09:00	baseline-r2	daily-card	80.9	83.0	baseline	-	重评基线：检查点设计严重不足	dry_run
+2026-04-20T09:05	optimize-r2	distill	79.0	86.0	keep	工作流+资源整合+指令具体性	R1:第一步操作步骤明确化+自动化执行策略+Skill关系表；R2:密度测试客观化4指标	dry_run
+2026-04-20T09:05	optimize-r2	archive	80.0	85.0	keep	边界条件+实测	URL/大文件/非MD/回滚机制+web_fetch工具指引	dry_run
+2026-04-20T09:05	optimize-r2	daily-card	83.0	87.0	keep	检查点	AIGC+CODM双分支检查点表+日报为空处理	dry_run
+2026-04-20T09:05	optimize-r2	publish	84.0	88.0	keep	资源整合+边界条件	4Skill联动表+4额外边界条件	dry_run
+2026-04-20T09:05	optimize-r2	design-style	86.0	89.0	keep	检查点	按模式区分的检查点表（代码模式需确认方向）	dry_run
+2026-04-20T09:05	optimize-r2	ingest	87.0	91.0	keep	边界条件+实测	批量ingest流程+中途失败恢复机制（断点续传）	dry_run

@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "date": "2026-04-23",
+    "dateCompact": "20260423",
+    "weekday": "星期四",
+    "extractedAt": "2026-04-23T04:17:21.945Z",
+    "sourceFile": "CODM_Competitive_Daily_20260423.md",
+    "version": "1.0.0"
+  },
+  "overview": "三角洲猛攻节官宣姜文代言+双IP联动，4/24首期开启，年度最高规格。CODM S4次日热度稳定，MonsterVerse联动明日启动。暗区突围周年庆二波福利今日释放。BF6路线图持续发酵。明日(4/24)三方同日对撞。",
+  "highlights": [
+    {
+      "text": "三角洲猛攻节：姜文代言+让子弹飞+古墓丽影双IP，4/24首期",
+      "priority": 3
+    },
+    {
+      "text": "CODM：哥斯拉×金刚MonsterVerse联动4/24正式开启",
+      "priority": 3
+    },
+    {
+      "text": "暗区突围：周年庆二波今日发放，15张无人区门票+4500点券",
+      "priority": 2
+    },
+    {
+      "text": "BF6：路线图热议，S3五月Golmud+S4威克岛海战",
+      "priority": 1
+    }
+  ],
+  "competitors": [
+    {
+      "icon": "🔀",
+      "nameCN": "横向维度对比",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "",
+      "attentionLevel": "",
+      "highlights": [],
+      "tempo": "",
+      "sources": []
+    },
+    {
+      "icon": "🔽",
+      "nameCN": "竞品详情",
+      "nameEN": "",
+      "isSelf": false,
+      "threatLevel": "low",
+      "threatEmoji": "🟢",
+      "threatReason": "端游赛道，路线图社区讨论期",
+      "attentionLevel": "⚡⚡⚡",
+      "highlights": [
+        {
+          "text": "猛攻节代言人官宣姜文 — 华语影坛顶级咖位，「翻译翻译，什么叫惊喜」经典台词引爆社区",
+          "priority": 3
+        },
+        {
+          "text": "《让子弹飞》IP联动确认 — 4/30上线姜文定制头像、军牌、喷漆等联动物资",
+          "priority": 3
+        },
+        {
+          "text": "猛攻节双阶段排期：4/24首期（烽火地带新模式+全面战场新地图）→ 4/30全面上线（联动活动+2600三角券福利）",
+          "priority": 2
+        },
+        {
+          "text": "古墓丽影联动「露娜-劳拉·克劳馥」传说级外观4/30商城上架，双IP并行",
+          "priority": 2
+        },
+        {
+          "text": "S4「永恒监狱」(Eternal Prison)上线次日，重生岛BR+DMZ双模式运营稳定",
+          "priority": 2
+        },
+        {
+          "text": "哥斯拉×金刚MonsterVerse联动4/24正式开启：怪兽主题活动+限定任务+联动外观解锁",
+          "priority": 2
+        },
+        {
+          "text": "一周年第二波奖励今日(4/23)发放：15张「无人区」门票+S级武器涂装+AK102涂装+3×3安全箱",
+          "priority": 2
+        },
+        {
+          "text": "乌鲁鲁联动皮肤曝光（疑似猛攻节限定），社区高度期待",
+          "priority": 1
+        },
+        {
+          "text": "Mythic DP27 LMG首日表现引社区讨论，通行证4款新干员外观持续曝光",
+          "priority": 1
+        },
+        {
+          "text": "4500点券(Bonds)福利总计已全部可领取：登录奖励+周年庆任务+挑战任务+兑换码",
+          "priority": 1
+        },
+        {
+          "text": "2026路线图持续社区热议：S3(五月)→S4(七月)→S5(秋季)三个赛季清晰排期",
+          "priority": 1
+        },
+        {
+          "text": "S4确认Wake Island(威克岛)经典回归+海战模式(Naval Warfare)实装",
+          "priority": 1
+        },
+        {
+          "text": "全面战场国际邀请赛4/27报名开放，吴彦祖联动传说外观「飞虎-威龙」4/29上线",
+          "priority": 0
+        },
+        {
+          "text": "全新BR职业Toxic Overload毒气战术上线首日社区反馈积极",
+          "priority": 0
+        },
+        {
+          "text": "DMZ：侦察模式重生岛作为第二张提取地图持续吸引新老玩家",
+          "priority": 0
+        },
+        {
+          "text": "混沌质概率UP活动持续中(4/21起)，红色品质收藏品产出提高",
+          "priority": 0
+        },
+        {
+          "text": "战神锦标赛TV Station电视台地图专项赛事进行中",
+          "priority": 0
+        },
+        {
+          "text": "S3五月上线Golmud Railway重制+服务器浏览器+REDSEC天梯排位",
+          "priority": 0
+        },
+        {
+          "text": "全年7张新地图承诺（含3张经典重制），社区信心大幅提振",
+          "priority": 0
+        }
+      ],
+      "tempo": "路线图信心释放+经典地图回归+海战革新",
+      "sources": [
+        "https://www.sohu.com/a/1013123316_122575551",
+        "https://news.17173.com/content/04212026/115107807.shtml",
+        "https://www.gamersky.com/news/202604/2126902.shtml",
+        "https://www.callofduty.com/blog/2026/04/call-of-duty-mobile-season-4-2026-eternal-prison",
+        "https://gamingonphone.com/news/cod-mobile-season-4-2026-eternal-prison-brings-rebirth-island-mythic-dp27-and-godzilla-x-kong-collaboration/",
+        "https://aqtwwx.qq.com/web202501/newsdetail.html?newsid=18767505",
+        "https://soren.com/zh-CN/news/arena-breakout-infinite/2026-04-20-arena-breakout-infinite",
+        "https://www.ea.com/games/battlefield/battlefield-6/seasons/battlefield-2026-roadmap",
+        "https://wccftech.com/battlefield-6-2026-roadmap-naval-warfare-season-4/"
+      ]
+    }
+  ],
+  "intensityTable": [
+    {
+      "name": "三角洲行动",
+      "event": "⭐⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "CODM",
+      "event": "⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "暗区突围",
+      "event": "⭐⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    },
+    {
+      "name": "BF6",
+      "event": "⭐⭐⭐",
+      "score": 0,
+      "means": ""
+    }
+  ],
+  "insights": [
+    {
+      "title": "4/24「三方同日对撞」— 用视觉差异化打赢明天",
+      "body": "明日三角洲猛攻节 vs CODM哥斯拉联动 vs 暗区周年庆余热三方对撞。横向看三角洲在代言人/IP维度碾压，但MonsterVerse的巨型怪兽是唯一不可替代的视觉资产。",
+      "codmActions": [
+        "4/24当日备好「怪兽核弹级视觉素材」——巨型怪兽冲击力横向无人能敌",
+        "社媒零点即释放联动内容，抢在猛攻节前建立声量",
+        "提前备好KOL内容包，确保首日产出不被猛攻节分流"
+      ]
+    },
+    {
+      "title": "CODM缺「代言人层」— 用IP场景深度弥补",
+      "body": "三角洲有姜文（全民代言人），暗区有周年庆福利锚定，CODM仅有IP联动缺少人物锚点。哥斯拉没台词能出圈，但「巨兽破坏城市」的沉浸场景比角色更有传播力。",
+      "codmActions": [
+        "后续联动可补齐代言人维度（华语顶级IP+明星组合拳）",
+        "本次深挖MonsterVerse「场景式」传播——巨兽从天而降的BR实况比静态海报传播力更强"
+      ]
+    },
+    {
+      "title": "暗区「分波福利」策略 — CODM赛季中期可复制",
+      "body": "暗区周年庆4/17首波→4/23二波，7天分两波精准拉升登录曲线。CODM通常赛季首日一波放完，中期活跃容易断崖。",
+      "codmActions": [
+        "MonsterVerse联动设计「第一周怪兽活动→第二周终极BOSS挑战」双波节奏",
+        "高价值稀缺道具作为「第二波福利」制造回流高峰"
+      ]
+    }
+  ],
+  "stats": {
+    "totalCompetitors": 2,
+    "highThreat": 0,
+    "mediumThreat": 0,
+    "lowThreat": 2,
+    "totalInsights": 3,
+    "totalActions": 7,
+    "maxIntensity": 0,
+    "codmIntensity": 0
+  }
+}
