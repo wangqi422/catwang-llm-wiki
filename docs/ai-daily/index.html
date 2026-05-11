@@ -241,12 +241,8 @@ body {
     <div class="page-desc">AI 周报 &amp; 日报归档信息流</div>
   </div>
 
-  <!-- Filter: Type -->
+  <!-- Filter: Tags only (type filter moved to left sidebar) -->
   <div class="filter-row" id="typeRow">
-    <button class="ftab active" data-filter="all">全部</button>
-    <button class="ftab" data-filter="weekly">周报</button>
-    <button class="ftab" data-filter="daily">日报</button>
-    <span class="ftab-sep"></span>
     <button class="ftab" data-filter="tag:Claude Code">Claude Code</button>
     <button class="ftab" data-filter="tag:GPT-5.5">GPT-5.5</button>
     <button class="ftab" data-filter="tag:DeepSeek">DeepSeek</button>
@@ -355,34 +351,34 @@ function render() {
   }).join('');
 }
 
-// Nav
-document.querySelector('.sidebar-nav').addEventListener('click', e => {
+// Nav (left sidebar)
+document.querySelector('.sidebar-nav').addEventListener('click', function(e) {
   e.preventDefault();
-  const item = e.target.closest('.nav-item');
+  var item = e.target.closest('.nav-item');
   if (!item) return;
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
   item.classList.add('active');
   activeFilter = item.dataset.nav;
   // Update header
-  const titles = {all:'\u5168\u90e8 AI \u52a8\u6001', weekly:'AI \u5468\u62a5', daily:'AI \u65e5\u62a5'};
+  var titles = {all:'\u5168\u90e8 AI \u52a8\u6001', weekly:'AI \u5468\u62a5', daily:'AI \u65e5\u62a5'};
   document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8 AI \u52a8\u6001';
-  // Reset tab active
-  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-  document.querySelector('.ftab[data-filter="' + activeFilter + '"]').classList.add('active');
+  // Clear tag filter
+  document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
   render();
 });
 
-// Tabs
-document.getElementById('typeRow').addEventListener('click', e => {
-  const btn = e.target.closest('.ftab');
+// Tags (top row)
+document.getElementById('typeRow').addEventListener('click', function(e) {
+  var btn = e.target.closest('.ftab');
   if (!btn) return;
-  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  activeFilter = btn.dataset.filter;
-  // Sync sidebar
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navMatch = document.querySelector('.nav-item[data-nav="' + (activeFilter.startsWith('tag:') ? 'all' : activeFilter) + '"]');
-  if (navMatch) navMatch.classList.add('active');
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    activeFilter = document.querySelector('.nav-item.active').dataset.nav || 'all';
+  } else {
+    document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+  }
   render();
 });
 
