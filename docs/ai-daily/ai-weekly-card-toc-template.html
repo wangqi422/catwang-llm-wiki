@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Soft Editorial · 带目录导航</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  /* Sidebar */
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--sidebar-accent);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--sidebar-text-hover);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.sidebar-header h1 em {
+  font-style: italic;
+  font-weight: 400;
+}
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px;
+  color: rgba(242,238,223,0.35);
+}
+
+.nav-section {
+  padding: 8px 16px;
+}
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: rgba(242,238,223,0.3);
+  text-transform: uppercase;
+  padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block;
+  padding: 8px 12px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 6px;
+  transition: all 0.2s;
+  margin-bottom: 2px;
+}
+.nav-link:hover {
+  color: var(--sidebar-text-hover);
+  background: rgba(255,255,255,0.04);
+}
+.nav-link.active {
+  color: var(--sidebar-accent);
+  background: var(--sidebar-active-bg);
+  font-weight: 500;
+}
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 14px;
+  margin-right: 6px;
+  opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+
+/* Sidebar decoration dots */
+.sidebar-dots {
+  display: flex;
+  gap: 8px;
+  padding: 20px 24px 0;
+  margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 20px;
+}
+.sidebar-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+/* ═══════ Main Content ═══════ */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 56px 60px;
+}
+
+/* ═══════ Typography ═══════ */
+.serif { font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif; font-weight: 500; }
+.serif-it { font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-style: italic; font-weight: 400; }
+.zh { font-family: "Noto Sans SC", "Work Sans", sans-serif; }
+.zh-serif { font-family: "Noto Serif SC", "Cormorant Garamond", serif; }
+
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header {
+  margin-bottom: 56px;
+  position: relative;
+  scroll-margin-top: 32px;
+}
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.header h1 {
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  max-width: 560px;
+  line-height: 1.7;
+}
+.header .swatches {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  display: flex;
+  gap: 12px;
+}
+.header .swatches i {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: block;
+}
+.header-meta {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis {
+  margin-bottom: 56px;
+  scroll-margin-top: 32px;
+}
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px;
+  float: left;
+  line-height: 0.85;
+  padding: 4px 10px 0 0;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
+}
+.thesis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.thesis-card {
+  border-radius: 20px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+  opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section {
+  margin-bottom: 52px;
+  scroll-margin-top: 32px;
+}
+.section-chrome {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.section-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.section-count {
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.section-title {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Content Cards ═══════ */
+.card {
+  background: var(--card-bg);
+  border-radius: 28px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  scroll-margin-top: 32px;
+}
+.card-chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.card-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--ink);
+}
+.card-title {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+.card-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+/* Sub-cards */
+.sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.sub-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.sub-card {
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+.sub-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* Code block */
+.code-block {
+  background: var(--ink);
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--paper);
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+/* Source */
+.source {
+  margin-top: 14px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush);
+  margin-left: -56px;
+  margin-right: -56px;
+  padding: 48px 56px;
+  margin-bottom: 52px;
+  border-radius: 0;
+  scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+.gallery-item {
+  border-radius: 24px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--ink);
+}
+.gallery-title {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.gallery-desc {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-left {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.footer-right {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+/* ═══════ Back to Top ═══════ */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: rgba(42,36,27,0.08);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  backdrop-filter: blur(8px);
+}
+.back-to-top:hover {
+  background: rgba(225,164,194,0.2);
+  border-color: var(--pink);
+  transform: scale(1.1);
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile Toggle ═══════ */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  width: 40px;
+  height: 40px;
+  background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  color: var(--sidebar-text-hover);
+  font-size: 18px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════ Reading Progress ═══════ */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  height: 3px;
+  z-index: 99;
+  background: transparent;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage));
+  transition: width 0.1s ease-out;
+}
+
+/* ═══════ Responsive ═══════ */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile menu toggle -->
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+
+<!-- Reading progress bar -->
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.04.20 – 04.26 · Issue No. 5</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active">
+      <span class="nav-num">·</span>标题 & 概览
+    </a>
+    <a href="#thesis" class="nav-link">
+      <span class="nav-num">·</span>本周结论
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools & Apps</div>
+    <a href="#s1" class="nav-link">
+      <span class="nav-num">§1</span>实用工具箱
+    </a>
+    <a href="#item-1" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">1.</span>Workspace Agents
+    </a>
+    <a href="#item-2" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">2.</span>DeepSeek V4
+    </a>
+    <a href="#item-3" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">3.</span>andrej-karpathy-skills
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link">
+      <span class="nav-num">§2</span>高效工作流
+    </a>
+    <a href="#item-4" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">4.</span>Claude Code 多 Agent
+    </a>
+    <a href="#item-5" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">5.</span>Follow-Builders
+    </a>
+    <a href="#item-6" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">6.</span>n8n Content Creator
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods & Prompts</div>
+    <a href="#s3" class="nav-link">
+      <span class="nav-num">§3</span>方法论与 Prompt
+    </a>
+    <a href="#item-7" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">7.</span>LLM Wiki
+    </a>
+    <a href="#item-8" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">8.</span>Meta Prompting
+    </a>
+    <a href="#item-9" class="nav-link" style="padding-left:28px; font-size:12px;">
+      <span class="nav-num">9.</span>MJ v7 Prompt 公式
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link">
+      <span class="nav-num">§4</span>推荐上手顺序
+    </a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<!-- ═══════ MAIN CONTENT ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 5</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">团队级 Agent + 1M 上下文周 &middot; 9 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.04.20 – 04.26</span>
+    </div>
+  </div>
+
+  <!-- ═══════ THESIS ═══════ -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的团队级 Agent 加百万上下文周——AI 不再给个人当副驾，而是直接替团队跑完整条 SOP，从 OpenAI 到 DeepSeek 到 Anthropic，巨头们不约而同指向同一方向。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">OpenAI</div>
+        <div class="thesis-card-body">ChatGPT 推 <b>Workspace Agents</b>，Codex 驱动 7&times;24 云端替团队跑工作流；GPTs 进入退役倒计时</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">DeepSeek</div>
+        <div class="thesis-card-body">沉寂 15 个月 <b>V4 预览版</b> 上线，全系 <b>1M 上下文</b>，Agentic Coding 开源最佳</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Anthropic</div>
+        <div class="thesis-card-body">Claude Code 官方讲透 <b>Subagents vs Agent Teams</b> 多 Agent 协作选型</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Karpathy</div>
+        <div class="thesis-card-body"><b>LLM Wiki</b> 方法论继续发酵，<b>andrej-karpathy-skills</b> 一周涨 44K star</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>💡 一句话总结：AI 不再是给一个人当副驾，而是直接替你和团队把一整套 SOP 跑完。</p>
+    </div>
+  </div>
+
+  <!-- ═══════ § 1 实用工具箱 ═══════ -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛠️ 实用工具箱</div>
+    <div class="section-sub">3 个立刻能用的 AI 工具 / Agent 平台</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI Workspace Agents &middot; 团队级 7&times;24 云端替身</span>
+        <span class="card-tag">GPTs 进化版</span>
+      </div>
+      <div class="card-desc">
+        4月23日上线的团队级协作 Agent，Codex 驱动，<strong>云端 7&times;24 小时运行，跨工具自动执行复杂长周期任务</strong>。被 OpenAI 官方定位为 GPTs 的进化形态——0 代码搭 Agent，全团队共用。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">适合谁</div><div class="sub-card-body">宣发/运营/市场团队里"一条工作流要跑好多次"的人</div></div>
+        <div class="sub-card"><div class="sub-card-title">最快路径</div><div class="sub-card-body">自然语言描述 SOP &rarr; 挂文件/工具 &rarr; 让 Agent 后台跑</div></div>
+        <div class="sub-card"><div class="sub-card-title">免费期</div><div class="sub-card-body">5月6日前 Team / Enterprise 免费体验</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI, @sama, @gdb &middot; openai.com/blog/workspace-agents</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">DeepSeek V4 预览版 &middot; 开源 1M 上下文 + 最强 Agentic Coding</span>
+        <span class="card-tag">开源权重</span>
+      </div>
+      <div class="card-desc">
+        4月24日 DeepSeek 沉寂 15 个月后发布 V4 预览版，分 <strong>V4-Pro / V4-Flash</strong> 两版，<strong>全系标配 1M 百万字上下文</strong>，Agentic Coding 达开源最佳，<strong>权重同步开源</strong>在 Hugging Face。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">V4-Flash</div><div class="sub-card-body">高并发省钱档，替代日常任务立刻降本</div></div>
+        <div class="sub-card"><div class="sub-card-title">V4-Pro</div><div class="sub-card-body">深度推理 + Agentic Coding 研发主力</div></div>
+      </div>
+      <div class="source">&compfn; @deepseek_ai &middot; huggingface.co/deepseek-ai/DeepSeek-V4-Pro</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">andrej-karpathy-skills &middot; 一个 CLAUDE.md 一周涨 44K star</span>
+        <span class="card-tag">AI 编程稳定器</span>
+      </div>
+      <div class="card-desc">
+        把 Karpathy 对 LLM 编码常见坑的观察，整理成<strong>一份可直接放到项目根目录的 CLAUDE.md</strong>，适用于 Claude Code / Cursor / Codebuddy 等所有读 CLAUDE.md 的 AI 编程工具。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">cp CLAUDE.md 到你的项目根目录</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">按项目实际情况删掉不相关小节</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">AI 每次先读规则 &rarr; 破坏性改动显著下降</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy &middot; github.com/forrestchang/andrej-karpathy-skills</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 2 高效工作流 ═══════ -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚡ 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Claude Code 多 Agent 选型 &middot; Subagents vs Agent Teams</span>
+        <span class="card-tag">多 Agent 协作</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：复杂任务塞给单个 Agent &rarr; 上下文爆炸；多开 Agent 又不知怎么分工。<strong>Anthropic 官方给出明确选型</strong>：能并行无依赖 &rarr; Subagents；需要讨论和交叉验证 &rarr; Agent Teams。实证：Code Review 覆盖率 <strong>16% &rarr; 54%</strong>。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">Subagents（独立分身）</div><div class="sub-card-body">主派发 &rarr; 子 Agent 独立上下文完成 &rarr; 只回摘要。适合并行研究/独立任务</div></div>
+        <div class="sub-card"><div class="sub-card-title">Agent Teams（对等协作）</div><div class="sub-card-body">多实例共享邮箱、互相讨论。适合架构师+实现者+审查者的博弈场景</div></div>
+      </div>
+      <div class="code-block"><span class="cmt"># 最小落地模板</span>
+<span class="key">Step 1</span> 主 Agent 读 README + CLAUDE.md，写任务拆解
+<span class="key">Step 2</span> Task() 派发 <span class="str">3 个 Subagent</span>：Explore / Plan / Implement
+<span class="key">Step 3</span> 结果合并 &rarr; 交 <span class="str">Agent Team Review</span></div>
+      <div class="source">&compfn; @AnthropicAI, @alexalbert__ &middot; claude.com/blog/subagents-in-claude-code</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Follow-Builders &middot; 每天 5 分钟读完 25 位 AI Builder 的干货</span>
+        <span class="card-tag">信息蒸馏</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：刷 X、听播客一天过去，摘要工具只抓热门不抓有用。Zara Zhang 开源的 Follow-Builders 是 Claude Code <strong>Skill</strong>：订阅 25 位 Builder（Karpathy / swyx / rauchg 等）+ 顶级 AI 播客 &rarr; Claude 按「工程师视角」蒸馏出结构化日报。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">输入</div><div class="sub-card-body">25 位 Builder X 推文 + 顶级 AI 播客</div></div>
+        <div class="sub-card"><div class="sub-card-title">处理</div><div class="sub-card-body">Builders vs Influencers 分类筛选</div></div>
+        <div class="sub-card"><div class="sub-card-title">输出</div><div class="sub-card-body">带原链接的 5 分钟可读摘要</div></div>
+      </div>
+      <div class="source">&compfn; @zarazhangrui &middot; github.com/zarazhangrui/follow-builders</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">n8n Content Creator Agent &middot; 内容创作者一天的工作流</span>
+        <span class="card-tag">半天&rarr;10分钟</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：选题/写稿/配图/排版/发布要切换 6 个工具，最痛的是<strong>切换与粘贴</strong>。n8n 把整条链路拼成可视化工作流，每一步都能独立调试/替换模型。
+      </div>
+      <div class="code-block"><span class="cmt"># Content Creator Agent 工作流</span>
+<span class="key">1)</span> Webhook 触发 &rarr; 输入周主题
+<span class="key">2)</span> AI 节点 Claude / GPT &rarr; 生成大纲 + 标题
+<span class="key">3)</span> AI 节点 Perplexity / Tavily &rarr; 补最新资料
+<span class="key">4)</span> AI 节点 Midjourney v7 / Hailuo &rarr; 按段落配图
+<span class="key">5)</span> AI 节点 &rarr; 排版成 <span class="str">HTML / 微信草稿</span>
+<span class="key">6)</span> 发布分叉：<span class="str">飞书 Doc + 企微推送 + Notion 备份</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">官方模板</div><div class="sub-card-body">aiautomationgenerator.com/templates/content-creator-agent</div></div>
+        <div class="sub-card"><div class="sub-card-title">中文模板站</div><div class="sub-card-body">n8ncn.io 提供 300+ 可直接导入 JSON</div></div>
+      </div>
+      <div class="source">&compfn; @n8n_io, @Ronald_vanLoon &middot; n8ncn.io</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 3 方法论 ═══════ -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 方法论与 Prompt</div>
+    <div class="section-sub">3 套最有 ROI 的一次性投入</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Karpathy LLM Wiki &middot; 让 AI 自我进化的个人知识库</span>
+        <span class="card-tag">252K 浏览</span>
+      </div>
+      <div class="card-desc">
+        不要让 AI 每次从零翻你的 Obsidian / Notion——<strong>先让 LLM 把原始内容"编译"成结构化 Wiki</strong>（摘要 + 百科 + 双向链接），以后它只读 Wiki，<strong>Token 成本降 10&times;，答案一致性显著提升</strong>。
+      </div>
+      <div class="code-block"><span class="cmt"># LLM Wiki 知识库架构师 Prompt</span>
+
+<span class="key">目录约定</span>
+<span class="str">raw/</span>      ：原始材料（只读）
+<span class="str">wiki/</span>     ：结构化知识（平铺 + 标签）
+<span class="str">index.md</span>  ：索引（自动维护）
+<span class="str">log.md</span>    ：操作日志
+
+<span class="key">加入新材料后执行</span>
+1) 生成摘要 &rarr; wiki/summaries/[title].md
+2) 提炼知识页 &rarr; wiki/[slug].md
+3) 更新 index.md + log.md
+4) 添加 <span class="str">[[wikilinks]]</span> 双向交叉引用
+
+<span class="key">硬约束</span>
+- 每页 &le; 150 行，根目录 &le; 150 页
+- Related 链接 &le; 10（超限触发蒸馏）</div>
+      <div class="source">&compfn; @karpathy &middot; llm-wiki.md gist（2026.04.04）</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Meta Prompting &middot; 让 LLM 帮你写 Prompt 的脚手架</span>
+        <span class="card-tag">2026 行业共识</span>
+      </div>
+      <div class="card-desc">
+        与其手写内容丰富的 Prompt，不如让 LLM 先<strong>生成结构化脚手架</strong>再填空。核心转变：从「内容驱动」到「结构驱动」。<strong>填一次脚手架 &asymp; 过去改 5 轮 Prompt，且脚手架本身可沉淀为团队模板 10 倍复用。</strong>
+      </div>
+      <div class="code-block"><span class="cmt"># Prompt 架构师脚手架</span>
+你是 Prompt 架构师。任务：<span class="str">[一句话任务描述]</span>
+先不要给答案，按 <span class="key">6 要素</span>生成 Prompt 脚手架：
+
+<span class="key">1) ROLE</span>     AI 最合适的身份？
+<span class="key">2) TASK</span>     任务精确边界？
+<span class="key">3) CONTEXT</span>  必须提供的背景？
+<span class="key">4) EXAMPLES</span> 几条 input&rarr;output 示范？
+<span class="key">5) OUTPUT</span>   结构/字段/长度？
+<span class="key">6) CONSTRAINTS</span> 禁止什么/必须什么？
+
+每一项都留成 <span class="str">[占位符]</span>，由我来填。</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">实战案例</div><div class="sub-card-body">输入：「给 CODM 英雄 LTM 写 30s 短视频文案」&rarr; 脚手架自动生成镜头脚本 JSON 格式 + 禁用词约束</div></div>
+        <div class="sub-card"><div class="sub-card-title">沉淀价值</div><div class="sub-card-body">脚手架成为团队 Prompt 库，后续新任务直接复用</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy, @GaryMarcus &middot; genaimlinstitute.com/blog/meta-prompting</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">Midjourney v7 电影感 Prompt 公式 &middot; 3 段式 + 参数三件套</span>
+        <span class="card-tag">出图良率翻倍</span>
+      </div>
+      <div class="card-desc">
+        MJ v7 已经不能再靠堆关键词"赌出图"——<strong>自然语言主导 + 结构化参数精修</strong>才是正解。公式 = 主体描述 + 镜头光线 + 风格 + <code style="font-size:12px; color:var(--ink);">--sref --cref --ar</code>。
+      </div>
+      <div class="code-block"><span class="cmt"># Midjourney v7 结构化 Prompt 公式</span>
+<span class="key">[主体]</span> 谁/什么/在做什么 +
+<span class="key">[环境]</span> 具体地点/时间/天气 +
+<span class="key">[镜头]</span> low angle / 85mm / anamorphic +
+<span class="key">[光线]</span> golden hour / rim light / volumetric fog +
+<span class="key">[质感]</span> shot on ARRI Alexa 65 / film grain,
+style of <span class="str">[导演/摄影师]</span>
+
+<span class="key">--ar</span> 21:9 <span class="key">--sref</span> <span class="str">[风格锁]</span> <span class="key">--cref</span> <span class="str">[角色锁]</span> <span class="key">--stylize</span> 300 <span class="key">--v</span> 7</div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">--sref</div><div class="sub-card-body">锁风格，最大杀招</div></div>
+        <div class="sub-card"><div class="sub-card-title">--cref</div><div class="sub-card-body">锁角色，人物一致性</div></div>
+        <div class="sub-card"><div class="sub-card-title">--stylize</div><div class="sub-card-body">200 写实 / 400 偏艺术</div></div>
+      </div>
+      <div class="source">&compfn; @midjourney, @alliekmiller &middot; masonaibase.com/midjourney-v7-ultimate-guide-2026</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 4 推荐顺序 ═══════ -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">ranked</span>
+    </div>
+    <div class="section-title">📋 本周最值得先试的顺序</div>
+    <div class="section-sub">按学习成本 &times; 价值收益从高到低排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">抄 CLAUDE.md 规则</div>
+        <div class="gallery-desc">5 分钟复制到项目根，AI 编程立刻变稳</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">搭 LLM Wiki 目录</div>
+        <div class="gallery-desc">10 分钟投入，长期 Token 降 10&times;</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">写 Meta Prompt 脚手架</div>
+        <div class="gallery-desc">一个模板，团队所有 Prompt 都能复用</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">MJ v7 三件套公式</div>
+        <div class="gallery-desc">看完即抄，次日出图良率立刻翻倍</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">切 DeepSeek V4 API</div>
+        <div class="gallery-desc">替换日常任务，立刻降本 + 开源权重自由</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">试 Workspace Agents</div>
+        <div class="gallery-desc">5/6 免费期内体验，判断是否团队采购</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 &middot; 2026.04.20 – 04.26<br>
+      扫描 65 个顶级 AI 信源 &middot; 精选 9 条立刻能用 &middot; 宁缺毋滥
+    </div>
+    <div class="footer-right">
+      小柒AI速递 &middot; 每周一上午推送
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+// ═══════ Scroll Spy — highlight current section in sidebar ═══════
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link, id: href.slice(1) });
+    }
+  });
+
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+
+    for (const s of sections) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    }
+
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+
+    // Progress bar
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+
+    // Back to top
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Close mobile sidebar on nav click
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.querySelector('.sidebar').classList.remove('open');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
