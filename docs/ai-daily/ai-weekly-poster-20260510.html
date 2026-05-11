@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 干货周报 · Issue #06 · 海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2EEDF;--paper-2:#ECE6D2;--ink:#2A241B;--ink-soft:#5C5345;--pink:#E1A4C2;--lemon:#D6DD63;--blush:#E8C9B6;--sage:#B7C7A8;--lilac:#C9BEDC}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  width:1920px;
+  height:1080px;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  overflow:hidden;
+  position:relative;
+}
+
+/* 背景装饰 */
+.bg-circle{position:absolute;border-radius:50%;opacity:0.35;z-index:0}
+.bg-c1{width:480px;height:480px;background:var(--pink);top:-120px;right:-80px}
+.bg-c2{width:320px;height:320px;background:var(--lemon);bottom:-60px;left:-40px}
+.bg-c3{width:220px;height:220px;background:var(--blush);bottom:200px;right:280px}
+.bg-c4{width:160px;height:160px;background:var(--sage);top:100px;left:350px}
+
+/* 主布局 */
+.poster{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  padding:80px 100px;
+  gap:60px;
+}
+
+/* 左侧 */
+.left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:28px;
+}
+.kicker{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:22px;
+  color:var(--ink-soft);
+}
+.left h1{
+  font-family:"Cormorant Garamond","Noto Serif SC",serif;
+  font-weight:500;
+  font-size:108px;
+  line-height:0.95;
+  letter-spacing:-0.02em;
+}
+.left h1 em{font-style:italic;font-weight:400}
+.lead{
+  font-family:"Noto Sans SC",sans-serif;
+  font-size:28px;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.5;
+  max-width:560px;
+}
+.meta-row{
+  display:flex;
+  gap:16px;
+  margin-top:8px;
+}
+.meta-chip{
+  font-family:"Work Sans",sans-serif;
+  font-size:16px;
+  font-weight:400;
+  color:var(--ink-soft);
+  padding:6px 16px;
+  border:1px solid rgba(42,36,27,0.2);
+  border-radius:999px;
+  background:rgba(255,255,255,0.5);
+}
+.footer-line{
+  margin-top:auto;
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:20px;
+  color:var(--ink-soft);
+}
+
+/* 右侧 */
+.right{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+}
+.highlight-card{
+  border-radius:24px;
+  padding:24px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.highlight-card:nth-child(1){background:var(--pink)}
+.highlight-card:nth-child(2){background:var(--lemon)}
+.highlight-card:nth-child(3){background:var(--blush)}
+.highlight-card:nth-child(4){background:var(--sage)}
+.hl-label{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:16px;
+  color:var(--ink);
+  opacity:0.6;
+}
+.hl-body{
+  font-family:"Noto Sans SC",sans-serif;
+  font-size:18px;
+  font-weight:400;
+  line-height:1.6;
+  color:var(--ink);
+}
+.hl-body b{font-weight:700}
+
+.tagline-card{
+  border-radius:20px;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.55);
+  border-left:4px solid var(--pink);
+  margin-top:4px;
+}
+.tagline-card p{
+  font-family:"Noto Sans SC",sans-serif;
+  font-size:18px;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.6;
+}
+
+/* 色块装饰 */
+.swatches{
+  position:absolute;
+  right:100px;
+  top:80px;
+  display:flex;
+  gap:12px;
+  z-index:2;
+}
+.swatches i{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  display:block;
+}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:16px;left:16px;z-index:9999;padding:8px 16px;border-radius:8px;background:rgba(42,36,27,0.85);color:rgba(242,238,223,0.8);font-family:sans-serif;font-size:13px;text-decoration:none;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);transition:all 0.2s;">&larr; 返回归档</a>
+  <!-- 背景色块 -->
+  <div class="bg-circle bg-c1"></div>
+  <div class="bg-circle bg-c2"></div>
+  <div class="bg-circle bg-c3"></div>
+  <div class="bg-circle bg-c4"></div>
+
+  <!-- 右上角色板 -->
+  <div class="swatches">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <div class="poster">
+    <!-- 左半 -->
+    <div class="left">
+      <div class="kicker">AI Practical Weekly · Issue No. 6</div>
+      <h1>AI<br><em>干货</em><br>周报</h1>
+      <p class="lead">Claude Code 大爆发周<br>+ ChatGPT 默认换代</p>
+      <div class="meta-row">
+        <span class="meta-chip">65 信源</span>
+        <span class="meta-chip">精选 9 条</span>
+        <span class="meta-chip">05.04 – 05.10</span>
+      </div>
+      <div class="footer-line">小柒AI速递 · 每周一上午推送</div>
+    </div>
+
+    <!-- 右半 -->
+    <div class="right">
+      <div class="highlight-card">
+        <div class="hl-label">Anthropic</div>
+        <div class="hl-body"><b>Code with Claude SF</b> 落地：速率翻倍、<b>/loop /ultrareview</b> 新命令</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-label">Claude Code</div>
+        <div class="hl-body"><b>Plugin Marketplace</b> 上线 + Native <b>Worktrees</b> 多 Agent 并行</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-label">OpenAI</div>
+        <div class="hl-body"><b>GPT-5.5 Instant</b> 成默认 + <b>Images 2.0</b> 文字渲染升级</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-label">Finance Agents</div>
+        <div class="hl-body">Anthropic 开源 <b>10 个金融 Agent 模板</b>，SOP 打包送上门</div>
+      </div>
+      <div class="tagline-card">
+        <p>💡 AI 变成终端里的 cron + 云端多 Agent 审查员</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
