@@ -6,7 +6,7 @@
 <title>AI 干货速递 · 归档中心</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #F2EEDF;
@@ -21,11 +21,10 @@
   --lilac: #C9BEDC;
   --card-bg: rgba(255, 255, 255, 0.55);
   --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.25);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-
 body {
   min-height: 100vh;
   background: var(--paper);
@@ -39,301 +38,190 @@ body {
 
 /* ═══════ Topbar ═══════ */
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(242, 238, 223, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(242,238,223,0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 16px 0;
 }
 .topbar-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  max-width: 1060px; margin: 0 auto; padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-.topbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.topbar-brand { display: flex; align-items: center; gap: 12px; }
+.topbar-dots { display: flex; gap: 6px; }
+.topbar-dots i { width: 10px; height: 10px; border-radius: 50%; }
+.topbar-name {
+  font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 20px;
 }
-.topbar-dots {
-  display: flex;
-  gap: 6px;
-}
-.topbar-dots i {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: block;
-}
-.topbar-title {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 500;
-  font-size: 20px;
-  color: var(--ink);
-}
-.topbar-title em {
-  font-style: italic;
-  font-weight: 400;
-}
+.topbar-name em { font-style: italic; font-weight: 400; }
 
 /* Search */
-.search-box {
-  position: relative;
-  flex: 0 0 280px;
-}
+.search-wrap { position: relative; flex: 0 0 300px; }
 .search-input {
-  width: 100%;
-  padding: 10px 16px 10px 38px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.6);
-  font-family: "Noto Sans SC", sans-serif;
-  font-size: 13px;
-  color: var(--ink);
-  outline: none;
-  transition: all 0.2s;
+  width: 100%; padding: 10px 16px 10px 40px;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: rgba(255,255,255,0.5);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; color: var(--ink);
+  outline: none; transition: all 0.2s;
 }
 .search-input::placeholder { color: var(--ink-faint); }
-.search-input:focus {
-  border-color: var(--pink);
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 0 0 3px rgba(225,164,194,0.15);
-}
-.search-icon {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  fill: var(--ink-faint);
-}
+.search-input:focus { border-color: var(--pink); background: rgba(255,255,255,0.9); box-shadow: 0 0 0 3px rgba(225,164,194,0.15); }
+.search-ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; fill: var(--ink-faint); }
 
-/* ═══════ Main ═══════ */
-.page {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
+/* ═══════ Page ═══════ */
+.page { max-width: 1060px; margin: 0 auto; padding: 36px 28px 80px; }
 
 /* Hero */
-.hero {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.hero h1 {
-  font-family: "Cormorant Garamond", "Noto Sans SC", serif;
-  font-weight: 500;
-  font-size: 48px;
-  line-height: 1;
-  margin-bottom: 12px;
-}
+.hero { text-align: center; margin-bottom: 36px; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 52px; line-height: 1; margin-bottom: 10px; }
 .hero h1 em { font-style: italic; font-weight: 400; }
-.hero p {
-  font-family: "Noto Sans SC", sans-serif;
-  font-size: 16px;
-  color: var(--ink-soft);
-  font-weight: 400;
-}
+.hero-sub { font-family: "Noto Sans SC", sans-serif; font-size: 15px; color: var(--ink-soft); }
+.hero-stats { display: flex; justify-content: center; gap: 28px; margin-top: 18px; }
+.stat { text-align: center; }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 32px; font-weight: 500; color: var(--ink); line-height: 1.1; }
+.stat-label { font-size: 12px; color: var(--ink-faint); letter-spacing: 0.04em; }
 
-/* ═══════ Tabs ═══════ */
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+/* ═══════ Filter Bar ═══════ */
+.filter-bar {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
 }
-.tab {
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-family: "Noto Sans SC", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--ink-soft);
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.2s;
-  background: transparent;
+.filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-label {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 13px;
+  color: var(--ink-faint); margin-right: 4px; align-self: center;
 }
-.tab:hover {
-  color: var(--ink);
-  background: rgba(255,255,255,0.5);
-  border-color: var(--border);
+.pill {
+  padding: 6px 16px; border-radius: 999px; font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; color: var(--ink-soft); cursor: pointer;
+  border: 1px solid var(--border); background: transparent; transition: all 0.2s;
 }
-.tab.active {
-  color: var(--ink);
-  background: var(--pink);
-  border-color: var(--pink);
-  font-weight: 500;
+.pill:hover { color: var(--ink); background: rgba(255,255,255,0.5); border-color: var(--border-strong); }
+.pill.active { color: var(--ink); background: var(--pink); border-color: var(--pink); font-weight: 500; }
+.pill .cnt { font-size: 11px; margin-left: 4px; opacity: 0.6; }
+
+.tag-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.tag-pill {
+  padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 400;
+  color: var(--ink-soft); background: var(--paper-2); border: 1px solid transparent;
+  cursor: pointer; transition: all 0.15s;
 }
-.tab-count {
-  display: inline-block;
-  margin-left: 6px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 500;
-  background: rgba(42,36,27,0.08);
-  color: var(--ink-soft);
-}
-.tab.active .tab-count {
-  background: rgba(42,36,27,0.15);
-  color: var(--ink);
-}
+.tag-pill:hover { border-color: var(--border-strong); color: var(--ink); }
+.tag-pill.active { background: var(--sage); color: var(--ink); border-color: var(--sage); }
 
 /* ═══════ Cards ═══════ */
-.card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.card-list { display: flex; flex-direction: column; gap: 18px; }
+
 .card {
-  background: var(--card-bg);
-  border-radius: 24px;
-  padding: 28px 32px;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.25s ease;
-  border: 1px solid transparent;
+  background: var(--card-bg); border-radius: 24px; overflow: hidden;
+  border: 1px solid transparent; transition: all 0.25s;
 }
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(42,36,27,0.08);
-  border-color: var(--border);
+.card:hover { border-color: var(--border); box-shadow: 0 8px 28px rgba(42,36,27,0.06); }
+
+.card-main {
+  display: flex; align-items: flex-start; gap: 18px; padding: 24px 28px;
+  text-decoration: none; color: inherit; cursor: pointer;
 }
 
-.card-badge {
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 22px;
-  color: var(--ink);
+/* Badge */
+.badge {
+  flex-shrink: 0; width: 54px; height: 54px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 20px; color: var(--ink);
 }
-.card-badge.weekly { background: var(--pink); }
-.card-badge.daily { background: var(--lemon); }
+.badge-weekly { background: var(--pink); }
+.badge-daily { background: var(--lemon); }
 
+/* Body */
 .card-body { flex: 1; min-width: 0; }
-.card-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
+.card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.card-type-label {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 11px;
+  letter-spacing: 0.8px; color: var(--ink-faint); text-transform: uppercase;
 }
-.card-type {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: var(--ink-faint);
-  text-transform: uppercase;
-}
-.card-date {
-  font-family: "Work Sans", sans-serif;
-  font-size: 12px;
-  color: var(--ink-faint);
-}
+.card-date { font-family: "Work Sans", sans-serif; font-size: 11px; color: var(--ink-faint); }
 .card-title {
-  font-family: "Noto Sans SC", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.4;
+  font-family: "Noto Sans SC", sans-serif; font-size: 17px; font-weight: 600;
+  color: var(--ink); line-height: 1.4; margin-bottom: 3px;
 }
 .card-subtitle {
-  font-family: "Noto Sans SC", sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--ink-soft);
-  margin-bottom: 10px;
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 300;
+  color: var(--ink-soft); margin-bottom: 10px;
 }
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .card-tag {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--ink-soft);
-  background: var(--paper-2);
-  letter-spacing: 0.02em;
+  padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 400;
+  color: var(--ink-soft); background: var(--paper-2);
 }
 
-.card-arrow {
-  flex-shrink: 0;
-  align-self: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--paper-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+/* Expand toggle */
+.card-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; align-self: center; }
+.btn-expand {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border);
+  background: var(--paper-2); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s;
 }
-.card:hover .card-arrow {
-  background: var(--pink);
+.btn-expand:hover { background: var(--blush); border-color: var(--blush); }
+.btn-expand svg { width: 14px; height: 14px; fill: var(--ink-soft); transition: transform 0.25s; }
+.btn-expand.open svg { transform: rotate(180deg); }
+
+.btn-open {
+  padding: 7px 16px; border-radius: 999px; font-family: "Noto Sans SC", sans-serif;
+  font-size: 12px; font-weight: 500; color: var(--ink); background: var(--paper-2);
+  border: 1px solid var(--border); text-decoration: none; transition: all 0.2s; white-space: nowrap;
 }
-.card-arrow svg {
-  width: 14px;
-  height: 14px;
-  fill: var(--ink-soft);
+.btn-open:hover { background: var(--pink); border-color: var(--pink); }
+
+/* ═══════ Preview Panel ═══════ */
+.card-preview {
+  max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+  border-top: 0px solid var(--border);
 }
-.card:hover .card-arrow svg { fill: var(--ink); }
+.card-preview.open { max-height: 600px; border-top-width: 1px; }
+
+.preview-inner { padding: 20px 28px 24px; }
+
+.preview-items { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.preview-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,0.45);
+}
+.preview-num {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 20px;
+  line-height: 1; color: var(--ink-faint); flex-shrink: 0; width: 24px; text-align: right;
+}
+.preview-text {
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  color: var(--ink-soft); line-height: 1.5;
+}
+.preview-text strong { font-weight: 600; color: var(--ink); }
+
+/* colors per item */
+.preview-item:nth-child(4n+1) { border-left: 3px solid var(--pink); }
+.preview-item:nth-child(4n+2) { border-left: 3px solid var(--lemon); }
+.preview-item:nth-child(4n+3) { border-left: 3px solid var(--blush); }
+.preview-item:nth-child(4n)   { border-left: 3px solid var(--sage); }
 
 /* Empty */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--ink-faint);
-  font-size: 16px;
-  display: none;
-}
+.empty-state { text-align: center; padding: 60px 20px; color: var(--ink-faint); font-size: 16px; display: none; }
 .empty-state.visible { display: block; }
 
-/* ═══════ Footer ═══════ */
-.footer {
-  margin-top: 56px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.footer p {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 14px;
-  color: var(--ink-faint);
-}
+/* Footer */
+.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; }
+.footer p { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-faint); }
 
-/* ═══════ Responsive ═══════ */
-@media (max-width: 640px) {
+/* Responsive */
+@media (max-width: 700px) {
   .topbar-inner { flex-wrap: wrap; }
-  .search-box { flex: 1 1 100%; order: 3; }
+  .search-wrap { flex: 1 1 100%; order: 3; }
   .hero h1 { font-size: 36px; }
-  .card { padding: 20px; flex-direction: column; gap: 12px; }
-  .card-badge { width: 44px; height: 44px; font-size: 18px; }
-  .tabs { overflow-x: auto; flex-wrap: nowrap; }
+  .hero-stats { gap: 16px; }
+  .card-main { flex-direction: column; gap: 10px; padding: 18px 20px; }
+  .badge { width: 42px; height: 42px; font-size: 16px; }
+  .preview-items { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; align-items: flex-start; }
+  .tag-pills { margin-left: 0; }
 }
 </style>
 </head>
@@ -344,173 +232,233 @@ body {
   <div class="topbar-inner">
     <div class="topbar-brand">
       <div class="topbar-dots">
-        <i style="background:#E1A4C2"></i>
-        <i style="background:#D6DD63"></i>
-        <i style="background:#E8C9B6"></i>
-        <i style="background:#B7C7A8"></i>
+        <i style="background:#E1A4C2"></i><i style="background:#D6DD63"></i>
+        <i style="background:#E8C9B6"></i><i style="background:#B7C7A8"></i>
       </div>
-      <div class="topbar-title">AI <em>干货速递</em></div>
+      <div class="topbar-name">AI <em>干货速递</em></div>
     </div>
-    <div class="search-box">
-      <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-      <input type="text" class="search-input" id="searchInput" placeholder="搜索关键词...">
+    <div class="search-wrap">
+      <svg class="search-ico" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="搜索标题、标签、关键词...">
     </div>
   </div>
 </div>
 
-<!-- Page -->
 <div class="page">
 
   <!-- Hero -->
   <div class="hero">
     <h1>AI <em>干货</em>速递</h1>
-    <p>周报 &amp; 日报归档 &middot; 小柒AI速递</p>
+    <p class="hero-sub">周报 &amp; 日报归档 &middot; 小柒AI速递</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="statTotal">0</div><div class="stat-label">总期数</div></div>
+      <div class="stat"><div class="stat-num" id="statWeekly">0</div><div class="stat-label">周报</div></div>
+      <div class="stat"><div class="stat-num" id="statDaily">0</div><div class="stat-label">日报</div></div>
+    </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-filter="all">全部 <span class="tab-count" id="count-all"></span></button>
-    <button class="tab" data-filter="weekly">📋 AI 周报 <span class="tab-count" id="count-weekly"></span></button>
-    <button class="tab" data-filter="daily">📰 AI 日报 <span class="tab-count" id="count-daily"></span></button>
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span class="filter-label">Type</span>
+    <div class="filter-group" id="typeFilter">
+      <button class="pill active" data-filter="all">全部</button>
+      <button class="pill" data-filter="weekly">📋 周报</button>
+      <button class="pill" data-filter="daily">📰 日报</button>
+    </div>
+    <span class="filter-label" style="margin-left:16px">Tags</span>
+    <div class="tag-pills" id="tagFilter"></div>
   </div>
 
   <!-- Card List -->
   <div class="card-list" id="cardList"></div>
-
-  <!-- Empty State -->
-  <div class="empty-state" id="emptyState">
-    没有找到匹配的内容
-  </div>
+  <div class="empty-state" id="emptyState">没有找到匹配的内容</div>
 
   <!-- Footer -->
   <div class="footer">
     <p>小柒AI速递 &middot; 每周一上午推送周报 &middot; 每日推送日报</p>
   </div>
-
 </div>
 
 <script>
-// Archive data (inline for zero-dependency static hosting)
-const ARCHIVE_DATA = [
+const DATA = [
   {
-    "type": "weekly",
-    "issue": 6,
-    "title": "AI 干货周报 \u00b7 Issue #06",
-    "subtitle": "Claude Code 大爆发周 + ChatGPT 默认换代 \u00b7 9 条立刻能用的干货",
-    "date": "2026.05.04 \u2013 05.10",
-    "url": "ai-weekly-card-20260510-toc.html",
-    "tags": ["Claude Code", "GPT-5.5", "Plugin Marketplace", "/loop", "/ultrareview"]
+    type: "weekly", issue: 6,
+    title: "AI \u5e72\u8d27\u5468\u62a5 \u00b7 Issue #06",
+    subtitle: "Claude Code \u5927\u7206\u53d1\u5468 + ChatGPT \u9ed8\u8ba4\u6362\u4ee3 \u00b7 9 \u6761\u7acb\u523b\u80fd\u7528\u7684\u5e72\u8d27",
+    date: "2026.05.04 \u2013 05.10",
+    url: "ai-weekly-card-20260510-toc.html",
+    tags: ["Claude Code", "GPT-5.5", "Plugin Marketplace", "/loop", "/ultrareview", "Git Worktrees"],
+    items: [
+      { num: 1, text: "<strong>Plugin Marketplace</strong> \u00b7 Claude Code \u88c5\u63d2\u4ef6\u50cf npm install" },
+      { num: 2, text: "<strong>10 \u4e2a\u91d1\u878d Agent \u6a21\u677f</strong> \u00b7 \u6295\u884c / KYC / \u5bf9\u8d26\u4e00\u952e\u5f00\u8dd1" },
+      { num: 3, text: "<strong>GPT-5.5 Instant</strong> \u00b7 ChatGPT \u9ed8\u8ba4\u6a21\u578b\u6362\u4ee3" },
+      { num: 4, text: "<strong>/loop</strong> \u00b7 \u628a Agent \u53d8\u6210\u7ec8\u7aef cron" },
+      { num: 5, text: "<strong>/ultrareview</strong> \u00b7 \u4e91\u7aef\u591a Agent \u8054\u5408\u4ee3\u7801\u5ba1\u67e5" },
+      { num: 6, text: "<strong>Native Git Worktrees</strong> \u00b7 \u591a Agent \u5e76\u884c\u4e92\u4e0d\u6253\u67b6" },
+      { num: 7, text: "<strong>Opus 4.7 Effort + 1H \u7f13\u5b58</strong> \u00b7 \u957f\u4f1a\u8bdd\u964d\u672c 3-4\u00d7" },
+      { num: 8, text: "<strong>Meta-Prompting</strong> \u00b7 \u8ba9 AI \u7ed9 AI \u5199 Prompt" },
+      { num: 9, text: "<strong>Follow-Builders</strong> \u00b7 \u6bcf\u5929 5 \u5206\u949f\u8bfb\u5b8c 25 \u4f4d Builder" }
+    ]
   },
   {
-    "type": "weekly",
-    "issue": 5,
-    "title": "AI 干货周报 \u00b7 Issue #05",
-    "subtitle": "团队级 Agent + 1M 上下文周 \u00b7 9 条立刻能用的干货",
-    "date": "2026.04.20 \u2013 04.26",
-    "url": "ai-weekly-card-toc-template.html",
-    "tags": ["OpenAI Workspace Agents", "DeepSeek V4", "LLM Wiki", "Meta Prompting", "MJ v7"]
+    type: "weekly", issue: 5,
+    title: "AI \u5e72\u8d27\u5468\u62a5 \u00b7 Issue #05",
+    subtitle: "\u56e2\u961f\u7ea7 Agent + 1M \u4e0a\u4e0b\u6587\u5468 \u00b7 9 \u6761\u7acb\u523b\u80fd\u7528\u7684\u5e72\u8d27",
+    date: "2026.04.20 \u2013 04.26",
+    url: "ai-weekly-card-toc-template.html",
+    tags: ["OpenAI", "DeepSeek V4", "LLM Wiki", "Meta Prompting", "MJ v7"],
+    items: [
+      { num: 1, text: "<strong>Workspace Agents</strong> \u00b7 \u56e2\u961f\u7ea7 7\u00d724 \u4e91\u7aef\u66ff\u8eab" },
+      { num: 2, text: "<strong>DeepSeek V4</strong> \u00b7 \u5f00\u6e90 1M \u4e0a\u4e0b\u6587 + \u6700\u5f3a Agentic Coding" },
+      { num: 3, text: "<strong>andrej-karpathy-skills</strong> \u00b7 \u4e00\u4e2a CLAUDE.md \u4e00\u5468\u6da8 44K star" },
+      { num: 4, text: "<strong>Claude Code \u591a Agent \u9009\u578b</strong> \u00b7 Subagents vs Agent Teams" },
+      { num: 5, text: "<strong>Follow-Builders</strong> \u00b7 \u6bcf\u5929 5 \u5206\u949f\u8bfb\u5b8c 25 \u4f4d Builder" },
+      { num: 6, text: "<strong>n8n Content Creator</strong> \u00b7 \u5185\u5bb9\u521b\u4f5c\u5de5\u4f5c\u6d41" },
+      { num: 7, text: "<strong>Karpathy LLM Wiki</strong> \u00b7 \u8ba9 AI \u81ea\u6211\u8fdb\u5316\u7684\u4e2a\u4eba\u77e5\u8bc6\u5e93" },
+      { num: 8, text: "<strong>Meta Prompting</strong> \u00b7 \u8ba9 LLM \u5e2e\u4f60\u5199 Prompt \u7684\u811a\u624b\u67b6" },
+      { num: 9, text: "<strong>MJ v7 \u7535\u5f71\u611f Prompt \u516c\u5f0f</strong> \u00b7 3 \u6bb5\u5f0f + \u53c2\u6570\u4e09\u4ef6\u5957" }
+    ]
   },
   {
-    "type": "daily",
-    "title": "AIGC 日报 \u00b7 2026.05.11",
-    "subtitle": "今日 AI 动态速览",
-    "date": "2026.05.11",
-    "url": "ai-daily-card-20260511.html",
-    "tags": ["AIGC", "Daily"]
+    type: "daily",
+    title: "AIGC \u65e5\u62a5 \u00b7 2026.05.11",
+    subtitle: "\u4eca\u65e5 AI \u52a8\u6001\u901f\u89c8",
+    date: "2026.05.11",
+    url: "ai-daily-card-20260511.html",
+    tags: ["AIGC", "Daily"],
+    items: []
   },
   {
-    "type": "daily",
-    "title": "AIGC 日报 \u00b7 2026.04.13",
-    "subtitle": "20 条精选 AI 资讯",
-    "date": "2026.04.13",
-    "url": "ai-daily-20-card-20260413.html",
-    "tags": ["AIGC", "Daily"]
+    type: "daily",
+    title: "AIGC \u65e5\u62a5 \u00b7 2026.04.13",
+    subtitle: "20 \u6761\u7cbe\u9009 AI \u8d44\u8baf",
+    date: "2026.04.13",
+    url: "ai-daily-20-card-20260413.html",
+    tags: ["AIGC", "Daily"],
+    items: []
   }
 ];
 
-// Render
-function renderCards(data) {
-  const list = document.getElementById('cardList');
-  const empty = document.getElementById('emptyState');
+// Collect all unique tags
+const allTags = [...new Set(DATA.flatMap(d => d.tags))].sort();
 
-  if (data.length === 0) {
-    list.innerHTML = '';
-    empty.classList.add('visible');
-    return;
-  }
-  empty.classList.remove('visible');
+// State
+let activeType = 'all';
+let activeTag = null;
+let searchQ = '';
 
-  list.innerHTML = data.map(item => {
-    const badgeLabel = item.type === 'weekly' ? ('#' + (item.issue || '')) : '\u2606';
-    return `
-      <a class="card" href="${item.url}" data-type="${item.type}">
-        <div class="card-badge ${item.type}">${badgeLabel}</div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-type">${item.type === 'weekly' ? 'Weekly' : 'Daily'}</span>
-            <span class="card-date">${item.date}</span>
-          </div>
-          <div class="card-title">${item.title}</div>
-          <div class="card-subtitle">${item.subtitle}</div>
-          <div class="card-tags">${item.tags.map(t => '<span class="card-tag">' + t + '</span>').join('')}</div>
-        </div>
-        <div class="card-arrow">
-          <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-        </div>
-      </a>
-    `;
-  }).join('');
+// Build tag pills
+function buildTagPills() {
+  const el = document.getElementById('tagFilter');
+  el.innerHTML = allTags.map(t =>
+    '<button class="tag-pill" data-tag="' + t + '">' + t + '</button>'
+  ).join('');
 }
 
-// Filter
-let currentFilter = 'all';
-let currentSearch = '';
-
-function applyFilters() {
-  let filtered = ARCHIVE_DATA;
-
-  if (currentFilter !== 'all') {
-    filtered = filtered.filter(item => item.type === currentFilter);
-  }
-
-  if (currentSearch.trim()) {
-    const q = currentSearch.toLowerCase();
-    filtered = filtered.filter(item =>
-      item.title.toLowerCase().includes(q) ||
-      item.subtitle.toLowerCase().includes(q) ||
-      item.tags.some(t => t.toLowerCase().includes(q))
+// Render
+function render() {
+  let list = DATA;
+  if (activeType !== 'all') list = list.filter(d => d.type === activeType);
+  if (activeTag) list = list.filter(d => d.tags.includes(activeTag));
+  if (searchQ.trim()) {
+    const q = searchQ.toLowerCase();
+    list = list.filter(d =>
+      d.title.toLowerCase().includes(q) ||
+      d.subtitle.toLowerCase().includes(q) ||
+      d.tags.some(t => t.toLowerCase().includes(q)) ||
+      d.items.some(it => it.text.toLowerCase().includes(q))
     );
   }
 
-  renderCards(filtered);
+  const container = document.getElementById('cardList');
+  const empty = document.getElementById('emptyState');
+
+  if (!list.length) { container.innerHTML = ''; empty.classList.add('visible'); return; }
+  empty.classList.remove('visible');
+
+  container.innerHTML = list.map((d, i) => {
+    const badgeClass = d.type === 'weekly' ? 'badge-weekly' : 'badge-daily';
+    const badgeText = d.type === 'weekly' ? '#' + (d.issue || '') : '\u2606';
+    const typeLabel = d.type === 'weekly' ? 'Weekly Report' : 'Daily Report';
+    const hasItems = d.items && d.items.length > 0;
+
+    let previewHTML = '';
+    if (hasItems) {
+      previewHTML = '<div class="card-preview" id="preview-' + i + '"><div class="preview-inner"><div class="preview-items">' +
+        d.items.map(it =>
+          '<div class="preview-item"><span class="preview-num">' + it.num + '</span><span class="preview-text">' + it.text + '</span></div>'
+        ).join('') +
+        '</div></div></div>';
+    }
+
+    return '<div class="card">' +
+      '<div class="card-main" onclick="window.location.href=\'' + d.url + '\'">' +
+        '<div class="badge ' + badgeClass + '">' + badgeText + '</div>' +
+        '<div class="card-body">' +
+          '<div class="card-head"><span class="card-type-label">' + typeLabel + '</span><span class="card-date">' + d.date + '</span></div>' +
+          '<div class="card-title">' + d.title + '</div>' +
+          '<div class="card-subtitle">' + d.subtitle + '</div>' +
+          '<div class="card-tags">' + d.tags.map(t => '<span class="card-tag">' + t + '</span>').join('') + '</div>' +
+        '</div>' +
+        '<div class="card-actions">' +
+          (hasItems ? '<button class="btn-expand" onclick="event.stopPropagation();togglePreview(' + i + ',this)" title="\u5c55\u5f00\u9884\u89c8"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>' : '') +
+          '<a class="btn-open" href="' + d.url + '" onclick="event.stopPropagation()">\u6253\u5f00 \u2192</a>' +
+        '</div>' +
+      '</div>' +
+      previewHTML +
+    '</div>';
+  }).join('');
 }
 
-// Tabs
-document.getElementById('tabs').addEventListener('click', (e) => {
-  const btn = e.target.closest('.tab');
+function togglePreview(idx, btn) {
+  const el = document.getElementById('preview-' + idx);
+  if (!el) return;
+  el.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+// Stats
+function updateStats() {
+  document.getElementById('statTotal').textContent = DATA.length;
+  document.getElementById('statWeekly').textContent = DATA.filter(d => d.type === 'weekly').length;
+  document.getElementById('statDaily').textContent = DATA.filter(d => d.type === 'daily').length;
+}
+
+// Events: type filter
+document.getElementById('typeFilter').addEventListener('click', e => {
+  const btn = e.target.closest('.pill');
   if (!btn) return;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#typeFilter .pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  currentFilter = btn.dataset.filter;
-  applyFilters();
+  activeType = btn.dataset.filter;
+  render();
 });
 
-// Search
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  currentSearch = e.target.value;
-  applyFilters();
+// Events: tag filter
+document.getElementById('tagFilter').addEventListener('click', e => {
+  const btn = e.target.closest('.tag-pill');
+  if (!btn) return;
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    activeTag = null;
+  } else {
+    document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    activeTag = btn.dataset.tag;
+  }
+  render();
 });
 
-// Counts
-function updateCounts() {
-  document.getElementById('count-all').textContent = ARCHIVE_DATA.length;
-  document.getElementById('count-weekly').textContent = ARCHIVE_DATA.filter(i => i.type === 'weekly').length;
-  document.getElementById('count-daily').textContent = ARCHIVE_DATA.filter(i => i.type === 'daily').length;
-}
+// Events: search
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQ = e.target.value;
+  render();
+});
 
 // Init
-updateCounts();
-renderCards(ARCHIVE_DATA);
+buildTagPills();
+updateStats();
+render();
 </script>
 </body>
 </html>
