@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.11 &middot; 星期一 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Agent &amp; Platform</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI Agent &amp; 平台</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek 500 亿融资</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Anthropic Orbit</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Microsoft Agent 365</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Claude 金融套件</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Business</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 商业</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Anthropic ARR $440亿</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Cloudflare 裁员</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Events</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 大事</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>DeepMind 成立工会</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>月之暗面 $20亿</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.11 &middot; Mon</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">设计师 8 条速报 &middot; 今日 AI 动态一览</p>
+    <div class="header-meta">
+      <span class="meta-tag">🤖 AI Agent &amp; 平台</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎮 行业 &amp; 商业</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔥 趋势 &amp; 大事</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.11</span>
+    </div>
+  </div>
+
+  <!-- §1 AI Agent & 平台 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Agent &amp; Platform</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🤖 AI Agent &amp; 平台</div>
+    <div class="section-sub">今日最重磅的 Agent 与平台动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">DeepSeek 首轮融资 500 亿元创中国 AI 纪录，V4.1 定档 6 月</span>
+        <span class="card-tag">🔥 热点</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek 启动<strong>中国 AI 史上最大单轮融资 500 亿元</strong>，估值 3500 亿元，<strong>V4.1 定档 6 月发布</strong>，进一步巩固开源阵营领先地位。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Code with Claude 开发者大会发布 Orbit 主动 AI 助手</span>
+        <span class="card-tag">🔥 热点</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布 <strong>Orbit 主动 AI 助手</strong>，能自动从多平台提取任务并执行，无需人工触发。标志着 Agent 从"被动问答"进化到<strong>"主动巡检 + 自动执行"</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Microsoft Agent 365 正式 GA，企业 AI Agent 治理时代到来</span>
+        <span class="card-tag">🔥 热点</span>
+      </div>
+      <div class="card-desc">
+        <strong>Microsoft Agent 365 正式上线</strong>，为企业提供 AI Agent 统一治理控制平面，每用户月费 $30。企业 Agent 从"各自为政"进入<strong>统一管控时代</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Anthropic 发布 Claude for Financial Services 金融垂直套件</span>
+        <span class="card-tag">垂直行业</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布<strong>金融服务专用 AI 套件</strong>，含参考代理和行业连接器，首次进军垂直行业。投行 / KYC / 合规 / 对账场景开箱即用。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 商业（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Business</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">💼 行业 &amp; 商业</div>
+    <div class="section-sub">值得关注的商业信号</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Anthropic ARR 突破 440 亿美元，Claude Code 成增长引擎</span>
+        <span class="card-tag">🔥 热点</span>
+      </div>
+      <div class="card-desc">
+        Anthropic ARR 从 90 亿美元飙升至 <strong>440 亿美元</strong>，<strong>Claude Code 是核心增长引擎</strong>。AI 编程工具正从"辅助"变成"刚需"。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Cloudflare 裁员 1100 人：AI 效率使支持岗位过时</span>
+        <span class="card-tag">行业警报</span>
+      </div>
+      <div class="card-desc">
+        Cloudflare 在<strong>营收创新高的同时裁员 1100 人</strong>，CEO 称 AI 效率使传统岗位过时。AI 替代效应从"狼来了"变成<strong>真实的裁员公告</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 大事 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Events</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🔥 趋势 &amp; 大事</div>
+    <div class="section-sub">今日不可忽视的行业信号</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Google DeepMind 英国员工 98% 投票成立工会，抵制军用 AI</span>
+        <span class="card-tag">工会运动</span>
+      </div>
+      <div class="card-desc">
+        DeepMind 英国员工 <strong>98% 投票成立工会</strong>，抵制 Google 的军用 AI 合同，为前沿 AI 实验室员工组织化开创先例。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">月之暗面完成 20 亿美元融资，估值突破 200 亿美元</span>
+        <span class="card-tag">融资</span>
+      </div>
+      <div class="card-desc">
+        月之暗面完成 <strong>20 亿美元融资</strong>，估值突破 200 亿美元，<strong>Kimi K2.6 万亿参数模型已全量开源</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">DeepSeek</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">Cloudflare</div><div class="data-value">8.5</div></div>
+    <div class="data-chip"><div class="data-label">Anthropic</div><div class="data-value">8.2</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.8</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.11<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>
