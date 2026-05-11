@@ -283,7 +283,7 @@ body {
 const DATA = [
   {
     type: "weekly", issue: 6,
-    title: "AI \u5e72\u8d27\u5468\u62a5 \u00b7 Issue #06",
+    title: "AI \u5e72\u8d27\u5468\u62a5",
     subtitle: "Claude Code \u5927\u7206\u53d1\u5468 + ChatGPT \u9ed8\u8ba4\u6362\u4ee3 \u00b7 9 \u6761\u7acb\u523b\u80fd\u7528\u7684\u5e72\u8d27",
     date: "2026.05.04 \u2013 05.10",
     url: "ai-weekly-card-20260510-toc.html",
@@ -302,7 +302,7 @@ const DATA = [
   },
   {
     type: "weekly", issue: 5,
-    title: "AI \u5e72\u8d27\u5468\u62a5 \u00b7 Issue #05",
+    title: "AI \u5e72\u8d27\u5468\u62a5",
     subtitle: "\u56e2\u961f\u7ea7 Agent + 1M \u4e0a\u4e0b\u6587\u5468 \u00b7 9 \u6761\u7acb\u523b\u80fd\u7528\u7684\u5e72\u8d27",
     date: "2026.04.20 \u2013 04.26",
     url: "ai-weekly-card-toc-template.html",
@@ -321,7 +321,7 @@ const DATA = [
   },
   {
     type: "daily",
-    title: "AIGC \u65e5\u62a5 \u00b7 2026.05.11",
+    title: "AIGC \u65e5\u62a5",
     subtitle: "\u8bbe\u8ba1\u5e08 8 \u6761\u901f\u62a5 \u00b7 DeepSeek 500\u4ebf + Orbit + Agent 365",
     date: "2026.05.11",
     url: "ai-daily-card-20260511-toc.html",
@@ -339,7 +339,7 @@ const DATA = [
   },
   {
     type: "daily",
-    title: "AIGC \u65e5\u62a5 \u00b7 2026.04.13",
+    title: "AIGC \u65e5\u62a5",
     subtitle: "20 \u6761\u7cbe\u9009 AI \u8d44\u8baf",
     date: "2026.04.13",
     url: "ai-daily-20-card-20260413.html",
@@ -405,7 +405,7 @@ function render() {
         '<div class="badge ' + badgeClass + '">' + badgeText + '</div>' +
         '<div class="card-body">' +
           '<div class="card-head"><span class="card-type-label">' + typeLabel + '</span><span class="card-date">' + d.date + '</span></div>' +
-          '<div class="card-title">' + d.title + '</div>' +
+          '<div class="card-title">' + d.title + ' \u00b7 ' + d.date + '</div>' +
           '<div class="card-subtitle">' + d.subtitle + '</div>' +
           '<div class="card-tags">' + d.tags.map(t => '<span class="card-tag">' + t + '</span>').join('') + '</div>' +
         '</div>' +
