@@ -40,10 +40,11 @@ body {
 
 .sidebar-nav { flex:1; padding:0 12px; }
 .nav-item {
-  display:flex; align-items:center; gap:10px; padding:10px 12px;
+  display:flex; align-items:center; gap:10px; padding:10px 12px; width:100%;
   border-radius:10px; color:var(--ink-soft); text-decoration:none;
   font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
   transition:all 0.15s; margin-bottom:2px;
+  background:none; border:none; cursor:pointer; text-align:left;
 }
 .nav-item:hover { background:rgba(42,36,27,0.04); color:var(--ink); }
 .nav-item.active { background:rgba(225,164,194,0.12); color:var(--pink); font-weight:500; }
@@ -211,18 +212,18 @@ body {
     <div class="sidebar-logo">AI <em>&middot;</em> 速递</div>
   </div>
   <nav class="sidebar-nav">
-    <a href="#" class="nav-item active" data-nav="all">
+    <button class="nav-item active" data-nav="all" onclick="navClick(this)">
       <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
       全部动态
-    </a>
-    <a href="#" class="nav-item" data-nav="weekly">
+    </button>
+    <button class="nav-item" data-nav="weekly" onclick="navClick(this)">
       <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
       AI 周报
-    </a>
-    <a href="#" class="nav-item" data-nav="daily">
+    </button>
+    <button class="nav-item" data-nav="daily" onclick="navClick(this)">
       <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>
       AI 日报
-    </a>
+    </button>
   </nav>
   <div class="sidebar-footer">
     <i style="background:var(--pink)"></i>
@@ -355,14 +356,11 @@ function render() {
   }).join('');
 }
 
-// Nav (left sidebar)
-document.querySelector('.sidebar-nav').addEventListener('click', function(e) {
-  e.preventDefault();
-  var item = e.target.closest('.nav-item');
-  if (!item) return;
+// Nav (left sidebar) — direct onclick
+function navClick(btn) {
   document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
-  item.classList.add('active');
-  activeFilter = item.dataset.nav;
+  btn.classList.add('active');
+  activeFilter = btn.dataset.nav;
   var titles = {all:'\u5168\u90e8 AI \u52a8\u6001', weekly:'AI \u5468\u62a5', daily:'AI \u65e5\u62a5'};
   document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8 AI \u52a8\u6001';
   // Sync top tabs
@@ -371,7 +369,8 @@ document.querySelector('.sidebar-nav').addEventListener('click', function(e) {
   if (matchTab) matchTab.classList.add('active');
   render();
   buildTimeline();
-});
+  if (window.innerWidth <= 768) document.querySelector('.sidebar').classList.remove('open');
+}
 
 // Top tabs
 document.getElementById('typeRow').addEventListener('click', function(e) {
@@ -404,10 +403,6 @@ document.getElementById('typeRow').addEventListener('click', function(e) {
   buildTimeline();
 });
 
-// Mobile sidebar close
-document.querySelectorAll('.nav-item').forEach(n => {
-  n.addEventListener('click', () => { if(window.innerWidth<=768) document.querySelector('.sidebar').classList.remove('open'); });
-});
 
 render();
 
