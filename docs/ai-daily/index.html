@@ -241,8 +241,12 @@ body {
     <div class="page-desc">AI 周报 &amp; 日报归档信息流</div>
   </div>
 
-  <!-- Filter: Tags only (type filter moved to left sidebar) -->
+  <!-- Filter: Type + Tags -->
   <div class="filter-row" id="typeRow">
+    <button class="ftab active" data-filter="all">全部</button>
+    <button class="ftab" data-filter="weekly">周报</button>
+    <button class="ftab" data-filter="daily">日报</button>
+    <span class="ftab-sep"></span>
     <button class="ftab" data-filter="tag:Claude Code">Claude Code</button>
     <button class="ftab" data-filter="tag:GPT-5.5">GPT-5.5</button>
     <button class="ftab" data-filter="tag:DeepSeek">DeepSeek</button>
@@ -359,27 +363,45 @@ document.querySelector('.sidebar-nav').addEventListener('click', function(e) {
   document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
   item.classList.add('active');
   activeFilter = item.dataset.nav;
-  // Update header
   var titles = {all:'\u5168\u90e8 AI \u52a8\u6001', weekly:'AI \u5468\u62a5', daily:'AI \u65e5\u62a5'};
   document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8 AI \u52a8\u6001';
-  // Clear tag filter
+  // Sync top tabs
   document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
+  var matchTab = document.querySelector('.ftab[data-filter="' + activeFilter + '"]');
+  if (matchTab) matchTab.classList.add('active');
   render();
+  buildTimeline();
 });
 
-// Tags (top row)
+// Top tabs
 document.getElementById('typeRow').addEventListener('click', function(e) {
   var btn = e.target.closest('.ftab');
   if (!btn) return;
-  if (btn.classList.contains('active')) {
-    btn.classList.remove('active');
-    activeFilter = document.querySelector('.nav-item.active').dataset.nav || 'all';
+  // Toggle tag pills
+  if (btn.dataset.filter.startsWith('tag:')) {
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      // Revert to current nav type
+      activeFilter = document.querySelector('.nav-item.active').dataset.nav || 'all';
+    } else {
+      document.querySelectorAll('.ftab[data-filter^="tag:"]').forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+    }
   } else {
+    // Type tab clicked
     document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
     btn.classList.add('active');
     activeFilter = btn.dataset.filter;
+    // Sync left nav
+    document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+    var navMatch = document.querySelector('.nav-item[data-nav="' + activeFilter + '"]');
+    if (navMatch) navMatch.classList.add('active');
+    var titles = {all:'\u5168\u90e8 AI \u52a8\u6001', weekly:'AI \u5468\u62a5', daily:'AI \u65e5\u62a5'};
+    document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8 AI \u52a8\u6001';
   }
   render();
+  buildTimeline();
 });
 
 // Mobile sidebar close
@@ -389,28 +411,36 @@ document.querySelectorAll('.nav-item').forEach(n => {
 
 render();
 
-// Build right timeline
-(function buildTimeline() {
-  const tl = document.getElementById('rightTimeline');
-  const groups = {};
-  DATA.forEach(item => {
-    const year = item.date.split('-')[0];
+// Build right timeline (filtered by current type)
+function buildTimeline() {
+  var tl = document.getElementById('rightTimeline');
+  // Determine type filter for timeline
+  var typeFilter = 'all';
+  if (activeFilter === 'weekly' || activeFilter === 'daily') typeFilter = activeFilter;
+  var items = typeFilter === 'all' ? DATA : DATA.filter(function(d) { return d.type === typeFilter; });
+  
+  var tlTitle = typeFilter === 'weekly' ? '\u5468\u62a5\u65f6\u95f4\u7ebf' : typeFilter === 'daily' ? '\u65e5\u62a5\u65f6\u95f4\u7ebf' : 'Archive Timeline';
+
+  var groups = {};
+  items.forEach(function(item) {
+    var year = item.date.split('-')[0];
     if (!groups[year]) groups[year] = [];
     groups[year].push(item);
   });
-  let html = '<div class="rt-title">Archive Timeline</div>';
-  Object.keys(groups).sort().reverse().forEach(year => {
+  var html = '<div class="rt-title">' + tlTitle + '</div>';
+  Object.keys(groups).sort().reverse().forEach(function(year) {
     html += '<div class="rt-group"><div class="rt-year">' + year + '</div>';
-    groups[year].sort((a,b) => b.date.localeCompare(a.date)).forEach(item => {
-      const parts = item.date.split('-');
-      const label = parts[1] + '.' + parts[2];
-      const typeLabel = item.type === 'weekly' ? '\u5468\u62a5' : '\u65e5\u62a5';
+    groups[year].sort(function(a,b) { return b.date.localeCompare(a.date); }).forEach(function(item) {
+      var parts = item.date.split('-');
+      var label = parts[1] + '.' + parts[2];
+      var typeLabel = item.type === 'weekly' ? '\u5468\u62a5' : '\u65e5\u62a5';
       html += '<a class="rt-item" href="' + item.url + '"><span class="rt-dot ' + item.type + '"></span><span class="rt-label">' + label + '</span><span class="rt-type">' + typeLabel + '</span></a>';
     });
     html += '</div>';
   });
   tl.innerHTML = html;
-})();
+}
+buildTimeline();
 </script>
 </body>
 </html>
