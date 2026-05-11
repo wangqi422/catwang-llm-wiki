@@ -1,0 +1,36 @@
+[
+  {
+    "type": "weekly",
+    "issue": 6,
+    "title": "AI 干货周报 · Issue #06",
+    "subtitle": "Claude Code 大爆发周 + ChatGPT 默认换代",
+    "date": "2026.05.04 – 05.10",
+    "url": "ai-weekly-card-20260510-toc.html",
+    "tags": ["Claude Code", "GPT-5.5", "Plugin Marketplace", "/loop", "/ultrareview"]
+  },
+  {
+    "type": "weekly",
+    "issue": 5,
+    "title": "AI 干货周报 · Issue #05",
+    "subtitle": "团队级 Agent + 1M 上下文周",
+    "date": "2026.04.20 – 04.26",
+    "url": "ai-weekly-card-toc-template.html",
+    "tags": ["OpenAI Workspace Agents", "DeepSeek V4", "LLM Wiki", "Meta Prompting"]
+  },
+  {
+    "type": "daily",
+    "title": "AIGC 日报 · 2026.05.11",
+    "subtitle": "今日 AI 动态速览",
+    "date": "2026.05.11",
+    "url": "ai-daily-card-20260511.html",
+    "tags": ["AIGC", "Daily"]
+  },
+  {
+    "type": "daily",
+    "title": "AIGC 日报 · 2026.04.13",
+    "subtitle": "20 条精选 AI 资讯",
+    "date": "2026.04.13",
+    "url": "ai-daily-20-card-20260413.html",
+    "tags": ["AIGC", "Daily"]
+  }
+]

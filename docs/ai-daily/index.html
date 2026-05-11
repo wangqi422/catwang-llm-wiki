@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货速递 · 归档中心</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Topbar ═══════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(242, 238, 223, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.topbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar-dots {
+  display: flex;
+  gap: 6px;
+}
+.topbar-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+.topbar-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--ink);
+}
+.topbar-title em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Search */
+.search-box {
+  position: relative;
+  flex: 0 0 280px;
+}
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 38px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.6);
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  transition: all 0.2s;
+}
+.search-input::placeholder { color: var(--ink-faint); }
+.search-input:focus {
+  border-color: var(--pink);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 3px rgba(225,164,194,0.15);
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  fill: var(--ink-faint);
+}
+
+/* ═══════ Main ═══════ */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.hero h1 {
+  font-family: "Cormorant Garamond", "Noto Sans SC", serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.hero h1 em { font-style: italic; font-weight: 400; }
+.hero p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 16px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* ═══════ Tabs ═══════ */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  background: transparent;
+}
+.tab:hover {
+  color: var(--ink);
+  background: rgba(255,255,255,0.5);
+  border-color: var(--border);
+}
+.tab.active {
+  color: var(--ink);
+  background: var(--pink);
+  border-color: var(--pink);
+  font-weight: 500;
+}
+.tab-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(42,36,27,0.08);
+  color: var(--ink-soft);
+}
+.tab.active .tab-count {
+  background: rgba(42,36,27,0.15);
+  color: var(--ink);
+}
+
+/* ═══════ Cards ═══════ */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.card {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(42,36,27,0.08);
+  border-color: var(--border);
+}
+
+.card-badge {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink);
+}
+.card-badge.weekly { background: var(--pink); }
+.card-badge.daily { background: var(--lemon); }
+
+.card-body { flex: 1; min-width: 0; }
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.card-type {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.card-date {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.card-title {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.card-subtitle {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.card-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+  letter-spacing: 0.02em;
+}
+
+.card-arrow {
+  flex-shrink: 0;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.card:hover .card-arrow {
+  background: var(--pink);
+}
+.card-arrow svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--ink-soft);
+}
+.card:hover .card-arrow svg { fill: var(--ink); }
+
+/* Empty */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-faint);
+  font-size: 16px;
+  display: none;
+}
+.empty-state.visible { display: block; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer p {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-faint);
+}
+
+/* ═══════ Responsive ═══════ */
+@media (max-width: 640px) {
+  .topbar-inner { flex-wrap: wrap; }
+  .search-box { flex: 1 1 100%; order: 3; }
+  .hero h1 { font-size: 36px; }
+  .card { padding: 20px; flex-direction: column; gap: 12px; }
+  .card-badge { width: 44px; height: 44px; font-size: 18px; }
+  .tabs { overflow-x: auto; flex-wrap: nowrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="topbar-dots">
+        <i style="background:#E1A4C2"></i>
+        <i style="background:#D6DD63"></i>
+        <i style="background:#E8C9B6"></i>
+        <i style="background:#B7C7A8"></i>
+      </div>
+      <div class="topbar-title">AI <em>干货速递</em></div>
+    </div>
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="搜索关键词...">
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>AI <em>干货</em>速递</h1>
+    <p>周报 &amp; 日报归档 &middot; 小柒AI速递</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-filter="all">全部 <span class="tab-count" id="count-all"></span></button>
+    <button class="tab" data-filter="weekly">📋 AI 周报 <span class="tab-count" id="count-weekly"></span></button>
+    <button class="tab" data-filter="daily">📰 AI 日报 <span class="tab-count" id="count-daily"></span></button>
+  </div>
+
+  <!-- Card List -->
+  <div class="card-list" id="cardList"></div>
+
+  <!-- Empty State -->
+  <div class="empty-state" id="emptyState">
+    没有找到匹配的内容
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>小柒AI速递 &middot; 每周一上午推送周报 &middot; 每日推送日报</p>
+  </div>
+
+</div>
+
+<script>
+// Archive data (inline for zero-dependency static hosting)
+const ARCHIVE_DATA = [
+  {
+    "type": "weekly",
+    "issue": 6,
+    "title": "AI 干货周报 \u00b7 Issue #06",
+    "subtitle": "Claude Code 大爆发周 + ChatGPT 默认换代 \u00b7 9 条立刻能用的干货",
+    "date": "2026.05.04 \u2013 05.10",
+    "url": "ai-weekly-card-20260510-toc.html",
+    "tags": ["Claude Code", "GPT-5.5", "Plugin Marketplace", "/loop", "/ultrareview"]
+  },
+  {
+    "type": "weekly",
+    "issue": 5,
+    "title": "AI 干货周报 \u00b7 Issue #05",
+    "subtitle": "团队级 Agent + 1M 上下文周 \u00b7 9 条立刻能用的干货",
+    "date": "2026.04.20 \u2013 04.26",
+    "url": "ai-weekly-card-toc-template.html",
+    "tags": ["OpenAI Workspace Agents", "DeepSeek V4", "LLM Wiki", "Meta Prompting", "MJ v7"]
+  },
+  {
+    "type": "daily",
+    "title": "AIGC 日报 \u00b7 2026.05.11",
+    "subtitle": "今日 AI 动态速览",
+    "date": "2026.05.11",
+    "url": "ai-daily-card-20260511.html",
+    "tags": ["AIGC", "Daily"]
+  },
+  {
+    "type": "daily",
+    "title": "AIGC 日报 \u00b7 2026.04.13",
+    "subtitle": "20 条精选 AI 资讯",
+    "date": "2026.04.13",
+    "url": "ai-daily-20-card-20260413.html",
+    "tags": ["AIGC", "Daily"]
+  }
+];
+
+// Render
+function renderCards(data) {
+  const list = document.getElementById('cardList');
+  const empty = document.getElementById('emptyState');
+
+  if (data.length === 0) {
+    list.innerHTML = '';
+    empty.classList.add('visible');
+    return;
+  }
+  empty.classList.remove('visible');
+
+  list.innerHTML = data.map(item => {
+    const badgeLabel = item.type === 'weekly' ? ('#' + (item.issue || '')) : '\u2606';
+    return `
+      <a class="card" href="${item.url}" data-type="${item.type}">
+        <div class="card-badge ${item.type}">${badgeLabel}</div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-type">${item.type === 'weekly' ? 'Weekly' : 'Daily'}</span>
+            <span class="card-date">${item.date}</span>
+          </div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-subtitle">${item.subtitle}</div>
+          <div class="card-tags">${item.tags.map(t => '<span class="card-tag">' + t + '</span>').join('')}</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+// Filter
+let currentFilter = 'all';
+let currentSearch = '';
+
+function applyFilters() {
+  let filtered = ARCHIVE_DATA;
+
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(item => item.type === currentFilter);
+  }
+
+  if (currentSearch.trim()) {
+    const q = currentSearch.toLowerCase();
+    filtered = filtered.filter(item =>
+      item.title.toLowerCase().includes(q) ||
+      item.subtitle.toLowerCase().includes(q) ||
+      item.tags.some(t => t.toLowerCase().includes(q))
+    );
+  }
+
+  renderCards(filtered);
+}
+
+// Tabs
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  applyFilters();
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  applyFilters();
+});
+
+// Counts
+function updateCounts() {
+  document.getElementById('count-all').textContent = ARCHIVE_DATA.length;
+  document.getElementById('count-weekly').textContent = ARCHIVE_DATA.filter(i => i.type === 'weekly').length;
+  document.getElementById('count-daily').textContent = ARCHIVE_DATA.filter(i => i.type === 'daily').length;
+}
+
+// Init
+updateCounts();
+renderCards(ARCHIVE_DATA);
+</script>
+</body>
+</html>
