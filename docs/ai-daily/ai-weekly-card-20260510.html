@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Soft Editorial · Issue #06 · 2026.05.10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2EEDF;--paper-2:#ECE6D2;--ink:#2A241B;--ink-soft:#5C5345;--ink-faint:rgba(42,36,27,0.35);--pink:#E1A4C2;--lemon:#D6DD63;--blush:#E8C9B6;--sage:#B7C7A8;--lilac:#C9BEDC;--card-bg:rgba(255,255,255,0.55);--border:rgba(42,36,27,0.14);--border-strong:rgba(42,36,27,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;margin:0 auto;background:var(--paper);color:var(--ink);font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;font-weight:300;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{width:1080px;padding:64px 72px 50px}
+h1,h2,h3{font-family:"Cormorant Garamond","Noto Serif SC",Georgia,serif;font-weight:500;color:var(--ink);line-height:1.1;letter-spacing:-0.01em}
+h1 em,h2 em,h3 em{font-style:italic;font-weight:400}
+
+/* Header */
+.header{margin-bottom:56px;position:relative}
+.header-kicker{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--ink-soft);margin-bottom:16px}
+.header h1{font-size:72px;line-height:0.95;letter-spacing:-0.015em;margin-bottom:16px}
+.header .lead{font-family:"Noto Sans SC",sans-serif;font-size:18px;font-weight:400;color:var(--ink-soft);max-width:620px;line-height:1.6}
+.header .swatches{position:absolute;right:0;top:8px;display:flex;gap:12px}
+.header .swatches i{width:36px;height:36px;border-radius:50%;display:block}
+.header-meta{margin-top:20px;display:flex;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid var(--border)}
+.meta-tag{font-family:"Work Sans",sans-serif;font-size:12px;font-weight:400;color:var(--ink-soft);letter-spacing:0.04em}
+
+/* Thesis */
+.thesis{margin-bottom:56px}
+.thesis-opener{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-style:italic;font-size:28px;line-height:1.3;color:var(--ink);margin-bottom:28px;max-width:700px}
+.thesis-opener::first-letter{font-size:72px;float:left;line-height:0.85;padding:4px 10px 0 0;font-style:normal;font-weight:500}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.thesis-card{border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:6px}
+.thesis-card:nth-child(1){background:var(--pink)}
+.thesis-card:nth-child(2){background:var(--lemon)}
+.thesis-card:nth-child(3){background:var(--blush)}
+.thesis-card:nth-child(4){background:var(--sage)}
+.thesis-card-label{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;color:var(--ink);opacity:0.7}
+.thesis-card-body{font-family:"Noto Sans SC",sans-serif;font-size:13px;font-weight:400;line-height:1.7;color:var(--ink)}
+.thesis-card-body b{font-weight:600}
+.thesis-tagline{background:var(--card-bg);border-radius:16px;padding:18px 24px;border-left:4px solid var(--pink)}
+.thesis-tagline p{font-family:"Noto Sans SC",sans-serif;font-size:15px;font-weight:500;color:var(--ink);line-height:1.7}
+
+/* Sections */
+.section{margin-bottom:52px}
+.section-chrome{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.section-kicker{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:16px;color:var(--ink-soft)}
+.section-count{font-family:"Work Sans",sans-serif;font-size:11px;letter-spacing:0.1em;color:var(--ink-faint);text-transform:uppercase}
+.section-title{font-family:"Noto Sans SC",sans-serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.section-sub{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;color:var(--ink-soft);margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+
+/* Cards */
+.card{background:var(--card-bg);border-radius:28px;padding:28px 32px;margin-bottom:18px}
+.card-chrome{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.card-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:36px;line-height:1;color:var(--ink)}
+.card-title{font-family:"Noto Sans SC",sans-serif;font-size:16px;font-weight:600;color:var(--ink);flex:1}
+.card-tag{font-family:"Work Sans",sans-serif;font-size:11px;font-weight:400;letter-spacing:0.06em;color:var(--ink-soft);padding:4px 12px;border-radius:999px;background:var(--paper-2)}
+.card-desc{font-family:"Noto Sans SC","Work Sans",sans-serif;font-size:14px;font-weight:300;line-height:1.85;color:var(--ink-soft);margin-bottom:14px}
+.card-desc strong{font-weight:500;color:var(--ink)}
+
+/* Sub-cards */
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.sub-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.sub-card{border-radius:16px;padding:14px 16px}
+.sub-card:nth-child(4n+1){background:var(--pink)}
+.sub-card:nth-child(4n+2){background:var(--lemon)}
+.sub-card:nth-child(4n+3){background:var(--blush)}
+.sub-card:nth-child(4n){background:var(--sage)}
+.sub-card-title{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:12px;color:var(--ink);opacity:0.65;margin-bottom:4px}
+.sub-card-body{font-family:"Noto Sans SC",sans-serif;font-size:12px;font-weight:400;line-height:1.6;color:var(--ink)}
+
+/* Code block */
+.code-block{background:var(--ink);border-radius:18px;padding:20px 24px;margin-top:14px;font-family:"JetBrains Mono","Work Sans",monospace;font-size:12px;font-weight:300;color:var(--paper);line-height:1.85;white-space:pre-wrap}
+.code-block .cmt{color:rgba(242,238,223,0.4)}
+.code-block .key{color:var(--pink)}
+.code-block .str{color:var(--lemon)}
+
+/* Source */
+.source{margin-top:14px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:12px;color:var(--ink-faint);padding-top:10px;border-top:1px dashed var(--border)}
+
+/* Highlight section */
+.section-highlight{background:var(--blush);margin-left:-72px;margin-right:-72px;padding:48px 72px;margin-bottom:52px}
+.section-highlight .card{background:rgba(255,255,255,0.7)}
+
+/* Gallery */
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.gallery-item{border-radius:24px;padding:22px 20px;display:flex;flex-direction:column;gap:6px}
+.gallery-item:nth-child(6n+1){background:var(--pink)}
+.gallery-item:nth-child(6n+2){background:var(--lemon)}
+.gallery-item:nth-child(6n+3){background:var(--blush)}
+.gallery-item:nth-child(6n+4){background:var(--sage)}
+.gallery-item:nth-child(6n+5){background:var(--lilac)}
+.gallery-item:nth-child(6n){background:var(--pink)}
+.gallery-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:40px;line-height:1;color:var(--ink)}
+.gallery-title{font-family:"Noto Sans SC",sans-serif;font-size:14px;font-weight:600;color:var(--ink)}
+.gallery-desc{font-family:"Work Sans",sans-serif;font-size:12px;font-weight:300;color:var(--ink-soft);line-height:1.5}
+
+/* Footer */
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-left{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;color:var(--ink-soft);line-height:1.7}
+.footer-right{font-family:"Work Sans",sans-serif;font-size:12px;font-weight:400;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:16px;left:16px;z-index:9999;padding:8px 16px;border-radius:8px;background:rgba(42,36,27,0.85);color:rgba(242,238,223,0.8);font-family:sans-serif;font-size:13px;text-decoration:none;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);transition:all 0.2s;">&larr; 返回归档</a>
+<div class="page">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="header">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly · Issue No. 6</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">Claude Code 大爆发周 + ChatGPT 默认换代 · 9 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">·</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">·</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">·</span>
+      <span class="meta-tag">2026.05.04 – 05.10</span>
+    </div>
+  </div>
+
+  <!-- ═══════ THESIS ═══════ -->
+  <div class="thesis">
+    <p class="thesis-opener">
+      这周 Claude Code 全面起飞——Plugin Marketplace、/loop、/ultrareview、Worktrees 四连发，配合 OpenAI 把 GPT-5.5 Instant 推上默认位，AI 终于从"你喊一声它才动"变成了终端里的 cron 加云端多 Agent 审查员。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Anthropic</div>
+        <div class="thesis-card-body"><b>Code with Claude SF</b> 5/6 落地：速率翻倍、独占 <b>SpaceX Colossus 1</b>（22 万 GPU）、<b>/loop /ultrareview</b> 新命令</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Claude Code</div>
+        <div class="thesis-card-body">v2.1.108+ 上线 <b>Plugin Marketplace</b>，Native Git <b>Worktrees</b> 让多 Agent 并行互不打架</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">OpenAI</div>
+        <div class="thesis-card-body">5/5 <b>GPT-5.5 Instant</b> 成 ChatGPT 默认模型，幻觉少 / 少 emoji；<b>Images 2.0</b> 文字渲染再升级</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Finance Agents</div>
+        <div class="thesis-card-body">Anthropic 开源 <b>10 个金融垂直模板</b>，投行 / KYC / 对账一键装，模式可套到任何重复 SOP 岗位</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>💡 AI 不再等你喊一声才干活，它变成了终端里的 cron + 云端的多 Agent 审查员，还顺便把整个金融行业的 SOP 打包送上门。</p>
+    </div>
+  </div>
+
+  <!-- ═══════ § 1 实用工具箱 ═══════ -->
+  <div class="section">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools & Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛠️ 实用工具箱</div>
+    <div class="section-sub">3 个本周立刻能装的 AI 工具 / 模板</div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Code Plugin Marketplace · 装插件像 npm install</span>
+        <span class="card-tag">v2.1.108+</span>
+      </div>
+      <div class="card-desc">
+        Claude Code 正式上线 <strong>Plugin Marketplace</strong>：一条 CLI 安装社区/官方插件，插件可同时注册 <strong>slash 命令 / hooks / 子 Agent / Skills</strong> 四类能力。<strong>package.json 依赖自动装</strong>，装完即用。
+      </div>
+      <div class="code-block"><span class="cmt"># 升级 + 装第一个插件</span>
+<span class="key">npm update</span> -g @anthropic/claude-code
+<span class="key">claude</span> --plugin-url <span class="str">https://github.com/anthropics/claude-plugins-official</span>
+
+<span class="cmt"># 在终端内实时搜索已装能力</span>
+/plugin       <span class="cmt"># 模糊搜索插件</span>
+/skills       <span class="cmt"># 模糊搜索 Skill</span></div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">适合谁</div><div class="sub-card-body">天天用 Claude Code 的开发/设计/运营</div></div>
+        <div class="sub-card"><div class="sub-card-title">最快路径</div><div class="sub-card-body">升级 → 装 official market → 敲 /plugin 挑一个</div></div>
+        <div class="sub-card"><div class="sub-card-title">企业安全</div><div class="sub-card-body">blockedMarketplaces 白名单封禁未授权市场</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI, @alexalbert__ · github.com/anthropics/claude-plugins-official</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">10 个金融 Agent 模板 · 投行 / KYC / 对账一键开跑</span>
+        <span class="card-tag">5/5 开源</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 开源 <strong>10 个金融垂直 Agent 模板</strong>，覆盖 pitchbook 生成 / KYC 尽调 / 合规筛查 / 财务对账 / 信贷评估 / 财会报告，既可作 <strong>Claude Cowork 插件</strong>也可作 <strong>Claude Code Agent Teams cookbook</strong>。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">为什么非金融也要看</div><div class="sub-card-body">凡"数据提取 → 交叉核对 → 报告输出"模式岗位都能照抄，例如 CODM 宣发的提案→素材→PPT</div></div>
+        <div class="sub-card"><div class="sub-card-title">Office 彩蛋</div><div class="sub-card-body">同日 Claude 接入 Microsoft 365：Excel / PPT / Word 可直调 Claude + Moody's 6 亿企业信用数据</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI · anthropic.com/news/finance-agents</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">GPT-5.5 Instant · ChatGPT 默认模型换代</span>
+        <span class="card-tag">5/5 全量</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 把 <strong>GPT-5.5 Instant</strong> 推成 ChatGPT 默认模型，替代 GPT-5.3 Instant。官方评测：<strong>幻觉更少、回答更准、不滥用 emoji</strong>，记忆控制更精细。配套 <strong>ChatGPT Images 2.0</strong> 同周迭代，多图 + 中英文字渲染质量翻倍。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">确认 ChatGPT 当前模型已显示 5.5 Instant</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">旧 prompt 在新模型同对话复测，对比长度/emoji/准确率</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">减掉"禁止 emoji / 简短回答"等对抗 5.3 的冗余约束</div></div>
+      </div>
+      <div class="source">◉ @OpenAI, @sama · TechCrunch 2026-05-05</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 2 高效工作流（Highlight）═══════ -->
+  <div class="section-highlight">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows & Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚡ 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Claude Code /loop · 把 Agent 变成终端 cron</span>
+        <span class="card-tag">AI 原语</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：监控部署/轮询 PR/定时拉日志——过去要么裸写 bash 脚本，要么开 Zapier / n8n。<strong>/loop 把"轮询 + 异常判断"揉成一条 AI 原语</strong>，Claude 既负责巡检也负责判断什么情况该告警。
+      </div>
+      <div class="code-block"><span class="cmt"># /loop 三种用法</span>
+/loop 5m /check-deploy     <span class="cmt"># 每 5 分钟跑一次</span>
+/loop /watch-pr            <span class="cmt"># 让模型自行判断节奏</span>
+
+<span class="cmt"># 降本套餐：长跑任务组合使用</span>
+/effort <span class="str">low</span>                <span class="cmt"># 简单巡检降 token</span>
+/focus                     <span class="cmt"># 压掉 TUI 噪音</span>
+/radio                     <span class="cmt"># Claude FM lo-fi 陪跑</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">兼容</div><div class="sub-card-body">所有订阅计划 · Sonnet 4.6 / Haiku 4.5 均可</div></div>
+        <div class="sub-card"><div class="sub-card-title">高频警告</div><div class="sub-card-body">&lt; 5 分钟轮询建议 Pro/Max + effort low</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI · Claude Code v2.1.137 Changelog</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Claude Code /ultrareview · 云端多 Agent 联合代码审查</span>
+        <span class="card-tag">云端单独计费</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：一个人盯不住 PR 的"安全 × 性能 × 业务逻辑"三条线，找三位同事要排期到明天。<strong>/ultrareview 在云端同时起多个专精 Agent</strong>，返回一份结构化审查报告（和本地速率上限独立）。
+      </div>
+      <div class="code-block"><span class="cmt"># 两种触发方式</span>
+/ultrareview          <span class="cmt"># 审当前分支</span>
+/ultrareview <span class="str">12345</span>    <span class="cmt"># 审指定 PR</span>
+
+<span class="cmt"># 组合 /loop：每晚自动审 main 分支</span>
+/loop <span class="str">24h</span> <span class="key">/ultrareview</span> main</div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">过去</div><div class="sub-card-body">一次 PR 至少 30 分钟找人 + 1-2 天等 review</div></div>
+        <div class="sub-card"><div class="sub-card-title">现在</div><div class="sub-card-body">10 分钟拿到"三方评审视角"初稿</div></div>
+        <div class="sub-card"><div class="sub-card-title">无远程也能用</div><div class="sub-card-body">本地分支自动打包上云</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI · Code with Claude SF 2026 Keynote</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Native Git Worktrees · 多 Agent 并行真正互不打架</span>
+        <span class="card-tag">自动清理</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：多个 Claude Code 窗口在同目录跑 → 改文件互相覆盖、git 状态混乱。<strong>Native Worktrees 让每个 sub-agent 用独立临时 worktree</strong>，PR squash-merge 后<strong>自动清理</strong>，不留孤儿分支。
+      </div>
+      <div class="code-block"><span class="cmt"># baseRef 配置</span>
+worktree.baseRef: <span class="str">fresh</span>    <span class="cmt"># 新功能：从最新 main 创建（推荐）</span>
+worktree.baseRef: <span class="str">head</span>     <span class="cmt"># Bugfix：从当前 commit 创建</span>
+
+<span class="cmt"># 委派 sub-agent 时声明隔离</span>
+{
+  <span class="key">"isolation"</span>: <span class="str">"worktree"</span>
+}
+<span class="cmt"># Claude 会自动克隆 worktree + 生成带上下文的 CLAUDE.md</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">新功能开发</div><div class="sub-card-body">baseRef: fresh</div></div>
+        <div class="sub-card"><div class="sub-card-title">Bugfix / 调试</div><div class="sub-card-body">baseRef: head</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI · Pasquale Pillitteri May 2026 Release Notes</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 3 方法论 ═══════ -->
+  <div class="section">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods & Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 方法论与 Prompt</div>
+    <div class="section-sub">3 套最有 ROI 的一次性投入</div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Opus 4.7 Effort 级别 + 1H 缓存 · 长会话降本 3-4 倍</span>
+        <span class="card-tag">73% 省钱</span>
+      </div>
+      <div class="card-desc">
+        1M 上下文时代，<strong>成本不再由模型聪不聪明决定，而是"你有没有把它塞进缓存"</strong>。Opus 4.7 引入 /effort 级别 + 1 小时 TTL prompt caching，实测长会话降本 <strong>3-4×（某 2 万行项目从 $120 降至 $32）</strong>。
+      </div>
+      <div class="code-block"><span class="cmt"># 1) 开启 1 小时缓存（默认 5 分钟）</span>
+<span class="key">export</span> ENABLE_PROMPT_CACHING_1H=<span class="str">1</span>
+
+<span class="cmt"># 2) 按任务类型切 effort</span>
+/effort <span class="str">low</span>         <span class="cmt"># 简单查询 / 高频 loop</span>
+/effort <span class="str">medium</span>      <span class="cmt"># 日常调试（默认推荐）</span>
+/effort <span class="str">high</span>        <span class="cmt"># 安全分析 / 多文件重构 / 架构推理</span>
+/effort <span class="str">xhigh</span>       <span class="cmt"># 复杂深度推理（耗 token）</span>
+/effort <span class="str">auto</span>        <span class="cmt"># 仅 Max 订阅可用</span>
+
+<span class="cmt"># 3) 启动长会话</span>
+claude --project <span class="str">./myapp</span> --context-window <span class="str">1m</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">新手最大坑</div><div class="sub-card-body">effort 和任务不匹配：简单任务开 xhigh 烧钱、复杂任务留 low 出 bug</div></div>
+        <div class="sub-card"><div class="sub-card-title">稳妥起手</div><div class="sub-card-body">先用 medium 跑通基线，再按实际效果调档</div></div>
+      </div>
+      <div class="source">◉ @AnthropicAI · claude.com/blog/best-practices-for-using-claude-opus-4-7-with-claude-code</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Meta-Prompting · 让 AI 给 AI 写 Prompt 的脚手架</span>
+        <span class="card-tag">Level 6 模板</span>
+      </div>
+      <div class="card-desc">
+        与其人肉调 prompt，不如让 <strong>Meta Agent 帮你生成/评估/迭代</strong>。Anthropic 把这套模式正式纳入 Plugin Marketplace（Skill 名 <strong>Template Meta-Prompt Creator</strong>），产出"Level 6"标准化 Prompt。
+      </div>
+      <div class="code-block"><span class="cmt"># Meta Prompt 模板（直接粘到 Claude / ChatGPT）</span>
+你是一个专业的 Prompt 工程师。请为以下任务生成 <span class="key">Level 6 Meta Prompt</span>：
+
+<span class="key"># 任务描述</span>
+[一句话说清楚你希望 AI 完成什么]
+
+<span class="key"># 使用场景</span>
+[AI 将在什么工作流中被调用？输入来自哪？输出给谁看？]
+
+<span class="key"># 成功标准</span>
+[3-5 个可验证的 checklist]
+
+<span class="key"># 已知失败案例</span>
+[过去试过输出不满意的 prompt / 示例]
+
+<span class="key">请输出：</span>
+1) Role 定义（≤50 字）
+2) Task 拆解（分 3-5 步）
+3) Few-shot 示例（≥2 组 input/output）
+4) 自我检查清单
+5) 输出格式（<span class="str">JSON / Markdown / 纯文本</span>）</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">关键诀窍</div><div class="sub-card-body">把"失败案例"喂回 meta prompt，3 轮迭代后稳定度 +60%</div></div>
+        <div class="sub-card"><div class="sub-card-title">实战</div><div class="sub-card-body">微信公众号 → 小红书文案 prompt：Meta Agent 输出 300 字结构化 prompt + 2 组 few-shot，直接复用 20+ 次</div></div>
+      </div>
+      <div class="source">◉ @swyx · Anthropic Template Meta-Prompt Creator Skill</div>
+    </div>
+
+    <div class="card">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">Follow-Builders Skill · 每天 5 分钟读完 25 位 Builder 的动态</span>
+        <span class="card-tag">嵌 Cowork</span>
+      </div>
+      <div class="card-desc">
+        信息过载不是靠"多订阅"解决，而是靠 <strong>Agent 帮你筛只看真正在 build 的人</strong>。Zara Zhang 的 follow-builders Skill 本周更新到可同时嵌入 <strong>Claude Desktop / OpenClaw / Claude Code</strong>。
+      </div>
+      <div class="code-block"><span class="cmt"># 每日自动简报 Prompt</span>
+<span class="key">Role</span>    你是我的 AI 情报官，追踪 [25 位 Builder]
+<span class="key">源</span>       X: Karpathy / Zara / Logan Kilpatrick / Swyx / ...
+         播客: Latent Space / AI &amp; I / No Priors / Lex Fridman
+
+<span class="key">任务</span>    每天 09:00 输出 [Daily Builders Digest]：
+  1) 过去 24h 每位 Builder 的推文 / 博客 / 播客
+  2) <span class="cmt">过滤</span>：观点、八卦、融资、情绪发言
+  3) <span class="cmt">保留</span>：他们亲手做的产品 / 开源 / 工作流 / Prompt / 教程
+  4) 每条 ≤50 字附原链接
+
+<span class="key">输出</span>    按 "工具 / 工作流 / 方法论" 聚类，附 <span class="str">3 条今日 action</span></div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">订阅前</div><div class="sub-card-body">每天 1-2h 翻 X，看完记不住 3 条</div></div>
+        <div class="sub-card"><div class="sub-card-title">订阅后</div><div class="sub-card-body">5 分钟读完，3 条可立即 action</div></div>
+        <div class="sub-card"><div class="sub-card-title">关键</div><div class="sub-card-body">定期清洗信源，只留 ship 产品的人</div></div>
+      </div>
+      <div class="source">◉ @zarazhangrui · github.com/zarazhangrui/follow-builders</div>
+    </div>
+  </div>
+
+  <!-- ═══════ § 4 推荐顺序 ═══════ -->
+  <div class="section">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">ranked</span>
+    </div>
+    <div class="section-title">📋 本周最值得先试的顺序</div>
+    <div class="section-sub">按学习成本 × 价值收益从高到低排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">切 GPT-5.5 Instant</div>
+        <div class="gallery-desc">0 成本，打开 ChatGPT 就是默认</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">升级 Claude Code v2.1.137+</div>
+        <div class="gallery-desc">5 分钟，解锁本期其他所有命令</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">/loop + /radio 组合</div>
+        <div class="gallery-desc">10 分钟体验终端 cron + lo-fi</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">装第一个官方 Plugin</div>
+        <div class="gallery-desc">30 分钟熟悉 marketplace</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">跑一次 /ultrareview</div>
+        <div class="gallery-desc">1 小时替你审一份真实 PR</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">套 Meta-Prompting 模板</div>
+        <div class="gallery-desc">半天沉淀 3-5 条团队复用 Prompt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 · 2026.05.04 – 05.10<br>
+      扫描 65 个顶级 AI 信源 · 精选 9 条立刻能用 · 宁缺毋滥
+    </div>
+    <div class="footer-right">
+      小柒AI速递 · 每周一上午推送
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
