@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #07 · 2026.05.05–05.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.05.05 – 05.11 &middot; Issue No. 7</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>GPT-5.5 + Images 2.0</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code /plan</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Kimi K2.5</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>高效工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>MJ V7 Draft Mode</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Git Worktrees</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>国产模型选型</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>方法论与 Prompt</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Veo 3.1 工作流</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>视频工具选型矩阵</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>Seedance 2.0 工作流</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">§4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 7</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">多模态 Agent 爆发周 &middot; 9 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.05 – 05.11</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的多模态 Agent 爆发周。OpenAI 把 GPT-5.5 推向全量用户，Images 2.0 带来精准可控的视觉生成；Claude Code 的 /plan 模式让企业落地不再踩坑；月之暗面开源 Kimi K2.5，万亿参数 MoE 加 Agent Swarm 集群，100 个子 Agent 并行编排。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">OpenAI</div>
+        <div class="thesis-card-body"><b>GPT-5.5</b> 成 ChatGPT 默认模型；<b>Images 2.0</b> 空间语义锚定 + 矢量文字渲染</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Claude Code</div>
+        <div class="thesis-card-body"><b>/plan 模式</b>防止 90% 过度自信错误；<b>Git Worktrees</b>让多 Agent 并行不打架</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Moonshot</div>
+        <div class="thesis-card-body"><b>Kimi K2.5</b>开源：万亿 MoE + <b>Agent Swarm</b> + 原生多模态</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">国产五强</div>
+        <div class="thesis-card-body"><b>Qwen 3.6 / DeepSeek V4 / MiniMax M2.7 / GLM-5.1 / Kimi K2.5</b>集体冲击 1M 上下文</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>💡 一句话总结：AI 从"聊天工具"彻底进化为"视觉编程 + Agent 集群"的完整工作站，会用多模态的人正在拉开十倍效率差。</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛠️ 实用工具箱</div>
+    <div class="section-sub">3 个本周立刻能装的 AI 工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">GPT-5.5 + Images 2.0 &middot; ChatGPT 默认模型换代</span>
+        <span class="card-tag">全量推送</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 把 <strong>GPT-5.5</strong> 推成 ChatGPT 默认模型，替代 GPT-5.3 Instant。配套 <strong>Images 2.0</strong> 带来<strong>空间语义锚定技术</strong>，支持局部精准编辑、矢量文字生成、多参考图角色锁定。官方评测：<strong>幻觉更少、回答更准、不滥用 emoji</strong>。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">适合谁</div><div class="sub-card-body">设计师 / 内容创作者 / 需要图文一体化输出的团队</div></div>
+        <div class="sub-card"><div class="sub-card-title">最快路径</div><div class="sub-card-body">确认模型显示 5.5 → 复测旧 prompt → 减掉对抗 5.3 的冗余约束</div></div>
+        <div class="sub-card"><div class="sub-card-title">关键参数</div><div class="sub-card-body">--sref 锁风格 / --cref 锁角色 / thinking mode 先规划再生成</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI, @sama</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Code /plan 模式 &middot; 防止 90% 的过度自信错误</span>
+        <span class="card-tag">v2.1.13x</span>
+      </div>
+      <div class="card-desc">
+        Claude Code 最新版本带来 <strong>/plan 模式</strong>——Claude 先只读探索、设计实现方案、写入计划文件，等待用户批准后才执行。配合 VS Code Plan Preview，可在预览中评论修改后再执行。
+      </div>
+      <div class="code-block"><span class="cmt"># 进入 plan 模式</span>
+/plan
+
+<span class="cmt"># 带描述进入</span>
+/plan refactor the auth module
+
+<span class="cmt"># 组合企业级安全</span>
+/plan + MCP Server 治理 + blockedMarketplaces 白名单</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">适合谁</div><div class="sub-card-body">企业团队 / 多人协作 / 核心业务逻辑开发</div></div>
+        <div class="sub-card"><div class="sub-card-title">核心价值</div><div class="sub-card-body">让 AI 从"速度猛男"变成"职业工程师"</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI, @alexalbert__</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Kimi K2.5 &middot; 开源多模态 Agent Swarm</span>
+        <span class="card-tag">开源</span>
+      </div>
+      <div class="card-desc">
+        月之暗面开源 <strong>Kimi K2.5</strong>，万亿参数 MoE 架构（仅激活 32B），原生多模态 + <strong>Agent Swarm 并行智能体编排</strong>，支持 100 个子 Agent 同时执行任务。256K 上下文 / 视觉推理激活 / 文本-视觉联合 RL。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">架构</div><div class="sub-card-body">1T 参数 MoE，仅激活 32B，计算量减少 97%</div></div>
+        <div class="sub-card"><div class="sub-card-title">上下文</div><div class="sub-card-body">256K tokens，可处理整本手册或代码库</div></div>
+        <div class="sub-card"><div class="sub-card-title">Agent Swarm</div><div class="sub-card-body">Orchestrator 分解任务 → 并行调度 100 子 Agent</div></div>
+      </div>
+      <div class="source">&compfn; @Kimi_Moonshot</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚡ 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Midjourney V7 &middot; Draft Mode + Omni-Reference</span>
+        <span class="card-tag">10x 迭代</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：AI 出图迭代慢、角色跨镜头变脸、风格不一致。<strong>MJ V7 的 Draft Mode 让概念迭代速度提升 10 倍</strong>（成本降低 50%），Omni-Reference 实现角色一致性锁定。
+      </div>
+      <div class="code-block"><span class="cmt"># MJ V7 Prompt 模板</span>
+[主体描述] + [环境/光线/镜头] + [风格关键词],
+--ar 16:9 --sref [风格图URL] --cref [角色图URL] --stylize 300 --v 7</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">过去</div><div class="sub-card-body">出 10 张图挑 1 张，等 10 分钟</div></div>
+        <div class="sub-card"><div class="sub-card-title">现在</div><div class="sub-card-body">Draft 30 张选 3 张精修，3 分钟</div></div>
+      </div>
+      <div class="source">&compfn; @midjourney</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Claude Code Git Worktrees &middot; 多 Agent 并行互不打架</span>
+        <span class="card-tag">自动清理</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：多个 Claude Code 窗口同目录跑 → 改文件互相覆盖、git 状态混乱。<strong>Native Worktrees 让每个 sub-agent 用独立临时 worktree</strong>，PR squash-merge 后自动清理。
+      </div>
+      <div class="code-block"><span class="cmt"># baseRef 配置</span>
+worktree.baseRef: <span class="str">fresh</span>    <span class="cmt"># 新功能：从最新 main 创建（推荐）</span>
+worktree.baseRef: <span class="str">head</span>     <span class="cmt"># Bugfix：从当前 commit 创建</span>
+
+<span class="cmt"># 委派 sub-agent 时声明隔离</span>
+{
+  <span class="key">"isolation"</span>: <span class="str">"worktree"</span>
+}</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">新功能开发</div><div class="sub-card-body">baseRef: fresh</div></div>
+        <div class="sub-card"><div class="sub-card-title">Bugfix / 调试</div><div class="sub-card-body">baseRef: head</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">国产模型五强选型指南</span>
+        <span class="card-tag">选型速查</span>
+      </div>
+      <div class="card-desc">
+        2026 年 5 月最新横评结论：按场景选型，避免"用一个模型做所有事"的效率损失。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">要开源定制</div><div class="sub-card-body">→ DeepSeek V4</div></div>
+        <div class="sub-card"><div class="sub-card-title">要编程最强</div><div class="sub-card-body">→ GLM-5.1（SWE-bench Pro 58.4）</div></div>
+        <div class="sub-card"><div class="sub-card-title">要 Agent 集群</div><div class="sub-card-body">→ Kimi K2.5</div></div>
+        <div class="sub-card"><div class="sub-card-title">要办公自动化</div><div class="sub-card-body">→ MiniMax M2.7</div></div>
+        <div class="sub-card"><div class="sub-card-title">要综合均衡</div><div class="sub-card-body">→ Qwen 3.6</div></div>
+        <div class="sub-card"><div class="sub-card-title">要长上下文</div><div class="sub-card-body">全部支持 1M tokens</div></div>
+      </div>
+      <div class="source">&compfn; 阿里云 PAI / 掘金横评</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 方法论与 Prompt</div>
+    <div class="section-sub">3 套最有 ROI 的一次性投入</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Veo 3.1 视频生成工作流 &middot; 从"能生成"到"能商用"</span>
+        <span class="card-tag">4K 60fps</span>
+      </div>
+      <div class="card-desc">
+        Google Veo 3.1 带来 <strong>9:16 原生竖屏</strong> + <strong>4K 60fps</strong> + <strong>多参考图角色一致性</strong>，AI 视频从"玩具"进化为"可商用素材"。物理模拟更真实，面部表情更细腻，音频同步增强。
+      </div>
+      <div class="code-block"><span class="cmt"># Veo 3.1 Prompt 模板（3段式）</span>
+[主体: 谁/做什么] +
+[环境: 地点/时间/氛围] +
+[镜头: 运镜方式/焦距/角度] +
+[光线: 光源类型/质感]
+
+--ar 9:16 --sref [风格图1,风格图2] --duration 10s</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">旧 workflow</div><div class="sub-card-body">Veo 3 生成 → 发现角色变脸 → 手动补帧调色 → 半天出 1 条</div></div>
+        <div class="sub-card"><div class="sub-card-title">新 workflow</div><div class="sub-card-body">Veo 3.1 + 4 张参考图 → Draft 批量生成 → 选最优直接投放 → 2 小时出 10 条</div></div>
+      </div>
+      <div class="source">&compfn; @GoogleDeepMind</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">AI 视频工具选型矩阵</span>
+        <span class="card-tag">选型决策</span>
+      </div>
+      <div class="card-desc">
+        不同视频生成工具适合不同场景，选对工具比调 prompt 更重要。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">电影级质感</div><div class="sub-card-body">Runway Gen-4（人物一致性最佳）</div></div>
+        <div class="sub-card"><div class="sub-card-title">快速社媒素材</div><div class="sub-card-body">Veo 3.1（原生竖屏、生成快）</div></div>
+        <div class="sub-card"><div class="sub-card-title">中文/口型同步</div><div class="sub-card-body">Seedance 2.0（剪映直连）</div></div>
+        <div class="sub-card"><div class="sub-card-title">超写实物理</div><div class="sub-card-body">Sora（流体/光影最真实）</div></div>
+        <div class="sub-card"><div class="sub-card-title">角色一致性严控</div><div class="sub-card-body">Kling（ID-LoRA 最强）</div></div>
+        <div class="sub-card"><div class="sub-card-title">免费额度多</div><div class="sub-card-body">Veo 3.1 / Seedance 2.0</div></div>
+      </div>
+      <div class="source">&compfn; @runway @GoogleDeepMind @BytedanceTalk</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">Seedance 2.0 中文视频工作流 &middot; 剪映一键出片</span>
+        <span class="card-tag">剪映集成</span>
+      </div>
+      <div class="card-desc">
+        字节 <strong>Seedance 2.0</strong> 深度集成剪映，中文理解力提升 42%，让"0 基础用户"也能一键生成带剧情、台词、口型同步的短视频。内置 C2PA 水印、禁止真实人脸/IP 生成。
+      </div>
+      <div class="code-block"><span class="cmt"># Seedance 2.0 中文 Prompt 示例</span>
+一个穿汉服的女孩在雪中舞剑，要有电影感，镜头从低角度缓慢上摇
+
+<span class="cmt"># 自动生成流程</span>
+1. 自动生成 3 组分镜脚本
+2. 按选定脚本生成视频片段
+3. 自动配音（可选方言/口音）
+4. 剪映内直接剪辑导出</div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">输入</div><div class="sub-card-body">"制作一条 15 秒咖啡广告，突出早晨清醒感"</div></div>
+        <div class="sub-card"><div class="sub-card-title">过去</div><div class="sub-card-body">1 天（写脚本+找素材+剪辑）</div></div>
+        <div class="sub-card"><div class="sub-card-title">现在</div><div class="sub-card-body">10 分钟出片</div></div>
+      </div>
+      <div class="source">&compfn; @BytedanceTalk</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">ranked</span>
+    </div>
+    <div class="section-title">📋 本周最值得先试的顺序</div>
+    <div class="section-sub">按学习成本 × 价值收益从高到低排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">GPT-5.5 模型切换</div>
+        <div class="gallery-desc">0 成本，打开 ChatGPT 就是默认</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">Claude Code /plan 模式</div>
+        <div class="gallery-desc">5 分钟学会，防止 90% AI 错误</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">MJ V7 Draft Mode</div>
+        <div class="gallery-desc">10 分钟上手，出图速度 10 倍提升</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">Seedance 2.0 剪映集成</div>
+        <div class="gallery-desc">15 分钟出第一条视频，0 基础友好</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">Veo 3.1 原生竖屏</div>
+        <div class="gallery-desc">免费额度充足，社媒素材首选</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">Kimi K2.5 Agent Swarm</div>
+        <div class="gallery-desc">半天实验复杂任务自动化</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 &middot; 2026.05.05 – 05.11<br>
+      扫描 65 个顶级 AI 信源 &middot; 精选 9 条立刻能用 &middot; 宁缺毋滥
+    </div>
+    <div class="footer-right">
+      小柒AI速递 &middot; 每周一上午推送
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
