@@ -1,876 +1,543 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CODM 竞品日报归档中心</title>
-  <style>
-    :root {
-      --bg: #0d0d0d;
-      --bg-soft: #131313;
-      --card: #171717;
-      --card-hover: #1d1d1d;
-      --line: rgba(255,255,255,0.08);
-      --line-strong: rgba(255,230,0,0.35);
-      --text: #ffffff;
-      --text-secondary: #c7c7c7;
-      --text-muted: #8b8b8b;
-      --yellow: #ffe600;
-      --yellow-soft: rgba(255,230,0,0.12);
-      --shadow: 0 16px 40px rgba(0,0,0,0.35);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODM 竞品日报 · 归档中心</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2; --paper-3: #E8E2D0;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --fire: #E07A5F; --amber: #E6AA5C; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.12);
+  --sidebar-w: 200px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  min-height:100vh; background:var(--paper);
+  color:var(--ink); font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
 
-    * { box-sizing: border-box; }
+/* ═══ Left Sidebar ═══ */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:rgba(255,255,255,0.6); backdrop-filter:blur(20px);
+  border-right:1px solid var(--border); padding:28px 0;
+  display:flex; flex-direction:column; z-index:100;
+}
+.sidebar-brand { padding:0 20px 24px; border-bottom:1px solid var(--border); margin-bottom:12px; }
+.sidebar-logo {
+  font-family:"Cormorant Garamond",serif; font-weight:600; font-size:18px; color:var(--ink);
+}
+.sidebar-logo em { font-style:italic; color:var(--fire); }
+.sidebar-sub { font-family:"Noto Sans SC",sans-serif; font-size:11px; color:var(--ink-faint); margin-top:4px; }
 
-    html { scroll-behavior: smooth; }
+.sidebar-nav { flex:1; padding:0 12px; }
+.nav-item {
+  display:flex; align-items:center; gap:10px; padding:10px 12px; width:100%;
+  border-radius:10px; color:var(--ink-soft); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  transition:all 0.15s; margin-bottom:2px;
+  background:none; border:none; cursor:pointer; text-align:left;
+}
+.nav-item:hover { background:rgba(42,36,27,0.04); color:var(--ink); }
+.nav-item.active { background:rgba(224,122,95,0.12); color:var(--fire); font-weight:500; }
+.nav-icon { width:18px; height:18px; fill:currentColor; flex-shrink:0; opacity:0.7; }
+.nav-item.active .nav-icon { opacity:1; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(255,230,0,0.08), transparent 28%),
-        linear-gradient(180deg, #0b0b0b 0%, #0d0d0d 45%, #111111 100%);
-      color: var(--text);
-      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
+.sidebar-footer {
+  padding:16px 20px 0; border-top:1px solid var(--border); margin-top:auto;
+  display:flex; gap:6px;
+}
+.sidebar-footer i { width:8px; height:8px; border-radius:50%; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+.sidebar-links { padding:12px 16px 0; }
+.sidebar-link {
+  display:block; padding:8px 12px; text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:12px; color:var(--ink-faint);
+  border:1px solid var(--border); border-radius:8px; text-align:center;
+  transition:all 0.15s; margin-bottom:6px;
+}
+.sidebar-link:hover { color:var(--fire); border-color:rgba(224,122,95,0.3); }
 
-    .page {
-      width: min(1120px, calc(100vw - 32px));
-      margin: 0 auto;
-      padding: 36px 0 56px;
-    }
+/* ═══ Main ═══ */
+.main { margin-left:var(--sidebar-w); min-height:100vh; display:flex; }
+.main-content { flex:1; min-width:0; }
+.right-timeline {
+  position:sticky; top:0; width:200px; height:100vh; flex-shrink:0;
+  border-left:1px solid var(--border); padding:32px 16px;
+  overflow-y:auto; background:rgba(255,255,255,0.3);
+}
+.rt-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:13px;
+  color:var(--ink-faint); letter-spacing:0.5px; margin-bottom:16px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.rt-group { margin-bottom:16px; }
+.rt-year {
+  font-family:"Work Sans",sans-serif; font-size:11px; font-weight:500;
+  color:var(--ink-faint); letter-spacing:0.08em; margin-bottom:6px;
+}
+.rt-item {
+  display:flex; align-items:center; gap:8px; padding:5px 8px;
+  border-radius:6px; text-decoration:none; color:var(--ink-soft);
+  font-size:12px; font-family:"Noto Sans SC",sans-serif; transition:all 0.15s;
+  margin-bottom:2px;
+}
+.rt-item:hover { background:rgba(42,36,27,0.04); color:var(--ink); }
+.rt-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.rt-dot.toc { background:var(--fire); }
+.rt-dot.card { background:var(--amber); }
+.rt-label { flex:1; }
+.rt-type { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:10px; color:var(--ink-faint); }
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 18px;
-      border: 1px solid var(--line);
-      background: rgba(12,12,12,0.8);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 12px;
-      z-index: 10;
-      box-shadow: var(--shadow);
-    }
+/* ═══ Header ═══ */
+.page-header { padding:32px 40px 0; max-width:960px; }
+.page-title {
+  font-family:"Noto Sans SC",sans-serif; font-size:28px; font-weight:700; color:var(--ink); margin-bottom:4px;
+}
+.page-desc { font-size:14px; color:var(--ink-faint); margin-bottom:24px; }
 
-    .topbar-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      color: var(--text-secondary);
-    }
+/* ═══ Filter Tabs ═══ */
+.filter-row {
+  display:flex; gap:8px; flex-wrap:wrap; padding:0 40px; max-width:960px; margin-bottom:8px;
+}
+.filter-row + .filter-row { margin-top:0; margin-bottom:20px; }
+.ftab {
+  padding:6px 14px; border-radius:999px; font-size:13px; font-weight:400;
+  color:var(--ink-soft); background:rgba(255,255,255,0.5); border:1px solid var(--border);
+  cursor:pointer; transition:all 0.15s; font-family:"Noto Sans SC",sans-serif;
+}
+.ftab:hover { background:rgba(255,255,255,0.8); color:var(--ink); }
+.ftab.active { background:var(--fire); color:#fff; border-color:var(--fire); font-weight:500; }
+.ftab-sep { width:1px; height:24px; background:var(--border); align-self:center; margin:0 4px; }
 
-    .topbar-brand::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: var(--yellow);
-      box-shadow: 0 0 20px rgba(255,230,0,0.55);
-    }
+/* ═══ Timeline Feed ═══ */
+.feed { padding:0 40px 80px; max-width:960px; }
 
-    .topbar-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+.date-group { margin-bottom:32px; }
+.date-label {
+  font-family:"Work Sans",sans-serif; font-size:12px; font-weight:500;
+  color:var(--ink-faint); letter-spacing:0.05em; margin-bottom:12px; padding-left:4px;
+}
 
-    .topbar-link {
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      color: var(--text-secondary);
-      font-size: 13px;
-      transition: all .2s ease;
-    }
+.feed-item {
+  display:flex; gap:16px; margin-bottom:16px; position:relative;
+  padding-left:20px;
+}
+.feed-item::before {
+  content:''; position:absolute; left:0; top:10px;
+  width:10px; height:10px; border-radius:50%; background:var(--sage);
+  border:2px solid var(--paper);
+}
+.feed-item.type-toc::before { background:var(--fire); }
+.feed-item.type-card::before { background:var(--amber); }
+.feed-item::after {
+  content:''; position:absolute; left:4px; top:22px; bottom:-16px;
+  width:2px; background:var(--border);
+}
+.date-group .feed-item:last-child::after { display:none; }
 
-    .topbar-link:hover {
-      border-color: var(--line-strong);
-      color: var(--yellow);
-      background: var(--yellow-soft);
-    }
+.time-col {
+  flex-shrink:0; width:48px; text-align:right;
+  font-family:"Work Sans",sans-serif; font-size:12px; color:var(--ink-faint);
+  padding-top:4px;
+}
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-      gap: 18px;
-      margin-top: 22px;
-    }
+.feed-card {
+  flex:1; background:var(--card-bg); border-radius:18px; padding:20px 24px;
+  border:1px solid transparent; transition:all 0.2s; cursor:pointer;
+  text-decoration:none; color:inherit; display:block;
+}
+.feed-card:hover { border-color:var(--border); box-shadow:0 6px 20px rgba(42,36,27,0.06); transform:translateY(-1px); }
 
-    .hero-main,
-    .hero-side,
-    .archive-card,
-    .rules,
-    .empty-state {
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow: var(--shadow);
-    }
+.feed-card-head { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.feed-source { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-faint); }
+.source-dot {
+  width:20px; height:20px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:10px; color:#fff;
+}
+.source-dot.toc { background:var(--fire); }
+.source-dot.card { background:var(--amber); }
+.feed-type-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px; }
 
-    .hero-main {
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-    }
+.feed-title {
+  font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600;
+  color:var(--ink); line-height:1.45; margin-bottom:4px;
+}
+.feed-desc {
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:300;
+  color:var(--ink-soft); line-height:1.6; margin-bottom:10px;
+}
+.feed-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.feed-tag {
+  padding:3px 9px; border-radius:6px; font-size:11px;
+  color:var(--ink-soft); background:var(--paper-2); font-weight:400;
+}
 
-    .hero-main::after {
-      content: 'ARCHIVE';
-      position: absolute;
-      right: -18px;
-      top: 18px;
-      font-size: 70px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.035);
-      pointer-events: none;
-    }
+/* ═══ Empty ═══ */
+.empty { text-align:center; padding:60px 20px; color:var(--ink-faint); display:none; }
+.empty.visible { display:block; }
 
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-      font-size: 12px;
-      letter-spacing: 0.24em;
-      color: var(--yellow);
-      text-transform: uppercase;
-    }
-
-    .hero-kicker::before {
-      content: '';
-      width: 28px;
-      height: 2px;
-      background: var(--yellow);
-    }
-
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 5vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-    }
-
-    .hero h1 .hl { color: var(--yellow); }
-
-    .hero p {
-      margin: 0;
-      max-width: 720px;
-      color: var(--text-secondary);
-      font-size: 15px;
-    }
-
-    .hero-side {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .stat-item {
-      padding: 16px;
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-    }
-
-    .stat-label {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .stat-value {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--yellow);
-      line-height: 1;
-    }
-
-    .stat-note {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 28px 0 14px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .section-head p {
-      margin: 0;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .archive-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    .archive-card {
-      padding: 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    .archive-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--line-strong);
-      background: linear-gradient(180deg, rgba(255,230,0,0.06), rgba(255,255,255,0.02));
-    }
-
-    .archive-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .archive-label {
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .archive-card h2 {
-      margin: 0;
-      font-size: 26px;
-      line-height: 1.15;
-    }
-
-    .archive-date {
-      font-size: 12px;
-      color: var(--yellow);
-      border: 1px solid var(--line-strong);
-      background: var(--yellow-soft);
-      padding: 6px 10px;
-      white-space: nowrap;
-    }
-
-    .archive-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .meta-badge {
-      border: 1px solid var(--line);
-      padding: 4px 8px;
-      font-size: 11px;
-      color: var(--text-secondary);
-      background: rgba(255,255,255,0.03);
-      letter-spacing: 0.08em;
-    }
-
-    .meta-badge-highlight {
-      border-color: var(--line-strong);
-      color: var(--yellow);
-      background: var(--yellow-soft);
-    }
-
-    .archive-desc {
-      min-height: 72px;
-      margin: 0 0 16px;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .archive-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .action-primary,
-    .action-secondary,
-    .action-disabled {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 92px;
-      padding: 10px 14px;
-      font-size: 13px;
-      border: 1px solid var(--line);
-    }
-
-    .action-primary {
-      background: var(--yellow);
-      color: #121212;
-      border-color: var(--yellow);
-      font-weight: 700;
-    }
-
-    .action-secondary:hover {
-      border-color: var(--line-strong);
-      color: var(--yellow);
-    }
-
-    .action-disabled {
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.03);
-    }
-
-    .archive-footer {
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .archive-footer a {
-      color: var(--text-secondary);
-    }
-
-    .archive-footer a:hover {
-      color: var(--yellow);
-    }
-
-    .rules {
-      margin-top: 18px;
-      padding: 24px;
-    }
-
-    .rules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .rule-item {
-      padding: 16px;
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-    }
-
-    .rule-item h3 {
-      margin: 0 0 8px;
-      font-size: 14px;
-      color: var(--yellow);
-    }
-
-    .rule-item p {
-      margin: 0;
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .empty-state {
-      margin-top: 16px;
-      padding: 36px;
-      text-align: center;
-    }
-
-    .empty-icon {
-      display: inline-block;
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      border: 1px solid var(--line-strong);
-      color: var(--yellow);
-      letter-spacing: 0.24em;
-      font-size: 12px;
-    }
-
-    code {
-      padding: 2px 6px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--line);
-      color: var(--yellow);
-    }
-
-    .footer {
-      margin-top: 28px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .topbar { position: static; }
-    }
-
-    @media (max-width: 640px) {
-      .page { width: min(100vw - 20px, 1120px); padding-top: 18px; }
-      .topbar, .hero-main, .hero-side, .archive-card, .rules { padding-left: 16px; padding-right: 16px; }
-      .hero-main { padding-top: 24px; padding-bottom: 24px; }
-      .archive-card h2 { font-size: 22px; }
-      .archive-card-head { flex-direction: column; }
-      .archive-footer { flex-direction: column; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+/* ═══ Mobile ═══ */
+.menu-toggle {
+  display:none; position:fixed; top:14px; left:14px; z-index:200;
+  width:36px; height:36px; background:rgba(255,255,255,0.9); border:1px solid var(--border);
+  border-radius:8px; font-size:16px; cursor:pointer; align-items:center; justify-content:center;
+}
+@media(max-width:768px) {
+  .sidebar { transform:translateX(-100%); transition:transform 0.3s; }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .menu-toggle { display:flex; }
+  .page-header, .filter-row, .feed { padding-left:20px; padding-right:20px; }
+  .right-timeline { display:none; }
+}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
-      <div class="topbar-brand">CODM DARK OPS / COMPETITIVE DAILY ARCHIVE</div>
-      <nav class="topbar-links">
-        <a class="topbar-link" href="../../index.html">返回首页</a>
-        <a class="topbar-link" href="./README.md">README</a>
-        <a class="topbar-link" href="#archive-list">日报列表</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <div class="hero-main">
-        <div class="hero-kicker">Codm Design Intel</div>
-        <h1>竞品日报 <span class="hl">归档中心</span></h1>
-        <p>把每天的 <code>competitive-daily-card-YYYYMMDD.html</code> 自动归入同一个 H5 入口，统一查看历史日报、原始 Markdown 与长图截图，作为 CODM 宣发设计团队的持续情报索引。</p>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
 
-      </div>
-
-      <aside class="hero-side">
-        <div class="stat-grid">
-          <div class="stat-item">
-            <div class="stat-label">Total Reports</div>
-            <div class="stat-value">17</div>
-            <div class="stat-note">已归档日报总数</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">Latest Date</div>
-            <div class="stat-value">0501</div>
-            <div class="stat-note">最新日报日期</div>
-          </div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Coverage</div>
-          <div class="stat-note">2026-04-13 → 2026-05-01</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Generated At</div>
-          <div class="stat-note">2026/5/1 09:44:26</div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="rules">
-      <div class="section-head">
-        <h2>归档规则</h2>
-        <p>自动扫描当前目录下符合命名规范的日报文件</p>
-      </div>
-      <div class="rules-grid">
-        <div class="rule-item">
-          <h3>HTML 收录</h3>
-          <p>文件名必须符合 <code>competitive-daily-card-YYYYMMDD.html</code>，归档页会按日期倒序展示。</p>
-        </div>
-        <div class="rule-item">
-          <h3>原文联动</h3>
-          <p>同日期的 <code>CODM_Competitive_Daily_YYYYMMDD.md</code> 会自动挂到卡片操作区，方便回溯原始日报。</p>
-        </div>
-        <div class="rule-item">
-          <h3>长图联动</h3>
-          <p>同日期的 <code>competitive-daily-card-YYYYMMDD.png</code> 会自动显示为可查看资源，适配群发截图复盘。</p>
-        </div>
-        <div class="rule-item">
-          <h3>更新方式</h3>
-          <p>可手动运行 <code>node _deploy/generate-competitive-archive.js</code>，也可在日报发布脚本中自动刷新。</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="archive-list">
-      <div class="section-head">
-        <h2>日报列表</h2>
-        <p>最新日报优先显示，点击即可进入对应 H5</p>
-      </div>
-      <div class="archive-grid">
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-05-01</h2>
-          </div>
-          <div class="archive-date">2026.05.01</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge meta-badge-highlight">LATEST</span><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">23 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260501.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260501.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260501.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/5/1 09:43:49</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260501.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-30</h2>
-          </div>
-          <div class="archive-date">2026.04.30</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">13 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260430.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260430.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260430.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/5/1 09:39:38</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260430.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-29</h2>
-          </div>
-          <div class="archive-date">2026.04.29</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260429.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260429.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260429.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/29 13:23:45</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260429.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-28</h2>
-          </div>
-          <div class="archive-date">2026.04.28</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">23 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260428.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260428.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260428.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/28 09:42:36</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260428.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-27</h2>
-          </div>
-          <div class="archive-date">2026.04.27</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260427.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260427.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260427.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/27 09:40:07</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260427.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-24</h2>
-          </div>
-          <div class="archive-date">2026.04.24</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260424.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260424.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260424.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/24 09:41:02</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260424.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-23</h2>
-          </div>
-          <div class="archive-date">2026.04.23</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">21 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260423.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260423.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260423.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/23 12:17:21</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260423.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-22</h2>
-          </div>
-          <div class="archive-date">2026.04.22</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260422.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260422.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260422.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/22 09:39:28</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260422.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-21</h2>
-          </div>
-          <div class="archive-date">2026.04.21</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260421.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260421.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260421.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/21 19:25:10</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260421.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-20</h2>
-          </div>
-          <div class="archive-date">2026.04.20</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260420.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260420.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260420.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/20 16:54:43</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260420.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-19</h2>
-          </div>
-          <div class="archive-date">2026.04.19</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">16 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260419.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260419.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260419.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/19 19:59:07</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260419.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-18</h2>
-          </div>
-          <div class="archive-date">2026.04.18</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">16 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260418.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260418.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260418.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/18 13:19:24</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260418.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-17</h2>
-          </div>
-          <div class="archive-date">2026.04.17</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">49 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260417.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260417.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260417.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/17 20:47:41</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260417.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-16</h2>
-          </div>
-          <div class="archive-date">2026.04.16</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">PNG</span><span class="meta-badge">MD</span><span class="meta-badge">15 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260416.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260416.md">查看 MD</a>
-          <a class="action-secondary" href="./competitive-daily-card-20260416.png">查看 PNG</a>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/17 14:55:09</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260416.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-15</h2>
-          </div>
-          <div class="archive-date">2026.04.15</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">24 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260415.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260415.md">查看 MD</a>
-          <span class="action-disabled">缺少 PNG</span>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/15 20:15:30</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260415.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-14</h2>
-          </div>
-          <div class="archive-date">2026.04.14</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">11 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260414.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260414.md">查看 MD</a>
-          <span class="action-disabled">缺少 PNG</span>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/15 18:39:45</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260414.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    
-      <article class="archive-card">
-        <div class="archive-card-head">
-          <div>
-            <div class="archive-label">COMPETITIVE DAILY</div>
-            <h2>2026-04-13</h2>
-          </div>
-          <div class="archive-date">2026.04.13</div>
-        </div>
-        <div class="archive-meta"><span class="meta-badge">MD</span><span class="meta-badge">22 KB</span></div>
-        <p class="archive-desc">每日 CODM 竞品情报网页归档，可直接查看交互 H5，也可回溯原始 Markdown 与截图长图。</p>
-        <div class="archive-actions">
-          <a class="action-primary" href="./competitive-daily-card-20260413.html">打开 H5</a>
-          <a class="action-secondary" href="./CODM_Competitive_Daily_20260413.md">查看 MD</a>
-          <span class="action-disabled">缺少 PNG</span>
-        </div>
-        <div class="archive-footer">
-          <span>页面更新时间：2026/4/13 17:03:57</span>
-          <a href="https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-20260413.html" target="_blank" rel="noreferrer">GitHub Pages</a>
-        </div>
-      </article>
-    </div>
-    </section>
-
-    <div class="footer">
-      Archive generated by <code>_deploy/generate-competitive-archive.js</code>
-    </div>
+<!-- Left Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-logo">竞品<em>.</em>日报</div>
+    <div class="sidebar-sub">CODM Competitive Intel</div>
   </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-nav="all" onclick="navClick(this)">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+      全部日报
+    </button>
+    <button class="nav-item" data-nav="toc" onclick="navClick(this)">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      TOC 互动版
+    </button>
+    <button class="nav-item" data-nav="card" onclick="navClick(this)">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>
+      9:16 卡片版
+    </button>
+  </nav>
+  <div class="sidebar-links">
+    <a class="sidebar-link" href="../ai-daily/index.html">&larr; AI 日报归档</a>
+  </div>
+  <div class="sidebar-footer">
+    <i style="background:var(--fire)"></i>
+    <i style="background:var(--amber)"></i>
+    <i style="background:var(--sage)"></i>
+    <i style="background:var(--lilac)"></i>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+<div class="main-content">
+
+  <div class="page-header">
+    <div class="page-title">全部竞品日报</div>
+    <div class="page-desc">CODM 宣发设计团队 · 竞品情报归档信息流</div>
+  </div>
+
+  <!-- Filter: Type + Tags -->
+  <div class="filter-row" id="typeRow">
+    <button class="ftab active" data-filter="all">全部</button>
+    <button class="ftab" data-filter="toc">TOC 互动版</button>
+    <button class="ftab" data-filter="card">9:16 卡片版</button>
+    <span class="ftab-sep"></span>
+    <button class="ftab" data-filter="tag:三角洲">三角洲</button>
+    <button class="ftab" data-filter="tag:暗区">暗区突围</button>
+    <button class="ftab" data-filter="tag:BF6">BF6</button>
+    <button class="ftab" data-filter="tag:联动">联动</button>
+  </div>
+
+  <!-- Feed -->
+  <div class="feed" id="feed"></div>
+  <div class="empty" id="empty">没有找到匹配的内容</div>
+
+</div>
+
+<!-- Right Timeline -->
+<div class="right-timeline" id="rightTimeline">
+  <div class="rt-title">Archive Timeline</div>
+</div>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    type:"toc", date:"2026-05-13", time:"11:50",
+    title:"竞品日报 · 2026.05.13",
+    desc:"BF6 S3正式上线掀起大盘变局 · 暗区赛博朋克返场定档5/15 · 三角洲双联动消化期 · CODM S4稳运营",
+    url:"competitive-daily-20260513-toc.html",
+    tags:["BF6","三角洲","暗区突围","联动","赛博朋克","古墓丽影"]
+  },
+  {
+    type:"card", date:"2026-05-11", time:"09:52",
+    title:"竞品日报 · 2026.05.11",
+    desc:"三角洲猛攻节 · 暗区二周年 · BF6 S3预热 · CODM S4运营",
+    url:"competitive-daily-card-20260511.html",
+    tags:["三角洲","暗区突围","BF6","CODM"]
+  },
+  {
+    type:"card", date:"2026-05-06", time:"10:56",
+    title:"竞品日报 · 2026.05.06",
+    desc:"三角洲行动KFC联动预热 · 暗区S5变异上线 · BF6更新",
+    url:"competitive-daily-card-20260506.html",
+    tags:["三角洲","暗区突围","联动","KFC"]
+  },
+  {
+    type:"card", date:"2026-05-01", time:"09:43",
+    title:"竞品日报 · 2026.05.01",
+    desc:"五一特别版 · 各竞品节日活动盘点",
+    url:"competitive-daily-card-20260501.html",
+    tags:["三角洲","暗区突围","BF6","CODM","节日"]
+  },
+  {
+    type:"card", date:"2026-04-30", time:"09:40",
+    title:"竞品日报 · 2026.04.30",
+    desc:"暗区突围S5预热 · 三角洲S9中期 · BF6 S3路线图",
+    url:"competitive-daily-card-20260430.html",
+    tags:["暗区突围","三角洲","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-29", time:"13:23",
+    title:"竞品日报 · 2026.04.29",
+    desc:"竞品赛季中期动态汇总",
+    url:"competitive-daily-card-20260429.html",
+    tags:["三角洲","暗区突围","CODM"]
+  },
+  {
+    type:"card", date:"2026-04-28", time:"09:42",
+    title:"竞品日报 · 2026.04.28",
+    desc:"各竞品常规运营动态",
+    url:"competitive-daily-card-20260428.html",
+    tags:["三角洲","暗区突围","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-27", time:"09:40",
+    title:"竞品日报 · 2026.04.27",
+    desc:"周末竞品动态盘点",
+    url:"competitive-daily-card-20260427.html",
+    tags:["三角洲","暗区突围","BF6","CODM"]
+  },
+  {
+    type:"card", date:"2026-04-24", time:"09:41",
+    title:"竞品日报 · 2026.04.24",
+    desc:"CODM S4 Eternal Prison上线 · 竞品联动动态",
+    url:"competitive-daily-card-20260424.html",
+    tags:["CODM","三角洲","暗区突围","联动"]
+  },
+  {
+    type:"card", date:"2026-04-23", time:"12:17",
+    title:"竞品日报 · 2026.04.23",
+    desc:"三角洲S9回声赛季 · 暗区S5预告",
+    url:"competitive-daily-card-20260423.html",
+    tags:["三角洲","暗区突围"]
+  },
+  {
+    type:"card", date:"2026-04-22", time:"09:39",
+    title:"竞品日报 · 2026.04.22",
+    desc:"各竞品赛季运营动态",
+    url:"competitive-daily-card-20260422.html",
+    tags:["三角洲","暗区突围","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-21", time:"19:25",
+    title:"竞品日报 · 2026.04.21",
+    desc:"周一竞品动态汇总",
+    url:"competitive-daily-card-20260421.html",
+    tags:["三角洲","暗区突围","CODM"]
+  },
+  {
+    type:"card", date:"2026-04-20", time:"16:54",
+    title:"竞品日报 · 2026.04.20",
+    desc:"周末竞品活动盘点",
+    url:"competitive-daily-card-20260420.html",
+    tags:["三角洲","暗区突围","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-19", time:"19:59",
+    title:"竞品日报 · 2026.04.19",
+    desc:"三角洲古墓丽影联动预热 · 竞品动态",
+    url:"competitive-daily-card-20260419.html",
+    tags:["三角洲","联动","古墓丽影"]
+  },
+  {
+    type:"card", date:"2026-04-18", time:"13:19",
+    title:"竞品日报 · 2026.04.18",
+    desc:"各竞品赛季中期运营",
+    url:"competitive-daily-card-20260418.html",
+    tags:["三角洲","暗区突围","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-17", time:"20:47",
+    title:"竞品日报 · 2026.04.17",
+    desc:"三角洲S9回声上线 · 暗区更新",
+    url:"competitive-daily-card-20260417.html",
+    tags:["三角洲","暗区突围"]
+  },
+  {
+    type:"card", date:"2026-04-16", time:"14:55",
+    title:"竞品日报 · 2026.04.16",
+    desc:"三角洲回声赛季首日 · 各竞品动态",
+    url:"competitive-daily-card-20260416.html",
+    tags:["三角洲","暗区突围","BF6"]
+  },
+  {
+    type:"card", date:"2026-04-15", time:"20:15",
+    title:"竞品日报 · 2026.04.15",
+    desc:"三角洲S9预热 · 竞品汇总",
+    url:"competitive-daily-card-20260415.html",
+    tags:["三角洲","暗区突围"]
+  },
+  {
+    type:"card", date:"2026-04-14", time:"18:39",
+    title:"竞品日报 · 2026.04.14",
+    desc:"竞品日常运营动态",
+    url:"competitive-daily-card-20260414.html",
+    tags:["三角洲","暗区突围","CODM"]
+  },
+  {
+    type:"card", date:"2026-04-13", time:"17:03",
+    title:"竞品日报 · 2026.04.13",
+    desc:"首期竞品日报归档",
+    url:"competitive-daily-card-20260413.html",
+    tags:["三角洲","暗区突围","BF6","CODM"]
+  }
+];
+
+let activeFilter = 'all';
+
+function groupByDate(items) {
+  const groups = {};
+  items.forEach(item => {
+    const d = item.date;
+    if (!groups[d]) groups[d] = [];
+    groups[d].push(item);
+  });
+  return Object.entries(groups).sort((a,b) => b[0].localeCompare(a[0]));
+}
+
+function formatDate(dateStr) {
+  const [y,m,d] = dateStr.split('-');
+  const dt = new Date(dateStr);
+  const weekdays = ['\u661f\u671f\u65e5','\u661f\u671f\u4e00','\u661f\u671f\u4e8c','\u661f\u671f\u4e09','\u661f\u671f\u56db','\u661f\u671f\u4e94','\u661f\u671f\u516d'];
+  return m + '\u6708' + d + '\u65e5 ' + weekdays[dt.getDay()];
+}
+
+function render() {
+  let items = DATA;
+  if (activeFilter === 'toc') items = items.filter(i => i.type === 'toc');
+  else if (activeFilter === 'card') items = items.filter(i => i.type === 'card');
+  else if (activeFilter.startsWith('tag:')) {
+    const tag = activeFilter.slice(4).toLowerCase();
+    items = items.filter(i => i.tags.some(t => t.toLowerCase().includes(tag)));
+  }
+
+  const feed = document.getElementById('feed');
+  const empty = document.getElementById('empty');
+
+  if (!items.length) { feed.innerHTML=''; empty.classList.add('visible'); return; }
+  empty.classList.remove('visible');
+
+  const groups = groupByDate(items);
+  feed.innerHTML = groups.map(([date, entries]) => {
+    return '<div class="date-group"><div class="date-label">' + formatDate(date) + '</div>' +
+      entries.map(item => {
+        const dotClass = item.type === 'toc' ? 'toc' : 'card';
+        const sourceLabel = item.type === 'toc' ? 'TOC Interactive' : 'Dark Ops Card';
+        const emoji = item.type === 'toc' ? '\u{1f4cb}' : '\u{1f3ae}';
+        return '<div class="feed-item type-' + item.type + '">' +
+          '<div class="time-col">' + item.time + '</div>' +
+          '<a class="feed-card" href="' + item.url + '">' +
+            '<div class="feed-card-head"><div class="feed-source"><span class="source-dot ' + dotClass + '">' + emoji + '</span><span class="feed-type-label">' + sourceLabel + '</span></div></div>' +
+            '<div class="feed-title">' + item.title + '</div>' +
+            '<div class="feed-desc">' + item.desc + '</div>' +
+            '<div class="feed-tags">' + item.tags.map(t => '<span class="feed-tag">' + t + '</span>').join('') + '</div>' +
+          '</a>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }).join('');
+}
+
+function navClick(btn) {
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+  btn.classList.add('active');
+  activeFilter = btn.dataset.nav;
+  var titles = {all:'\u5168\u90e8\u7ade\u54c1\u65e5\u62a5', toc:'TOC \u4e92\u52a8\u7248', card:'9:16 \u5361\u7247\u7248'};
+  document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8\u7ade\u54c1\u65e5\u62a5';
+  document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
+  var matchTab = document.querySelector('.ftab[data-filter="' + activeFilter + '"]');
+  if (matchTab) matchTab.classList.add('active');
+  render();
+  buildTimeline();
+  if (window.innerWidth <= 768) document.querySelector('.sidebar').classList.remove('open');
+}
+
+document.getElementById('typeRow').addEventListener('click', function(e) {
+  var btn = e.target.closest('.ftab');
+  if (!btn) return;
+  if (btn.dataset.filter.startsWith('tag:')) {
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      activeFilter = document.querySelector('.nav-item.active').dataset.nav || 'all';
+    } else {
+      document.querySelectorAll('.ftab[data-filter^="tag:"]').forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+    }
+  } else {
+    document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+    var navMatch = document.querySelector('.nav-item[data-nav="' + activeFilter + '"]');
+    if (navMatch) navMatch.classList.add('active');
+    var titles = {all:'\u5168\u90e8\u7ade\u54c1\u65e5\u62a5', toc:'TOC \u4e92\u52a8\u7248', card:'9:16 \u5361\u7247\u7248'};
+    document.querySelector('.page-title').textContent = titles[activeFilter] || '\u5168\u90e8\u7ade\u54c1\u65e5\u62a5';
+  }
+  render();
+  buildTimeline();
+});
+
+render();
+
+function buildTimeline() {
+  var tl = document.getElementById('rightTimeline');
+  var typeFilter = 'all';
+  if (activeFilter === 'toc' || activeFilter === 'card') typeFilter = activeFilter;
+  var items = typeFilter === 'all' ? DATA : DATA.filter(function(d) { return d.type === typeFilter; });
+
+  var tlTitle = typeFilter === 'toc' ? 'TOC Timeline' : typeFilter === 'card' ? 'Card Timeline' : 'Archive Timeline';
+
+  var groups = {};
+  items.forEach(function(item) {
+    var year = item.date.split('-')[0];
+    if (!groups[year]) groups[year] = [];
+    groups[year].push(item);
+  });
+  var html = '<div class="rt-title">' + tlTitle + '</div>';
+  Object.keys(groups).sort().reverse().forEach(function(year) {
+    html += '<div class="rt-group"><div class="rt-year">' + year + '</div>';
+    groups[year].sort(function(a,b) { return b.date.localeCompare(a.date); }).forEach(function(item) {
+      var parts = item.date.split('-');
+      var label = parts[1] + '.' + parts[2];
+      var typeLabel = item.type === 'toc' ? 'TOC' : 'Card';
+      html += '<a class="rt-item" href="' + item.url + '"><span class="rt-dot ' + item.type + '"></span><span class="rt-label">' + label + '</span><span class="rt-type">' + typeLabel + '</span></a>';
+    });
+    html += '</div>';
+  });
+  tl.innerHTML = html;
+}
+buildTimeline();
+</script>
 </body>
 </html>
