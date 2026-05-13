@@ -98,80 +98,38 @@ function extractPushMarkdown(mdContent, dateStr) {
   const year = dateStr.slice(0, 4);
   const month = dateStr.slice(4, 6);
   const day = dateStr.slice(6, 8);
-  lines.push(`**📰 AIGC 日报 | ${year}.${month}.${day}**`);
-  lines.push('');
   
-  // 提取概览表格
+  // 提取 TOP 1 标题作为 hook
+  let hookTitle = '';
   const tableStart = mdLines.findIndex(l => l.match(/^\|.*新闻标题/));
   if (tableStart >= 0) {
-    // 解析表格获取 TOP 条目
-    const items = [];
     for (let i = tableStart + 1; i < mdLines.length; i++) {
       const line = mdLines[i];
       if (!line.startsWith('|') || line.includes('---')) continue;
-      
       const cells = line.split('|').filter(c => c.trim());
-      if (cells.length >= 4) {
-        const num = cells[0].trim();
+      if (cells.length >= 2) {
         const titleCell = cells[1].trim();
-        const sourceCell = cells[2].trim();
-        const tagsCell = cells[3].trim();
-        const scoreCell = cells[4] ? cells[4].trim() : '';
-        
-        // 提取标题（去除链接格式）
         const titleMatch = titleCell.match(/\[(.+?)\]/);
-        const title = titleMatch ? titleMatch[1] : titleCell;
-        
-        if (num && title && !isNaN(parseFloat(scoreCell))) {
-          items.push({
-            num: parseInt(num),
-            title: title,
-            source: sourceCell,
-            tags: tagsCell,
-            score: parseFloat(scoreCell)
-          });
-        }
+        hookTitle = titleMatch ? titleMatch[1] : titleCell;
+        break;
       }
-    }
-    
-    // 取 TOP 5
-    const top5 = items.slice(0, 5);
-    if (top5.length > 0) {
-      lines.push('**📌 今日 TOP 5**');
-      for (const item of top5) {
-        const fire = item.score >= 8.8 ? '🔥 ' : '';
-        const tags = item.tags.replace(/#/g, '').trim();
-        lines.push(`> ${fire}#${item.num} ${item.title}`);
-        lines.push(`> 来源: ${item.source} | ${tags} (${item.score})`);
-      }
-      lines.push('');
     }
   }
   
-  // 提取编辑点评
-  const insightStart = mdLines.findIndex(l => l.match(/^## 编辑点评/));
-  if (insightStart >= 0) {
-    let insight = '';
-    for (let i = insightStart + 1; i < mdLines.length; i++) {
-      const line = mdLines[i].trim();
-      if (line.startsWith('##') || line.startsWith('---')) break;
-      if (line && !line.startsWith('**')) {
-        insight += (insight ? ' ' : '') + line;
-      }
-    }
-    if (insight) {
-      if (insight.length > 200) insight = insight.slice(0, 197) + '...';
-      lines.push('**💡 编辑点评**');
-      lines.push(`> ${insight}`);
-      lines.push('');
-    }
+  // 如果没从表格拿到，尝试从 ### #1 ⭐ 提取
+  if (!hookTitle) {
+    const h3Match = mdLines.find(l => l.match(/^### #1 ⭐/));
+    if (h3Match) hookTitle = h3Match.replace(/^### #1 ⭐\s*/, '').trim();
   }
   
-  // Footer
-  lines.push('---');
-  lines.push('*AIGC 日报 · 每工作日 9:30 自动推送*');
+  const hook = hookTitle ? `🔥 ${hookTitle}` : `📰 今日 AI 圈 8 条重磅`;
+  
+  lines.push(`**AIGC 日报 · ${year}.${month}.${day}**`);
+  lines.push('');
+  lines.push(hook);
+  lines.push('');
   const pageUrl = `${GITHUB_PAGES_BASE}/docs/ai-daily/ai-daily-card-${dateStr}-toc.html`;
-  lines.push(`[👉 查看完整日报](${pageUrl})`);
+  lines.push(`👉 [查看完整日报](${pageUrl})`);
   
   let markdown = lines.join('\n');
   
