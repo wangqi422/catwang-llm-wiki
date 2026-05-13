@@ -6,7 +6,7 @@
       "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65"
     }
   ],
-  "githubPagesBase": "https://wangqi422.github.io/my-llm-wiki",
+  "githubPagesBase": "https://wangqi422.github.io/catwang-llm-wiki",
   "mentionAll": false,
   "note": "webhook 字段保持向后兼容；webhooks 数组用于多群推送；lexiang 配置用于乐享知识库推送",
   "lexiang": {
