@@ -27,7 +27,7 @@
 
 ## 🔗 在线查看
 
-- **归档入口**：[`https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/`](https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/)
+- **归档入口**：[`https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/`](https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/)
 - **说明**：部署后会优先打开 `docs/competitive-daily/index.html`，作为所有竞品日报的统一 H5 目录
 
 

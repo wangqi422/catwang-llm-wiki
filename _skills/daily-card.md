@@ -50,12 +50,48 @@ description: "统一日报流水线 Skill：合并 AI Daily 速报卡片 与 COD
 
 - 统一原则：**先读日报 MD，再生成视觉层**，不要只凭记忆或上次结果直接拼图。
 - 所有非日报的生成结果默认落到 `wiki/outputs/` 作为中间层或备份层。日报卡片只存 `docs/`。
+- **AIGC 分支必须同时生成 TOC 版 H5**（Soft Editorial + 侧边栏导航风格）：
+  - 输出文件：`docs/ai-daily/ai-daily-card-YYYYMMDD-toc.html`
+  - 参考模板：`docs/ai-daily/ai-daily-card-20260511-toc.html`
+  - 侧边栏高亮色用柠檬黄 `#D6DD63`
+  - 右上角必须有固定「← 返回归档」按钮
 
-### Phase 4: 发布 / 推送 / 记录
+### Phase 4: 归档 + 发布 + 推送（AIGC 分支必须执行全部步骤）
 
-- AIGC 分支：通常只需要卡片 PNG；如有群发需求，再走企微脚本。
-- CODM 分支：HTML 完成后通常继续执行 GitHub Pages 发布和企业微信推送。
-- 两条分支完成后都应更新 `log.md`。
+**Step 4.1 — 更新归档首页**：
+- 打开 `docs/ai-daily/index.html`
+- 在 `const DATA = [` 数组的**最顶部**追加一条新记录：
+```js
+{
+  type: "daily",  // 日报用 "daily"，周报用 "weekly"
+  date: "YYYY-MM-DD",
+  time: "09:30",
+  title: "AIGC 日报 · YYYY.MM.DD",
+  desc: "一句话描述当天主要内容",
+  url: "ai-daily-card-YYYYMMDD-toc.html",
+  tags: ["标签1", "标签2", "标签3"]
+}
+```
+
+**Step 4.2 — Git Push 发布到 GitHub Pages**：
+```bash
+git add docs/ai-daily/
+git commit -m "feat: AIGC daily YYYY.MM.DD"
+git push origin main
+```
+- 等待 ~30 秒 GitHub Actions 自动部署
+- 在线地址：`https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-YYYYMMDD-toc.html`
+
+**Step 4.3 — 推送企业微信群**：
+```bash
+node _deploy/wecom-push/push-ai-daily.js
+```
+- 推送内容：① Markdown 文字摘要（标题列表 + 一句话总结）→ ② H5 在线链接
+- 如果 push 脚本不存在或 webhook 未配，手动提示用户
+
+**Step 4.4 — 记录日志**：
+- 更新 `log.md`
+- CODM 分支：HTML 完成后继续执行 GitHub Pages 发布和企业微信推送。
 
 ---
 
@@ -657,7 +693,7 @@ git push origin main
 公网链接格式：
 
 ```text
-https://wangqi422.github.io/my-llm-wiki/docs/competitive-daily/competitive-daily-card-YYYYMMDD.html
+https://wangqi422.github.io/catwang-llm-wiki/docs/competitive-daily/competitive-daily-card-YYYYMMDD.html
 ```
 
 #### 企业微信推送（v2.0 — 精简摘要 + 9:16 PNG）

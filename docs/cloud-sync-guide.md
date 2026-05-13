@@ -9,18 +9,18 @@
 1. 登录 https://github.com （没账号就注册一个）
 2. 点右上角 **+** → **New repository**
 3. 填写：
-   - Repository name: `my-llm-wiki`
+   - Repository name: `catwang-llm-wiki`
    - **Private** ← 一定选私有！
    - 不要勾选 "Add a README"（我们本地已有内容）
 4. 点 **Create repository**
-5. 复制仓库地址（形如 `https://github.com/你的用户名/my-llm-wiki.git`）
+5. 复制仓库地址（形如 `https://github.com/你的用户名/catwang-llm-wiki.git`）
 
 ## 第二步：公司电脑首次推送（当前电脑）
 
 在项目目录执行：
 
 ```powershell
-cd e:\my-llm-wiki
+cd e:\catwang-llm-wiki
 
 # 添加所有文件
 git add .
@@ -29,7 +29,7 @@ git add .
 git commit -m "init: LLM Wiki 知识库初始化"
 
 # 关联远程仓库（替换为你的地址）
-git remote add origin https://github.com/你的用户名/my-llm-wiki.git
+git remote add origin https://github.com/你的用户名/catwang-llm-wiki.git
 
 # 推送
 git push -u origin main
@@ -41,10 +41,10 @@ git push -u origin main
 
 ```powershell
 # 克隆到你想要的位置
-git clone https://github.com/你的用户名/my-llm-wiki.git
+git clone https://github.com/你的用户名/catwang-llm-wiki.git
 
 # 安装依赖（如需运行卡片生成脚本）
-cd my-llm-wiki
+cd catwang-llm-wiki
 npm install
 ```
 

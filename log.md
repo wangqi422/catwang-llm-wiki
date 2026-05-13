@@ -15,7 +15,7 @@
 
 ## [2026-05-09 13:37] Init | 知识库双轨制架构初建
 
-- 整合 `E:\my-llm-wiki`（工作自动化仓库）+ `E:\小柒知识库建立`（个人学习仓库）
+- 整合 `E:\catwang-llm-wiki`（原 my-llm-wiki 工作自动化仓库）+ `E:\小柒知识库建立`（个人学习仓库）
 - 新仓库：`E:\catwang-llm-wiki`
 - 架构：双轨制（work/ + learn/）+ 共享知识底座（wiki/）
 - 基于 Karpathy LLM-Wiki 理念

@@ -27,7 +27,7 @@ const { execSync } = require('child_process');
 const WIKI_ROOT = path.resolve(__dirname, '..', '..');
 let configWebhook = '';
 let configWebhooks = []; // 多群推送支持
-let configGitPages = 'https://wangqi422.github.io/my-llm-wiki';
+let configGitPages = 'https://wangqi422.github.io/catwang-llm-wiki';
 
 try {
   const configPath = path.join(__dirname, 'config.json');
