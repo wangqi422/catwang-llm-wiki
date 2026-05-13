@@ -223,6 +223,60 @@ body {
   background:rgba(255,230,0,0.04); border-left:2px solid rgba(255,230,0,0.3);
 }
 
+/* ═══ VIDEO GALLERY ═══ */
+.video-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:28px; }
+.video-card {
+  background:var(--card); border:0.5px solid var(--line); overflow:hidden; cursor:pointer;
+  transition:all 0.2s; position:relative;
+}
+.video-card:hover { border-color:var(--line-strong); transform:translateY(-2px); }
+.video-thumb {
+  position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000;
+}
+.video-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.video-play-btn {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:48px; height:48px; background:rgba(255,230,0,0.9);
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.video-card:hover .video-play-btn { background:var(--yellow); transform:translate(-50%,-50%) scale(1.1); }
+.video-play-btn svg { width:20px; height:20px; fill:#0D0D0D; margin-left:2px; }
+.video-duration {
+  position:absolute; bottom:6px; right:6px; padding:2px 6px;
+  background:rgba(0,0,0,0.8); font-size:10px; font-weight:600; color:#fff;
+}
+.video-info { padding:10px 14px; }
+.video-game {
+  font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  margin-bottom:4px; display:inline-block; padding:2px 6px;
+}
+.video-game.delta { background:rgba(255,230,0,0.12); color:var(--yellow); }
+.video-game.arena { background:rgba(0,229,255,0.12); color:var(--cyan); }
+.video-game.codm { background:rgba(255,107,53,0.12); color:var(--orange); }
+.video-game.bf6 { background:rgba(76,175,80,0.12); color:var(--green); }
+.video-title { font-size:13px; font-weight:600; color:var(--text-85); line-height:1.4; margin-bottom:4px; }
+.video-meta { font-size:11px; color:var(--text-40); }
+
+/* Video Modal */
+.video-modal {
+  display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.92); z-index:9999;
+  align-items:center; justify-content:center; flex-direction:column;
+}
+.video-modal.open { display:flex; }
+.video-modal-close {
+  position:absolute; top:20px; right:24px; width:40px; height:40px;
+  background:none; border:1px solid var(--line); color:var(--yellow);
+  font-size:24px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.video-modal-close:hover { background:rgba(255,230,0,0.15); }
+.video-modal-title {
+  margin-top:12px; font-size:14px; font-weight:600; color:var(--text-85);
+  text-align:center; max-width:600px;
+}
+
 /* ═══ FOOTER ═══ */
 .footer {
   margin-top:32px; padding-top:20px; border-top:1px solid var(--line);
@@ -305,6 +359,7 @@ body {
   <div class="nav-section">
     <div class="nav-section-title">ANALYSIS</div>
     <a href="#intensity" class="nav-link"><span class="nav-num">—</span>宣发强度</a>
+    <a href="#videos" class="nav-link"><span class="nav-num">—</span>🎬 视频动态</a>
     <a href="#insights" class="nav-link"><span class="nav-num">—</span>运营洞察</a>
   </div>
 
@@ -473,6 +528,51 @@ body {
     </div>
   </div>
 
+  <!-- VIDEOS -->
+  <div class="section-label" id="videos">🎬 VIDEO INTEL / CG & TRAILER</div>
+  <div class="video-grid">
+
+    <div class="video-card" onclick="openVideo('https://player.bilibili.com/player.html?bvid=BV1aB5763E9J&high_quality=1','BF6 S3「Warlords: Supremacy」官方游戏预告片','iframe')">
+      <div class="video-thumb">
+        <img src="videos/bf6-s3-gameplay-trailer.jpg" alt="BF6 S3 Trailer">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">2:18</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game bf6">Battlefield 6</span>
+        <div class="video-title">S3「Warlords: Supremacy」官方游戏预告片</div>
+        <div class="video-meta">4K60帧 · Railway to Golmud 新地图首秀</div>
+      </div>
+    </div>
+
+    <div class="video-card" onclick="openVideo('https://player.bilibili.com/player.html?bvid=BV1Ub5u6LEuf&high_quality=1','暗区突围：无限 × 赛博朋克2077 联动返场预览','iframe')">
+      <div class="video-thumb">
+        <img src="videos/arena-cp2077-collab-preview.jpg" alt="Arena Breakout CP2077">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">1:52</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game arena">暗区突围：无限</span>
+        <div class="video-title">赛博朋克2077联动返场 · 限定军需抢先预览</div>
+        <div class="video-meta">5/15 限时返场 · 上线送15抽</div>
+      </div>
+    </div>
+
+    <div class="video-card" onclick="openVideo('https://v.qq.com/txp/iframe/player.html?vid=g31988lqsc6','三角洲行动 × 古墓丽影 联动CG · 露娜变身劳拉','iframe')">
+      <div class="video-thumb">
+        <img src="videos/delta-tombraider-collab-cg.jpg" alt="Delta Force Tomb Raider">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">0:48</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game delta">三角洲行动</span>
+        <div class="video-title">古墓丽影联动CG · 露娜变身劳拉</div>
+        <div class="video-meta">S9 回声赛季联动 · 古墓丽影30周年</div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- INSIGHTS -->
   <div class="section-label" id="insights">STRATEGIC INSIGHTS</div>
   <div class="insights-box">
@@ -534,6 +634,13 @@ body {
 </div>
 </div>
 
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" onclick="closeVideo()">&times;</button>
+  <div id="modalContent" style="width:min(90vw,900px); aspect-ratio:16/9;"></div>
+  <div class="video-modal-title" id="modalTitle"></div>
+</div>
+
 <!-- Back to top -->
 <div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
@@ -573,6 +680,34 @@ function updateBackTop() {
 
 window.addEventListener('scroll', () => { updateSpy(); updateProgress(); updateBackTop(); }, { passive:true });
 updateSpy(); updateProgress();
+
+// Video modal
+function openVideo(src, title, type) {
+  const modal = document.getElementById('videoModal');
+  const content = document.getElementById('modalContent');
+  const titleEl = document.getElementById('modalTitle');
+  titleEl.textContent = title;
+  if (type === 'iframe') {
+    content.innerHTML = '<iframe src="' + src + '" style="width:100%;height:100%;border:1px solid rgba(255,255,255,0.08);" allowfullscreen allow="autoplay"></iframe>';
+  } else {
+    content.innerHTML = '<video src="' + src + '" controls autoplay style="width:100%;height:100%;border:1px solid rgba(255,255,255,0.08);"></video>';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideo() {
+  const modal = document.getElementById('videoModal');
+  const content = document.getElementById('modalContent');
+  content.innerHTML = '';
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideo();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideo();
+});
 
 // Close mobile sidebar
 navLinks.forEach(link => {
