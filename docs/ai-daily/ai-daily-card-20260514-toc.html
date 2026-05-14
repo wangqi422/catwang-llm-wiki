@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63;
+  --sidebar-active-bg: rgba(214, 221, 99, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--lemon);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-score {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px;
+  color: var(--ink-soft); padding: 4px 12px; border-radius: 999px; background: var(--paper-2);
+}
+.card-score.hot { background: #E1A4C2; color: var(--ink); font-weight: 500; }
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AIGC Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.13 &middot; Tuesday</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>今日结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Headlines</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>今日要闻</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>百度 Create 2026 文心5.1</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>xAI 解散 GPU 转让</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic ARR 440亿</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Musk v. Altman 庭审</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Trends</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业动态</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Gemma 4 MTP 3倍加速</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Anthropic×Google 2000亿</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Google I/O 下周开幕</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Runway Gen-5 Lite</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Commentary</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>编辑点评</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AIGC Daily &middot; 2026.05.13</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">百度 Create 开幕 + Anthropic 算力核弹 &middot; AI 竞争格局一夜改写</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 TOP 8</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.13</span>
+    </div>
+  </div>
+
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      今日 AI 圈双核爆发：国内百度 Create 2026 大会开幕、文心 5.1 以 6% 成本登顶国产搜索能力第一；海外 Anthropic 获 xAI 22 万 GPU + Google 2000 亿美元合同 + ARR 两月翻倍至 440 亿，成为 OpenAI 最强挑战者。AI 竞争正式进入"国产大模型内卷+全球算力重分配"新阶段。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Baidu Create 2026</div>
+        <div class="thesis-card-body"><b>文心 5.1</b> 发布，6% 训练成本登顶国内搜索榜，Agent 能力超 DeepSeek-V4-Pro</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">xAI &rarr; Anthropic</div>
+        <div class="thesis-card-body">马斯克解散 xAI，<b>22 万 GPU</b> Colossus 超算转租 Anthropic，算力版图剧变</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Anthropic 狂飙</div>
+        <div class="thesis-card-body">ARR 两月翻倍至 <b>440 亿美元</b>，Claude Code 驱动史上最快增长</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">OpenAI 庭审</div>
+        <div class="thesis-card-body">Sutskever 出庭持有 <b>$70 亿</b> OpenAI 股份，披露花一年收集 Altman 不诚信证据</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>今日关键词：AI 权力版图正在重绘——百度冲刺 Agent 定义权，Anthropic 三连击成最强挑战者，OpenAI 内部治理裂痕进一步暴露。</p>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Headlines</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">今日要闻</div>
+    <div class="section-sub">TOP 1&ndash;4 &middot; 今日最高优先级动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">🔥 百度 Create 2026 大会今日开幕，文心 5.1 正式发布</span>
+        <span class="card-score hot">9.2</span>
+      </div>
+      <div class="card-desc">
+        Create 2026 百度 AI 开发者大会今日在北京国家会议中心二期开幕。李彦宏提出 <strong>"AI 时代的 DAA（每日活跃 Agent）相当于移动互联网的 DAU"</strong>，正式发布文心大模型 5.1。该模型以业界同规模 <strong>6% 的预训练成本</strong>实现 LMArena 搜索榜国内第一、全球第四，是唯一进入前十五的国产模型。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">极致成本</div><div class="sub-card-body">总参数压缩至 1/3，激活参数 1/2，训练成本仅行业 6%</div></div>
+        <div class="sub-card"><div class="sub-card-title">Agent 登顶</div><div class="sub-card-body">智能体评测超越 DeepSeek-V4-Pro，创意写作平 Gemini 3.1 Pro</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">文心生态 AI 创作工具将快速迭代，可关注视觉生成能力</div></div>
+      </div>
+      <div class="source">百度官方 &middot; ITBEAR &middot; 腾讯新闻</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">马斯克解散 xAI，22 万张 GPU 转租 Anthropic</span>
+        <span class="card-score hot">9.0</span>
+      </div>
+      <div class="card-desc">
+        马斯克正式宣布解散 xAI 独立运营主体，整合至 SpaceX 旗下新部门 <strong>"SpaceAI"</strong>。同日，xAI 的 <strong>Colossus 1</strong> 超算（约 22 万张 GPU）以长期租赁形式转给 Anthropic。36 氪报道称马斯克"解散 xAI，把 GPU 租给了仇人"。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">算力核弹</div><div class="sub-card-body">Colossus 是全球最大私有 AI 超算之一，迁移将加速 Claude 训练</div></div>
+        <div class="sub-card"><div class="sub-card-title">战略逻辑</div><div class="sub-card-body">马斯克将 AI 与航天绑定，转向专用 AI 而非通用 AGI</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">Claude 模型能力即将大幅跃升，工作流可加大 Claude 依赖</div></div>
+      </div>
+      <div class="source">证券时报 &middot; 36kr &middot; 腾讯新闻</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic ARR 突破 440 亿美元，Claude Code 驱动史上最快增长</span>
+        <span class="card-score hot">8.9</span>
+      </div>
+      <div class="card-desc">
+        Semi Analysis 最新报告：Anthropic 年化收入从 2025 年底 90 亿美元飙升至 <strong>440 亿美元</strong>——两个月内翻倍。<strong>Claude Code</strong> 是核心增长引擎。同期月之暗面完成 20 亿美元新融资、估值破 200 亿，Kimi K2.6 与 DeepSeek V4 四天内相继开源。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">增速之王</div><div class="sub-card-body">"从未见过此等增速"——两月 5 倍，AI 编程成最赚场景</div></div>
+        <div class="sub-card"><div class="sub-card-title">中国同步</div><div class="sub-card-body">月之暗面 20 亿融资 + Kimi K2.6 开源，中国 AI 融资热潮</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">AI 编码刚需已验证，团队可加大 AI 自动化工具投入</div></div>
+      </div>
+      <div class="source">Semi Analysis &middot; 华尔街见闻 &middot; 新浪财经</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Musk v. Altman 庭审：Sutskever 披露持有 70 亿 OpenAI 股份</span>
+        <span class="card-score">8.7</span>
+      </div>
+      <div class="card-desc">
+        马斯克诉 Altman 案进入第三周。<strong>Ilya Sutskever</strong> 出庭作证，首次披露持有约 <strong>70 亿美元</strong> OpenAI 股份，并表示"花了一年收集 Altman 不诚实的证据"、"我不想让它（OpenAI）被摧毁"。微软 CEO Nadella 同期出庭，Altman 预计本周出庭。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">核心争议</div><div class="sub-card-body">非营利→营利转型、治理结构及原始使命承诺</div></div>
+        <div class="sub-card"><div class="sub-card-title">行业影响</div><div class="sub-card-body">裁定结果将影响 AI 行业公司治理标准</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">短期不影响工具使用，但需关注 OpenAI 产品路线图变化</div></div>
+      </div>
+      <div class="source">Forbes &middot; Wired &middot; The Star</div>
+    </div>
+  </div>
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Trends &amp; Insights</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">行业动态</div>
+    <div class="section-sub">TOP 5&ndash;8 &middot; 技术突破、生态合作与工具更新</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Google Gemma 4 推出 MTP 起草器，推理速度最高提升 3 倍</span>
+        <span class="card-score">8.5</span>
+      </div>
+      <div class="card-desc">
+        Google 为 Gemma 4 系列（31B/26B）推出<strong>多 Token 预测（MTP）起草器</strong>，利用推测解码架构在单次推理中输出多个 Token，最高实现 <strong>3 倍生成加速</strong>，且不牺牲输出质量。模型基于 Apache 2.0 协议完全开源。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">3 倍无损加速</div><div class="sub-card-body">MTP Drafter 与 Gemma 4 31B 配对，推测解码架构</div></div>
+        <div class="sub-card"><div class="sub-card-title">开源可商用</div><div class="sub-card-body">Apache 2.0 协议，支持 ADK Agent 框架集成</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">本地部署 Gemma 4 可加速批量素材生成响应速度</div></div>
+      </div>
+      <div class="source">Google 官方 &middot; IT 之家 &middot; 新浪 AI</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Anthropic 与 Google Cloud 签署 2000 亿美元五年合同</span>
+        <span class="card-score">8.5</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 承诺五年内向 Google Cloud 支付 <strong>2000 亿美元</strong>，创 AI 领域最大单笔云计算合作。Google 同步追加至少 <strong>100 亿美元</strong>投资。该合同占 Google Cloud 积压订单的 40% 以上，使 Anthropic 成为其最大客户。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">规模空前</div><div class="sub-card-body">年均 400 亿美元云支出，超过多数中型云厂商年收入</div></div>
+        <div class="sub-card"><div class="sub-card-title">算力锁定</div><div class="sub-card-body">xAI GPU + Google Cloud 双保险，Claude 迭代加速</div></div>
+      </div>
+      <div class="source">Investing.com &middot; 新浪财经 &middot; 中时电子报</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Google I/O 2026 定档 5 月 19 日，Gemini 新版本即将亮相</span>
+        <span class="card-score">8.2</span>
+      </div>
+      <div class="card-desc">
+        Google I/O 2026 确认于 <strong>5 月 19-20 日</strong>举办。预计发布 Gemini 新版本（可能是 Gemini 3.5）、<strong>Android XR 智能眼镜</strong>、Android 17 及 Project Astra 2.0。多方预测本届 AI 浓度将远超去年。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Gemini 升级</div><div class="sub-card-body">更长上下文 + 实时视频理解 + 增强多模态</div></div>
+        <div class="sub-card"><div class="sub-card-title">Android XR</div><div class="sub-card-body">AI 驱动 AR/MR 眼镜，可能成为新交互入口</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">关注 Gemini 视频理解能力，可用于素材自动分析</div></div>
+      </div>
+      <div class="source">CNET &middot; Android Authority &middot; PChome</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Runway 推出 Gen-5 Lite：价格减半，单订阅覆盖 6 个视频模型</span>
+        <span class="card-score">8.0</span>
+      </div>
+      <div class="card-desc">
+        Runway 推出 <strong>Gen-5 Lite</strong>，订阅价格降至标准版一半，整合 6 个视频生成模型于单一订阅。从"纯质量竞争"转向<strong>"性价比竞争"</strong>，直指 Sora、Veo、可灵等对手。2026 年 AI 视频工具正式进入平民化阶段。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">多模型打包</div><div class="sub-card-body">Gen-5 + Gen-4.5 + 更早版本，适配不同创作场景</div></div>
+        <div class="sub-card"><div class="sub-card-title">行业信号</div><div class="sub-card-body">AI 视频从"贵族工具"变"创作者日用品"</div></div>
+        <div class="sub-card"><div class="sub-card-title">CODM 启示</div><div class="sub-card-body">性价比极高，适合短视频/预告片快速原型制作</div></div>
+      </div>
+      <div class="source">Runway 官方 &middot; Promptyze &middot; 网易</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Commentary</span>
+      <span class="section-count">editorial</span>
+    </div>
+    <div class="section-title">编辑点评</div>
+    <div class="section-sub">对 CODM 宣发团队的四点启示</div>
+
+    <div class="card">
+      <div class="card-desc" style="font-size:15px; line-height:2; color:var(--ink);">
+        今日 AI 圈双核爆发：<strong>国内</strong>百度 Create 大会发布文心 5.1，以极致性价比重新定义国产大模型竞争力；<strong>海外</strong> Anthropic 获得 xAI 22 万 GPU + Google 2000 亿合同 + ARR 两月翻倍的"三连击"，成为 OpenAI 最强挑战者。与此同时，Musk v. Altman 庭审白热化暴露 OpenAI 内部治理裂痕，Google 在 I/O 前持续加码开源（Gemma 4 MTP），Runway 以降价策略推动 AI 视频平民化。
+      </div>
+      <div class="sub-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="sub-card"><div class="sub-card-title">启示一</div><div class="sub-card-body">关注百度生态 Agent 工具——文心 5.1 Agent 能力超 DeepSeek-V4-Pro，百度系创作工具可能快速升级</div></div>
+        <div class="sub-card"><div class="sub-card-title">启示二</div><div class="sub-card-body">加大 Claude 工作流投入——算力+资金双保障意味着 Claude 将持续高速迭代</div></div>
+        <div class="sub-card"><div class="sub-card-title">启示三</div><div class="sub-card-body">评估 Runway Gen-5 Lite 采购——单订阅覆盖 6 个模型的性价比适合团队日常创作</div></div>
+        <div class="sub-card"><div class="sub-card-title">启示四</div><div class="sub-card-body">下周关注 Google I/O——Gemini 视频理解/生成能力可能带来新的素材分析工具</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.13<br>
+      扫描 65 个顶级 AI 信源 &middot; 精选 TOP 8 &middot; 百度Create+Anthropic算力双主线
+    </div>
+    <div class="footer-right">
+      小柒AI速递 &middot; 每工作日推送
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  var navLinks = document.querySelectorAll('.nav-link');
+  var sections = [];
+  navLinks.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      var target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    var scrollY = window.scrollY + 80;
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.offsetTop <= scrollY) current = sections[i];
+    }
+    navLinks.forEach(function(l) { l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    var btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(214,221,99,0.95)';this.style.color='#2A241B';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.color='#F2EEDF';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
