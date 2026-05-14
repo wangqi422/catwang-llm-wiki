@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODM 竞品日报 · 2026.05.13</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  --bg: #0D0D0D; --card: #141414; --card-hover: #1a1a1a;
+  --yellow: #FFE600; --yellow-soft: rgba(255,230,0,0.12); --yellow-glow: rgba(255,230,0,0.06);
+  --red: #FF3B3B; --cyan: #00E5FF; --orange: #FF6B35; --green: #4CAF50;
+  --text: #FFFFFF; --text-85: rgba(255,255,255,0.85); --text-65: rgba(255,255,255,0.65);
+  --text-55: rgba(255,255,255,0.55); --text-40: rgba(255,255,255,0.4);
+  --line: rgba(255,255,255,0.08); --line-strong: rgba(255,230,0,0.35);
+  --sidebar-w: 260px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',sans-serif;
+  -webkit-font-smoothing:antialiased; font-size:14px; line-height:1.6;
+}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:#080808; border-right:1px solid var(--line); overflow-y:auto;
+  z-index:100; padding:32px 0 40px; transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(255,230,0,0.2); border-radius:3px; }
+
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid var(--line); margin-bottom:16px; }
+.sidebar-brand {
+  display:flex; align-items:center; gap:8px; margin-bottom:12px;
+}
+.sidebar-brand-bar { width:4px; height:18px; background:var(--yellow); }
+.sidebar-brand-label {
+  font-size:11px; font-weight:800; letter-spacing:0.2em; color:var(--yellow);
+  text-transform:uppercase;
+}
+.sidebar-title {
+  font-size:20px; font-weight:900; letter-spacing:-0.5px; color:var(--text);
+}
+.sidebar-title .hl { color:var(--yellow); }
+.sidebar-meta {
+  margin-top:8px; font-size:11px; color:var(--text-40); letter-spacing:0.05em;
+}
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-size:10px; font-weight:700; letter-spacing:0.25em; color:var(--text-40);
+  text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--text-55); text-decoration:none;
+  font-size:13px; font-weight:500; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--text-85); background:rgba(255,255,255,0.03); }
+.nav-link.active { color:var(--yellow); background:var(--yellow-soft); font-weight:700; }
+.nav-link .nav-num {
+  display:inline-block; width:24px; font-size:11px; font-weight:800;
+  color:var(--text-40); letter-spacing:0.05em;
+}
+.nav-link.active .nav-num { color:var(--yellow); }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.back-archive {
+  display:block; margin:16px 16px 0; padding:10px 16px; text-align:center;
+  font-size:12px; font-weight:600; color:var(--text-55); text-decoration:none;
+  border:1px solid var(--line); transition:all 0.2s;
+}
+.back-archive:hover { color:var(--yellow); border-color:var(--line-strong); background:var(--yellow-glow); }
+
+.sidebar-dots {
+  display:flex; gap:6px; padding:20px 24px 0; border-top:1px solid var(--line); margin-top:auto; padding-top:16px;
+}
+.sidebar-dots i { width:8px; height:8px; }
+.sidebar-dots i:nth-child(1) { background:var(--yellow); }
+.sidebar-dots i:nth-child(2) { background:var(--cyan); }
+.sidebar-dots i:nth-child(3) { background:var(--orange); }
+.sidebar-dots i:nth-child(4) { background:var(--green); }
+
+/* ═══ MAIN ═══ */
+.main { margin-left:var(--sidebar-w); min-height:100vh; position:relative; }
+.main::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:400px;
+  background:radial-gradient(ellipse at 50% 0%,var(--yellow-glow) 0%,transparent 70%);
+  pointer-events:none;
+}
+.page { max-width:900px; margin:0 auto; padding:48px 56px 60px; position:relative; z-index:1; }
+
+/* ═══ COVER ═══ */
+.cover { margin-bottom:36px; scroll-margin-top:32px; }
+.cover-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.cover-brand { display:flex; align-items:center; gap:10px; }
+.brand-bar { width:4px; height:22px; background:var(--yellow); }
+.brand-label { background:var(--yellow); color:#0D0D0D; padding:4px 14px; font-size:12px; font-weight:800; letter-spacing:0.06em; }
+.brand-sub { font-size:13px; color:var(--text-55); letter-spacing:0.02em; margin-left:8px; }
+.cover-date { font-size:12px; color:var(--text-40); text-align:right; line-height:1.6; }
+.cover-date .brand-name { font-size:12px; font-weight:700; color:var(--text-85); letter-spacing:0.08em; }
+.cover-title { font-size:42px; font-weight:900; letter-spacing:-1px; line-height:1.05; margin-bottom:8px; }
+.cover-title .hl { color:var(--yellow); }
+.cover-sub { font-size:13px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-40); }
+.divider { height:1px; background:var(--line); margin:0 0 28px; }
+
+/* ═══ SECTION LABEL ═══ */
+.section-label {
+  font-size:11px; font-weight:700; color:var(--text-40); letter-spacing:0.25em;
+  text-transform:uppercase; display:flex; align-items:center; gap:10px;
+  margin-bottom:16px; scroll-margin-top:32px;
+}
+.section-label::after { content:''; flex:1; height:0.5px; background:var(--line); }
+
+/* ═══ OVERVIEW CARD ═══ */
+.overview-card {
+  background:var(--card); border:0.5px solid var(--line); padding:22px 24px;
+  margin-bottom:20px; font-size:13.5px; color:var(--text-65); line-height:1.85;
+}
+.overview-card strong { color:var(--yellow); font-weight:700; }
+
+/* ═══ HIGHLIGHTS ═══ */
+.highlights { margin-bottom:28px; }
+.hl-item {
+  padding:8px 14px; margin-bottom:4px; font-size:13px; color:var(--text-85);
+  background:rgba(255,255,255,0.02); border-left:3px solid var(--line);
+}
+.hl-item.p0 { border-left-color:var(--red); background:rgba(255,59,59,0.04); }
+.hl-item.p1 { border-left-color:var(--yellow); background:var(--yellow-glow); }
+.hl-item.p2 { border-left-color:var(--text-40); }
+
+/* ═══ COMPARE TABLES ═══ */
+.compare-block { margin-bottom:24px; scroll-margin-top:32px; }
+.compare-title {
+  font-size:14px; font-weight:700; color:var(--yellow); margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;
+}
+.compare-table {
+  width:100%; border-collapse:collapse; background:var(--card);
+  border:0.5px solid var(--line); margin-bottom:8px;
+}
+.compare-table th {
+  font-size:11px; font-weight:700; color:var(--text-40); letter-spacing:0.1em;
+  text-transform:uppercase; padding:10px 14px; text-align:left;
+  border-bottom:1px solid var(--line);
+}
+.compare-table td {
+  font-size:13px; color:var(--text-85); padding:10px 14px;
+  border-bottom:0.5px solid rgba(255,255,255,0.04);
+}
+.compare-table tr:last-child td { border-bottom:none; }
+.compare-table .game-name { font-weight:700; white-space:nowrap; }
+.compare-table .game-delta { border-left:3px solid var(--yellow); }
+.compare-table .game-arena { border-left:3px solid var(--cyan); }
+.compare-table .game-codm { border-left:3px solid var(--orange); }
+.compare-table .game-bf6 { border-left:3px solid var(--green); }
+.compare-insight {
+  font-size:12px; color:var(--text-65); padding:10px 14px;
+  border-left:3px solid var(--yellow); background:var(--yellow-glow); line-height:1.7;
+}
+
+/* ═══ COMP CARDS ═══ */
+.comp-card {
+  background:var(--card); border:0.5px solid var(--line);
+  padding:18px 22px; margin-bottom:12px; scroll-margin-top:32px;
+  border-left:3px solid var(--yellow);
+}
+.comp-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.comp-icon { font-size:16px; }
+.comp-name { font-size:15px; font-weight:800; color:var(--text); flex:1; }
+.threat-badge { padding:3px 10px; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; }
+.threat-high { background:var(--red); color:#fff; }
+.threat-mid { background:var(--yellow-soft); color:var(--yellow); border:0.5px solid rgba(255,230,0,0.3); }
+.threat-self { background:rgba(255,255,255,0.06); color:var(--text-55); }
+.comp-highlight {
+  font-size:13px; color:var(--text-65); padding:4px 0 4px 14px; line-height:1.7;
+  position:relative;
+}
+.comp-highlight::before {
+  content:''; position:absolute; left:0; top:12px;
+  width:4px; height:4px; background:var(--text-40);
+}
+.comp-highlight strong { color:var(--text); font-weight:600; }
+.comp-tempo {
+  margin-top:10px; padding-top:10px; border-top:0.5px solid var(--line);
+  font-size:11px; color:var(--text-40); font-style:italic;
+}
+
+/* ═══ INTENSITY ═══ */
+.intensity-section { margin-bottom:28px; scroll-margin-top:32px; }
+.tempo-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.tempo-name { width:130px; font-size:13px; font-weight:600; color:var(--text-85); flex-shrink:0; }
+.tempo-bar-bg { flex:1; height:8px; background:rgba(255,255,255,0.06); position:relative; }
+.tempo-bar-fill { height:100%; transition:width 0.6s ease; }
+.tempo-stars { font-size:12px; width:80px; text-align:right; }
+
+/* ═══ INSIGHTS BOX ═══ */
+.insights-box {
+  background:var(--yellow-glow); border:1px solid rgba(255,230,0,0.12);
+  padding:24px 28px; margin-bottom:20px; scroll-margin-top:32px;
+}
+.insights-header {
+  font-size:16px; font-weight:800; color:var(--yellow); margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.insights-header::before { content:''; width:4px; height:20px; background:var(--yellow); }
+.insight-item { display:flex; gap:14px; margin-bottom:16px; }
+.insight-item:last-child { margin-bottom:0; }
+.insight-num {
+  width:28px; height:28px; flex-shrink:0;
+  background:var(--yellow-soft); color:var(--yellow);
+  font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;
+}
+.insight-body { flex:1; }
+.insight-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.insight-text { font-size:12.5px; color:var(--text-65); line-height:1.7; }
+.insight-tips { margin-top:8px; list-style:none; }
+.insight-tips li {
+  font-size:12px; color:var(--text-85); padding:6px 12px; margin-bottom:4px;
+  background:rgba(255,230,0,0.04); border-left:2px solid rgba(255,230,0,0.3);
+}
+
+/* ═══ VIDEO GALLERY ═══ */
+.video-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:28px; }
+.video-card {
+  background:var(--card); border:0.5px solid var(--line); overflow:hidden; cursor:pointer;
+  transition:all 0.2s; position:relative;
+}
+.video-card:hover { border-color:var(--line-strong); transform:translateY(-2px); }
+.video-thumb {
+  position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000;
+}
+.video-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.video-play-btn {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:48px; height:48px; background:rgba(255,230,0,0.9);
+  display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.video-card:hover .video-play-btn { background:var(--yellow); transform:translate(-50%,-50%) scale(1.1); }
+.video-play-btn svg { width:20px; height:20px; fill:#0D0D0D; margin-left:2px; }
+.video-duration {
+  position:absolute; bottom:6px; right:6px; padding:2px 6px;
+  background:rgba(0,0,0,0.8); font-size:10px; font-weight:600; color:#fff;
+}
+.video-info { padding:10px 14px; }
+.video-game {
+  font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  margin-bottom:4px; display:inline-block; padding:2px 6px;
+}
+.video-game.delta { background:rgba(255,230,0,0.12); color:var(--yellow); }
+.video-game.arena { background:rgba(0,229,255,0.12); color:var(--cyan); }
+.video-game.codm { background:rgba(255,107,53,0.12); color:var(--orange); }
+.video-game.bf6 { background:rgba(76,175,80,0.12); color:var(--green); }
+.video-title { font-size:13px; font-weight:600; color:var(--text-85); line-height:1.4; margin-bottom:4px; }
+.video-meta { font-size:11px; color:var(--text-40); }
+
+/* Video Modal */
+.video-modal {
+  display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.92); z-index:9999;
+  align-items:center; justify-content:center; flex-direction:column;
+}
+.video-modal.open { display:flex; }
+.video-modal-close {
+  position:absolute; top:20px; right:24px; width:40px; height:40px;
+  background:none; border:1px solid var(--line); color:var(--yellow);
+  font-size:24px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.video-modal-close:hover { background:rgba(255,230,0,0.15); }
+.video-modal-title {
+  margin-top:12px; font-size:14px; font-weight:600; color:var(--text-85);
+  text-align:center; max-width:600px;
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  margin-top:32px; padding-top:20px; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-left { display:flex; align-items:center; gap:10px; }
+.footer-dot { width:8px; height:8px; background:var(--yellow); }
+.footer-team { font-size:12px; color:var(--text-55); }
+.footer-team strong { color:var(--text-85); }
+.footer-right { font-size:10px; color:var(--text-40); letter-spacing:0.15em; text-align:right; }
+.footer-deco { display:flex; gap:4px; margin-top:4px; justify-content:flex-end; }
+.footer-sq { width:6px; height:6px; }
+.footer-sq:nth-child(1) { background:var(--yellow); }
+.footer-sq:nth-child(2) { background:rgba(255,230,0,0.5); }
+.footer-sq:nth-child(3) { background:rgba(255,230,0,0.2); }
+
+/* ═══ PROGRESS BAR ═══ */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--yellow),var(--orange)); transition:width 0.1s ease-out; }
+
+/* ═══ BACK TO TOP ═══ */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:40px; height:40px;
+  background:rgba(255,230,0,0.1); border:1px solid var(--line-strong);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999;
+}
+.back-to-top:hover { background:rgba(255,230,0,0.2); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:16px; height:16px; fill:var(--yellow); }
+
+/* ═══ MOBILE ═══ */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:#080808; border:1px solid var(--line);
+  color:var(--yellow); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:36px 24px 60px; }
+  .cover-title { font-size:28px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <span class="sidebar-brand-bar"></span>
+      <span class="sidebar-brand-label">CODM Design Intel</span>
+    </div>
+    <div class="sidebar-title">竞品<span class="hl">日报</span></div>
+    <div class="sidebar-meta">2026.05.13 · TUE · 4 COMPETITORS</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">OVERVIEW</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">—</span>今日速览</a>
+    <a href="#compare" class="nav-link"><span class="nav-num">—</span>横向对比</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">COMPETITORS</div>
+    <a href="#delta" class="nav-link"><span class="nav-num">01</span>三角洲行动</a>
+    <a href="#arena" class="nav-link"><span class="nav-num">02</span>暗区突围：无限</a>
+    <a href="#codm" class="nav-link"><span class="nav-num">03</span>CODM</a>
+    <a href="#bf6" class="nav-link"><span class="nav-num">04</span>Battlefield 6</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ANALYSIS</div>
+    <a href="#intensity" class="nav-link"><span class="nav-num">—</span>宣发强度</a>
+    <a href="#videos" class="nav-link"><span class="nav-num">—</span>🎬 视频动态</a>
+    <a href="#insights" class="nav-link"><span class="nav-num">—</span>运营洞察</a>
+  </div>
+
+  <a href="index.html" class="back-archive">← 返回归档</a>
+
+  <div class="sidebar-dots">
+    <i></i><i></i><i></i><i></i>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover" id="top">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <span class="brand-bar"></span>
+        <span class="brand-label">COMPETITIVE DAILY</span>
+        <span class="brand-sub">v3.1 · Soft Intel</span>
+      </div>
+      <div class="cover-date">
+        <div class="brand-name">CODM DESIGN TEAM</div>
+        <div>2026.05.13 TUE</div>
+      </div>
+    </div>
+    <div class="cover-title">竞品日报 · <span class="hl">05.13</span></div>
+    <div class="cover-sub">BF6 S3 LAUNCH · ARENA CP2077 COLLAB · DELTA DUAL COLLAB · CODM S4 OPS</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OVERVIEW -->
+  <div class="section-label">TODAY'S OVERVIEW</div>
+  <div class="overview-card">
+    <strong>BF6 S3「Warlords: Supremacy」5/12 正式上线</strong>是今日最大变量——EA 携历代最大地图 Railway to Golmud、3把新武器及首个排位大逃杀模式登场，对 FPS 大盘格局构成直接冲击。三角洲行动持续消化<strong>古墓丽影 × KFC 双联动</strong>红利期。暗区突围：无限官宣 <strong>5/15 赛博朋克2077联动返场</strong>，送15抽。CODM S4「Eternal Prison」处于赛季中段运营期。
+  </div>
+
+  <div class="highlights">
+    <div class="hl-item p0">🔥🔥🔥 BF6 S3「Warlords: Supremacy」5/12正式上线，历代最大地图+排位BR+3新武器</div>
+    <div class="hl-item p0">🔥🔥🔥 暗区突围：无限 × 赛博朋克2077 联动返场定档 5/15，上线即送15抽</div>
+    <div class="hl-item p1">🔥🔥 三角洲行动古墓丽影+KFC双联动进入收尾期，深圳快闪门店收官</div>
+    <div class="hl-item p2">🔥 CODM S4 赛季中段稳定运营，哥斯拉×金刚联动推进中</div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="section-label" id="compare">CROSS-COMPARISON</div>
+
+  <div class="compare-block">
+    <div class="compare-title">🎬 IP联动 / 品牌合作</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>核心牌面</th><th>影响力</th></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>古墓丽影·劳拉 + KFC联动</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>赛博朋克2077返场</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>哥斯拉×金刚怪兽宇宙</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>S3战斗通行证（无IP联动）</td><td>⭐⭐</td></tr>
+    </table>
+    <div class="compare-insight">🔍 三角洲"游戏IP+快消品牌"双线联动策略执行力最强，CODM怪兽宇宙量级够但赛季中段热度趋缓</div>
+  </div>
+
+  <div class="compare-block">
+    <div class="compare-title">📅 赛季节奏</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>赛季/阶段</th><th>下一节点</th></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>S3 刚上线（5/12）</td><td>S3中期活动</td></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>S9「回声」中期</td><td>联动持续至6/13</td></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>S5「变异」中期</td><td>5/15赛博朋克返场</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>S4「Eternal Prison」中期</td><td>S5预热窗口</td></tr>
+    </table>
+    <div class="compare-insight">🔍 BF6 S3处于峰值关注期，三角洲和暗区靠联动维持中期热度，CODM需关注S5预热节奏</div>
+  </div>
+
+  <div class="compare-block">
+    <div class="compare-title">💰 福利策略</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>核心福利</th><th>策略</th></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>上线送15抽+限定军需</td><td>高频回馈拉回流</td></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>KFC套餐送枪皮+周边</td><td>线上线下联动引流</td></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>100+层通行证+排位BR</td><td>内容驱动留存</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>哥斯拉事件积分+Cache</td><td>持续任务驱动</td></tr>
+    </table>
+    <div class="compare-insight">🔍 暗区"送15抽"简单粗暴有效，三角洲KFC有破圈能力，CODM事件积分模式稳但缺爆点</div>
+  </div>
+
+  <!-- COMPETITOR DETAILS -->
+  <div class="section-label">COMPETITOR DETAILS</div>
+
+  <!-- 三角洲 -->
+  <div class="comp-card" id="delta" style="border-left-color:var(--yellow);">
+    <div class="comp-header">
+      <span class="comp-icon">🎯</span>
+      <span class="comp-name">三角洲行动（Delta Force）</span>
+      <span class="threat-badge threat-mid">MID THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>古墓丽影联动持续至6/13</strong>：「劳拉的训练营」双模式任务，可兑换 AKM-古墓丽影枪皮、劳拉箭袋挂饰、劳拉手办（崛起）</div>
+    <div class="comp-highlight"><strong>KFC联动进入中期（5/7-6/5）</strong>：烽火地带搜索「肯小桶」联动收藏品；线下联动套餐送武器外观+干员周边</div>
+    <div class="comp-highlight">深圳快闪门店（5/10）收官，社交媒体传播余温仍在</div>
+    <div class="comp-highlight">5/7 不停机更新：修复崩溃、手柄操控异常等问题</div>
+    <div class="comp-tempo">宣发节奏：双联动红利维持中，KFC线下破圈+古墓丽影线上粘性，预计至6月中旬持续有联动内容释放。</div>
+  </div>
+
+  <!-- 暗区 -->
+  <div class="comp-card" id="arena" style="border-left-color:var(--cyan);">
+    <div class="comp-header">
+      <span class="comp-icon">🏙️</span>
+      <span class="comp-name">暗区突围：无限（Arena Breakout: Infinite）</span>
+      <span class="threat-badge threat-mid">MID THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>赛博朋克2077联动返场定档5/15</strong>：多款联动限定军需回归、联动藏品"石中剑"重新上线、上线即送15抽</div>
+    <div class="comp-highlight"><strong>卡莫纳评测团矩阵启动</strong>：硬核技术流主播开荒 + 攻略型UP主全内容拆解</div>
+    <div class="comp-highlight">S5「变异」赛季持续中；5/8 不停服更新：初夏季挑战、U191/FAL枪械调整</div>
+    <div class="comp-tempo">宣发节奏：5/15赛博朋克返场是本周重头戏，评测团已开始预热。</div>
+  </div>
+
+  <!-- CODM -->
+  <div class="comp-card" id="codm" style="border-left-color:var(--orange);">
+    <div class="comp-header">
+      <span class="comp-icon">🔫</span>
+      <span class="comp-name">CODM / 战区手游</span>
+      <span class="threat-badge threat-self">SELF MONITOR</span>
+    </div>
+    <div class="comp-highlight"><strong>哥斯拉×金刚联动持续</strong>：完成任务积攒空心地球能量，参与主题小游戏获取ASM10-冰咬等12+奖励</div>
+    <div class="comp-highlight"><strong>DMZ: Recon模式热度维持</strong>：重生岛监狱门+Nikto Boss战+双开关提取系统</div>
+    <div class="comp-highlight">S4「Eternal Prison」通行证推进中：DP27轻机枪免费层、怪兽猎人主题皮肤</div>
+    <div class="comp-tempo">宣发节奏：赛季中段稳定节奏，缺乏爆点刺激，需关注S5预热时间窗口。</div>
+  </div>
+
+  <!-- BF6 -->
+  <div class="comp-card" id="bf6" style="border-left-color:var(--green);">
+    <div class="comp-header">
+      <span class="comp-icon">🪖</span>
+      <span class="comp-name">Battlefield 6（战地6）</span>
+      <span class="threat-badge threat-high">HIGH THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>S3「Warlords: Supremacy」5/12正式上线</strong>：三部分季节开篇，和平军团军阀向北约宣战宏大叙事</div>
+    <div class="comp-highlight"><strong>新地图 Railway to Golmud</strong>：BF6史上最大地图，含村庄废墟/装甲山丘/密集工业区/移动铁路</div>
+    <div class="comp-highlight"><strong>首个排位BR Ranked Quads</strong>：四人小队排位，Rookie→Master排名，精英250排行榜</div>
+    <div class="comp-highlight"><strong>3把新武器</strong>：M16A4突击步枪（经典回归）、L115狙击、RPK-74M轻机枪</div>
+    <div class="comp-highlight">100+层战斗通行证 + 车辆系统大幅重做 + AMD FSR 4.1 / PS5 Pro 升级</div>
+    <div class="comp-tempo">宣发节奏：S3开服为BF6本年度最重要节点，EA全渠道宣发+路线图公开+媒体评测密集。</div>
+  </div>
+
+  <!-- INTENSITY -->
+  <div class="section-label" id="intensity">MARKETING INTENSITY</div>
+  <div class="intensity-section">
+    <div class="tempo-row">
+      <span class="tempo-name">BF6</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--green),var(--yellow));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">三角洲行动</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:78%;background:linear-gradient(90deg,var(--yellow),rgba(255,230,0,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">暗区突围：无限</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:75%;background:linear-gradient(90deg,var(--cyan),rgba(0,229,255,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">CODM</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:55%;background:linear-gradient(90deg,var(--orange),rgba(255,107,53,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐</span>
+    </div>
+  </div>
+
+  <!-- VIDEOS -->
+  <div class="section-label" id="videos">🎬 VIDEO INTEL / CG & TRAILER</div>
+  <div class="video-grid">
+
+    <div class="video-card" onclick="openVideo('https://player.bilibili.com/player.html?bvid=BV1aB5763E9J&high_quality=1','BF6 S3「Warlords: Supremacy」官方游戏预告片','iframe')">
+      <div class="video-thumb">
+        <img src="videos/bf6-s3-gameplay-trailer.jpg" alt="BF6 S3 Trailer">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">2:18</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game bf6">Battlefield 6</span>
+        <div class="video-title">S3「Warlords: Supremacy」官方游戏预告片</div>
+        <div class="video-meta">4K60帧 · Railway to Golmud 新地图首秀</div>
+      </div>
+    </div>
+
+    <div class="video-card" onclick="openVideo('https://player.bilibili.com/player.html?bvid=BV1Ub5u6LEuf&high_quality=1','暗区突围：无限 × 赛博朋克2077 联动返场预览','iframe')">
+      <div class="video-thumb">
+        <img src="videos/arena-cp2077-collab-preview.jpg" alt="Arena Breakout CP2077">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">1:52</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game arena">暗区突围：无限</span>
+        <div class="video-title">赛博朋克2077联动返场 · 限定军需抢先预览</div>
+        <div class="video-meta">5/15 限时返场 · 上线送15抽</div>
+      </div>
+    </div>
+
+    <div class="video-card" onclick="openVideo('https://v.qq.com/txp/iframe/player.html?vid=g31988lqsc6','三角洲行动 × 古墓丽影 联动CG · 露娜变身劳拉','iframe')">
+      <div class="video-thumb">
+        <img src="videos/delta-tombraider-collab-cg.jpg" alt="Delta Force Tomb Raider">
+        <div class="video-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-duration">0:48</div>
+      </div>
+      <div class="video-info">
+        <span class="video-game delta">三角洲行动</span>
+        <div class="video-title">古墓丽影联动CG · 露娜变身劳拉</div>
+        <div class="video-meta">S9 回声赛季联动 · 古墓丽影30周年</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-label" id="insights">STRATEGIC INSIGHTS</div>
+  <div class="insights-box">
+    <div class="insights-header">💡 运营洞察 & CODM 启示</div>
+
+    <div class="insight-item">
+      <span class="insight-num">1</span>
+      <div class="insight-body">
+        <div class="insight-title">BF6 排位BR开启——FPS大逃杀赛道竞争白热化</div>
+        <div class="insight-text">BF6推出首个排位大逃杀模式（Ranked BR Quads），标志着端游FPS在BR赛道的竞争进入新阶段。虽定位端游，但排位BR设计理念值得手游端参考。</div>
+        <ul class="insight-tips">
+          <li>CODM DMZ: Recon 可考虑引入排位机制增加竞技深度</li>
+          <li>BF6"移动载具控制权争夺"概念可参考应用于使命战场大地图</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <span class="insight-num">2</span>
+      <div class="insight-body">
+        <div class="insight-title">"联动密度战"加剧——三角洲双线联动值得警惕</div>
+        <div class="insight-text">三角洲同时运营「游戏IP+快消品牌」双线联动，线上线下打通破圈效果显著。暗区则用"返场+送抽"拉回流。联动密度整体提升。</div>
+        <ul class="insight-tips">
+          <li>哥斯拉×金刚缺少线下破圈环节，可考虑与本地品牌合作增加曝光触点</li>
+          <li>联动收尾期需"二次刺激"手段，避免被竞品新联动分流关注度</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <span class="insight-num">3</span>
+      <div class="insight-body">
+        <div class="insight-title">暗区"送15抽"回流策略——低门槛高转化标杆</div>
+        <div class="insight-text">暗区突围赛博朋克返场"上线即送15抽"极简有效——降低回流门槛+制造沉没成本，配合评测团矩阵形成闭环。</div>
+        <ul class="insight-tips">
+          <li>重大联动/赛季开启可参考"登录即送N抽"的简单回流钩子</li>
+          <li>评测团/主播矩阵预热模式可复制到CODM S5预热期</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-dot"></span>
+      <span class="footer-team"><strong>CODM Design</strong> · 宣发设计团队</span>
+    </div>
+    <div class="footer-right">
+      AUTO-GENERATED · 2026.05.13
+      <div class="footer-deco">
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" onclick="closeVideo()">&times;</button>
+  <div id="modalContent" style="width:min(90vw,900px); aspect-ratio:16/9;"></div>
+  <div class="video-modal-title" id="modalTitle"></div>
+</div>
+
+<!-- Back to top -->
+<div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<script>
+// ScrollSpy
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = [];
+navLinks.forEach(link => {
+  const id = link.getAttribute('href').slice(1);
+  const el = document.getElementById(id);
+  if (el) sections.push({ el, link });
+});
+
+function updateSpy() {
+  let current = sections[0];
+  sections.forEach(s => {
+    if (s.el.getBoundingClientRect().top <= 120) current = s;
+  });
+  navLinks.forEach(l => l.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+}
+
+// Progress bar
+const fill = document.getElementById('progressFill');
+function updateProgress() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  fill.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}
+
+// Back to top
+const btn = document.getElementById('backTop');
+function updateBackTop() {
+  btn.classList.toggle('visible', window.scrollY > 400);
+}
+
+window.addEventListener('scroll', () => { updateSpy(); updateProgress(); updateBackTop(); }, { passive:true });
+updateSpy(); updateProgress();
+
+// Video modal
+function openVideo(src, title, type) {
+  const modal = document.getElementById('videoModal');
+  const content = document.getElementById('modalContent');
+  const titleEl = document.getElementById('modalTitle');
+  titleEl.textContent = title;
+  if (type === 'iframe') {
+    content.innerHTML = '<iframe src="' + src + '" style="width:100%;height:100%;border:1px solid rgba(255,255,255,0.08);" allowfullscreen allow="autoplay"></iframe>';
+  } else {
+    content.innerHTML = '<video src="' + src + '" controls autoplay style="width:100%;height:100%;border:1px solid rgba(255,255,255,0.08);"></video>';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideo() {
+  const modal = document.getElementById('videoModal');
+  const content = document.getElementById('modalContent');
+  content.innerHTML = '';
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideo();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideo();
+});
+
+// Close mobile sidebar
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
