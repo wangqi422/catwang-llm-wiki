@@ -347,7 +347,7 @@ function extractPushMarkdown(mdContent, dateStr) {
   lines.push('*J3 宣发设计组 · 小柒运营日报*');
   
   // HTML 链接
-  const pageUrl = `${GITHUB_PAGES_BASE}/docs/competitive-daily/competitive-daily-card-${dateStr}.html`;
+  const pageUrl = `${GITHUB_PAGES_BASE}/docs/competitive-daily/competitive-daily-${dateStr}-toc.html`;
   lines.push(`[👉 查看完整日报](${pageUrl})`);
   
   let markdown = lines.join('\n');
