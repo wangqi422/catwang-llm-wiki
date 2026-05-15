@@ -67,36 +67,23 @@ body {
 .sidebar-link:hover { color:var(--yellow); border-color:var(--yellow); background:var(--yellow-glow); }
 
 /* ═══ Main ═══ */
-.main { margin-left:var(--sidebar-w); min-height:100vh; display:flex; }
-.main-content { flex:1; min-width:0; }
-.right-timeline {
-  position:sticky; top:0; width:200px; height:100vh; flex-shrink:0;
-  border-left:1px solid var(--line); padding:32px 16px;
-  overflow-y:auto; background:#080808;
-}
-.right-timeline::-webkit-scrollbar { width:3px; }
-.right-timeline::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.main-content { min-width:0; }
 
-.rt-title {
-  font-family:"Inter",sans-serif; font-size:11px; font-weight:700;
-  color:var(--text-40); letter-spacing:0.15em; text-transform:uppercase;
-  margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--line);
+/* ═══ Sidebar Date List ═══ */
+.sidebar-dates { padding:8px 12px 0; max-height:calc(100vh - 280px); overflow-y:auto; }
+.sidebar-dates::-webkit-scrollbar { width:3px; }
+.sidebar-dates::-webkit-scrollbar-thumb { background:rgba(255,230,0,0.15); }
+.sd-month { font-size:10px; font-weight:700; letter-spacing:0.15em; color:var(--text-40); text-transform:uppercase; margin:12px 0 4px 4px; }
+.sd-month:first-child { margin-top:4px; }
+.sd-item {
+  display:flex; align-items:center; gap:8px; padding:6px 8px;
+  text-decoration:none; color:var(--text-55); font-size:12px;
+  font-family:"Noto Sans SC",sans-serif; transition:all 0.15s;
 }
-.rt-group { margin-bottom:16px; }
-.rt-year {
-  font-family:"Inter",sans-serif; font-size:11px; font-weight:600;
-  color:var(--yellow); letter-spacing:0.08em; margin-bottom:6px;
-}
-.rt-item {
-  display:flex; align-items:center; gap:8px; padding:5px 8px;
-  text-decoration:none; color:var(--text-70);
-  font-size:12px; font-family:"Noto Sans SC",sans-serif; transition:all 0.15s;
-  margin-bottom:2px;
-}
-.rt-item:hover { background:rgba(255,255,255,0.03); color:var(--text); }
-.rt-dot { width:8px; height:8px; flex-shrink:0; }
-.rt-dot.toc { background:var(--yellow); }
-.rt-dot.card { background:var(--orange); }
+.sd-item:hover { color:var(--yellow); background:rgba(255,230,0,0.04); }
+.sd-dot { width:6px; height:6px; background:var(--yellow); flex-shrink:0; }
+.sd-date { flex:1; }
 .rt-label { flex:1; }
 .rt-type { font-family:"Inter",sans-serif; font-size:10px; color:var(--text-40); letter-spacing:0.05em; }
 
@@ -227,7 +214,6 @@ body::before {
   .main { margin-left:0; }
   .menu-toggle { display:flex; }
   .page-header, .filter-row, .feed, .search-row { padding-left:20px; padding-right:20px; }
-  .right-timeline { display:none; }
 }
 </style>
 </head>
@@ -247,6 +233,7 @@ body::before {
       全部日报
     </button>
   </nav>
+  <div class="sidebar-dates" id="sidebarDates"></div>
   <div class="sidebar-links">
     <a class="sidebar-link" href="../ai-daily/index.html">&larr; AI 日报归档</a>
   </div>
@@ -289,10 +276,6 @@ body::before {
 
 </div>
 
-<!-- Right Timeline -->
-<div class="right-timeline" id="rightTimeline">
-  <div class="rt-title">ARCHIVE</div>
-</div>
 
 </div>
 
@@ -566,10 +549,9 @@ document.getElementById('typeRow').addEventListener('click', function(e) {
 render();
 
 function buildTimeline() {
-  var tl = document.getElementById('rightTimeline');
-  var typeFilter = 'all';
-  if (activeFilter === 'toc' || activeFilter === 'card') typeFilter = activeFilter;
-  var items = typeFilter === 'all' ? DATA : DATA.filter(function(d) { return d.type === typeFilter; });
+  var tl = document.getElementById('sidebarDates');
+  if (!tl) return;
+  var items = DATA.slice();
 
   var groups = {};
   items.forEach(function(item) {
@@ -577,16 +559,14 @@ function buildTimeline() {
     if (!groups[ym]) groups[ym] = [];
     groups[ym].push(item);
   });
-  var html = '<div class="rt-title">ARCHIVE</div>';
+  var html = '';
   Object.keys(groups).sort().reverse().forEach(function(ym) {
     var parts = ym.split('-');
-    html += '<div class="rt-group"><div class="rt-year">' + parts[0] + '.' + parts[1] + '</div>';
+    html += '<div class="sd-month">' + parts[0] + '.' + parts[1] + '</div>';
     groups[ym].sort(function(a,b) { return b.date.localeCompare(a.date); }).forEach(function(item) {
       var d = item.date.split('-')[2];
-      var typeLabel = item.type === 'toc' ? 'TOC' : 'CARD';
-      html += '<a class="rt-item" href="' + item.url + '"><span class="rt-dot ' + item.type + '"></span><span class="rt-label">' + d + '日</span><span class="rt-type">' + typeLabel + '</span></a>';
+      html += '<a class="sd-item" href="' + item.url + '"><span class="sd-dot"></span><span class="sd-date">' + parts[1] + '.' + d + '</span></a>';
     });
-    html += '</div>';
   });
   tl.innerHTML = html;
 }
