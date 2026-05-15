@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODM 竞品日报 · 2026.05.15</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  --bg: #0D0D0D; --card: #141414; --card-hover: #1a1a1a;
+  --yellow: #FFE600; --yellow-soft: rgba(255,230,0,0.12); --yellow-glow: rgba(255,230,0,0.06);
+  --red: #FF3B3B; --cyan: #00E5FF; --orange: #FF6B35; --green: #4CAF50; --blue: #448AFF;
+  --text: #FFFFFF; --text-85: rgba(255,255,255,0.85); --text-65: rgba(255,255,255,0.65);
+  --text-55: rgba(255,255,255,0.55); --text-40: rgba(255,255,255,0.4);
+  --line: rgba(255,255,255,0.08); --line-strong: rgba(255,230,0,0.35);
+  --sidebar-w: 260px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',sans-serif;
+  -webkit-font-smoothing:antialiased; font-size:14px; line-height:1.6;
+}
+
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:#080808; border-right:1px solid var(--line); overflow-y:auto;
+  z-index:100; padding:32px 0 40px; transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(255,230,0,0.2); border-radius:3px; }
+
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid var(--line); margin-bottom:16px; }
+.sidebar-brand { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.sidebar-brand-bar { width:4px; height:18px; background:var(--yellow); }
+.sidebar-brand-label { font-size:11px; font-weight:800; letter-spacing:0.2em; color:var(--yellow); text-transform:uppercase; }
+.sidebar-title { font-size:20px; font-weight:900; letter-spacing:-0.5px; color:var(--text); }
+.sidebar-title .hl { color:var(--yellow); }
+.sidebar-meta { margin-top:8px; font-size:11px; color:var(--text-40); letter-spacing:0.05em; }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title { font-size:10px; font-weight:700; letter-spacing:0.25em; color:var(--text-40); text-transform:uppercase; padding:12px 8px 6px; }
+.nav-link { display:block; padding:8px 12px; color:var(--text-55); text-decoration:none; font-size:13px; font-weight:500; transition:all 0.2s; margin-bottom:2px; }
+.nav-link:hover { color:var(--text-85); background:rgba(255,255,255,0.03); }
+.nav-link.active { color:var(--yellow); background:var(--yellow-soft); font-weight:700; }
+.nav-link .nav-num { display:inline-block; width:24px; font-size:11px; font-weight:800; color:var(--text-40); letter-spacing:0.05em; }
+.nav-link.active .nav-num { color:var(--yellow); }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.back-archive { display:block; margin:16px 16px 0; padding:10px 16px; text-align:center; font-size:12px; font-weight:600; color:var(--text-55); text-decoration:none; border:1px solid var(--line); transition:all 0.2s; }
+.back-archive:hover { color:var(--yellow); border-color:var(--line-strong); background:var(--yellow-glow); }
+
+.sidebar-dots { display:flex; gap:6px; padding:20px 24px 0; border-top:1px solid var(--line); margin-top:auto; padding-top:16px; }
+.sidebar-dots i { width:8px; height:8px; }
+.sidebar-dots i:nth-child(1) { background:var(--yellow); }
+.sidebar-dots i:nth-child(2) { background:var(--cyan); }
+.sidebar-dots i:nth-child(3) { background:var(--orange); }
+.sidebar-dots i:nth-child(4) { background:var(--green); }
+
+.main { margin-left:var(--sidebar-w); min-height:100vh; position:relative; }
+.main::before { content:''; position:absolute; top:0; left:0; right:0; height:400px; background:radial-gradient(ellipse at 50% 0%,var(--yellow-glow) 0%,transparent 70%); pointer-events:none; }
+.page { max-width:900px; margin:0 auto; padding:48px 56px 60px; position:relative; z-index:1; }
+
+.cover { margin-bottom:36px; scroll-margin-top:32px; }
+.cover-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.cover-brand { display:flex; align-items:center; gap:10px; }
+.brand-bar { width:4px; height:22px; background:var(--yellow); }
+.brand-label { background:var(--yellow); color:#0D0D0D; padding:4px 14px; font-size:12px; font-weight:800; letter-spacing:0.06em; }
+.brand-sub { font-size:13px; color:var(--text-55); letter-spacing:0.02em; margin-left:8px; }
+.cover-date { font-size:12px; color:var(--text-40); text-align:right; line-height:1.6; }
+.cover-date .brand-name { font-size:12px; font-weight:700; color:var(--text-85); letter-spacing:0.08em; }
+.cover-title { font-size:42px; font-weight:900; letter-spacing:-1px; line-height:1.05; margin-bottom:8px; }
+.cover-title .hl { color:var(--yellow); }
+.cover-sub { font-size:13px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-40); }
+.divider { height:1px; background:var(--line); margin:0 0 28px; }
+
+.section-label { font-size:11px; font-weight:700; color:var(--text-40); letter-spacing:0.25em; text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:16px; scroll-margin-top:32px; }
+.section-label::after { content:''; flex:1; height:0.5px; background:var(--line); }
+
+.overview-card { background:var(--card); border:0.5px solid var(--line); padding:22px 24px; margin-bottom:20px; font-size:13.5px; color:var(--text-65); line-height:1.85; }
+.overview-card strong { color:var(--yellow); font-weight:700; }
+
+.highlights { margin-bottom:28px; }
+.hl-item { padding:8px 14px; margin-bottom:4px; font-size:13px; color:var(--text-85); background:rgba(255,255,255,0.02); border-left:3px solid var(--line); }
+.hl-item.p0 { border-left-color:var(--red); background:rgba(255,59,59,0.04); }
+.hl-item.p1 { border-left-color:var(--yellow); background:var(--yellow-glow); }
+.hl-item.p2 { border-left-color:var(--text-40); }
+
+.compare-block { margin-bottom:24px; scroll-margin-top:32px; }
+.compare-title { font-size:14px; font-weight:700; color:var(--yellow); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.compare-table { width:100%; border-collapse:collapse; background:var(--card); border:0.5px solid var(--line); margin-bottom:8px; }
+.compare-table th { font-size:11px; font-weight:700; color:var(--text-40); letter-spacing:0.1em; text-transform:uppercase; padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); }
+.compare-table td { font-size:13px; color:var(--text-85); padding:10px 14px; border-bottom:0.5px solid rgba(255,255,255,0.04); }
+.compare-table tr:last-child td { border-bottom:none; }
+.compare-table .game-name { font-weight:700; white-space:nowrap; }
+.compare-table .game-delta { border-left:3px solid var(--yellow); }
+.compare-table .game-arena { border-left:3px solid var(--cyan); }
+.compare-table .game-codm { border-left:3px solid var(--orange); }
+.compare-table .game-bf6 { border-left:3px solid var(--green); }
+.compare-table .game-pubg { border-left:3px solid var(--blue); }
+.compare-insight { font-size:12px; color:var(--text-65); padding:10px 14px; border-left:3px solid var(--yellow); background:var(--yellow-glow); line-height:1.7; }
+
+.comp-card { background:var(--card); border:0.5px solid var(--line); padding:18px 22px; margin-bottom:12px; scroll-margin-top:32px; border-left:3px solid var(--yellow); }
+.comp-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.comp-icon { font-size:16px; }
+.comp-name { font-size:15px; font-weight:800; color:var(--text); flex:1; }
+.threat-badge { padding:3px 10px; font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; }
+.threat-high { background:var(--red); color:#fff; }
+.threat-mid { background:var(--yellow-soft); color:var(--yellow); border:0.5px solid rgba(255,230,0,0.3); }
+.threat-self { background:rgba(255,255,255,0.06); color:var(--text-55); }
+.comp-highlight { font-size:13px; color:var(--text-65); padding:4px 0 4px 14px; line-height:1.7; position:relative; }
+.comp-highlight::before { content:''; position:absolute; left:0; top:12px; width:4px; height:4px; background:var(--text-40); }
+.comp-highlight strong { color:var(--text); font-weight:600; }
+.comp-tempo { margin-top:10px; padding-top:10px; border-top:0.5px solid var(--line); font-size:11px; color:var(--text-40); font-style:italic; }
+
+.intensity-section { margin-bottom:28px; scroll-margin-top:32px; }
+.tempo-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.tempo-name { width:130px; font-size:13px; font-weight:600; color:var(--text-85); flex-shrink:0; }
+.tempo-bar-bg { flex:1; height:8px; background:rgba(255,255,255,0.06); position:relative; }
+.tempo-bar-fill { height:100%; transition:width 0.6s ease; }
+.tempo-stars { font-size:12px; width:80px; text-align:right; }
+
+.insights-box { background:var(--yellow-glow); border:1px solid rgba(255,230,0,0.12); padding:24px 28px; margin-bottom:20px; scroll-margin-top:32px; }
+.insights-header { font-size:16px; font-weight:800; color:var(--yellow); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.insights-header::before { content:''; width:4px; height:20px; background:var(--yellow); }
+.insight-item { display:flex; gap:14px; margin-bottom:16px; }
+.insight-item:last-child { margin-bottom:0; }
+.insight-num { width:28px; height:28px; flex-shrink:0; background:var(--yellow-soft); color:var(--yellow); font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+.insight-body { flex:1; }
+.insight-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.insight-text { font-size:12.5px; color:var(--text-65); line-height:1.7; }
+.insight-tips { margin-top:8px; list-style:none; }
+.insight-tips li { font-size:12px; color:var(--text-85); padding:6px 12px; margin-bottom:4px; background:rgba(255,230,0,0.04); border-left:2px solid rgba(255,230,0,0.3); }
+
+.data-snapshot { margin-bottom:28px; }
+.data-table { width:100%; border-collapse:collapse; background:var(--card); border:0.5px solid var(--line); }
+.data-table th { font-size:11px; font-weight:700; color:var(--text-40); letter-spacing:0.1em; text-transform:uppercase; padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); }
+.data-table td { font-size:13px; color:var(--text-85); padding:10px 14px; border-bottom:0.5px solid rgba(255,255,255,0.04); }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table .data-val { color:var(--yellow); font-weight:700; }
+
+.footer { margin-top:32px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; align-items:center; gap:10px; }
+.footer-dot { width:8px; height:8px; background:var(--yellow); }
+.footer-team { font-size:12px; color:var(--text-55); }
+.footer-team strong { color:var(--text-85); }
+.footer-right { font-size:10px; color:var(--text-40); letter-spacing:0.15em; text-align:right; }
+.footer-deco { display:flex; gap:4px; margin-top:4px; justify-content:flex-end; }
+.footer-sq { width:6px; height:6px; }
+.footer-sq:nth-child(1) { background:var(--yellow); }
+.footer-sq:nth-child(2) { background:rgba(255,230,0,0.5); }
+.footer-sq:nth-child(3) { background:rgba(255,230,0,0.2); }
+
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--yellow),var(--orange)); transition:width 0.1s ease-out; }
+
+.back-to-top { position:fixed; bottom:32px; right:32px; width:40px; height:40px; background:rgba(255,230,0,0.1); border:1px solid var(--line-strong); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; }
+.back-to-top:hover { background:rgba(255,230,0,0.2); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:16px; height:16px; fill:var(--yellow); }
+
+.menu-toggle { display:none; position:fixed; top:16px; left:16px; z-index:200; width:40px; height:40px; background:#080808; border:1px solid var(--line); color:var(--yellow); font-size:18px; cursor:pointer; align-items:center; justify-content:center; }
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:36px 24px 60px; }
+  .cover-title { font-size:28px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <span class="sidebar-brand-bar"></span>
+      <span class="sidebar-brand-label">CODM Design Intel</span>
+    </div>
+    <div class="sidebar-title">竞品<span class="hl">日报</span></div>
+    <div class="sidebar-meta">2026.05.15 · THU · 5 COMPETITORS</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">OVERVIEW</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">-</span>今日速览</a>
+    <a href="#compare" class="nav-link"><span class="nav-num">-</span>横向对比</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">COMPETITORS</div>
+    <a href="#delta" class="nav-link"><span class="nav-num">01</span>三角洲行动</a>
+    <a href="#arena" class="nav-link"><span class="nav-num">02</span>暗区突围：无限</a>
+    <a href="#bf6" class="nav-link"><span class="nav-num">03</span>Battlefield 6</a>
+    <a href="#pubg" class="nav-link"><span class="nav-num">04</span>PUBG Mobile</a>
+    <a href="#codm" class="nav-link"><span class="nav-num">05</span>CODM</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ANALYSIS</div>
+    <a href="#intensity" class="nav-link"><span class="nav-num">-</span>宣发强度</a>
+    <a href="#insights" class="nav-link"><span class="nav-num">-</span>运营洞察</a>
+    <a href="#data" class="nav-link"><span class="nav-num">-</span>数据速览</a>
+  </div>
+
+  <a href="index.html" class="back-archive">&larr; 返回归档</a>
+
+  <div class="sidebar-dots">
+    <i></i><i></i><i></i><i></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="cover" id="top">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <span class="brand-bar"></span>
+        <span class="brand-label">COMPETITIVE DAILY</span>
+        <span class="brand-sub">v3.1 &middot; Soft Intel</span>
+      </div>
+      <div class="cover-date">
+        <div class="brand-name">CODM DESIGN TEAM</div>
+        <div>2026.05.15 THU</div>
+      </div>
+    </div>
+    <div class="cover-title">竞品日报 · <span class="hl">05.15</span></div>
+    <div class="cover-sub">DELTA 9 EVENTS BLITZ · ARENA CP2077 LIVE · BF6 GOLMUD IGN · PUBG FORD · CODM LOW</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-label">TODAY'S OVERVIEW</div>
+  <div class="overview-card">
+    <strong>三角洲行动 5/15 九大活动同步上新</strong>是今日核心变量——烽火春决庆典正式开启（配合 5/16 春季赛总决赛）、4v4 战术模式回归、传说近战武器「处刑者」免费获取等活动同步上线，运营密度达到 S9 赛季峰值。腾讯 2025 财报正式将三角洲列为<strong>「长青游戏」</strong>（日活 5000 万+、年流水 29 倍增长）。暗区突围：无限 <strong>赛博朋克 2077 联动返场今日正式上线</strong>。BF6 S3 新地图获 <strong>IGN 专题报道</strong>。<strong>PUBG Mobile &times; Ford</strong> 联动今日开启。CODM 处于声量低谷。
+  </div>
+
+  <div class="highlights">
+    <div class="hl-item p0">🔥🔥🔥 三角洲行动 5/15 九大活动同步上线：烽火春决庆典 + 4v4 战术回归 + 传说武器免费拿 + 周末双倍积分</div>
+    <div class="hl-item p0">🔥🔥🔥 腾讯财报将三角洲列为「长青游戏」：日活 5000 万+、年流水 29 倍增长、与王者/和平并列</div>
+    <div class="hl-item p1">🔥🔥 暗区突围：无限 &times; 赛博朋克 2077 联动返场今日正式上线，上线即送 15 抽</div>
+    <div class="hl-item p1">🔥🔥 BF6 S3 新地图格尔木铁路获 IGN 专题报道：历代最大空战空间，修复系列最大痛点</div>
+    <div class="hl-item p2">🔥 PUBG Mobile &times; Ford 联动今日开启，怪兽卡车亮相</div>
+    <div class="hl-item p2">🔥 CODM Major Spring 2026 落幕，S5 &times; The Boys 预告持续</div>
+  </div>
+
+  <div class="section-label" id="compare">CROSS-COMPARISON</div>
+
+  <div class="compare-block">
+    <div class="compare-title">🎬 IP联动 / 品牌合作</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>核心牌面</th><th>影响力</th></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>赛博朋克 2077 返场（今日上线）</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>古墓丽影（持续至6/13）+ 烽火电竞赛事</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-pubg">PUBG Mobile</td><td>Ford 联动（今日开启）+ Blue Lock 持续</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>Major 赛事落幕 + S5 &times; The Boys 预告</td><td>⭐⭐⭐</td></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>S3 纯内容驱动 + 格尔木铁路经典翻新</td><td>⭐⭐⭐</td></tr>
+    </table>
+    <div class="compare-insight">🔍 暗区今日联动上线 + PUBG Ford 同日开启，形成联动夹击；三角洲用电竞赛事+九大活动堆量，注意力争夺白热化</div>
+  </div>
+
+  <div class="compare-block">
+    <div class="compare-title">📅 赛季节奏</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>赛季/阶段</th><th>下一节点</th></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>S9「回声」中后期（烽火春决开启）</td><td>5/16 春季赛总决赛 / S10 预热</td></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>S5 + 赛博朋克 2077 联动今日上线</td><td>联动期间高频运营</td></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>S3「Warlords」运营第 4 天</td><td>新地图口碑发酵 / 中期活动</td></tr>
+      <tr><td class="game-name game-pubg">PUBG Mobile</td><td>v4.4 英雄王冠 + Ford 联动</td><td>联动持续至 7/7</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>S4「Eternal Prison」末期</td><td>S5 &times; The Boys 即将上线</td></tr>
+    </table>
+    <div class="compare-insight">🔍 三角洲用电竞赛事制造节目效应延长 S9 生命力；CODM S4&rarr;S5 交替期是关键窗口</div>
+  </div>
+
+  <div class="compare-block">
+    <div class="compare-title">💰 福利策略</div>
+    <table class="compare-table">
+      <tr><th>竞品</th><th>核心福利</th><th>策略</th></tr>
+      <tr><td class="game-name game-delta">三角洲行动</td><td>传说处刑者免费拿 + 周末双倍积分 + 9大活动</td><td>电竞+福利双轮驱动</td></tr>
+      <tr><td class="game-name game-arena">暗区突围：无限</td><td>上线送 15 抽 + 赛博朋克限定军需</td><td>高频回馈拉回流</td></tr>
+      <tr><td class="game-name game-pubg">PUBG Mobile</td><td>Ford 怪兽卡车 + Blue Lock 免费奖励</td><td>双联动覆盖不同圈层</td></tr>
+      <tr><td class="game-name game-bf6">BF6</td><td>100+层通行证 + 排位BR独占奖励</td><td>内容深度驱动留存</td></tr>
+      <tr><td class="game-name game-codm">CODM</td><td>S4 末期福利 + Major 赛事关注</td><td>赛季交替蓄力期</td></tr>
+    </table>
+    <div class="compare-insight">🔍 三角洲「免费传说武器」策略首次出现，降低付费门槛换赛季末活跃度；CODM 需在 S5 开服时给出同等级福利</div>
+  </div>
+
+  <div class="section-label">COMPETITOR DETAILS</div>
+
+  <div class="comp-card" id="delta" style="border-left-color:var(--yellow);">
+    <div class="comp-header">
+      <span class="comp-icon">🎯</span>
+      <span class="comp-name">三角洲行动（Delta Force）</span>
+      <span class="threat-badge threat-high">HIGH THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>5/15 九大活动同步上线</strong>：烽火春决庆典（配合 5/16 春季赛总决赛）；战队巡礼（6支决赛队伍晋级之路）；4v4 战术模式回归（持续至 6/4）；先遣破阵（攻防模式新玩法）；回声行动&middot;轻装奇袭——完成核心任务免费获取<strong>传说近战武器「处刑者」1级</strong></div>
+    <div class="comp-highlight"><strong>周末活动</strong>：洲末畅玩（经验卡&times;5）；洲末上分（周六日晚 20:00-22:00 <strong>双倍得分</strong>）；洲末品枪（AR-57 突击步枪）；阿萨拉宣章传说捆绑包（2400限时三角券）</div>
+    <div class="comp-highlight"><strong>腾讯 2025 财报核心数据</strong>：日活 5000 万+（2026年3月）；PC 端日活近 1000 万；年流水同比增长 29 倍；累计收入突破 5 亿美元；正式列入「长青游戏」与王者荣耀、和平精英并列</div>
+    <div class="comp-highlight"><strong>系统优化</strong>：匹配算法优化（段位相近优先）+ 一键配装优化 + 安全环境标识</div>
+    <div class="comp-tempo">宣发节奏：电竞赛事 + 九大活动 + 财报数据三线并行，S9 后期运营密度达到历史峰值。</div>
+  </div>
+
+  <div class="comp-card" id="arena" style="border-left-color:var(--cyan);">
+    <div class="comp-header">
+      <span class="comp-icon">🏙️</span>
+      <span class="comp-name">暗区突围：无限（Arena Breakout: Infinite）</span>
+      <span class="threat-badge threat-high">HIGH THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>赛博朋克 2077 联动返场 5/15 正式上线</strong>：上线即送 15 抽；限定军需回归（赛博风格武器皮肤+角色外观）；评测团矩阵已提前发布预热内容</div>
+    <div class="comp-highlight"><strong>暗区大师赛</strong> 5/8 已开赛，三大核心玩法升级</div>
+    <div class="comp-highlight"><strong>初夏季挑战活动</strong>：做任务领枪皮 + 周年庆多重好礼</div>
+    <div class="comp-tempo">宣发节奏：联动正式上线日，今日是宣发集中爆发节点——免费福利+限定皮肤+KOL 矩阵同步发力。</div>
+  </div>
+
+  <div class="comp-card" id="bf6" style="border-left-color:var(--green);">
+    <div class="comp-header">
+      <span class="comp-icon">🪖</span>
+      <span class="comp-name">Battlefield 6（战地6）</span>
+      <span class="threat-badge threat-mid">MID THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>新地图「Railway to Golmud」获 IGN 专题报道</strong>：BF4 经典地图翻新，历代最大可玩空间；<strong>核心改进：大幅扩展空战空域</strong>，修复系列最大痛点（此前地图空域过小限制空战体验）</div>
+    <div class="comp-highlight"><strong>S3「Warlords: Supremacy」运营第 4 天</strong>：排位大逃杀持续拉升活跃；3 把新武器 + 全新叙事剧情持续解锁</div>
+    <div class="comp-highlight">EA 承诺后续还将重做 New Sobek City 和 Blackwell Fields 两张小图</div>
+    <div class="comp-tempo">宣发节奏：IGN 专题报道形成权威口碑背书，「经典地图翻新」叙事精准击中老玩家情怀。</div>
+  </div>
+
+  <div class="comp-card" id="pubg" style="border-left-color:var(--blue);">
+    <div class="comp-header">
+      <span class="comp-icon">🎮</span>
+      <span class="comp-name">PUBG Mobile / 和平精英</span>
+      <span class="threat-badge threat-mid">MID THREAT</span>
+    </div>
+    <div class="comp-highlight"><strong>PUBG Mobile &times; Ford 联动今日（5/15）开启</strong>：持续至 7/7；Motor Cruise 活动上线；怪兽卡车涂装首次亮相</div>
+    <div class="comp-highlight"><strong>v4.4「英雄王冠」持续运营</strong>：Blue Lock 联动活动持续；希腊神话主题 + Boss 战</div>
+    <div class="comp-highlight">哥斯拉联动活动同期进行</div>
+    <div class="comp-tempo">宣发节奏：双联动策略（Ford 汽车 + Blue Lock 动漫），覆盖不同受众圈层。</div>
+  </div>
+
+  <div class="comp-card" id="codm" style="border-left-color:var(--orange);">
+    <div class="comp-header">
+      <span class="comp-icon">🔫</span>
+      <span class="comp-name">CODM（使命召唤手游）</span>
+      <span class="threat-badge threat-self">SELF MONITOR</span>
+    </div>
+    <div class="comp-highlight"><strong>CODM Major Spring 2026 赛事落幕</strong>：菲律宾队伍未能夺冠；GodLike vs Elevate 决赛；赛事热度集中在东南亚地区</div>
+    <div class="comp-highlight"><strong>S5 &times; The Boys 联动持续预告</strong>：「Supers Are Coming」宣传语；新赛季即将上线</div>
+    <div class="comp-highlight">Garena 夏季嘉年华 2026 菲律宾站预告；国服 &times; 汨罗联动（端午活动）持续预热</div>
+    <div class="comp-tempo">宣发节奏：赛事结束+赛季交替双空窗期，S5 预告尚未形成足够声量，需加速 The Boys 联动物料释出。</div>
+  </div>
+
+  <div class="section-label" id="intensity">MARKETING INTENSITY</div>
+  <div class="intensity-section">
+    <div class="tempo-row">
+      <span class="tempo-name">三角洲行动</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:98%;background:linear-gradient(90deg,var(--yellow),rgba(255,230,0,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">暗区突围：无限</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--cyan),rgba(0,229,255,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">BF6</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:75%;background:linear-gradient(90deg,var(--green),var(--yellow));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">PUBG Mobile</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:72%;background:linear-gradient(90deg,var(--blue),rgba(68,138,255,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐⭐⭐</span>
+    </div>
+    <div class="tempo-row">
+      <span class="tempo-name">CODM</span>
+      <div class="tempo-bar-bg"><div class="tempo-bar-fill" style="width:35%;background:linear-gradient(90deg,var(--orange),rgba(255,107,53,0.4));"></div></div>
+      <span class="tempo-stars">⭐⭐</span>
+    </div>
+  </div>
+
+  <div class="section-label" id="insights">STRATEGIC INSIGHTS</div>
+  <div class="insights-box">
+    <div class="insights-header">💡 运营洞察 &amp; CODM 启示</div>
+
+    <div class="insight-item">
+      <span class="insight-num">1</span>
+      <div class="insight-body">
+        <div class="insight-title">三角洲「长青游戏」认证的战略意义</div>
+        <div class="insight-text">腾讯财报将三角洲与王者荣耀、和平精英并列为「长青游戏」，意味着资源倾斜和长期投入承诺。日活 5000 万+、年流水 29 倍增长表明 FPS 手游赛道仍在高速增长。</div>
+        <ul class="insight-tips">
+          <li>CODM 需关注自身在腾讯内部定位变化——三角洲强势崛起可能挤压资源分配</li>
+          <li>建议以差异化内容（联动 IP、国际化赛事）强化 CODM 独特价值</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <span class="insight-num">2</span>
+      <div class="insight-body">
+        <div class="insight-title">今日竞品联动「多线夹击」——CODM 声量最低</div>
+        <div class="insight-text">今日竞品联动密度极高：暗区&times;赛博朋克(上线) + 三角洲&times;烽火电竞(开启) + PUBG&times;Ford(开启)。CODM 仅有赛事落幕+S5预告，处于明显声量低谷。</div>
+        <ul class="insight-tips">
+          <li>加速 The Boys 联动物料释出，在 5/16 三角洲总决赛前抢占一波话题窗口</li>
+          <li>如果 S5 能在 5/19-5/21 区间开服，可避开本周竞品联动高峰</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-item">
+      <span class="insight-num">3</span>
+      <div class="insight-body">
+        <div class="insight-title">「免费传说武器」策略值得关注</div>
+        <div class="insight-text">三角洲首次通过任务系统免费发放传说级近战武器「处刑者」，打破「传说=付费」惯例。此举意在赛季末最大化活跃度，牺牲短期收入换长期留存。</div>
+        <ul class="insight-tips">
+          <li>CODM S5 开服可参考：设置一个「任务链通关送紫色/传说武器」活动，制造开服话题</li>
+          <li>免费传说策略对短期收入有压力，但对 DAU 拉升效果显著</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="data">DATA SNAPSHOT</div>
+  <div class="data-snapshot">
+    <table class="data-table">
+      <tr><th>指标</th><th>数据</th></tr>
+      <tr><td>三角洲日活用户</td><td class="data-val">5000 万+（腾讯财报）</td></tr>
+      <tr><td>三角洲 PC 日活</td><td class="data-val">近 1000 万</td></tr>
+      <tr><td>三角洲年流水增长</td><td class="data-val">29 倍</td></tr>
+      <tr><td>三角洲今日上新活动</td><td class="data-val">9 个</td></tr>
+      <tr><td>暗区赛博朋克返场</td><td class="data-val">5/15 今日上线</td></tr>
+      <tr><td>BF6 格尔木铁路</td><td class="data-val">历代最大空战空间</td></tr>
+      <tr><td>PUBG &times; Ford</td><td class="data-val">5/15-7/7</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-dot"></span>
+      <span class="footer-team"><strong>J3宣发设计组</strong> &middot; 小柒运营日报</span>
+    </div>
+    <div class="footer-right">
+      AUTO-GENERATED &middot; 2026.05.15
+      <div class="footer-deco">
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+        <span class="footer-sq"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<script>
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = [];
+navLinks.forEach(link => {
+  const id = link.getAttribute('href').slice(1);
+  const el = document.getElementById(id);
+  if (el) sections.push({ el, link });
+});
+
+function updateSpy() {
+  let current = sections[0];
+  sections.forEach(s => {
+    if (s.el.getBoundingClientRect().top <= 120) current = s;
+  });
+  navLinks.forEach(l => l.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+}
+
+const fill = document.getElementById('progressFill');
+function updateProgress() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  fill.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}
+
+const btn = document.getElementById('backTop');
+function updateBackTop() {
+  btn.classList.toggle('visible', window.scrollY > 400);
+}
+
+window.addEventListener('scroll', () => { updateSpy(); updateProgress(); updateBackTop(); }, { passive:true });
+updateSpy(); updateProgress();
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
