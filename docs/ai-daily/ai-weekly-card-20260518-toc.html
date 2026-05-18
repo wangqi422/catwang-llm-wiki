@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #08 · 2026.05.12–05.18</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.05.12 – 05.18 &middot; Issue No. 8</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Seedance 2.0</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Veo 3.1</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>MJ V7 Omni</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>高效工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Codex /goal</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Git Worktrees</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>可灵数字演员</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>方法论与 Prompt</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Kimi Agent Swarm</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>DeepSeek V4 双模式</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>视频 Prompt 五维公式</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">§4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 8</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">AI 视频生成军备竞赛周 · 9 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.12 – 05.18</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的 AI 视频生成工具军备竞赛周——字节 Seedance 2.0、Google Veo 3.1、可灵 AI 3.0 同时升级，多模态输入和角色一致性终于能让 AI 短剧落地了。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Seedance 2.0</div>
+        <div class="thesis-card-body"><b>四模态混合输入</b>（文本+图片+视频+音频），生成 4-15 秒带原生音频视频，<b>@引用系统</b>精准控制</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Veo 3.1</div>
+        <div class="thesis-card-body">Google 首款<b>视频+同步音频一体化生成</b>，支持 1080p 和 16:9/9:16 双比例，首尾帧控制剧情</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">MJ V7</div>
+        <div class="thesis-card-body"><b>Omni Reference</b> 锁定角色一致性，<code>--oref [URL] --cw 80-100</code> 彻底解决「换脸」痛点</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Codex /goal</div>
+        <div class="thesis-card-body"><b>长时域模式</b>上线，AI 编程从「临时工」变「马拉松选手」，跨会话持久执行 backlog</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>💡 一句话总结：AI 视频生成进入「多模态精准控制」时代，角色一致性不再是瓶颈；AI 编程进入「长时域自主执行」时代，Agent 能跑通宵了。</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛠️ 实用工具箱</div>
+    <div class="section-sub">3 个本周立刻能装的 AI 视频/图像工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">即梦 Seedance 2.0 · 多模态 AI 视频生成器</span>
+        <span class="card-tag">字节跳动</span>
+      </div>
+      <div class="card-desc">
+        支持<b>文本+图片+视频+音频四种模态混合输入</b>，生成 4-15 秒带原生音频的高质量视频。角色跨镜头一致性碾压同级竞品，核心语法是 <code>@引用系统</code>。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">文生视频：用「主体+动作+环境+光影+运镜」五维结构写 prompt</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">图生视频：上传角色参考图固定外貌，上传视频参考复刻镜头运动</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">音频驱动：上传背景音乐实现卡点生成</div></div>
+      </div>
+      <div class="source">&compfn; @BytedanceTalk &middot; jimeng.jianying.com</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Google Veo 3.1 · 带原生音频的视频生成</span>
+        <span class="card-tag">Google DeepMind</span>
+      </div>
+      <div class="card-desc">
+        <b>首次实现视频+同步音频一体化生成</b>（环境音、音效、对白），支持 1080p 输出和 16:9/9:16 双比例。Gemini App 内直接使用。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">提示词结构</div><div class="sub-card-body">[镜头运动] + [主体动作] + [光线氛围] + [音频描述]</div></div>
+        <div class="sub-card"><div class="sub-card-title">核心功能</div><div class="sub-card-body">首尾帧生成控制剧情走向，Scene extension 拼接多片段</div></div>
+      </div>
+      <div class="source">&compfn; @GoogleDeepMind &middot; gemini.google.com</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Midjourney V7 Omni Reference · 角色一致性革命</span>
+        <span class="card-tag">--oref</span>
+      </div>
+      <div class="card-desc">
+        V7 推出的 <b>Omni Reference</b> 功能，允许用 <code>--oref [图片URL]</code> 锁定角色外貌，配合 <code>--cw</code> 参数控制一致性权重，彻底解决 AI 短剧「换脸」痛点。
+      </div>
+      <div class="code-block"><span class="cmt"># Step 1: 生成并保存角色参考图</span>
+<span class="cmt"># Step 2: 后续生成时添加参数</span>
+--oref https://example.com/character.jpg --cw 100  <span class="cmt"># 严格保持脸部+服装</span>
+--oref https://example.com/character.jpg --cw 0   <span class="cmt"># 只保持脸部，服装可换</span></div>
+      <div class="source">&compfn; @midjourney &middot; midjourney.com</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚡ 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">OpenAI Codex /goal · AI 编程的「长时域模式」</span>
+        <span class="card-tag">马拉松选手</span>
+      </div>
+      <div class="card-desc">
+        以前用 AI 写代码像指挥临时工——你说一句它干一点。Codex CLI 0.128.0 的 <b>/goal</b> 命令把 Agent 升级为「马拉松选手」：设置持久目标后，跨会话、跨中断自动执行，直到完成或预算用完。
+      </div>
+      <div class="code-block"><span class="cmt"># 设置持久目标</span>
+<span class="key">/goal</span> 迁移这个包到新 API 版本，并验证所有调用
+<span class="key">/goal</span> 把我 backlog.md 里的 18 个特性全干完
+
+<span class="cmt"># 任务管理</span>
+<span class="key">/goal</span> pause      <span class="cmt"># 暂停</span>
+<span class="key">/goal</span> resume     <span class="cmt"># 恢复</span>
+<span class="key">/goal</span> clear      <span class="cmt"># 清除</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">社区实测</div><div class="sub-card-body">18 个特性跑了 14 个，还自审代码、跑通 CI</div></div>
+        <div class="sub-card"><div class="sub-card-title">核心升级</div><div class="sub-card-body">持久状态 + 自主循环，Agent 不再「7秒记忆」</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI &middot; Codex CLI 0.128.0</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Claude Code Native Git Worktrees · 多 Agent 并行互不打架</span>
+        <span class="card-tag">自动清理</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：多个 Claude Code 窗口在同目录跑 → 改文件互相覆盖、git 状态混乱。<strong>Native Worktrees 让每个 sub-agent 用独立临时 worktree</strong>，PR squash-merge 后<strong>自动清理</strong>，不留孤儿分支。
+      </div>
+      <div class="code-block"><span class="cmt"># 配置 baseRef</span>
+worktree.baseRef: <span class="str">fresh</span>    <span class="cmt"># 新功能：从最新 main 创建</span>
+worktree.baseRef: <span class="str">head</span>     <span class="cmt"># Bugfix：从当前 commit 创建</span>
+
+<span class="cmt"># 委派 sub-agent 时声明隔离</span>
+{
+  <span class="key">"isolation"</span>: <span class="str">"worktree"</span>
+}</div>
+      <div class="source">&compfn; @AnthropicAI &middot; Claude Code v2.1.108+</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">可灵 AI 3.0 · 数字演员绑定工作流</span>
+        <span class="card-tag">角色一致性</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：AI 短剧角色在不同镜头里「换脸」，观众出戏。<strong>可灵 3.0 的「数字演员」功能把角色特征绑定为可复用资产</strong>，3 集微短剧角色完全一致。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">建立角色库：生成主角正/侧/半身多角度图</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">提取特征：用视频 3.0 Omni 提取角色动态特征</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">绑定数字演员：保存为模板，逐集调用</div></div>
+      </div>
+      <div class="source">&compfn; @Kimi_Moonshot &middot; klingai.com</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 方法论与 Prompt</div>
+    <div class="section-sub">3 套最有 ROI 的一次性投入</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Kimi K2.6 Agent Swarm · 智能体集群编排</span>
+        <span class="card-tag">300 子 Agent</span>
+      </div>
+      <div class="card-desc">
+        把大任务拆成多个可并行子任务，由主 Agent 动态调度最多 <b>300 个子智能体</b>同时工作，执行时间缩短 80%。适合竞品调研、技术选型、多语言内容生产。
+      </div>
+      <div class="code-block"><span class="cmt"># 每日自动简报 Prompt</span>
+<span class="key">Role</span>    你是我的 AI 项目 orchestrator
+<span class="key">任务</span>    [一句话描述复杂任务]
+
+<span class="key">自动执行:</span>
+  1) 任务分解：识别可并行子任务
+  2) 子 Agent 分配：每个子任务一个专项 Agent
+  3) 并行执行：同时调度所有子 Agent
+  4) 结果汇总：整合产出为最终报告</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">竞品调研</div><div class="sub-card-body">8-10 个竞品同时调研，4 分钟出对比报告</div></div>
+        <div class="sub-card"><div class="sub-card-title">技术选型</div><div class="sub-card-body">Pinecone/Weaviate/Qdrant/Milvus 并行查文档</div></div>
+      </div>
+      <div class="source">&compfn; @Kimi_Moonshot &middot; kimi.com</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">DeepSeek V4 快速/专家双模式 · 按需切换推理强度</span>
+        <span class="card-tag">1M 上下文</span>
+      </div>
+      <div class="card-desc">
+        V4 提供「快速模式」（轻量 V4 Lite）和「专家模式」（完整 V4 Pro）两种选择，<b>1M tokens 上下文</b>，日常对话用快速，复杂推理切专家。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">快速模式</div><div class="sub-card-body">法律文本检索，秒级响应，给出具体操作表格</div></div>
+        <div class="sub-card"><div class="sub-card-title">专家模式</div><div class="sub-card-body">物理仿真/数学推理，逻辑链完整，思考深度高</div></div>
+      </div>
+      <div class="source">&compfn; @deepseek_ai &middot; deepseek.com</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">AI 视频 Prompt 五维公式 · 稳定出片 checklist</span>
+        <span class="card-tag">从抽卡到控制</span>
+      </div>
+      <div class="card-desc">
+        从「抽卡盲盒」到「精准控制」，视频生成 prompt 需要结构化五维公式。
+      </div>
+      <div class="code-block"><span class="cmt"># 五维公式</span>
+[主体描述] + [动作细节] + [环境背景] + [光影材质] + [运镜方式]
+
+<span class="cmt"># 示例</span>
+赛博朋克风女战士(主体)，缓慢转头望向镜头(动作)，
+雨夜霓虹街道倒影(环境)，侧逆光蓝紫色调 8K 分辨率(光影)，
+缓慢推进特写(运镜)</div>
+      <div class="source">&compfn; @zarazhangrui &middot; Seedance/Veo/Kling 实测</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">ranked</span>
+    </div>
+    <div class="section-title">📋 本周最值得先试的顺序</div>
+    <div class="section-sub">按学习成本 × 价值收益从高到低排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">切 GPT-5.5 Instant</div>
+        <div class="gallery-desc">0 成本，ChatGPT 默认已切换</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">试 Seedance 2.0</div>
+        <div class="gallery-desc">15 分钟生成第一条带音频视频</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">MJ V7 Omni Reference</div>
+        <div class="gallery-desc">20 分钟锁定角色一致性</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">Codex /goal 长时域</div>
+        <div class="gallery-desc">1 小时让 AI 通宵跑 backlog</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">Kimi K2.6 Agent Swarm</div>
+        <div class="gallery-desc">30 分钟体验百 Agent 并行</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">Claude Code Worktrees</div>
+        <div class="gallery-desc">1 小时多 Agent 协作不打架</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 &middot; 2026.05.12 – 05.18<br>
+      扫描 65 个顶级 AI 信源 &middot; 精选 9 条立刻能用 &middot; 宁缺毋滥
+    </div>
+    <div class="footer-right">
+      小柒AI速递 &middot; 每周一上午推送
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
