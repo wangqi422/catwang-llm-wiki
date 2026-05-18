@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #09 · 2026.05.12–05.17</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+* { margin:0; padding:0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300; font-size: 14px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px; transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+.sidebar-header { padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
+.sidebar-brand { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 12px; letter-spacing: 2px; color: var(--sidebar-accent); text-transform: uppercase; margin-bottom: 10px; }
+.sidebar-header h1 { font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif; font-weight: 500; font-size: 22px; color: var(--sidebar-text-hover); line-height: 1.2; }
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta { margin-top: 8px; font-family: "Work Sans", sans-serif; font-size: 11px; color: rgba(242,238,223,0.35); }
+.nav-section { padding: 8px 16px; }
+.nav-section-title { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 11px; letter-spacing: 1.5px; color: rgba(242,238,223,0.3); text-transform: uppercase; padding: 12px 8px 6px; }
+.nav-link { display: block; padding: 8px 12px; color: var(--sidebar-text); text-decoration: none; font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400; border-radius: 6px; transition: all 0.2s; margin-bottom: 2px; }
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6; }
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+.sidebar-dots { display: flex; gap: 8px; padding: 20px 24px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 20px; }
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+/* ═══════ Typography ═══════ */
+h1, h2, h3 { font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif; font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em; }
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px; }
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead { font-family: "Noto Sans SC", sans-serif; font-size: 17px; font-weight: 400; color: var(--ink-soft); max-width: 560px; line-height: 1.7; }
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta { margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--border); }
+.meta-tag { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em; }
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener { font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-style: italic; font-size: 26px; line-height: 1.35; color: var(--ink); margin-bottom: 28px; max-width: 660px; }
+.thesis-opener::first-letter { font-size: 68px; float: left; line-height: 0.85; padding: 4px 10px 0 0; font-style: normal; font-weight: 500; }
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7; }
+.thesis-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink); }
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline { background: var(--card-bg); border-radius: 16px; padding: 18px 24px; border-left: 4px solid var(--pink); }
+.thesis-tagline p { font-family: "Noto Sans SC", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7; }
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px; color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+/* ═══════ Cards ═══════ */
+.card { background: var(--card-bg); border-radius: 28px; padding: 28px 32px; margin-bottom: 18px; scroll-margin-top: 32px; }
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag { font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px; border-radius: 999px; background: var(--paper-2); }
+.card-desc { font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px; font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px; }
+.card-desc strong { font-weight: 500; color: var(--ink); }
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px; }
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+.code-block { background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px; font-family: "JetBrains Mono", "Work Sans", monospace; font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap; }
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+.source { margin-top: 14px; font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 12px; color: var(--ink-faint); padding-top: 10px; border-top: 1px dashed var(--border); }
+/* ═══════ Highlight section ═══════ */
+.section-highlight { background: var(--blush); margin-left: -56px; margin-right: -56px; padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-highlight .section-kicker, .section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+/* ═══════ Footer ═══════ */
+.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+/* ═══════ Back to top ═══════ */
+.back-to-top { position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px; background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px); }
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+/* ═══════ Mobile ═══════ */
+.menu-toggle { display: none; position: fixed; top: 16px; left: 16px; z-index: 200; width: 40px; height: 40px; background: var(--sidebar-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer; align-items: center; justify-content: center; }
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.05.12 – 05.17 &middot; Issue No. 9</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>autoresearch</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code + Skills</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>GitHub Copilot CLI</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>高效工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>复合工程</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>LLM Wiki 方法</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Dreaming</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>方法论与 Prompt</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>锯齿状智能</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Skills 取代 MCP</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">§4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 9</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">Agent 自主化 + 工作流标准化周 &middot; 8 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 8 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.12 – 05.17</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的 Agent 自主化 + 工作流标准化周：Karpathy 开源 autoresearch 让 AI 自己优化模型、Anthropic 上线 Dreaming 让 Agent 从错误中学习、Skills 正在取代 MCP 成为 AI Agent 开发新标准。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Karpathy</div>
+        <div class="thesis-card-body"><b>autoresearch</b> 开源：630 行代码，一块 GPU 就能拥有一个永不下班的 AI 研究实验室</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Anthropic</div>
+        <div class="thesis-card-body">Claude Dreaming 上线：Agent 从过去会话中提取模式，<b>Harvey 任务完成率提升 6 倍</b></div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Workflow</div>
+        <div class="thesis-card-body">复合工程 + LLM Wiki：让每单位工作使未来工作更容易，<b>替代 RAG 的新范式</b></div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Standardization</div>
+        <div class="thesis-card-body">Skills 取代 MCP 成为 AI Agent 开发新标准，<b>karpathy-skills 一周突破 10 万星</b></div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>💡 一句话总结：AI 不再只是工具，它开始自己优化自己；人类的新工作，是写好 Prompt 然后去蒸桑拿。</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛠️ 实用工具箱</div>
+    <div class="section-sub">3 个本周立刻能装的 AI 工具 / 框架</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">autoresearch — AI 自己优化 AI，一块 GPU 就能跑</span>
+        <span class="card-tag">630 行代码</span>
+      </div>
+      <div class="card-desc">
+        Karpathy 开源的「AI 自主科研」框架。核心机制：AI Agent 在一个 Git 特性分支上循环「改代码 → 5 分钟训练 → 检查分数 → 更好就提交」，人类只需写好 <strong>program.md</strong> 任务说明书，然后去睡觉。
+      </div>
+      <div class="code-block"><span class="cmt"># 获取项目</span>
+git clone https://github.com/karpathy/autoresearch
+cd autoresearch
+
+<span class="cmt"># 准备数据（只需跑一次）</span>
+python prepare.py
+
+<span class="cmt"># 启动 AI 自主研究（一块 GPU 即可）</span>
+python train.py
+<span class="cmt"># AI 会自动在特性分支上迭代，每 5 分钟一轮</span>
+<span class="cmt"># 第二天早上查看实验日志和合并的改进</span></div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">适合谁</div><div class="sub-card-body">有 GPU 的研究者 / 想让 AI 自动调参的工程师</div></div>
+        <div class="sub-card"><div class="sub-card-title">最快路径</div><div class="sub-card-body">clone → 跑 prepare.py → 编辑 program.md → 启动 train.py</div></div>
+        <div class="sub-card"><div class="sub-card-title">关键约束</div><div class="sub-card-body">AI 只改 train.py，prepare.py 是固定的，确保可复现</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy &middot; github.com/karpathy/autoresearch</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Code + Skills — 让 AI 按照你的规范写代码</span>
+        <span class="card-tag">10 万星</span>
+      </div>
+      <div class="card-desc">
+        Karpathy 的 <strong>karpathy-skills</strong> 仓库一周突破 10 万星，Matt Pocock 的 <strong>mattpocock/skills</strong> 紧随其后 6 万+。核心思想：把「如何让 AI 干活」从每次手写 Prompt，变成可复用、可分享、可组装的标准化模块（Skills）。
+      </div>
+      <div class="code-block"><span class="cmt"># 获取 Karpathy 的 Skills</span>
+git clone https://github.com/karpathy/karpathy-skills ~/.claude/skills/
+
+<span class="cmt"># 获取 Matt Pocock 的 Skills</span>
+git clone https://github.com/mattpocock/skills ~/.claude/skills/
+
+<span class="cmt"># 在 Claude Code 中调用</span>
+<span class="str">"按照 karpathy-skills 里的规范，帮我重构这段代码"</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">为什么重要</div><div class="sub-card-body">以前每次教 AI「你是谁 / 你要干什么」，现在打包成 Skill 一句话直接跑</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动</div><div class="sub-card-body">把 CODM 工作流写成 Skill，开源出去建立影响力</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy, @mattpocock &middot; github.com/karpathy/karpathy-skills</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">GitHub Copilot CLI 1.0.45 — 快速迭代，新增 /autopilot</span>
+        <span class="card-tag">5 版本/周</span>
+      </div>
+      <div class="card-desc">
+        过去 7 天发布了 5 个版本（1.0.41 → 1.0.45），核心更新：后台认证 UI 立即渲染、MCP server 错误信息改进、新增 <strong>/autopilot</strong> 斜杠命令（在交互模式和自动驾驶模式之间切换）。
+      </div>
+      <div class="code-block"><span class="cmt"># 安装/升级</span>
+npm install -g @github/next-github-copilot-cli
+
+<span class="cmt"># 在终端里使用</span>
+copilot-cli ask "帮我写一个 Python 脚本..."
+
+<span class="cmt"># 切换 autopilot 模式</span>
+/autopilot
+<span class="cmt"># AI 会自主执行多步任务，不需要你每步确认</span></div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">安装后运行 `copilot-cli auth` 登录 GitHub</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">试试 `/autopilot` 模式：让 AI 自主执行多步任务</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">结合 MCP server 扩展能力（连接本地文件系统）</div></div>
+      </div>
+      <div class="source">&compfn; @github &middot; github.com/features/copilot</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚡ 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">「复合工程」— 让每单位工作使未来工作更容易</span>
+        <span class="card-tag">Every.com</span>
+      </div>
+      <div class="card-desc">
+        <strong>痛点</strong>：AI 帮你完成当前任务，但下次类似任务还得重新教它。<strong>复合工程</strong>（Compounding Engineering）的核心：不要让 AI 只是「完成当前任务」，而要让它「让下一个任务更容易」。
+      </div>
+      <div class="code-block"><span class="cmt"># 实践方法：每次让 AI 完成任务后，顺便生成可复用的 Skill</span>
+<span class="key">你</span>: 帮我写这份 PRD，然后生成一个 <span class="str">/write-prd</span> 命令，
+       让以后任何人都能用一句话生成符合我们规范的 PRD。
+
+<span class="cmt"># AI 会生成两个文件：</span>
+<span class="key">1.</span> <span class="str">.claude/skills/write-prd.md</span>  <span class="cmt"># Skill 定义</span>
+<span class="key">2.</span> <span class="str">.claude/CLAUDE.md</span>        <span class="cmt"># 引用 Skill</span>
+
+<span class="cmt"># 下次直接用</span>
+/claude <span class="str">/write-prd "我的新功能想法"</span></div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">实际案例</div><div class="sub-card-body">Dan Shipper 的团队用这个方法，2 个工程师 + 15 个 Claude Code 实例就构建了 Quora（AI 邮件助手），已有 2,500 活跃用户</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动</div><div class="sub-card-body">从下一个任务开始，让 AI 顺便生成「如何做这件事」的 Skill，存到 GitHub 形成团队知识资产</div></div>
+      </div>
+      <div class="source">&compfn; @danshipper &middot; lennysvault.com</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">LLM Wiki 方法 — 替代 RAG 的新范式，让 LLM 自己建知识库</span>
+        <span class="card-tag">Karpathy 新概念</span>
+      </div>
+      <div class="card-desc">
+        Karpathy 提出的个人知识库构建模式：<strong>不让 LLM 临时检索，而是让它在摄入知识时就处理、编译、维护一个 Markdown 知识库</strong>。比喻：Obsidian 是 IDE；LLM 是程序员；wiki 是代码库。
+      </div>
+      <div class="code-block"><span class="cmt"># 三层架构</span>
+<span class="key">Layer 1: Raw Sources</span>  <span class="cmt"># 原始资料，不可变，LLM 只读不写</span>
+<span class="key">Layer 2: The Wiki</span>      <span class="cmt"># LLM 生成的 Markdown 文件集合，自动交叉引用</span>
+<span class="key">Layer 3: Ingest Workflow</span> <span class="cmt"># LLM 自动读取 Raw → 更新 Wiki</span>
+
+<span class="cmt"># 为什么比 RAG 好？</span>
+<span class="key">RAG</span>: 每次查询都临时检索，没有知识积累，不知道 AI 参考了什么
+<span class="key">LLM Wiki</span>: 知识被「编译」一次，持续更新，所有推理过程可审计</div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">获取方式</div><div class="sub-card-body">搜索 "LLM Wiki Karpathy" 找 Gist，或用 Obsidian + Claude Code 自己搭建</div></div>
+        <div class="sub-card"><div class="sub-card-title">上手建议</div><div class="sub-card-body">创建 `raw/` 目录存原始材料，写 `INGEST.md` 告诉 AI 如何提取和交叉引用</div></div>
+        <div class="sub-card"><div class="sub-card-title">关键优势</div><div class="sub-card-body">知识积累、可审计、跨会话记忆——RAG 做不到这三点</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy &middot; gist.github.com/karpathy</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Claude Dreaming — Agent 从自己的错误中学习，Harvey 完成任务率提升 6 倍</span>
+        <span class="card-tag">Anthropic 新功能</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布的 <strong>Dreaming</strong> 功能：AI Agent 在后台回顾过去会话和记忆，提取模式，生成「未来自我可以参考的笔记和 Playbook」。与 Memory 的区别：Memory 保留偏好和上下文，Dreaming 更高层次，跨会话提取模式。
+      </div>
+      <div class="code-block"><span class="cmt"># Dreaming 的核心机制</span>
+<span class="key">1. 回顾</span>: Agent 定期回顾过去 N 个会话
+<span class="key">2. 提取</span>: 找出重复出现的错误、有效的工作流模式
+<span class="key">3. 编写</span>: 将洞察写成纯文本笔记和 Playbook
+<span class="key">4. 应用</span>: 未来会话自动参考这些笔记
+
+<span class="cmt"># 实际效果</span>
+<span class="key">Harvey (法律 AI)</span>: 任务完成率提升 ~<span class="str">6x</span>
+<span class="key">Wisedocs (医疗)</span>: 文档审查时间减少 <span class="str">50%</span>
+<span class="key">Netflix</span>: 同时处理数百个构建日志，用多 Agent 编排</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">不修改模型权重</div><div class="sub-card-body">Dreaming 不是 fine-tuning，它写笔记供未来会话参考，所有记忆都是纯文本，人类可审计</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动</div><div class="sub-card-body">在 `CLAUDE.md` 里明确告诉 AI「完成后把经验写入 skills/ 目录」，定期 review AI 生成的笔记</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI, @alexalbert__ &middot; Code with Claude 2026 Keynote</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🧠 方法论与 Prompt</div>
+    <div class="section-sub">2 套最有 ROI 的一次性投入</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">「锯齿状智能」— 理解 AI 能力的边界，设计更好的协作流程</span>
+        <span class="card-tag">Karpathy 概念</span>
+      </div>
+      <div class="card-desc">
+        Karpathy 在 Sequoia AI Ascent 2026 炉边谈话中提出：AI 的能力分布是「锯齿状的」—— 一边能重构 10 万行代码库，一边会建议你「走路去 50 米外的洗车店」。
+      </div>
+      <div class="code-block"><span class="cmt"># 锯齿状智能的核心解释</span>
+<span class="key">可验证的任务</span> (代码能跑、答案能对): AI 表现超人
+<span class="key">不可验证的任务</span> (常识判断、模糊决策): AI 可能犯低级错误
+
+<span class="cmt"># 对你的启示：把任务设计成「可验证」的</span>
+<span class="key">❌ 不要说</span>: <span class="str">"帮我决定用哪个方案"</span>  <span class="cmt"># AI 会瞎猜</span>
+<span class="key">✅ 要说</span>: <span class="str">"生成 3 个方案，每个方案列出优缺点，我来决定"</span>
+
+<span class="cmt"># Prompt 模板：弥补锯齿状缺陷</span>
+你是一个 [角色]。
+你的任务是 [目标]。
+约束条件：
+1. [硬性约束，可验证]
+2. [硬性约束，可验证]
+参考我的 Skills: [[skills/xxx.md]]
+如果不确定，给出 3 个选项让我选择，不要自己决定。</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">关键领悟</div><div class="sub-card-body">不要指望 AI「理解」你的业务上下文，除非你能把上下文写进 Prompt/Skill</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动</div><div class="sub-card-body">把常用决策模式写成 Skill，让 AI 按可验证的方式工作，减少低级错误</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy &middot; Sequoia AI Ascent 2026</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Skills 取代 MCP — AI 工作流标准化的未来方向</span>
+        <span class="card-tag">GitHub 趋势</span>
+      </div>
+      <div class="card-desc">
+        过去两个月，GitHub Trending 榜首从 `microsoft/mcp` 变成了 `karpathy/karpathy-skills` 和 `mattpocock/skills`。释放的信号：<strong>AI 工作流的标准化正在从「工具调用协议」（MCP）转向「领域知识包」（Skills）</strong>。
+      </div>
+      <div class="code-block"><span class="cmt"># MCP vs Skills 对比</span>
+<span class="key">MCP</span> (Model Context Protocol)
+  - 定义「AI 能调用哪些工具」
+  - 是<strong>能力层</strong>的标准化
+  - 需要写 server 代码
+
+<span class="key">Skills</span>
+  - 定义「AI 在某个领域如何思考、如何行动」
+  - 是<strong>知识层</strong>的标准化
+  - 一个 Markdown 文件即可
+
+<span class="cmt"># 为什么 Skills 更有优势？</span>
+<span class="key">1. 轻量</span>: 一个 .md 文件，不需要写代码
+<span class="key">2. 可版本控制</span>: 和代码一样用 Git 管理
+<span class="key">3. 可分享</span>: 扔到 GitHub 上，任何人都能用
+<span class="key">4. 可组合</span>: 像乐高积木一样组装和复用
+
+<span class="cmt"># 当前生态</span>
+- Karpathy Skills: 聚焦 AI 编码最佳实践
+- Matt Pocock Skills: 聚焦 TypeScript/React 开发
+- 社区正在形成 Skills 市场（类似 VS Code 扩展市场）</div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">你的行动 1</div><div class="sub-card-body">去 GitHub 搜 `topic:claude-skills` 看看别人分享了什么</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动 2</div><div class="sub-card-body">把你的 CODM 工作流程写成 Skills（比如「赛季海报生成流程」）</div></div>
+        <div class="sub-card"><div class="sub-card-title">你的行动 3</div><div class="sub-card-body">开源你的 Skills，建立个人影响力，让其他人给你提 PR 改进</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy, @mattpocock, @zarazhangrui &middot; GitHub Trending</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">ranked</span>
+    </div>
+    <div class="section-title">📋 本周最值得先试的顺序</div>
+    <div class="section-sub">按学习成本 × 价值收益从高到低排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-num">1</div>
+        <div class="gallery-title">Claude Code + Skills</div>
+        <div class="gallery-desc">学习成本 ⭐，价值收益 ⭐⭐⭐⭐⭐ —— 立刻能大幅提升 AI 编码质量</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">2</div>
+        <div class="gallery-title">LLM Wiki 方法</div>
+        <div class="gallery-desc">学习成本 ⭐⭐，价值收益 ⭐⭐⭐⭐ —— 替代 RAG，建立真正积累的知识库</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">3</div>
+        <div class="gallery-title">复合工程工作流</div>
+        <div class="gallery-desc">学习成本 ⭐⭐，价值收益 ⭐⭐⭐⭐ —— 让 AI 不仅完成任务，还让未来任务更容易</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">4</div>
+        <div class="gallery-title">autoresearch</div>
+        <div class="gallery-desc">学习成本 ⭐⭐⭐，价值收益 ⭐⭐⭐⭐⭐ —— 如果你有 GPU，一夜之间跑完一个小型研究实验室的工作量</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">5</div>
+        <div class="gallery-title">理解「锯齿状智能」</div>
+        <div class="gallery-desc">学习成本 ⭐，价值收益 ⭐⭐⭐ —— 帮你设计更好的 AI 协作流程</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-num">6</div>
+        <div class="gallery-title">Claude Dreaming</div>
+        <div class="gallery-desc">学习成本 ⭐⭐，价值收益 ⭐⭐⭐⭐ —— 如果你在用企业版 Claude，开启这个功能</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 &middot; 2026.05.12 – 05.17<br>
+      扫描 65 个顶级 AI 信源 &middot; 精选 8 条立刻能用 &middot; 宁缺毋滥
+    </div>
+    <div class="footer-right">
+      小柒AI速递 &middot; 每周一上午推送
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
