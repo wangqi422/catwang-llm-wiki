@@ -128,6 +128,8 @@ node _deploy/daily-card/run.js --all
 node _deploy/daily-card/run.js raw/daily-reports/AIGC_Daily_Report_YYYYMMDD.md
 ```
 
+**重要修正（2026-05-20）**：`_deploy/daily-card/run.js` 旧逻辑会在截图后删除 `docs/ai-daily/ai-daily-card-*.html`，可能误删 TOC 版 H5。补发/发布 TOC 版日报时不要直接运行 `run.js`；应单独生成 `ai-daily-card-YYYYMMDD-toc.html`，确认归档页已更新后再推送。若需要 PNG，先修复 `run.js` 的清理规则或改用专用截图脚本，禁止让它清理 `*-toc.html`。
+
 ### 2.4 解析规则
 
 生成器从以下结构提取数据：
