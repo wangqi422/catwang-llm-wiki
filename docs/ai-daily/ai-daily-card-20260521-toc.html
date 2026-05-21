@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-back {
+  display:block; margin-top:20px; padding:10px 24px; font-family:"Noto Sans SC",sans-serif;
+  font-size:12px; color:var(--sidebar-accent); text-decoration:none; letter-spacing:0.05em;
+  border-top:1px solid rgba(255,255,255,0.06); padding-top:20px;
+}
+.sidebar-back:hover { color:var(--sidebar-text-hover); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Back to archive */
+.back-archive {
+  position:fixed; top:16px; right:24px; z-index:200;
+  font-family:"Noto Sans SC",sans-serif; font-size:12px; font-weight:400;
+  color:var(--ink-soft); text-decoration:none; padding:8px 16px;
+  background:var(--card-bg); border-radius:999px; backdrop-filter:blur(8px);
+  border:1px solid var(--border); transition:all 0.2s;
+}
+.back-archive:hover { color:var(--ink); background:rgba(255,255,255,0.75); border-color:var(--lemon); }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-source { margin-top:8px; font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px; color:var(--ink-faint); border-top:1px dashed var(--border); padding-top:8px; }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip { flex:1; border-radius:16px; padding:14px 16px; text-align:center; }
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+  .back-archive { top:auto; bottom:16px; right:16px; font-size:11px; padding:6px 12px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<a href="index.html" class="back-archive">← 返回归档</a>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.21 &middot; 星期三 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Talent &amp; Research</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>人才 &amp; 科研</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Karpathy 加盟 Anthropic</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI 推翻 Erdős 猜想</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Platform &amp; Agent</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>平台 &amp; Agent</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Google I/O 2026</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>阿里 Qwen3.7-Max</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Gemini 3.5 Flash</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Creative &amp; Industry</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>创作 &amp; 产业</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Midjourney TPU 反思</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Kimi 20 亿美元融资</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>AIGC 产业峰会</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a href="index.html" class="sidebar-back">← 返回归档</a>
+
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.21 &middot; Wed</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">设计师 8 条速报 &middot; Karpathy 加盟 Anthropic &amp; AI 推翻 80 年数学猜想</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 人才 &amp; 科研</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🤖 平台 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎨 创作 &amp; 产业</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.21</span>
+    </div>
+  </div>
+
+  <!-- DATA STRIP -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Top Score</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">Items</div><div class="data-value">8</div></div>
+    <div class="data-chip"><div class="data-label">Hot</div><div class="data-value">Agent</div></div>
+    <div class="data-chip"><div class="data-label">Tags</div><div class="data-value">7</div></div>
+  </div>
+
+  <!-- §1 人才 & 科研 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Talent &amp; Research</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🧠 人才 &amp; 科研</div>
+    <div class="section-sub">今日最重磅的人才流动与科研突破</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Karpathy 官宣加入 Anthropic，带队用 Claude 加速预训练</span>
+        <span class="card-tag">🔥 9.5</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 联合创始人 Karpathy 宣布加入 Anthropic 预训练团队，将组建新团队专攻<strong>「AI 自我加速预训练」</strong>——让 Claude 训练下一代 Claude。该推文获得 1700 万浏览量，超过同日 Google I/O 直播的 850 万观看。Anthropic 在顶尖人才争夺战中持续扩大优势。
+      </div>
+      <div class="card-source">IT之家 / TechCrunch &middot; #人才流动 #Anthropic</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 推理模型推翻 Erdős 80 年几何猜想，菲尔兹奖主称里程碑</span>
+        <span class="card-tag">🔥 9.3</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 通用推理模型首次自主推翻近 80 年的数学猜想，发现比平方网格更优的<strong>全新代数数论构造</strong>。菲尔兹奖得主 Tim Gowers 称其为「AI 数学的里程碑」，Noga Alon 等多位顶级数学家背书验证。AI 开始触碰科研创造上游——<strong>提出新想法、连接跨领域知识</strong>。
+      </div>
+      <div class="card-source">TechCrunch / IT之家 &middot; #AI科研 #数学</div>
+    </div>
+  </div>
+
+  <!-- §2 平台 & Agent（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Platform &amp; Agent</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🤖 平台 &amp; Agent</div>
+    <div class="section-sub">Agent 时代正式从概念走向大规模落地</div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Google I/O 2026：Gemini Omni 全模态 + Spark 智能体 + 搜索 25 年最大改版</span>
+        <span class="card-tag">🔥 9.0</span>
+      </div>
+      <div class="card-desc">
+        Google 以「Agentic Gemini Era」为主题发布三大核心：<strong>Gemini Omni</strong>（任意输入→任意输出，对话式编辑视频）、<strong>Gemini Spark</strong>（7×24 自主运行 AI 智能体）、搜索 25 年来最大改版（多模态输入+AI 总结）。Gemini 月活从 4 亿增至 <strong>9 亿</strong>，月 Token 处理量两年增长 330 倍至 3200 万亿。
+      </div>
+      <div class="card-source">36氪 / 北京商报 &middot; #GoogleIO #Agent</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">阿里发布 Qwen3.7-Max + 千问云 + 真武 M890 芯片，全栈 Agent 化</span>
+        <span class="card-tag">🔥 8.8</span>
+      </div>
+      <div class="card-desc">
+        2026 阿里云峰会发布 <strong>Qwen3.7-Max</strong>（Arena 盲测国产第一）、千问云 Agent 平台（150+ 模型 API + Skills 封装）、<strong>真武 M890</strong> AI 芯片（144GB 显存，性能 3 倍提升）。完成「芯-云-模型-推理」全栈 Agent 化升级，百炼平台全面开放。
+      </div>
+      <div class="card-source">证券通 / TechWeb &middot; #Qwen #国产模型</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Gemini 3.5 Flash 发布：长周期 Agent + 编程模型，全球数十亿用户开放</span>
+        <span class="card-tag">8.5</span>
+      </div>
+      <div class="card-desc">
+        Gemini 3.5 Flash 即日起面向全球数十亿用户开放，支持<strong>多步骤任务执行、自动调用工具、代码生成</strong>。Antigravity 2.0 可协调多智能体并提供 SDK。更强大的 Gemini 3.5 Pro 已内部使用，预计下月发布。
+      </div>
+      <div class="card-source">36氪 / 新浪 &middot; #Gemini #Agent</div>
+    </div>
+  </div>
+
+  <!-- §3 创作 & 产业 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Creative &amp; Industry</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🎨 创作 &amp; 产业</div>
+    <div class="section-sub">AI 创作工具与产业信号</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Midjourney 创始人反思：选 Google TPU 致研究落后一年，V8 遭用户吐槽</span>
+        <span class="card-tag">8.2</span>
+      </div>
+      <div class="card-desc">
+        Midjourney 创始人 David Holz 公开承认早期选择 Google TPU 导致研究进度落后近一年，<strong>「如果重来，第一天就用 Nvidia」</strong>。V8 版本虽实现 5 倍速度+2K 输出，但用户大量抱怨工作流被破坏、画面质感变平。<strong>美学优势仍在，但迭代速度被全面压制</strong>。
+      </div>
+      <div class="card-source">凤凰网科技 / 搜狐 &middot; #Midjourney #AI绘画</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Kimi 获国资加持融资 20 亿美元，累计融资超 376 亿人民币</span>
+        <span class="card-tag">8.0</span>
+      </div>
+      <div class="card-desc">
+        月之暗面 Kimi 最新一轮 <strong>20 亿美元融资</strong>进入收尾，国智投、中国移动等国资入场。不到半年累计融资超 39 亿美元，估值翻 4 倍。<strong>K2.6 已集成 Cursor</strong>，可连续 13 小时不间断编写超 4000 行代码，Agent 集群能力是国产模型在 Agent 赛道的重要突破。
+      </div>
+      <div class="card-source">IT之家 / 科创板日报 &middot; #融资 #Kimi</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">量子位 AIGC 产业峰会：Agent 成超级入口，众创是 AI 生产力杠杆</span>
+        <span class="card-tag">7.8</span>
+      </div>
+      <div class="card-desc">
+        第四届 AIGC 产业峰会近 20 位领军人物齐聚，核心共识：<strong>Agent 是下一代超级入口</strong>，DAA（日活智能体数）成为新度量衡。商汤 SenseNova U1 实现语言+视觉统一底座，百度秒哒验证 Vibe Coding 商业可行性——<strong>4 位项目经理替代 12 人研发团队</strong>，交付周期从年缩至月。
+      </div>
+      <div class="card-source">量子位 / 腾讯新闻 &middot; #Agent #产业</div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL -->
+  <div class="section">
+    <div class="section-chrome">
+      <span class="section-kicker">Editorial</span>
+      <span class="section-count">点评</span>
+    </div>
+    <div class="section-title">📝 编辑点评</div>
+    <div class="section-sub">今日最大看点 &amp; 对设计团队的启发</div>
+    <div class="card" style="background:var(--card-bg); border-left:4px solid var(--lemon);">
+      <div class="card-desc">
+        今日 AI 圈两大重磅消息同日爆发：<strong>Karpathy 加盟 Anthropic</strong> 和 <strong>OpenAI 推翻 Erdős 猜想</strong>，分别从人才流动和科研突破两个维度证明——大模型竞争最激烈的战场仍在研发前沿。Google I/O 将 Agent 推向数十亿用户规模，阿里全栈 Agent 化升级紧随其后，<strong>Agent 时代正式从概念走向大规模落地</strong>。对 CODM 宣发团队而言，Gemini Omni 的对话式视频编辑、Qwen3.7-Max 的中文推理能力、以及 Agent 编排工具的成熟，都意味着 AI 辅助内容生产的工具链正加速从「单点工具」进化为「端到端工作流」——值得密切关注并提前布局。
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; <em>2026.05.21</em><br>
+      8 条速报 &middot; 7 标签 &middot; 5 轮扫描
+    </div>
+    <div class="footer-right">
+      J3工作室·宣发设计组·小柒&amp;AI分析
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- Back to top -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<script>
+// ScrollSpy + Progress
+const sections = document.querySelectorAll('.section, .section-highlight, .header');
+const navLinks = document.querySelectorAll('.nav-link');
+const progressFill = document.getElementById('progressFill');
+const backToTop = document.getElementById('backToTop');
+
+function onScroll() {
+  const scrollY = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = Math.min(100, (scrollY / docH) * 100);
+  progressFill.style.width = pct + '%';
+
+  // Back to top
+  if (scrollY > 400) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+
+  // ScrollSpy
+  let current = '';
+  sections.forEach(s => {
+    if (scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
