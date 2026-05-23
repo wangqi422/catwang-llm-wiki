@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-archive { padding:16px 24px; }
+.sidebar-archive a { color:var(--sidebar-text); font-family:"Noto Sans SC",sans-serif; font-size:12px; text-decoration:none; display:flex; align-items:center; gap:6px; transition:color 0.2s; }
+.sidebar-archive a:hover { color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { display:inline-block; font-family:"Cormorant Garamond",serif; font-size:18px; font-weight:500; color:var(--ink); margin-top:8px; padding:4px 14px; border-radius:999px; }
+.card-score.high { background:var(--lemon); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.23 &middot; 星期五 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Industry &amp; Business</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>行业 &amp; 商业</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Glasswing 漏洞扫描</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>英伟达 4 万亿基建</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Cursor Gartner 领导者</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>微软 AI 成本报告</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Research</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>前沿研究</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>AlphaProof Nexus</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Nemotron 扩散语言模型</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Products &amp; Models</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>产品 &amp; 模型</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Google Agent 工具链</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>DeepSeek V4 永久降价</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <div class="sidebar-archive">
+    <a href="index.html">&#8592; 返回归档</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.23 &middot; Fri</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">设计师 8 条速报 &middot; Glasswing 万级漏洞 &middot; 英伟达 4 万亿预言 &middot; AlphaProof 证明猜想</p>
+    <div class="header-meta">
+      <span class="meta-tag">🔒 安全</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔥 行业</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📄 论文</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛠️ 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.23</span>
+    </div>
+  </div>
+
+  <!-- §1 行业 & 商业（Highlight） -->
+  <div class="section-highlight" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Industry &amp; Business</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🔥 行业 &amp; 商业</div>
+    <div class="section-sub">Glasswing 安全里程碑 &middot; 英伟达万亿野望 &middot; AI 编程双寡头确立</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic Project Glasswing：AI 发现 1 万+ 高危漏洞</span>
+        <span class="card-tag">🔒 安全</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 上月启动的 Project Glasswing 发布初步成果：利用 <strong>Claude Mythos Preview</strong> 模型，与约 50 家合作伙伴协作，已在全球关键系统中发现超过 <strong>10,000 个高危或严重安全漏洞</strong>。Cloudflare 发现 2,000 个漏洞；Mozilla 在 Firefox 150 中发现并修复 271 个漏洞。独立验证准确率达 <strong>90.6%</strong>，多家伙伴报告效率提升 10 倍以上。
+      </div>
+      <span class="card-score high">9.5</span>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">黄仁勋：AI 基建年度开支要冲向 4 万亿美元</span>
+        <span class="card-tag">🔥 财报</span>
+      </div>
+      <div class="card-desc">
+        英伟达 FY2027 Q1 财报：营收 <strong>816 亿美元</strong>（同比+85%），净利润 <strong>583 亿美元</strong>，市值 5.7 万亿美元超德国 GDP。黄仁勋预测超大规模云厂商 AI 基建年度开支将从 1 万亿增至 <strong>3-4 万亿美元</strong>。数据中心营收 752 亿美元占比超九成。AI 高能耗正推高居民电费。
+      </div>
+      <span class="card-score high">9.3</span>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Cursor 获评 2026 Gartner 企业 AI 编码代理魔力象限领导者</span>
+        <span class="card-tag">🔥 行业</span>
+      </div>
+      <div class="card-desc">
+        Gartner 2026 年魔力象限报告将 Cursor 评为企业级 AI 编码代理领域<strong>领导者</strong>，愿景完整性领先。超过 <strong>70%</strong> 的财富 500 强企业使用 Cursor。GitHub Copilot 同时获评三连冠。AI 编程赛道<strong>双寡头格局</strong>清晰。
+      </div>
+      <span class="card-score">8.3</span>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">微软报告：AI 使用成本高于支付人工工资</span>
+        <span class="card-tag">🔥 成本</span>
+      </div>
+      <div class="card-desc">
+        微软发布报告指出，在特定工作场景中，部署 AI（tokens + agents）的综合开销已<strong>高于人工工资</strong>。对"AI 取代一切人类工作"的叙事形成重要反面证据，将推动行业加速优化推理成本。
+      </div>
+      <span class="card-score">8.0</span>
+    </div>
+
+    <div class="data-strip">
+      <div class="data-chip"><div class="data-label">NVIDIA 营收</div><div class="data-value">$816B</div></div>
+      <div class="data-chip"><div class="data-label">漏洞数量</div><div class="data-value">10,000+</div></div>
+      <div class="data-chip"><div class="data-label">AI 基建预测</div><div class="data-value">$4T/yr</div></div>
+      <div class="data-chip"><div class="data-label">F500 用 Cursor</div><div class="data-value">70%</div></div>
+    </div>
+  </div>
+
+  <!-- §2 前沿研究 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Research</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📄 前沿研究</div>
+    <div class="section-sub">形式化证明 + 扩散语言模型：推理范式双突破</div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">AlphaProof Nexus：形式化验证驱动 AI 数学证明</span>
+        <span class="card-tag">📄 论文</span>
+      </div>
+      <div class="card-desc">
+        Google DeepMind 提出 AlphaProof Nexus，将 LLM 与 <strong>Lean 形式化验证</strong>结合。模型在生成证明时不断读取编译错误并修正，可调用更强工具辅助子问题。在 353 个 Erdős 问题中解决 <strong>9 个</strong>，证明 44 个序列猜想。模型角色从"叙述者"变为"候选方案生成器"。
+      </div>
+      <span class="card-score high">9.0</span>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">NVIDIA Nemotron-Labs 扩散语言模型：光速级文本生成</span>
+        <span class="card-tag">📄 论文</span>
+      </div>
+      <div class="card-desc">
+        NVIDIA 在 Hugging Face 发布 Nemotron-Labs 扩散语言模型技术博客，通过<strong>扩散模型架构</strong>大幅提升文本生成速度。挑战自回归模型推理瓶颈，对实时 Agent 系统和高并发场景有重大意义。
+      </div>
+      <span class="card-score">8.5</span>
+    </div>
+  </div>
+
+  <!-- §3 产品 & 模型（Highlight） -->
+  <div class="section-highlight" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Products &amp; Models</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🛠️ 产品 &amp; 模型</div>
+    <div class="section-sub">Google Agent 全家桶 &middot; DeepSeek 永久降价</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">谷歌 I/O 发布 AI 代理全套开发工具链</span>
+        <span class="card-tag">🛠️ 工具</span>
+      </div>
+      <div class="card-desc">
+        谷歌 I/O 发布面向 AI Agent 的完整工具链：<strong>Antigravity 2.0</strong> 桌面应用 + CLI；Google AI Studio 新增 Kotlin；Gemini API 托管代理服务<strong>一键部署</strong>。<strong>WebMCP</strong> 在 Chrome 149 推出，允许网页向代理暴露工具。Chrome DevTools 开放给 AI 代理以自动化调试。
+      </div>
+      <span class="card-score">8.8</span>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">DeepSeek-V4-Pro 永久降价</span>
+        <span class="card-tag">🤖 降价</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek 宣布将 V4-Pro 模型优惠<strong>永久化</strong>。价格战持续升级，国产大模型 API 成本进一步压低，对中小企业和独立开发者的 AI 应用开发成本直接利好。
+      </div>
+      <span class="card-score">8.5</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AI HOT &middot; aihot.virxact.com<br>
+      信源覆盖 34 条精选 &middot; 筛选 Top 8
+    </div>
+    <div class="footer-right">
+      AIGC Daily &middot; Designed by Claw<br>
+      2026.05.23 15:40
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- BACK TO TOP -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressFill').style.width = (window.scrollY / h * 100) + '%';
+  document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+});
+
+// ScrollSpy
+const links = document.querySelectorAll('.nav-link');
+const sections = [];
+links.forEach(l => {
+  const id = l.getAttribute('href');
+  if (id && id.startsWith('#')) {
+    const el = document.querySelector(id);
+    if (el) sections.push({ el, link: l });
+  }
+});
+const spy = () => {
+  let current = sections[0];
+  sections.forEach(s => { if (s.el.getBoundingClientRect().top <= 80) current = s; });
+  links.forEach(l => l.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+};
+window.addEventListener('scroll', spy);
+spy();
+
+// Mobile close
+document.querySelectorAll('.nav-link').forEach(l => {
+  l.addEventListener('click', () => { if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open'); });
+});
+</script>
+</body>
+</html>
