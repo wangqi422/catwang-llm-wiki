@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-archive { padding:16px 24px; margin-top:auto; }
+.sidebar-archive a { color:var(--sidebar-accent); font-family:"Noto Sans SC",sans-serif; font-size:12px; text-decoration:none; opacity:0.7; transition:opacity 0.2s; }
+.sidebar-archive a:hover { opacity:1; }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); }
+.card-source { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px; color:var(--ink-faint); margin-top:8px; }
+.card-takeaway { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); font-size:13px; color:var(--ink-soft); }
+.card-takeaway em { font-style:normal; font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Editorial */
+.editorial {
+  margin-top:48px; padding:32px 36px; background:var(--card-bg); border-radius:28px; scroll-margin-top:32px;
+}
+.editorial-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin-bottom:12px; }
+.editorial-title { font-family:"Noto Sans SC",sans-serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:12px; }
+.editorial-text { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.editorial-text strong { font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.27 &middot; 星期二 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Agent &amp; Infra</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI Agent &amp; 基础设施</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Grok Build Beta + V9</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>支付宝 AI Wallet</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>天工 SkyClaw-v1.0</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Win11 Ask Copilot</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. AI Ecosystem &amp; Video</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>生态 &amp; AI 视频</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>美团跑腿 Skill</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Runway Aleph 2.0</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>可灵分拆 IPO</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>AI视频三国杀</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <div class="sidebar-archive">
+    <a href="index.html">&larr; 返回归档</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.27 &middot; Tue</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Agent 基础设施化 &middot; AI 视频精修时代 &middot; 支付交易闭环成型</p>
+    <div class="header-meta">
+      <span class="meta-tag">🤖 AI Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💰 AI 支付</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎬 AI 视频</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.27</span>
+    </div>
+  </div>
+
+  <!-- §1 AI Agent & 基础设施 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Agent &amp; Infrastructure</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🤖 AI Agent &amp; 基础设施</div>
+    <div class="section-sub">Agent 军备竞赛升级 &middot; AI 支付闭环成型 &middot; 长上下文 Agent 模型入局</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">xAI Grok Build 扩大 Beta + Grok V9 1.5T 模型预告</span>
+        <span class="card-tag">🔥 9.2</span>
+      </div>
+      <div class="card-desc">
+        xAI 将 <strong>Grok Build 从早期访问扩大到更广泛 Beta</strong>，支持 Plan Mode（自动拆解任务）、CLI 工具、文件读写。Elon Musk 预告 <strong>Grok V9 将是 1.5 万亿参数级别模型</strong>，SuperGrok Heavy 订阅 $300/月直指企业级 Agent 市场。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：Grok Build 的 CLI + Plan Mode 可探索用于自动化素材生产流水线编排</div>
+      <div class="card-source">xAI Official &middot; The Verge &middot; May 25-26</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">支付宝 AI Wallet + Token Pay — 全球首个 AI 原生支付体系</span>
+        <span class="card-tag">🔥 8.8</span>
+      </div>
+      <div class="card-desc">
+        蚂蚁集团上线 <strong>AI Wallet（智能钱包）及 Token Pay</strong>。AI Wallet 允许自然语言完成转账/查询/理财；Token Pay 是<strong>面向 AI Agent 的加密支付协议</strong>，让 AI 可在授权范围内自主完成交易——标志着支付行业从"人操作 App"到"AI 代人操作"的范式转变。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：Token Pay 的 Agent 支付能力未来可用于自动化采买广告位/素材分发</div>
+      <div class="card-source">蚂蚁集团 &middot; 36氪 &middot; May 26</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">天工 AI SkyClaw-v1.0 — 百万 token 上下文 Agent 模型</span>
+        <span class="card-tag">8.5</span>
+      </div>
+      <div class="card-desc">
+        昆仑万维发布 <strong>SkyClaw-v1.0</strong>，支持 <strong>100 万 token 上下文窗口</strong>（约 75 万字中文），原生支持 Function Call + 多工具编排，面向复杂 Agent 工作流设计。<strong>开源权重即将释放</strong>，有望成为国内 Agent 开发基础模型。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：长上下文模型可处理完整策划方案/竞品报告，辅助长文档分析</div>
+      <div class="card-source">昆仑万维 &middot; 量子位 &middot; May 26</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">微软 Win11 Ask Copilot 任务栏 AI — 文档确认 mid-2026 发布</span>
+        <span class="card-tag">8.3</span>
+      </div>
+      <div class="card-desc">
+        微软支持文档确认 Windows 11 将在 <strong>mid-2026 推出"Ask Copilot"</strong>，直接集成在任务栏。用户可在任何应用中调起 AI 助手，<strong>跨应用上下文理解</strong>——AI 从应用层下沉到 OS 基础设施层。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：OS 级 AI 助手意味着未来宣发素材触达用户的方式可能变化</div>
+      <div class="card-source">Microsoft Docs &middot; The Verge &middot; May 26</div>
+    </div>
+  </div>
+
+  <!-- §2 生态 & AI 视频（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Ecosystem &amp; AI Video</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🎬 生态 &amp; AI 视频</div>
+    <div class="section-sub">Skill 化生态开放 &middot; 帧级编辑突破 &middot; AI 视频资本加速</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">美团发布"跑腿 Skill"— AI 助手生态开放</span>
+        <span class="card-tag">8.0</span>
+      </div>
+      <div class="card-desc">
+        美团将<strong>跑腿服务封装为 AI Agent 可调用的标准化 Skill 接口</strong>。任何 AI 助手都可集成美团跑腿能力，实现"AI 帮你下单跑腿"。与支付宝 Token Pay 形成互补——<strong>AI Agent 从"能做"到"能买"的闭环正在形成</strong>。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：Skill 化思路可借鉴——将宣发流程各环节封装为可组合 AI Skill</div>
+      <div class="card-source">美团官方 &middot; 36氪 &middot; May 26</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Runway Aleph 2.0 + Edit Studio — 改一帧全片生效</span>
+        <span class="card-tag">🔥 8.2</span>
+      </div>
+      <div class="card-desc">
+        Runway 发布 <strong>Aleph 2.0</strong> 及 <strong>Edit Studio</strong>。Edit Studio 支持帧级编辑——修改某一帧后，<strong>AI 自动将变化传播到全片</strong>，保持时间一致性。这是从"一次生成"到"迭代优化"的关键能力跃迁，交互方式类似传统 NLE 降低专业创作者迁移门槛。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：帧级编辑+自动传播可直接用于视频广告素材精修和版本迭代</div>
+      <div class="card-source">Runway Blog &middot; The Verge &middot; May 21</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">可灵（Kling）分拆拟 IPO — 200 亿美元估值</span>
+        <span class="card-tag">7.8</span>
+      </div>
+      <div class="card-desc">
+        快手旗下 <strong>可灵（Kling）推进分拆独立运营</strong>，目标估值约 <strong>200 亿美元</strong>。AI 视频赛道首个独立超级独角兽，分拆后将拥有更灵活的融资和人才机制，与 Runway/Sora 竞争。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：可灵 IPO 后产品力可能加速，需持续关注其与游戏行业合作动态</div>
+      <div class="card-source">Bloomberg &middot; 36氪</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">AI 视频三国杀 — Seedance 8 成份额 vs Kling vs HappyHorse</span>
+        <span class="card-tag">8.0</span>
+      </div>
+      <div class="card-desc">
+        AI 视频市场格局初定：<strong>Seedance 2.0 占据约 80% 国内份额</strong>；Kling 海外市场差异化发力；<strong>阿里 HappyHorse 正式入局</strong>，主打电商视频场景。三足鼎立意味着技术迭代和价格竞争将加速。
+      </div>
+      <div class="card-takeaway"><em>宣发启发</em>：按场景选用——角色动画 Seedance、海外素材 Kling、产品展示 HappyHorse</div>
+      <div class="card-source">量子位 &middot; 极客公园 &middot; 行业综合</div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Grok Build</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">AI Wallet</div><div class="data-value">8.8</div></div>
+    <div class="data-chip"><div class="data-label">Runway Edit</div><div class="data-value">8.2</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.5</div></div>
+  </div>
+
+  <!-- Editorial -->
+  <div class="editorial" id="editorial">
+    <div class="editorial-kicker">Editorial</div>
+    <div class="editorial-title">编辑点评</div>
+    <div class="editorial-text">
+      今日 AI 行业三大主线清晰：<strong>Agent 基础设施化</strong>、<strong>AI 视频工具精修化</strong>、<strong>AI 支付交易闭环</strong>。xAI Grok Build 扩大 Beta + V9 1.5T 预告将 Agent 军备竞赛推向新高度；支付宝 Token Pay 和美团跑腿 Skill 标志着 AI Agent 从"信息助手"正式迈入"交易执行者"阶段。AI 视频赛道则进入精耕期——Runway Edit Studio 的帧级编辑、Seedance/Kling/HappyHorse 的三国格局，都指向<strong>"从生成到精修"</strong>的行业拐点。<br><br>
+      对 CODM 宣发团队：AI Agent 的 Skill 化和交易能力正在快速成熟，建议提前规划宣发流程各环节的 AI Skill 化封装；AI 视频的帧级编辑能力已可用于广告素材精修，建议本周内试用 Runway Edit Studio 评估工作流整合可行性。
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.27<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
