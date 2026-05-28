@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-archive { padding:16px 24px 0; }
+.sidebar-archive a {
+  font-family:"Work Sans",sans-serif; font-size:12px; color:rgba(242,238,223,0.4);
+  text-decoration:none; transition:color 0.2s;
+}
+.sidebar-archive a:hover { color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); margin-left:8px; }
+.card-bullets { margin-top:10px; padding-left:18px; font-size:13px; line-height:1.9; color:var(--ink-soft); }
+.card-bullets li { margin-bottom:4px; }
+.card-bullets li strong { font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Sage section */
+.section-sage {
+  background:var(--sage); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-sage .section-kicker,
+.section-sage .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-sage .card { background:rgba(255,255,255,0.65); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight, .section-sage { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.28 &middot; 星期四 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Image &amp; Creation</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI 图像 &amp; 创作</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Midjourney V8 Alpha</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>MiniCPM-V 4.6</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Stable Audio 3</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. AI Coding &amp; Agent</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>AI 编码 &amp; Agent</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Cognition AI 260亿</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Vibe Coding 全民造App</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. LLM &amp; Industry</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>大模型 &amp; 产业</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Qwen3.7 Max</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Google SynthID</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>阿里530 Token战役</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <div class="sidebar-archive">
+    <a href="index.html">&larr; 返回归档</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.28 &middot; Thu</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">设计师 8 条速报 &middot; Midjourney V8 来了 &middot; AI 编码赛道估值暴涨</p>
+    <div class="header-meta">
+      <span class="meta-tag">🎨 AI 图像</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🤖 AI 编码</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧠 大模型</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔊 AI 音频</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.28</span>
+    </div>
+  </div>
+
+  <!-- §1 AI 图像 & 创作 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Image &amp; Creation</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🎨 AI 图像 &amp; 创作</div>
+    <div class="section-sub">今日最重磅的创作工具动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Midjourney V8 Alpha 开放测试：5倍速 + 原生2K + 最强文字渲染</span>
+        <span class="card-tag">🔥 重磅</span>
+        <span class="card-score">9.5</span>
+      </div>
+      <div class="card-desc">
+        Midjourney 正式放出 <strong>V8 Alpha</strong>，等了整整一年的史诗级更新。六项核心升级：提示词遵循大幅提升、生成速度<strong>快5倍</strong>（30s→6s）、<strong>原生2048px 2K</strong>输出、文字渲染史上最强、个性化和风格系统全面升级、界面大改版。
+      </div>
+      <ul class="card-bullets">
+        <li><strong>提示词遵循</strong>：复杂指令不再"选择性失忆"</li>
+        <li><strong>原生2K</strong>：直接满足印刷/海报需求，无需后期放大</li>
+        <li><strong>文字渲染</strong>：引号标注即可准确渲染，AI 生图老大难突破</li>
+        <li><strong>--srefs + moodboard</strong>：完全兼容 V7 个性化档案</li>
+      </ul>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">面壁智能 MiniCPM-V 4.6：1.3B 端侧多模态新标杆</span>
+        <span class="card-tag">端侧AI</span>
+        <span class="card-score">8.5</span>
+      </div>
+      <div class="card-desc">
+        仅 <strong>1.3B 参数</strong>的多模态模型在 OCR、图表理解、文档分析上超越同级别甚至更大模型，适合手机和 IoT 设备直接部署。高效视觉-语言对齐策略+优化训练数据配比，端侧 AI 不必在性能和体积间做极端妥协。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Stability AI 发布 Stable Audio 3：长音频秒级生成</span>
+        <span class="card-tag">AI音频</span>
+        <span class="card-score">8.3</span>
+      </div>
+      <div class="card-desc">
+        Stable Audio 3 支持长音频的<strong>高质量秒级生成</strong>，音频连贯性和音质保真度显著提升。改进扩散架构，从短音效到数分钟完整音乐作品均可生成，独立创作者和游戏开发者的音频生产利器。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 AI 编码 & Agent（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. AI Coding &amp; Agent</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🤖 AI 编码 &amp; Agent</div>
+    <div class="section-sub">AI 编码赛道估值暴涨，全民造应用浪潮来临</div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Cognition AI 融资10亿美元，估值飙至260亿</span>
+        <span class="card-tag">🔥 融资</span>
+        <span class="card-score">9.2</span>
+      </div>
+      <div class="card-desc">
+        Devin 开发商 Cognition AI 完成超 <strong>10 亿美元</strong>融资，估值<strong>260亿</strong>，8个月翻倍。年化收入从 3700 万美元飙升至 <strong>4.92 亿美元</strong>（+13倍）。客户含高盛、奔驰、NASA。AI 编码 Agent 从概念验证走向商业规模化。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">大厂全线押注 Vibe Coding：百度秒哒 / 腾讯吐司 / 字节 TRAE</span>
+        <span class="card-tag">趋势</span>
+        <span class="card-score">7.8</span>
+      </div>
+      <div class="card-desc">
+        <strong>百度秒哒3.0</strong>：自然语言生成 iOS/Android 原生应用，累计用户超1000万。<strong>腾讯吐司</strong>：5月15日上线，主打灵感共创和社交分享。<strong>字节TRAE SOLO</strong>：脱离传统IDE的独立端，AI从编程泛化到全产研流程。开发门槛降至"说一句话就能做App"。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 大模型 & 产业（Sage） -->
+  <div class="section-sage" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. LLM &amp; Industry</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 大模型 &amp; 产业</div>
+    <div class="section-sub">国产模型突破 + 安全标准 + Token 经济</div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Qwen3.7 Max 发布：国产模型问鼎全球前五</span>
+        <span class="card-tag">🔥 旗舰</span>
+        <span class="card-score">9.0</span>
+      </div>
+      <div class="card-desc">
+        阿里云发布 <strong>Qwen3.7 Max</strong>，Code Arena 得分 1541 超越 GPT-5.5，全球编程第二、综合第五。<strong>RL Scaling 路径清晰</strong>：4000+ 环境超越 DeepSeek V4。自主完成1万行代码 App 开发（11小时），控制机器狗寻找物品，实现多轮自进化。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Google 将 SynthID 接入搜索与 Chrome：一键验证 AI 生成内容</span>
+        <span class="card-tag">AI安全</span>
+        <span class="card-score">8.8</span>
+      </div>
+      <div class="card-desc">
+        Google 将 <strong>SynthID 数字水印</strong>整合到搜索和 Chrome 浏览器，一键检测 AI 生成内容。不可见水印不影响视觉质量，Chrome 数十亿用户将使 AI 内容检测成为<strong>标配功能</strong>，AI 内容治理进入实操阶段。
+      </div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">阿里"530 Token战役"：MaaS 收入 5 个月增长 15 倍</span>
+        <span class="card-tag">产业</span>
+        <span class="card-score">8.0</span>
+      </div>
+      <div class="card-desc">
+        阿里"530 Token 战役"超额完成，MaaS 收入<strong>5个月增长15倍</strong>。1:1绩效激励+Agent打包卖Token。平头哥发布<strong>真武890 AI芯片</strong>，AL128超节点搭载128张。阿里云AI相关 ARR 突破<strong>100亿元</strong>，年底目标300亿。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Midjourney V8</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">Cognition AI</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">Qwen3.7 Max</div><div class="data-value">9.0</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.6</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.28<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
