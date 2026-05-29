@@ -64,12 +64,9 @@ body {
 .sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
 .sidebar-dots i { width:10px; height:10px; border-radius:50%; }
 
-.sidebar-archive { padding:16px 24px 0; }
-.sidebar-archive a {
-  font-family:"Noto Sans SC",sans-serif; font-size:12px; color:rgba(242,238,223,0.4);
-  text-decoration:none; transition:color 0.2s;
-}
-.sidebar-archive a:hover { color:var(--sidebar-accent); }
+.sidebar-back { padding:16px 24px 0; }
+.sidebar-back a { font-family:"Noto Sans SC",sans-serif; font-size:12px; color:rgba(242,238,223,0.4); text-decoration:none; transition:color 0.2s; }
+.sidebar-back a:hover { color:var(--sidebar-accent); }
 
 /* Main */
 .main { margin-left:var(--sidebar-w); min-height:100vh; }
@@ -106,23 +103,6 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 .card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
 .card-desc strong { font-weight:500; color:var(--ink); }
 
-/* Sub-cards inside card for highlights */
-.card-highlights { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
-.highlight-item {
-  font-size:13px; color:var(--ink-soft); line-height:1.7; padding:8px 14px;
-  border-radius:16px;
-}
-.highlight-item:nth-child(4n+1) { background:var(--pink); }
-.highlight-item:nth-child(4n+2) { background:var(--lemon); }
-.highlight-item:nth-child(4n+3) { background:var(--blush); }
-.highlight-item:nth-child(4n)   { background:var(--sage); }
-.highlight-label { font-weight:500; color:var(--ink); }
-
-/* Card summary */
-.card-summary { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); }
-.card-summary ol { padding-left:18px; margin:0; }
-.card-summary li { font-size:13px; color:var(--ink-soft); line-height:1.8; margin-bottom:2px; }
-
 /* Highlight section */
 .section-highlight {
   background:var(--blush); margin-left:-56px; margin-right:-56px;
@@ -143,16 +123,6 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 .data-chip:nth-child(4n)   { background:var(--sage); }
 .data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
 .data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
-
-/* Editor comment */
-.editor-comment {
-  background:var(--card-bg); border-radius:28px; padding:28px 32px; margin-top:32px; margin-bottom:24px;
-  border-left:4px solid var(--lemon);
-}
-.editor-comment h3 { font-family:"Noto Sans SC",sans-serif; font-size:18px; font-weight:700; margin-bottom:12px; }
-.editor-comment p { font-size:14px; line-height:1.85; color:var(--ink-soft); margin-bottom:8px; }
-.editor-comment p:last-child { margin-bottom:0; }
-.editor-comment strong { color:var(--ink); font-weight:500; }
 
 /* Footer */
 .footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
@@ -214,26 +184,26 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">i. Major Releases &amp; Funding</div>
-    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>重大发布 &amp; 融资</a>
-    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 650 亿 H 轮</a>
-    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Opus 4.8 发布</a>
+    <div class="nav-section-title">i. Funding &amp; Models</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>融资 &amp; 模型</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 650亿H轮</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Opus 4.8</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>iOS 27 AI Siri</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">ii. Industry &amp; Platforms</div>
-    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 平台</a>
-    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>iOS 27 AI Siri 曝光</a>
-    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>DeepSeek 再度中断</a>
-    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>MiniMax ARR 翻番</a>
+    <div class="nav-section-title">ii. Stability &amp; Business</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>稳定性 &amp; 商业</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>DeepSeek 再中断</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>MiniMax ARR翻番</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Qwen3.7-Max登顶</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">iii. Open Source &amp; Trends</div>
-    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>开源 &amp; 趋势</a>
-    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Qwen3.7-Max 登顶</a>
-    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>AI 视频生产级拐点</a>
-    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>OpenRouter B 轮融资</a>
+    <div class="nav-section-title">iii. Video &amp; Infra</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>视频 &amp; 基建</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Seedance 2.0 生产级</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>OpenRouter B轮</a>
   </div>
 
   <div class="sidebar-dots">
@@ -243,7 +213,7 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
     <i style="background:var(--sage)"></i>
   </div>
 
-  <div class="sidebar-archive">
+  <div class="sidebar-back">
     <a href="index.html">&larr; 返回归档</a>
   </div>
 </nav>
@@ -262,49 +232,35 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
     </div>
     <div class="header-kicker">AI Daily Report &middot; 2026.05.29 &middot; Thu</div>
     <h1>AIGC <em>日报</em></h1>
-    <p class="lead">Anthropic 双响：650 亿 H 轮创纪录 + Opus 4.8 新范式 &middot; AI 视频生产级拐点 &middot; DeepSeek 再中断</p>
+    <p class="lead">今日 8 条速报 &middot; Anthropic 双响 + AI视频生产拐点</p>
     <div class="header-meta">
-      <span class="meta-tag">💰 重大融资</span>
+      <span class="meta-tag">💰 融资 &amp; 模型</span>
       <span class="meta-tag">&middot;</span>
-      <span class="meta-tag">🤖 模型发布</span>
+      <span class="meta-tag">📊 稳定性 &amp; 商业</span>
       <span class="meta-tag">&middot;</span>
-      <span class="meta-tag">📱 行业动态</span>
-      <span class="meta-tag">&middot;</span>
-      <span class="meta-tag">🎬 AI 视频</span>
+      <span class="meta-tag">🎬 视频 &amp; 基建</span>
       <span class="meta-tag">&middot;</span>
       <span class="meta-tag">2026.05.29</span>
     </div>
   </div>
 
-  <!-- §1 重大发布 & 融资 -->
+  <!-- §1 融资 & 模型 -->
   <div class="section" id="s1">
     <div class="section-chrome">
-      <span class="section-kicker">i. Major Releases &amp; Funding</span>
-      <span class="section-count">2 items</span>
+      <span class="section-kicker">i. Funding &amp; Models</span>
+      <span class="section-count">3 items</span>
     </div>
-    <div class="section-title">💰 重大发布 &amp; 融资</div>
-    <div class="section-sub">今日最重磅的发布与融资动态</div>
+    <div class="section-title">💰 融资 &amp; 模型</div>
+    <div class="section-sub">今日最重磅的融资与模型发布动态</div>
 
     <div class="card" id="item-1">
       <div class="card-chrome">
         <span class="card-num">1</span>
-        <span class="card-title">Anthropic 完成 650 亿美元 H 轮融资，估值 9650 亿美元超越 OpenAI</span>
-        <span class="card-tag">🔥 P0</span>
+        <span class="card-title">Anthropic 完成 650 亿美元 H 轮融资，估值 9650 亿美元首超 OpenAI</span>
+        <span class="card-tag">🔥 9.5</span>
       </div>
       <div class="card-desc">
-        Anthropic 完成 H 轮融资，规模达 <strong>650 亿美元</strong>，公司估值飙升至 <strong>9650 亿美元</strong>，超越 OpenAI 成为全球估值最高的 AI 公司。Lightspeed Venture Partners 领投，Salesforce Ventures 等跟投。
-      </div>
-      <div class="card-highlights">
-        <div class="highlight-item"><span class="highlight-label">估值纪录：</span>9650 亿美元刷新 AI 初创公司纪录，反映市场对 AI 安全路线的强烈认可</div>
-        <div class="highlight-item"><span class="highlight-label">资金用途：</span>扩大 Claude 模型训练规模、企业级产品线扩展及安全研究</div>
-        <div class="highlight-item"><span class="highlight-label">策略验证：</span>B2B 企业客户策略（安全与合规）获得资本市场最高溢价</div>
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>Anthropic H 轮 650 亿美元，估值 9650 亿美元超越 OpenAI</li>
-          <li>「AI 安全优先」路线获资本最高溢价，企业级 AI 应用成新共识</li>
-          <li>CODM 宣发可关注 Claude 企业版工作流自动化，未来可能接入游戏宣发内容生产链</li>
-        </ol>
+        Anthropic H 轮融资 <strong>650 亿美元</strong>，估值飙升至 <strong>9650 亿美元</strong>，超越 OpenAI 创 AI 初创估值纪录。Lightspeed 领投，资金将用于扩大 Claude 训练规模、企业级产品扩展及安全研究。「AI 安全优先」路线获资本市场最高溢价。
       </div>
     </div>
 
@@ -312,132 +268,85 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
       <div class="card-chrome">
         <span class="card-num">2</span>
         <span class="card-title">Claude Opus 4.8 发布 + Dynamic Workflows + Effort Control</span>
-        <span class="card-tag">🔥 P0</span>
+        <span class="card-tag">🔥 9.2</span>
       </div>
       <div class="card-desc">
-        Anthropic 发布 <strong>Claude Opus 4.8</strong>，同时推出 <strong>Dynamic Workflows</strong>（动态工作流）和 <strong>Effort Control</strong>（努力程度控制）两大新功能。推理能力、代码生成和多模态理解均有显著提升。
-      </div>
-      <div class="card-highlights">
-        <div class="highlight-item"><span class="highlight-label">Dynamic Workflows：</span>自动拆解复杂任务为多步骤流程，无需手动编排</div>
-        <div class="highlight-item"><span class="highlight-label">Effort Control：</span>可调节模型「思考深度」，在速度和精度间灵活权衡</div>
-        <div class="highlight-item"><span class="highlight-label">性能提升：</span>代码基准接近 o3，但成本仅为其 1/3</div>
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>Opus 4.8 发布，推理大幅提升 + Dynamic Workflows + Effort Control</li>
-          <li>Effort Control 开创「可调节推理深度」新范式，对 AI 成本优化意义重大</li>
-          <li>CODM 宣发可用 Dynamic Workflows 自动编排「文案→配图→排版→审核」全流程</li>
-        </ol>
+        Anthropic 发布 <strong>Claude Opus 4.8</strong>，同时推出 <strong>Dynamic Workflows</strong>（自动拆解复杂任务为多步骤流程）和 <strong>Effort Control</strong>（可调节思考深度）。代码基准接近 o3 但成本仅 1/3，开创「可调节推理深度」新范式。
       </div>
     </div>
-  </div>
-
-  <!-- §2 行业 & 平台（Highlight） -->
-  <div class="section-highlight" id="s2">
-    <div class="section-chrome">
-      <span class="section-kicker">ii. Industry &amp; Platforms</span>
-      <span class="section-count">3 items</span>
-    </div>
-    <div class="section-title">📱 行业 &amp; 平台</div>
-    <div class="section-sub">值得关注的行业信号与平台动态</div>
 
     <div class="card" id="item-3">
       <div class="card-chrome">
         <span class="card-num">3</span>
         <span class="card-title">iOS 27 AI Siri 界面曝光，苹果全面拥抱对话式 AI</span>
-        <span class="card-tag">🔥 P1</span>
+        <span class="card-tag">8.5</span>
       </div>
       <div class="card-desc">
-        苹果 iOS 27 全新设计的 <strong>AI Siri 界面被曝光</strong>，采用类似 ChatGPT 的对话式交互设计，取代原有卡片式界面。新 Siri 支持多轮上下文记忆和视觉理解，集成 Apple Intelligence 的端侧+云端混合推理架构。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>iOS 27 AI Siri 采用对话式交互取代卡片式，苹果全面拥抱对话式 AI</li>
-          <li>AI 助手从工具型向对话型转变成为行业共识</li>
-          <li>CODM 宣发需关注对话式 AI 在游戏内助手和客服场景的应用趋势</li>
-        </ol>
+        iOS 27 全新 <strong>AI Siri</strong> 界面曝光，采用<strong>全屏对话式交互</strong>取代卡片式设计，支持多轮上下文记忆和视觉理解。集成 Apple Intelligence 端侧+云端混合推理，预计 WWDC 2026 正式发布，将改变数十亿用户 AI 交互习惯。
       </div>
     </div>
+  </div>
+
+  <!-- §2 稳定性 & 商业（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Stability &amp; Business</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">📊 稳定性 &amp; 商业</div>
+    <div class="section-sub">值得关注的稳定性事件与商业信号</div>
 
     <div class="card" id="item-4">
       <div class="card-chrome">
         <span class="card-num">4</span>
-        <span class="card-title">DeepSeek 服务再次中断，引发国产大模型稳定性讨论</span>
-        <span class="card-tag">⚠️ P1</span>
+        <span class="card-title">DeepSeek 服务再次中断，近两月第三次重大故障</span>
+        <span class="card-tag">⚠️ 8.2</span>
       </div>
       <div class="card-desc">
-        5 月 28 日 DeepSeek 服务再次出现大规模中断，<strong>近两个月内第三次重大故障</strong>。初步指向推理集群负载突增，暴露开源模型商业部署的弹性瓶颈。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>DeepSeek 近两月第三次重大故障，引发国产大模型稳定性讨论</li>
-          <li>频繁中断削弱企业客户信心，稳定性成国产模型商业化与出海关键瓶颈</li>
-          <li>CODM 宣发选型 AI 工具时需建立多供应商备份策略</li>
-        </ol>
+        5 月 28 日 <strong>DeepSeek 再次服务中断</strong>，近两月第三次重大故障。原因初步指向推理集群负载突增，暴露开源模型商业部署弹性瓶颈。频繁中断正影响企业客户信心，与 OpenAI/Anthropic 的 99.9% SLA 形成鲜明对比。
       </div>
     </div>
 
     <div class="card" id="item-5">
       <div class="card-chrome">
         <span class="card-num">5</span>
-        <span class="card-title">MiniMax ARR 两个月翻番，AI 视频赛道商业化加速</span>
-        <span class="card-tag">📈 P1</span>
+        <span class="card-title">MiniMax ARR 两个月翻番，AI 视频商业化加速</span>
+        <span class="card-tag">8.0</span>
       </div>
       <div class="card-desc">
-        MiniMax 近两个月 <strong>ARR 实现翻番增长</strong>，成为 AI 视频生成赛道商业化进展最快公司之一。Hailuo 视频产品在海外市场表现强劲，C 端订阅和企业级 API 调用双轮驱动。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>MiniMax ARR 两个月翻番，Hailuo 视频海外表现强劲</li>
-          <li>AI 视频从技术验证进入商业落地，C 端订阅+企业 API 双模式跑通</li>
-          <li>CODM 宣发可重点关注 Hailuo 动作一致性和场景连贯性，用于角色动画和场景预告片</li>
-        </ol>
+        MiniMax 近两个月 <strong>ARR 实现翻番</strong>，增长来自海外 C 端订阅和企业级 API 双轮驱动。<strong>Hailuo 视频模型</strong>在人物动作一致性和场景连贯性方面持续突破，AI 视频从技术验证期进入商业化加速期。
       </div>
     </div>
-  </div>
-
-  <!-- §3 开源 & 趋势 -->
-  <div class="section" id="s3">
-    <div class="section-chrome">
-      <span class="section-kicker">iii. Open Source &amp; Trends</span>
-      <span class="section-count">3 items</span>
-    </div>
-    <div class="section-title">🔥 开源 &amp; 趋势</div>
-    <div class="section-sub">今日不可忽视的开源动态与趋势信号</div>
 
     <div class="card" id="item-6">
       <div class="card-chrome">
         <span class="card-num">6</span>
-        <span class="card-title">Qwen3.7-Max 登顶国产第一，开源模型持续进化</span>
-        <span class="card-tag">开源</span>
+        <span class="card-title">Qwen3.7-Max 登顶国产第一，开源双雄格局成型</span>
+        <span class="card-tag">7.9</span>
       </div>
       <div class="card-desc">
-        阿里通义千问 <strong>Qwen3.7-Max</strong> 在多项基准测试中登顶国产大模型第一，部分指标接近 Claude Opus 4 和 GPT-4o 水平。代码生成、数学推理和中文理解方面表现尤为突出，开源权重已发布。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>Qwen3.7-Max 登顶国产第一，部分指标接近国际顶尖水平</li>
-          <li>开源双雄（Qwen + DeepSeek）格局推动国产 AI 生态多元化</li>
-          <li>CODM 宣发可用 Qwen3.7-Max 本地部署进行中文文案生成和游戏内容本地化</li>
-        </ol>
+        阿里 <strong>Qwen3.7-Max</strong> 多项基准登顶国产第一，部分指标接近 Claude Opus 4 / GPT-4o。<strong>开源权重发布</strong>，与 DeepSeek-R1 形成开源双雄格局，推动国产 AI 生态多元化，降低企业 AI 应用门槛。
       </div>
     </div>
+  </div>
+
+  <!-- §3 视频 & 基建 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Video &amp; Infra</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🎬 视频 &amp; 基建</div>
+    <div class="section-sub">AI 视频拐点与基础设施演进</div>
 
     <div class="card" id="item-7">
       <div class="card-chrome">
         <span class="card-num">7</span>
         <span class="card-title">AI 视频进入生产线阶段，Seedance 2.0 标志生产级应用</span>
-        <span class="card-tag">🎬 生产级</span>
+        <span class="card-tag">7.7</span>
       </div>
       <div class="card-desc">
-        字节跳动 <strong>Seedance 2.0</strong> 标志 AI 视频从实验工具正式进入生产线阶段。镜头控制、角色一致性和运动物理性达商业可用水平，多家 <strong>4A 广告公司已纳入正式创意制作流程</strong>。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>Seedance 2.0 标志 AI 视频进入生产线阶段，4A 广告公司已纳入正式工作流</li>
-          <li>可预测性和可复现性的突破是关键拐点</li>
-          <li>CODM 宣发应立即评估 Seedance 2.0 在游戏预告片、赛季 CG 中的集成可行性</li>
-        </ol>
+        字节 <strong>Seedance 2.0</strong> 在镜头控制、角色一致性和运动物理性方面达商业可用水平，多家 4A 广告公司已纳入正式创意制作流程。从「效果惊艳但不可控」到<strong>「可预测可复现」</strong>，这是 AI 视频的关键转折点。
       </div>
     </div>
 
@@ -445,37 +354,20 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
       <div class="card-chrome">
         <span class="card-num">8</span>
         <span class="card-title">OpenRouter 完成 1.13 亿美元 B 轮融资，模型路由赛道升温</span>
-        <span class="card-tag">融资</span>
+        <span class="card-tag">7.5</span>
       </div>
       <div class="card-desc">
-        AI 模型路由平台 <strong>OpenRouter 完成 1.13 亿美元 B 轮融资</strong>，估值达 10 亿美元。提供统一 API 接口，让开发者可在同一平台访问和切换多个 AI 模型，支持智能路由自动选择最优模型和性价比。
-      </div>
-      <div class="card-summary">
-        <ol>
-          <li>OpenRouter B 轮 1.13 亿美元，模型路由赛道升温</li>
-          <li>模型抽象层价值被市场验证，企业追求灵活多模型策略</li>
-          <li>CODM 宣发可关注智能路由在不同 AI 任务（文案/图片/视频）间自动匹配最优模型</li>
-        </ol>
+        AI 模型路由平台 <strong>OpenRouter</strong> 完成 B 轮融资估值 10 亿美元，核心价值是「模型抽象层」——开发者无需绑定单一供应商，支持<strong>智能路由</strong>根据任务类型自动选择最优模型。反映企业多模型策略已成刚需。
       </div>
     </div>
-  </div>
-
-  <!-- Editor Comment -->
-  <div class="editor-comment">
-    <h3>📝 编辑点评</h3>
-    <p><strong>今日最大看点：</strong>Anthropic 一天内双响——650 亿美元 H 轮融资创 AI 初创估值纪录，同时 Claude Opus 4.8 发布带来 Dynamic Workflows 和 Effort Control 两大新范式。叠加效应清晰指向：<strong>企业级 AI 正在从「能力竞赛」转向「成本可控的工作流自动化」</strong>。</p>
-    <p><strong>对 CODM 宣发团队的建议：</strong></p>
-    <p>1. <strong>Dynamic Workflows 值得立即试用</strong>——将宣发流水线（选题→文案→配图→排版→审核）交给 Claude 自动编排，Effort Control 可在快速出草稿和精细修稿间切换</p>
-    <p>2. <strong>AI 视频赛道已到拐点</strong>——Seedance 2.0 + MiniMax Hailuo 均达生产级，建议本周安排 AI 视频工具评估，重点测试角色动作一致性和场景连贯性</p>
-    <p>3. <strong>多模型策略必须提上日程</strong>——DeepSeek 频繁中断敲响警钟，结合 OpenRouter 融资信号，团队应建立至少 2-3 个 AI 供应商的备份方案</p>
   </div>
 
   <!-- Data strip -->
   <div class="data-strip">
     <div class="data-chip"><div class="data-label">Anthropic</div><div class="data-value">9.5</div></div>
-    <div class="data-chip"><div class="data-label">Claude Opus</div><div class="data-value">9.2</div></div>
-    <div class="data-chip"><div class="data-label">MiniMax</div><div class="data-value">8.0</div></div>
-    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.3</div></div>
+    <div class="data-chip"><div class="data-label">Claude</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">DeepSeek</div><div class="data-value">8.2</div></div>
+    <div class="data-chip"><div class="data-label">Avg</div><div class="data-value">8.3</div></div>
   </div>
 
   <!-- FOOTER -->
