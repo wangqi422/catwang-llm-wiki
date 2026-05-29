@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-archive { padding:16px 24px 0; }
+.sidebar-archive a {
+  font-family:"Noto Sans SC",sans-serif; font-size:12px; color:rgba(242,238,223,0.4);
+  text-decoration:none; transition:color 0.2s;
+}
+.sidebar-archive a:hover { color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+
+/* Sub-cards inside card for highlights */
+.card-highlights { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+.highlight-item {
+  font-size:13px; color:var(--ink-soft); line-height:1.7; padding:8px 14px;
+  border-radius:16px;
+}
+.highlight-item:nth-child(4n+1) { background:var(--pink); }
+.highlight-item:nth-child(4n+2) { background:var(--lemon); }
+.highlight-item:nth-child(4n+3) { background:var(--blush); }
+.highlight-item:nth-child(4n)   { background:var(--sage); }
+.highlight-label { font-weight:500; color:var(--ink); }
+
+/* Card summary */
+.card-summary { margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); }
+.card-summary ol { padding-left:18px; margin:0; }
+.card-summary li { font-size:13px; color:var(--ink-soft); line-height:1.8; margin-bottom:2px; }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Editor comment */
+.editor-comment {
+  background:var(--card-bg); border-radius:28px; padding:28px 32px; margin-top:32px; margin-bottom:24px;
+  border-left:4px solid var(--lemon);
+}
+.editor-comment h3 { font-family:"Noto Sans SC",sans-serif; font-size:18px; font-weight:700; margin-bottom:12px; }
+.editor-comment p { font-size:14px; line-height:1.85; color:var(--ink-soft); margin-bottom:8px; }
+.editor-comment p:last-child { margin-bottom:0; }
+.editor-comment strong { color:var(--ink); font-weight:500; }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.29 &middot; 星期四 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Major Releases &amp; Funding</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>重大发布 &amp; 融资</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 650 亿 H 轮</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Opus 4.8 发布</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Platforms</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 平台</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>iOS 27 AI Siri 曝光</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>DeepSeek 再度中断</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>MiniMax ARR 翻番</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Open Source &amp; Trends</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>开源 &amp; 趋势</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Qwen3.7-Max 登顶</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>AI 视频生产级拐点</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>OpenRouter B 轮融资</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <div class="sidebar-archive">
+    <a href="index.html">&larr; 返回归档</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.29 &middot; Thu</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Anthropic 双响：650 亿 H 轮创纪录 + Opus 4.8 新范式 &middot; AI 视频生产级拐点 &middot; DeepSeek 再中断</p>
+    <div class="header-meta">
+      <span class="meta-tag">💰 重大融资</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🤖 模型发布</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📱 行业动态</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎬 AI 视频</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.29</span>
+    </div>
+  </div>
+
+  <!-- §1 重大发布 & 融资 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Major Releases &amp; Funding</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">💰 重大发布 &amp; 融资</div>
+    <div class="section-sub">今日最重磅的发布与融资动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 完成 650 亿美元 H 轮融资，估值 9650 亿美元超越 OpenAI</span>
+        <span class="card-tag">🔥 P0</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 完成 H 轮融资，规模达 <strong>650 亿美元</strong>，公司估值飙升至 <strong>9650 亿美元</strong>，超越 OpenAI 成为全球估值最高的 AI 公司。Lightspeed Venture Partners 领投，Salesforce Ventures 等跟投。
+      </div>
+      <div class="card-highlights">
+        <div class="highlight-item"><span class="highlight-label">估值纪录：</span>9650 亿美元刷新 AI 初创公司纪录，反映市场对 AI 安全路线的强烈认可</div>
+        <div class="highlight-item"><span class="highlight-label">资金用途：</span>扩大 Claude 模型训练规模、企业级产品线扩展及安全研究</div>
+        <div class="highlight-item"><span class="highlight-label">策略验证：</span>B2B 企业客户策略（安全与合规）获得资本市场最高溢价</div>
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>Anthropic H 轮 650 亿美元，估值 9650 亿美元超越 OpenAI</li>
+          <li>「AI 安全优先」路线获资本最高溢价，企业级 AI 应用成新共识</li>
+          <li>CODM 宣发可关注 Claude 企业版工作流自动化，未来可能接入游戏宣发内容生产链</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Opus 4.8 发布 + Dynamic Workflows + Effort Control</span>
+        <span class="card-tag">🔥 P0</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布 <strong>Claude Opus 4.8</strong>，同时推出 <strong>Dynamic Workflows</strong>（动态工作流）和 <strong>Effort Control</strong>（努力程度控制）两大新功能。推理能力、代码生成和多模态理解均有显著提升。
+      </div>
+      <div class="card-highlights">
+        <div class="highlight-item"><span class="highlight-label">Dynamic Workflows：</span>自动拆解复杂任务为多步骤流程，无需手动编排</div>
+        <div class="highlight-item"><span class="highlight-label">Effort Control：</span>可调节模型「思考深度」，在速度和精度间灵活权衡</div>
+        <div class="highlight-item"><span class="highlight-label">性能提升：</span>代码基准接近 o3，但成本仅为其 1/3</div>
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>Opus 4.8 发布，推理大幅提升 + Dynamic Workflows + Effort Control</li>
+          <li>Effort Control 开创「可调节推理深度」新范式，对 AI 成本优化意义重大</li>
+          <li>CODM 宣发可用 Dynamic Workflows 自动编排「文案→配图→排版→审核」全流程</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 平台（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Platforms</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">📱 行业 &amp; 平台</div>
+    <div class="section-sub">值得关注的行业信号与平台动态</div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">iOS 27 AI Siri 界面曝光，苹果全面拥抱对话式 AI</span>
+        <span class="card-tag">🔥 P1</span>
+      </div>
+      <div class="card-desc">
+        苹果 iOS 27 全新设计的 <strong>AI Siri 界面被曝光</strong>，采用类似 ChatGPT 的对话式交互设计，取代原有卡片式界面。新 Siri 支持多轮上下文记忆和视觉理解，集成 Apple Intelligence 的端侧+云端混合推理架构。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>iOS 27 AI Siri 采用对话式交互取代卡片式，苹果全面拥抱对话式 AI</li>
+          <li>AI 助手从工具型向对话型转变成为行业共识</li>
+          <li>CODM 宣发需关注对话式 AI 在游戏内助手和客服场景的应用趋势</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">DeepSeek 服务再次中断，引发国产大模型稳定性讨论</span>
+        <span class="card-tag">⚠️ P1</span>
+      </div>
+      <div class="card-desc">
+        5 月 28 日 DeepSeek 服务再次出现大规模中断，<strong>近两个月内第三次重大故障</strong>。初步指向推理集群负载突增，暴露开源模型商业部署的弹性瓶颈。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>DeepSeek 近两月第三次重大故障，引发国产大模型稳定性讨论</li>
+          <li>频繁中断削弱企业客户信心，稳定性成国产模型商业化与出海关键瓶颈</li>
+          <li>CODM 宣发选型 AI 工具时需建立多供应商备份策略</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">MiniMax ARR 两个月翻番，AI 视频赛道商业化加速</span>
+        <span class="card-tag">📈 P1</span>
+      </div>
+      <div class="card-desc">
+        MiniMax 近两个月 <strong>ARR 实现翻番增长</strong>，成为 AI 视频生成赛道商业化进展最快公司之一。Hailuo 视频产品在海外市场表现强劲，C 端订阅和企业级 API 调用双轮驱动。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>MiniMax ARR 两个月翻番，Hailuo 视频海外表现强劲</li>
+          <li>AI 视频从技术验证进入商业落地，C 端订阅+企业 API 双模式跑通</li>
+          <li>CODM 宣发可重点关注 Hailuo 动作一致性和场景连贯性，用于角色动画和场景预告片</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 开源 & 趋势 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Open Source &amp; Trends</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🔥 开源 &amp; 趋势</div>
+    <div class="section-sub">今日不可忽视的开源动态与趋势信号</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Qwen3.7-Max 登顶国产第一，开源模型持续进化</span>
+        <span class="card-tag">开源</span>
+      </div>
+      <div class="card-desc">
+        阿里通义千问 <strong>Qwen3.7-Max</strong> 在多项基准测试中登顶国产大模型第一，部分指标接近 Claude Opus 4 和 GPT-4o 水平。代码生成、数学推理和中文理解方面表现尤为突出，开源权重已发布。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>Qwen3.7-Max 登顶国产第一，部分指标接近国际顶尖水平</li>
+          <li>开源双雄（Qwen + DeepSeek）格局推动国产 AI 生态多元化</li>
+          <li>CODM 宣发可用 Qwen3.7-Max 本地部署进行中文文案生成和游戏内容本地化</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">AI 视频进入生产线阶段，Seedance 2.0 标志生产级应用</span>
+        <span class="card-tag">🎬 生产级</span>
+      </div>
+      <div class="card-desc">
+        字节跳动 <strong>Seedance 2.0</strong> 标志 AI 视频从实验工具正式进入生产线阶段。镜头控制、角色一致性和运动物理性达商业可用水平，多家 <strong>4A 广告公司已纳入正式创意制作流程</strong>。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>Seedance 2.0 标志 AI 视频进入生产线阶段，4A 广告公司已纳入正式工作流</li>
+          <li>可预测性和可复现性的突破是关键拐点</li>
+          <li>CODM 宣发应立即评估 Seedance 2.0 在游戏预告片、赛季 CG 中的集成可行性</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">OpenRouter 完成 1.13 亿美元 B 轮融资，模型路由赛道升温</span>
+        <span class="card-tag">融资</span>
+      </div>
+      <div class="card-desc">
+        AI 模型路由平台 <strong>OpenRouter 完成 1.13 亿美元 B 轮融资</strong>，估值达 10 亿美元。提供统一 API 接口，让开发者可在同一平台访问和切换多个 AI 模型，支持智能路由自动选择最优模型和性价比。
+      </div>
+      <div class="card-summary">
+        <ol>
+          <li>OpenRouter B 轮 1.13 亿美元，模型路由赛道升温</li>
+          <li>模型抽象层价值被市场验证，企业追求灵活多模型策略</li>
+          <li>CODM 宣发可关注智能路由在不同 AI 任务（文案/图片/视频）间自动匹配最优模型</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editor Comment -->
+  <div class="editor-comment">
+    <h3>📝 编辑点评</h3>
+    <p><strong>今日最大看点：</strong>Anthropic 一天内双响——650 亿美元 H 轮融资创 AI 初创估值纪录，同时 Claude Opus 4.8 发布带来 Dynamic Workflows 和 Effort Control 两大新范式。叠加效应清晰指向：<strong>企业级 AI 正在从「能力竞赛」转向「成本可控的工作流自动化」</strong>。</p>
+    <p><strong>对 CODM 宣发团队的建议：</strong></p>
+    <p>1. <strong>Dynamic Workflows 值得立即试用</strong>——将宣发流水线（选题→文案→配图→排版→审核）交给 Claude 自动编排，Effort Control 可在快速出草稿和精细修稿间切换</p>
+    <p>2. <strong>AI 视频赛道已到拐点</strong>——Seedance 2.0 + MiniMax Hailuo 均达生产级，建议本周安排 AI 视频工具评估，重点测试角色动作一致性和场景连贯性</p>
+    <p>3. <strong>多模型策略必须提上日程</strong>——DeepSeek 频繁中断敲响警钟，结合 OpenRouter 融资信号，团队应建立至少 2-3 个 AI 供应商的备份方案</p>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Anthropic</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">Claude Opus</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">MiniMax</div><div class="data-value">8.0</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.3</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.29<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
