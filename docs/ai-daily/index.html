@@ -23,39 +23,39 @@ body {
   font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
 }
 
-/* ═══ Left Sidebar ═══ */
+/* ═══ Left Sidebar (深色 · 与周报 TOC 版统一) ═══ */
 .sidebar {
   position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
-  background:rgba(255,255,255,0.6); backdrop-filter:blur(20px);
-  border-right:1px solid var(--border); padding:28px 0;
+  background:#2A241B;
+  border-right:1px solid rgba(255,255,255,0.06); padding:28px 0;
   display:flex; flex-direction:column; z-index:100;
 }
 .sidebar-brand {
-  padding:0 20px 24px; border-bottom:1px solid var(--border); margin-bottom:12px;
+  padding:0 20px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:12px;
 }
 .sidebar-logo {
-  font-family:"Cormorant Garamond",serif; font-weight:600; font-size:20px; color:var(--ink);
+  font-family:"Cormorant Garamond",serif; font-weight:600; font-size:20px; color:#F2EEDF;
 }
 .sidebar-logo em { font-style:italic; color:var(--pink); }
 
 .sidebar-nav { flex:1; padding:0 12px; }
 .nav-item {
   display:flex; align-items:center; gap:10px; padding:10px 12px; width:100%;
-  border-radius:10px; color:var(--ink-soft); text-decoration:none;
+  border-radius:10px; color:rgba(242,238,223,0.6); text-decoration:none;
   font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
   transition:all 0.15s; margin-bottom:2px;
   background:none; border:none; cursor:pointer; text-align:left;
 }
-.nav-item:hover { background:rgba(42,36,27,0.04); color:var(--ink); }
+.nav-item:hover { background:rgba(255,255,255,0.04); color:#F2EEDF; }
 .nav-item.active { background:rgba(225,164,194,0.12); color:var(--pink); font-weight:500; }
 .nav-icon { width:18px; height:18px; fill:currentColor; flex-shrink:0; opacity:0.7; }
 .nav-item.active .nav-icon { opacity:1; }
 
 .sidebar-footer {
-  padding:16px 20px 0; border-top:1px solid var(--border); margin-top:auto;
+  padding:16px 20px 0; border-top:1px solid rgba(255,255,255,0.08); margin-top:auto;
   display:flex; gap:6px;
 }
-.sidebar-footer i { width:8px; height:8px; border-radius:50%; }
+.sidebar-footer i { width:8px; height:8px; border-radius:50%; opacity:0.85; }
 
 /* ═══ Main ═══ */
 .main { margin-left:var(--sidebar-w); min-height:100vh; display:flex; }

@@ -169,9 +169,117 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   .data-chip { flex:1 1 45%; }
   .back-archive-btn { right:16px!important; top:12px!important; font-size:12px!important; padding:7px 14px!important; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   VF-STYLE —— Lenis + Preloader + 整屏位移 + 自定义光标
+   ═══════════════════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  html.vf-cursor-on, html.vf-cursor-on body, html.vf-cursor-on a, html.vf-cursor-on button { cursor: none !important; }
+}
+.vf-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2A241B; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.vf-cursor.hover { width: 48px; height: 48px; background: rgba(214, 221, 99, 0.6); }
+.vf-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(42, 36, 27, 0.3); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%); mix-blend-mode: multiply;
+}
+@media (hover: none), (pointer: coarse) { .vf-cursor, .vf-cursor-ring { display: none !important; } }
+
+.vf-preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #F2EEDF;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: all;
+}
+.vf-preloader-counter {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-weight: 500;
+  font-size: 96px; line-height: 1;
+  color: #2A241B; letter-spacing: -0.04em;
+  margin-bottom: 32px; font-variant-numeric: tabular-nums;
+}
+.vf-preloader-counter sup {
+  font-size: 28px; vertical-align: super;
+  font-style: normal; font-weight: 400;
+  margin-left: 4px; color: #5C5345;
+}
+.vf-preloader-bar {
+  width: 280px; height: 1px;
+  background: rgba(42, 36, 27, 0.15);
+  position: relative; overflow: hidden;
+}
+.vf-preloader-fill {
+  position: absolute; top: 0; left: 0;
+  width: 0%; height: 100%; background: #2A241B;
+}
+.vf-preloader-label {
+  margin-top: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 0.2em; color: #5C5345;
+  text-transform: uppercase;
+}
+
+html.vf-anim .vf-fade { opacity: 0; will-change: opacity; }
+html.vf-anim .vf-rise-100 { opacity: 0; transform: translateY(100px); will-change: opacity, transform; }
+html.vf-anim .vf-char { display: inline-block; opacity: 0; transform: translateY(110%); will-change: opacity, transform; }
+@media (prefers-reduced-motion: reduce) {
+  html.vf-anim .vf-fade,
+  html.vf-anim .vf-rise-100,
+  html.vf-anim .vf-char { opacity: 1 !important; transform: none !important; }
+  .vf-preloader { display: none !important; }
+}
+
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+html.vf-anim body .page,
+html.vf-anim body .sidebar,
+html.vf-anim body .progress-bar,
+html.vf-anim body .back-to-top,
+html.vf-anim body .back-archive-btn {
+  opacity: 0; transition: opacity 0.8s ease;
+}
+html.vf-revealed body .page,
+html.vf-revealed body .sidebar,
+html.vf-revealed body .progress-bar,
+html.vf-revealed body .back-to-top,
+html.vf-revealed body .back-archive-btn {
+  opacity: 1;
+}
+
+/* 截图模式：跳过所有 VF 动效 */
+html.screenshot-mode .vf-preloader,
+html.screenshot-mode .vf-cursor,
+html.screenshot-mode .vf-cursor-ring { display: none !important; }
+html.screenshot-mode .vf-fade,
+html.screenshot-mode .vf-rise-100,
+html.screenshot-mode .vf-char { opacity: 1 !important; transform: none !important; }
 </style>
 </head>
 <body>
+
+<!-- VF Preloader -->
+<div class="vf-preloader" id="vfPreloader">
+  <div class="vf-preloader-counter" id="vfCounter">0<sup>%</sup></div>
+  <div class="vf-preloader-bar"><div class="vf-preloader-fill" id="vfFill"></div></div>
+  <div class="vf-preloader-label">AIGC Daily · 小柒AI速递</div>
+</div>
+
+<!-- VF Custom Cursor -->
+<div class="vf-cursor" id="vfCursor"></div>
+<div class="vf-cursor-ring" id="vfCursorRing"></div>
 
 <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
 <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
@@ -430,6 +538,171 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+<!-- ═══════ VF Style: Lenis + GSAP ═══════ -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  // 截图模式检测：URL 含 ?screenshot=1 或 html.screenshot-mode
+  const urlParams = new URLSearchParams(window.location.search);
+  const screenshotMode = urlParams.get('screenshot') === '1' ||
+                         document.documentElement.classList.contains('screenshot-mode');
+  if (screenshotMode) {
+    document.documentElement.classList.add('screenshot-mode');
+    const pre = document.getElementById('vfPreloader');
+    if (pre) pre.style.display = 'none';
+    return;
+  }
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || typeof gsap === 'undefined' || typeof Lenis === 'undefined') {
+    document.getElementById('vfPreloader').style.display = 'none';
+    document.documentElement.classList.add('vf-revealed');
+    return;
+  }
+
+  document.documentElement.classList.add('vf-anim');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ════════ 1. Lenis 平滑惯性滚动 ════════
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical', smooth: true,
+    mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ════════ 2. 自定义光标 ════════
+  const cursor = document.getElementById('vfCursor');
+  const cursorRing = document.getElementById('vfCursorRing');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.documentElement.classList.add('vf-cursor-on');
+    let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+    addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, .card, .thesis-card, .gallery-item, .sub-card, .nav-link, .back-to-top, .back-archive-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+
+  // ════════ 3. h1 拆字符 ════════
+  const h1 = document.querySelector('.header h1');
+  if (h1) {
+    const text = h1.textContent;
+    h1.innerHTML = '';
+    [...text].forEach(ch => {
+      const wrap = document.createElement('span');
+      wrap.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:bottom;';
+      const span = document.createElement('span');
+      span.className = 'vf-char';
+      // 日报中 emoji/英文部分保持正体；中文加粗
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      wrap.appendChild(span);
+      h1.appendChild(wrap);
+    });
+  }
+
+  // ════════ 4. 动画 class ════════
+  const tag = (sel, cls) => document.querySelectorAll(sel).forEach(el => el.classList.add(cls));
+  tag('.header-kicker', 'vf-fade');
+  tag('.header-meta .meta-tag', 'vf-fade');
+  tag('.thesis-opener, .thesis-summary', 'vf-rise-100');
+  tag('.thesis-card', 'vf-rise-100');
+  tag('.thesis-tagline', 'vf-fade');
+  tag('.section-kicker, .section-count, .section-title, .section-sub', 'vf-rise-100');
+  tag('.card', 'vf-rise-100');
+  tag('.sub-card', 'vf-fade');
+  tag('.gallery-item', 'vf-rise-100');
+  tag('.data-chip', 'vf-rise-100');
+  tag('.footer-left, .footer-right', 'vf-fade');
+
+  // ════════ 5. Preloader 进度 ════════
+  const preloader = document.getElementById('vfPreloader');
+  const counter = document.getElementById('vfCounter');
+  const fill = document.getElementById('vfFill');
+  const counterObj = { val: 0 };
+  lenis.stop();
+
+  gsap.to(counterObj, {
+    val: 100, duration: 1.6, ease: 'power2.inOut',
+    onUpdate: () => {
+      const v = Math.floor(counterObj.val);
+      counter.innerHTML = v + '<sup>%</sup>';
+      fill.style.width = v + '%';
+    },
+    onComplete: revealPage
+  });
+
+  function revealPage() {
+    const tl = gsap.timeline({
+      defaults: { ease: 'power4.out' },
+      onStart: () => document.documentElement.classList.add('vf-revealed'),
+      onComplete: () => lenis.start()
+    });
+    tl.to(preloader, {
+      yPercent: -100, duration: 1.1, ease: 'power3.inOut',
+      onComplete: () => preloader.style.display = 'none'
+    }, 0);
+    tl.to('.vf-char', { y: 0, opacity: 1, duration: 1.0, stagger: 0.015, ease: 'power3.out' }, 0.4);
+    tl.to('.header-kicker', { opacity: 1, duration: 0.8 }, 0.7);
+    tl.to('.header-meta .meta-tag', { opacity: 1, duration: 0.7, stagger: 0.03 }, 0.9);
+    tl.to('.data-chip', { opacity: 1, y: 0, duration: 1.0, stagger: 0.05, ease: 'power4.out' }, 1.0);
+    tl.to('.thesis-opener, .thesis-summary', { opacity: 1, y: 0, duration: 1.2 }, 1.1);
+    tl.to('.thesis-card', { opacity: 1, y: 0, duration: 1.2, stagger: 0.06, ease: 'power4.out' }, 1.3);
+    tl.to('.thesis-tagline', { opacity: 1, duration: 0.8 }, 1.9);
+  }
+
+  // ════════ 6. 章节滚动入场 ════════
+  document.querySelectorAll('.section').forEach((sec) => {
+    const titleGroup = sec.querySelectorAll('.section-kicker, .section-count, .section-title, .section-sub');
+    const cards = sec.querySelectorAll('.card');
+    const subs = sec.querySelectorAll('.sub-card');
+    const galleries = sec.querySelectorAll('.gallery-item');
+    const trig = (start) => ({ trigger: sec, start: 'top ' + start, toggleActions: 'play none none none' });
+
+    if (titleGroup.length) gsap.to(titleGroup, { opacity: 1, y: 0, duration: 1.0, stagger: 0.02, ease: 'power4.out', scrollTrigger: trig('85%') });
+    if (cards.length) gsap.to(cards, { opacity: 1, y: 0, duration: 1.2, stagger: 0.08, ease: 'power4.out', scrollTrigger: trig('80%') });
+    if (subs.length) gsap.to(subs, { opacity: 1, duration: 0.8, stagger: 0.015, ease: 'power3.out', scrollTrigger: trig('75%') });
+    if (galleries.length) gsap.to(galleries, { opacity: 1, y: 0, duration: 1.0, stagger: 0.05, ease: 'power4.out', scrollTrigger: trig('80%') });
+  });
+
+  gsap.to('.footer-left, .footer-right', {
+    opacity: 1, duration: 1.0, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer', start: 'top 90%', toggleActions: 'play none none none' }
+  });
+
+  // ════════ 7. 视差 ════════
+  document.querySelectorAll('.thesis-card').forEach((card, i) => {
+    gsap.to(card, { y: -20 - i * 6, ease: 'none',
+      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+  });
+
+  // ════════ 8. 进度条 glow ════════
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.background = 'linear-gradient(90deg, #D6DD63 0%, #E1A4C2 50%, #B7C7A8 100%)';
+
+  // 锚点 lenis 跳转
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -32 }); }
     });
   });
 })();

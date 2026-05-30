@@ -24,9 +24,21 @@ async function screenshotHTML(htmlPath, pngPath) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1080, height: 1920, deviceScaleFactor: 1 });
     
-    const fileUrl = 'file:///' + htmlPath.replace(/\\/g, '/');
+    const fileUrl = 'file:///' + htmlPath.replace(/\\/g, '/') + '?screenshot=1';
     await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 30000 });
-    
+
+    // 兜底：强制移除 VF preloader / cursor，跳过所有 Lenis/GSAP 动效
+    await page.evaluate(() => {
+      document.documentElement.classList.add('screenshot-mode');
+      document.documentElement.classList.add('vf-revealed');
+      const pre = document.getElementById('vfPreloader');
+      if (pre) pre.remove();
+      const cur = document.getElementById('vfCursor');
+      if (cur) cur.remove();
+      const ring = document.getElementById('vfCursorRing');
+      if (ring) ring.remove();
+    });
+
     // 等待字体加载
     await new Promise(r => setTimeout(r, 2000));
     

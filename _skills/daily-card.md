@@ -50,11 +50,18 @@ description: "统一日报流水线 Skill：合并 AI Daily 速报卡片 与 COD
 
 - 统一原则：**先读日报 MD，再生成视觉层**，不要只凭记忆或上次结果直接拼图。
 - 所有非日报的生成结果默认落到 `wiki/outputs/` 作为中间层或备份层。日报卡片只存 `docs/`。
-- **AIGC 分支必须同时生成 TOC 版 H5**（Soft Editorial + 侧边栏导航风格）：
+- **AIGC 分支必须同时生成 TOC 版 H5**（Soft Editorial + 侧边栏导航风格 + **VF 风动效**）：
   - 输出文件：`docs/ai-daily/ai-daily-card-YYYYMMDD-toc.html`
-  - 参考模板：`docs/ai-daily/ai-daily-card-20260511-toc.html`
+  - 参考模板：`docs/ai-daily/ai-daily-card-20260530-toc.html`（已套 VF 风的最新模板）
   - 侧边栏高亮色用柠檬黄 `#D6DD63`
   - 右上角必须有固定「← 返回归档」按钮
+  - **必须套 VF 风动效**（2026-05-31 起强制要求）：调用 `h5-lenis-vf` skill 一键注入
+    - Lenis 1.1.13 平滑惯性滚动
+    - Preloader 0→100% 计数 1.6s + 进度条充满 + 整块上推消失
+    - 自定义鼠标光标（8px 黑点 + 36px 描边圆环延迟跟随）
+    - h1 字符 stagger 0.015s 溅出
+    - 章节滚动用 vf-rise-100（translateY 100px）+ power4.out
+    - **截图模式自动跳过**：URL 加 `?screenshot=1` 或 `html.screenshot-mode` class 即可，已在 `screenshot.js` 自动处理
 
 ### Phase 4: 归档 + 发布 + 推送（AIGC 分支必须执行全部步骤）
 
@@ -265,6 +272,14 @@ IT之家AI · 腾讯云开发者 · 阿里云官方 · 极客公园 · 品玩
 HuggingFace Blog · ArXiv Daily（仅重大论文落地） · ProductHunt（前3名AI产品）
 ```
 
+**🔬 技术 & 社区补充源（2026-05-29 新增）：**
+```
+GitHub Trending（trendshift.io · AI/ML 类前10仓库）
+Hacker News（Top 10 AI 相关帖子）
+Reddit r/MachineLearning · r/LocalLLaMA（热门讨论）
+ArXiv Daily（cs.CL/cs.AI/cs.LG 热门论文 Top 5）
+```
+
 #### 2.10.2 扫描方法 —— 5 轮分批 Web Search
 
 | 轮次 | 目标 | 搜索策略 |
@@ -274,13 +289,18 @@ HuggingFace Blog · ArXiv Daily（仅重大论文落地） · ProductHunt（前3
 | **第 3 轮** | AI 创作工具 | `(Midjourney OR Runway OR Kling OR 可灵 OR Veo OR Sora OR 即梦 OR Hailuo) new OR update OR release` |
 | **第 4 轮** | 中文 AI 媒体聚合 | `site:36kr.com OR site:jiqizhixin.com OR site:qbitai.com AI 今日` |
 | **第 5 轮** | 补扫长尾 + 垂直 | `AI agent OR AI coding OR AI video generation latest news {today_date}` |
+| **第 6 轮** | GitHub Trending + 技术社区 | `GitHub trending AI repositories {today_date}` + `site:news.ycombinator.com AI {today_date}` |
+| **第 7 轮** | 研究论文 + Reddit | `arxiv AI research papers {today_date}` + `Reddit r/MachineLearning OR r/LocalLLaMA top {today_date}` |
 
 **时间过滤**：所有搜索加 `freshness=day`（仅过去 24h）。
 
 **执行规则**：
 - 每轮至少命中 2 条有价值信息，否则换关键词补搜
 - 5 轮后总计应有 ≥15 条候选，再筛选出 TOP 8
+- **7 轮**（含第 6-7 轮社区+论文扫描）后应有 ≥20 条候选
 - 优先取一手来源（官方博客 > 官方推文 > 媒体报道）
+- GitHub Trending 条目需确认为**当日新增或当日大幅增长**（日增 star ≥ 50）
+- Hacker News 条目需 **score ≥ 50** 或引发有意义讨论
 
 #### 2.10.3 筛选标准
 
