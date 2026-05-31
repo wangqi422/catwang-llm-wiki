@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-05-01"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-01
+updated: 2026-05-01
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 日报 | 2026-05-01
 
 > 每工作日 9:30 自动生成 | 推送时间：2026-05-01 10:11
@@ -168,3 +183,18 @@
 ## 编辑点评
 
 五一假期首日，AIGC 领域依然热闹非凡。本期最大看点是**国产大模型集体冲刺**：DeepSeek V4 开源+昇腾适配、Qwen3.6 稠密多模态、四强对决格局形成，中国AI第一梯队的技术自信和开源策略正在重塑全球格局。对 CODM 宣发团队而言，关注 Veo 3.1/Kling 3.0 视频能力提升和 Agent 协议成熟带来的自动化工作流升级机会。
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

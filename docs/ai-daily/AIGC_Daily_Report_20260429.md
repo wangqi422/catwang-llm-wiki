@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-29"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-29
+updated: 2026-04-29
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 每日速报 · 2026.04.29
 
 > 今日关键词：GPT-5.5夺回榜首 · GPT-6发布200万Token · DeepSeek V4开源 · AIGC产业刚需化
@@ -116,3 +131,18 @@
 - [2026年AI大模型巅峰对决](https://www.chatgpt-chinese.com/blog/guides/chatgpt/ai-model-2026-comprehensive-comparison.html)
 - [美股全线收跌：AI增长疑虑重燃](https://usstock.jrj.com.cn/2026/04/29080556935159.shtml)
 - [AIGC淘金热](https://finance.sina.com.cn/wm/2026-04-28/doc-inhwaicx1556077.shtml)
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

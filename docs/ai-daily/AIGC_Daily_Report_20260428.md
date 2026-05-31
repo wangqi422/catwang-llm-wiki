@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-28"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-28
+updated: 2026-04-28
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC Daily Report 2026-04-28
 
 > 📅 日期：2026年4月28日 星期二
@@ -178,3 +193,18 @@
 - **治理层**：小红书AI治理框架、OpenAI Privacy Filter开源，AI内容合规基础设施正在快速补位。
 
 > 💡 **CODM宣发启示**：GPT-5.5"越简单越好"的Prompt理念值得团队Prompt库适配；百度视频剪辑Agent预告对宣发视频制作流程可能产生冲击，建议提前评估。
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

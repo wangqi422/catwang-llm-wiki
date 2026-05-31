@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-16"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-16
+updated: 2026-04-16
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # 🎯 AIGC 宣发设计日报 — 2026.04.16
 
 > **关注领域**：游戏美术 · 写实AIGC · 视频生成 · AI Agent  
@@ -416,3 +431,18 @@ MiniMax在Firefly中已被Adobe集成（作为视频模型），M2.7开源意味
 | 🤖 AI Agent/工具 | 3 | 🔥🔥🔥 |
 | 💻 AI编程 | 2 | 🔥🔥 |
 | 📊 基准/评测 | 1 | 🔥 |
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

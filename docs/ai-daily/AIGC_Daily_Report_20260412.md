@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-12"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-12
+updated: 2026-04-12
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # 🎯 AIGC 宣发设计日报 — 2026.04.12
 
 > **关注领域**：游戏美术 · 写实AIGC · 视频生成 · AI Agent  
@@ -466,3 +481,18 @@ Agent框架的选型将决定CODM宣发自动化系统的技术底座和未来5�
 > 📌 **下次更新**：2026-04-13  
 > 📌 **数据来源**：X/Twitter、官方博客、产品更新页、GitHub、PR Newswire、Linux Foundation、行业分析站  
 > 📌 **制作工具**：CodeBuddy AIGC日报助手
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

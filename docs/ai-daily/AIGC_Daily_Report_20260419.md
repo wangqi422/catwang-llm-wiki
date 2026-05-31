@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-19"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-19
+updated: 2026-04-19
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 每日速报 · 2026.04.19
 
 > 🤖 AI/AIGC 行业每日精选，聚焦最具价值的技术突破与产业动态
@@ -164,3 +179,18 @@
 | **AIGC相关度** | ⭐⭐⭐⭐ 4/5 — 多模态模型密集发布、AI设计工具持续进化 |
 
 > 📌 **今日关键主题**: 具身智能里程碑（人形机器人半马）× 国产AI资本化加速（DeepSeek百亿融资）× 大模型效率战（Opus 4.7 + Gemini Flash + MoE普及）
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

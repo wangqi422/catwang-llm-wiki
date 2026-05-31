@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-05-11"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-11
+updated: 2026-05-11
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 日报 | 2026-05-11
 
 > 每工作日 9:30 自动生成 | 推送时间：2026-05-11 09:36
@@ -227,3 +242,18 @@ Anthropic 在 GitHub 上发布 Claude for Financial Services，面向投资银�
 1. 密切跟踪 DeepSeek V4.1（6 月发布）的视觉/创作能力，低成本高质量模型可能革新批量素材生产流程
 2. 借鉴 Orbit 的「主动 Agent」理念，将竞品监控从「每日人工触发」升级为「自动感知+主动报告」
 3. AI 效率替代人力的趋势不可逆——加速团队 AI 工具深度培训，让每个成员都成为「AI 增强型设计师」
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-04-18"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-18
+updated: 2026-04-18
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # 🎯 AIGC 宣发设计日报 — 2026.04.18
 
 > **关注领域**：游戏美术 · 写实AIGC · 视频生成 · AI Agent  
@@ -418,3 +433,18 @@ Vidu/生数科技是CODM宣发团队最值得关注的国产视频生成工具�
 ## 🔑 Key Theme
 
 **今日最大主题：AI工具从"代码补全/图片生成"跃升为"对话式全链路设计引擎"**。Cursor的Agent模式+Canva AI 2.0的对话式设计，预示着宣发设计团队的工作方式将从"打开工具→手动操作→导出文件"变为"描述需求→AI编排→审核输出"。DeepSeek和生数科技的巨额融资确保了国产替代方案的持续进化。与此同时，Anthropic版权案提醒我们：**用好AI的前提是用对AI、用合规的AI**。
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

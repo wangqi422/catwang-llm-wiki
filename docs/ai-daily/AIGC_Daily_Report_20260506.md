@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-05-06"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-06
+updated: 2026-05-06
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 每日速报 | 2026-05-06
 
 > 每工作日 9:30 自动生成 | 推送时间：2026-05-06 10:20
@@ -147,3 +162,18 @@
 1. **立即可用**：GPT-5.5 Instant 已上线，日常文案策划的事实准确率更高
 2. **中期关注**：DeepSeek V4 百万上下文能力，可尝试导入完整品牌体系做一致性创作
 3. **风险意识**：Meta 版权案提醒我们，使用开源模型生成 IP 相关内容时需注意合规溯源
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

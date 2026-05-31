@@ -1,3 +1,18 @@
+﻿---
+title: "AIGC 宣发设计日报 2026-05-15"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-15
+updated: 2026-05-15
+tags:
+  - aigc
+  - ai-image
+  - ai-video
+  - codm
+  - daily-report
+---
+
 # AIGC 日报 | 2026-05-15
 
 > 每工作日 9:30 自动生成 | 推送时间：2026-05-15 10:35
@@ -224,3 +239,18 @@ Notion 宣布将工作空间升级为 AI Agent 集成枢纽，支持调用多种
 *信源：xAI、Anthropic、证券时报、每日经济新闻、TechCrunch、TechMeme、量子位、Yahoo News*
 
 *生成时间：2026-05-15 10:35 | J3宣发设计组 · 小柒&AI分析*
+
+
+---
+
+## Related
+
+- [[wiki/gpt-image-v2]] — GPT Image v2 图像生成模型
+- [[wiki/ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[wiki/codm-asset-pipeline]] — CODM 素材获取流程
+- [[wiki/codm-vfx-system]] — CODM 特效分类体系
+- [[wiki/character-consistency-techniques]] — AI 绘图角色一致性技术
+- [[wiki/urban-character-prompt]] — 电影级角色设定板 AI 提示词方法论
+- [[wiki/content-creation-methodology]] — 内容创作方法论
+- [[wiki/harness-engineering]] — Harness Engineering（AI Agent 工程基础设施）
+- [[wiki/insights/codm-aigc-workflow]] — CODM AIGC 工作流

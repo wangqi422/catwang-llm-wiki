@@ -20,3 +20,12 @@
 - **卡片图片**（PNG）：1080×1920 满屏 9:16 速报卡片，用于分享到企微群
 - 生成流程：`MD → HTML（中间文件）→ Puppeteer 截图 → PNG`
 - 推送脚本：`_deploy/wecom-push/push-ai-daily.js`
+
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[INDEX-by-type]] · [[2026-04-11-obsidian-ai-second-brain]] · [[codm-aigc-workflow]]
+
+---
+*返回 [[INDEX-by-type]]*
