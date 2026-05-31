@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.05.31</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Preloader */
+.preloader {
+  position:fixed; inset:0; z-index:99999; background:var(--sidebar-bg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:transform 1s cubic-bezier(0.76,0,0.24,1);
+}
+.preloader.loaded { transform:translateY(-100%); }
+.preloader-count {
+  font-family:"Cormorant Garamond",serif; font-size:80px; font-weight:500;
+  color:var(--lemon); line-height:1;
+}
+.preloader-bar {
+  width:200px; height:2px; background:rgba(242,238,223,0.1); margin-top:24px; border-radius:2px; overflow:hidden;
+}
+.preloader-bar-fill { height:100%; width:0%; background:var(--lemon); transition:width 0.05s linear; }
+
+/* Custom cursor */
+.custom-cursor {
+  position:fixed; width:8px; height:8px; background:var(--ink);
+  border-radius:50%; pointer-events:none; z-index:99998;
+  transform:translate(-50%,-50%); transition:transform 0.1s;
+}
+.cursor-ring {
+  position:fixed; width:36px; height:36px;
+  border:1.5px solid rgba(42,36,27,0.3); border-radius:50%;
+  pointer-events:none; z-index:99997;
+  transform:translate(-50%,-50%);
+  transition:transform 0.15s ease-out, width 0.3s, height 0.3s;
+}
+
+/* VF Rise animation */
+.vf-rise { opacity:0; transform:translateY(100px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+.vf-rise.visible { opacity:1; transform:translateY(0); }
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-back {
+  display:block; margin:16px 24px 0; padding:10px 16px;
+  color:var(--sidebar-text); text-decoration:none; font-size:12px;
+  border:1px solid rgba(255,255,255,0.1); border-radius:8px; text-align:center;
+  transition:all 0.2s;
+}
+.sidebar-back:hover { color:var(--sidebar-accent); border-color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header h1 .char { display:inline-block; opacity:0; transform:translateY(20px); }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:600; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+  .custom-cursor, .cursor-ring { display:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-count" id="preloaderCount">0</div>
+  <div class="preloader-bar"><div class="preloader-bar-fill" id="preloaderFill"></div></div>
+</div>
+
+<!-- Custom Cursor -->
+<div class="custom-cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.05.31 &middot; 星期六 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Agent &amp; Platform</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI Agent &amp; 平台</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Codex Windows Computer Use</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>何恺明 ELF 扩散语言模型</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>软银 750 亿欧元数据中心</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Security &amp; Protocol</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>安全 &amp; 协议</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Deno Claw Patrol</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>COMPUTEX 英伟达前瞻</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Open Envelope 协议</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Models &amp; Optimization</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>模型 &amp; 优化</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>智元 GE 2.0 登顶</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>小米 MiMo 降价 99%</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a href="index.html" class="sidebar-back">&larr; 返回归档</a>
+
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.05.31 &middot; Sat</div>
+    <h1 id="heroTitle">AIGC <em>日报</em></h1>
+    <p class="lead">设计师 8 条速报 &middot; Agent 安全化 &amp; 推理经济性突破 &amp; 模型多元化</p>
+    <div class="header-meta">
+      <span class="meta-tag">🤖 AI Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔬 研究突破</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💰 行业基建</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛡️ 开源安全</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.05.31</span>
+    </div>
+  </div>
+
+  <!-- §1 AI Agent & 平台 -->
+  <div class="section vf-rise" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Agent &amp; Platform</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🤖 AI Agent &amp; 平台</div>
+    <div class="section-sub">今日最重磅的 Agent 与平台动态</div>
+
+    <div class="card vf-rise" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI Codex Computer Use 正式登陆 Windows，手机可远程操控电脑</span>
+        <span class="card-score">9.3</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 发布 Codex 26.527，<strong>Computer Use 视觉操作能力正式登陆 Windows 10/11</strong>，支持屏幕识别与鼠标键盘控制。同步上线<strong>手机远程控制功能</strong>——ChatGPT App 可远程启动电脑任务，AI Agent 从"桌面助手"进化为"全天候远程操作员"。Windows 版仍缺锁屏操作等 macOS 专属能力。
+      </div>
+    </div>
+
+    <div class="card vf-rise" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">何恺明团队首个扩散语言模型 ELF：不走 GPT 自回归老路</span>
+        <span class="card-score">8.8</span>
+      </div>
+      <div class="card-desc">
+        何恺明带队发布<strong>连续扩散语言模型 ELF（Embedded Language Flows）</strong>，仅 105M 参数但架构完全不同于 GPT。放弃"预测下一个 token"的自回归范式，采用<strong>扩散模型路线</strong>生成文本。若扩散路线可 scale，可能绕过自回归的推理速度瓶颈，实现并行解码。
+      </div>
+    </div>
+
+    <div class="card vf-rise" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">软银拟 750 亿欧元在法建 5 吉瓦 AI 数据中心，欧洲史上最大</span>
+        <span class="card-score">8.5</span>
+      </div>
+      <div class="card-desc">
+        软银计划投入至多<strong>750 亿欧元</strong>在法国敦刻尔克等地建设总功率最高<strong>5 吉瓦</strong>的数据中心，首期力争 2031 年提供 3.1 吉瓦算力。法国凭借核电低价电力成为欧洲 AI 算力中心首选地，全球 AI 基建竞赛进入"吉瓦级"时代。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 安全 & 协议（Highlight） -->
+  <div class="section-highlight vf-rise" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Security &amp; Protocol</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛡️ 安全 &amp; 协议</div>
+    <div class="section-sub">Agent 从"能做什么"转向"如何安全规范地做"</div>
+
+    <div class="card vf-rise" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Deno 开源 Claw Patrol：AI Agent 安全防火墙</span>
+        <span class="card-score">8.3</span>
+      </div>
+      <div class="card-desc">
+        Deno 团队发布专为 AI Agent 设计的<strong>开源安全防火墙 Claw Patrol</strong>。基于 Deno 安全沙箱架构，拦截和审计 Agent 所有系统调用，支持<strong>自定义安全策略、白名单和实时告警</strong>。轻量高性能，适合集成到 LangChain、CrewAI 等各类框架。
+      </div>
+    </div>
+
+    <div class="card vf-rise" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">COMPUTEX 前瞻：英伟达 N1 PC 芯片 + Vera Rubin 机架下周亮相</span>
+        <span class="card-score">8.2</span>
+      </div>
+      <div class="card-desc">
+        COMPUTEX 2026 将于 6 月 2-5 日举行，黄仁勋周一主题演讲。<strong>N1/N1X PC 芯片</strong>（英伟达 GPU + 联发科 Arm CPU）正式亮相，微软同步推出本地 Agent 执行软件。Vera Rubin 机架内存成本较 GB300 <strong>飙升 435%</strong>，英伟达+微软+Arm 联手定义"PC 新世代"。
+      </div>
+    </div>
+
+    <div class="card vf-rise" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Open Envelope：定义 AI Agent 团队的开放协议规范</span>
+        <span class="card-score">8.0</span>
+      </div>
+      <div class="card-desc">
+        Open Envelope 旨在<strong>标准化 AI Agent 团队的定义和交互方式</strong>——类似 Agent 世界的"OpenAPI 规范"。统一 Schema 让不同框架（LangChain、CrewAI、AutoGen）构建的 Agent 可在同一团队中<strong>无缝协作</strong>。Multi-Agent 互操作性的关键一步。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 模型 & 优化 -->
+  <div class="section vf-rise" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Models &amp; Optimization</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">⚡ 模型 &amp; 优化</div>
+    <div class="section-sub">推理经济性与架构多元化</div>
+
+    <div class="card vf-rise" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">智元 GE 2.0 仅 2B 参数登顶 WorldArena 世界模型榜单</span>
+        <span class="card-score">7.8</span>
+      </div>
+      <div class="card-desc">
+        智元机器人发布<strong>GE 2.0 世界模型</strong>，仅 <strong>2B 参数</strong>便登顶 WorldArena 榜单。核心创新在于<strong>新型时空注意力机制和物理约束训练策略</strong>，"四两拨千斤"——精心设计的小模型在特定领域可超越大模型，降低世界模型部署门槛。
+      </div>
+    </div>
+
+    <div class="card vf-rise" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">小米 MiMo 推理系统全链路优化，成本最高降 99%</span>
+        <span class="card-score">7.6</span>
+      </div>
+      <div class="card-desc">
+        小米首次公开 MiMo 推理系统<strong>全链路优化技术细节</strong>：多级缓存、动态批处理、自适应并行度调整，推理成本<strong>最高降低 99%</strong>。覆盖模型量化到服务层加速全流程，原本 1 元推理可降至 0.01 元，推理经济性进入"分钱时代"。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip vf-rise">
+    <div class="data-chip"><div class="data-label">Codex Win</div><div class="data-value">9.3</div></div>
+    <div class="data-chip"><div class="data-label">ELF</div><div class="data-value">8.8</div></div>
+    <div class="data-chip"><div class="data-label">Claw Patrol</div><div class="data-value">8.3</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.3</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer vf-rise">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.05.31<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<!-- Return to Archive (fixed top-right) -->
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(214,221,99,0.95)';this.style.color='#2A241B';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.color='#F2EEDF';this.style.transform='scale(1)'">&larr; 返回归档</a>
+
+<script>
+(function() {
+  // === Preloader ===
+  var count = 0, target = 100, duration = 1600, start = performance.now();
+  var countEl = document.getElementById('preloaderCount');
+  var fillEl = document.getElementById('preloaderFill');
+  var preloader = document.getElementById('preloader');
+
+  function tick(now) {
+    var elapsed = now - start;
+    var progress = Math.min(elapsed / duration, 1);
+    count = Math.round(progress * target);
+    countEl.textContent = count;
+    fillEl.style.width = progress + '%';
+    if (progress < 1) requestAnimationFrame(tick);
+    else setTimeout(function() { preloader.classList.add('loaded'); }, 200);
+  }
+  requestAnimationFrame(tick);
+
+  // === Custom Cursor ===
+  var cursor = document.getElementById('cursor');
+  var ring = document.getElementById('cursorRing');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  if (window.matchMedia('(pointer:fine)').matches) {
+    document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    (function followRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(followRing); })();
+  } else { cursor.style.display = 'none'; ring.style.display = 'none'; }
+
+  // === h1 Character Stagger ===
+  var heroTitle = document.getElementById('heroTitle');
+  if (heroTitle) {
+    var html = heroTitle.innerHTML;
+    var styled = '';
+    var inTag = false, tag = '';
+    for (var i = 0; i < html.length; i++) {
+      if (html[i] === '<') { inTag = true; tag = '<'; continue; }
+      if (inTag) { tag += html[i]; if (html[i] === '>') { inTag = false; styled += tag; tag = ''; } continue; }
+      if (html[i] === ' ') { styled += ' '; continue; }
+      styled += '<span class="char" style="transition-delay:' + (i * 15) + 'ms">' + html[i] + '</span>';
+    }
+    heroTitle.innerHTML = styled;
+    setTimeout(function() {
+      var chars = heroTitle.querySelectorAll('.char');
+      chars.forEach(function(c) { c.style.opacity = '1'; c.style.transform = 'translateY(0)'; c.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; });
+    }, 1800);
+  }
+
+  // === ScrollSpy ===
+  var navLinks = document.querySelectorAll('.nav-link');
+  var sections = [];
+  navLinks.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      var target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    var scrollY = window.scrollY + 80;
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++) { if (sections[i].el.offsetTop <= scrollY) current = sections[i]; }
+    navLinks.forEach(function(l) { l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    var btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+
+    // VF Rise on scroll
+    document.querySelectorAll('.vf-rise').forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88) el.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  setTimeout(onScroll, 1900);
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>

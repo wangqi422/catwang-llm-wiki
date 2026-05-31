@@ -298,9 +298,130 @@ h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
   .progress-bar { left: 0; width: 100%; }
   .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   GSAP MAX —— 一眼看得见的动态层
+   ═══════════════════════════════════════════════════════════ */
+
+/* 全局动画兜底 */
+html.gsap-anim .gx-rise-big { opacity: 0; transform: translateY(80px) rotate(-2deg); will-change: opacity, transform; }
+html.gsap-anim .gx-rise { opacity: 0; transform: translateY(50px); will-change: opacity, transform; }
+html.gsap-anim .gx-blur-big { opacity: 0; filter: blur(20px); transform: translateY(40px) scale(1.05); will-change: opacity, filter, transform; }
+html.gsap-anim .gx-scale { opacity: 0; transform: scale(0.7); will-change: opacity, transform; }
+html.gsap-anim .gx-slide-l { opacity: 0; transform: translateX(-80px); will-change: opacity, transform; }
+html.gsap-anim .gx-slide-r { opacity: 0; transform: translateX(80px); will-change: opacity, transform; }
+html.gsap-anim .gx-flip { opacity: 0; transform: perspective(800px) rotateX(-50deg) translateY(40px); transform-origin: bottom; will-change: opacity, transform; }
+html.gsap-anim .gx-char { display: inline-block; opacity: 0; transform: translateY(60px) rotate(8deg); will-change: opacity, transform; }
+@media (prefers-reduced-motion: reduce) {
+  html.gsap-anim .gx-rise-big, html.gsap-anim .gx-rise, html.gsap-anim .gx-blur-big,
+  html.gsap-anim .gx-scale, html.gsap-anim .gx-slide-l, html.gsap-anim .gx-slide-r,
+  html.gsap-anim .gx-flip, html.gsap-anim .gx-char {
+    opacity: 1 !important; transform: none !important; filter: none !important;
+  }
+}
+
+/* 全局背景光斑漂移（永不停止） */
+.bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+.bg-orb-1 { width: 500px; height: 500px; background: #E1A4C2; top: -100px; left: -100px; }
+.bg-orb-2 { width: 400px; height: 400px; background: #D6DD63; top: 30%; right: -100px; }
+.bg-orb-3 { width: 450px; height: 450px; background: #B7C7A8; bottom: -100px; left: 30%; }
+.bg-orb-4 { width: 350px; height: 350px; background: #E8C9B6; top: 60%; left: 10%; }
+
+.page, .sidebar { position: relative; z-index: 2; }
+
+/* 顶部 H1 持续呼吸效果 */
+.header h1 .breath {
+  display: inline-block;
+  animation: breath 3s ease-in-out infinite;
+}
+@keyframes breath {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* 卡片悬停 3D */
+.card, .thesis-card, .gallery-item {
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s;
+}
+
+/* 数字滚动 */
+.num-roll {
+  display: inline-block;
+  font-feature-settings: 'tnum';
+}
+
+/* thesis-card 边光晕 */
+.thesis-card { position: relative; overflow: hidden; }
+.thesis-card-shine {
+  position: absolute; inset: -2px;
+  background: conic-gradient(from var(--shine-angle, 0deg),
+    transparent 0deg,
+    rgba(225,164,194,0.4) 30deg,
+    transparent 80deg,
+    transparent 360deg);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.thesis-card > *:not(.thesis-card-shine) { position: relative; z-index: 1; }
+
+/* card 大扫光 */
+.card { overflow: hidden; }
+.card-sweep {
+  position: absolute; top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg,
+    transparent 0%,
+    rgba(225,164,194,0.0) 30%,
+    rgba(225,164,194,0.5) 50%,
+    rgba(214,221,99,0.4) 60%,
+    transparent 80%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+.card > *:not(.card-sweep) { position: relative; z-index: 1; }
+
+/* sub-card hover 弹起 */
+.sub-card { transition: transform 0.3s cubic-bezier(.5,1.6,.4,1); cursor: default; }
+
+/* 章节大背景数字 */
+.bg-num {
+  position: absolute;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-weight: 500;
+  font-size: 240px; line-height: 1;
+  color: var(--ink);
+  opacity: 0; pointer-events: none;
+  letter-spacing: -0.05em;
+  z-index: 0;
+  right: -20px; top: -60px;
+  user-select: none;
+}
+.section { position: relative; }
+.section > *:not(.bg-num) { position: relative; z-index: 1; }
+
+/* 进度条加粗+辉光 */
+.progress-bar { height: 4px !important; box-shadow: 0 0 12px rgba(225,164,194,0.5); }
+.progress-fill { box-shadow: 0 0 8px currentColor; }
+
 </style>
 </head>
 <body>
+<!-- 背景漂浮光斑 -->
+<div class="bg-orbs" aria-hidden="true">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+  <div class="bg-orb bg-orb-4"></div>
+</div>
 
 <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
 <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
@@ -741,6 +862,343 @@ response = client.messages.create(
       if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
     });
   });
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     GSAP MAX —— 大幅度、持续、3D、扫光、视差全开
+     ═══════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (typeof gsap === 'undefined' || reduced) return;
+
+  document.documentElement.classList.add('gsap-anim');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ════════ 1. 背景光斑永远漂浮 ════════
+  gsap.to('.bg-orb-1', { x: 200, y: 100, scale: 1.3, duration: 14, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.to('.bg-orb-2', { x: -180, y: 80, scale: 0.8, duration: 18, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.to('.bg-orb-3', { x: 120, y: -120, scale: 1.2, duration: 16, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.to('.bg-orb-4', { x: -100, y: 150, scale: 1.1, duration: 20, ease: 'sine.inOut', repeat: -1, yoyo: true });
+  gsap.to('.bg-orbs', { rotation: 360, duration: 80, ease: 'none', repeat: -1, transformOrigin: 'center center' });
+
+  // ════════ 2. h1 字符大角度跳出 ════════
+  const h1 = document.querySelector('.header h1');
+  if (h1) {
+    const text = h1.textContent;
+    h1.innerHTML = '';
+    [...text].forEach(ch => {
+      const span = document.createElement('span');
+      span.className = 'gx-char breath';
+      if (ch === '干' || ch === '货') {
+        span.style.fontStyle = 'italic';
+        span.style.fontWeight = '500';
+        span.style.color = '#E1A4C2';
+        span.style.textShadow = '0 4px 20px rgba(225,164,194,0.4)';
+      }
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      h1.appendChild(span);
+    });
+  }
+
+  // ════════ 3. 给元素打动画 class ════════
+  const tag = (sel, cls) => document.querySelectorAll(sel).forEach(el => el.classList.add(cls));
+
+  tag('.header-kicker', 'gx-slide-l');
+  tag('.header-meta .meta-tag', 'gx-scale');
+  tag('.thesis-opener', 'gx-blur-big');
+  tag('.thesis-card', 'gx-flip');
+  tag('.thesis-tagline', 'gx-rise');
+  tag('.section-kicker', 'gx-slide-l');
+  tag('.section-count', 'gx-slide-r');
+  tag('.section-title', 'gx-rise-big');
+  tag('.section-sub', 'gx-rise');
+  tag('.card', 'gx-rise-big');
+  tag('.sub-card', 'gx-scale');
+  tag('.gallery-item', 'gx-flip');
+  tag('.footer-left, .footer-right', 'gx-rise');
+
+  // ════════ 4. 给章节加大背景数字 ════════
+  const bgNums = ['1', '2', '3', '4'];
+  document.querySelectorAll('.section').forEach((sec, i) => {
+    if (i < bgNums.length) {
+      const span = document.createElement('span');
+      span.className = 'bg-num';
+      span.textContent = bgNums[i];
+      sec.appendChild(span);
+    }
+  });
+
+  // ════════ 5. 给 thesis-card 加 conic 光环（hover 触发） ════════
+  document.querySelectorAll('.thesis-card').forEach(card => {
+    const shine = document.createElement('div');
+    shine.className = 'thesis-card-shine';
+    card.insertBefore(shine, card.firstChild);
+  });
+
+  // ════════ 6. 给 card 加大扫光 ════════
+  document.querySelectorAll('.card').forEach(card => {
+    const sweep = document.createElement('div');
+    sweep.className = 'card-sweep';
+    card.insertBefore(sweep, card.firstChild);
+  });
+
+  // ════════════════════════════════════════
+  // 首屏开场（4 秒大戏）
+  // ════════════════════════════════════════
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+  // header-kicker 从左飞入
+  tl.to('.header-kicker', { opacity: 1, x: 0, duration: 1.0 }, 0.1);
+
+  // h1 字符弹跳进入
+  tl.to('.gx-char', {
+    opacity: 1, y: 0, rotate: 0,
+    duration: 1.2, stagger: 0.08,
+    ease: 'back.out(2)'
+  }, 0.3);
+
+  // meta-tag 一颗颗弹出来
+  tl.to('.header-meta .meta-tag', {
+    opacity: 1, scale: 1, duration: 0.7,
+    stagger: 0.1, ease: 'back.out(2.5)'
+  }, 1.5);
+
+  // thesis 大开场
+  tl.to('.thesis-opener', {
+    opacity: 1, filter: 'blur(0px)', y: 0, scale: 1,
+    duration: 1.4, ease: 'power4.out'
+  }, 1.8);
+
+  // 4 张厂商卡 3D 翻转入场
+  tl.to('.thesis-card', {
+    opacity: 1, y: 0, rotateX: 0,
+    duration: 1.2, stagger: 0.18, ease: 'power4.out'
+  }, 2.2);
+
+  // tagline
+  tl.to('.thesis-tagline', { opacity: 1, y: 0, duration: 1.0 }, 3.5);
+
+  // ════════════════════════════════════════
+  // 章节滚动入场（戏剧化）
+  // ════════════════════════════════════════
+  document.querySelectorAll('.section').forEach((sec, idx) => {
+    const bgNum = sec.querySelector('.bg-num');
+    const kicker = sec.querySelector('.section-kicker');
+    const count = sec.querySelector('.section-count');
+    const title = sec.querySelector('.section-title');
+    const sub = sec.querySelector('.section-sub');
+    const cards = sec.querySelectorAll('.card');
+    const subs = sec.querySelectorAll('.sub-card');
+    const galleries = sec.querySelectorAll('.gallery-item');
+
+    const trigger = { trigger: sec, start: 'top 80%', toggleActions: 'play none none none' };
+
+    // 大背景数字
+    if (bgNum) {
+      gsap.fromTo(bgNum,
+        { opacity: 0, x: 200, scale: 0.5, rotation: -20 },
+        { opacity: 0.06, x: 0, scale: 1, rotation: 0, duration: 1.6, ease: 'power4.out',
+          scrollTrigger: { ...trigger, start: 'top 90%' } }
+      );
+    }
+
+    if (kicker) gsap.to(kicker, { opacity: 1, x: 0, duration: 1.0, ease: 'power3.out', scrollTrigger: trigger });
+    if (count) gsap.to(count, { opacity: 1, x: 0, duration: 1.0, ease: 'power3.out', scrollTrigger: trigger });
+
+    if (title) {
+      gsap.to(title, {
+        opacity: 1, y: 0, rotation: 0,
+        duration: 1.2, ease: 'back.out(1.4)',
+        scrollTrigger: trigger
+      });
+    }
+    if (sub) gsap.to(sub, { opacity: 1, y: 0, duration: 0.9, delay: 0.2, ease: 'power2.out', scrollTrigger: trigger });
+
+    // 主卡片大幅度上推
+    if (cards.length) {
+      gsap.to(cards, {
+        opacity: 1, y: 0, rotation: 0,
+        duration: 1.3, stagger: 0.22,
+        ease: 'back.out(1.3)',
+        scrollTrigger: { trigger: sec, start: 'top 70%', toggleActions: 'play none none none' }
+      });
+
+      // 每张卡片入场时扫光
+      cards.forEach((card, i) => {
+        const sweep = card.querySelector('.card-sweep');
+        if (sweep) {
+          gsap.fromTo(sweep,
+            { left: '-120%', opacity: 0 },
+            {
+              left: '120%', opacity: 1,
+              duration: 1.5, delay: i * 0.22 + 0.6,
+              ease: 'power2.inOut',
+              scrollTrigger: { trigger: sec, start: 'top 70%', toggleActions: 'play none none none' }
+            }
+          );
+        }
+      });
+    }
+
+    // sub-card 大力弹出
+    if (subs.length) {
+      gsap.to(subs, {
+        opacity: 1, scale: 1,
+        duration: 0.8, stagger: 0.05,
+        ease: 'back.out(2.2)',
+        scrollTrigger: { trigger: sec, start: 'top 65%', toggleActions: 'play none none none' }
+      });
+    }
+
+    // gallery-item 翻转入场
+    if (galleries.length) {
+      gsap.to(galleries, {
+        opacity: 1, y: 0, rotateX: 0,
+        duration: 1.0, stagger: 0.15,
+        ease: 'back.out(1.6)',
+        scrollTrigger: { trigger: sec, start: 'top 70%', toggleActions: 'play none none none' }
+      });
+    }
+  });
+
+  // ════════ Footer ════════
+  gsap.to('.footer-left, .footer-right', {
+    opacity: 1, y: 0, duration: 1.0, stagger: 0.2,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer', start: 'top 90%', toggleActions: 'play none none none' }
+  });
+
+  // ════════════════════════════════════════
+  // 数字滚动（thesis-card-label 后缀添加序号 01-04）
+  // ════════════════════════════════════════
+  document.querySelectorAll('.thesis-card').forEach((card, i) => {
+    const num = document.createElement('div');
+    num.style.cssText = `
+      position: absolute; top: 12px; right: 16px;
+      font-family: "Cormorant Garamond", serif; font-style: italic;
+      font-size: 32px; color: rgba(42,36,27,0.15); font-weight: 500;
+      z-index: 2; pointer-events: none;
+    `;
+    num.textContent = '0' + (i + 1);
+    card.appendChild(num);
+
+    const counter = { val: 0 };
+    gsap.to(counter, {
+      val: i + 1,
+      duration: 1.5,
+      delay: 2.4 + i * 0.18,
+      ease: 'power2.out',
+      onUpdate: () => {
+        num.textContent = '0' + Math.floor(counter.val);
+        if (counter.val < 0.1) num.textContent = '00';
+      }
+    });
+  });
+
+  // ════════════════════════════════════════
+  // 交互动效：3D tilt + conic shine
+  // ════════════════════════════════════════
+
+  // thesis-card：3D 倾斜 + conic 光环旋转
+  document.querySelectorAll('.thesis-card').forEach(card => {
+    const shine = card.querySelector('.thesis-card-shine');
+    let shineAngle = 0;
+    let rafId = null;
+
+    function spin() {
+      shineAngle = (shineAngle + 2) % 360;
+      if (shine) shine.style.setProperty('--shine-angle', shineAngle + 'deg');
+      rafId = requestAnimationFrame(spin);
+    }
+
+    card.addEventListener('mouseenter', () => {
+      if (shine) gsap.to(shine, { opacity: 1, duration: 0.4 });
+      gsap.to(card, { y: -10, scale: 1.03, duration: 0.5, ease: 'power3.out' });
+      spin();
+    });
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(card, {
+        rotationY: x * 12,
+        rotationX: -y * 12,
+        duration: 0.4,
+        ease: 'power2.out',
+        transformPerspective: 800
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (shine) gsap.to(shine, { opacity: 0, duration: 0.4 });
+      gsap.to(card, {
+        y: 0, scale: 1, rotationX: 0, rotationY: 0,
+        duration: 0.6, ease: 'power3.out'
+      });
+      if (rafId) cancelAnimationFrame(rafId);
+    });
+  });
+
+  // .card 鼠标悬停 3D
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      gsap.to(card, { y: -6, scale: 1.01, boxShadow: '0 20px 60px rgba(42,36,27,0.15)', duration: 0.4, ease: 'power2.out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { y: 0, scale: 1, boxShadow: 'none', duration: 0.5, ease: 'power2.out' });
+    });
+  });
+
+  // sub-card 鼠标悬停弹起
+  document.querySelectorAll('.sub-card').forEach(sub => {
+    sub.addEventListener('mouseenter', () => {
+      gsap.to(sub, { y: -4, scale: 1.04, duration: 0.3, ease: 'back.out(2)' });
+    });
+    sub.addEventListener('mouseleave', () => {
+      gsap.to(sub, { y: 0, scale: 1, duration: 0.4, ease: 'power2.out' });
+    });
+  });
+
+  // ════════════════════════════════════════
+  // 视差：背景大数字随滚动平移
+  // ════════════════════════════════════════
+  document.querySelectorAll('.bg-num').forEach(bn => {
+    gsap.to(bn, {
+      y: -150,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: bn.parentElement,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+  });
+
+  // header 主标题持续微旋转
+  if (h1) {
+    gsap.to('.gx-char', {
+      rotation: '+=2',
+      duration: 4,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      stagger: { each: 0.1, from: 'random' }
+    });
+  }
+
+  // 进度条 glow 颜色锁定
+  const fill = document.getElementById('progressFill');
+  if (fill) {
+    fill.style.background = 'linear-gradient(90deg, #E1A4C2 0%, #D6DD63 50%, #B7C7A8 100%)';
+    fill.style.color = '#E1A4C2';
+  }
+
 })();
 </script>
 <a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
