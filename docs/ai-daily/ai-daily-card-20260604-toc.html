@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.06.04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-back {
+  display:block; margin:20px 24px 0; padding:10px 16px; border-radius:8px;
+  background:rgba(255,255,255,0.06); color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; text-align:center;
+  transition:all 0.2s;
+}
+.sidebar-back:hover { background:rgba(214,221,99,0.15); color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { display:inline-block; font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); margin-left:8px; }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+  .back-archive-btn { right:16px!important; top:12px!important; font-size:12px!important; padding:7px 14px!important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VF-STYLE —— Lenis + Preloader + 整屏位移 + 自定义光标
+   ═══════════════════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  html.vf-cursor-on, html.vf-cursor-on body, html.vf-cursor-on a, html.vf-cursor-on button { cursor: none !important; }
+}
+.vf-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2A241B; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.vf-cursor.hover { width: 48px; height: 48px; background: rgba(214, 221, 99, 0.6); }
+.vf-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(42, 36, 27, 0.3); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%); mix-blend-mode: multiply;
+}
+@media (hover: none), (pointer: coarse) { .vf-cursor, .vf-cursor-ring { display: none !important; } }
+
+.vf-preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #F2EEDF;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: all;
+}
+.vf-preloader-counter {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-weight: 500;
+  font-size: 96px; line-height: 1;
+  color: #2A241B; letter-spacing: -0.04em;
+  margin-bottom: 32px; font-variant-numeric: tabular-nums;
+}
+.vf-preloader-counter sup {
+  font-size: 28px; vertical-align: super;
+  font-style: normal; font-weight: 400;
+  margin-left: 4px; color: #5C5345;
+}
+.vf-preloader-bar {
+  width: 280px; height: 1px;
+  background: rgba(42, 36, 27, 0.15);
+  position: relative; overflow: hidden;
+}
+.vf-preloader-fill {
+  position: absolute; top: 0; left: 0;
+  width: 0%; height: 100%; background: #2A241B;
+}
+.vf-preloader-label {
+  margin-top: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 0.2em; color: #5C5345;
+  text-transform: uppercase;
+}
+
+html.vf-anim .vf-fade { opacity: 0; will-change: opacity; }
+html.vf-anim .vf-rise-100 { opacity: 0; transform: translateY(100px); will-change: opacity, transform; }
+html.vf-anim .vf-char { display: inline-block; opacity: 0; transform: translateY(110%); will-change: opacity, transform; }
+@media (prefers-reduced-motion: reduce) {
+  html.vf-anim .vf-fade,
+  html.vf-anim .vf-rise-100,
+  html.vf-anim .vf-char { opacity: 1 !important; transform: none !important; }
+  .vf-preloader { display: none !important; }
+}
+
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+html.vf-anim body .page,
+html.vf-anim body .sidebar,
+html.vf-anim body .progress-bar,
+html.vf-anim body .back-to-top,
+html.vf-anim body .back-archive-btn {
+  opacity: 0; transition: opacity 0.8s ease;
+}
+html.vf-revealed body .page,
+html.vf-revealed body .sidebar,
+html.vf-revealed body .progress-bar,
+html.vf-revealed body .back-to-top,
+html.vf-revealed body .back-archive-btn {
+  opacity: 1;
+}
+
+/* 截图模式：跳过所有 VF 动效 */
+html.screenshot-mode .vf-preloader,
+html.screenshot-mode .vf-cursor,
+html.screenshot-mode .vf-cursor-ring { display: none !important; }
+html.screenshot-mode .vf-fade,
+html.screenshot-mode .vf-rise-100,
+html.screenshot-mode .vf-char { opacity: 1 !important; transform: none !important; }
+</style>
+</head>
+<body>
+
+<!-- VF Preloader -->
+<div class="vf-preloader" id="vfPreloader">
+  <div class="vf-preloader-counter" id="vfCounter">0<sup>%</sup></div>
+  <div class="vf-preloader-bar"><div class="vf-preloader-fill" id="vfFill"></div></div>
+  <div class="vf-preloader-label">AIGC Daily · 小柒AI速递</div>
+</div>
+
+<!-- VF Custom Cursor -->
+<div class="vf-cursor" id="vfCursor"></div>
+<div class="vf-cursor-ring" id="vfCursorRing"></div>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.06.04 &middot; 星期三 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Model &amp; Agent</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI 模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>微软 Build 2026 全发布</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>英伟达 Nemotron 3 Ultra</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>OpenAI Codex 合并 ChatGPT</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Anthropic IPO 估值 9650 亿</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>DeepSeek 70 亿美元首轮融资</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Alphabet 847.5 亿融资</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Meta AI Agent 上线 Instagram</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>可灵 V3 4K60fps + 180 亿估值</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a href="index.html" class="sidebar-back">&larr; 返回归档</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.06.04 &middot; Wed</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">微软 Build 7 款模型 + Anthropic IPO 9650 亿 + DeepSeek 70 亿融资 &middot; AI 超级日</p>
+    <div class="header-meta">
+      <span class="meta-tag">🤖 AI 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏗️ 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📊 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.04</span>
+    </div>
+  </div>
+
+  <!-- §1 AI 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Model &amp; Agent</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🤖 AI 模型 &amp; Agent</div>
+    <div class="section-sub">今日最重磅的模型与 Agent 动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">微软 Build 2026：MAI-Thinking-1 + 7 款自研模型 + Project Solara + Scout 智能体</span>
+        <span class="card-tag">🔥 P0</span>
+        <span class="card-score">9.5</span>
+      </div>
+      <div class="card-desc">
+        微软 Build 2026 开发者大会正式发布 <strong>7 款自研 MAI 系列模型</strong>，其中旗舰 MAI-Thinking-1 支持深度推理链，性能对标 o3；同步推出 <strong>Project Solara</strong>（AI 应用可视化编排平台）和 <strong>Scout 智能体框架</strong>（企业级多轮任务规划 + 工具调用链）。7 款模型覆盖对话、代码、嵌入、多模态等场景，补齐自研版图。Solara 类似 LangGraph 但深度集成 Azure，是"AI 工作流编排"的标准范式之作。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">英伟达 GTC 台北：Nemotron 3 Ultra + Agent Toolkit，推理速度 5x</span>
+        <span class="card-tag">🔥 P0</span>
+        <span class="card-score">8.8</span>
+      </div>
+      <div class="card-desc">
+        英伟达 GTC 台北站发布 <strong>Nemotron 3 Ultra</strong> 推理优化模型，结合新一代 TensorRT 推理引擎实现推理速度 <strong>5 倍提升</strong>。同步推出 <strong>Agent Toolkit</strong>，包含规划器、工具调用、记忆管理等 Agent 核心模块，补齐英伟达在 Agent 开发层的关键拼图。FP8 量化 + 新架构优化，实际部署效果显著。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">OpenAI Codex 与 ChatGPT 合并，6 款工作流插件角色上线</span>
+        <span class="card-tag">P0</span>
+        <span class="card-score">8.6</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 将 Codex 代码 Agent 正式合并入 ChatGPT 生态，推出 <strong>6 款 Codex 工作流插件</strong>（代码审查、测试生成、文档编写、部署、安全扫描、重构）。多个插件角色可串行/并行编排，形成自动化开发流水线。ChatGPT 统一入口降低使用门槛，<strong>多 Agent 协作</strong>模式验证了 AI 辅助开发的流水线化趋势。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏗️ 行业 &amp; 基础设施</div>
+    <div class="section-sub">融资 / IPO / 资本的关键信号</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Anthropic IPO 选定摩根士丹利+高盛，估值 9650 亿美元，最早 10 月上市</span>
+        <span class="card-tag">🔥 P0</span>
+        <span class="card-score">9.3</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 已选定 <strong>摩根士丹利和高盛</strong>作为 IPO 牵头承销商，预计估值达 <strong>9650 亿美元</strong>，最早将于 2026 年 10 月登陆美股。这是 AI 行业历史上最大规模 IPO 之一，较上一轮 600 亿估值暴涨 15 倍。双顶级投行护航，Claude 系列模型的商业化能力获资本市场强力认可。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">DeepSeek 首轮 70 亿美元融资，腾讯+宁德时代参投，估值 590 亿美元</span>
+        <span class="card-tag">🔥 P0</span>
+        <span class="card-score">9.1</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek 完成首轮融资 <strong>70 亿美元</strong>，由腾讯、宁德时代等参投，估值达 <strong>590 亿美元</strong>，创中国 AI 公司首轮融资纪录。腾讯参投意味着 DeepSeek 能力可能与腾讯云、微信生态深度整合；宁德时代入局暗示工业/制造 AI 布局。从开源实验室到商业化，DeepSeek 正在改写中国 AI 竞争格局。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Alphabet 847.5 亿美元股权融资 + Gemini 3.5 Pro 6 月发布</span>
+        <span class="card-tag">P1</span>
+        <span class="card-score">8.5</span>
+      </div>
+      <div class="card-desc">
+        Alphabet 宣布通过股权融资筹集 <strong>847.5 亿美元</strong>，创科技行业单轮融资纪录。绝大部分将投入 AI 基础设施（TPU 集群、数据中心）。同时确认 <strong>Gemini 3.5 Pro</strong> 将于 6 月发布，预计支持 10M token 上下文 + 原生多模态推理，正面迎击微软 Build。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📊 趋势 &amp; 工具</div>
+    <div class="section-sub">Agent 落地与创作工具质变</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Meta 商用 AI 智能体全球上线 Instagram + 管理平台</span>
+        <span class="card-tag">P1</span>
+        <span class="card-score">8.8</span>
+      </div>
+      <div class="card-desc">
+        Meta 正式在全球范围推出商用 AI 智能体，支持 <strong>Instagram 商家零代码部署品牌 AI</strong>，并同步上线 AI Agent 管理平台（统一监控对话质量、转化率、用户满意度）。底层使用 Llama 4 模型，支持多语言。这是 <strong>AI Agent 从开发者工具走向大众商业化</strong>的标志性事件。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">可灵 AI 融资 180 亿美元估值 + 可灵 V3 发布（4K60fps）</span>
+        <span class="card-tag">P1</span>
+        <span class="card-score">8.3</span>
+      </div>
+      <div class="card-desc">
+        可灵 AI（快手旗下）完成新一轮融资，估值达 <strong>180 亿美元</strong>；同步发布可灵 V3，支持 <strong>4K 60fps 视频生成</strong>，运动一致性和画面质量实现质的飞跃。AI 视频生成首次达到广播级画质标准，解决了物体形变、运动不连贯的核心痛点。<strong>4K60fps AI 视频生成可直接用于游戏宣传片</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Build 2026</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">Anthropic</div><div class="data-value">9.3</div></div>
+    <div class="data-chip"><div class="data-label">DeepSeek</div><div class="data-value">9.1</div></div>
+    <div class="data-chip"><div class="data-label">Avg</div><div class="data-value">8.7</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.06.04<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<a href="index.html" class="back-archive-btn" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+<!-- ═══════ VF Style: Lenis + GSAP ═══════ -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  // 截图模式检测
+  const urlParams = new URLSearchParams(window.location.search);
+  const screenshotMode = urlParams.get('screenshot') === '1' ||
+                         document.documentElement.classList.contains('screenshot-mode');
+  if (screenshotMode) {
+    document.documentElement.classList.add('screenshot-mode');
+    const pre = document.getElementById('vfPreloader');
+    if (pre) pre.style.display = 'none';
+    return;
+  }
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || typeof gsap === 'undefined' || typeof Lenis === 'undefined') {
+    document.getElementById('vfPreloader').style.display = 'none';
+    document.documentElement.classList.add('vf-revealed');
+    return;
+  }
+
+  document.documentElement.classList.add('vf-anim');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ════════ 1. Lenis 平滑惯性滚动 ════════
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical', smooth: true,
+    mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ════════ 2. 自定义光标 ════════
+  const cursor = document.getElementById('vfCursor');
+  const cursorRing = document.getElementById('vfCursorRing');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.documentElement.classList.add('vf-cursor-on');
+    let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+    addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, .card, .thesis-card, .gallery-item, .sub-card, .nav-link, .back-to-top, .back-archive-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+
+  // ════════ 3. h1 拆字符 ════════
+  const h1 = document.querySelector('.header h1');
+  if (h1) {
+    const text = h1.textContent;
+    h1.innerHTML = '';
+    [...text].forEach(ch => {
+      const wrap = document.createElement('span');
+      wrap.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:bottom;';
+      const span = document.createElement('span');
+      span.className = 'vf-char';
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      wrap.appendChild(span);
+      h1.appendChild(wrap);
+    });
+  }
+
+  // ════════ 4. 动画 class ════════
+  const tag = (sel, cls) => document.querySelectorAll(sel).forEach(el => el.classList.add(cls));
+  tag('.header-kicker', 'vf-fade');
+  tag('.header-meta .meta-tag', 'vf-fade');
+  tag('.section-kicker, .section-count, .section-title, .section-sub', 'vf-rise-100');
+  tag('.card', 'vf-rise-100');
+  tag('.data-chip', 'vf-rise-100');
+  tag('.footer-left, .footer-right', 'vf-fade');
+
+  // ════════ 5. Preloader 进度 ════════
+  const preloader = document.getElementById('vfPreloader');
+  const counter = document.getElementById('vfCounter');
+  const fill = document.getElementById('vfFill');
+  const counterObj = { val: 0 };
+  lenis.stop();
+
+  gsap.to(counterObj, {
+    val: 100, duration: 1.6, ease: 'power2.inOut',
+    onUpdate: () => {
+      const v = Math.floor(counterObj.val);
+      counter.innerHTML = v + '<sup>%</sup>';
+      fill.style.width = v + '%';
+    },
+    onComplete: revealPage
+  });
+
+  function revealPage() {
+    const tl = gsap.timeline({
+      defaults: { ease: 'power4.out' },
+      onStart: () => document.documentElement.classList.add('vf-revealed'),
+      onComplete: () => lenis.start()
+    });
+    tl.to(preloader, {
+      yPercent: -100, duration: 1.1, ease: 'power3.inOut',
+      onComplete: () => preloader.style.display = 'none'
+    }, 0);
+    tl.to('.vf-char', { y: 0, opacity: 1, duration: 1.0, stagger: 0.015, ease: 'power3.out' }, 0.4);
+    tl.to('.header-kicker', { opacity: 1, duration: 0.8 }, 0.7);
+    tl.to('.header-meta .meta-tag', { opacity: 1, duration: 0.7, stagger: 0.03 }, 0.9);
+    tl.to('.data-chip', { opacity: 1, y: 0, duration: 1.0, stagger: 0.05, ease: 'power4.out' }, 1.0);
+  }
+
+  // ════════ 6. 章节滚动入场 ════════
+  document.querySelectorAll('.section, .section-highlight').forEach((sec) => {
+    const titleGroup = sec.querySelectorAll('.section-kicker, .section-count, .section-title, .section-sub');
+    const cards = sec.querySelectorAll('.card');
+    const trig = (start) => ({ trigger: sec, start: 'top ' + start, toggleActions: 'play none none none' });
+
+    if (titleGroup.length) gsap.to(titleGroup, { opacity: 1, y: 0, duration: 1.0, stagger: 0.02, ease: 'power4.out', scrollTrigger: trig('85%') });
+    if (cards.length) gsap.to(cards, { opacity: 1, y: 0, duration: 1.2, stagger: 0.08, ease: 'power4.out', scrollTrigger: trig('80%') });
+  });
+
+  gsap.to('.footer-left, .footer-right', {
+    opacity: 1, duration: 1.0, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer', start: 'top 90%', toggleActions: 'play none none none' }
+  });
+
+  // ════════ 7. 进度条渐变 ════════
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.background = 'linear-gradient(90deg, #D6DD63 0%, #E1A4C2 50%, #B7C7A8 100%)';
+
+  // 锚点 lenis 跳转
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -32 }); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
