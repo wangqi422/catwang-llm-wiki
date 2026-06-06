@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.06.06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-back {
+  display:block; margin:20px 24px 0; padding:10px 16px; border-radius:8px;
+  background:rgba(255,255,255,0.06); color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; text-align:center;
+  transition:all 0.2s;
+}
+.sidebar-back:hover { background:rgba(214,221,99,0.15); color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { display:inline-block; font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); margin-left:8px; }
+
+/* Sub-cards (4-color rotation) */
+.sub-card { border-radius:16px; padding:18px 22px; margin-bottom:12px; }
+.sub-card:nth-child(4n+1) { background:var(--pink); }
+.sub-card:nth-child(4n+2) { background:var(--lemon); }
+.sub-card:nth-child(4n+3) { background:var(--blush); }
+.sub-card:nth-child(4n+4) { background:var(--sage); }
+.sub-card-title { font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+.sub-card-text { font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:300; line-height:1.7; color:var(--ink-soft); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Drop-cap conclusion */
+.conclusion { margin-top:32px; scroll-margin-top:32px; }
+.conclusion-text { font-family:"Noto Serif SC","Cormorant Garamond",serif; font-size:17px; line-height:2; color:var(--ink); font-weight:400; }
+.conclusion-text::first-letter { font-family:"Cormorant Garamond",serif; font-size:72px; float:left; line-height:0.8; margin-right:8px; margin-top:6px; font-weight:500; }
+
+/* Footer */
+.footer {
+  margin-top:48px; padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:13px; color:var(--ink-soft); line-height:1.6; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:11px; color:var(--ink-faint); text-align:right; line-height:1.5; }
+
+/* Back-to-top */
+.back-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px; border-radius:50%;
+  background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer; opacity:0; transition:opacity 0.3s; z-index:200; border:none;
+  box-shadow:0 2px 12px rgba(42,36,27,0.18);
+}
+.back-top.show { opacity:1; }
+
+/* Progress bar */
+.progress-bar {
+  position:fixed; top:0; left:var(--sidebar-w); right:0; height:3px; z-index:300;
+  background:transparent;
+}
+.progress-bar-fill {
+  height:100%; width:0; background:linear-gradient(90deg,var(--pink),var(--lemon),var(--sage));
+  transition:width 0.1s;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:32px 20px 40px; }
+  .header h1 { font-size:38px; }
+  .section-highlight { margin-left:-20px; margin-right:-20px; padding:32px 20px; }
+  .hamburger { display:flex !important; }
+}
+.hamburger {
+  display:none; position:fixed; top:16px; left:16px; z-index:400;
+  width:40px; height:40px; border-radius:8px; background:var(--ink);
+  align-items:center; justify-content:center; cursor:pointer; border:none;
+}
+.hamburger span { display:block; width:20px; height:2px; background:var(--paper); margin:3px 0; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<button class="hamburger" id="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+  <span></span><span></span><span></span>
+</button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AIGC Daily</div>
+    <h1>日报 · <em>2026.06.06</em></h1>
+    <div class="sidebar-meta">Friday · Vol.0606</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Thesis</div>
+    <a class="nav-link active" href="#thesis" data-section="thesis">总览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 1 重大发布</div>
+    <a class="nav-link" href="#s1" data-section="s1"><span class="nav-num">1.</span> Anthropic 呼吁暂停AI</a>
+    <a class="nav-link" href="#s2" data-section="s2"><span class="nav-num">2.</span> ChatGPT+Codex 合体</a>
+    <a class="nav-link" href="#s3" data-section="s3"><span class="nav-num">3.</span> NVIDIA Nemotron 3 Ultra</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 2 Agent与工具生态</div>
+    <a class="nav-link" href="#s4" data-section="s4"><span class="nav-num">4.</span> xAI Grok Video 1.5</a>
+    <a class="nav-link" href="#s5" data-section="s5"><span class="nav-num">5.</span> 腾讯效率智能体工具集</a>
+    <a class="nav-link" href="#s6" data-section="s6"><span class="nav-num">6.</span> Runway 全AI游戏CG</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 3 开源与产业</div>
+    <a class="nav-link" href="#s7" data-section="s7"><span class="nav-num">7.</span> HuggingFace Workflow SDK</a>
+    <a class="nav-link" href="#s8" data-section="s8"><span class="nav-num">8.</span> 可灵AI破1亿用户</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a class="sidebar-back" href="index.html">← 返回归档</a>
+</nav>
+
+<div class="main">
+<div class="page">
+
+<!-- HEADER -->
+<header class="header" id="thesis">
+  <div class="header-kicker">i. aigc daily report</div>
+  <h1>AI 正在<br><em>加速构建自身</em></h1>
+  <p class="lead">Anthropic 首次量化披露 AI 自我进化速度：80% 代码由 Claude 编写，任务可靠时长每 4 个月翻倍——同时罕见呼吁全球暂停前沿开发。OpenAI 同日宣布 Codex 并入 ChatGPT 推向 10 亿用户，NVIDIA 开源 Nemotron 3 Ultra 面向长程 Agent。</p>
+  <div class="swatches">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+  <div class="header-meta">
+    <span class="meta-tag">#AI自我进化</span>
+    <span class="meta-tag">#超级Agent</span>
+    <span class="meta-tag">#开源模型</span>
+    <span class="meta-tag">#AI视频</span>
+    <span class="meta-tag">#腾讯Agent</span>
+    <span class="meta-tag">#游戏CG</span>
+    <span class="meta-tag">#可灵</span>
+    <span class="meta-tag">#Workflow SDK</span>
+  </div>
+</header>
+
+<!-- §1 重大发布 -->
+<section class="section" id="s1">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 1 Major Releases</span>
+    <span class="section-count">3 items</span>
+  </div>
+  <h2 class="section-title">重大发布</h2>
+  <p class="section-sub">自我进化警告、超级Agent与开源长程模型</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">1</span>
+      <span class="card-title">Anthropic 呼吁全球暂停前沿AI开发：80% 代码由 Claude 编写</span>
+      <span class="card-score">9.5</span>
+    </div>
+    <div class="card-desc">
+      Anthropic 发布长文《当AI构建自身》，首次量化披露递归自我改进数据：截至2026年5月，超过<strong>80%</strong>代码由 Claude 编写。工程师日均代码合并量是2024年的<strong>8倍</strong>，任务可靠时长翻倍周期从7个月缩短至4个月，Mythos 内测已能连续工作16小时+。罕见呼吁全球AI实验室建立可验证的协调减速/暂停机制。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">⚡ 8倍代码产出</div>
+        <div class="sub-card-text">工程师日均合并代码量达 2024 年的 8 倍，80%+ 由 Claude 自动完成</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">⚡ 每4个月翻倍</div>
+        <div class="sub-card-text">AI可靠完成任务时长翻倍周期从7个月加速至4个月</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">⚡ 暂停呼吁</div>
+        <div class="sub-card-text">递归自我改进可能2年内发生，呼吁全球可验证地协调减速</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：Anthropic Blog · #AI自我进化 #Claude
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">2</span>
+      <span class="card-title">OpenAI 官宣 ChatGPT + Codex 合体，打造10亿用户超级Agent</span>
+      <span class="card-score">9.3</span>
+    </div>
+    <div class="card-desc">
+      "Intelligence at Work"活动上，OpenAI宣布将Codex并入ChatGPT，合并后覆盖桌面端/移动端/浏览器。Codex周活突破<strong>500万</strong>，知识工作者占比20%、增速是开发者3倍。6款角色插件覆盖数据分析、创意制作、销售等，共<strong>110项技能</strong>+62个外部应用。产品负责人："你不需要24/7工作，但你的云端Agent会。"
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🤖 超级Agent</div>
+        <div class="sub-card-text">对话式AI+自主任务执行，从开发者工具推向10亿用户</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🎨 创意制作插件</div>
+        <div class="sub-card-text">支持Figma/Canva，一键将创意方案转为可审阅素材</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：OpenAI / 36氪 · #超级Agent #Codex
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">3</span>
+      <span class="card-title">NVIDIA 开源 Nemotron 3 Ultra：550B参数，1M上下文面向长程Agent</span>
+      <span class="card-score">9.1</span>
+    </div>
+    <div class="card-desc">
+      NVIDIA发布Nemotron 3 Ultra，550B总参/55B激活参数的推理模型，<strong>1M token上下文</strong>窗口，开源检查点和训练数据集。内置reasoning-budget controls可调节推理预算，专为多步骤Agent执行优化吞吐和长上下文。同日Anthropic发布Partner Hub，Asana发布人机协作系统——行业重心从单模型转向Agent编排基础设施。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🌐 1M上下文</div>
+        <div class="sub-card-text">百万级上下文+推理预算控制，专为长程Agent工作负载设计</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔓 全面开源</div>
+        <div class="sub-card-text">检查点+训练数据集开放，Apache 2.0级友好许可</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：NVIDIA / Kingy AI · #开源模型 #Agent
+    </div>
+  </div>
+</section>
+
+<!-- §2 Agent与工具生态 -->
+<section class="section section-highlight" id="s4">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 2 Agent & Tool Ecosystem</span>
+    <span class="section-count">3 items</span>
+  </div>
+  <h2 class="section-title">Agent与工具生态</h2>
+  <p class="section-sub">视频生成、效率智能体与游戏CG生产革命</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">4</span>
+      <span class="card-title">xAI 发布 Grok Imagine Video 1.5，正式入局视频生成赛道</span>
+      <span class="card-score">8.8</span>
+    </div>
+    <div class="card-desc">
+      马斯克旗下xAI发布Grok Imagine Video 1.5预览版，主打<strong>图转视频</strong>，最高720P输出。上传图片+自然语言描述镜头/节奏/氛围即可生成流畅短片，支持多段拼接合成长视频、保障角色风格统一。API同步开放，开发者少量代码即可接入。OpenAI暂缓Sora节奏，xAI趁势入局。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🎬 图生视频</div>
+        <div class="sub-card-text">静态图+自然语言→流畅动态短片，多段拼接保持风格统一</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔗 API开放</div>
+        <div class="sub-card-text">开发者少量代码接入，瞄准中小团队快速集成</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：xAI / AITOP100 · #AI视频 #创作工具
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">5</span>
+      <span class="card-title">腾讯发布效率智能体工具集，WorkBuddy等20+场景Agent</span>
+      <span class="card-score">8.6</span>
+    </div>
+    <div class="card-desc">
+      6月5日腾讯云AI大会，首次系统发布"效率智能体工具集"：<strong>QClaw</strong>首创微信直连，打通文档/会议/ima/邮箱；<strong>WorkBuddy</strong>3个月迭代43版，按DAU国内最受欢迎效率Agent；<strong>CodeBuddy</strong>覆盖编码/评审/测试/运维。企业版WorkBuddy Enterprise+Agent Suite+ClawPro+ADP 4.0同步发布。汤道生透露腾讯大部分代码已由AI生成。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">💬 QClaw微信直连</div>
+        <div class="sub-card-text">本地AI助手首创微信直连模式，打通腾讯文档/会议/ima</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🏆 WorkBuddy国内DAU第一</div>
+        <div class="sub-card-text">3个月43版本迭代，按DAU已成为国内最受欢迎效率Agent</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：腾讯云AI大会 / 新浪科技 · #Agent #国内生态
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">6</span>
+      <span class="card-title">Runway 全AI生成游戏CG「50 Crowns」：1人1周完成</span>
+      <span class="card-score">8.5</span>
+    </div>
+    <div class="card-desc">
+      Runway发布短片"50 Crowns"，官方描述为<strong>全AI生成游戏CG</strong>，展示两名赏金猎人的故事，声称1人在不到1周内使用Runway工具完成。传统需小团队数周、六位数预算的工作量被压缩至个人级。Gen-4.5的运动画笔、角色一致性、物理模拟组合达到"足以替代小型工作室"水平。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🎮 1人1周游戏CG</div>
+        <div class="sub-card-text">传统小团队数周+六位数预算→单人短周期完成</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🤖 Gen-4.5驱动</div>
+        <div class="sub-card-text">运动画笔+角色一致性+物理模拟，AI视频达到生产级门槛</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：Runway X / The Agent Times · #AI视频 #游戏CG
+    </div>
+  </div>
+</section>
+
+<!-- §3 开源与产业 -->
+<section class="section" id="s7">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 3 Open Source & Industry</span>
+    <span class="section-count">2 items</span>
+  </div>
+  <h2 class="section-title">开源与产业</h2>
+  <p class="section-sub">LLM编排开源与AI视频商业化里程碑</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">7</span>
+      <span class="card-title">Hugging Face 发布开源 Workflow SDK，解决LLM编排碎片化</span>
+      <span class="card-score">8.3</span>
+    </div>
+    <div class="card-desc">
+      Hugging Face发布开源Workflow SDK，<strong>Apache 2.0</strong>许可，提供Python原生API用于链式编排LLM、数据源和函数调用。内置社区连接器兼容LangChain/CrewAI等框架，支持AWS/Azure/GCP+本地集群部署，包含工作流版本控制和错误处理。直接挑战OpenAI/Microsoft/Google的专有编排方案。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🔓 Apache 2.0</div>
+        <div class="sub-card-text">完全可审计可扩展，同时支持开源和商业LLM</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔗 消除供应商锁定</div>
+        <div class="sub-card-text">模块化架构让开发者自由组合模型构建Agent工作流</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：Hugging Face / Tech Daily Shot · #开源 #Agent框架
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">8</span>
+      <span class="card-title">可灵AI两年用户破1亿，分拆融资估值180亿美元</span>
+      <span class="card-score">8.0</span>
+    </div>
+    <div class="card-desc">
+      可灵AI发布两周年宣布全球用户数突破<strong>1亿</strong>，企业客户近5万。过去一年完成<strong>26次迭代</strong>，覆盖影视/广告/MV/游戏/电商。Kling 3.0 Omni支持4K@60fps、15秒片段、联合音视频生成。同时快手旗下可灵AI进行分拆首轮融资，投前估值<strong>180亿美元</strong>，按2027年初港股IPO节奏推进。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">📈 1亿用户</div>
+        <div class="sub-card-text">两年0→1亿，全球AI视频产品中最快增长</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">💰 180亿估值</div>
+        <div class="sub-card-text">分拆融资+2027年初港股IPO，AI视频商业化跑通</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：快手 / IT之家 · #AI视频 #商业化
+    </div>
+  </div>
+</section>
+
+<!-- Conclusion -->
+<div class="conclusion" id="conclusion">
+  <p class="conclusion-text">今日AI圈最大的叙事不再是"谁发了更强的模型"，而是AI正在加速构建自身。Anthropic用内部数据量化了这一趋势——80%代码由Claude写、任务时长4个月翻倍——同时罕见呼吁全球暂停前沿开发，这在万亿级IPO前夕尤为反常。OpenAI同日宣布Codex并入ChatGPT将Agent推向10亿用户；NVIDIA开源Nemotron 3 Ultra面向长程Agent。三条线索汇聚：AI的下半场，不是更聪明的聊天，而是能自主履职的数字工作者。</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">
+    <em>AIGC Daily Report</em><br>
+    信源：Anthropic Blog · OpenAI · NVIDIA · xAI · 腾讯 · Runway · Hugging Face · 快手
+  </div>
+  <div class="footer-right">
+    2026.06.06 · Friday<br>
+    Generated by Claw · 65 sources scanned
+  </div>
+</div>
+
+</div><!-- page -->
+</div><!-- main -->
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ScrollSpy
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const progressFill = document.getElementById('progressFill');
+const backTop = document.getElementById('backTop');
+
+function updateScrollSpy() {
+  const scrollY = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? (scrollY / docH) * 100 : 0;
+  progressFill.style.width = pct + '%';
+  backTop.classList.toggle('show', scrollY > 400);
+
+  let current = '';
+  sections.forEach(s => {
+    if (s.offsetTop - 80 <= scrollY) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('data-section') === current);
+  });
+}
+window.addEventListener('scroll', updateScrollSpy, {passive:true});
+updateScrollSpy();
+</script>
+</body>
+</html>
