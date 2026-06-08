@@ -303,7 +303,7 @@ Karpathy 在 Sequoia AI Ascent 2026 炉边谈话中提出的概念：AI 的能�
 约束条件：
 1. [硬性约束，可验证]
 2. [硬性约束，可验证]
-参考我的 Skills: [[skills/xxx.md]]
+参考我的 Skills: xxx
 如果不确定，给出 3 个选项让我选择，不要自己决定。
 ```
 
@@ -356,3 +356,14 @@ Karpathy 在 Sequoia AI Ascent 2026 炉边谈话中提出的概念：AI 的能�
 —— 小柒AI速递 · 每周一上午推送
 
 *本周长图将于今日稍晚发布，敬请关注*
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[harness-engineering]] · [[gpt-image-v2]] · [[ai-video-landscape-2026]] · [[single-agent-vs-multi-agent]] · [[codm-aigc-workflow]]
+
+---
+*返回 [[INDEX-by-type]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

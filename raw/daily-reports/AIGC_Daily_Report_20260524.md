@@ -179,3 +179,21 @@ OpenAI Codex 修复了额度消耗异常并重置所有限额；Codex 负责人�
 1. **Gemini + Canva 图层编辑**能力应立即试用，这是 AI 海报生成的关键突破
 2. **Sonnet 4.8 视觉升级**（准确率 98%+）可用于 UI/设计稿评审
 3. **GPT-5.6 去Slop** 将大幅提升 AI 生成页面的专业度，6 月发布后跟进评估
+
+
+---
+## 知识关联
+
+**AI 工具与模型**：[[gpt-image-v2]] · [[single-agent-vs-multi-agent]] · [[ai-video-landscape-2026]]
+
+**工程方法论**：[[harness-engineering]] · [[spec-driven-development]] · [[vibe-coding-vs-harness-engineering]]
+
+**CODM 工作流**：[[codm-aigc-workflow]] · [[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]] · [[constraints-as-leverage]]
+
+---
+*← 返回 [[INDEX-by-type]] | 日报索引 [[aigc-daily-report-20260409]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

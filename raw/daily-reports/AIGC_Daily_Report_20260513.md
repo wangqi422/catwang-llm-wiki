@@ -180,3 +180,21 @@ Runway 推出 Gen-5 Lite 版本，订阅价格降至标准版一半，同时整�
 2. **加大 Claude 工作流投入**：算力保障+收入增长意味着 Claude 将持续高速迭代
 3. **评估 Runway Gen-5 Lite**：性价比时代来临，单一订阅覆盖多模型适合团队采购
 4. **下周关注 Google I/O**：Gemini 新版本可能带来视频理解/生成能力突破
+
+
+---
+## 知识关联
+
+**AI 工具与模型**：[[gpt-image-v2]] · [[single-agent-vs-multi-agent]] · [[ai-video-landscape-2026]]
+
+**工程方法论**：[[harness-engineering]] · [[spec-driven-development]] · [[vibe-coding-vs-harness-engineering]]
+
+**CODM 工作流**：[[codm-aigc-workflow]] · [[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]] · [[constraints-as-leverage]]
+
+---
+*← 返回 [[INDEX-by-type]] | 日报索引 [[aigc-daily-report-20260409]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

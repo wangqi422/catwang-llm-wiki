@@ -169,3 +169,21 @@ WZM 4/17 正式停服，运营不足两年黯然退场。作为同 IP 产品，W
 
 *情报采集时间：2026-04-19 18:30 | 分析师：小柒*
 *数据来源：微博、B站、YouTube、X/Twitter、callofduty.com、EA 官方、IGN、GameInformer、TapTap、36氪、伽马数据*
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

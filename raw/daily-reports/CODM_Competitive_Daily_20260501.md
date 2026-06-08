@@ -245,3 +245,21 @@ Battlefield 6在2026年路线图中展示了极强的「长线诚意」——7�
 - CODM的赛季更新节奏（每月一次）比BF6（每2-3月一次）更快，应强化「高频更新、持续新鲜」的差异化定位
 - BF6的「经典地图回归」策略（Golmud Railway、Wake Island）证明情怀牌有效，CODM可考虑在BR模式中复刻更多经典地图（如Nuketown、Terminal等）
 - 关注BF6排位赛上线后的电竞生态发展，评估对CODM电竞用户的潜在分流
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

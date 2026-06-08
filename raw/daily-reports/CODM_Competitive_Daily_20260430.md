@@ -204,3 +204,21 @@
 - 虽然移动端难以直接复刻海战，但可关注BF6的端游内容趋势，预判CODM未来可能的内容方向
 - BF6的"大地图"概念可转化为CODM的"大战场"模式设计参考
 - 海战元素的视觉语言（舰艇、水面特效）可作为CODM未来新地图/模式的视觉参考
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

@@ -164,3 +164,21 @@ BF6 推出首个排位大逃杀模式（Ranked BR Quads），标志着端游FPS�
 **对 CODM 的启示**
 - 重大联动或赛季开启时可参考"登录即送N抽"的简单回流钩子
 - 评测团/主播矩阵的预热模式可复制到CODM S5预热期
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

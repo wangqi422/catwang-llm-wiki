@@ -164,3 +164,21 @@
 **对 CODM 的启示**
 - MonsterVerse联动设计「第一周怪兽活动→第二周终极BOSS挑战」双波节奏
 - 高价值稀缺道具作为「第二波福利」制造回流高峰
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

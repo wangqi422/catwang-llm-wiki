@@ -192,3 +192,21 @@
 - 字节跳动的入选意味着TikTok生态AI化将加速，游戏出海素材的AI生成需求将进一步爆发
 - AI安全话题升温，宣发素材需注意品牌调性与合规表述
 - AI编程工具的成熟为内部自动化素材生成提供了更多可能，建议评估Claude Code等工具在宣发工作流中的应用
+
+
+---
+## 知识关联
+
+**AI 工具与模型**：[[gpt-image-v2]] · [[single-agent-vs-multi-agent]] · [[ai-video-landscape-2026]]
+
+**工程方法论**：[[harness-engineering]] · [[spec-driven-development]] · [[vibe-coding-vs-harness-engineering]]
+
+**CODM 工作流**：[[codm-aigc-workflow]] · [[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]] · [[constraints-as-leverage]]
+
+---
+*← 返回 [[INDEX-by-type]] | 日报索引 [[aigc-daily-report-20260409]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

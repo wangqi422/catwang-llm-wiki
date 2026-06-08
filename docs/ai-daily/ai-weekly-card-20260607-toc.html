@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #10 · 2026.06.01–06.07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Back to Archive Button (强制元素) ═══════ */
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Connection Surface ═══════ */
+.connection-box {
+  background: linear-gradient(135deg, var(--paper-2) 0%, var(--paper-3) 100%);
+  border-radius: 20px; padding: 24px 28px; margin-bottom: 28px;
+  border: 1px dashed var(--border-strong);
+}
+.connection-box h4 {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 16px; color: var(--ink-soft); margin-bottom: 12px;
+}
+.connection-item {
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px;
+  line-height: 1.8; color: var(--ink-soft); margin-bottom: 8px;
+}
+.connection-item strong { color: var(--ink); font-weight: 500; }
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+  .back-archive-btn { right: 16px !important; top: 12px !important; font-size: 12px !important; padding: 7px 14px !important; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- 强制返回归档按钮 -->
+<a href="index.html" class="back-archive-btn">&#8592; 返回归档</a>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.06.01 – 06.07 &middot; Issue No. 10</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>&#26631;&#39064; &amp; &#27010;&#35272;</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>&#26412;&#21608;&#32467;&#35770;</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&#167;1</span>&#23454;&#29992;&#24037;&#20855;&#31665;</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>&#21160;&#24577;&#24037;&#20316;&#27969;</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>MiniMax M3</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>DeepSeek V4</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Midjourney V7</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&#167;2</span>&#39640;&#25928;&#24037;&#20316;&#27969;</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Claude Code 10x</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Karpathy Wiki</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&#167;3</span>&#26041;&#27861;&#35770;&#19982; Prompt</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Tool Use Patterns</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>OpenAI &#36827;&#21270;&#21490;</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>Prompt &#24037;&#31243;</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&#167;4</span>&#25512;&#33616;&#19978;&#25163;&#39034;&#24207;</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 10</div>
+    <h1>AI <em>&#24178;&#36135;</em>&#21608;&#25253;</h1>
+    <p class="lead">Agent &#24037;&#20316;&#27969;&#22823;&#29190;&#21457;&#21608; + &#22269;&#20135;&#27169;&#22411;&#36830;&#29615;&#21457; &middot; 9 &#26465;&#31435;&#21051;&#33021;&#29992;&#30340;&#24178;&#36135;</p>
+    <div class="header-meta">
+      <span class="meta-tag">&#25195;&#25551;&#33539;&#22260; 65 &#20449;&#28304;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">&#31934;&#36873; 9 &#26465;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 &#22823;&#26495;&#22359;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.01 – 06.07</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      &#36825;&#21608;&#26159;&#21517;&#21103;&#20854;&#23454;&#30340;&#12300;Agent &#24037;&#20316;&#27969;&#21608;&#12301;&#65306;Claude Code &#21160;&#24577;&#24037;&#20316;&#27969;&#27491;&#24335;&#19978;&#32447;&#65292;&#19968;&#27425;&#24615;&#21487;&#35843;&#24230;&#25968;&#30334;&#20010;&#23376; Agent &#24182;&#34892;&#24037;&#20316;&#65307;MiniMax M3 &#21457;&#24067;&#65292;&#30334;&#19975;&#19978;&#19979;&#25991; + &#21407;&#29983;&#22810;&#27169;&#24577; + &#32534;&#31243;&#33021;&#21147;&#36229;&#36234; GPT-5.5&#65307;DeepSeek V4 &#31995;&#21015;&#20840;&#38754;&#24320;&#28304;&#65292;1M &#19978;&#19979;&#25991;&#25104;&#20026;&#26631;&#37197;&#12290;
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Claude Code</div>
+        <div class="thesis-card-body"><b>&#21160;&#24577;&#24037;&#20316;&#27969;</b>&#19978;&#32447;&#65306;&#19968;&#20010; AI &#25351;&#25381;&#25968;&#30334;&#20010; AI &#24182;&#34892;&#24178;&#27963;&#65292;&#25903;&#25345;&#26029;&#28857;&#24674;&#22797;&#19982;&#23545;&#25239;&#24615;&#23457;&#26597;</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">MiniMax</div>
+        <div class="thesis-card-body"><b>M3 &#27169;&#22411;</b>&#21457;&#24067;&#65306;&#22269;&#20135;&#39318;&#20010; Frontier &#33021;&#21147;&#24320;&#28304;&#27169;&#22411;&#65292;1M &#19978;&#19979;&#25991; + &#21407;&#29983;&#22810;&#27169;&#24577; + &#32534;&#31243; SOTA</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">DeepSeek</div>
+        <div class="thesis-card-body"><b>V4 &#31995;&#21015;</b>&#24320;&#28304;&#65306;1M &#19978;&#19979;&#25991;&#25104;&#26631;&#37197;&#65292;Flash &#29256;&#36755;&#20986;&#20215; <b>2&#20803;/MT</b>&#65292;&#26119;&#33150;&#20840;&#31995;&#21015;&#36866;&#37197;</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Midjourney</div>
+        <div class="thesis-card-body"><b>V7 &#27491;&#24335;&#25512;&#20986;</b>&#65306;&#39318;&#27425;&#25903;&#25345;&#35270;&#39057;&#29983;&#25104;&#65288;21 &#31186;&#65289;&#65292;Omni-Reference &#22810;&#23545;&#35937;&#19968;&#33268;&#24615;&#25511;&#21046;</div>
+      </div>
+    </div>
+
+    <!-- Vault Connection Surface -->
+    <div class="connection-box">
+      <h4>&#128161; &#26412;&#21608;&#30693;&#35782;&#24211;&#36830;&#25509;&#21457;&#29616;&#65288;weekly-connections-2026-W23&#65289;</h4>
+      <div class="connection-item"><strong>&#128279; PRINCIPLE</strong>&#65306;constraints-as-leverage &#19982; character-consistency-aigc &#20849;&#20139;&#12300;&#32422;&#26463;&#21363;&#26464;&#26438;&#12301;&#21407;&#29702;</div>
+      <div class="connection-item"><strong>&#128279; PRINCIPLE</strong>&#65306;agent-stack-mcp-a2a &#19982; multi-agent-engineering &#21487;&#25972;&#21512;&#20026; Agent &#26550;&#26500;&#20998;&#23618;</div>
+      <div class="connection-item"><strong>&#128278; EVIDENCE</strong>&#65306;eye-realism-prompt-technique &#21487;&#20316;&#20026; urban-character-prompt &#30340;&#23376;&#29615;&#33410;</div>
+      <div class="connection-item"><strong>&#127744; PATTERN</strong>&#65306;INDEX-by-type / weekly-audit / CHIEF &#19977;&#32773;&#20849;&#21516;&#26500;&#25104; vault &#20581;&#24247;&#24230;&#30417;&#25511;&#20307;&#31995;</div>
+    </div>
+
+    <div class="thesis-tagline">
+      <p>&#128161; &#19968;&#21477;&#35805;&#24635;&#32467;&#65306;Agent &#19981;&#20877;&#26159;&#27010;&#24565;&#65292;&#23427;&#21464;&#25104;&#20102;&#21487;&#32534;&#25490;&#30340;&#24037;&#20316;&#27969;&#65307;&#22269;&#20135;&#27169;&#22411;&#25226; 1M &#19978;&#19979;&#25991;&#20174;&#12300;&#21152;&#20215;&#21151;&#33021;&#12301;&#21464;&#25104;&#20102;&#12300;&#26631;&#37197;&#24213;&#24231;&#12301;&#12290;</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">&#128736;&#65039; &#23454;&#29992;&#24037;&#20855;&#31665;</div>
+    <div class="section-sub">4 &#20010;&#26412;&#21608;&#31435;&#21051;&#33021;&#35797;&#29992;&#30340; AI &#24037;&#20855;</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Code &#21160;&#24577;&#24037;&#20316;&#27969; &middot; &#19968;&#20010; AI &#25351;&#25381;&#25968;&#30334;&#20010; AI &#24178;&#27963;</span>
+        <span class="card-tag">&#27491;&#24335;&#19978;&#32447;</span>
+      </div>
+      <div class="card-desc">
+        Anthropic &#27491;&#24335;&#25512;&#20986; <strong>Dynamic Workflows</strong>&#65292;&#35753; Claude Code &#33021;&#22815;&#32534;&#20889; JavaScript &#35843;&#24230;&#33050;&#26412;&#65292;&#21516;&#26102;&#21551;&#21160;&#25968;&#21313;&#33267;&#25968;&#30334;&#20010;&#24182;&#34892;&#23376; Agent &#20998;&#22836;&#24178;&#27963;&#12289;&#20114;&#30456;&#23457;&#26597;&#65292;&#26368;&#21518;&#20132;&#20184;&#39564;&#35777;&#36807;&#30340;&#32467;&#26524;&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">&#26680;&#24515;&#33021;&#21147;</div><div class="sub-card-body">&#25159;&#20986;&#25193;&#23637; + &#33258;&#25105;&#26816;&#39564; + &#26029;&#28857;&#24674;&#22797; + &#32534;&#25490;&#22797;&#29992;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#35302;&#21457;&#26041;&#24335;</div><div class="sub-card-body">&#25552;&#31034;&#35789;&#20013;&#21253;&#21547; &quot;workflow&quot; &#25110; /deep-research</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">Claude Code CLI / Desktop / VS Code &#25193;&#23637;</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI / Claude Code &#22242;&#38431; &middot; code.claude.com</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">MiniMax M3 &middot; &#22269;&#20135;&#39318;&#20010; Frontier &#33021;&#21147;&#24320;&#28304;&#27169;&#22411;</span>
+        <span class="card-tag">&#38480;&#26102; 5 &#25240;</span>
+      </div>
+      <div class="card-desc">
+        MiniMax &#21457;&#24067; M3 &#27169;&#22411;&#65292;&#25104;&#20026;&#22269;&#20869;&#39318;&#20010;&#21516;&#26102;&#20855;&#22791;&#12300;&#21069;&#27839;&#32534;&#31243; + &#30334;&#19975;&#19978;&#19979;&#25991; + &#21407;&#29983;&#22810;&#27169;&#24577;&#12301;&#19977;&#39033;&#33021;&#21147;&#30340;&#24320;&#28304;&#27169;&#22411;&#12290;SWE-Bench Pro &#36798; <strong>59.0%</strong>&#65288;&#36229;&#36234; GPT-5.5&#65289;&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#19978;&#19979;&#25991;&#31383;&#21475;</div><div class="sub-card-body">&#26368;&#39640; <strong>1M tokens</strong>&#65292;&#20445;&#38556; 512K &#21487;&#29992;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#38480;&#26102;&#20215;&#26684;</div><div class="sub-card-body">&#36755;&#20837; 2.1&#20803;/MT &#20008; &#36755;&#20986; 8.4&#20803;/MT</div></div>
+      </div>
+      <div class="source">&compfn; @MiniMax_AI &middot; minimax.io</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">DeepSeek V4 &#31995;&#21015; &middot; 1M &#19978;&#19979;&#25991;&#25104;&#20026;&#26631;&#37197;</span>
+        <span class="card-tag">MIT &#24320;&#28304;</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek &#21457;&#24067; V4-PRO &#21644; V4-Flash&#65292;&#25903;&#25345; 100 &#19975; token &#19978;&#19979;&#25991;&#65292;MIT &#21327;&#35758;&#23436;&#20840;&#24320;&#28304;&#12290;V4-Flash &#36755;&#20986;&#20215;&#20165; <strong>2&#20803;/MT</strong>&#65292;&#19982; GPT-5.5 &#30340; 200+ &#20803;/MT &#24046;&#36317;&#36229; 100 &#20493;&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">V4-Flash</div><div class="sub-card-body">&#36755;&#20837; 1&#20803;/MT &#20008; &#36755;&#20986; 2&#20803;/MT</div></div>
+        <div class="sub-card"><div class="sub-card-title">V4-Pro</div><div class="sub-card-body">&#36755;&#20837; 12&#20803;/MT &#20008; &#36755;&#20986; 24&#20803;/MT</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#30828;&#20214;&#36866;&#37197;</div><div class="sub-card-body">&#26119;&#33150;&#20840;&#31995;&#21015; + &#23506;&#27494;&#32426; Day 0 &#36866;&#37197;</div></div>
+      </div>
+      <div class="source">&compfn; @deepseek_ai &middot; deepseek.com</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Midjourney V7 &middot; &#35270;&#39057;&#29983;&#25104; + Omni-Reference &#19978;&#32447;</span>
+        <span class="card-tag">&#37325;&#30917;&#21457;&#24067;</span>
+      </div>
+      <div class="card-desc">
+        Midjourney V7 &#27491;&#24335;&#25512;&#20986;&#65292;&#39318;&#27425;&#25903;&#25345;&#35270;&#39057;&#29983;&#25104;&#65288;&#26368;&#38271; 21 &#31186;&#65289;&#65292;&#24182;&#24102;&#26469; Omni-Reference &#20840;&#26032;&#21442;&#32771;&#26426;&#21046;&#65292;&#25903;&#25345;&#22810;&#23545;&#35937;&#19968;&#33268;&#24615;&#25511;&#21046;&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#35270;&#39057;&#29983;&#25104;</div><div class="sub-card-body">&#26368;&#38271; 21 &#31186;&#65292;&#25903;&#25345; FPV &#26080;&#20154;&#26426;&#12289;&#36712;&#36947;&#29615;&#32469;&#31561;&#36816;&#38236;</div></div>
+        <div class="sub-card"><div class="sub-card-title">Omni-Reference</div><div class="sub-card-body">--oref &#21442;&#32771;&#22270; + --ow &#26435;&#37325;&#25511;&#21046;&#65288;25-400&#65289;</div></div>
+      </div>
+      <div class="source">&compfn; @midjourney &middot; midjourney.com</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#9889; &#39640;&#25928;&#24037;&#20316;&#27969;</div>
+    <div class="section-sub">2 &#22871;&#25913;&#21464;&#26085;&#24120;&#30340;&#24037;&#20316;&#26041;&#24335;</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Claude Code 10x &#29983;&#20135;&#21147;&#23436;&#20840;&#25351;&#21335;</span>
+        <span class="card-tag">&#39640;&#38454;&#23454;&#36341;</span>
+      </div>
+      <div class="card-desc">
+        &#31995;&#32479;&#21270;&#23454;&#36341;&#35206;&#30422;&#19978;&#19979;&#25991;&#24037;&#31243;&#12289;Plan Mode&#12289;&#22810; Agent &#24182;&#34892;&#30340;&#23436;&#25972;&#25216;&#27861;&#12290;<strong>&#26680;&#24515;&#24515;&#27861;</strong>&#65306;&#20320;&#26159;&#19978;&#19979;&#25991;&#24037;&#31243;&#24072;&#65292;&#19981;&#26159; Prompt &#24037;&#31243;&#24072;&#12290;
+      </div>
+      <div class="code-block"><span class="cmt"># Subagent &#26368;&#20339;&#23454;&#36341;</span>
+<span class="cmt"># &#22312;&#29420;&#31435; Session &#37324;&#25628;&#32034;&#25972;&#20010; src/ &#30446;&#24405;&#65306;</span>
+- &#25214;&#20986;&#25152;&#26377;&#20351;&#29992; createUser() &#36825;&#20010;&#24050;&#24223;&#24323;&#20989;&#25968;&#30340;&#22320;&#26041;
+- &#21482;&#36820;&#22238;&#25991;&#20214;&#36335;&#24452;&#21644;&#34892;&#21495;&#65292;&#19981;&#35201;&#25226;&#25991;&#20214;&#20869;&#23481;&#24102;&#22238;&#26469;</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">CLAUDE.md &#20998;&#23618;</div><div class="sub-card-body">&#20840;&#23616; &rarr; &#39033;&#30446;&#32423; &rarr; &#27169;&#22359;&#32423;&#65292;&#35268;&#21017;&#36880;&#23618;&#32454;&#21270;</div></div>
+        <div class="sub-card"><div class="sub-card-title">Session &#21355;&#29983;</div><div class="sub-card-body">&#27599;&#20010;&#20219;&#21153;&#24320;&#26032; Session&#65292;/clear &#28165;&#31354;&#19978;&#19979;&#25991;</div></div>
+      </div>
+      <div class="source">&compfn; Claude Code &#31038;&#21306; / @claudecode</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Karpathy LLM Wiki &#24037;&#20316;&#27969; &middot; &#32456;&#36523;&#31532;&#20108;&#22823;&#33041;</span>
+        <span class="card-tag">&#30693;&#35782;&#31649;&#29702;</span>
+      </div>
+      <div class="card-desc">
+        Andrej Karpathy &#20998;&#20139;&#30340; LLM &#20010;&#20154;&#30693;&#35782;&#24211;&#24037;&#20316;&#27969;&#21047;&#23631;&#12290;&#26680;&#24515;&#26159;&#29992;&#12300;&#25991;&#20214;&#22841; + &#25991;&#26412;&#25991;&#20214; + AI&#12301;&#25645;&#24314;&#32456;&#36523;&#31532;&#20108;&#22823;&#33041;&#12290;
+      </div>
+      <div class="code-block">my-knowledge-base/
+&#9500;&#9472;&#9472; raw/          <span class="cmt"># &#21407;&#22987;&#26448;&#26009;&#65288;&#21482;&#35835;&#19981;&#25913;&#65289;</span>
+&#9500;&#9472;&#9472; wiki/         <span class="cmt"># AI &#33258;&#21160;&#29983;&#25104;&#30340;&#32467;&#26500;&#21270;&#32500;&#22522;</span>
+&#9500;&#9472;&#9472; outputs/      <span class="cmt"># AI &#29983;&#25104;&#30340;&#31572;&#26696;/&#25253;&#21578;</span>
+&#9492;&#9472;&#9472; CLAUDE.md    <span class="cmt"># AI &#30340;&quot;&#24037;&#20316;&#25163;&#20876;&quot;</span></div>
+      <div class="source">&compfn; @karpathy</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论与 Prompt -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#129504; &#26041;&#27861;&#35770;&#19982; Prompt</div>
+    <div class="section-sub">3 &#22871;&#25552;&#21319; AI &#21327;&#20316;&#36136;&#37327;&#30340;&#26041;&#27861;&#35770;</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Tool Use Prompting Patterns &middot; &#21487;&#38752;&#24037;&#20855;&#35843;&#29992;&#30340; 5 &#20010;&#27169;&#24335;</span>
+        <span class="card-tag">Prompt &#24037;&#31243;</span>
+      </div>
+      <div class="card-desc">
+        &#31995;&#32479;&#24615;&#24635;&#32467;&#24037;&#20855;&#35843;&#29992;&#20013;&#26368;&#24120;&#35265;&#30340; 5 &#31181;&#22833;&#36133;&#27169;&#24335;&#19982;&#23545;&#31574;&#12290;<strong>&#22909;&#24037;&#20855;&#25551;&#36848;&#30340; 5 &#35201;&#32032;</strong>&#65306;Name / Purpose / Parameters / Example / Negative&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">5 &#31181;&#22833;&#36133;&#27169;&#24335;</div><div class="sub-card-body">Wrong tool / No tool / Malformed args / Infinite loop / Hallucination</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#20851;&#38190;&#35201;&#28857;</div><div class="sub-card-body">Negative &#26126;&#30830;&#35828;&#26126;&#12300;&#19981;&#20570;&#20160;&#20040;&#12301;&#65292;&#38450;&#27490;&#35823;&#29992;</div></div>
+      </div>
+      <div class="source">&compfn; SurePrompts / @sureprompts</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">OpenAI &#24037;&#20855;&#35843;&#29992;&#36827;&#21270;&#21490; &middot; &#20174; Prompt &#40657;&#39764;&#27861;&#21040;&#21407;&#29983;&#25903;&#25345;</span>
+        <span class="card-tag">&#25216;&#26415;&#36827;&#21270;</span>
+      </div>
+      <div class="card-desc">
+        &#22238;&#39038; OpenAI &#24037;&#20855;&#35843;&#29992;&#21644; JSON &#36755;&#20986;&#30340;&#19977;&#27573;&#36827;&#21270;&#65292;&#24110;&#21161;&#24320;&#21457;&#32773;&#36873;&#25321;&#27491;&#30830;&#30340;&#25216;&#26415;&#26041;&#26696;&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">&#26089;&#26399; (~2023)</div><div class="sub-card-body">Prompt &#25551;&#36848; + &#25991;&#26412;&#35299;&#26512;&#65292;&#32463;&#24120;&#20986;&#38169;</div></div>
+        <div class="sub-card"><div class="sub-card-title">JSON Mode</div><div class="sub-card-body">&#20445;&#35777;&#21512;&#27861; JSON&#65292;&#20294; Schema &#19981;&#20445;&#35777;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#29616;&#22312; (2024.08+)</div><div class="sub-card-body">&#21407;&#29983; tools + strict: true&#65292;100% &#31526;&#21512; Schema</div></div>
+      </div>
+      <div class="source">&compfn; OpenAI &#23448;&#26041;&#25991;&#26723; / &#31038;&#21306;&#23454;&#36341;</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">Claude Code Prompt &#24037;&#31243; &middot; 7 &#23618;&#26550;&#26500;</span>
+        <span class="card-tag">&#31995;&#32479;&#21270;&#26041;&#27861;</span>
+      </div>
+      <div class="card-desc">
+        &#20174;&#26085;&#24120;&#25216;&#24039;&#21040; CLAUDE.md&#12289;SKILL.md &#30340;&#20998;&#23618;&#26550;&#26500;&#12290;<strong>&#39564;&#25910;&#39537;&#21160;&#24320;&#21457;</strong>&#65306;&#32473; Claude &#39564;&#35777;&#26631;&#20934;&#65292;&#32780;&#19981;&#21482;&#26159;&#20219;&#21153;&#25551;&#36848;&#12290;
+      </div>
+      <div class="code-block"><span class="cmt"># 7 &#23618;&#26550;&#26500;</span>
+L1: CLAUDE.md      <span class="cmt"># &#35268;&#21017;&#21644;&#32422;&#26463;</span>
+L2: SKILL.md       <span class="cmt"># &#27169;&#26495;&#21644;&#26684;&#24335;</span>
+L3: &#20250;&#35805; Prompt    <span class="cmt"># &#20855;&#20307;&#20219;&#21153;&#21644;&#39564;&#25910;&#26631;&#20934;</span>
+L4: Hooks          <span class="cmt"># &#33258;&#21160;&#21270;&#35302;&#21457;&#26816;&#26597;</span>
+L5: Agent          <span class="cmt"># &#23376; Agent &#32844;&#36131;&#36793;&#30028;</span>
+L6: Subagent       <span class="cmt"># &#29420;&#31435;&#19978;&#19979;&#25991;&#20570;&#30740;&#31350;</span>
+L7: Multi-Agent    <span class="cmt"># &#24182;&#34892;&#20219;&#21153;&#20998;&#37197;</span></div>
+      <div class="source">&compfn; LoreAI / @loreai</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐上手顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">6 items</span>
+    </div>
+    <div class="section-title">&#128204; &#25512;&#33616;&#19978;&#25163;&#39034;&#24207;</div>
+    <div class="section-sub">&#25353;&#12300;&#23398;&#20064;&#25104;&#26412; &times; &#20215;&#20540;&#25910;&#30410;&#12301;&#25490;&#24207;</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-num">1</span>
+        <span class="gallery-title">Claude Code &#21160;&#24577;&#24037;&#20316;&#27969;</span>
+        <span class="gallery-desc">&#39640;&#20215;&#20540;&#20008;&#20013;&#25104;&#26412; &rarr; &#31435;&#21363;&#35797;&#29992; /deep-research</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">2</span>
+        <span class="gallery-title">Karpathy Wiki &#24037;&#20316;&#27969;</span>
+        <span class="gallery-desc">&#39640;&#20215;&#20540;&#20008;&#20302;&#25104;&#26412; &rarr; &#20170;&#22825;&#23601;&#33021;&#25645;&#36215;&#26469;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">3</span>
+        <span class="gallery-title">Tool Use Prompting</span>
+        <span class="gallery-desc">&#20013;&#20215;&#20540;&#20008;&#20302;&#25104;&#26412; &rarr; &#20248;&#21270;&#29616;&#26377;&#24037;&#20855;&#35843;&#29992;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">4</span>
+        <span class="gallery-title">MiniMax M3 API</span>
+        <span class="gallery-desc">&#39640;&#20215;&#20540;&#20008;&#20013;&#25104;&#26412; &rarr; &#38480;&#26102; 5 &#25240;&#65292;&#26367;&#25442;&#29616;&#26377;&#27169;&#22411;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">5</span>
+        <span class="gallery-title">DeepSeek V4-Flash</span>
+        <span class="gallery-desc">&#39640;&#20215;&#20540;&#20008;&#20302;&#25104;&#26412; &rarr; 1&#20803;/MT &#20215;&#26684;&#65292;&#30452;&#25509;&#26367;&#25442;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">6</span>
+        <span class="gallery-title">Midjourney V7</span>
+        <span class="gallery-desc">&#20013;&#20215;&#20540;&#20008;&#39640;&#25104;&#26412; &rarr; &#38656;&#35746;&#38405;&#65292;&#36866;&#21512;&#35270;&#35273;&#21019;&#20316;&#32773;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">AI &#24178;&#36135;&#21608;&#25253; &middot; 2026.06.01 – 06.07<br>&#26412;&#26399;&#20449;&#28304;&#32479;&#35745;&#65306;65 &#20449;&#28304; / 9 &#26465;&#20837;&#36873;</div>
+    <div class="footer-right">&#23567;&#26690;AI&#36895;&#36882; &middot; &#27599;&#21608;&#19968;&#19978;&#21320;&#25512;&#36865;</div>
+  </div>
+
+</div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressFill').style.width = scrolled + '%';
+  
+  // Back to top visibility
+  const btn = document.getElementById('backToTop');
+  if (winScroll > 300) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ScrollSpy for sidebar
+const sections = document.querySelectorAll('.section, .header, .thesis');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (scrollY >= sectionTop - 100) current = section.getAttribute('id');
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -29,3 +29,21 @@
 1. **三角洲×古墓丽影联动视觉**：劳拉"持枪又美又飒"的形象处理+30周年纪念包装，IP联动海报的经典角色现代化演绎手法值得参考——如何在保留原IP辨识度的同时融入射击游戏视觉语言
 2. **暗区突围×闪魂实体收藏卡**：游戏IP跨界实体周边的视觉设计——角色卡面+枪械涂装的包装设计，"黑卡蒂刺破硝烟"的暗黑美学文案+视觉调性，跨界营销新思路
 3. **CODM"赛博养猫"萌系营销**：射击游戏做反差萌营销的参考案例，猫系武器皮肤的IP化视觉包装，打破品类刻板印象的创意方向
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

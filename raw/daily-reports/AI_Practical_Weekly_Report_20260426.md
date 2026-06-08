@@ -151,7 +151,7 @@
 2. 生成摘要 → wiki/summaries/[title].md
 3. 提炼知识页 → wiki/[slug].md（扁平、带 frontmatter）
 4. 更新 index.md 和 log.md
-5. 添加 [[wikilinks]] 双向交叉引用
+5. 添加 wikilinks 双向交叉引用
 
 # 原则
 - 积累而非检索
@@ -268,3 +268,14 @@ style of Denis Villeneuve
 
 AI 干货周报 · 2026.04.20 – 04.26
 —— 小柒AI速递 · 每周一上午推送
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[harness-engineering]] · [[gpt-image-v2]] · [[ai-video-landscape-2026]] · [[single-agent-vs-multi-agent]] · [[codm-aigc-workflow]]
+
+---
+*返回 [[INDEX-by-type]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

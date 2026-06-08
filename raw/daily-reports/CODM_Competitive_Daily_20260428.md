@@ -210,3 +210,21 @@
 - 大版本宣发应拆解为**多个独立话题点**，按「版本预告 → 明星/IP联动官宣 → 核心玩法上线 → 福利高峰」的节奏分阶段释放
 - 每个阶段之间不超过3天，保持社区热度的连续性
 - 在B站、抖音、微博分别定制不同形式的物料（B站长视频、抖音短视频、微博图文），最大化覆盖
+
+
+---
+## 知识关联
+
+**竞品分析**：[[codm-competitive-daily-20260413]] · [[codm-competitive-daily-20260414]]
+
+**CODM 核心**：[[codm-aigc-workflow]] · [[codm-asset-pipeline]] · [[codm-vfx-system]] · [[2026-05-09-codm-project-resources]]
+
+**IP 联动 & 活动**：[[ai-campaign-prototyping]] · [[traditional-vs-ai-campaign-workflow]] · [[2026-05-13-gucci-crocs-campaign-gpt-v2]]
+
+**内容方法论**：[[content-creation-methodology]] · [[content-rhythm]]
+
+---
+*← 返回 [[INDEX-by-type]] | 竞品分析 [[codm-competitive-daily-20260413]]*
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

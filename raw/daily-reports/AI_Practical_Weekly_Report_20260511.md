@@ -240,3 +240,19 @@
 
 AI 干货周报 · 2026.05.05 – 05.11  
 —— 小柒AI速递 · 每周一上午推送
+
+
+---
+## 知识关联
+
+**AI 工程实践**：[[harness-engineering]] · [[spec-driven-development]] · [[vibe-coding-vs-harness-engineering]] · [[2026-04-09-harness-engineering-practice]]
+
+**工具与模型**：[[gpt-image-v2]] · [[ai-video-landscape-2026]] · [[single-agent-vs-multi-agent]]
+
+**CODM 应用**：[[codm-aigc-workflow]] · [[ai-campaign-prototyping]]
+
+---
+*← 返回 [[INDEX-by-type]]*
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

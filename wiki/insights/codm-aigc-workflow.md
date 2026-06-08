@@ -1,25 +1,25 @@
 ---
-title: "CODM AIGC Workflow — 2026 Integrated Strategy"
+title: CODM AIGC Workflow — 2026 Integrated Strategy
 type: insight
-created: "2026-04-10"
-updated: "2026-04-15"
-frozen_from: "codm-aigc-workflow-snapshot-20260413.md"
+capture_type: idea
+created: 2026-04-10
+updated: 2026-04-15
+frozen_from: codm-aigc-workflow-snapshot-20260413.md
 sources:
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260409.md]]"
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260411.md]]"
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260412.md]]"
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260413.md]]"
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260414.md]]"
-  - "[[raw/daily-reports/AIGC_Daily_Report_20260415.md]]"
-  - "[[raw/work-docs/codm-visual-style-text.md]]"
-  - "[[raw/daily-reports/CODM_Competitive_Daily_20260413.md]]"
-  - "[[raw/daily-reports/CODM_Competitive_Daily_20260414.md]]"
-  - "[[raw/daily-reports/CODM_Competitive_Daily_20260416.md]]"
+  - "[[AIGC_Daily_Report_20260409]]"
+  - "[[AIGC_Daily_Report_20260411]]"
+  - "[[AIGC_Daily_Report_20260412]]"
+  - "[[AIGC_Daily_Report_20260413]]"
+  - "[[AIGC_Daily_Report_20260414]]"
+  - "[[AIGC_Daily_Report_20260415]]"
+  - "[[codm-visual-style-text]]"
+  - "[[CODM_Competitive_Daily_20260413]]"
+  - "[[CODM_Competitive_Daily_20260414]]"
+  - "[[CODM_Competitive_Daily_20260416]]"
 tags:
   - codm
   - aigc
   - game-art
-
 ---
 
 # CODM AIGC Workflow — 2026 Integrated Strategy
@@ -107,10 +107,18 @@ tags:
 
 ## Sources
 
-- [[raw/daily-reports/AIGC_Daily_Report_20260409.md]]
-- [[raw/daily-reports/AIGC_Daily_Report_20260411.md]]
-- [[raw/daily-reports/AIGC_Daily_Report_20260412.md]]
-- [[raw/daily-reports/AIGC_Daily_Report_20260413.md]]
-- [[raw/daily-reports/AIGC_Daily_Report_20260414.md]]
-- [[raw/daily-reports/AIGC_Daily_Report_20260415.md]]
-- [[raw/daily-reports/CODM_Competitive_Daily_20260413.md]]
+- [[AIGC_Daily_Report_20260409]]
+- [[AIGC_Daily_Report_20260411]]
+- [[AIGC_Daily_Report_20260412]]
+- [[AIGC_Daily_Report_20260413]]
+- [[AIGC_Daily_Report_20260414]]
+- [[AIGC_Daily_Report_20260415]]
+- [[CODM_Competitive_Daily_20260413]]
+
+---
+## 引用此页的日报
+
+[[AIGC_Daily_Report_20260409]] · [[AIGC_Daily_Report_20260411]] · [[AIGC_Daily_Report_20260412]] · [[AIGC_Daily_Report_20260413]] · [[AIGC_Daily_Report_20260414]] · [[AIGC_Daily_Report_20260415]] · [[AIGC_Daily_Report_20260416]] · [[AIGC_Daily_Report_20260417]] · [[AIGC_Daily_Report_20260418]] · [[AIGC_Daily_Report_20260419]] · *(共68篇)*
+
+<!-- 反向引用 -->
+[[darwin]]
