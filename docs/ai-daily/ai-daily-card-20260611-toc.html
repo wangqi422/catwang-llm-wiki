@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.06.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+.sidebar-back {
+  display:block; margin:20px 24px 0; padding:10px 16px; border-radius:8px;
+  background:rgba(255,255,255,0.06); color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; text-align:center;
+  transition:all 0.2s;
+}
+.sidebar-back:hover { background:rgba(214,221,99,0.15); color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { display:inline-block; font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); margin-left:8px; }
+
+/* Sub-cards (4-color rotation) */
+.sub-card { border-radius:16px; padding:18px 22px; margin-bottom:12px; }
+.sub-card:nth-child(4n+1) { background:var(--pink); }
+.sub-card:nth-child(4n+2) { background:var(--lemon); }
+.sub-card:nth-child(4n+3) { background:var(--blush); }
+.sub-card:nth-child(4n+4) { background:var(--sage); }
+.sub-card-title { font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+.sub-card-text { font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:300; line-height:1.7; color:var(--ink-soft); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Drop-cap conclusion */
+.conclusion { margin-top:32px; scroll-margin-top:32px; }
+.conclusion-text { font-family:"Noto Serif SC","Cormorant Garamond",serif; font-size:17px; line-height:2; color:var(--ink); font-weight:400; }
+.conclusion-text::first-letter { font-family:"Cormorant Garamond",serif; font-size:72px; float:left; line-height:0.8; margin-right:8px; margin-top:6px; font-weight:500; }
+
+/* Footer */
+.footer {
+  margin-top:48px; padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:13px; color:var(--ink-soft); line-height:1.6; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:11px; color:var(--ink-faint); text-align:right; line-height:1.5; }
+
+/* Back-to-top */
+.back-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px; border-radius:50%;
+  background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer; opacity:0; transition:opacity 0.3s; z-index:200; border:none;
+  box-shadow:0 2px 12px rgba(42,36,27,0.18);
+}
+.back-top.show { opacity:1; }
+
+/* Progress bar */
+.progress-bar {
+  position:fixed; top:0; left:var(--sidebar-w); right:0; height:3px; z-index:300;
+  background:transparent;
+}
+.progress-bar-fill {
+  height:100%; width:0; background:linear-gradient(90deg,var(--pink),var(--lemon),var(--sage));
+  transition:width 0.1s;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:32px 20px 40px; }
+  .header h1 { font-size:38px; }
+  .section-highlight { margin-left:-20px; margin-right:-20px; padding:32px 20px; }
+  .hamburger { display:flex !important; }
+}
+.hamburger {
+  display:none; position:fixed; top:16px; left:16px; z-index:400;
+  width:40px; height:40px; border-radius:8px; background:var(--ink);
+  align-items:center; justify-content:center; cursor:pointer; border:none;
+}
+.hamburger span { display:block; width:20px; height:2px; background:var(--paper); margin:3px 0; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<button class="hamburger" id="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+  <span></span><span></span><span></span>
+</button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AIGC Daily</div>
+    <h1>日报 · <em>2026.06.11</em></h1>
+    <div class="sidebar-meta">Wednesday · Vol.0611</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Thesis</div>
+    <a class="nav-link active" href="#thesis" data-section="thesis">总览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 1 重大发布</div>
+    <a class="nav-link" href="#s1" data-section="s1"><span class="nav-num">1.</span> Anthropic Fable 5</a>
+    <a class="nav-link" href="#s2" data-section="s2"><span class="nav-num">2.</span> OpenAI 申请IPO</a>
+    <a class="nav-link" href="#s3" data-section="s3"><span class="nav-num">3.</span> 智谱GLM-5开源</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 2 AI创作与工具</div>
+    <a class="nav-link" href="#s4" data-section="s4"><span class="nav-num">4.</span> OpenAI Sora 2</a>
+    <a class="nav-link" href="#s5" data-section="s5"><span class="nav-num">5.</span> 月之暗面20亿融资</a>
+    <a class="nav-link" href="#s6" data-section="s6"><span class="nav-num">6.</span> DeepSeek桌面版</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">§ 3 开源与趋势</div>
+    <a class="nav-link" href="#s7" data-section="s7"><span class="nav-num">7.</span> 小米MiMo Code</a>
+    <a class="nav-link" href="#s8" data-section="s8"><span class="nav-num">8.</span> 智谱SCAIL-2</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a class="sidebar-back" href="index.html">← 返回归档</a>
+</nav>
+
+<div class="main">
+<div class="page">
+
+<!-- HEADER -->
+<header class="header" id="thesis">
+  <div class="header-kicker">i. aigc daily report</div>
+  <h1>安全分层<br><em>开源追赶</em></h1>
+  <p class="lead">Anthropic 发布 Fable 5 与 Mythos 5，"静默防护"取代拒绝回答；智谱 GLM-5 开源双 SOTA 逼近 Opus；OpenAI Sora 2 视频社交化——三大方向同时引爆。OpenAI 同日提交万亿美元 IPO 申请，AI 资本化进入冲刺期。</p>
+  <div class="swatches">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+  <div class="header-meta">
+    <span class="meta-tag">#Fable5</span>
+    <span class="meta-tag">#OpenAI-IPO</span>
+    <span class="meta-tag">#GLM-5</span>
+    <span class="meta-tag">#Sora2</span>
+    <span class="meta-tag">#DeepSeek</span>
+    <span class="meta-tag">#MiMo-Code</span>
+    <span class="meta-tag">#SCAIL-2</span>
+    <span class="meta-tag">#月之暗面</span>
+  </div>
+</header>
+
+<!-- §1 重大发布 -->
+<section class="section" id="s1">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 1 Major Releases</span>
+    <span class="section-count">3 items</span>
+  </div>
+  <h2 class="section-title">重大发布</h2>
+  <p class="section-sub">静默防护、万亿美元IPO与开源SOTA</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">1</span>
+      <span class="card-title">Anthropic 发布 Claude Fable 5 + Mythos 5：静默防护新范式</span>
+      <span class="card-score">9.5</span>
+    </div>
+    <div class="card-desc">
+      Anthropic 发布首个公开版 Mythos 级模型 <strong>Fable 5</strong>，内置"静默防护"——在网络安全/生物/化学等高风险场景自动降级至 Opus 4.8，用户无感知。约<strong>5%</strong>会话触发保守分类器。同源 <strong>Mythos 5</strong> 仅开放给 Project Glasswing 审核组织。定价输入 $10/1M、输出 $50/1M tokens。Karpathy 指出初期分类器"配置过于敏感"，正常科研可能误触降级。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🛡️ 静默防护</div>
+        <div class="sub-card-text">从"拒绝回答"转向"静默降级"，AI 安全进入软防护时代</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🎭 一模型两张脸</div>
+        <div class="sub-card-text">Fable 5 公开 + Mythos 5 受限，安全分层治理引发争议</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">💰 半价 Mythos</div>
+        <div class="sub-card-text">定价不到 Mythos Preview 一半，降低高端模型使用门槛</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：Anthropic 官方 · #模型发布 #AI安全
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">2</span>
+      <span class="card-title">OpenAI 正式提交 IPO 申请，目标估值万亿美元</span>
+      <span class="card-score">9.3</span>
+    </div>
+    <div class="card-desc">
+      OpenAI 6月8日宣布已秘密提交美国 IPO 申请，目标估值<strong>1万亿美元</strong>，可能9月上市。与 Anthropic（9650亿美元）、SpaceX（1.75万亿美元）构成"万亿美元三剑客"。ChatGPT 超<strong>9亿</strong>周活、<strong>5000万+</strong>付费用户，月收入<strong>20亿美元</strong>，增速约 Google/Meta 同期4倍。但预计2030年前不盈利。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">📈 万亿三剑客</div>
+        <div class="sub-card-text">SpaceX + Anthropic + OpenAI 扎堆上市，AI 资本化进入冲刺期</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">💸 20亿月收入</div>
+        <div class="sub-card-text">增速4倍于同期 Google/Meta，但盈利路径仍不明朗</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：路透社 · #行业事件 #IPO
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">3</span>
+      <span class="card-title">智谱 GLM-5 开源：编程+Agent 双 SOTA，股价暴涨 28%</span>
+      <span class="card-score">9.1</span>
+    </div>
+    <div class="card-desc">
+      智谱正式上线并开源 <strong>GLM-5</strong>，编程能力逼近 Claude Opus 4.5，Agent 能力开源 SOTA。此前以"PonyAlpha"神秘身份登顶 OpenRouter 热度榜首，发布首日股价涨<strong>28.68%</strong>。预训练数据从 23T→<strong>28.5T</strong>，构建全新"Slime"框架，首次集成 DeepSeek Sparse Attention，长文本效果无损同时大幅降低部署成本。OpenClaw 开源 Agent 系统可一键接入。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🏆 双SOTA</div>
+        <div class="sub-card-text">编程+Agent 开源第一，逼近 Opus 4.5 闭源水平</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔗 OpenClaw生态</div>
+        <div class="sub-card-text">开源 Agent 系统一键接入飞书，打造自动化工作流</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：第一财经 · #开源模型 #中国AI
+    </div>
+  </div>
+</section>
+
+<!-- §2 AI创作与工具 -->
+<section class="section section-highlight" id="s4">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 2 AI Creation & Tools</span>
+    <span class="section-count">3 items</span>
+  </div>
+  <h2 class="section-title">AI创作与工具</h2>
+  <p class="section-sub">视频社交化、融资加速与桌面端编程智能体</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">4</span>
+      <span class="card-title">OpenAI 发布 Sora 2：视频+音频一体生成，上线社交 App</span>
+      <span class="card-score">8.9</span>
+    </div>
+    <div class="card-desc">
+      OpenAI 6月10日发布 <strong>Sora 2</strong>，支持视频+音频同步生成、最长<strong>25秒</strong>1080p 视频，新增"角色客串"功能让用户以高精度出现在 AI 生成视频中。同步上线 Sora 社交 App（iOS 邀请制），内置算法推荐信息流，定位从"工具"转向"社交平台"。物理模拟能力大幅提升，但道具变形等细节仍有缺陷。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🎬 角色客串</div>
+        <div class="sub-card-text">一次性录制验证身份，将自身形象高精度嵌入 AI 视频</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">📱 社交App</div>
+        <div class="sub-card-text">Sora 从工具进化为社交平台，算法信息流+可调控排名</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：OpenAI 官方 · #AI视频 #创作工具
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">5</span>
+      <span class="card-title">月之暗面再启 20 亿美元融资，半年估值暴涨近 7 倍</span>
+      <span class="card-score">8.7</span>
+    </div>
+    <div class="card-desc">
+      月之暗面（Kimi）启动新一轮<strong>20亿美元</strong>融资，半年估值暴涨近7倍。Kimi K2.6 开源模型在多项基准测试中持平甚至超越 GPT-5.4、Claude Opus 4.6，OpenRouter 全球排名第九；<strong>Kimi Work Beta</strong>本地办公 AI 工具上线，ARR 突破<strong>1亿美金</strong>。融资节奏与 Anthropic/OpenAI IPO 同步，中国 AI 军团加速资本化。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">💰 7倍估值增长</div>
+        <div class="sub-card-text">半年内从低调到 20 亿美元融资，ARR 破 1 亿美金</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🛠️ Kimi Work Beta</div>
+        <div class="sub-card-text">补齐本地化办公 AI 工具布局，瞄准知识工作者</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：36氪 · #融资 #中国AI
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">6</span>
+      <span class="card-title">DeepSeek 桌面版发布：对标 Codex 的全平台 AI 编程智能体</span>
+      <span class="card-score">8.5</span>
+    </div>
+    <div class="card-desc">
+      DeepSeek 推出 <strong>Dipsyk Desktop App</strong>，支持 macOS/Windows/Linux，对标 OpenAI Codex App 和 Anthropic Code Desktop。内置<strong>编码模式</strong>与<strong>写作模式</strong>双分区，支持 MCP 插件和定时任务，可连接飞书/Slack/微信跨端同步。支持多思考深度（V4 Flash/Pro），需自填 API Key。桌面端 AI 编程智能体已成各厂商标配。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🖥️ 全平台覆盖</div>
+        <div class="sub-card-text">macOS/Windows/Linux 三端齐发，填补国产桌面端空白</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔗 MCP+定时任务</div>
+        <div class="sub-card-text">从聊天工具进化为工作流中枢，跨端同步打通</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：网易 · #AI编程 #桌面端
+    </div>
+  </div>
+</section>
+
+<!-- §3 开源与趋势 -->
+<section class="section" id="s7">
+  <div class="section-chrome">
+    <span class="section-kicker">§ 3 Open Source & Trends</span>
+    <span class="section-count">2 items</span>
+  </div>
+  <h2 class="section-title">开源与趋势</h2>
+  <p class="section-sub">自进化Agent与端到端视频生成</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">7</span>
+      <span class="card-title">小米开源 MiMo Code：终端 AI 编程助手，迈向自进化 Agent</span>
+      <span class="card-score">8.3</span>
+    </div>
+    <div class="card-desc">
+      小米正式发布并开源 <strong>MiMo Code V0.1</strong>，定位"住在你电脑里、越用越懂你的 AI 队友"。采用<strong>模型+Agent 协同优化</strong>策略，而非仅靠单模型能力提升，主打自进化能力。与 DeepSeek Desktop、智谱 GLM-5 形成国产 AI 编程工具开源矩阵，三大厂商同时入局终端 AI 编程赛道。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🧬 自进化Agent</div>
+        <div class="sub-card-text">模型+Agent协同优化，让工具随使用习惯持续进化</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔓 开源生态</div>
+        <div class="sub-card-text">与DeepSeek、智谱形成国产AI编程工具三足鼎立</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：小米官方 · #开源工具 #AI编程
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">8</span>
+      <span class="card-title">智谱 SCAIL-2：端到端视频生成，挑战"中间表示"法则</span>
+      <span class="card-score">8.0</span>
+    </div>
+    <div class="card-desc">
+      智谱创始人唐杰教授领衔，智谱AI与清华大学联合发布 <strong>SCAIL-2</strong>。该模型用"端到端"架构挑战 AI 视频生成领域长期依赖的"中间表示"（骨架/深度图等）控制范式，用<strong>视觉直觉替代符号学崇拜</strong>。抛弃传统骨架/深度图等中间表示，直接从意图驱动视频生成，大幅降低专业视频制作技术门槛。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🎯 意图即创作</div>
+        <div class="sub-card-text">端到端架构无需分镜/运动规划，意图直接驱动视频</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🎬 颠覆中间表示</div>
+        <div class="sub-card-text">视觉直觉替代骨架控制，可能重塑AI视频创作底层逻辑</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：腾讯新闻 · #AI视频 #多模态
+    </div>
+  </div>
+</section>
+
+<!-- Conclusion -->
+<div class="conclusion" id="conclusion">
+  <p class="conclusion-text">今日AI行业迎来"模型日"级别的密集发布：Anthropic Fable 5/Mythos 5的"静默防护"范式、智谱GLM-5开源双SOTA、OpenAI Sora 2视频社交化——三大方向同时引爆。安全分层、开源追赶、视频民主化三条主线并行，2026年中AI行业的竞争格局已从"谁能做"转向"谁更安全、更开放、更易用"。对CODM宣发团队而言，GLM-5+OpenClaw的开源Agent生态和Sora 2的角色客串功能是最值得立即上手尝试的两项新能力。</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">
+    <em>AIGC Daily Report</em><br>
+    信源：Anthropic · OpenAI · 智谱AI · 月之暗面 · DeepSeek · 小米 · 第一财经 · 36氪 · 路透社
+  </div>
+  <div class="footer-right">
+    2026.06.11 · Wednesday<br>
+    Generated by Claw · 65 sources scanned
+  </div>
+</div>
+
+</div><!-- page -->
+</div><!-- main -->
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ScrollSpy
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const progressFill = document.getElementById('progressFill');
+const backTop = document.getElementById('backTop');
+
+function updateScrollSpy() {
+  const scrollY = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? (scrollY / docH) * 100 : 0;
+  progressFill.style.width = pct + '%';
+  backTop.classList.toggle('show', scrollY > 400);
+
+  let current = '';
+  sections.forEach(s => {
+    if (s.offsetTop - 80 <= scrollY) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('data-section') === current);
+  });
+}
+window.addEventListener('scroll', updateScrollSpy, {passive:true});
+updateScrollSpy();
+</script>
+</body>
+</html>
