@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #11 · 2026.06.08–06.14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Back to Archive Button (强制元素) ═══════ */
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 72px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Connection Surface ═══════ */
+.connection-box {
+  background: linear-gradient(135deg, var(--paper-2) 0%, var(--paper-3) 100%);
+  border-radius: 20px; padding: 24px 28px; margin-bottom: 28px;
+  border: 1px dashed var(--border-strong);
+}
+.connection-box h4 {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 16px; color: var(--ink-soft); margin-bottom: 12px;
+}
+.connection-item {
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px;
+  line-height: 1.8; color: var(--ink-soft); margin-bottom: 8px;
+}
+.connection-item strong { color: var(--ink); font-weight: 500; }
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+  .back-archive-btn { right: 16px !important; top: 12px !important; font-size: 12px !important; padding: 7px 14px !important; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .thesis-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- 强制返回归档按钮 -->
+<a href="index.html" class="back-archive-btn">&#8592; 返回归档</a>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.06.08 – 06.14 &middot; Issue No. 11</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Claude Fable 5</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Google Managed Agents</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Kling 2.6</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>高效工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Claude Dynamic Workflows</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>HeyGen全平台视频</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>NotebookLM Agent</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>方法论与 Prompt</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Karpathy四原则</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>RCCF框架</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>Dreaming V3记忆</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&sect;4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 11</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">旗舰模型双层架构 + 全托管Agent沙箱 + 音视频一体生成 &middot; 9 条立即可用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 60+ 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.08 – 06.14</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是模型与Agent的双重进化：Claude Fable 5 以双层架构刷新旗舰标杆，MMLU-Pro 98.3%；Google Managed Agents 让一次 API 调用就能分配远程沙箱 Linux 环境；Kling 2.6 实现原生音频+视频一体化生成，对白、音效、环境音一次生成与画面协同；Kimi K2.7 Code 则把编程速度推到新高。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Claude</div>
+        <div class="thesis-card-body"><b>Fable 5</b> — 双层架构旗舰，MMLU-Pro 98.3%，支持 Dynamic Workflows</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Google</div>
+        <div class="thesis-card-body"><b>Managed Agents</b> — 全托管沙箱，一次 API 调用分配远程 Linux 环境</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Kling</div>
+        <div class="thesis-card-body"><b>2.6</b> — 音视频一体生成，对白音效环境音与画面协同</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Kimi</div>
+        <div class="thesis-card-body"><b>K2.7 Code</b> — 编程高速版，代码生成与推理速度新标杆</div>
+      </div>
+    </div>
+
+    <!-- Vault Connection Surface -->
+    <div class="connection-box">
+      <h4>&#128279; 本周自我连接</h4>
+      <div class="connection-item"><strong>1.</strong> Claude Dynamic Workflows &harr; midjourney-locking-pattern：fan-out-and-synthesize 与单一变量锁定法本质同构</div>
+      <div class="connection-item"><strong>2.</strong> Kling 2.6 音视频一体 &harr; codm-cg-vfx-ai-sop：原生音频+视频协同挑战传统"先画面后配音"流程</div>
+    </div>
+
+    <div class="thesis-tagline">
+      <p>&#128161; 一句话总结：旗舰模型从"更大参数"转向"更巧架构"，Agent 从"自己搭环境"变成"一个 API 全托管"，音视频从"分步制作"走向"原生一体化"。</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#128736;&#65039; 实用工具箱</div>
+    <div class="section-sub">3 个本周立即可试的 AI 工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Fable 5 &middot; Anthropic 最强公开模型</span>
+        <span class="card-tag">旗舰发布</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布 <strong>Claude Fable 5</strong>，采用双层架构设计，MMLU-Pro 达 <strong>98.3%</strong>，支持 Dynamic Workflows 子 Agent 编排。这是目前公开可用的最强语言模型之一。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">核心能力</div><div class="sub-card-body">双层架构 + MMLU-Pro 98.3% + Dynamic Workflows</div></div>
+        <div class="sub-card"><div class="sub-card-title">获取方式</div><div class="sub-card-body">Claude Code /model fable</div></div>
+        <div class="sub-card"><div class="sub-card-title">适用场景</div><div class="sub-card-body">复杂推理、多步骤任务、Agent 编排</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Google Managed Agents &middot; 一次 API 调用分配远程沙箱</span>
+        <span class="card-tag">公测</span>
+      </div>
+      <div class="card-desc">
+        Google 推出 <strong>Managed Agents</strong>，一次 API 调用即可分配远程沙箱 Linux 环境，Agent 可在其中规划执行代码、浏览网页，无需自建基础设施。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">核心能力</div><div class="sub-card-body">全托管沙箱 + 代码执行 + 网页浏览 + 自动规划</div></div>
+        <div class="sub-card"><div class="sub-card-title">获取方式</div><div class="sub-card-body">Gemini API 公测</div></div>
+      </div>
+      <div class="source">&compfn; @GoogleDeepMind</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Kling 2.6 &middot; 原生音频+视频一体化生成</span>
+        <span class="card-tag">音视频</span>
+      </div>
+      <div class="card-desc">
+        Kling 2.6 实现原生 <strong>音频+视频一体化生成</strong>，对白、音效、环境音一次生成并与画面协同，告别传统"先画面后配音"的分步流程。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">核心能力</div><div class="sub-card-body">原生音频+视频 + 对白音效环境音 + 画面协同</div></div>
+        <div class="sub-card"><div class="sub-card-title">获取方式</div><div class="sub-card-body">可灵官网 / Layer 平台</div></div>
+      </div>
+      <div class="source">&compfn; @BytedanceTalk</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#9889; 高效工作流</div>
+    <div class="section-sub">3 套改变日常工作的工作流</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Claude Code Dynamic Workflows &middot; JS 驱动子 Agent 编排</span>
+        <span class="card-tag">正式上线</span>
+      </div>
+      <div class="card-desc">
+        Claude Code Dynamic Workflows 用 <strong>JavaScript 驱动子 Agent 编排</strong>，支持 fan-out-and-synthesize + 对抗验证模式，内置模板覆盖日志分析、简历排序、Bug 分诊等场景。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">编排模式</div><div class="sub-card-body">fan-out-and-synthesize + 对抗验证</div></div>
+        <div class="sub-card"><div class="sub-card-title">内置模板</div><div class="sub-card-body">日志分析 / 简历排序 / Bug 分诊</div></div>
+        <div class="sub-card"><div class="sub-card-title">驱动方式</div><div class="sub-card-body">JavaScript 调度脚本</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">HeyGen 全平台视频整合 &middot; 一站式视频生产</span>
+        <span class="card-tag">平台整合</span>
+      </div>
+      <div class="card-desc">
+        HeyGen 整合 <strong>Sora / Veo / Kling 三模型</strong>，加上虚拟人像和编辑功能，实现从脚本到成片的一站式视频生产。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">集成模型</div><div class="sub-card-body">Sora + Veo + Kling 三选一</div></div>
+        <div class="sub-card"><div class="sub-card-title">附加能力</div><div class="sub-card-body">虚拟人像 + 视频编辑</div></div>
+        <div class="sub-card"><div class="sub-card-title">定位</div><div class="sub-card-body">一站式视频生产平台</div></div>
+      </div>
+      <div class="source">&compfn; @heygen_official</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">NotebookLM Agentic Research &middot; Agent 自动发现来源</span>
+        <span class="card-tag">公测</span>
+      </div>
+      <div class="card-desc">
+        NotebookLM 升级为 <strong>Agentic Research</strong>，不再需要提前准备资料集，Agent 自动发现来源，内置云电脑可运行代码，还能导出 PPT / PDF。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">核心升级</div><div class="sub-card-body">Agent 自动发现来源 + 无需预建资料集</div></div>
+        <div class="sub-card"><div class="sub-card-title">内置能力</div><div class="sub-card-body">云电脑运行代码 + 数据分析</div></div>
+        <div class="sub-card"><div class="sub-card-title">导出格式</div><div class="sub-card-body">PPT / PDF</div></div>
+      </div>
+      <div class="source">&compfn; @GoogleDeepMind</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论与 Prompt -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#129504; 方法论与 Prompt</div>
+    <div class="section-sub">3 套提升 AI 协作质量的方法论</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Karpathy 四原则 &middot; 实测任务成功率 59%&#8594;97%</span>
+        <span class="card-tag">方法论</span>
+      </div>
+      <div class="card-desc">
+        Andrej Karpathy 总结的四个编码原则：<strong>先想再写 / 先求简单 / 外科手术式改动 / 目标驱动</strong>。实测任务成功率从 59% 提升至 97%，Bug 引入率从 22% 降至 3%。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">四原则</div><div class="sub-card-body">先想再写 / 先求简单 / 外科手术式改动 / 目标驱动</div></div>
+        <div class="sub-card"><div class="sub-card-title">实测效果</div><div class="sub-card-body">任务成功率 59%&#8594;97% / Bug 引入率 22%&#8594;3%</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">RCCF Prompt 框架 &middot; 2026 年 Prompt 工程标准</span>
+        <span class="card-tag">Prompt 工程</span>
+      </div>
+      <div class="card-desc">
+        <strong>Role + Context + Constraints + Format</strong> 四块结构，被广泛认为是 2026 年 Prompt 工程的标准范式。每个 Prompt 只需对齐这四个维度即可大幅提升输出质量。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">RCCF 四块</div><div class="sub-card-body">Role + Context + Constraints + Format</div></div>
+        <div class="sub-card"><div class="sub-card-title">定位</div><div class="sub-card-body">2026 年 Prompt 工程标准范式</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy @swyx</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">Dreaming V3 记忆架构 &middot; ChatGPT 记忆最大升级</span>
+        <span class="card-tag">已上线</span>
+      </div>
+      <div class="card-desc">
+        ChatGPT 记忆系统迎来最大升级：<strong>Dreaming V3</strong>，后台跨年对话合成用户画像，具备时间感知能力，计算量降低 5x，首次面向免费用户开放。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">核心升级</div><div class="sub-card-body">跨年对话合成用户画像 + 时间感知</div></div>
+        <div class="sub-card"><div class="sub-card-title">效率提升</div><div class="sub-card-body">计算量降低 5x</div></div>
+        <div class="sub-card"><div class="sub-card-title">开放范围</div><div class="sub-card-body">首次面向免费用户</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐上手顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">9 items</span>
+    </div>
+    <div class="section-title">&#128204; 推荐上手顺序</div>
+    <div class="section-sub">按"学习成本 &times; 价值收益"排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-num">1</span>
+        <span class="gallery-title">Karpathy 四原则</span>
+        <span class="gallery-desc">5min / 必做&#128293;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">2</span>
+        <span class="gallery-title">RCCF 框架</span>
+        <span class="gallery-desc">5min / 必做&#128293;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">3</span>
+        <span class="gallery-title">Claude Fable 5</span>
+        <span class="gallery-desc">切换模型 / 必试&#128293;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">4</span>
+        <span class="gallery-title">Kling 2.6 音视频</span>
+        <span class="gallery-desc">写提示词 / 推荐</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">5</span>
+        <span class="gallery-title">NotebookLM Agent</span>
+        <span class="gallery-desc">输入问题 / 推荐</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">6</span>
+        <span class="gallery-title">Google Managed Agents</span>
+        <span class="gallery-desc">API 调用 / 进阶</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">7</span>
+        <span class="gallery-title">Claude Dynamic Workflows</span>
+        <span class="gallery-desc">写 JS / 进阶</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">8</span>
+        <span class="gallery-title">HeyGen 整合</span>
+        <span class="gallery-desc">选模型 / 推荐</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">9</span>
+        <span class="gallery-title">Dreaming V3</span>
+        <span class="gallery-desc">无需操作 / 已上线</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">AI 干货周报 &middot; 2026.06.08 – 06.14<br>本期信源统计：60+ 信源 / 9 条入选</div>
+    <div class="footer-right">小桂AI速递 &middot; 每周一上午推送</div>
+  </div>
+
+</div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressFill').style.width = scrolled + '%';
+  
+  // Back to top visibility
+  const btn = document.getElementById('backToTop');
+  if (winScroll > 300) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ScrollSpy for sidebar
+const sections = document.querySelectorAll('.section, .section-highlight, .header, .thesis');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (scrollY >= sectionTop - 100) current = section.getAttribute('id');
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// Close sidebar on mobile when nav link clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      document.querySelector('.sidebar').classList.remove('open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

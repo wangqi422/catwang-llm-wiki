@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIGC 日报 · 2026.06.12</title>
+<title>AIGC 日报 · 2026.06.15</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -145,6 +145,16 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 .conclusion-text { font-family:"Noto Serif SC","Cormorant Garamond",serif; font-size:17px; line-height:2; color:var(--ink); font-weight:400; }
 .conclusion-text::first-letter { font-family:"Cormorant Garamond",serif; font-size:72px; float:left; line-height:0.8; margin-right:8px; margin-top:6px; font-weight:500; }
 
+/* 4-color thesis cards */
+.thesis-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:24px; }
+.thesis-card { border-radius:16px; padding:20px 22px; }
+.thesis-card--pink { background:var(--pink); }
+.thesis-card--lemon { background:var(--lemon); }
+.thesis-card--blush { background:var(--blush); }
+.thesis-card--sage { background:var(--sage); }
+.thesis-card-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px; color:var(--ink-soft); margin-bottom:6px; letter-spacing:0.5px; }
+.thesis-card-title { font-family:"Noto Sans SC",sans-serif; font-size:14px; font-weight:600; color:var(--ink); line-height:1.5; }
+
 /* Footer */
 .footer {
   margin-top:48px; padding-top:24px; border-top:1px solid var(--border);
@@ -180,6 +190,7 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   .page { padding:32px 20px 40px; }
   .header h1 { font-size:38px; }
   .section-highlight { margin-left:-20px; margin-right:-20px; padding:32px 20px; }
+  .thesis-cards { grid-template-columns:1fr; }
   .hamburger { display:flex !important; }
   .back-archive-btn { top:16px; right:16px; padding:6px 12px; font-size:11px; }
 }
@@ -195,7 +206,7 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 
 <a class="back-archive-btn" href="index.html">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-  返回归档
+  ← 返回归档
 </a>
 
 <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
@@ -207,8 +218,8 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-brand">AIGC Daily</div>
-    <h1>日报 · <em>2026.06.12</em></h1>
-    <div class="sidebar-meta">Thursday · Vol.0612</div>
+    <h1>日报 · <em>2026.06.15</em></h1>
+    <div class="sidebar-meta">Sunday · Vol.0615</div>
   </div>
 
   <div class="nav-section">
@@ -217,23 +228,23 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">§ 1 重大事件</div>
-    <a class="nav-link" href="#s1" data-section="s1"><span class="nav-num">1.</span> OpenAI 收购 Ona</a>
-    <a class="nav-link" href="#s2" data-section="s2"><span class="nav-num">2.</span> SpaceX 史上最大 IPO</a>
-    <a class="nav-link" href="#s3" data-section="s3"><span class="nav-num">3.</span> Agents' Last Exam</a>
+    <div class="nav-section-title">§ 1 模型发布</div>
+    <a class="nav-link" href="#s1" data-section="s1"><span class="nav-num">1.</span> Kimi K2.7 Code</a>
+    <a class="nav-link" href="#s2" data-section="s2"><span class="nav-num">2.</span> Claude Fable 5</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">§ 2 AI工具与生态</div>
-    <a class="nav-link" href="#s4" data-section="s4"><span class="nav-num">4.</span> Claude Corps</a>
-    <a class="nav-link" href="#s5" data-section="s5"><span class="nav-num">5.</span> Cursor Auto-review</a>
-    <a class="nav-link" href="#s6" data-section="s6"><span class="nav-num">6.</span> Krea 2</a>
+    <div class="nav-section-title">§ 2 Agent 与生态</div>
+    <a class="nav-link" href="#s3" data-section="s3"><span class="nav-num">3.</span> Google Managed Agents</a>
+    <a class="nav-link" href="#s4" data-section="s4"><span class="nav-num">4.</span> DeepSeek V4 降价</a>
+    <a class="nav-link" href="#s5" data-section="s5"><span class="nav-num">5.</span> Kling 2.6</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">§ 3 多模态与Agent</div>
-    <a class="nav-link" href="#s7" data-section="s7"><span class="nav-num">7.</span> Perplexity 混合推理</a>
-    <a class="nav-link" href="#s8" data-section="s8"><span class="nav-num">8.</span> Gemini Omni Flash</a>
+    <div class="nav-section-title">§ 3 工具升级</div>
+    <a class="nav-link" href="#s6" data-section="s6"><span class="nav-num">6.</span> Qwen3.7-Plus</a>
+    <a class="nav-link" href="#s7" data-section="s7"><span class="nav-num">7.</span> NotebookLM Agent</a>
+    <a class="nav-link" href="#s8" data-section="s8"><span class="nav-num">8.</span> Cursor 3.7</a>
   </div>
 
   <div class="sidebar-dots">
@@ -252,252 +263,270 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 <!-- HEADER -->
 <header class="header" id="thesis">
   <div class="header-kicker">i. aigc daily report</div>
-  <h1>持久化<br><em>落地检验</em></h1>
-  <p class="lead">OpenAI 收购 Ona 为 Codex 补齐云运行底座，AI Agent 进入"持久战"时代；ALE 基准揭示 AI 智能体真干活通过率仅 24%；SpaceX 今夜以 1.77 万亿估值登陆纳斯达克——AI 竞争从"模型更强"转向"Agent 更安全、更持久"。</p>
+  <h1>Agent 工作流<br><em>爆发日</em></h1>
+  <p class="lead">Kimi K2.7 Code 高速版把代码生成推到 260 Token/s，Claude Fable 5 以 98.3% MMLU-Pro 刷新旗舰天花板，Google Managed Agents 让一行 API 调出沙箱 Agent，DeepSeek V4 永久降价 75% 把成本压到 GPT 的 1/30——AI 从"谁更聪明"正式进入"谁更便宜、谁跑得更快"的 Agent 工作流竞赛。</p>
   <div class="swatches">
     <i style="background:var(--pink)"></i>
     <i style="background:var(--lemon)"></i>
     <i style="background:var(--blush)"></i>
     <i style="background:var(--sage)"></i>
   </div>
+  <div class="thesis-cards">
+    <div class="thesis-card thesis-card--pink">
+      <div class="thesis-card-label">Speed</div>
+      <div class="thesis-card-title">Kimi K2.7 Code 高速版上线 — 输出速度 180-260 Token/s，Code Bench +21.8%</div>
+    </div>
+    <div class="thesis-card thesis-card--lemon">
+      <div class="thesis-card-label">Benchmark</div>
+      <div class="thesis-card-title">Claude Fable 5 发布 — MMLU-Pro 98.3%，双层架构</div>
+    </div>
+    <div class="thesis-card thesis-card--blush">
+      <div class="thesis-card-label">Agent</div>
+      <div class="thesis-card-title">Google Managed Agents 公测 — 一行 API 调出沙箱 Agent</div>
+    </div>
+    <div class="thesis-card thesis-card--sage">
+      <div class="thesis-card-label">Price</div>
+      <div class="thesis-card-title">DeepSeek V4 永久降价 75% — 成本仅为 GPT 的 1/30</div>
+    </div>
+  </div>
   <div class="header-meta">
-    <span class="meta-tag">#OpenAI-Ona</span>
-    <span class="meta-tag">#SpaceX-IPO</span>
-    <span class="meta-tag">#ALE</span>
-    <span class="meta-tag">#Claude-Corps</span>
-    <span class="meta-tag">#Cursor-AutoReview</span>
-    <span class="meta-tag">#Krea2</span>
-    <span class="meta-tag">#Perplexity</span>
-    <span class="meta-tag">#Gemini-Omni</span>
+    <span class="meta-tag">#Kimi-K2.7</span>
+    <span class="meta-tag">#Claude-Fable5</span>
+    <span class="meta-tag">#Managed-Agents</span>
+    <span class="meta-tag">#DeepSeek-V4</span>
+    <span class="meta-tag">#Kling-2.6</span>
+    <span class="meta-tag">#Qwen3.7</span>
+    <span class="meta-tag">#NotebookLM</span>
+    <span class="meta-tag">#Cursor-3.7</span>
   </div>
 </header>
 
-<!-- §1 重大事件 -->
+<!-- §1 模型发布 -->
 <section class="section" id="s1">
   <div class="section-chrome">
-    <span class="section-kicker">§ 1 Major Events</span>
-    <span class="section-count">3 items</span>
+    <span class="section-kicker">§ 1 Model Releases</span>
+    <span class="section-count">2 items</span>
   </div>
-  <h2 class="section-title">重大事件</h2>
-  <p class="section-sub">云底座补齐、史上最大IPO与真干活考试</p>
+  <h2 class="section-title">模型发布</h2>
+  <p class="section-sub">速度翻倍与旗舰重构</p>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">1</span>
-      <span class="card-title">OpenAI 收购 Ona：为 Codex 补齐云运行底座，Agent 进入"持久战"</span>
-      <span class="card-score">9.3</span>
+      <span class="card-title">Kimi K2.7 Code 高速版今日上线</span>
+      <span class="card-score">9.2</span>
     </div>
     <div class="card-desc">
-      OpenAI 收购初创公司 Ona（原 Gitpod GmbH），将其安全云执行和编排技术整合进 Codex 生态。Ona 专为 AI 智能体提供安全、预配置的云端沙盒环境，使 Agent 在开发者关闭工作站后仍可持续运行。Codex 周活跃用户从 4 月的 300 万增至逾<strong>500 万</strong>，增长<strong>67%</strong>。这是 OpenAI 12 个月内第三笔编程工具收购（此前收购 Astral 和 Alex Codes）。
+      月之暗面发布 Kimi K2.7 Code 高速版，输出速度达<strong>180-260 Token/s</strong>，较标准版提升<strong>5-6 倍</strong>。Code Benchmark 得分提升<strong>21.8%</strong>，token 消耗降低<strong>30%</strong>。高速版资费为标准版<strong>2 倍</strong>，但速度提升 5-6 倍，性价比显著优于标准版。这是国内首个在代码生成速度上突破 200 Token/s 大关的模型。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">☁️ 持久云沙盒</div>
-        <div class="sub-card-text">Agent 在客户云环境中运行，本地设备关闭任务不中断</div>
+        <div class="sub-card-title">⚡ 5-6x 速度飞跃</div>
+        <div class="sub-card-text">180-260 Token/s 输出，代码生成从"等答案"变成"秒出"</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">🔒 企业级安全</div>
-        <div class="sub-card-text">哈希加密校验恶意程序、隔离敏感凭证、阻断恶意外联</div>
+        <div class="sub-card-title">📈 Code Bench +21.8%</div>
+        <div class="sub-card-text">不只是快，代码质量同步跃升</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">🎯 战略转向</div>
-        <div class="sub-card-text">从"模型更强"转向"Agent 跑得更久、更安全"</div>
+        <div class="sub-card-title">💰 2x 价格 5x 速度</div>
+        <div class="sub-card-text">高速版定价 2 倍但速度 5-6 倍，实际单位成本更低</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：OpenAI 官方 · #收购 #AI编程
+      来源：@Kimi_Moonshot · #代码模型 #速度
     </div>
   </div>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">2</span>
-      <span class="card-title">SpaceX 史上最大 IPO 今夜登陆纳斯达克：募资 750 亿美元</span>
-      <span class="card-score">9.2</span>
+      <span class="card-title">Claude Fable 5 — Anthropic 双层架构旗舰</span>
+      <span class="card-score">9.5</span>
     </div>
     <div class="card-desc">
-      SpaceX 以代码 SPCX 登陆纳斯达克，发行价<strong>135 美元/股</strong>，募资<strong>750 亿美元</strong>，刷新全球 IPO 纪录。完全摊薄估值约<strong>1.77 万亿美元</strong>，超越特斯拉跻身美国市值第七。IPO 获超<strong>4 倍</strong>超额认购。星链是唯一盈利板块，2025 年营收 186.7 亿美元，正成为全球边缘 AI 推理骨干基础设施。
+      Anthropic 发布 Claude Fable 5，采用<strong>双层架构</strong>（快速推理层 + 深度思考层），MMLU-Pro 达<strong>98.3%</strong>，刷新公开模型最高纪录。引入 <strong>Constitutional Self-Correction</strong> 机制，模型可在推理过程中自行检测并修正逻辑错误。用户可通过 <strong>/model fable</strong> 一键切换，API 兼容现有 Claude 接口。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">🚀 1.77万亿估值</div>
-        <div class="sub-card-text">超越特斯拉，跻身美国市值第七，史上最大 IPO</div>
+        <div class="sub-card-title">🏆 MMLU-Pro 98.3%</div>
+        <div class="sub-card-text">公开模型新天花板，全面超越前代</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">📡 星链=AI骨干网</div>
-        <div class="sub-card-text">从通信基础设施升级为全球边缘 AI 推理骨干</div>
+        <div class="sub-card-title">🔄 Constitutional Self-Correction</div>
+        <div class="sub-card-text">推理过程中自检自纠，错误率大幅下降</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">⚡ /model fable 切换</div>
+        <div class="sub-card-text">一行命令切换旗舰模型，无缝集成现有工作流</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：证券时报 · #IPO #AI基建
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-chrome">
-      <span class="card-num">3</span>
-      <span class="card-title">Agents' Last Exam：AI 智能体"真干活"考试，最强仅通过 24%</span>
-      <span class="card-score">9.0</span>
-    </div>
-    <div class="card-desc">
-      UC Berkeley 联合 250+ 专家发布 ALE 基准，含 1490 个真实专业任务（3D 建模、游戏引擎搭建、特效合成等），覆盖 55 个行业。最强配置 Codex + GPT-5.5 整体通过率仅<strong>24%</strong>，最难档仅<strong>8.6%</strong>，多数模型得<strong>零分</strong>。<strong>GPT-5.5 意外击败 Fable 5</strong>（24% vs 22%），逆转了传统 benchmark 上 Fable 5 碾压 GPT-5.5 的格局。78% 失败来自"理解/方法"层面，瓶颈是领域知识而非代码能力。
-    </div>
-    <div style="margin-top:14px;">
-      <div class="sub-card">
-        <div class="sub-card-title">📊 24%天花板</div>
-        <div class="sub-card-text">最强 AI Agent 真实干活通过率不到四分之一</div>
-      </div>
-      <div class="sub-card">
-        <div class="sub-card-title">🔄 GPT-5.5逆转</div>
-        <div class="sub-card-text">传统 benchmark 上 Fable 5 碾压 GPT-5.5，真干活测试反而输</div>
-      </div>
-      <div class="sub-card">
-        <div class="sub-card-title">🧠 知识是瓶颈</div>
-        <div class="sub-card-text">78% 失败来自领域理解，不是代码执行能力</div>
-      </div>
-    </div>
-    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：UC Berkeley · #基准测试 #AI Agent
+      来源：@AnthropicAI · #旗舰模型 #双层架构
     </div>
   </div>
 </section>
 
-<!-- §2 AI工具与生态 -->
-<section class="section section-highlight" id="s4">
+<!-- §2 Agent 与生态 -->
+<section class="section section-highlight" id="s3">
   <div class="section-chrome">
-    <span class="section-kicker">§ 2 AI Tools & Ecosystem</span>
+    <span class="section-kicker">§ 2 Agent & Ecosystem</span>
     <span class="section-count">3 items</span>
   </div>
-  <h2 class="section-title">AI工具与生态</h2>
-  <p class="section-sub">人才管道、自主性管控与美学优先</p>
+  <h2 class="section-title">Agent 与生态</h2>
+  <p class="section-sub">一行调出、永久降价与音视频一体</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">3</span>
+      <span class="card-title">Google Managed Agents 公测：一行 API 调出沙箱 Agent</span>
+      <span class="card-score">8.8</span>
+    </div>
+    <div class="card-desc">
+      Google DeepMind 开放 Managed Agents 公测，开发者通过<strong>一次 API 调用</strong>即可分配一个运行在沙箱 Linux 环境中的全托管 Agent。Agent 拥有独立文件系统、网络访问权限和持久化存储，支持长时间运行任务。无需自建基础设施，按运行时间计费。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">🖥️ 沙箱 Linux 环境</div>
+        <div class="sub-card-text">一次 API 调用分配完整沙箱，Agent 拥有独立文件系统</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🔧 全托管</div>
+        <div class="sub-card-text">无需自建基础设施，Google 负责运维、扩缩容和安全隔离</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：@GoogleDeepMind · #AI Agent #全托管
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">4</span>
-      <span class="card-title">Anthropic 启动 Claude Corps：1.5 亿美元派 1000 名 AI 研究员</span>
-      <span class="card-score">8.7</span>
+      <span class="card-title">DeepSeek V4 永久降价 75%：成本仅为 GPT 的 1/30</span>
+      <span class="card-score">8.5</span>
     </div>
     <div class="card-desc">
-      Anthropic 投入<strong>1.5 亿美元</strong>，分三批将 1000 名早期职业人才派驻 400+ 家非营利组织，12 个月全职 AI 应用。研究员年薪<strong>8.5 万美元</strong>（Anthropic 全额承担），接收机构获 1 万美元补助 + 最高 2500 美元 Claude 额度。首批 100 人 10 月入职，申请截止 7 月 17 日。隐性门槛：接收机构必须是 Claude for Nonprofits 付费客户。
+      DeepSeek V4 宣布<strong>永久降价 75%</strong>，Pro 和 Flash 双模型均开源。支持<strong>100 万 token 上下文</strong>窗口，成本仅为 GPT 同级模型的<strong>1/30</strong>。开源策略 + 极致低价的组合拳，继续对 OpenAI 和 Anthropic 的定价体系施加压力。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">🎓 人才管道</div>
-        <div class="sub-card-text">1000 人在一年内深度绑定 Claude 生态，任期后携带技能进入市场</div>
+        <div class="sub-card-title">💰 永久降价 75%</div>
+        <div class="sub-card-text">不是促销，是永久定价调整</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">🔗 生态绑定</div>
-        <div class="sub-card-text">公益外衣下是产品绑定——需为 Claude 付费客户才可申请</div>
+        <div class="sub-card-title">📐 100 万 token 上下文</div>
+        <div class="sub-card-text">超长上下文窗口，单次可处理整本书级内容</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：Anthropic 官方 · #社会责任 #AI人才
+      来源：@deepseek_ai · #开源模型 #价格战
     </div>
   </div>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">5</span>
-      <span class="card-title">Cursor Auto-review：用分类器智能体管控 AI 编程自主性</span>
-      <span class="card-score">8.5</span>
+      <span class="card-title">Kling 2.6 音视频一体：原生音频 + 视频一次性生成</span>
+      <span class="card-score">8.7</span>
     </div>
     <div class="card-desc">
-      Cursor 发布 Auto-review 运行模式，用专门的<strong>LLM 分类器子 Agent</strong>替代传统"允许/拒绝"二元权限判断，实现三层决策：<strong>白名单→沙箱→分类器</strong>。SDK 同步支持 Auto-review，可用自然语言指令校准分类器行为（如"禁止 rm -rf"）。配合自定义工具和嵌套子 Agent，Cursor SDK 从"编辑器插件"进化为"Agent 运行时"。
+      字节跳动发布 Kling 2.6，首次实现<strong>原生音频 + 视频</strong>一次性生成，无需二次配音或音画对齐。支持<strong>4K 分辨率</strong>输出，音画同步精度达毫秒级。此前视频生成需要先出画面再单独生成音频，Kling 2.6 将两步合为一步，大幅简化创作流程。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">🎛️ 自主性旋钮</div>
-        <div class="sub-card-text">从"开关"变成"旋钮"，Agent 自主性可精细调节</div>
+        <div class="sub-card-title">🎬 音视频同生</div>
+        <div class="sub-card-text">原生音频与画面一次生成，毫秒级音画同步</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">📝 自然语言规则</div>
-        <div class="sub-card-text">用自然语言引导分类器，如"只读检查可放行，删除操作须暂停"</div>
+        <div class="sub-card-title">📹 4K 输出</div>
+        <div class="sub-card-text">支持 4K 分辨率，满足专业创作需求</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：Cursor 官方 · #AI编程 #安全
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-chrome">
-      <span class="card-num">6</span>
-      <span class="card-title">Krea 2 发布：美学优先的 AI 图像模型，创意从"提示词"转向"操控杆"</span>
-      <span class="card-score">8.3</span>
-    </div>
-    <div class="card-desc">
-      Krea AI 发布 Krea 2（K2）基础图像模型，两个变体——<strong>Medium</strong>（更快更稳定，适合插画/动漫）和<strong>Large</strong>（超 2 倍参数，适合照片级真实感）。核心创新是<strong>"生成式滑块"</strong>：最多 4 个风格参考图各自独立强度调节。Moodboard 功能可读取数十张图片的视觉语言，生成"品味档案"+ 关键词 + "避坑清单"。四档创造力参数让"创意"成为可调参数。
-    </div>
-    <div style="margin-top:14px;">
-      <div class="sub-card">
-        <div class="sub-card-title">🎨 美学连贯性</div>
-        <div class="sub-card-text">模型做审美解读而非逐字翻译，视觉意图优先</div>
-      </div>
-      <div class="sub-card">
-        <div class="sub-card-title">🎚️ 生成式滑块</div>
-        <div class="sub-card-text">4 个风格参考独立强度调节，创意从写提示词变成调参数</div>
-      </div>
-    </div>
-    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：Krea AI / Magnific · #AI图像 #创作工具
+      来源：@BytedanceTalk · #AI视频 #音视频一体
     </div>
   </div>
 </section>
 
-<!-- §3 多模态与Agent -->
-<section class="section" id="s7">
+<!-- §3 工具升级 -->
+<section class="section" id="s6">
   <div class="section-chrome">
-    <span class="section-kicker">§ 3 Multimodal & Agents</span>
-    <span class="section-count">2 items</span>
+    <span class="section-kicker">§ 3 Tool Upgrades</span>
+    <span class="section-count">3 items</span>
   </div>
-  <h2 class="section-title">多模态与Agent</h2>
-  <p class="section-sub">混合推理编排与对话式视频编辑</p>
+  <h2 class="section-title">工具升级</h2>
+  <p class="section-sub">全能视觉、Agent 模式与设计画布</p>
+
+  <div class="card">
+    <div class="card-chrome">
+      <span class="card-num">6</span>
+      <span class="card-title">Qwen3.7-Plus：视觉中国第一，看想写做验一个模型全搞定</span>
+      <span class="card-score">8.3</span>
+    </div>
+    <div class="card-desc">
+      阿里发布 Qwen3.7-Plus，在中文视觉理解基准上登顶<strong>国内第一</strong>。实现<strong>"看-想-写-做-验"</strong>五步闭环：看（图像理解）→ 想（推理分析）→ 写（内容生成）→ 做（工具调用）→ 验（结果校验），单一模型完成全链路任务，无需多模型编排。
+    </div>
+    <div style="margin-top:14px;">
+      <div class="sub-card">
+        <div class="sub-card-title">👁️ 看想写做验</div>
+        <div class="sub-card-text">五步闭环一个模型搞定，省去多模型编排的复杂度</div>
+      </div>
+      <div class="sub-card">
+        <div class="sub-card-title">🇨🇳 视觉中文第一</div>
+        <div class="sub-card-text">中文视觉理解基准登顶，本土化优势显著</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
+      来源：@Alibaba_Qwen · #视觉模型 #全能
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">7</span>
-      <span class="card-title">Perplexity Computer 混合推理：本地与云端模型自动分配任务</span>
-      <span class="card-score">8.2</span>
+      <span class="card-title">NotebookLM Agent 模式：自动发现来源 + 云电脑 + 多格式导出</span>
+      <span class="card-score">8.0</span>
     </div>
     <div class="card-desc">
-      Perplexity Computer 今夏引入<strong>"混合智能体推理"</strong>模式：系统根据任务类型和数据敏感度，在本地紧凑模型和云端前沿模型间自动切换。敏感数据严格留守本地，高推理需求自动发往云端。Deep Research 已集成进 Computer，可协调<strong>20+ 前沿模型</strong>，Opus 4.6 作为主推理引擎。Search as Code 架构让 Agent 生成 Python 构建搜索管线，token 使用量降低<strong>85%</strong>。
+      Google NotebookLM 上线 Agent 模式，支持<strong>自动发现来源</strong>——模型会根据研究主题自动搜索并推荐相关资料。新增<strong>云电脑</strong>功能，Agent 可直接在云端执行代码、处理数据。支持<strong>多格式导出</strong>（PDF、Markdown、音频播客），从"笔记本"进化为"研究助手"。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">🔀 混合路由</div>
-        <div class="sub-card-text">本地处理敏感数据，云端执行重推理，自动路由无需预选</div>
+        <div class="sub-card-title">🔍 自动发现来源</div>
+        <div class="sub-card-text">根据研究主题自动搜索推荐相关资料，省去手动收集</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">📝 Search as Code</div>
-        <div class="sub-card-text">Agent 生成 Python 构建搜索管线，token 使用降低 85%</div>
+        <div class="sub-card-title">💻 云电脑执行</div>
+        <div class="sub-card-text">Agent 直接在云端执行代码、处理数据，无需本地环境</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：Perplexity · #AI Agent #混合推理
+      来源：@GoogleDeepMind · #AI研究 #Agent模式
     </div>
   </div>
 
   <div class="card">
     <div class="card-chrome">
       <span class="card-num">8</span>
-      <span class="card-title">Gemini Omni Flash 上线：视频创作从"生成一次"变"聊着改"</span>
-      <span class="card-score">8.0</span>
+      <span class="card-title">Cursor 3.7 Canvas Design Mode：多选元素 + 语音叙述 + 上下文报告</span>
+      <span class="card-score">7.8</span>
     </div>
     <div class="card-desc">
-      Google I/O 2026 发布的 Gemini Omni Flash 已上线，支持<strong>对话式视频编辑</strong>：用户可用自然语言连续修改视频，换环境、换视角、调氛围、替换局部元素，同时保持角色一致性和物理规律。支持多模态输入（文本+图片+音频+视频），可用自己的声音和形象创建数字分身。所有生成内容内嵌<strong>SynthID</strong>不可见数字水印。已向全球付费用户开放，并免费内置到 YouTube Shorts。
+      Cursor 发布 3.7 版本，新增 Canvas Design Mode。支持<strong>多选元素</strong>批量编辑，<strong>语音叙述</strong>功能可口述设计意图让 AI 执行，<strong>上下文报告</strong>自动生成设计决策文档。从代码编辑器进一步向"AI 设计协作平台"演进。
     </div>
     <div style="margin-top:14px;">
       <div class="sub-card">
-        <div class="sub-card-title">💬 对话式迭代</div>
-        <div class="sub-card-text">多轮对话增量修改，微调一处不需重做整段视频</div>
+        <div class="sub-card-title">🖱️ 多选元素</div>
+        <div class="sub-card-text">批量选中 UI 元素进行统一样式调整，效率倍增</div>
       </div>
       <div class="sub-card">
-        <div class="sub-card-title">🔒 SynthID水印</div>
-        <div class="sub-card-text">所有生成内容内嵌不可见数字水印，可溯源验证</div>
+        <div class="sub-card-title">🎙️ 语音叙述</div>
+        <div class="sub-card-text">口述设计意图，AI 理解并执行，降低操作门槛</div>
       </div>
     </div>
     <div style="margin-top:10px; font-family:'Work Sans',sans-serif; font-size:11px; color:var(--ink-faint);">
-      来源：Google DeepMind · #AI视频 #多模态
+      来源：@CursorAI · #AI编程 #设计模式
     </div>
   </div>
 </section>
@@ -508,20 +537,20 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
     <span class="section-kicker">Epilogue</span>
   </div>
   <div class="conclusion-text">
-    今日 AI 行业的三个关键词：持久化、落地检验、生态绑定。OpenAI 收购 Ona 为 Codex 补上"持久运行"底座，Agent 从"聊一聊"正式进入"替你干活几天"的阶段；ALE 基准无情揭示 AI Agent 在真实工作中的通过率仅 24%，给"Agent 取代人类"的叙事泼了一盆冷水；Anthropic 的 Claude Corps 和 Cursor 的 Auto-review 则从不同角度回应了同一个问题——AI 能力越强，管控越重要。SpaceX 今夜以 1.77 万亿估值登陆纳斯达克，与 OpenAI 和 Anthropic 的 IPO 进程形成三巨头共振。对 CODM 宣发团队而言，今天最值得关注的两个工具：Krea 2 的 Moodboard + 风格滑块（品牌视觉统一性的工程化方案）和 Cursor Auto-review（宣发自动化工作流的安全网）。
+    今日 AI 行业的三个关键词：速度、托管、降价。Kimi K2.7 Code 高速版把代码生成推到 260 Token/s，Claude Fable 5 以 98.3% MMLU-Pro 重构旗舰天花板——速度和精度同时突破。Google Managed Agents 用一行 API 调出沙箱 Agent，DeepSeek V4 永久降价 75% 把成本压到 GPT 的 1/30——AI 从"谁更聪明"正式进入"谁更便宜、谁跑得更快"的 Agent 工作流竞赛。Kling 2.6 音视频同生、Qwen3.7-Plus 五步闭环、NotebookLM Agent 模式、Cursor 3.7 Design Mode，四款工具从不同维度降低 AI 使用门槛。对从业者而言，今天最重要的信号是：模型能力已不是瓶颈，编排成本和运行速度才是决胜点。
   </div>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-left">
-    AIGC Daily Report · Vol.0612<br>
-    <em>Crafted by Claw 🦅 for 小柒</em>
+    AIGC 日报 · 2026.06.15<br>
+    <em>小柒AI速递</em>
   </div>
   <div class="footer-right">
-    信源：OpenAI · Anthropic · UC Berkeley · SpaceX<br>
-    Cursor · Krea AI · Perplexity · Google DeepMind<br>
-    2026.06.12 手动补发
+    信源：Kimi · Anthropic · Google DeepMind · DeepSeek<br>
+    ByteDance · Alibaba · Google · Cursor<br>
+    2026.06.15
   </div>
 </footer>
 
