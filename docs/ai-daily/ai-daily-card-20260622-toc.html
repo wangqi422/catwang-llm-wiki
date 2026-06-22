@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.06.22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Conclusion */
+.conclusion { margin-bottom:48px; scroll-margin-top:32px; }
+.conclusion-text {
+  font-family:"Noto Serif SC","Cormorant Garamond",serif; font-size:16px; font-weight:400;
+  line-height:2; color:var(--ink-soft); max-width:640px;
+}
+.conclusion-text::first-letter {
+  font-family:"Cormorant Garamond",serif; font-size:72px; font-weight:500;
+  float:left; line-height:0.8; margin-right:8px; margin-top:6px; color:var(--ink);
+}
+.conclusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:24px; }
+.conclusion-card { border-radius:16px; padding:18px 20px; }
+.conclusion-card:nth-child(4n+1) { background:var(--pink); }
+.conclusion-card:nth-child(4n+2) { background:var(--lemon); }
+.conclusion-card:nth-child(4n+3) { background:var(--blush); }
+.conclusion-card:nth-child(4n)   { background:var(--sage); }
+.conclusion-card-title { font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+.conclusion-card-text { font-family:"Noto Sans SC",sans-serif; font-size:12px; font-weight:300; color:var(--ink-soft); line-height:1.6; }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+  .back-archive-btn { right:16px!important; top:12px!important; font-size:12px!important; padding:7px 14px!important; }
+  .conclusion-grid { grid-template-columns:1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VF-STYLE —— Lenis + Preloader + 整屏位移 + 自定义光标
+   ═══════════════════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  html.vf-cursor-on, html.vf-cursor-on body, html.vf-cursor-on a, html.vf-cursor-on button { cursor: none !important; }
+}
+.vf-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2A241B; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.vf-cursor.hover { width: 48px; height: 48px; background: rgba(214, 221, 99, 0.6); }
+.vf-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(42, 36, 27, 0.3); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%); mix-blend-mode: multiply;
+}
+@media (hover: none), (pointer: coarse) { .vf-cursor, .vf-cursor-ring { display: none !important; } }
+
+.vf-preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #F2EEDF;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: all;
+}
+.vf-preloader-counter {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-weight: 500;
+  font-size: 96px; line-height: 1;
+  color: #2A241B; letter-spacing: -0.04em;
+  margin-bottom: 32px; font-variant-numeric: tabular-nums;
+}
+.vf-preloader-counter sup {
+  font-size: 28px; vertical-align: super;
+  font-style: normal; font-weight: 400;
+  margin-left: 4px; color: #5C5345;
+}
+.vf-preloader-bar {
+  width: 280px; height: 1px;
+  background: rgba(42, 36, 27, 0.15);
+  position: relative; overflow: hidden;
+}
+.vf-preloader-fill {
+  position: absolute; top: 0; left: 0;
+  width: 0%; height: 100%; background: #2A241B;
+}
+.vf-preloader-label {
+  margin-top: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 0.2em; color: #5C5345;
+  text-transform: uppercase;
+}
+
+html.vf-anim .vf-fade { opacity: 0; will-change: opacity; }
+html.vf-anim .vf-rise-100 { opacity: 0; transform: translateY(100px); will-change: opacity, transform; }
+html.vf-anim .vf-char { display: inline-block; opacity: 0; transform: translateY(110%); will-change: opacity, transform; }
+@media (prefers-reduced-motion: reduce) {
+  html.vf-anim .vf-fade,
+  html.vf-anim .vf-rise-100,
+  html.vf-anim .vf-char { opacity: 1 !important; transform: none !important; }
+  .vf-preloader { display: none !important; }
+}
+
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+html.vf-anim body .page,
+html.vf-anim body .sidebar,
+html.vf-anim body .progress-bar,
+html.vf-anim body .back-to-top,
+html.vf-anim body .back-archive-btn {
+  opacity: 0; transition: opacity 0.8s ease;
+}
+html.vf-revealed body .page,
+html.vf-revealed body .sidebar,
+html.vf-revealed body .progress-bar,
+html.vf-revealed body .back-to-top,
+html.vf-revealed body .back-archive-btn {
+  opacity: 1;
+}
+
+/* 截图模式：跳过所有 VF 动效 */
+html.screenshot-mode .vf-preloader,
+html.screenshot-mode .vf-cursor,
+html.screenshot-mode .vf-cursor-ring { display: none !important; }
+html.screenshot-mode .vf-fade,
+html.screenshot-mode .vf-rise-100,
+html.screenshot-mode .vf-char { opacity: 1 !important; transform: none !important; }
+</style>
+</head>
+<body>
+
+<!-- VF Preloader -->
+<div class="vf-preloader" id="vfPreloader">
+  <div class="vf-preloader-counter" id="vfCounter">0<sup>%</sup></div>
+  <div class="vf-preloader-bar"><div class="vf-preloader-fill" id="vfFill"></div></div>
+  <div class="vf-preloader-label">AIGC Daily · 小柒AI速递</div>
+</div>
+
+<!-- VF Custom Cursor -->
+<div class="vf-cursor" id="vfCursor"></div>
+<div class="vf-cursor-ring" id="vfCursorRing"></div>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.06.22 &middot; 星期一 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. AI Agent &amp; Platform</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>AI Agent &amp; 平台</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Codex Record &amp; Replay</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Shazeer 加入 OpenAI</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic Mythos 自我加速</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Policy</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 政策</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>AWS Continuum + Context</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Azure 托管 DeepSeek V4</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>八部门 AI+消费 指导</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Google 75% 代码 AI 生成</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>AI 视频三巨头竞技</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+  <a href="index.html" class="sidebar-back" style="display:block;padding:16px 24px;color:rgba(242,238,223,0.4);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-size:12px;margin-top:16px;transition:color 0.2s;" onmouseover="this.style.color='#D6DD63'" onmouseout="this.style.color='rgba(242,238,223,0.4)'">&larr; 返回归档</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.06.22 &middot; Mon</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Codex 录制即 Skill + Mythos 自我加速闭环 &middot; AI 从工具变系统</p>
+    <div class="header-meta">
+      <span class="meta-tag">🤖 AI Agent &amp; 平台</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💼 行业 &amp; 政策</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📊 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.22</span>
+    </div>
+  </div>
+
+  <!-- Thesis / 结论区 -->
+  <div class="conclusion" id="thesis">
+    <div class="conclusion-text">
+      今日 AI 行业的核心信号是"加速"：OpenAI Codex 用录制替代手写 Prompt、Anthropic Mythos 实现自我加速闭环、Google 75% 代码 AI 生成——三条新闻共同指向一个趋势：AI 正从"人类使用的工具"进化为"自我迭代的系统"。对设计团队而言，可用 AI 自动化的工作流范围正在指数级扩大，同时需要警惕自主性增强带来的质量控制挑战。
+    </div>
+    <div class="conclusion-grid">
+      <div class="conclusion-card">
+        <div class="conclusion-card-title">OpenAI</div>
+        <div class="conclusion-card-text">Codex Record &amp; Replay，录制操作自动生成可复用 Skill</div>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-card-title">Anthropic</div>
+        <div class="conclusion-card-text">Mythos 自我加速闭环，模型迭代从月级缩短到日级</div>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-card-title">Google</div>
+        <div class="conclusion-card-text">75% 新代码 AI 生成，Agent-First 架构全面转型</div>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-card-text">AI 视频三巨头竞技：Seedance 2 重控制 / Veo 3.1 重音画 / Grok 重速度</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §1 AI Agent & 平台 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. AI Agent &amp; Platform</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🤖 AI Agent &amp; 平台</div>
+    <div class="section-sub">今日最重磅的 Agent 与平台动态</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI Codex Record &amp; Replay：录制操作自动生成可复用 Skill</span>
+        <span class="card-tag">🔥 P0</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 发布 Codex Record &amp; Replay，开发者可<strong>录制自己的操作流程</strong>，Codex 自动将操作转化为可复用的 Skill，后续 Agent 可自动执行相同任务。Skill 可<strong>跨项目复用、可分享给团队成员</strong>，形成组织级 AI 知识沉淀。从"AI 辅助写代码"进化为<strong>"AI 复刻工作流"</strong>，自动化深度质的飞跃。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Noam Shazeer 离开 Google 加入 OpenAI，Transformer 共同作者全员离场</span>
+        <span class="card-tag">🔥 P0</span>
+      </div>
+      <div class="card-desc">
+        Transformer 论文共同作者 Noam Shazeer 正式离开 Google 加入 OpenAI。至此，<strong>Transformer 的 8 位共同作者已全部离开 Google</strong>。Shazeer 此前主导 Character.AI 和 Gemini 开发，加入 OpenAI 将加强其模型研发。AI 顶尖人才从大厂向创业公司/专注型公司<strong>流动趋势持续加速</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic Mythos 内部版本完成训练，自我加速闭环启动</span>
+        <span class="card-tag">🔥 P0</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 内部确认 Mythos 模型完成训练，具备<strong>自我评估和自我改进能力</strong>，标志着 AI"自我加速闭环"首次在大型实验室中实现。Constitutional AI 框架深度融入 Mythos，<strong>安全与能力同步演进</strong>。自我加速闭环意味着模型迭代速度可能<strong>从月级缩短到周级甚至日级</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 政策（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Policy</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">💼 行业 &amp; 政策</div>
+    <div class="section-sub">企业级基础设施与政策动态</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">AWS Summit NYC：Continuum + Context 发布，企业 Agent 安全与知识图谱</span>
+        <span class="card-tag">🔥 P1</span>
+      </div>
+      <div class="card-desc">
+        AWS 在纽约 Summit 发布 Continuum 和 Context 两大服务。Continuum 为 AI Agent 提供<strong>安全沙箱和权限管理框架</strong>，Context 为企业级 RAG 提供<strong>知识图谱能力</strong>，自动索引和关联内部文档。两大服务组合解决了企业部署 AI Agent 的<strong>安全合规和知识管理两大痛点</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">微软 Azure 引入 DeepSeek V4 托管，Copilot Cowork 按用量计费</span>
+        <span class="card-tag">P1</span>
+      </div>
+      <div class="card-desc">
+        微软宣布 Azure AI 平台正式<strong>托管 DeepSeek V4</strong>，开发者可通过 Azure API 直接调用。同时 Copilot Cowork 转为<strong>按用量计费模式</strong>，企业可根据实际使用量灵活控制 AI 成本。微软"开放模型托管"策略与 OpenAI Codex 开放第三方<strong>形成行业共振</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">商务部等八部门发布"人工智能+消费"实施意见</span>
+        <span class="card-tag">P1 政策</span>
+      </div>
+      <div class="card-desc">
+        商务部联合七部门发布《关于促进人工智能+消费的指导意见》，<strong>"AI+消费"首次获国家层面系统性政策支持</strong>。重点鼓励 AI 驱动的新型消费场景（智能导购、个性化推荐、虚拟体验等），同时强调<strong>消费者权益保护和数据安全</strong>，为 AI 消费应用划定合规边界。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📊 趋势 &amp; 工具</div>
+    <div class="section-sub">行业趋势信号与 AI 创作工具动态</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Google 75% 新代码由 AI 生成，Agent-First 架构转型</span>
+        <span class="card-tag">P2 趋势</span>
+      </div>
+      <div class="card-desc">
+        Google 内部数据显示，<strong>75% 的新代码由 AI 生成</strong>，公司正全面转向 Agent-First 架构。内部推广 Antigravity 编辑器，让开发者以 Agent 协作方式完成编码任务。从<strong>"人主导+AI 辅助"转向"AI 主导+人审核"</strong>，开发者角色从执行者转为架构师。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">AI 视频工具格局巨变：Seedance 2、Veo 3.1、Grok Imagine Video 齐更新</span>
+        <span class="card-tag">P1 工具</span>
+      </div>
+      <div class="card-desc">
+        AI 视频生成工具集中爆发：字节 Seedance 2 提升<strong>视频一致性和可控性</strong>，适合叙事性内容创作；Google Veo 3.1 增强<strong>音画同步</strong>，AI 视频从"无声动图"进化为"完整视听作品"；xAI Grok Imagine Video 1.5 Fast 模式<strong>25 秒出片</strong>，速度仍是核心优势。三巨头同场竞技，AI 视频进入<strong>"秒级产出"时代</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Codex R&amp;R</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">Shazeer</div><div class="data-value">9.0</div></div>
+    <div class="data-chip"><div class="data-label">Mythos</div><div class="data-value">8.9</div></div>
+    <div class="data-chip"><div class="data-label">Avg</div><div class="data-value">8.4</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.06.22<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<a href="index.html" class="back-archive-btn" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(214,221,99,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+<!-- ═══════ VF Style: Lenis + GSAP ═══════ -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  // 截图模式检测
+  const urlParams = new URLSearchParams(window.location.search);
+  const screenshotMode = urlParams.get('screenshot') === '1' ||
+                         document.documentElement.classList.contains('screenshot-mode');
+  if (screenshotMode) {
+    document.documentElement.classList.add('screenshot-mode');
+    const pre = document.getElementById('vfPreloader');
+    if (pre) pre.style.display = 'none';
+    return;
+  }
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || typeof gsap === 'undefined' || typeof Lenis === 'undefined') {
+    document.getElementById('vfPreloader').style.display = 'none';
+    document.documentElement.classList.add('vf-revealed');
+    return;
+  }
+
+  document.documentElement.classList.add('vf-anim');
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ════════ 1. Lenis 平滑惯性滚动 ════════
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical', smooth: true,
+    mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2,
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // ════════ 2. 自定义光标 ════════
+  const cursor = document.getElementById('vfCursor');
+  const cursorRing = document.getElementById('vfCursorRing');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.documentElement.classList.add('vf-cursor-on');
+    let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+    addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a, .card, .conclusion-card, .nav-link, .back-to-top, .back-archive-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+
+  // ════════ 3. h1 拆字符 ════════
+  const h1 = document.querySelector('.header h1');
+  if (h1) {
+    const text = h1.textContent;
+    h1.innerHTML = '';
+    [...text].forEach(ch => {
+      const wrap = document.createElement('span');
+      wrap.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:bottom;';
+      const span = document.createElement('span');
+      span.className = 'vf-char';
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      wrap.appendChild(span);
+      h1.appendChild(wrap);
+    });
+  }
+
+  // ════════ 4. 动画 class ════════
+  const tag = (sel, cls) => document.querySelectorAll(sel).forEach(el => el.classList.add(cls));
+  tag('.header-kicker', 'vf-fade');
+  tag('.header-meta .meta-tag', 'vf-fade');
+  tag('.conclusion-text', 'vf-rise-100');
+  tag('.conclusion-card', 'vf-rise-100');
+  tag('.section-kicker, .section-count, .section-title, .section-sub', 'vf-rise-100');
+  tag('.card', 'vf-rise-100');
+  tag('.data-chip', 'vf-rise-100');
+  tag('.footer-left, .footer-right', 'vf-fade');
+
+  // ════════ 5. Preloader 进度 ════════
+  const preloader = document.getElementById('vfPreloader');
+  const counter = document.getElementById('vfCounter');
+  const fill = document.getElementById('vfFill');
+  const counterObj = { val: 0 };
+  lenis.stop();
+
+  gsap.to(counterObj, {
+    val: 100, duration: 1.6, ease: 'power2.inOut',
+    onUpdate: () => {
+      const v = Math.floor(counterObj.val);
+      counter.innerHTML = v + '<sup>%</sup>';
+      fill.style.width = v + '%';
+    },
+    onComplete: revealPage
+  });
+
+  function revealPage() {
+    const tl = gsap.timeline({
+      defaults: { ease: 'power4.out' },
+      onStart: () => document.documentElement.classList.add('vf-revealed'),
+      onComplete: () => lenis.start()
+    });
+    tl.to(preloader, {
+      yPercent: -100, duration: 1.1, ease: 'power3.inOut',
+      onComplete: () => preloader.style.display = 'none'
+    }, 0);
+    tl.to('.vf-char', { y: 0, opacity: 1, duration: 1.0, stagger: 0.015, ease: 'power3.out' }, 0.4);
+    tl.to('.header-kicker', { opacity: 1, duration: 0.8 }, 0.7);
+    tl.to('.header-meta .meta-tag', { opacity: 1, duration: 0.7, stagger: 0.03 }, 0.9);
+    tl.to('.data-chip', { opacity: 1, y: 0, duration: 1.0, stagger: 0.05, ease: 'power4.out' }, 1.0);
+    tl.to('.conclusion-text', { opacity: 1, y: 0, duration: 1.2 }, 1.1);
+    tl.to('.conclusion-card', { opacity: 1, y: 0, duration: 1.2, stagger: 0.06, ease: 'power4.out' }, 1.3);
+  }
+
+  // ════════ 6. 章节滚动入场 ════════
+  document.querySelectorAll('.section, .section-highlight').forEach((sec) => {
+    const titleGroup = sec.querySelectorAll('.section-kicker, .section-count, .section-title, .section-sub');
+    const cards = sec.querySelectorAll('.card');
+    const trig = (start) => ({ trigger: sec, start: 'top ' + start, toggleActions: 'play none none none' });
+
+    if (titleGroup.length) gsap.to(titleGroup, { opacity: 1, y: 0, duration: 1.0, stagger: 0.02, ease: 'power4.out', scrollTrigger: trig('85%') });
+    if (cards.length) gsap.to(cards, { opacity: 1, y: 0, duration: 1.2, stagger: 0.08, ease: 'power4.out', scrollTrigger: trig('80%') });
+  });
+
+  gsap.to('.footer-left, .footer-right', {
+    opacity: 1, duration: 1.0, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.footer', start: 'top 90%', toggleActions: 'play none none none' }
+  });
+
+  // ════════ 7. 视差 ════════
+  document.querySelectorAll('.conclusion-card').forEach((card, i) => {
+    gsap.to(card, { y: -20 - i * 6, ease: 'none',
+      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+  });
+
+  // ════════ 8. 进度条 glow ════════
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.background = 'linear-gradient(90deg, #D6DD63 0%, #E1A4C2 50%, #B7C7A8 100%)';
+
+  // 锚点 lenis 跳转
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -32 }); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
