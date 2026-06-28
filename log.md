@@ -2,6 +2,40 @@
 
 ---
 
+## [2026-06-28 09:20] AIGC 日报 06.28
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 5+ 轮 WebSearch 扫描 65 信源，过去 24h 筛选 8 条最新动态
+- 来源覆盖：36氪 / IT之家 / DeepSeek 官方、OpenAI 官方 + Broadcom 官方、Anthropic + Bloomberg、The Information、Mistral 官方 + TechTimes、新智元 / 36氪、GitHub Trending / Trendshift、Anthropic + The Decoder、IT之家 / 微博开放平台 等
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260628.md`
+- 三大主题：基建 & 芯片（2条）/ 地缘 & 工具（2条，腮红色满幅高亮）/ Agent & 趋势（4条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260628-toc.html`
+- Soft Editorial + TOC 侧边栏，柠檬黄 `#D6DD63` 高亮
+- 3 大章节：§1 基建 & 芯片（2条）/ §2 地缘 & 工具（2条，腮红色满幅高亮）/ §3 Agent & 趋势（4条）
+- 右上角「← 返回归档」按钮 + ScrollSpy 自动高亮
+
+**Phase 4 - 发布推送**：
+- Git commit `ea3e027` → push origin main 成功（dc79615..ea3e027）
+- 企微推送 `node push-ai-daily.js --date 20260628` 成功（242/4096 字节）
+
+**TOP 8**：
+1. DeepSeek × 北大开源 DSpark 推测解码框架：单用户生成速度+60-85%（9.4）
+2. OpenAI × Broadcom 联合发布 Jalapeño 首款自研推理芯片：9 个月流片成本降 50%（9.2）
+3. Anthropic 指控阿里 Qwen 实施 28.8M 次蒸馏攻击：4 倍于此前 DeepSeek 案（9.0）
+4. Mistral AI 发布 OCR4：170 语言 OmniDocBench 击败 GPT-5.5 Pro（8.8）
+5. Karpathy 内部 Claude.md 军规泄露：10 条实战规则碾压 GitHub 18 万星（8.7）
+6. OpenMontage：GitHub 周榜第一的 Agentic 视频制作系统 500+ Agent Skills（8.6）
+7. Anthropic 停招初级工程师双重警告：增长伴随失业两端同时拉满（8.5）
+8. 微博 weibo-cli 正式上线：70+ API + MCP 协议国内首个 Agent 原生 CLI（8.3）
+
+---
+
 ## [2026-06-27 09:20] AIGC 日报 06.27
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
