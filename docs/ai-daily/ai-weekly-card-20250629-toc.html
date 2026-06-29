@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #12 · 2026.06.23–06.29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Back to Archive Button ═══════ */
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+  .back-archive-btn { right: 16px!important; top: 12px!important; font-size: 12px!important; padding: 7px 14px!important; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+<a href="index.html" class="back-archive-btn">&#8592; 返回归档</a>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.06.23 – 06.29 &middot; Issue No. 12</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>&#26631;&#39064; &amp; &#27010;&#35272;</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>&#26412;&#21608;&#32467;&#35770;</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&#167;1</span>&#23454;&#29992;&#24037;&#20855;&#31665;</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Kimi K2.7-Code</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>MiniMax M3</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>GPT-5.6 &#31995;&#21015;</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>&#21487;&#28789; 3.0 Omni 4K</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Seedance 2.0 VIP</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&#167;2</span>&#39640;&#25928;&#24037;&#20316;&#27969;</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Tag</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Runway Agent</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&#167;3</span>&#26041;&#27861;&#35770;&#19982; Prompt</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Karpathy CLAUDE.md</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>&#32422;&#26463;&#21363;&#22797;&#21033;</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&#167;4</span>&#25512;&#33616;&#19978;&#25163;&#39034;&#24207;</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 12</div>
+    <h1>AI <em>&#24178;&#36135;</em>&#21608;&#25253;</h1>
+    <p class="lead">&#27169;&#22411;&#36845;&#20195;&#29190;&#21457;&#21608; &middot; GPT-5.6 &#19977;&#31661;&#40784;&#21457; + &#21407;&#29983; 4K &#35270;&#39057;&#26102;&#20195;&#26469;&#20020; &middot; 9 &#26465;&#31435;&#21051;&#33021;&#29992;&#30340;&#24178;&#36135;</p>
+    <div class="header-meta">
+      <span class="meta-tag">&#25195;&#25551;&#33539;&#22260; 65 &#20449;&#28304;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">&#31934;&#36873; 9 &#26465;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 &#22823;&#26495;&#22359;</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.23 – 06.29</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      &#36825;&#21608;&#26159;&#21517;&#21103;&#20854;&#23454;&#30340;&#12300;&#27169;&#22411;&#36845;&#20195;&#29190;&#21457;&#21608;&#12301;&#65306;OpenAI &#19977;&#31661;&#40784;&#21457; GPT-5.6 &#23478;&#26063;&#65292;Anthropic Claude Sonnet-5 &#34180;&#21183;&#24453;&#21457;&#65292;&#22269;&#20135;&#27169;&#22411; Kimi K2.7-Code &#19982; MiniMax M3 &#22312;&#20195;&#30721;&#39046;&#22495;&#23637;&#24320;&#27491;&#38754;&#23545;&#20915;&#12290;
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">OpenAI</div>
+        <div class="thesis-card-body"><b>GPT-5.6</b> &#19977;&#26723;&#27169;&#22411;&#65288;Sol/Terra/Luna&#65289;&#65306;&#26071;&#33328; Sol &#22312; Terminal-Bench 2.1 &#19978;&#21047;&#26032; 91.9%&#65292;&#36229;&#36234; Claude Mythos 5</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Anthropic</div>
+        <div class="thesis-card-body"><b>Claude Sonnet-5</b>&#65288;&#20195;&#21495; Fennec&#65289;&#34180;&#21183;&#24453;&#21457;&#65292;<b>Claude Tag</b> &#19978;&#32447; Slack &#38598;&#25104;&#65292;&#30452;&#25509; @Claude &#27966;&#27963;</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">AI &#35270;&#39057;</div>
+        <div class="thesis-card-body"><b>&#21487;&#28789; 3.0 Omni</b> &#25903;&#25345; 4K &#32534;&#36753;&#65292;<b>Seedance 2.0 VIP</b> &#19978;&#32447;&#21407;&#29983; 4K &#36755;&#20986;&#8212;&#8212;&#35270;&#39057;&#36827;&#20837;&#12300;&#29289;&#29702;&#30495;&#23454; + &#36229;&#28165;&#12301;&#26102;&#20195;</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">&#26041;&#27861;&#35770;</div>
+        <div class="thesis-card-body"><b>Karpathy CLAUDE.md</b> &#20197; 17 &#19975;&#26143;&#25104;&#20026; AI &#32534;&#31243;&#22307;&#32463;&#65292;&#22235;&#26465;&#38081;&#24459;&#27835;&#20303; LLM &#36807;&#24230;&#22797;&#26434;&#12289;&#26080;&#20851;&#25913;&#21160;&#30340;&#36890;&#30149;</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>&#128161; &#19968;&#21477;&#35805;&#24635;&#32467;&#65306;AI &#27169;&#22411;&#36845;&#20195;&#36895;&#24230;&#21152;&#24555;&#65292;&#20174;&#8220;&#26356;&#22823;&#26356;&#24378;&#8221;&#36716;&#21521;&#8220;&#26356;&#19987;&#26356;&#20934;&#8221;&#20998;&#23618;&#65292;&#32780;&#35270;&#39057;&#29983;&#25104;&#27491;&#22312;&#20174;&#8220;&#33021;&#29992;&#8221;&#36808;&#21521;&#8220;&#19987;&#19994;&#32423;&#8221;&#12290;</p>
+    </div>
+  </div>
+
+  <!-- &#167;1 &#23454;&#29992;&#24037;&#20855;&#31665; -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">5 items</span>
+    </div>
+    <div class="section-title">&#128736;&#65039; &#23454;&#29992;&#24037;&#20855;&#31665;</div>
+    <div class="section-sub">5 &#20010;&#26412;&#21608;&#31435;&#21051;&#33021;&#29992;&#30340; AI &#24037;&#20855;</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Kimi K2.7-Code &middot; &#22269;&#20135;&#20195;&#30721;&#27169;&#22411;&#26032;&#26631;&#26438;</span>
+        <span class="card-tag">6&#26376;12&#26085;&#21457;&#24067;</span>
+      </div>
+      <div class="card-desc">
+        &#26376;&#20043;&#26263;&#38754; 6 &#26376; 12 &#26085;&#21457;&#24067;&#30340;&#20195;&#30721;&#19987;&#29992;&#27169;&#22411;&#65292;32B &#28608;&#27963;&#21442;&#25968;&#65292;&#22312; MCP &#24037;&#20855;&#35843;&#29992;&#22522;&#20934;&#19978;&#20197; 76.0 &#20998;&#39046;&#20808;&#24320;&#28304;&#38453;&#33829;&#12290;1T &#24635;&#21442;&#25968; / 32B &#28608;&#27963;&#65288;MoE &#26550;&#26500;&#65289;&#65292;256K &#19978;&#19979;&#25991;&#31383;&#21475;&#65292;Modified MIT &#35768;&#21487;&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">Hugging Face &#24320;&#28304;&#26435;&#37325; / Moonshot API: $0.95/$4.00 per MTok</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#26368;&#24555;&#36335;&#24452;</div><div class="sub-card-body">&#30452;&#25509;&#26367;&#25442;&#29616;&#26377; Claude Code &#24213;&#23618;&#27169;&#22411;&#65292;&#24050;&#39564;&#35777;&#20860;&#23481;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#27880;&#24847;</div><div class="sub-card-body">&#24378;&#21046; thinking &#27169;&#24335;&#65292;token &#28040;&#32791;&#27604; DeepSeek V4 &#39640;&#32422; 30%</div></div>
+      </div>
+      <div class="source">&compfn; @Kimi_Moonshot / Moonshot &#23448;&#26041;&#27169;&#22411;&#21345;</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">MiniMax M3 &middot; &#39318;&#20010;&#21407;&#29983;&#22810;&#27169;&#24577;&#24320;&#28304;&#20195;&#30721;&#27169;&#22411;</span>
+        <span class="card-tag">6&#26376;1&#26085;&#21457;&#24067;</span>
+      </div>
+      <div class="card-desc">
+        &#39318;&#27425;&#23558;&#21407;&#29983;&#22270;&#20687;/&#35270;&#39057;&#36755;&#20837;&#19982;&#20195;&#30721;&#33021;&#21147;&#32467;&#21512;&#65292;SWE-Bench Pro 59%&#65288;&#21378;&#21830;&#33258;&#27979;&#65289;&#12290;&#25903;&#25345; 1M &#19978;&#19979;&#25991;&#65292;&#21487;&#19968;&#27425;&#24615;&#22622;&#20837;&#25972;&#20010;&#20195;&#30721;&#24211; + &#35774;&#35745;&#22270;&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#36866;&#21512;&#22330;&#26223;</div><div class="sub-card-body">&#12300;&#30475;&#22270;&#20889;&#20195;&#30721;&#12301;&#22330;&#26223;&#65288;&#26681;&#25454; UI &#35774;&#35745;&#31295;&#29983;&#25104;&#21069;&#31471;&#20195;&#30721;&#65289;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#19982; Kimi &#23545;&#27604;</div><div class="sub-card-body">&#22810;&#27169;&#24577;&#21407;&#29983;&#25903;&#25345; vs &#32431;&#25991;&#26412; / 1M vs 256K &#19978;&#19979;&#25991;</div></div>
+      </div>
+      <div class="source">&compfn; @MiniMax_AI / MiniMax &#23448;&#26041;&#20844;&#21578;</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">GPT-5.6 &#31995;&#21015; &middot; OpenAI &#19977;&#26723;&#27169;&#22411;&#31934;&#20934;&#20998;&#23618;</span>
+        <span class="card-tag">6&#26376;27&#26085;&#21457;&#24067;</span>
+      </div>
+      <div class="card-desc">
+        Sol&#65288;&#26071;&#33328;&#65289;/ Terra&#65288;&#22343;&#34913;&#65289;/ Luna&#65288;&#36731;&#37327;&#65289;&#19977;&#26723;&#20998;&#23618;&#12290;&#26071;&#33328; Sol &#22312; Terminal-Bench 2.1 &#19978;&#20197; 91.9%&#65288;Ultra &#27169;&#24335;&#65289;&#36229;&#36234; Claude Mythos 5&#12290;7 &#26376;&#23558;&#19978;&#32447; Cerebras &#19987;&#23646;&#37096;&#32626;&#65292;&#26368;&#39640; 750 tok/s&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Sol &#26071;&#33328;</div><div class="sub-card-body">$5/$30 per MTok&#65292;&#36866;&#21512;&#22797;&#26434;&#31185;&#30740;/&#32593;&#32476;&#23433;&#20840;</div></div>
+        <div class="sub-card"><div class="sub-card-title">Terra &#22343;&#34913;</div><div class="sub-card-body">$2.5/$15&#65292;&#24615;&#33021;&#25345;&#24179; GPT-5.5 &#20294;&#20215;&#26684;&#33136;&#26025;</div></div>
+        <div class="sub-card"><div class="sub-card-title">Luna &#36731;&#37327;</div><div class="sub-card-body">$1/$6&#65292;&#36866;&#21512;&#39640;&#24182;&#21457;&#22330;&#26223;</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI / OpenAI &#23448;&#26041;&#21338;&#23458;</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">&#21487;&#28789; 3.0 Omni 4K &#32534;&#36753;&#21319;&#32423; &middot; AI &#35270;&#39057;&#36827;&#20837;&#36229;&#28165;&#26102;&#20195;</span>
+        <span class="card-tag">6&#26376;17&#26085;&#21319;&#32423;</span>
+      </div>
+      <div class="card-desc">
+        &#24555;&#25163; 6 &#26376; 17 &#26085;&#21319;&#32423;&#65292;&#25903;&#25345; 4K &#36755;&#20837;/&#36755;&#20986;&#30340; AI &#35270;&#39057;&#32534;&#36753;&#65292;&#32534;&#36753;&#26102;&#38271;&#20174; 3 &#31186;&#25193;&#23637;&#21040; 15 &#31186;&#12290;&#31361;&#30772;&#28857;&#65306;&#19981;&#20877;&#26159;&#12300;&#29983;&#25104; 4K&#12301;&#65292;&#32780;&#26159;&#12300;&#32534;&#36753; 4K&#12301;&#8212;&#8212;&#20445;&#30041;&#21407;&#22987;&#32032;&#26448;&#20998;&#36776;&#29575;&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#19978;&#25163;&#24314;&#35758;</div><div class="sub-card-body">&#19978;&#20256; 4K &#21407;&#29255; &#8594; &#33258;&#28982;&#35821;&#35328;&#25551;&#36848;&#32534;&#36753;&#38656;&#27714; &#8594; &#30452;&#25509;&#36755;&#20986; 4K</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#36866;&#21512;&#20154;&#32676;</div><div class="sub-card-body">&#38656;&#35201;&#23545;&#29616;&#26377; 4K &#32032;&#26448;&#36827;&#34892; AI &#32534;&#36753;&#30340;&#19987;&#19994;&#21046;&#20316;&#22242;&#38431;</div></div>
+      </div>
+      <div class="source">&compfn; Kling AI &#23448;&#26041;&#20844;&#21578; / Atlas Cloud</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">&#21363;&#26790; Seedance 2.0 VIP &#21407;&#29983; 4K &middot; &#23383;&#33410;&#36339;&#21160;&#29289;&#29702;&#30495;&#23454;&#35270;&#39057;&#27169;&#22411;</span>
+        <span class="card-tag">6&#26376;23&#26085;&#19978;&#32447;</span>
+      </div>
+      <div class="card-desc">
+        &#19982;&#21518;&#26399;&#36229;&#20998;&#19981;&#21516;&#65292;&#21407;&#29983; 4K &#20174;&#28304;&#22836;&#20445;&#30041;&#21457;&#19997;&#12289;&#32441;&#29702;&#12289;&#26448;&#36136;&#31561;&#39640;&#23494;&#24230;&#32454;&#33410;&#12290;&#25903;&#25345; 12 &#20010;&#28151;&#21512;&#36755;&#20837;&#65288;9 &#22270;+3 &#35270;&#39057;+3 &#38899;&#39057;&#65289;&#65292;&#29289;&#29702;&#19990;&#30028;&#27169;&#25311;&#22120;&#25903;&#25345;&#37325;&#21147;&#12289;&#30896;&#25758;&#12289;&#20809;&#24433;&#12289;&#26448;&#36136;&#27169;&#25311;&#12290;
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">&#21363;&#26790; AI &#32593;&#39029;&#29256;/App&#65288;VIP &#20250;&#21592;&#65289;/ &#28779;&#23665;&#24341;&#25806; API</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#20142;&#28857;</div><div class="sub-card-body">16 &#31186;&#38271;&#26102;&#24207;&#36830;&#36143;&#29983;&#25104;&#65292;&#21407;&#29983;&#38899;&#35270;&#39057;&#21516;&#27493;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#36866;&#21512;&#22330;&#26223;</div><div class="sub-card-body">&#24433;&#35270;&#21518;&#26399;&#12289;&#21697;&#29260;&#35270;&#35273;&#12289;&#24191;&#21578;&#33829;&#38144;&#39640;&#21697;&#36136;&#22330;&#26223;</div></div>
+      </div>
+      <div class="source">&compfn; @BytedanceTalk / &#21363;&#26790; AI &#23448;&#26041;</div>
+    </div>
+  </div>
+
+  <!-- &#167;2 &#39640;&#25928;&#24037;&#20316;&#27969; (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#9889; &#39640;&#25928;&#24037;&#20316;&#27969;</div>
+    <div class="section-sub">2 &#22871;&#25913;&#21464;&#26085;&#24120;&#30340;&#24037;&#20316;&#26041;&#24335;</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Claude Tag &middot; &#22312; Slack &#37324;&#30452;&#25509; @Claude &#27966;&#27963;</span>
+        <span class="card-tag">6&#26376;23&#26085;&#19978;&#32447;</span>
+      </div>
+      <div class="card-desc">
+        <strong>&#30171;&#28857;</strong>&#65306;&#22242;&#38431;&#24050;&#32463;&#22312; Slack &#37324;&#21327;&#20316;&#65292;&#20294;&#38656;&#35201;&#39057;&#32321;&#20999;&#25442;&#21040; Claude &#30028;&#38754;&#25165;&#33021;&#29992; AI&#65292;&#19978;&#19979;&#25991;&#21106;&#35010;&#12290;<strong>Claude Tag &#25226; AI &#33021;&#21147;&#23884;&#20837;&#29616;&#26377;&#24037;&#20316;&#27969;</strong>&#65292;&#30452;&#25509;&#22312;&#39057;&#36947;&#37324; @Claude &#23436;&#25104;&#20219;&#21153;&#12290;
+      </div>
+      <div class="code-block"><span class="cmt"># &#20351;&#29992;&#31034;&#20363;</span>
+@Claude &#24635;&#32467;&#36825;&#20010;&#32447;&#31243;&#30340;&#26680;&#24515;&#32467;&#35770;
+@Claude &#26816;&#26597;&#36825;&#20010; PR &#30340;&#20195;&#30721;&#36136;&#37327;
+@Claude &#27599;&#22825;&#19979;&#21320;3&#28857;&#25552;&#37266;&#25105;&#26597;&#30475;&#37038;&#20214;</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#39044;&#26399;&#25928;&#26524;</div><div class="sub-card-body">&#38646;&#20999;&#25442;&#25104;&#26412;&#65292;&#24179;&#22343;&#27599;&#20010;&#20219;&#21153;&#33410;&#30465; 8-12 &#20998;&#38047;&#19978;&#19979;&#25991;&#20999;&#25442;&#26102;&#38388;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">Team/Enterprise &#35745;&#21010;&#19987;&#20139;&#65292;6 &#26376; 23 &#26085;&#36215;&#36880;&#27493;&#25512;&#36865;</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI / TechCrunch</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Runway Agent &middot; &#33258;&#21160;&#21270;&#33829;&#38144;&#20869;&#23481;&#29983;&#20135;</span>
+        <span class="card-tag">6&#26376;25&#26085;&#19978;&#32447;</span>
+      </div>
+      <div class="card-desc">
+        <strong>&#30171;&#28857;</strong>&#65306;&#33829;&#38144;&#22242;&#38431;&#38656;&#35201;&#20026;&#19981;&#21516;&#24179;&#21488;&#12289;&#19981;&#21516;&#24066;&#22330;&#21046;&#20316;&#22823;&#37327;&#21464;&#20307;&#32032;&#26448;&#65292;&#20154;&#24037;&#21046;&#20316;&#32791;&#26102;&#19988;&#38590;&#20445;&#25345;&#19968;&#33268;&#24615;&#12290;<strong>Runway Agent &#33258;&#21160;&#20998;&#26512;&#25968;&#25454;&#29983;&#25104;&#21019;&#24847;&#26041;&#21521;&#65292;&#19968;&#38190;&#29983;&#25104;&#22810;&#24179;&#21488;&#36866;&#37197;&#29256;&#26412;&#12290;</strong>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#25928;&#26524;</div><div class="sub-card-body">&#26696;&#20363;&#65306;&#24191;&#21578;&#21046;&#20316;&#21608;&#26399;&#20174; 2 &#21608;&#32553;&#30701;&#21040; 2 &#22825;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">Runway Unlimited / Enterprise &#35745;&#21010;</div></div>
+      </div>
+      <div class="source">&compfn; @runwayml / Runway &#23448;&#26041; Changelog</div>
+    </div>
+  </div>
+
+  <!-- &#167;3 &#26041;&#27861;&#35770;&#19982; Prompt -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#129504; &#26041;&#27861;&#35770;&#19982; Prompt</div>
+    <div class="section-sub">2 &#20010;&#21487;&#22797;&#29992;&#30340; AI &#26041;&#27861;&#35770;</div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Karpathy &#30340; CLAUDE.md &middot; AI &#32534;&#31243;&#22235;&#26465;&#38081;&#24459;</span>
+        <span class="card-tag">GitHub 17&#19975;&#26143;</span>
+      </div>
+      <div class="card-desc">
+        OpenAI &#32852;&#21512;&#21019;&#22987;&#20154; Andrej Karpathy &#21457;&#24067;&#30340; AI &#32534;&#31243;&#35268;&#33539;&#25991;&#26723;&#65292;&#30452;&#25351; LLM &#20889;&#20195;&#30721;&#30340;&#19977;&#22823;&#36890;&#30149;&#65306;<strong>&#38169;&#35823;&#20551;&#35774;&#12289;&#36807;&#24230;&#22797;&#26434;&#12289;&#26080;&#20851;&#25913;&#21160;</strong>&#12290;
+      </div>
+      <div class="code-block"><span class="cmt">## CLAUDE.md &#26680;&#24515;&#35268;&#21017;</span>
+<span class="key">1. &#32534;&#30721;&#21069;&#24605;&#32771;</span> - &#36935;&#21040;&#19981;&#26126;&#30830;&#30340;&#38656;&#27714;&#65292;&#20027;&#21160;&#28165;&#32780;&#38750;&#29468;&#27979;
+<span class="key">2. &#31616;&#27905;&#20248;&#20808;</span> - &#33021;&#29992; 50 &#34892;&#23454;&#29616;&#65292;&#32477;&#19981;&#20889; 200 &#34892;
+<span class="key">3. &#31934;&#20934;&#20462;&#25913;</span> - &#21482;&#25913;&#21160;&#20219;&#21153;&#30456;&#20851;&#30340;&#20195;&#30721;
+<span class="key">4. &#30446;&#26631;&#39537;&#21160;</span> - &#26126;&#30830;&#39564;&#35777;&#26631;&#20934;&#65292;&#23545;&#32467;&#26524;&#36127;&#36131;</div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">&#23454;&#25112;&#25928;&#26524;</div><div class="sub-card-body">&#20195;&#30721;&#34892;&#25968;&#20943;&#23569; 40%&#65292;&#20195;&#30721;&#35780;&#23457;&#26102;&#38388;&#32553;&#30701; 25%</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#33719;&#21462;&#26041;&#24335;</div><div class="sub-card-body">GitHub: karpathy/claude-code-guidelines</div></div>
+      </div>
+      <div class="source">&compfn; @karpathy / X &#21407;&#24086; &amp; GitHub &#31038;&#21306;</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">&#26412;&#21608; Vault &#33258;&#25105;&#36830;&#25509;&#21457;&#29616;&#65306;&#32422;&#26463;&#21363;&#22797;&#21033;</span>
+        <span class="card-tag">Vault Insight</span>
+      </div>
+      <div class="card-desc">
+        &#36825;&#26159;&#26412;&#21608; connection-surface &#20174; vault &#20013;&#28014;&#29616;&#30340;&#26680;&#24515; pattern&#8212;&#8212;<strong>&#32473;&#20250;&#28418;&#31227;&#30340;&#31995;&#32479;&#21152;&#32467;&#26500;&#21270;&#32422;&#26463;&#65292;&#30701;&#26399;&#30475;&#20687;&#21152;&#40635;&#28902;&#65292;&#38271;&#26399;&#26159;&#22797;&#21033;&#21457;&#21160;&#26426;</strong>&#12290;
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">AI &#24037;&#31243;</div><div class="sub-card-body">&#32473; Agent &#21152;&#32422;&#26463;&#65288;rules / skills / spec&#65289;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#30693;&#35782;&#31649;&#29702;</div><div class="sub-card-body">&#32473;&#31508;&#35760;&#21152;&#32422;&#26463;&#65288;capture_type &#24517;&#22635; 5 &#31867;&#65289;</div></div>
+        <div class="sub-card"><div class="sub-card-title">Prompt &#24037;&#33402;</div><div class="sub-card-body">&#32473; AI &#32472;&#22270;&#21152;&#32422;&#26463;&#65288;--cref &#38170;&#28857;&#65289;</div></div>
+        <div class="sub-card"><div class="sub-card-title">&#24320;&#21457;&#27969;&#31243;</div><div class="sub-card-body">&#32473;&#20195;&#30721;&#21152;&#32422;&#26463;&#65288;&#20808;&#20889; spec &#20877;&#20889;&#20195;&#30721;&#65289;</div></div>
+      </div>
+      <div class="source">&compfn; &#26412;&#21608; vault connection-surface &#21457;&#29616;</div>
+    </div>
+  </div>
+
+  <!-- &#167;4 &#25512;&#33616;&#19978;&#25163;&#39034;&#24207; -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">6 items</span>
+    </div>
+    <div class="section-title">&#127941; &#25512;&#33616;&#19978;&#25163;&#39034;&#24207;</div>
+    <div class="section-sub">&#25353;&#23398;&#20064;&#25104;&#26412; &#215; &#20215;&#20540;&#25910;&#30410;&#25490;&#24207;</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-num">1</span>
+        <span class="gallery-title">Claude Tag</span>
+        <span class="gallery-desc">10 &#20998;&#38047; / &#24050;&#22312;&#29992; Slack &#30340;&#22242;&#38431;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">2</span>
+        <span class="gallery-title">Karpathy CLAUDE.md</span>
+        <span class="gallery-desc">15 &#20998;&#38047; / &#25152;&#26377;&#29992; AI &#32534;&#31243;&#30340;&#24320;&#21457;&#32773;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">3</span>
+        <span class="gallery-title">Seedance 2.0 &#21407;&#29983; 4K</span>
+        <span class="gallery-desc">20 &#20998;&#38047; / &#38656;&#35201;&#39640;&#21697;&#36136;&#35270;&#39057;&#30340;&#21019;&#20316;&#22242;&#38431;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">4</span>
+        <span class="gallery-title">GPT-5.6 Terra</span>
+        <span class="gallery-desc">&#24453;&#23450; / &#36861;&#27714;&#24615;&#20215;&#27604;&#30340; API &#29992;&#25143;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">5</span>
+        <span class="gallery-title">Kimi K2.7-Code &#33258;&#25176;&#31649;</span>
+        <span class="gallery-desc">2 &#23567;&#26102; / &#26377;&#33258;&#24314;&#20195;&#30721; Agent &#38656;&#27714;&#30340;&#22242;&#38431;</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">6</span>
+        <span class="gallery-title">Runway Agent</span>
+        <span class="gallery-desc">1 &#22825; / &#26377;&#22823;&#37327;&#33829;&#38144;&#32032;&#26448;&#38656;&#27714;&#30340;&#21697;&#29260;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">AI &#24178;&#36135;&#21608;&#25253; &middot; 2026.06.23 – 06.29<br>Weekly Audit W26 &#20581;&#24247;&#24230; 99.2% &middot; Vault &#33258;&#25105;&#36830;&#25509; 1 &#26465;</div>
+    <div class="footer-right">&#23567;&#26646;AI&#36895;&#36882; &middot; &#27599;&#21608;&#19968;&#19978;&#21320;&#25512;&#36865;</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ Back to top ═══════ -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</div>
+
+<!-- ═══════ Scripts ═══════ -->
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('progressFill').style.width = scrolled + '%';
+
+  // Back to top visibility
+  const backToTop = document.getElementById('backToTop');
+  if (winScroll > 300) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+});
+
+// ScrollSpy for sidebar
+const sections = document.querySelectorAll('.section, .header, .thesis');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (scrollY >= sectionTop - 100) current = section.getAttribute('id');
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
