@@ -2,6 +2,44 @@
 
 ---
 
+## [2026-06-29 09:20] AIGC 日报 06.29
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 5+ 轮 WebSearch 扫描 65 信源，过去 24h 筛选 8 条最新动态
+- 来源覆盖：36氪 / 新智元 / 量子位、火山引擎 FORCE 大会 / 北京商报 / 钛媒体、雪球 / Brian Armstrong X 帖、量子位 / The Information、Techmeme / OpenAI 官方、Anthropic 官方 / 环球网、智元官方 / 网易、GitHub alibaba/page-agent / CSDN 等
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260629.md`
+- 四大主题：前沿 & 产业（2条）/ 商业化 & 成本（2条，腮红色满幅高亮）/ 模型 & 政策（2条）/ 工具 & 趋势（2条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260629-toc.html`
+- Soft Editorial + TOC 侧边栏，柠檬黄 `#D6DD63` 高亮
+- 4 大章节：§1 前沿 & 产业（2条）/ §2 商业化 & 成本（2条，腮红色满幅高亮）/ §3 模型 & 政策（2条）/ §4 工具 & 趋势（2条）
+- 顶部 Header / 底部 Data Strip 4 色块 / Footer 署名
+
+**Phase 4 - 归档 + 发布 + 推送**：
+- 归档首页 `docs/ai-daily/index.html` DATA 数组顶部追加新条目（8 个 tags）
+- Git Push: `0135651 daily: AIGC daily card 20260629` → origin main
+- 企微推送：293 字节 → 1 个群组（Markdown 摘要 + H5 在线链接）
+
+**TOP 8 主题分布**：
+- 前沿研究：1 条（#1 红皇后哥德尔机器，9.4）
+- AI 商业化：2 条（#2 豆包专业版 9.2 + #3 Coinbase 选国货 9.0）
+- 模型 & 政策：2 条（#4 Fable 5 回归 8.8 + #5 GPT-5.6 Sol 8.7）
+- AI 渗透：1 条（#6 Claude 9700 用户报告 8.5）
+- 具身智能：1 条（#7 智元 1.5 万台 8.3）
+- 工具 & Agent：1 条（#8 page-agent + MoE 8.0）
+
+**关键看点**：
+- 今日最大看点是 #1「红皇后哥德尔机器」论文 + Anthropic Jack Clark 60% 押注 2028 年底 ASI 降临
+- #3 Coinbase 把 GLM 5.2 + Kimi 2.7 设为内部默认是「国货 AI 成为默认选项」的重要信号
+- 今日是周日，但 24h 内新闻密度充足，未触发降级策略
+
+---
+
 ## [2026-06-28 09:20] AIGC 日报 06.28
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
