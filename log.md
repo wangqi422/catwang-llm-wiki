@@ -2,6 +2,87 @@
 
 ---
 
+## [2026-06-30 09:20] AIGC 日报 06.30
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 7 轮 WebSearch 扫描 65 信源过去 24h 推文，筛选 8 条最新动态
+- 来源覆盖：Anthropic 官方 X / Slack Newsroom、OpenAI 政府产品线 / TechCrunch、DeepSeek 官方 / 36氪、Karpathy 个人 X / 中文转译媒体、OpenAI × HP 合作 / Reuters、GitHub Trending agency-agents、中国具身智能行业报告 / 量子位、字节火山引擎 FORCE 大会
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260630.md`
+- 四大主题：AI Agent & 企业（3条）/ 模型 & 监管（2条，腮红色满幅高亮）/ 思考 & 精髓（1条）/ 行业 & 应用（2条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260630-toc.html`
+- Soft Editorial + TOC 侧边栏，柠檬黄 `#D6DD63` 高亮
+- 4 大章节：§1 AI Agent & 企业（3条）/ §2 模型 & 监管（2条，腮红色满幅高亮）/ §3 思考 & 精髓（1条）/ §4 行业 & 应用（2条）
+- 顶部 Header / 底部 Data Strip 4 色块 / Footer 署名
+
+**Phase 4 - 归档 + 发布 + 推送**：
+- 归档首页 `docs/ai-daily/index.html` DATA 数组顶部追加新条目（8 个 tags）
+- Git Push: `d8fdfb6 daily: AIGC daily card 20260630` → origin main
+- 企微推送：233 字节 → 1 个群组（Markdown 摘要 + H5 在线链接，无 PNG，符合 2026-05-31 后规范）
+- H5 在线验证：HTTP 200, 23KB, Last-Modified 2026-06-30 01:24:45 GMT
+
+**TOP 8 主题分布**：
+- AI Agent & 企业：3 条（#1 Claude Tag 进 Slack 9.5 / #2 OpenAI × HP Frontier 8.8 / #3 agency-agents 11.9万星 8.7）
+- 模型 & 监管：2 条（#4 GPT-5.6 政府强制预览 9.4 / #5 DeepSeek V4.1 + 500亿融资 9.3）
+- 思考 & 精髓：1 条（#6 Karpathy 长文：LLM 是全新智能物种 9.0）
+- 行业 & 应用：2 条（#7 具身智能 1H26 融资 460 亿 8.5 / #8 字节 Seedance 2.5 8.3）
+
+**关键看点**：
+- 今日两条主旋律：#1 Anthropic Claude Tag 进 Slack（Karpathy 评「第三次 LLM UI 重设计」）+ #4 OpenAI GPT-5.6 政府强制预览版（监管新形态）
+- 国产 AI 双线突破：DeepSeek V4.1 + 500 亿融资（资本）+ 字节 Seedance 2.5（视频生成）
+- 今日是周二工作日，新闻密度充足，4 章节视觉分隔明显
+
+---
+
+## [2026-06-29 09:45] AI 干货周报 Issue #12 | Vault 自检 W26
+
+**Phase 0 - Vault 自检**（2026-05-31 新增流程）：
+
+- **Weekly Audit W26**：扫描 119 篇 wiki 笔记
+  - 健康度：**99.2%**（118/119 活跃）
+  - 归档 1 篇：`pureref.md` → `wiki/_archive/2026-05-pureref.md`（W22 REVIEW 标记，休眠 28 天）
+  - 活跃指标：used_by 非空 3 篇 / surfaced_with 非空 4 篇 / 14 天内修改 0 篇
+  - 产物：`wiki/insights/weekly-audit-2026-W26.md`
+
+- **Connection Surface W26**：扫描过去 14 天新增笔记 vs 全库
+  - 新增笔记：**0 篇**（过去 14 天无新增）
+  - surfaced_with 但未 used_by：**3 篇**（约束即复利、CHIEF、character-consistency-techniques）
+  - 本周连接入选：**0 条**（无可信度 ⭐⭐⭐ 以上连接）
+  - 产物：`wiki/insights/weekly-connections-2026-W26.md`
+
+**Phase 1-4 - AI 干货周报** Issue #12：
+
+- **周期**：2026.06.23 – 06.29
+- **主题**：模型迭代爆发周
+- **条数**：9 条（5 工具 / 2 工作流 / 2 方法论）
+
+**内容分布**：
+- 🛠️ **实用工具箱**（5条）：Kimi K2.7-Code 高速版、MiniMax M3、GPT-5.6 家族（Sol/Terra/Luna）、可灵 3.0 Omni 4K、Seedance 2.0 VIP 会员
+- ⚡ **高效工作流**（2条）：Claude Tag 跨项目知识关联、Runway Agent AI 视频生成工作流
+- 🧠 **方法论与 Prompt**（2条）：Karpathy CLAUDE.md 17万星最佳实践、**约束即复利**（vault 本周自我连接发现）
+
+**关键看点**：
+- OpenAI 三箭齐发 GPT-5.6 家族（Sol 轻量/Terra 标准/Luna 创意），价格最高降 92%
+- 国产模型正面对决：Kimi K2.7-Code 代码场景 3x 提速 vs MiniMax M3 开源冲榜
+- AI 视频进入原生 4K + 物理真实时代（可灵 3.0 Omni 4K、Seedance 2.0 VIP 会员体系）
+- Vault 连接发现「约束即复利」成为方法论第 9 条 —— 证明自我连接机制有效
+
+**产物**：
+- MD：`raw/daily-reports/AI_Practical_Weekly_Report_20250629.md`
+- H5：`docs/ai-daily/ai-weekly-card-20250629-toc.html`（Soft Editorial + TOC 侧边栏，粉色 #E1A4C2 高亮）
+- 归档：`docs/ai-daily/index.html` DATA 数组顶部追加
+
+**发布**：
+- Git Push：`7d1730c` feat: AI weekly 2026.06.23–06.29 Issue #12 + vault audit/connections W26 + archive pureref
+- 企微推送：✅ 极简版（标题+🔥hook+👉链接）→ 185 字节成功送达
+
+---
+
 ## [2026-06-29 09:20] AIGC 日报 06.29
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
