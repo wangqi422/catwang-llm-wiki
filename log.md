@@ -2,6 +2,42 @@
 
 ---
 
+## [2026-07-01 09:20] AIGC 日报 07.01
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 多轮 WebSearch 扫描 65 信源过去 24h 推文，筛选 8 条最新动态
+- 来源覆盖：Anthropic 官方 X / TechCrunch、AWS 官方 / 36氪、Google DeepMind 官方 / The Verge、美团 LongCat 技术报告 / 量子位、优必选官方 / 智东西、SK 海力士招股书 / Reuters、国务院政策原文 / 财新
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260701.md`
+- 三大主题：海外巨头 & 平台（3条）/ 国产 AI & 政策（2条，腮红色满幅高亮）/ 物理 AI & 硬件（3条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260701-toc.html`（23532 字节）
+- Soft Editorial + TOC 侧边栏，柠檬黄 `#D6DD63` 高亮
+- 3 大章节：§1 海外巨头 & 平台（3条）/ §2 国产 AI & 政策（2条，腮红色满幅高亮）/ §3 物理 AI & 硬件（3条）
+- 顶部 Header / 4 色块 Data Strip / Footer 署名
+- 右上角「← 返回归档」按钮
+
+**Phase 4 - 归档 + 发布 + 推送**：
+- 归档首页 `docs/ai-daily/index.html` DATA 数组顶部追加新条目（8 个 tags）
+- Git Commit: `c680ced AIGC daily 2026.07.01` → push origin main
+- 企微推送：231 字节 → 1 个群组（Markdown 摘要 + H5 在线链接，无 PNG）
+
+**TOP 8 主题分布**：
+- 海外巨头 & 平台：3 条（#1 Claude Sonnet 5 9.6 / #2 AWS FDE 10亿 9.4 / #3 Google Nano Banana 2 Lite + Gemini Omni 9.3）
+- 国产 AI & 政策：2 条（#4 美团 LongCat-2.0 9.2 / #5 国务院 AI 全学段教育 8.5）
+- 物理 AI & 硬件：3 条（#6 优必选 U1 全尺寸超仿生机器人 8.9 / #7 黄仁勋 物理 AI 8.8 / #8 SK 海力士 IPO 8.7）
+
+**关键看点**：
+- 今日 3 大主旋律：模型迭代（Sonnet 5 价格砍 60%）+ Agent 工程化（AWS FDE 部门成立 10 亿） + 物理 AI 全面起势（优必选+黄仁勋+SK海力士IPO）
+- 国产 AI 重大里程碑：美团 LongCat-2.0 成为首个全国产算力万亿模型开源，OpenRouter 全球前三
+- 国务院《教育发展"十五五"规划》把 AI 教育从试点推向全学段覆盖
+
+---
+
 ## [2026-06-30 09:20] AIGC 日报 06.30
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
