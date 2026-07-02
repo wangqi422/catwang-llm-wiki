@@ -2,6 +2,41 @@
 
 ---
 
+## [2026-07-02 09:20] AIGC 日报 07.02
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 多轮 WebSearch 扫描 65 信源过去 24h 推文，筛选 8 条最新动态
+- 来源覆盖：Anthropic Claude Science 官方公告 / 财联社、华为开源盘古 2.0 / IT之家、DeepSeek API 用户通知 / 微博、Anthropic×Microsoft Foundry / 微博、Karpathy LLM Wiki Gist / 36氪 / 新智元、路透社 / IT之家、科创板日报 / 雪球、软银官方声明
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260702.md`
+- 三大主题：海外巨头 & 垂直行业（3条）/ 国产 AI & 资本（3条，腮红色满幅高亮）/ 趋势 & 大事（2条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260702-toc.html`（Soft Editorial + TOC 侧边栏，柠檬黄 #D6DD63 高亮）
+- 3 大章节：§1 海外巨头 & 垂直行业（3条）/ §2 国产 AI & 资本（3条，腮红色满幅高亮）/ §3 趋势 & 大事（2条）
+- 顶部 Header / 4 色块 Data Strip / Footer 署名
+- 右上角「← 返回归档」按钮
+
+**Phase 4 - 归档 + 发布 + 推送**：
+- 归档首页 `docs/ai-daily/index.html` DATA 数组顶部追加新条目（8 个 tags）
+- Git Commit: `ae3d433 daily: AIGC daily 2026.07.02` → push origin main（04a288d..ae3d433）
+- 企微推送：250 字节 → 1 个群组（Markdown 摘要 + H5 在线链接，无 PNG）
+
+**TOP 8 主题分布**：
+- 海外巨头 & 垂直行业：3 条（#1 Claude Science 9.5 / #2 Claude 登陆 Azure 9.0 / #3 Fable 5 解禁 8.8）
+- 国产 AI & 资本：3 条（#4 华为 openPangu-2.0 9.4 / #5 DeepSeek V4 峰谷定价 9.2 / #6 Kimi 315亿美元估值 8.8）
+- 趋势 & 大事：2 条（#7 Karpathy LLM Wiki 9.0 / #8 软银追加 OpenAI 30亿美元 8.6）
+
+**关键看点**：
+- **Anthropic 三连击**：Claude Science（垂直行业 OS 入口）+ 登陆 Azure（企业生态扩张）+ 美国出口管制解除——Anthropic 正从"模型公司"转型为"AI 操作系统公司"
+- **国产 AI 算力闭环**：华为 openPangu 全栈开源（授人以渔）+ DeepSeek V4 峰谷定价 + 跑通昇腾——首次形成"训练 + 推理 + 价格机制"完整闭环
+- **Karpathy "autocompiler" 持续发酵**：本仓库（catwang-llm-wiki）的 raw/ + wiki/ + Codex/ 三层结构正是该范式实践
+
+---
+
 ## [2026-07-01 09:20] AIGC 日报 07.01
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
