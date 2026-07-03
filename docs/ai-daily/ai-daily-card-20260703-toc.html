@@ -45,6 +45,15 @@ body {
 .sidebar-header h1 em { font-style:italic; font-weight:400; }
 .sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
 
+.sidebar-back {
+  display:block; margin:0 16px 12px; padding:8px 12px; text-align:center;
+  background:rgba(214,221,99,0.12); color:var(--lemon);
+  font-family:"Noto Sans SC",sans-serif; font-size:12px; font-weight:500;
+  border-radius:6px; text-decoration:none; border:1px solid rgba(214,221,99,0.3);
+  transition:all 0.2s;
+}
+.sidebar-back:hover { background:rgba(214,221,99,0.2); border-color:var(--lemon); }
+
 .nav-section { padding:8px 16px; }
 .nav-section-title {
   font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
@@ -174,6 +183,8 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
     <div class="sidebar-meta">2026.07.03 &middot; 星期五 &middot; 8 条速报</div>
   </div>
 
+  <a href="../index.html" class="sidebar-back">&larr; 返回归档</a>
+
   <div class="nav-section">
     <div class="nav-section-title">Overview</div>
     <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
@@ -182,24 +193,29 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   <div class="nav-section">
     <div class="nav-section-title">i. 海外巨头 &amp; Agent 革命</div>
     <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>海外巨头 &amp; Agent 革命</a>
-    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 5% 股权</a>
-    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Sonnet 5 降价 60%</a>
-    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">3.</span>Claude Code 1000 Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 一夜三连</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code 后台 Agent</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>OpenAI 5% 股权</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>AI 算力转向 ROI</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">ii. 国产 AI &amp; 资本</div>
-    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>国产 AI &amp; 资本</a>
-    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">4.</span>Kimi K2.7/K3</a>
-    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>可灵 30 亿美元</a>
+    <div class="nav-section-title">ii. 国产 AI &amp; 大模型</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>国产 AI &amp; 大模型</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Kimi K3 2.5 万亿</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>搭子 Skill 降本</a>
   </div>
 
   <div class="nav-section">
-    <div class="nav-section-title">iii. 编程 &amp; 趋势</div>
-    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>编程 &amp; 趋势</a>
-    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Code 监视</a>
-    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>35% 一年替代</a>
-    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Cursor 移动端</a>
+    <div class="nav-section-title">iii. 论文 &amp; AI for Science</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>论文 &amp; AI for Science</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>字节 PAR 蛋白质</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>纳德拉"学习回路论"</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Recommend</div>
+    <a href="#recommend" class="nav-link"><span class="nav-num">&sect;4</span>推荐上手顺序</a>
   </div>
 
   <div class="sidebar-dots">
@@ -223,196 +239,254 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
       <i style="background:var(--blush)"></i>
       <i style="background:var(--sage)"></i>
     </div>
-    <div class="header-kicker">AI Daily Report &middot; 2026.07.03 &middot; Fri</div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.07.03 &middot; Fri &middot; 第 13 期</div>
     <h1>AIGC <em>日报</em></h1>
-    <p class="lead">8 条速报 &middot; OpenAI 以股换路 &middot; 国产 AI 商业化反超 &middot; Agent 工程化全面落地</p>
+    <p class="lead">8 条速报 &middot; 巨头「国家化」加速 &middot; 国产大模型 2.5 万亿竞赛 &middot; Agent 工程化流水线化</p>
     <div class="header-meta">
-      <span class="meta-tag">&#127760; 海外巨头 &amp; Agent 革命</span>
+      <span class="meta-tag">&#127760; 海外巨头 &amp; Agent</span>
       <span class="meta-tag">&middot;</span>
-      <span class="meta-tag">&#127464;&#127475; 国产 AI &amp; 资本</span>
+      <span class="meta-tag">&#127464;&#127475; 国产 AI</span>
       <span class="meta-tag">&middot;</span>
-      <span class="meta-tag">&#128293; 编程 &amp; 趋势</span>
+      <span class="meta-tag">&#128300; 论文 &amp; AI for Science</span>
       <span class="meta-tag">&middot;</span>
       <span class="meta-tag">2026.07.03</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">&#127760; AI HOT 第 0 轮</span>
     </div>
   </div>
 
-  <!-- &sect;1 海外巨头 & Agent 革命 -->
+  <!-- 数据条 · 速览 4 大要点 -->
+  <div class="data-strip" style="margin-bottom:48px;">
+    <div class="data-chip">
+      <div class="data-label">本期主旋律</div>
+      <div class="data-value">巨头「国家化」</div>
+    </div>
+    <div class="data-chip">
+      <div class="data-label">国产最大模型</div>
+      <div class="data-value">2.5T</div>
+    </div>
+    <div class="data-chip">
+      <div class="data-label">AI HOT 候选</div>
+      <div class="data-value">19 / 100</div>
+    </div>
+    <div class="data-chip">
+      <div class="data-label">总扫描信源</div>
+      <div class="data-value">177</div>
+    </div>
+  </div>
+
+  <!-- §1 海外巨头 & Agent 革命 -->
   <div class="section" id="s1">
     <div class="section-chrome">
       <span class="section-kicker">i. Global Giants &amp; Agent Revolution</span>
-      <span class="section-count">3 items</span>
+      <span class="section-count">4 items</span>
     </div>
     <div class="section-title">&#127760; 海外巨头 &amp; Agent 革命</div>
-    <div class="section-sub">OpenAI 以股换路 &middot; Anthropic 双线突进 &middot; 1000 个并行子代理开放 Pro 计划</div>
+    <div class="section-sub">Anthropic 一夜三连 &middot; Claude Code 后台化 &middot; OpenAI 国家化 &middot; 算力转向 ROI</div>
 
     <div class="card" id="item-1">
       <div class="card-chrome">
         <span class="card-num">1</span>
-        <span class="card-title">OpenAI 提议 5% 股权（426 亿美元）给美国政府 &middot; 换监管绿灯同时邀 Anthropic/谷歌/Meta 一起</span>
+        <span class="card-title">Anthropic 一夜三连：Fable 5 全球 + Sonnet 5 + Claude Science + Claude Code 进化为 Claude Tag</span>
         <span class="card-tag">&#128293; 头条</span>
       </div>
       <div class="card-desc">
-        英国《金融时报》7/2 独家披露：<strong>OpenAI CEO 奥特曼已向特朗普政府提议将公司 5% 股权（按 8520 亿美元估值计算约 426 亿美元）移交公共财富基金</strong>，化解国会强监管压力，让美国公众"直接分享 AI 经济收益"。<strong>奥特曼进一步建议 Anthropic、谷歌 DeepMind、Meta 等美国前沿 AI 开发商各出 1%-5% 股权</strong>，注入类似"阿拉斯加永久基金"的主权财富基金，由独立委员会管理，分红给全美公民。方案仍处"概念性"阶段，<strong>需国会立法授权</strong>。
+        <strong>Fable 5</strong> 7/1 全球可用，出口管制解除；7/7 从订阅中移除，改为 AI 用量计费。<strong>Sonnet 5</strong> 同步发布——"最 agentic 的 Sonnet"，针对编码和日常专业工作。<strong>Claude Science</strong> 是可定制科研 App，集成研究者常用工具，产出可审计工件。<strong>Claude Tag</strong> = Anthropic 把内部工具 Claude Code 进化为全公司使用的"团队 AI 记忆层"，Fable 5 已接入。从今天起，<strong>Anthropic 不再是模型公司，而是"AI 工作流操作系统公司"</strong>。
       </div>
     </div>
 
     <div class="card" id="item-2">
       <div class="card-chrome">
         <span class="card-num">2</span>
-        <span class="card-title">Anthropic Claude Sonnet 5 6/30 正式发布 &middot; 最 Agentic 价位砍 60%</span>
-        <span class="card-tag">&#128293; 巨头降价</span>
+        <span class="card-title">Claude Code 子智能体默认后台运行：Boris Cherny 八个月不写代码，同时管上万个 Agent</span>
+        <span class="card-tag">&#129302; Agent 革命</span>
       </div>
       <div class="card-desc">
-        Anthropic 6/30 正式发布 <strong>Claude Sonnet 5</strong>——迄今最"Agentic"的 Sonnet 模型。<strong>能制定计划、自主调用浏览器/终端、自主任务能力接近 Opus 4.8</strong>。促销期 8/31 前 <strong>2 美元/百万输入 + 10 美元/百万输出 tokens</strong>，之后回到 3/15 美元——<strong>相比 Sonnet 4.6 综合降价约 60%</strong>。BrowseComp 评估匹配 Opus 4.8（高 effort ），<strong>网络安全能力比 Opus 弱很多（Firefox 漏洞 0%）</strong>，主动定位为"agentic 部署的安全选择"。同步 7/1 全面解除 Fable 5/Mythos 5 出口管制。
+        <strong>Claude Code v2.1.198</strong> 发布：后台智能体可<strong>自动提交、推送、创建草稿 PR</strong>。下版 Claude Code 子智能体<strong>默认在后台跑</strong>——Boris Cherny 官宣。新增 <code>agent_needs_input</code> / <code>agent_completed</code> 事件，前台用户与主 Agent 聊天时，后台 Agent 在 worktree 完成代码并自动推送。新增 <strong>/dataviz 技能</strong>（图表与仪表盘设计）。<strong>Boris 自述</strong>：八个月没手写过一行代码；有些日子同时管理着<strong>数千甚至上万个 AI 智能体</strong>——"你不再是那个给 Claude 写提示的人了，写提示的是另一个 Claude"。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">OpenAI 拟向美国政府提供 5% 股权（估值 426 亿美元）+ GPT-5.6 Sol 创 Terminal-Bench 2.1 91.9% 新纪录</span>
+        <span class="card-tag">&#127482;&#127480; 国家化</span>
+      </div>
+      <div class="card-desc">
+        奥特曼向特朗普政府提议，<strong>将公司 5% 股权移交公共财富基金</strong>，估值约 426 亿美元；建议 Anthropic、谷歌、Meta 同步实施同等股权出让。<strong>GPT-5.6 系列</strong> 6/27 发布——旗舰版 Sol、均衡版 Terra、轻量版 Luna；Sol 在 <strong>Terminal-Bench 2.1 基准测试中创下 91.9% 新纪录</strong>。应美国政府要求目前仅向少数可信合作伙伴开放 API 预览。加州男子起诉 OpenAI 指控 ChatGPT 加剧双相情感障碍病情。
       </div>
     </div>
 
     <div class="card" id="item-4">
       <div class="card-chrome">
-        <span class="card-num">3</span>
-        <span class="card-title">Anthropic Claude Code 动态工作流正式开放 Pro 用户 &middot; 单次 1000 个并行子代理</span>
-        <span class="card-tag">&#128293; 多代理</span>
+        <span class="card-num">4</span>
+        <span class="card-title">AI 行业从军备竞赛转向 ROI：Anthropic 牵手三星自研芯片，Meta 拟出租闲置算力</span>
+        <span class="card-tag">&#128176; 算力转向</span>
       </div>
       <div class="card-desc">
-        Anthropic 7/2 宣布将 <strong>Claude Code 的"动态工作流"（Dynamic Workflows）升级为正式可用</strong>，<strong>首次向 Pro 计划（20 美元/月）订阅用户开放</strong>。<strong>单次运行可协调多达 1000 个并行子代理</strong>，每个子代理拥有独立、专注的上下文窗口。架构级重构：模型把编排计划"外置"为 JavaScript 脚本由独立运行时执行，<strong>让"长达数天的自主运行"在架构上成为可能</strong>。<strong>"评估器-优化器"对抗验证机制</strong>专门解决 LLM 自我验证时倾向"高报成功率"的缺陷。成本警示：<strong>24 小时并行运行约 400-600 美元</strong>。
+        <strong>Anthropic × 三星</strong>：正深度接触探讨定制 AI 芯片开发，定位/服务器集成/性能指标待定；同时不放弃谷歌 TPU、亚马逊 Trainium、英伟达 GPU 多元硬件架构。<strong>Meta 出租算力</strong>：拟对外出租闲置 AI 算力，把"资本回报率"摆在"资本开支规模"前面。背景：OpenAI 上周联合博通推出 Jalapeño 推理芯片；亚马逊/谷歌也在云服务中提供定制 TPU。<strong>AI 行业的下半场不再是"谁烧钱多"，而是"谁 ROI 高"</strong>。
       </div>
     </div>
   </div>
 
-  <!-- &sect;2 国产 AI & 资本（Highlight） -->
+  <!-- §2 国产 AI & 大模型激战（Highlight） -->
   <div class="section-highlight" id="s2">
     <div class="section-chrome">
-      <span class="section-kicker">ii. China AI &amp; Capital</span>
+      <span class="section-kicker">ii. China AI &amp; Foundation Models</span>
       <span class="section-count">2 items</span>
     </div>
-    <div class="section-title">&#127464;&#127475; 国产 AI &amp; 资本</div>
-    <div class="section-sub">Kimi 进 GitHub Copilot &middot; K3 2.5 万亿定档 &middot; 可灵 30 亿美元独角兽</div>
-
-    <div class="card" id="item-3">
-      <div class="card-chrome">
-        <span class="card-num">4</span>
-        <span class="card-title">Kimi K2.7 Code 登陆 GitHub Copilot &middot; 首个开源模型进入选择器；K3 7月定档 2.5 万亿参数</span>
-        <span class="card-tag">&#128293; 国产开源</span>
-      </div>
-      <div class="card-desc">
-        <strong>GitHub 7/1 正式在 Copilot 中上线月之暗面 Kimi K2.7 Code</strong>——<strong>这是 Copilot 模型选择器首次纳入"开放权重"模型</strong>。模型托管在 Microsoft Azure，按用量计费。K2.7 Code 技术规格：<strong>MoE 架构总参 1 万亿，激活 320 亿；256K 上下文 + MLA + MoonViT 多模态</strong>。核心亮点："过度思考抑制"——比 K2.6 <strong>平均减少 30% thinking-token 使用量</strong>。同步消息：<strong>Kimi K3 已确认 7 月内发布，参数规模 2.5 万亿</strong>，超越 DeepSeek V4 Pro 的 1.6 万亿与百度文心 5.0 的 2.4 万亿，<strong>有望成为"国产最大参数模型"</strong>，1M 超长上下文 + 多模态深度集成对标 GPT-5.6 旗舰。
-      </div>
-    </div>
+    <div class="section-title">&#127464;&#127475; 国产 AI &amp; 大模型激战</div>
+    <div class="section-sub">2.5 万亿参数俱乐部 &middot; 多模态 + 1M 上下文 &middot; 7 月中发布</div>
 
     <div class="card" id="item-5">
       <div class="card-chrome">
         <span class="card-num">5</span>
-        <span class="card-title">快手可灵 AI 完成近 30 亿美元融资 &middot; 国产视频生成步入独角兽时代</span>
-        <span class="card-tag">国产资本</span>
+        <span class="card-title">Kimi K3 七月中发布：2.5 万亿参数 + 1M 上下文 + 多模态，国产最大</span>
+        <span class="card-tag">&#128293; 国产最大</span>
       </div>
       <div class="card-desc">
-        快手旗下 <strong>可灵 AI（Kling AI）7/2 完成近 30 亿美元融资</strong>，<strong>估值跃升至独角兽顶端（超 200 亿美元）</strong>。本轮融资是国产 AIGC 视频生成赛道<strong>迄今最大单笔融资</strong>，资金主要用于基础模型迭代、推理算力扩张与全球商业化。可灵 3.0 在国产视频生成中长期处于"质量 + 速度 + 中文场景"三维第一梯队，3.0 Ultra 早期访问已开放。30 亿美元足够把可灵推到"全球第一阵营"：<strong>买算力、扩团队、抢市场，1 年内可能直接挑战 Runway / Veo 3.1</strong>。
+        月之暗面员工 <strong>Young_AGI 在 X 上确认</strong> 7 月发布 Kimi K3；参数量 <strong>2.5 万亿</strong>，超越 DeepSeek V4 Pro 的 1.6 万亿、超过文心 5.0 的 2.4 万亿，成为当前国产大模型中参数量最大的产品。能力：<strong>1M 超长上下文 + 多模态理解与生成</strong>。商业进展：海外付费用户 4 倍增长，API 收入 4 倍增长，进入 200 多个国家与地区；员工总数仅 300 人。估值：月之暗面 6 月初融资估值 <strong>300 亿美元</strong>（vs OpenAI/Anthropic 的 1 万亿，谷歌 4 万亿）。
       </div>
     </div>
-  </div>
-
-  <!-- &sect;3 编程 & 趋势 -->
-  <div class="section" id="s3">
-    <div class="section-chrome">
-      <span class="section-kicker">iii. Programming &amp; Trends</span>
-      <span class="section-count">3 items</span>
-    </div>
-    <div class="section-title">&#128293; 编程 &amp; 趋势</div>
-    <div class="section-sub">地缘 AI 摩擦 &middot; 万人调查预警 &middot; AI 编程移动化</div>
 
     <div class="card" id="item-6">
       <div class="card-chrome">
         <span class="card-num">6</span>
-        <span class="card-title">Claude Code 被曝暗中监视中国用户 3 个月 &middot; Anthropic 道歉并下线代码</span>
-        <span class="card-tag">&#128293; 地缘 AI</span>
+        <span class="card-title">Anthropic 封号加码 + 开源"搭子"Skill：Claude Code + Codex 分工成本降至 30%</span>
+        <span class="card-tag">&#128296; 工程化降本</span>
       </div>
       <div class="card-desc">
-        7/2 Reddit 用户爆料：<strong>Anthropic 在 4 月推出的 Claude Code 2.1.196 版本中暗藏针对中国用户的"监视代码"</strong>——可暗中检测用户是否在中国境内、是否使用中国域名代理、是否与某中国 AI 实验室存在关联；<strong>一旦检测到会通过篡改系统提示词中的日期格式和表达符号向服务器发送隐藏标记</strong>。代码通过 XOR 加密遮蔽，<strong>官方更新说明从未提及，可能已存在近 3 个月</strong>。Anthropic 7/3 凌晨紧急回应："这是一次实验"，<strong>将在次日发布的新版本中删除该特殊代码</strong>。这是迄今最具体的"AI 公司针对特定国家歧视性技术"证据。
+        <strong>Anthropic 加大中国用户封号</strong>：Claude Code 通过时区 + <code>ANTHROPIC_BASE_URL</code> 检测中国用户；7/2 新版本删除该检测代码，但部署了更强措施。<strong>Sonnet 5 新 tokenizer 涨价</strong>：英文 token 数增至 1.4 倍，API 降价但实际更贵。<strong>开源"搭子"Skill</strong>：让 Claude Code 与 Codex 分工协作——Claude 负责架构/审美/创作，Codex 负责实现/测试/部署——成本降至纯 Claude 的 <strong>30%</strong>，避免反复冷启动。Fable 5 因过度安全防护能力大幅削弱。
       </div>
     </div>
+  </div>
+
+  <!-- §3 论文 & AI for Science -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Papers &amp; AI for Science</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#128300; 论文 &amp; AI for Science</div>
+    <div class="section-sub">开源蛋白质 + 护城河重新定义 &middot; 微软 CEO 亲自下场</div>
 
     <div class="card" id="item-7">
       <div class="card-chrome">
         <span class="card-num">7</span>
-        <span class="card-title">Anthropic 万人调查：35% 用户预计 AI 一年内完成大部分工作</span>
-        <span class="card-tag">趋势</span>
+        <span class="card-title">字节跳动 Seed 开源 PAR 蛋白质生成自回归模型（Apache 2.0，400M / 60M 两版）</span>
+        <span class="card-tag">&#129516; AI for Science</span>
       </div>
       <div class="card-desc">
-        Anthropic 7/2 发布<strong>万人规模用户调研</strong>：<strong>35% 的重度 AI 委托者预计 AI 将在 12 个月内承担其大部分工作任务</strong>。<strong>使用强度越高，对 AI 替代速度的预期越激进</strong>。同期 Claude Code 核心开发者 <strong>Boris Cherny 披露其工作流：同时运行 15 个 AI 代理协同写代码</strong>，已 6 个月未手写 SQL。<strong>Claude Code 已占 GitHub 公开提交量的 4%</strong>——意味着 GitHub 每 25 次公开 commit 就有 1 次来自 Claude Code。"AI 写代码"从概念变成基础设施数据。
+        <strong>PAR（Protein Autoregressive Modeling via Multiscale Structure Generation）</strong>：字节跳动 Seed 在 Hugging Face 开源。协议：<strong>Apache 2.0</strong>。规模：<strong>400M 和 60M 两个参数版本</strong>。方向：AI for Science / 生物计算，生成高质量蛋白质结构。字节在开源蛋白质模型方面动作较少，此次将"多尺度自回归"做法直接开源，被认为是对该领域较直接的贡献。
       </div>
     </div>
 
     <div class="card" id="item-8">
       <div class="card-chrome">
         <span class="card-num">8</span>
-        <span class="card-title">Cursor 推出 iPhone/iPad 移动应用 &middot; AI 编程走向移动端</span>
-        <span class="card-tag">&#128293; 移动编程</span>
+        <span class="card-title">微软 CEO 纳德拉"学习回路论"：AI 时代护城河不在模型，而在公司独有的学习回路</span>
+        <span class="card-tag">&#127919; 大佬观点</span>
       </div>
       <div class="card-desc">
-        <strong>AI 编程工具 Cursor 7/1 推出 iPhone 和 iPad 应用公测版</strong>，为付费订阅用户提供"从移动设备启动、监控、审查 AI 编码智能体"的能力。功能完整度：<strong>启动编码智能体 + 管理进行中工程 + 审查变更的截图/视频 + 图片批注 + 差异检查 + 合并 PR + 语音对话与智能体交流</strong>。<strong>联合创始人 Chris Browder 称之为"连接本地和云端智能体工作的桥梁"</strong>。<strong>7/5 前移动端 Composer 2.5 享受 75% 折扣</strong>。继 SpaceX 600 亿美元收购 Cursor 传闻后，<strong>Cursor 是第一个把 AI 编程"装进口袋"的主流工具</strong>。
+        当智能成为可租赁的商品时，<strong>企业护城河不再是所使用的模型，而是公司独有的"学习回路"</strong>。方法：构建私有"爬坡机器"——一个从公司特定任务、痕迹、评估和结果中持续改进模型的循环。三个动作：<strong>私有评估成为战略记忆</strong>、<strong>工作流痕迹变成训练信号</strong>、<strong>人类判断用于引导复合增长</strong>。<strong>结论</strong>：未来的前沿不属于拥有最大模型的人，而属于拥有最佳学习回路的人。
       </div>
     </div>
   </div>
 
-  <!-- Data strip -->
-  <div class="data-strip">
-    <div class="data-chip"><div class="data-label">OpenAI 5%</div><div class="data-value">9.4</div></div>
-    <div class="data-chip"><div class="data-label">Sonnet 5</div><div class="data-value">9.2</div></div>
-    <div class="data-chip"><div class="data-label">Kimi K3</div><div class="data-value">9.0</div></div>
-    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">9.0</div></div>
+  <!-- §4 推荐上手顺序 -->
+  <div class="section" id="recommend">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Recommended Action</span>
+      <span class="section-count">6 picks</span>
+    </div>
+    <div class="section-title">&#128640; 推荐上手顺序（按 CODM 团队场景）</div>
+    <div class="section-sub">优先级 &middot; 工具 &middot; 理由 &middot; 时间投入</div>
+
+    <div class="data-strip">
+      <div class="data-chip">
+        <div class="data-label">&#11088;&#11088;&#11088; P0</div>
+        <div class="data-value">Claude Code v2.1.198</div>
+      </div>
+      <div class="data-chip">
+        <div class="data-label">后台子 Agent</div>
+        <div class="data-value">1 周</div>
+      </div>
+      <div class="data-chip">
+        <div class="data-label">&#11088;&#11088;&#11088; P0</div>
+        <div class="data-value">搭子 Skill</div>
+      </div>
+      <div class="data-chip">
+        <div class="data-label">Claude + Codex</div>
+        <div class="data-value">1 天</div>
+      </div>
+      <div class="data-chip">
+        <div class="data-label">&#11088;&#11088;&#11088; P0</div>
+        <div class="data-value">Kimi K3</div>
+      </div>
+      <div class="data-chip">
+        <div class="data-label">2.5 万亿 · 1M</div>
+        <div class="data-value">7 月中</div>
+      </div>
+    </div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-left">
-      AIGC 日报 &middot; 2026.07.03<br>
-      小柒AI速递 &middot; 每日推送
+      8 items &middot; 4 sections &middot; 177 sources &middot; AI HOT 100 + 65 X + 12 中文媒体<br>
+      Generated by Claw &middot; 数据截止 2026-07-03 13:25 GMT+8
     </div>
     <div class="footer-right">
-      Powered by CodeBuddy &middot; 小柒运营
+      <a href="../index.html" style="color:var(--ink-soft);text-decoration:none;">&larr; 归档首页</a>
+      &middot;
+      <a href="https://github.com/wangqi422/catwang-llm-wiki" style="color:var(--ink-soft);text-decoration:none;">GitHub</a>
     </div>
   </div>
 
 </div>
 </div>
 
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<!-- Back to top -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
-</button>
+</div>
 
 <script>
-(function() {
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = [];
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && href.startsWith('#')) {
-      const target = document.getElementById(href.slice(1));
-      if (target) sections.push({ el: target, link: link });
-    }
-  });
-  function onScroll() {
-    const scrollY = window.scrollY + 80;
-    let current = sections[0];
-    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
-    navLinks.forEach(l => l.classList.remove('active'));
-    if (current) current.link.classList.add('active');
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-    document.getElementById('progressFill').style.width = progress + '%';
-    const btn = document.getElementById('backToTop');
-    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const w = (window.scrollY / h) * 100;
+  document.getElementById('progressFill').style.width = w + '%';
+  const btn = document.getElementById('backToTop');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ScrollSpy
+const links = document.querySelectorAll('.nav-link');
+const sections = ['top','s1','s2','s3','recommend'];
+const cards = ['item-1','item-2','item-3','item-4','item-5','item-6','item-7','item-8'];
+
+window.addEventListener('scroll', () => {
+  const scroll = window.scrollY + 100;
+  // section
+  let activeSection = 'top';
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scroll) activeSection = id;
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
-    });
+  // card
+  let activeCard = null;
+  for (const id of cards) {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scroll) activeCard = id;
+  }
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + activeSection) l.classList.add('active');
+    if (l.getAttribute('href') === '#' + activeCard) l.classList.add('active');
   });
-})();
+});
 </script>
-<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
 </body>
 </html>
