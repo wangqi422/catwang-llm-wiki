@@ -2,6 +2,47 @@
 
 ---
 
+## [2026-07-03 09:20] AIGC 日报 07.03
+
+执行 AIGC 日报完整流水线（Phase 1-4）：
+
+**Phase 1 - 情报采集**：
+- 7 轮 WebSearch 扫描 65 信源过去 24h 推文，筛选 8 条最新动态
+- 来源覆盖：金融时报 / CNBC（OpenAI 5%股权首曝）、Anthropic 官方（Claude Sonnet 5 + Claude Code 动态工作流）、网易 / IT之家（Kimi K2.7 Code 进 GitHub Copilot + K3 2.5 万亿）、科技国际洞察（快手可灵 30 亿美元融资）、Reddit / 财联社 / 东方财富（Claude Code 监视中国用户）、大模型独白（Anthropic 万人调查）、多知 / 36氪（Cursor 移动端）、腾讯新闻 7/3 凌晨快讯、arXiv 2607.00924 / 2607.00510、GitHub Trending 2026-07-03、ICML 2026 Spotlight STAR-KV
+
+**Phase 2 - 日报 MD**：
+- 产物：`raw/daily-reports/AIGC_Daily_Report_20260703.md`
+- 三大主题：海外巨头 & Agent 革命（3条）/ 国产 AI & 资本（2条，腮红色满幅高亮）/ 编程 & 趋势（3条）
+
+**Phase 3 - TOC H5**：
+- 产物：`docs/ai-daily/ai-daily-card-20260703-toc.html`（Soft Editorial + TOC 侧边栏，柠檬黄 #D6DD63 高亮）
+- 3 大章节：§1 海外巨头 & Agent 革命（3条）/ §2 国产 AI & 资本（2条，腮红色满幅高亮）/ §3 编程 & 趋势（3条）
+- 顶部 Header / 4 色块 Data Strip（OpenAI 5%=9.4 / Sonnet 5=9.2 / Kimi K3=9.0 / Avg=9.0）/ Footer 署名
+- 右上角「← 返回归档」固定按钮
+
+**Phase 4 - 归档 + 发布 + 推送**：
+- 更新 `docs/ai-daily/index.html`（DATA 数组顶部追加 1 条新记录，8 tags）
+- Git commit: `4c8e23e` - daily: AIGC daily 2026.07.03
+- Git push: 57558dd → 4c8e23e，GitHub Actions 自动部署
+- 企微推送：269 字节文字摘要到「竞品日报群」1 个群组，**仅文字+H5 链接无 PNG**（符合 2026-05-31 后规范）
+
+**TOP 8**：
+1. OpenAI 提议 5% 股权（426 亿美元）给美国政府 · 换监管绿灯同时邀 Anthropic/谷歌/Meta 一起 (9.4)
+2. Anthropic Claude Sonnet 5 6/30 正式发布 · 最 Agentic 价位砍 60% (9.2)
+3. Kimi K2.7 Code 登陆 GitHub Copilot · 首个开源模型进入选择器；K3 7月定档 2.5 万亿参数 (9.0)
+4. Anthropic Claude Code 动态工作流正式开放 Pro 用户 · 单次 1000 个并行子代理 (9.0)
+5. 快手可灵 AI 完成近 30 亿美元融资 · 国产视频生成步入独角兽时代 (8.8)
+6. Claude Code 被曝暗中监视中国用户 3 个月 · Anthropic 道歉并下线代码 (8.7)
+7. Anthropic 万人调查：35% 用户预计 AI 一年内完成大部分工作 (8.6)
+8. Cursor 推出 iPhone/iPad 移动应用 · AI 编程走向移动端 (8.5)
+
+**今日备注**：
+- 今日是周五工作日，新闻密度充足
+- 三条主旋律：AI 巨头"国家化"加速（OpenAI 5%股权 + Anthropic 监视中国用户）+ 国产 AI 商业化反超（Kimi K2.7 进 Copilot + K3 2.5万亿 + 可灵 30 亿美元）+ AI Agent 工程化全面落地（Claude Code 1000 Agent + Cursor 移动端 + Claude Code 4% GitHub 占比）
+- 关键洞察：Anthropic Claude Code "暗中监视中国用户 3 个月"是迄今最具体的"AI 公司针对特定国家歧视性技术"证据，**对 CODM 宣发团队意义重大——海外 AI 工具涉政/涉历史/涉军事素材必须 0% 走海外工具**
+
+---
+
 ## [2026-07-02 09:20] AIGC 日报 07.02
 
 执行 AIGC 日报完整流水线（Phase 1-4）：
