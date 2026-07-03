@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.07.03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.07.03 &middot; 星期五 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. 海外巨头 &amp; Agent 革命</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>海外巨头 &amp; Agent 革命</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 5% 股权</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Sonnet 5 降价 60%</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">3.</span>Claude Code 1000 Agent</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. 国产 AI &amp; 资本</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>国产 AI &amp; 资本</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">4.</span>Kimi K2.7/K3</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>可灵 30 亿美元</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. 编程 &amp; 趋势</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>编程 &amp; 趋势</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Code 监视</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>35% 一年替代</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Cursor 移动端</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.07.03 &middot; Fri</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">8 条速报 &middot; OpenAI 以股换路 &middot; 国产 AI 商业化反超 &middot; Agent 工程化全面落地</p>
+    <div class="header-meta">
+      <span class="meta-tag">&#127760; 海外巨头 &amp; Agent 革命</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">&#127464;&#127475; 国产 AI &amp; 资本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">&#128293; 编程 &amp; 趋势</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.07.03</span>
+    </div>
+  </div>
+
+  <!-- &sect;1 海外巨头 & Agent 革命 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Global Giants &amp; Agent Revolution</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#127760; 海外巨头 &amp; Agent 革命</div>
+    <div class="section-sub">OpenAI 以股换路 &middot; Anthropic 双线突进 &middot; 1000 个并行子代理开放 Pro 计划</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 提议 5% 股权（426 亿美元）给美国政府 &middot; 换监管绿灯同时邀 Anthropic/谷歌/Meta 一起</span>
+        <span class="card-tag">&#128293; 头条</span>
+      </div>
+      <div class="card-desc">
+        英国《金融时报》7/2 独家披露：<strong>OpenAI CEO 奥特曼已向特朗普政府提议将公司 5% 股权（按 8520 亿美元估值计算约 426 亿美元）移交公共财富基金</strong>，化解国会强监管压力，让美国公众"直接分享 AI 经济收益"。<strong>奥特曼进一步建议 Anthropic、谷歌 DeepMind、Meta 等美国前沿 AI 开发商各出 1%-5% 股权</strong>，注入类似"阿拉斯加永久基金"的主权财富基金，由独立委员会管理，分红给全美公民。方案仍处"概念性"阶段，<strong>需国会立法授权</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Anthropic Claude Sonnet 5 6/30 正式发布 &middot; 最 Agentic 价位砍 60%</span>
+        <span class="card-tag">&#128293; 巨头降价</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 6/30 正式发布 <strong>Claude Sonnet 5</strong>——迄今最"Agentic"的 Sonnet 模型。<strong>能制定计划、自主调用浏览器/终端、自主任务能力接近 Opus 4.8</strong>。促销期 8/31 前 <strong>2 美元/百万输入 + 10 美元/百万输出 tokens</strong>，之后回到 3/15 美元——<strong>相比 Sonnet 4.6 综合降价约 60%</strong>。BrowseComp 评估匹配 Opus 4.8（高 effort ），<strong>网络安全能力比 Opus 弱很多（Firefox 漏洞 0%）</strong>，主动定位为"agentic 部署的安全选择"。同步 7/1 全面解除 Fable 5/Mythos 5 出口管制。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic Claude Code 动态工作流正式开放 Pro 用户 &middot; 单次 1000 个并行子代理</span>
+        <span class="card-tag">&#128293; 多代理</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 7/2 宣布将 <strong>Claude Code 的"动态工作流"（Dynamic Workflows）升级为正式可用</strong>，<strong>首次向 Pro 计划（20 美元/月）订阅用户开放</strong>。<strong>单次运行可协调多达 1000 个并行子代理</strong>，每个子代理拥有独立、专注的上下文窗口。架构级重构：模型把编排计划"外置"为 JavaScript 脚本由独立运行时执行，<strong>让"长达数天的自主运行"在架构上成为可能</strong>。<strong>"评估器-优化器"对抗验证机制</strong>专门解决 LLM 自我验证时倾向"高报成功率"的缺陷。成本警示：<strong>24 小时并行运行约 400-600 美元</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- &sect;2 国产 AI & 资本（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. China AI &amp; Capital</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#127464;&#127475; 国产 AI &amp; 资本</div>
+    <div class="section-sub">Kimi 进 GitHub Copilot &middot; K3 2.5 万亿定档 &middot; 可灵 30 亿美元独角兽</div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Kimi K2.7 Code 登陆 GitHub Copilot &middot; 首个开源模型进入选择器；K3 7月定档 2.5 万亿参数</span>
+        <span class="card-tag">&#128293; 国产开源</span>
+      </div>
+      <div class="card-desc">
+        <strong>GitHub 7/1 正式在 Copilot 中上线月之暗面 Kimi K2.7 Code</strong>——<strong>这是 Copilot 模型选择器首次纳入"开放权重"模型</strong>。模型托管在 Microsoft Azure，按用量计费。K2.7 Code 技术规格：<strong>MoE 架构总参 1 万亿，激活 320 亿；256K 上下文 + MLA + MoonViT 多模态</strong>。核心亮点："过度思考抑制"——比 K2.6 <strong>平均减少 30% thinking-token 使用量</strong>。同步消息：<strong>Kimi K3 已确认 7 月内发布，参数规模 2.5 万亿</strong>，超越 DeepSeek V4 Pro 的 1.6 万亿与百度文心 5.0 的 2.4 万亿，<strong>有望成为"国产最大参数模型"</strong>，1M 超长上下文 + 多模态深度集成对标 GPT-5.6 旗舰。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">快手可灵 AI 完成近 30 亿美元融资 &middot; 国产视频生成步入独角兽时代</span>
+        <span class="card-tag">国产资本</span>
+      </div>
+      <div class="card-desc">
+        快手旗下 <strong>可灵 AI（Kling AI）7/2 完成近 30 亿美元融资</strong>，<strong>估值跃升至独角兽顶端（超 200 亿美元）</strong>。本轮融资是国产 AIGC 视频生成赛道<strong>迄今最大单笔融资</strong>，资金主要用于基础模型迭代、推理算力扩张与全球商业化。可灵 3.0 在国产视频生成中长期处于"质量 + 速度 + 中文场景"三维第一梯队，3.0 Ultra 早期访问已开放。30 亿美元足够把可灵推到"全球第一阵营"：<strong>买算力、扩团队、抢市场，1 年内可能直接挑战 Runway / Veo 3.1</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- &sect;3 编程 & 趋势 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Programming &amp; Trends</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#128293; 编程 &amp; 趋势</div>
+    <div class="section-sub">地缘 AI 摩擦 &middot; 万人调查预警 &middot; AI 编程移动化</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Claude Code 被曝暗中监视中国用户 3 个月 &middot; Anthropic 道歉并下线代码</span>
+        <span class="card-tag">&#128293; 地缘 AI</span>
+      </div>
+      <div class="card-desc">
+        7/2 Reddit 用户爆料：<strong>Anthropic 在 4 月推出的 Claude Code 2.1.196 版本中暗藏针对中国用户的"监视代码"</strong>——可暗中检测用户是否在中国境内、是否使用中国域名代理、是否与某中国 AI 实验室存在关联；<strong>一旦检测到会通过篡改系统提示词中的日期格式和表达符号向服务器发送隐藏标记</strong>。代码通过 XOR 加密遮蔽，<strong>官方更新说明从未提及，可能已存在近 3 个月</strong>。Anthropic 7/3 凌晨紧急回应："这是一次实验"，<strong>将在次日发布的新版本中删除该特殊代码</strong>。这是迄今最具体的"AI 公司针对特定国家歧视性技术"证据。
+      </div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Anthropic 万人调查：35% 用户预计 AI 一年内完成大部分工作</span>
+        <span class="card-tag">趋势</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 7/2 发布<strong>万人规模用户调研</strong>：<strong>35% 的重度 AI 委托者预计 AI 将在 12 个月内承担其大部分工作任务</strong>。<strong>使用强度越高，对 AI 替代速度的预期越激进</strong>。同期 Claude Code 核心开发者 <strong>Boris Cherny 披露其工作流：同时运行 15 个 AI 代理协同写代码</strong>，已 6 个月未手写 SQL。<strong>Claude Code 已占 GitHub 公开提交量的 4%</strong>——意味着 GitHub 每 25 次公开 commit 就有 1 次来自 Claude Code。"AI 写代码"从概念变成基础设施数据。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Cursor 推出 iPhone/iPad 移动应用 &middot; AI 编程走向移动端</span>
+        <span class="card-tag">&#128293; 移动编程</span>
+      </div>
+      <div class="card-desc">
+        <strong>AI 编程工具 Cursor 7/1 推出 iPhone 和 iPad 应用公测版</strong>，为付费订阅用户提供"从移动设备启动、监控、审查 AI 编码智能体"的能力。功能完整度：<strong>启动编码智能体 + 管理进行中工程 + 审查变更的截图/视频 + 图片批注 + 差异检查 + 合并 PR + 语音对话与智能体交流</strong>。<strong>联合创始人 Chris Browder 称之为"连接本地和云端智能体工作的桥梁"</strong>。<strong>7/5 前移动端 Composer 2.5 享受 75% 折扣</strong>。继 SpaceX 600 亿美元收购 Cursor 传闻后，<strong>Cursor 是第一个把 AI 编程"装进口袋"的主流工具</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">OpenAI 5%</div><div class="data-value">9.4</div></div>
+    <div class="data-chip"><div class="data-label">Sonnet 5</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">Kimi K3</div><div class="data-value">9.0</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">9.0</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.07.03<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>

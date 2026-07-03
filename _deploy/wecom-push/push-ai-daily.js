@@ -308,7 +308,9 @@ async function main() {
     await sendMarkdown(targetWebhook.url, markdown);
     console.log(`   ✅ 文字摘要发送成功`);
     
-    if (hasPng) {
+    // 2026-05-31 用户要求：不再推送 PNG 截图，只发文字摘要 + H5 链接
+    // 如需恢复推送 PNG，把下面的 false 改回 hasPng
+    if (false && hasPng) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       console.log(`   📸 发送 PNG 卡片...`);
       await sendImage(targetWebhook.url, pngPath);
