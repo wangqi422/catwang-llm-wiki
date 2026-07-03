@@ -238,7 +238,17 @@ node _deploy/daily-card/run.js raw/daily-reports/AIGC_Daily_Report_YYYYMMDD.md
 > - 周报：过去 7 天，精选 8-10 条实用干货
 > - **日报：过去 24h，精选 8 条最新动态（新闻+工具+发布+重大事件）**
 
-#### 2.10.1 扫描目标 —— 65 个 AI 信源（与周报完全同步）
+#### 2.10.1 扫描目标 —— 65 个 AI 信源 + 1 聚合源（与周报完全同步 · 2026-07-03 起）
+
+**🌐 聚合资讯源（1 个 · 第 0 轮必扫 · 用户指定原信息源 · 2026-07-03 新增）：**
+- **AI HOT** (`https://aihot.virxact.com/all`) — 中文 AI 资讯全量聚合池，覆盖 5 大类别（模型/产品/行业/论文/技巧）
+  - **首选模式 `mode=all`**（用户指定 `/all`，全量未筛选池，由日报自己过滤）：
+    - 日报：`?mode=all&since=<24h 前>&take=100`（按需 cursor 翻页）
+    - 周报：`?mode=all&since=<7d 前>&take=100`（按需 cursor 翻页）
+  - **备选模式**（仅在 `/all` 命中不足时降级到精选）：`mode=selected`（编辑精选）/ `/api/public/daily`（每天 08:00 自动生成的成品日报）
+  - **强制要求**：调 API 必须带浏览器 UA（nginx UA 黑名单会 403，否则误以为接口挂了）
+  - **调用规范**：见 `_skills/aihot.md`（已安装的 skill，含完整端点速览 + 时间窗 / 限流 / 翻页规则）
+  - **意义**：作为聚合源，第 0 轮扫描提供「全网信号概览」，第 1-7 轮 X 账号扫描补充一手源头 + 抓高优条目原文
 
 **机构账号（17 个）：**
 ```
@@ -284,6 +294,7 @@ ArXiv Daily（cs.CL/cs.AI/cs.LG 热门论文 Top 5）
 
 | 轮次 | 目标 | 搜索策略 |
 |------|------|----------|
+| **第 0 轮** | 聚合源概览（AI HOT `/all`） | 拉 `mode=all&since=<24h 前>&take=100` 全量池（自动 cursor 翻页直到命中 ≥30 条）→ 拿到全网信号后，第 1-7 轮 X 账号扫描做定向深挖（2026-07-03 新增 · 必跑） |
 | **第 1 轮** | 实战派 6 人 + 头部机构 | `(@karpathy OR @sama OR @rauchg OR @zarazhangrui OR @OpenAI OR @AnthropicAI) AI today 2026` |
 | **第 2 轮** | 中国 AI 生态 | `(DeepSeek OR Qwen OR Kimi OR 智谱 OR MiniMax OR 月之暗面) 发布 OR 开源 OR 更新 今日` |
 | **第 3 轮** | AI 创作工具 | `(Midjourney OR Runway OR Kling OR 可灵 OR Veo OR Sora OR 即梦 OR Hailuo) new OR update OR release` |
@@ -298,6 +309,7 @@ ArXiv Daily（cs.CL/cs.AI/cs.LG 热门论文 Top 5）
 - 每轮至少命中 2 条有价值信息，否则换关键词补搜
 - 5 轮后总计应有 ≥15 条候选，再筛选出 TOP 8
 - **7 轮**（含第 6-7 轮社区+论文扫描）后应有 ≥20 条候选
+- **8 轮**（含 第 0 轮 AI HOT 聚合）后应有 ≥25 条候选（2026-07-03 新增）
 - 优先取一手来源（官方博客 > 官方推文 > 媒体报道）
 - GitHub Trending 条目需确认为**当日新增或当日大幅增长**（日增 star ≥ 50）
 - Hacker News 条目需 **score ≥ 50** 或引发有意义讨论
@@ -794,3 +806,12 @@ node _deploy/wecom-push/push-competitive-daily.js --date YYYYMMDD
 - `publish`：可把日报进一步转成展示型长文
 - `darwin`：可继续优化日报类 Skill 或相关 Prompt
 - `design-style`：竞品日报 HTML 的风格规则可从品牌设计系统中继续抽象
+
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[harness-engineering]] · [[codm-aigc-workflow]] · [[content-creation-methodology]] · [[INDEX-by-type]]
+
+---
+*返回 [[INDEX-by-type]]*

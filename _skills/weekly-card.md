@@ -2,21 +2,22 @@
 title: AI 干货周报生成与推送
 type: skill
 created: 2026-04-20
-updated: 2026-04-20
+updated: 2026-07-03
 tags:
   - aigc
   - skill
   - automation
+  - aihot-aggregator
 ---
 
 # Skill · AI 干货周报（AI Practical Weekly）
 
-> 每周一早上自动扫描 **65 个顶级 AI Builder / 官方账号** 的近 7 天公开推文，筛选出**立刻能用的工具、工作流改进和可复用方法论**，产出三板块周报 MD + 苹果白底 1080×长图 PNG，推送到企业微信群。
+> 每周一早上自动扫描 **65 个顶级 AI Builder / 官方账号** 的近 7 天公开推文，筛选出**立刻能用的工具、工作流改进和可复用方法论**，产出三板块周报（Soft Editorial + TOC 侧边栏 H5），归档到首页，推送到企业微信群。
 > **专为 AI 内容创作者 / CODM 宣发设计团队设计**：只看实用干货，跳过极客技术细节。落款：**小柒AI速递**。
 
 **触发词**：`ai-weekly` / `AI 周报` / `干货周报` / `生成周报` / `推送周报` / `weekly-card` / `小柒AI速递`
 
-**参考模板（唯一正确版式）**：`docs/ai-daily/ai-weekly-card-20260419-v2.html`（Apple 白底长图版 · 完整 CSS 设计系统见 §2.2）
+**参考模板（TOC 版 · 唯一正确版式）**：`docs/ai-daily/ai-weekly-card-20260510-toc.html`（Soft Editorial + TOC 侧边栏 · 粉色高亮）
 
 ---
 
@@ -25,11 +26,14 @@ tags:
 | 产物 | 路径 | 用途 |
 |------|------|------|
 | 周报 MD | `raw/daily-reports/AI_Practical_Weekly_Report_<SUN_DATE>.md` | 完整结构化周报（3 板块 8-10 条） |
-| 周报 HTML | `docs/ai-daily/ai-weekly-card-<SUN_DATE>.html` | 1080 宽 Apple 白底长图网页（v2 唯一版式） |
-| 周报 PNG | `docs/ai-daily/ai-weekly-card-<SUN_DATE>.png` | 1080×auto @ 2x 高清长图（企微推送） |
+| **周报 TOC H5** | `docs/ai-daily/ai-weekly-card-<SUN_DATE>-toc.html` | **Soft Editorial + 侧边栏 H5（唯一正式版）** |
+| 周报 PNG | `docs/ai-daily/ai-weekly-card-<SUN_DATE>.png` | 1080×auto 长图（企微推送附图） |
+| 归档首页更新 | `docs/ai-daily/index.html` | DATA 数组顶部追加条目 |
 
 > `<SUN_DATE>` = 周期末日（上周日）YYYYMMDD。周一触发时 `SUN_DATE = 昨天`。
 > 例：2026-04-20（周一）运行 → `<SUN_DATE>=20260419`，周期 = 2026-04-13 ~ 2026-04-19。
+
+> 🚨 **生成 TOC H5 前必读 §2.2.5**：右上角「← 返回归档」FAB 是强制元素，每期必须包含。漏掉视为不合格。
 
 ---
 
@@ -37,7 +41,16 @@ tags:
 
 ### Phase 1 · 65 信源扫描 & 干货筛选（核心）
 
-#### 2.1.1 扫描目标 —— 65 个 AI 信源
+#### 2.1.1 扫描目标 —— 65 个 AI 信源 + 1 聚合源（2026-07-03 起）
+
+**🌐 聚合资讯源（1 个 · 第 0 步必扫 · 用户指定原信息源 · 2026-07-03 新增）：**
+- **AI HOT** (`https://aihot.virxact.com/all`) — 中文 AI 资讯全量聚合池，覆盖 5 大类别（模型/产品/行业/论文/技巧）
+  - **首选模式 `mode=all`**（用户指定 `/all`，全量未筛选池，由周报自己过滤）：
+    - 周报：`?mode=all&since=<7d 前>&take=100`（按需 cursor 翻页）
+  - **备选模式**（仅在 `/all` 命中不足时降级到精选）：`mode=selected`（编辑精选）/ `/api/public/daily`（每天 08:00 自动生成的成品日报）
+  - **强制要求**：调 API 必须带浏览器 UA（nginx UA 黑名单会 403）
+  - **调用规范**：见 `_skills/aihot.md`（已安装的 skill，含完整端点速览 + 时间窗 / 限流 / 翻页规则）
+  - **意义**：作为聚合源，第 0 步扫描提供「全网近 7 天信号概览」，第 1-5 步 X 账号扫描补充一手源头 + 抓高优条目原文
 
 **机构账号（17 个）：**
 ```
@@ -75,6 +88,7 @@ tags:
 | 补充源 | 若 X 原文搜不到，可用 `account_name "keyword" site:x.com OR site:twitter.com past week` |
 
 **执行顺序建议**（≥ 5 轮）：
+0. 🌐 **聚合源** AI HOT `/all` 全量池（`mode=all&since=<7d 前>&take=100`，按需 cursor 翻页）→ 拿到 7 天全网信号概览（2026-07-03 新增 · 必跑）
 1. 🎯 实战派 6 人（`@zarazhangrui` 等）
 2. 机构官方 17 个（分 2 批）
 3. 个人账号前半 24 个
@@ -306,6 +320,61 @@ Chip 标签色系（header-meta 区域）：
 
 - **输出位置**：`docs/ai-daily/ai-weekly-card-<SUN_DATE>.html`（不再加 `-v2` 后缀，v2 即唯一版式）
 
+#### 2.2.5 TOC 版页面硬性必备元素（每期必须包含，不得遗漏）
+
+> ⚠️ **以下元素是 TOC 版 H5 的强制要求**。生成 `ai-weekly-card-<SUN_DATE>-toc.html` 时必须全部包含，缺一项视为不合格。
+
+##### A. 右上角「← 返回归档」按钮（强制 · 与 AI Daily 完全对齐）
+
+**强制约束**：weekly TOC 版 H5 的右上角返回归档按钮，**必须使用与 AI Daily H5 完全相同的样式和 class 名**（`.back-archive-btn`）。这样所有归档页面右上角视觉统一，用户在 daily / weekly 之间切换无突兀感。
+
+**位置**：紧跟在 `<div class="progress-bar"></div>` 之后，`<nav class="sidebar">` 之前。
+
+**CSS 片段（粘进 `<style>` 内，与其他 class 并列）**：
+
+```css
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+```
+
+**移动端适配（合并进既有 `@media (max-width: 900px)` 块）**：
+
+```css
+.back-archive-btn { right: 16px!important; top: 12px!important; font-size: 12px!important; padding: 7px 14px!important; }
+```
+
+**HTML 片段（紧跟 progress-bar 之后）**：
+
+```html
+<a href="index.html" class="back-archive-btn">← 返回归档</a>
+```
+
+**为什么必须用这个版本**：
+- 与 AI Daily H5 (`docs/ai-daily/ai-daily-card-*-toc.html`) 视觉完全统一——米色透明胶囊 + 柠檬绿 hover，符合 Soft Editorial 主色调
+- 依赖 `--border` / `--ink-soft` / `--lemon` / `--ink` 这些 CSS 变量，所有 TOC 版 H5 都已定义，零额外配置
+- ⚠️ **不要使用深色胶囊（`var(--ink)` 背景）或 Pink hover**，那是早期 weekly 试错版本，已废弃
+
+**参考实现（最终标准）**：`docs/ai-daily/ai-daily-card-20260601-toc.html` 第 153-161 行（CSS）+ 第 296 行（HTML）
+
+##### B. 生成完 H5 后必须自查清单
+
+| 检查项 | 期望 |
+|--------|------|
+| 右上角按钮 class | ✅ 必须是 `.back-archive-btn`（与 AI Daily 完全对齐），不得用 `.archive-fab` 或其他名 |
+| 按钮样式 | ✅ 米色透明胶囊（`rgba(42,36,27,0.08)`）+ 柠檬绿 hover（`rgba(214,221,99,0.2)`） |
+| 按钮 href | ✅ 指向 `index.html`（相对路径，不要写绝对 URL） |
+| 按钮文案 | ✅ `← 返回归档`（不要写"归档中心"或其他） |
+| 侧边栏底部「← 返回归档中心」 | ✅ 保留（双入口冗余但不冲突） |
+| 移动端 (<900px) | ✅ 按钮缩小到 right:16px / top:12px / font-size:12px |
+| 顶部进度条 | ✅ 3px 渐变条存在 |
+
 ---
 
 ### Phase 3 · Puppeteer 截图
@@ -325,21 +394,51 @@ Chip 标签色系（header-meta 区域）：
 
 ---
 
-### Phase 4 · 企业微信推送
+### Phase 4 · 归档 + 发布 + 推送（必须全部执行）
 
+**Step 4.1 — 更新归档首页**：
+- 打开 `docs/ai-daily/index.html`
+- 在 `const DATA = [` 数组的**最顶部**追加一条新记录：
+```js
+{
+  type: "weekly",
+  date: "YYYY-MM-DD",  // 周期末日
+  time: "09:45",
+  title: "AI 干货周报 · YYYY.MM.DD–MM.DD",
+  desc: "一句话描述本周主题 · N 条立刻能用的干货",
+  url: "ai-weekly-card-YYYYMMDD-toc.html",
+  tags: ["标签1", "标签2", "标签3"]
+}
+```
+
+**Step 4.2 — Git Push 发布到 GitHub Pages**：
+```bash
+git add docs/ai-daily/
+git commit -m "feat: AI weekly YYYY.MM.DD–MM.DD"
+git push origin main
+```
+- 在线地址：`https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-weekly-card-YYYYMMDD-toc.html`
+- 归档首页：`https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/`
+
+**Step 4.3 — 企业微信推送**：
 - **脚本**：`_deploy/wecom-push/push-ai-weekly.js`
 - **Webhook**：`_deploy/wecom-push/config.json`（默认 key=56d19b7a-5bc8-44ee-9b3a-af2619e87cab）
 - **调用**：
-  ```powershell
-  node _deploy/wecom-push/push-ai-weekly.js --date 20260419
+  ```bash
+  node _deploy/wecom-push/push-ai-weekly.js --date YYYYMMDD
   ```
 - **推送顺序**（固定）：
-  1. 先推 Markdown 文字摘要（本期结论 + 8-10 条条目标题，≤4096 字节）
+  1. 先推 Markdown 文字摘要（本期结论 + 条目标题列表 + H5 链接）
   2. 再推 PNG 长图（完整周报视觉）
-- **参数**：
-  - `--date YYYYMMDD`
-  - `--webhook <URL>`（覆盖默认）
-  - `--skip-git`（不 git push）
+- **H5 链接必须包含在推送文案中**：
+  ```
+  📋 AI 干货周报 · YYYY.MM.DD–MM.DD
+  ...条目列表...
+  
+  🔗 完整版：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-weekly-card-YYYYMMDD-toc.html
+  ```
+
+**Step 4.4 — 记录日志**：更新 `log.md`
 
 ---
 
@@ -349,10 +448,10 @@ Chip 标签色系（header-meta 区域）：
 
 ---
 
-### Phase 6 · GitHub Pages 同步
+### Phase 6 · GitHub Pages 验证
 
-- `push-ai-weekly.js` 内置 `git add docs/ai-daily/ → commit → push origin main`
-- GitHub Pages 地址：`https://wangqi422.github.io/my-llm-wiki/docs/ai-daily/ai-weekly-card-<SUN_DATE>.html`
+- 推送后等待约 30 秒，curl 验证 HTTP 200
+- GitHub Pages 地址：`https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-weekly-card-<SUN_DATE>-toc.html`
 
 ---
 
@@ -426,3 +525,12 @@ node _deploy/wecom-push/push-ai-weekly.js --date 20260419
 - [ ] PNG ≤ 2MB（超限降 dpr，screenshot-weekly.js 已支持 `--dpr 1.5` 小数）
 - [ ] 企微推送顺序：先 Markdown 再图片
 - [ ] config.json `webhooks` 数组 **3 个群齐全**（AI小柒速递 / 新群 / 竞品日报群），不要被回退到只 2 个
+
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[harness-engineering]] · [[codm-aigc-workflow]] · [[content-creation-methodology]] · [[INDEX-by-type]]
+
+---
+*返回 [[INDEX-by-type]]*
