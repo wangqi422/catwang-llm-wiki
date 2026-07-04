@@ -1140,3 +1140,27 @@
 - 生成 `raw/daily-reports/AIGC_Daily_Report_20260520.md`
 - 生成 `docs/ai-daily/ai-daily-card-20260520-toc.html`
 - 更新 `docs/ai-daily/index.html` 归档条目
+
+## [2026-07-04 09:30] daily-card | AIGC 日报 2026.07.04（自动化 · 第 14 期）
+
+- **操作**: 执行 AIGC 日报完整流水线（自动化触发）
+- **Phase 1**: 8 轮扫描（AI HOT 第 0 轮全量池 100 条 + 65 X 信源 + 中文媒体）→ 19 候选 → 8 条 TOP
+- **Phase 2**: 生成日报 MD → `raw/daily-reports/AIGC_Daily_Report_20260704.md`（含今日概览表格，企微 hook 抓取成功）
+- **Phase 3**: 生成 Soft Editorial + TOC 侧边栏 H5（4 section × 8 card, 23.6 KB）→ `docs/ai-daily/ai-daily-card-20260704-toc.html`
+- **Phase 4**: 更新归档首页 `docs/ai-daily/index.html`（DATA 数组顶部插入新条目）→ git commit `8842a0b` → push origin main（ab91f06..8842a0b）→ 企微推送 249 字节到「竞品日报群」
+- **TOP 8 主旋律**:
+  1. OpenAI 5% 股权 + 12-15 家闭门会谈 + GPT-5.6 7/7-9 发布 (9.5)
+  2. Claude Code v2.1.201 Sonnet 5 系统角色外置 (8.7)
+  3. **阿里 7/10 全员卸载 Claude（中国 AI 史上首次反向封禁）** (9.3)
+  4. 字节豆包 Seedance 2.5 7/6 上线 30 秒单段 + 50 参考 (8.5)
+  5. Anthropic 砸 4 亿美元收购 Coefficient Bio 制药 (8.9)
+  6. Google DeepMind 投 7500 万入股 A24 电影厂 (8.6)
+  7. GLM-5.2 通过 Hugging Face 整合 Claude Code (8.4)
+  8. 微软 8 月改版 Copilot + AutoPilot 智能体 (8.3)
+- **关键洞察**:
+  - 阿里 7/10 禁令 = 中国 AI 史上首次"反向封禁"美国头部 AI（之前都是美方封中方）
+  - 头部 AI 公司"国家化"+"工具化"+"跨界"三线同时推进
+  - 国产开源（GLM-5.2/Qwen3.7/DeepSeek V4）已能撑起"中国版 Claude Code"
+  - CODM 团队 7/10 前需完成 Qoder + Qwen3.7-Max 切换 POC
+- **信源统计**: AI HOT 100 + X 65 + 中文媒体 12 = 177 信源（与 7/3 同口径）
+- **备注**: 7/4 是周六但 24h 新闻密度仍充足,3 章节视觉分隔明显（§2 国产 AI 用腮红色满幅高亮）
