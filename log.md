@@ -1164,3 +1164,29 @@
   - CODM 团队 7/10 前需完成 Qoder + Qwen3.7-Max 切换 POC
 - **信源统计**: AI HOT 100 + X 65 + 中文媒体 12 = 177 信源（与 7/3 同口径）
 - **备注**: 7/4 是周六但 24h 新闻密度仍充足,3 章节视觉分隔明显（§2 国产 AI 用腮红色满幅高亮）
+
+---
+
+## [2026-07-05 09:30] daily-card | AIGC 日报 2026.07.05（自动化 · 第 15 期）
+
+- **操作**: 执行 AIGC 日报完整流水线（自动化触发）
+- **Phase 1**: **AI HOT API 不可达**（TLS 错误连续失败 4 种方法：Bash/curl、PowerShell、Node.js https、WebFetch）,改用 **8 轮 WebSearch 兜底**扫描 65 X 信源 + 11 篇中文媒体 + 6 一手源头 → 8 条 TOP
+- **Phase 2**: 生成日报 MD → `raw/daily-reports/AIGC_Daily_Report_20260705.md`（19.3 KB，含今日概览表格，企微 hook 抓取成功）
+- **Phase 3**: 生成 Soft Editorial + TOC 侧边栏 H5（4 section × 8 card, 23.8 KB）→ `docs/ai-daily/ai-daily-card-20260705-toc.html`
+- **Phase 4**: 更新归档首页 `docs/ai-daily/index.html`（DATA 数组顶部插入新条目，10 tags）→ git commit `2e43ced` → push origin main（fe959d2..2e43ced）→ 企微推送 **245 字节**到「竞品日报群」（仅文字+H5链接无 PNG，符合 2026-05-31 后规范）
+- **TOP 8 主旋律**:
+  1. GPT-5.6 7/7-9 终局发布: Sol 创 Terminal-Bench 2.1 91.9% 新纪录 (9.5)
+  2. **OpenAI 万亿 IPO 目标 + 微软 27% 持股**（7/5 凌晨新发，较 7/4 估值翻 23 倍）(9.4)
+  3. 阿里 7/10 全员卸载 Claude（中国 AI 史上首次反向封禁）(9.3)
+  4. **Anthropic×三星 2nm 芯片 + 挖角 OpenAI 芯片工程师 Clive Chan**（自研芯片进入实操，配套 80 亿 G 轮融资）(8.8)
+  5. GLM-5.2 + 智谱 ZCode 7/2 公测: Hugging Face 100+ Claude 模型适配 (8.7)
+  6. 字节豆包 Seedance 2.5 7/6 体验中心: 30秒单段 + 50 个全模态参考 (8.6)
+  7. Google DeepMind 投 7500 万入股 A24 电影厂 (8.5)
+  8. Anthropic 砸 4 亿美元收购 Coefficient Bio 做药 (8.4)
+- **关键洞察**:
+  - **Anthropic 一日内三线扩张**：芯片（与三星 2nm 洽谈 + Clive Chan 挖角）+ 制药（4 亿收 Coefficient Bio）+ 资本（80 亿 G 轮 1850 亿估值），7/4 是 Anthropic "成为垂直行业操盘手"里程碑日
+  - **OpenAI 资本化加码**：万亿 IPO 目标 + 微软 27% 持股 + 公共财富基金 5% = 头部 AI 公司"国家化"不可逆
+  - **国产 AI 反击三件套成熟**：阿里 7/10 禁令 + 智谱 ZCode 公测 + Qwen3.7-Max/GLM-5.2/DeepSeek V4 = 7/10 前完成 POC 切换是"必做"
+  - **AI HOT 基础设施问题**：连续 4 种方法 TLS 失败，需后续排查（怀疑 aihot.virxact.com 在中国区网络层的 IP 路由或证书问题）
+- **信源统计**: AI HOT 不可达 + WebSearch 8 轮 + 11 篇中文媒体 + 6 一手源头 = **25 信源**（较 7/4 的 177 大幅缩减，全部依赖 WebSearch 兜底）
+- **备注**: 7/5 是周日但 24h 新闻密度仍充足（OpenAI 凌晨 5 点发新细节 + Anthropic 三线扩张同日发）,4 章节视觉分隔明显（§2 国产 AI 用腮红色满幅高亮）
