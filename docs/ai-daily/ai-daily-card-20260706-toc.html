@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.07.06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+
+/* Highlight section */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.07.06 &middot; 星期一 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Compute Roadmap</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>算力路标 &amp; 巨头转向</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>NVIDIA Kyber 推迟 12+ 月</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Zuckerberg 智能体不及预期</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Chinese AI &amp; Compliance</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>国产 AI &amp; 合规收紧</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>字节阿里拟人化下线</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>美团 LongCat-2.0</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Capital &amp; Paradigm</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>资本 &amp; 范式转移</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>SK 海力士 294 亿 IPO</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>HBM 之父:AI 即内存</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Tools &amp; Field</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&sect;4</span>工具 &amp; 实战</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>agent-skills 开源</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>MTurk 7/30 停接</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.07.06 &middot; Mon</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今日 8 条速报 &middot; NVIDIA Kyber 推迟 12+ 月 + 国产合规收紧 + 内存即新货币</p>
+    <div class="header-meta">
+      <span class="meta-tag">🔥 算力路标 &amp; 巨头转向</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛡 国产 AI &amp; 合规收紧</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💰 资本 &amp; 范式转移</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛠 工具 &amp; 实战</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.07.06</span>
+    </div>
+  </div>
+
+  <!-- §1 算力路标 & 巨头转向 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Compute Roadmap &amp; Giants Pivot</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🔥 算力路标 &amp; 巨头转向</div>
+    <div class="section-sub">NVIDIA Kyber 推迟 12+ 月 + Zuckerberg 承认智能体未达预期</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">NVIDIA Kyber NVL144 推迟 12+ 月到 2028 + NVL72x2 取消:Rubin Ultra 4-die 版砍掉,AMD MI500X/谷歌 TPUv8i 获窗口</span>
+        <span class="card-tag">🔥 重磅</span>
+      </div>
+      <div class="card-desc">
+        SemiAnalysis 7/5 盘前 6 条连续推文披露,英伟达下一代旗舰机架 Kyber NVL144 推迟超 <strong>12 个月</strong>至 2028;距 GTC 2026 展示仅 3 个月,直接打掉客户对 2026 内交付预期. PCB 正交背板良率不及预期,SemiAnalysis 称为"工业可制造性"硬瓶颈. <strong>NVL72x2 已取消</strong>(CSP 反对"设计怪异 + 运维负担"),<strong>Rubin Ultra 4-die 版被砍</strong>仅留 2-die(性能减半),CPO NVSwitch 推迟到 Feynman 世代. AMD MI500X(2027 Q1 量产)+ 谷歌 TPUv8i(2027 中)获得 6-12 月相对优势期. 英伟达应对:不砍出货,大幅增售现有 Oberon Rubin 机架"以量补质".
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">扎克伯格承认 AI 智能体发展不及预期:Meta 裁 8000 + 调 7000 人,但千兆瓦 Prometheus 集群仍在建</span>
+        <span class="card-tag">巨头困境</span>
+      </div>
+      <div class="card-desc">
+        7/2 内部全员会,小扎称 AI 智能体发展速度"未如高管此前预期的那样加速". <strong>Meta 2026 年已裁 8000 人</strong>(占企业员工 10%),另 7000 人重新分配到"Agent Transformation"等 AI 团队. KPI 焦虑:高层担心无法足够快地适应行业变化,以 AI 为中心的新架构尚未"带来成果". 资本支出 2026 年 <strong>1450 亿美元</strong>;俄亥俄 Prometheus 1GW 集群 2026 上线,Hyperion 路易斯安那 2027 底扩到 5GW. 同期 NVIDIA Kyber 推迟让 Meta"用最多卡赢比赛"策略遇阻,可能 2027 考虑 AMD MI500X.
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 国产 AI & 合规收紧（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Chinese AI &amp; Compliance Tightening</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🛡 国产 AI &amp; 合规收紧</div>
+    <div class="section-sub">字节阿里拟人化智能体下线 + 美团 LongCat-2.0 全国产算力</div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">字节豆包 + 阿里千问拟人化智能体 7/10-15 双线下线:主动对齐 7/15《拟人化互动服务管理暂行办法》</span>
+        <span class="card-tag">🔥 重磅</span>
+      </div>
+      <div class="card-desc">
+        《人工智能拟人化互动服务管理暂行办法》7/15 正式施行,5 部门联合公布,管"模拟人类人格特质、思维模式和交流方式,并提供持续情感交互"的服务. 7/4 千问推送:拟人化智能体 + 用户自建智能体功能 <strong>7/10 下线</strong>,7/15 千问智能体功能全线关闭. 豆包 7/3 晚通知:智能体功能 <strong>7/15 下线</strong>,数据保留至 10/15. <strong>历史首次</strong>:两大头部 C 端平台同日对"用户自建智能体 + 拟人化互动"按暂停键,标志 C 端 AI "野蛮青春期"结束.
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">美团 LongCat-2.0 1.6T MoE 开源 + 5 万张国产 ASIC 全流程训练:首次证明前沿万亿模型不靠英伟达</span>
+        <span class="card-tag">国产开源</span>
+      </div>
+      <div class="card-desc">
+        美团 7/5 发布 LongCat-2.0,<strong>1.6T 总参数 / 48B 激活 / 1M token 上下文</strong> / MoE 架构 / MIT 许可. <strong>5 万张国产 AI ASIC 集群</strong>完成训练与推理,未依赖英伟达 GPU,显存峰值压至 60GB 以下. 架构创新:ScMoE 跨层快捷连接 + 零计算专家机制(动态 33-56B) + LongCat Sparse Attention + 135B N-gram 嵌入 + MOPD 后训练(Agent/Reasoning/Interaction 三组专家). SWE-bench Pro <strong>59.5(超 GPT-5.5 58.6)</strong>,Terminal-Bench 2.1 70.8. OpenRouter 此前匿名"Owl Alpha"跻身全球前三,月处理 10.1 万亿 token.
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 资本 & 范式转移 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Capital &amp; Paradigm Shift</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">💰 资本 &amp; 范式转移</div>
+    <div class="section-sub">SK 海力士 294 亿美元 IPO + HBM 之父宣告"AI 本质是内存"</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">SK 海力士 7/10 纳斯达克 IPO 募资 294 亿美元:近十年亚洲半导体美股最大 ADR,HBM 市占 57%</span>
+        <span class="card-tag">🔥 重磅</span>
+      </div>
+      <div class="card-desc">
+        SK 海力士 7/10 纳斯达克上市,代码 "SKHY",募资 <strong>294 亿美元</strong>(45.45 万亿韩元),美银/花旗/高盛/摩根大通承销. 最多 1779 万股新股(2.50%),韩美双重上市. 2025 Q4 全球 HBM 市占 <strong>57%</strong>(1Q26 58%),英伟达 AI GPU 核心 HBM 供应商(订单占总营收 42%). 资金:45.5 万亿韩元存储产能 + 11.9 万亿韩元 EUV 光刻机采购(2027/12 前) + 印第安纳封装基地. 2026 Q1 营业利润 37.61 万亿韩元(<strong>营业利润率 72%,超英伟达</strong>). UBS 预测 DRAM Q3 +32%,至少缺货至 2028.
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">HBM 之父金正浩:AI 本质是内存,GPU 利用率仅 10-30%,10 年后 HBF 超 HBM,终极 100 层 3D 复合架构</span>
+        <span class="card-tag">范式转移</span>
+      </div>
+      <div class="card-desc">
+        韩国 KAIST 电气系教授金正浩(HBM1 2010 与 SK 海力士共同研发)7/5 受访《东亚日报》表示"<strong>AI 核心竞争力正从 GPU 转向内存</strong>". 每次 AI 输出都要从 HBM 读 + GPU 算 + 写回,就算 100 万块 GPU,真正计算时间仅 <strong>10-30%</strong>(行业普遍认知 30-50%). 训练→推理范式转移:决定性能的是"一次能处理多少数据、多快处理",内存能力直接决定 AI 性能. 三阶段:HBM(当前,客户定制)→ <strong>HBF(10 年内)</strong>堆叠 NAND 超 HBM → HBS(更远)高带宽 SRAM 比 DRAM 快 1000 倍. 终极:HBM 商场 + HBF 住宅 + HBS 缓存,组合约 100 层 3D 复合架构.
+      </div>
+    </div>
+  </div>
+
+  <!-- §4 工具 & 实战 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Tools &amp; Field Practice</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🛠 工具 &amp; 实战</div>
+    <div class="section-sub">agent-skills 24 技能开源 + Mechanical Turk 21 年落幕</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Google 工程负责人 Addy Osmani 开源 agent-skills:24 个工程技能 + 7 阶段生命周期,GitHub 5.9 万星</span>
+        <span class="card-tag">工程实战</span>
+      </div>
+      <div class="card-desc">
+        agent-skills,Addy Osmani(Google Chrome 首席工程师 / Google Cloud AI Director)开源,MIT 许可,6.30 公开后 6 天达 <strong>5.9 万 star</strong>. 把"资深工程师内隐判断"编码为 24 个结构化 skill,让 AI 编程 Agent 强制走 7 阶段:DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP. 8 个 slash 命令入口(/spec、/plan、/build、/test、/review、/code-simplify、/ship、/build auto). 每个 skill 配"rationalization table"反制 AI 写代码时的借口("这很简单不需要 spec"). 融合 Hyrum's Law + 测试金字塔 + 主干开发 + doubt-driven-development. 兼容 Claude Code / Cursor / Gemini CLI / Codex / Windsurf.
+      </div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Amazon Mechanical Turk 7/30 起停接新客户:21 年众包平台进入"维持模式",33-46% 工人已被 LLM 替代</span>
+        <span class="card-tag">劳工范式</span>
+      </div>
+      <div class="card-desc">
+        Amazon 7/5 宣布 MTurk <strong>7/30 起不再接受新客户</strong>,现有客户可继续使用,AWS 不再开发新功能,平台进入"Services in Maintenance"内部清单. 21 年历史(2005.11 上线),2018 并入 SageMaker 做 AI 训练数据标注流水线. 2023 学术研究:MTurk 上 <strong>33-46% 工人已使用 LLM 完成"人类智能任务"</strong>,平台成为"数据污染源". 关联:7/1 Uber 裁 AI 数据标注部门两位资深领导,Scale AI 因 Meta 关系受质疑. 替代:SageMaker Ground Truth + Scale AI + Surge AI 等"可审计"标注.
+      </div>
+    </div>
+  </div>
+
+  <!-- Data strip -->
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Kyber 推迟</div><div class="data-value">9.5</div></div>
+    <div class="data-chip"><div class="data-label">字节阿里下线</div><div class="data-value">9.3</div></div>
+    <div class="data-chip"><div class="data-label">LongCat-2.0</div><div class="data-value">9.2</div></div>
+    <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">9.0</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.07.06<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
