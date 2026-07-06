@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #13 · 2026.06.29–07.05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Back to Archive Button ═══════ */
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+  .back-archive-btn { right: 16px!important; top: 12px!important; font-size: 12px!important; padding: 7px 14px!important; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+<a href="index.html" class="back-archive-btn">&#8592; 返回归档</a>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.06.29 – 07.05 &middot; Issue No. 13</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&#167;1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Claude Sonnet 5</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>LongCat-2.0</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Gemini Omni Flash</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>X Hosted MCP</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&#167;2</span>高效工作流</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>Every 复利工程</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Code Loops</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>Claude Design 提示词</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&#167;3</span>方法论与 Prompt</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Anthropic 提示词心法</a>
+    <a href="#item-9" class="nav-link nav-sub"><span class="nav-num">9.</span>shot-scraper video</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&#167;4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 13</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">Agent 工程化落地周 &middot; 9 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 9 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.06.29 – 07.05</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的 Agent 工程化落地周：Anthropic 用 Claude Sonnet 5 把旗舰能力下放到中端价位，美团 LongCat-2.0 用国产算力训练出万亿参数开源模型，Google Gemini Omni Flash 让视频生成进入对话式编辑时代。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">Claude Sonnet 5</div>
+        <div class="thesis-card-body">最 Agentic 的 Sonnet，性能接近 Opus 4.8，<b>价格低 60%</b>，支持自主规划与工具调用</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">LongCat-2.0</div>
+        <div class="thesis-card-body">美团开源 <b>1.6T MoE</b>，国产算力训练，<b>1M 上下文</b>，MIT 协议可商用</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Gemini Omni Flash</div>
+        <div class="thesis-card-body">视频生成 + <b>对话式编辑</b>，0.10 美元/秒，Video Arena 登顶</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Every 复利工程</div>
+        <div class="thesis-card-body">单人维护 5 款产品，<b>80% 时间花在 Plan/Review</b>，代码是思考的副产品</div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>&#128161; 一句话总结：AI 竞争从"拼模型参数"转向"拼工程化落地"，中端模型能力下放 + 国产算力崛起 + 工作流复利成为本周主旋律。</p>
+    </div>
+  </div>
+
+  <!-- &#167;1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">&#128736;&#65039; 实用工具箱</div>
+    <div class="section-sub">4 个本周立刻能试的 AI 工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Sonnet 5 &middot; 最 Agentic 的中端模型</span>
+        <span class="card-tag">Anthropic</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布 Claude Sonnet 5，定位是"迄今为止智能体能力最强的 Sonnet"。它能自主制定计划、调用浏览器和终端等外部工具，在没有人工干预的情况下独立完成多步骤任务。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">SWE-bench Pro</div><div class="sub-card-body">63.2%（Sonnet 4.6 仅 58.1%）</div></div>
+        <div class="sub-card"><div class="sub-card-title">定价（促销期）</div><div class="sub-card-body">$2/$10 每百万 token</div></div>
+        <div class="sub-card"><div class="sub-card-title">比 Opus 4.8 便宜</div><div class="sub-card-body">约 60%</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI, @berryxia &middot; anthropic.com/news/claude-sonnet-5</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">LongCat-2.0 &middot; 国产算力万亿参数开源模型</span>
+        <span class="card-tag">美团开源</span>
+      </div>
+      <div class="card-desc">
+        美团开源 LongCat-2.0，总参数 <strong>1.6T（MoE）</strong>，每 token 激活约 48B，原生支持 <strong>1M 超长上下文</strong>。训练全程在五万卡国产算力集群完成，<strong>英伟达含量为零</strong>。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">SWE-bench Pro</div><div class="sub-card-body">59.5%（超越 GPT-5.5）</div></div>
+        <div class="sub-card"><div class="sub-card-title">协议</div><div class="sub-card-body">MIT（商用友好）</div></div>
+        <div class="sub-card"><div class="sub-card-title">定价</div><div class="sub-card-body">$0.75/$2.95（促销 $0.30/$1.20）</div></div>
+      </div>
+      <div class="source">&compfn; @Meituan_LongCat &middot; meituan.com/news/NN260630164005904</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Gemini Omni Flash &middot; 对话式视频编辑</span>
+        <span class="card-tag">Google</span>
+      </div>
+      <div class="card-desc">
+        Google 发布 Gemini Omni Flash，支持文本/图片/视频多模态输入生成视频，<strong>最大亮点是「对话式编辑」</strong>&#8212;&#8212;生成后可继续用自然语言修改，如"把背景从雨天换成晴天"。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">Video Arena</div><div class="sub-card-body">1404 Elo，登顶榜首</div></div>
+        <div class="sub-card"><div class="sub-card-title">定价</div><div class="sub-card-body">$0.10/秒（720p）</div></div>
+        <div class="sub-card"><div class="sub-card-title">视频时长</div><div class="sub-card-body">10 秒（更长 coming soon）</div></div>
+      </div>
+      <div class="source">&compfn; @GoogleDeepMind, @op7418 &middot; deepmind.google</div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">X Hosted MCP &middot; Twitter 官方 MCP 上线</span>
+        <span class="card-tag">X / Twitter</span>
+      </div>
+      <div class="card-desc">
+        X 推出官方 hosted MCP，AI 智能体可通过 MCP 协议直接调用 X API 获取实时信息，支持 Grok、Cursor、Claude 等工具。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">定价</div><div class="sub-card-body">$0.01/次（1 美元 = 1000 次）</div></div>
+        <div class="sub-card"><div class="sub-card-title">实测</div><div class="sub-card-body">拉取三天书签仅花 $0.1</div></div>
+        <div class="sub-card"><div class="sub-card-title">适合</div><div class="sub-card-body">重度 Twitter 用户、社媒 Agent</div></div>
+      </div>
+      <div class="source">&compfn; @op7418 &middot; X Developer</div>
+    </div>
+  </div>
+
+  <!-- &#167;2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#9889; 高效工作流</div>
+    <div class="section-sub">3 套改变日常的工作方式</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Every「复利工程」&middot; 单人维护 5 款产品的秘密</span>
+        <span class="card-tag">方法论</span>
+      </div>
+      <div class="card-desc">
+        媒体软件公司 Every 公开「复利工程」方法论，用单人工程团队维护 5 款产品。核心不是写代码更快，而是 <strong>80% 时间花在 Plan 和 Review，只有 20% 写代码</strong>。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">Plan</div><div class="sub-card-body">AI 生成实现计划、任务列表、测试策略</div></div>
+        <div class="sub-card"><div class="sub-card-title">Work</div><div class="sub-card-body">按 plan 执行，每个改动后跑测试</div></div>
+        <div class="sub-card"><div class="sub-card-title">Review</div><div class="sub-card-body">14 个专项审查 agent 并行检查</div></div>
+        <div class="sub-card"><div class="sub-card-title">Compound</div><div class="sub-card-body">把解法写入 CLAUDE.md 和 docs/solutions/</div></div>
+      </div>
+      <div class="source">&compfn; @xiaohu, Every Engineering &middot; github.com/everydotai/compound-engineering</div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Claude Code 四种 Agent 循环模式</span>
+        <span class="card-tag">Claude</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 官方定义了四种 agent 循环类型：Turn-based（用户触发）、Goal-based（/goal 设定完成标准）、Time-based（/loop 定时重复）、Proactive（事件驱动自动运行）。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">/goal</div><div class="sub-card-body">设定可验证完成标准与最大轮次</div></div>
+        <div class="sub-card"><div class="sub-card-title">/loop</div><div class="sub-card-body">按时间间隔重复执行</div></div>
+        <div class="sub-card"><div class="sub-card-title">/schedule</div><div class="sub-card-body">移至云端定时运行</div></div>
+      </div>
+      <div class="source">&compfn; @ClaudeDevs &middot; claude.com/blog/getting-started-with-loops</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Claude Design 系统提示词开源</span>
+        <span class="card-tag">MIT 协议</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 旗下 Claude Design 的反向工程系统提示词在 GitHub 以 MIT 许可证开源，包含 <strong>20 章提示词和 14 项技能</strong>，覆盖内容纪律、美学、无障碍（WCAG）、交互状态、系统思维等。
+      </div>
+      <div class="source">&compfn; Hacker News &middot; github.com/Trystan-SA/claude-design-system-prompt</div>
+    </div>
+  </div>
+
+  <!-- &#167;3 方法论与 Prompt -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#129504; 方法论与 Prompt</div>
+    <div class="section-sub">2 个可复用的方法论</div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Anthropic 提示词工程实战心法</span>
+        <span class="card-tag">Margot Van Laar</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 应用 AI 工程师 Margot Van Laar 核心观点：<strong>我们很少从零写提示词，大部分时间在调试和维护已有生产提示词。</strong>两个实战场景：客服机器人维护（XML 结构化、移除旧模型遗留指令）、零售排班 Agent 从零构建（拆成生成-评估-修复三个简单提示词）。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">核心心法</div><div class="sub-card-body">评估（Eval）是唯一严谨方式，没有评估就是碰运气</div></div>
+        <div class="sub-card"><div class="sub-card-title">模型选择</div><div class="sub-card-body">复杂逻辑选用更强推理模型（Opus）</div></div>
+      </div>
+      <div class="source">&compfn; @berryxia &middot; Code with Claude</div>
+    </div>
+
+    <div class="card" id="item-9">
+      <div class="card-chrome">
+        <span class="card-num">9</span>
+        <span class="card-title">shot-scraper video &middot; 让 AI 智能体录制演示视频</span>
+        <span class="card-tag">Simon Willison</span>
+      </div>
+      <div class="card-desc">
+        shot-scraper 1.10 新增 video 命令，支持通过 storyboard.yml 定义操作步骤，利用 Playwright 录制浏览器视频。<strong>把 --help 输出设计得足够详细，可使编码 Agent 直接利用该命令生成演示视频。</strong>
+      </div>
+      <div class="code-block"><span class="cmt"># 安装并录制演示视频</span>
+<span class="key">pip install</span> shot-scraper
+<span class="key">shot-scraper video</span> <span class="str">storyboard.yml</span></div>
+      <div class="source">&compfn; Simon Willison Blog</div>
+    </div>
+  </div>
+
+  <!-- &#167;4 推荐上手顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority</span>
+      <span class="section-count">Priority ranking</span>
+    </div>
+    <div class="section-title">&#128204; 推荐上手顺序</div>
+    <div class="section-sub">按「学习成本 &#215; 价值收益」排序</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-num">1</span>
+        <span class="gallery-title">Claude Sonnet 5</span>
+        <span class="gallery-desc">已默认切换，直接体验 Agent 能力</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">2</span>
+        <span class="gallery-title">Every 复利工程</span>
+        <span class="gallery-desc">阅读文档，理解 Plan-Work-Review-Compound 循环</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">3</span>
+        <span class="gallery-title">Gemini Omni Flash</span>
+        <span class="gallery-desc">Google AI Studio 直接试用视频生成</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">4</span>
+        <span class="gallery-title">X Hosted MCP</span>
+        <span class="gallery-desc">配置 MCP，让 AI 读取你的 Twitter 数据</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">5</span>
+        <span class="gallery-title">LongCat-2.0</span>
+        <span class="gallery-desc">OpenRouter 调用，体验国产万亿模型</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">6</span>
+        <span class="gallery-title">Claude Code Loops</span>
+        <span class="gallery-desc">学习 /goal /loop /schedule 命令用法</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">AI 干货周报 &middot; 2026.06.29 – 07.05<br>Issue No. 13</div>
+    <div class="footer-right">&#8212;&#8212; 小柒AI速递 &middot; 每周一上午推送</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ Back to top ═══════ -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<!-- ═══════ Scripts ═══════ -->
+<script>
+// Progress bar
+const progressFill = document.getElementById('progressFill');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const max = document.body.scrollHeight - window.innerHeight;
+  const pct = Math.min(100, (scrolled / max) * 100);
+  progressFill.style.width = pct + '%';
+});
+
+// Back to top
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+});
+
+// Sidebar active state
+const sections = document.querySelectorAll('.nav-link[href^="#"]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.nav-link[href="#' + entry.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -80% 0px' });
+
+document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
