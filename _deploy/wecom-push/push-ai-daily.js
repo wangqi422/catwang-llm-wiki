@@ -90,54 +90,103 @@ function parseArgs() {
   return config;
 }
 
-// ── 从 MD 提取精简推送摘要 ────────────────────────
+// ── 从 MD 提取精简推送摘要（v2: 包含全部 8 条新闻） ──
 function extractPushMarkdown(mdContent, dateStr) {
-  const lines = [];
   const mdLines = mdContent.split('\n');
   
   const year = dateStr.slice(0, 4);
   const month = dateStr.slice(4, 6);
   const day = dateStr.slice(6, 8);
   
-  // 提取 TOP 1 标题作为 hook
-  let hookTitle = '';
+  // ── 提取概览表格中全部 8 条 ──
+  const items = [];
   const tableStart = mdLines.findIndex(l => l.match(/^\|.*新闻标题/));
   if (tableStart >= 0) {
     for (let i = tableStart + 1; i < mdLines.length; i++) {
       const line = mdLines[i];
       if (!line.startsWith('|') || line.includes('---')) continue;
       const cells = line.split('|').filter(c => c.trim());
-      if (cells.length >= 2) {
+      if (cells.length >= 4) {
+        const num = cells[0].trim();
         const titleCell = cells[1].trim();
+        // 提取 [标题] 或纯文本
         const titleMatch = titleCell.match(/\[(.+?)\]/);
-        hookTitle = titleMatch ? titleMatch[1] : titleCell;
+        const title = titleMatch ? titleMatch[1] : titleCell;
+        const score = (cells[4] || '').trim();
+        const fire = parseFloat(score) >= 9.0 ? '🔥' : '';
+        items.push({ num, title, score, fire });
+      }
+      if (items.length >= 8) break;
+    }
+  }
+  
+  if (items.length === 0) {
+    // 兜底：从 ### #N ⭐ 标题提取
+    mdLines.forEach(l => {
+      const m = l.match(/^### #(\d+) ⭐ (.+)/);
+      if (m) items.push({ num: m[1], title: m[2], score: '', fire: '' });
+    });
+  }
+  
+  // ── 构建 Markdown 推送 ──
+  const lines = [];
+  const pageUrl = `${GITHUB_PAGES_BASE}/docs/ai-daily/ai-daily-card-${dateStr}-toc.html`;
+  
+  // Header
+  lines.push(`**AIGC 日报 · ${year}.${month}.${day}**`);
+  lines.push('');
+  
+  // 编辑点评（如果有的话，取前一段作为引言）
+  const editStart = mdLines.findIndex(l => l.startsWith('## 编辑点评'));
+  if (editStart >= 0) {
+    // 取编辑点评后的第一个非空段落
+    for (let i = editStart + 1; i < mdLines.length && i < editStart + 5; i++) {
+      const t = mdLines[i].trim();
+      if (t && !t.startsWith('##') && !t.startsWith('---') && !t.startsWith('#')) {
+        // 截取合适长度（企微 markdown 不支持太长）
+        const intro = t.length > 120 ? t.slice(0, 117) + '...' : t;
+        lines.push(intro);
+        lines.push('');
         break;
       }
     }
   }
   
-  // 如果没从表格拿到，尝试从 ### #1 ⭐ 提取
-  if (!hookTitle) {
-    const h3Match = mdLines.find(l => l.match(/^### #1 ⭐/));
-    if (h3Match) hookTitle = h3Match.replace(/^### #1 ⭐\s*/, '').trim();
-  }
+  // 8 条新闻逐条列出
+  items.forEach(item => {
+    const scoreStr = item.score ? ` **${item.score}**` : '';
+    const firstLine = item.title.slice(0, 140);
+    const displayTitle = firstLine.length < item.title.length ? firstLine + '...' : firstLine;
+    lines.push(`${item.fire} **#${item.num}**${scoreStr} ${displayTitle}`);
+  });
   
-  const hook = hookTitle ? `🔥 ${hookTitle}` : `📰 今日 AI 圈 8 条重磅`;
-  
-  lines.push(`**AIGC 日报 · ${year}.${month}.${day}**`);
   lines.push('');
-  lines.push(hook);
-  lines.push('');
-  const pageUrl = `${GITHUB_PAGES_BASE}/docs/ai-daily/ai-daily-card-${dateStr}-toc.html`;
   lines.push(`👉 [查看完整日报](${pageUrl})`);
   
   let markdown = lines.join('\n');
   
-  // 字节限制检查
+  // 字节限制检查（企微 markdown 上限 4096）
   const mdBytes = Buffer.byteLength(markdown, 'utf-8');
   if (mdBytes > 4096) {
-    console.warn(`⚠️  Markdown ${mdBytes} 字节超过 4096 限制，将截断`);
-    markdown = markdown.slice(0, 4093) + '...';
+    console.warn(`⚠️  Markdown ${mdBytes} 字节超过 4096 限制，逐条裁剪...`);
+    // 从最后一条开始删，直到 ≤ 4096
+    let trimmedLines = lines;
+    while (Buffer.byteLength(trimmedLines.join('\n'), 'utf-8') > 4096 && items.length > 3) {
+      // 去掉最后一行新闻（在 lines 中找 items 行）
+      const newsIdx = trimmedLines.findIndex((l, idx) => {
+        return l.startsWith('🔥 ') || l.startsWith(' **#');
+      });
+      const lastNewsIdx = trimmedLines.map((l, idx) => ({
+        l, idx
+      })).filter(x => x.l.startsWith('🔥 ') || x.l.startsWith(' **#')).pop();
+      if (lastNewsIdx) {
+        trimmedLines.splice(lastNewsIdx.idx, 1);
+      }
+      // 同时也跟踪减少
+      const remainCount = trimmedLines.filter(l => l.startsWith('🔥 ') || l.startsWith(' **#')).length;
+      console.warn(`   → 保留前 ${remainCount} 条 (${Buffer.byteLength(trimmedLines.join('\n'), 'utf-8')} 字节)`);
+    }
+    markdown = trimmedLines.join('\n');
   }
   
   return markdown;
