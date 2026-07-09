@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.07.09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.sidebar-dots i:nth-child(1) { background:var(--pink); }
+.sidebar-dots i:nth-child(2) { background:var(--lemon); }
+.sidebar-dots i:nth-child(3) { background:var(--blush); }
+.sidebar-dots i:nth-child(4) { background:var(--sage); }
+
+.sidebar-back {
+  display:block; margin:20px 24px 0; padding:10px 16px; border-radius:8px;
+  background:rgba(255,255,255,0.06); color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; text-align:center;
+  transition:all 0.2s;
+}
+.sidebar-back:hover { background:rgba(214,221,99,0.15); color:var(--sidebar-accent); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+
+/* Typography */
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+
+/* Header */
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header .swatches i:nth-child(1) { background:var(--pink); }
+.header .swatches i:nth-child(2) { background:var(--lemon); }
+.header .swatches i:nth-child(3) { background:var(--blush); }
+.header .swatches i:nth-child(4) { background:var(--sage); }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+
+/* Back to archive button (fixed top-right) */
+.back-archive-btn {
+  position:fixed; top:20px; right:32px; z-index:200;
+  display:flex; align-items:center; gap:6px;
+  padding:10px 20px; border-radius:999px;
+  background:rgba(42,36,27,0.06); border:1px solid var(--border);
+  color:var(--ink-soft); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  backdrop-filter:blur(8px); transition:all 0.2s;
+}
+.back-archive-btn:hover { background:rgba(214,221,99,0.2); border-color:var(--lemon); color:var(--ink); }
+
+/* Section */
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+
+/* Cards */
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.card-score { display:inline-block; font-family:"Cormorant Garamond",serif; font-size:20px; font-weight:500; color:var(--ink); margin-left:8px; }
+.card-fire { margin-left:4px; font-size:18px; }
+
+/* Highlight section (full-width blush) */
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+
+/* Data strip */
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+
+/* Footer */
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+
+/* Progress */
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+
+/* Back to top */
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+
+/* Edit note */
+.edit-note { margin-top:32px; padding:20px 24px; background:rgba(214,221,99,0.15); border-radius:16px; font-size:13px; color:var(--ink-soft); line-height:1.7; }
+.edit-note p { margin-bottom:6px; }
+.edit-note p:last-child { margin-bottom:0; }
+.edit-note strong { font-weight:500; color:var(--ink); }
+
+/* Mobile */
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+  .back-archive-btn { right:16px!important; top:12px!important; font-size:12px!important; padding:7px 14px!important; }
+}
+
+/* VF Cursor */
+@media (hover: hover) and (pointer: fine) {
+  html.vf-cursor-on, html.vf-cursor-on body, html.vf-cursor-on a, html.vf-cursor-on button { cursor: none !important; }
+}
+.vf-cursor {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2A241B; pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.vf-cursor.hover { width: 48px; height: 48px; background: rgba(214, 221, 99, 0.6); }
+.vf-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(42, 36, 27, 0.3); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%); mix-blend-mode: multiply;
+}
+@media (hover: none), (pointer: coarse) { .vf-cursor, .vf-cursor-ring { display: none !important; } }
+
+.vf-preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #F2EEDF;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.vf-preloader.hide { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
+.vf-preloader-count {
+  font-family: "Cormorant Garamond", serif; font-size: 96px; font-weight: 500;
+  color: #2A241B; line-height: 1;
+}
+.vf-preloader-bar {
+  width: 200px; height: 2px; background: rgba(42,36,27,0.1); margin-top: 24px; border-radius: 1px; overflow: hidden;
+}
+.vf-preloader-bar-fill { height: 100%; width: 0%; background: #2A241B; transition: width 0.05s; }
+
+/* Lenis-driven animations */
+.vf-rise { opacity: 0; transform: translateY(100px); }
+.vf-rise.visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Stagger chars */
+.vf-char { display: inline-block; opacity: 0; transform: translateY(60px); }
+.vf-char.visible { opacity: 1; transform: translateY(0); }
+
+/* Screenshot skip */
+html.screenshot-mode .vf-preloader,
+html.screenshot-mode .vf-cursor,
+html.screenshot-mode .vf-cursor-ring { display: none !important; }
+html.screenshot-mode .vf-rise { opacity: 1 !important; transform: none !important; }
+html.screenshot-mode .vf-char { opacity: 1 !important; transform: none !important; transition: none !important; }
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="vf-preloader" id="preloader">
+  <div class="vf-preloader-count" id="preloader-count">0</div>
+  <div class="vf-preloader-bar"><div class="vf-preloader-bar-fill" id="preloader-bar-fill"></div></div>
+</div>
+
+<!-- Custom Cursors -->
+<div class="vf-cursor" id="vf-cursor"></div>
+<div class="vf-cursor-ring" id="vf-cursor-ring"></div>
+
+<!-- Progress Bar -->
+<div class="progress-bar"><div class="progress-bar-fill" id="progress-fill"></div></div>
+
+<!-- Back to Archive Button -->
+<a href="index.html" class="back-archive-btn">&larr; 返回归档</a>
+
+<!-- Mobile Menu Toggle -->
+<div class="menu-toggle" id="menu-toggle">☰</div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AIGC Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.07.09 · 周四</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">本期导航</div>
+    <a href="#sec-overview" class="nav-link"><span class="nav-num">◆</span>今日概览</a>
+    <a href="#sec1" class="nav-link"><span class="nav-num">§1</span>巨头发布 &amp; 监管松绑</a>
+    <a href="#card-1" class="nav-link nav-sub">GPT-5.6 全量发布 9.6</a>
+    <a href="#card-2" class="nav-link nav-sub">Grok 4.5 开放 9.2</a>
+    <a href="#sec2" class="nav-link"><span class="nav-num">§2</span>自研替代 &amp; 芯片自主</a>
+    <a href="#card-4" class="nav-link nav-sub">微软 MAI 自研 8.8</a>
+    <a href="#card-5" class="nav-link nav-sub">DeepSeek 智谱造芯 8.7</a>
+    <a href="#sec3" class="nav-link"><span class="nav-num">§3</span>创作工具 &amp; 社交 AI</a>
+    <a href="#card-3" class="nav-link nav-sub">Meta Muse Image 8.9</a>
+    <a href="#card-7" class="nav-link nav-sub">可灵 4K + MJ V8.1 8.4</a>
+    <a href="#sec4" class="nav-link"><span class="nav-num">§4</span>国产生态 &amp; 合规倒计时</a>
+    <a href="#card-6" class="nav-link nav-sub">腾讯 Hy3 + 零一万物 8.6</a>
+    <a href="#card-8" class="nav-link nav-sub">Achiam 离职 + 合规 8.3</a>
+  </div>
+
+  <div class="sidebar-dots"><i></i><i></i><i></i><i></i></div>
+  <a href="index.html" class="sidebar-back">&larr; 返回归档</a>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+<div class="page">
+
+<!-- Header -->
+<section class="header" id="sec-overview">
+  <div class="swatches"><i></i><i></i><i></i><i></i></div>
+  <div class="header-kicker">2026 年 7 月 9 日 · 星期四</div>
+  <h1>AIGC <em>Daily</em> Report</h1>
+  <p class="lead">美国监管首次对前沿 AI「松绑」，GPT-5.6 三款模型 7/10 全量发布；中国 AI 双雄从算法延伸到自研芯片，一场 24 小时内四线并发的大变局。</p>
+  <div class="header-meta">
+    <span class="meta-tag">#GPT-5.6</span>
+    <span class="meta-tag">#Grok4.5</span>
+    <span class="meta-tag">#MuseImage</span>
+    <span class="meta-tag">#自研芯片</span>
+    <span class="meta-tag">#Hy3</span>
+    <span class="meta-tag">#可灵4K</span>
+    <span class="meta-tag">#合规</span>
+  </div>
+</section>
+
+<!-- Data Strip -->
+<div class="data-strip vf-rise">
+  <div class="data-chip"><div class="data-label">巨头新品</div><div class="data-value">4</div></div>
+  <div class="data-chip"><div class="data-label">监管变动</div><div class="data-value">3</div></div>
+  <div class="data-chip"><div class="data-label">芯片自研</div><div class="data-value">2</div></div>
+  <div class="data-chip"><div class="data-label">合规截止</div><div class="data-value">7.10</div></div>
+</div>
+
+<!-- ──────────────── §1: 巨头发布 & 监管松绑 ──────────────── -->
+<section class="section" id="sec1">
+  <div class="section-chrome">
+    <div class="section-kicker">§1</div>
+    <div class="section-count">2 articles</div>
+  </div>
+  <div class="section-title">巨头发布 &amp; 监管松绑</div>
+  <div class="section-sub">24 小时内两个顶级模型密集上线，美国前沿 AI 监管首次「松绑」</div>
+
+  <!-- Card 1: GPT-5.6 -->
+  <div class="card vf-rise" id="card-1">
+    <div class="card-chrome">
+      <div class="card-num">1</div>
+      <div class="card-title">GPT-5.6 获美国政府放行，7/10 全量发布三款模型 + GPT-Live 全双工语音<span class="card-fire">🔥</span></div>
+      <span class="card-tag">#GPT-5.6</span>
+    </div>
+    <div class="card-desc">
+      美国商务部 7/8 正式批准 OpenAI 全面发布 GPT-5.6，旗舰 <strong>Sol</strong>、平衡型 <strong>Terra</strong>、低成本 <strong>Luna</strong> 三款将于 7/10 向公众推出——这是美国首次对全球最先进大模型实施「松绑」。同步发布的 <strong>GPT-Live</strong> 采用原生全双工架构，支持实时打断与翻译，AI 交互从文本时代进入「自然对话」时代。
+      <span class="card-score">9.6 / 10</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Grok 4.5 -->
+  <div class="card vf-rise" id="card-2">
+    <div class="card-chrome">
+      <div class="card-num">2</div>
+      <div class="card-title">SpaceXAI Grok 4.5 今日向公众正式开放<span class="card-fire">🔥</span></div>
+      <span class="card-tag">#Grok4.5</span>
+    </div>
+    <div class="card-desc">
+      马斯克 7/8 宣布 <strong>Grok 4.5 今日（7/9）正式向公众开放</strong>，宣称为「Opus 级别模型，更快更便宜」。xAI 已完成并入 SpaceX，更名 <strong>SpaceXAI</strong>，品牌与 SpaceX 卫星星座基础设施深度融合——FCC 已备案轨道 AI 计算星座计划，可能是全球首个太空 AI 推理基础设施。
+      <span class="card-score">9.2 / 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── §2: 自研替代 & 芯片自主（腮红满幅） ──────────────── -->
+<div class="section-highlight" id="sec2">
+<section class="section" style="margin-bottom:0;">
+  <div class="section-chrome">
+    <div class="section-kicker">§2</div>
+    <div class="section-count">2 articles</div>
+  </div>
+  <div class="section-title">自研替代 &amp; 芯片自主</div>
+  <div class="section-sub">从微软到中国 AI 双雄，「自己做」从口号变成行动</div>
+
+  <!-- Card 4: 微软 MAI -->
+  <div class="card vf-rise" id="card-4">
+    <div class="card-chrome">
+      <div class="card-num">4</div>
+      <div class="card-title">微软 MAI 自研模型替代 OpenAI/Anthropic，已在 Excel/Outlook 落地</div>
+      <span class="card-tag">#自研模型</span>
+    </div>
+    <div class="card-desc">
+      彭博社 7/8 报道，微软 <strong>MAI 自研模型</strong>已在 Excel、Outlook 中逐步替换 OpenAI 与 Anthropic 第三方模型，<strong>每周数万次 AI 请求已由 MAI 独立处理</strong>。AI 负责人穆斯塔法·苏莱曼公开目标：减少并<strong>最终消除对 Anthropic 的付费</strong>。当最大 AI 客户开始「自己做」，第三方 API 的高利润率模式面临系统性压力。
+      <span class="card-score">8.8 / 10</span>
+    </div>
+  </div>
+
+  <!-- Card 5: DeepSeek 智谱造芯 -->
+  <div class="card vf-rise" id="card-5">
+    <div class="card-chrome">
+      <div class="card-num">5</div>
+      <div class="card-title">DeepSeek &amp; 智谱双双被曝秘密自研 AI 推理芯片</div>
+      <span class="card-tag">#芯片</span>
+    </div>
+    <div class="card-desc">
+      路透社 / The Information 7/8 同时爆料：<strong>DeepSeek 与智谱 AI 正在秘密自研定制化 AI 推理芯片</strong>。DeepSeek 同步推进 70 亿美元融资，智谱则因 GLM-5.2 在 Vercel 日 Token 一周暴涨 <strong>27 倍</strong>、算力告急直接推动造芯决策。英伟达盘前跌 1.6%，分析师称其在华市场份额「正在逐步归零」。
+      <span class="card-score">8.7 / 10</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ──────────────── §3: 创作工具 & 社交 AI ──────────────── -->
+<section class="section" id="sec3">
+  <div class="section-chrome">
+    <div class="section-kicker">§3</div>
+    <div class="section-count">2 articles</div>
+  </div>
+  <div class="section-title">创作工具 &amp; 社交 AI</div>
+  <div class="section-sub">Meta 把 AI 生图做成社交产品的默认能力，可灵把视频质量推到院线级</div>
+
+  <!-- Card 3: Meta Muse Image -->
+  <div class="card vf-rise" id="card-3">
+    <div class="card-chrome">
+      <div class="card-num">3</div>
+      <div class="card-title">Meta 发布自研 Muse Image 图像生成模型，免费 + Instagram/WhatsApp 整合</div>
+      <span class="card-tag">#Muse</span>
+    </div>
+    <div class="card-desc">
+      Meta 超级智能实验室 7/8 发布首款图像生成产品 <strong>Muse Image</strong>，免费开放并深度整合 Instagram 和 WhatsApp——<strong>数亿用户无需跳转即可调用 AI 生图</strong>。核心突破：<strong>精准文字渲染</strong>（解决行业「文字乱码」痛点），可直接生成可扫码使用的定制二维码、操作指引和信息图。同系列 <strong>Muse Video</strong> 已进入开发。
+      <span class="card-score">8.9 / 10</span>
+    </div>
+  </div>
+
+  <!-- Card 7: 可灵 4K + MJ V8.1 -->
+  <div class="card vf-rise" id="card-7">
+    <div class="card-chrome">
+      <div class="card-num">7</div>
+      <div class="card-title">快手可灵 AI 推原生 4K 直出 + Midjourney V8.1 成默认模型</div>
+      <span class="card-tag">#创作工具</span>
+    </div>
+    <div class="card-desc">
+      快手可灵推出<strong>业内首个原生 4K 直出视频模型</strong>，跳过传统超分后处理，直接输出院线级画面，面向影视广告行业。Midjourney <strong>V8.1 正式取代 V7 为默认模型</strong>：4 秒生成 SD、12 秒 HD，文字渲染能力大幅提升。AI 视频从「demo 级」进入「可交付级」。
+      <span class="card-score">8.4 / 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── §4: 国产生态 & 合规倒计时（腮红满幅） ──────────────── -->
+<div class="section-highlight" id="sec4">
+<section class="section" style="margin-bottom:0;">
+  <div class="section-chrome">
+    <div class="section-kicker">§4</div>
+    <div class="section-count">2 articles</div>
+  </div>
+  <div class="section-title">国产生态 &amp; 合规倒计时</div>
+  <div class="section-sub">国产大模型生态加速丰满，同时 Claude Code 安全事件触发连锁合规反应</div>
+
+  <!-- Card 6: 腾讯 Hy3 + 零一万物 -->
+  <div class="card vf-rise" id="card-6">
+    <div class="card-chrome">
+      <div class="card-num">6</div>
+      <div class="card-title">腾讯混元 Hy3 正式版发布 + 零一万物「一号位」决策 AI 三件套</div>
+      <span class="card-tag">#国产大模型</span>
+    </div>
+    <div class="card-desc">
+      腾讯混元 <strong>Hy3 正式版</strong> 7/6 发布：MoE 架构 295B 总参 / 21B 激活，<strong>256K 超长上下文，快慢思考融合</strong>。零一万物同步推出「一号位决策 AI」：<strong>老板 AI、销冠 AI、投资官 AI</strong>，李开复称「AI 正在将人的智力平价化、商品化」——AI 产品从「工具」跃迁到「决策赋能」。
+      <span class="card-score">8.6 / 10</span>
+    </div>
+  </div>
+
+  <!-- Card 8: Achiam 离职 + 合规 -->
+  <div class="card vf-rise" id="card-8">
+    <div class="card-chrome">
+      <div class="card-num">8</div>
+      <div class="card-title">OpenAI 元老 Joshua Achiam 离职 + 工信部预警 Claude Code / 阿里 7.10 截止卸载</div>
+      <span class="card-tag">#合规</span>
+    </div>
+    <div class="card-desc">
+      OpenAI 近 9 年元老 <strong>Joshua Achiam</strong> 7/8 宣布离职，其「首席未来学家」头衔仅存活 5 个月。同天，<strong>工信部发布 Claude Code 风险预警</strong>，阿里巴巴通知全员 <strong>7 月 10 日前完成卸载</strong>（明天截止）。从 Anthropic 安全事件到中国监管响应，国产 AI 编程工具替换窗口被强制打开。
+      <span class="card-score">8.3 / 10</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- Edit Note -->
+<div class="edit-note vf-rise">
+  <p><strong>📝 编辑点评</strong></p>
+  <p>今天可能是 2026 年 AI 圈最密集的一天——GPT-5.6 政府放行 + Grok 4.5 开放 + Meta Muse Image 发布 + DeepSeek/智谱造芯，四条 P0 级新闻在 24 小时内扎堆。核心叙事线：<strong>「美国监管首次对前沿 AI 松绑」+「巨头自研/自控成本全面加速」+「中国 AI 从算法延伸到芯片自主」</strong>。</p>
+  <p>对 CODM 宣发团队的三条建议：① <strong>7/10 关注 GPT-5.6 实测表现</strong>，尤其是 GPT-Live 全双工语音能否替代传统配音流程；② <strong>Muse Image 的文字渲染能力</strong>值得马上测试，对活动海报/信息图制作有直接价值；③ <strong>Claude Code 合规风险</strong>需评估团队使用情况，明天就是阿里强制卸载截止日。</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">
+    AIGC Daily Report<br>
+    Curated by WorkBuddy · 65 Source Pipeline
+  </div>
+  <div class="footer-right">
+    2026.07.09<br>
+    09:30 CST
+  </div>
+</div>
+
+</div>
+</main>
+
+<!-- Back to Top -->
+<div class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<!-- Lenis + GSAP CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+
+<script>
+(function(){
+  const urlP = new URLSearchParams(window.location.search);
+  const isScreenshot = urlP.has('screenshot');
+
+  /* ── Preloader ── */
+  if (!isScreenshot) {
+    const pl = document.getElementById('preloader');
+    const cnt = document.getElementById('preloader-count');
+    const bar = document.getElementById('preloader-bar-fill');
+    const dur = 1600;
+    const step = 20;
+    let start = null;
+    function tick(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      cnt.textContent = Math.floor(eased * 100);
+      bar.style.width = (eased * 100) + '%';
+      if (p < 1) { requestAnimationFrame(tick); }
+      else { pl.classList.add('hide'); setTimeout(function(){ pl.style.display='none'; }, 500); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ── URL screenshot skip ── */
+  if (isScreenshot) {
+    document.documentElement.classList.add('screenshot-mode');
+  }
+
+  /* ── Lenis Smooth Scroll ── */
+  const lenis = new Lenis({ duration: 1.2, easing: function(t){ return 1 - Math.pow(1 - t, 4); }, smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  /* ── Progress Bar ── */
+  const progressFill = document.getElementById('progress-fill');
+  lenis.on('scroll', function(e){
+    const scrollTop = e.scroll || window.pageYOffset;
+    const docH = document.body.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+    progressFill.style.width = pct + '%';
+  });
+
+  /* ── ScrollSpy for Sidebar ── */
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sectionIds = [];
+  navLinks.forEach(function(l){ const href = l.getAttribute('href'); if (href && href.startsWith('#card-') || href && href.startsWith('#sec')) { sectionIds.push(href.substring(1)); } });
+
+  function updateActive(){
+    let current = '';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 120) { current = sectionIds[i]; break; }
+      }
+    }
+    navLinks.forEach(function(l){
+      const href = l.getAttribute('href');
+      if (href) {
+        const id = href.substring(1);
+        if (id === current) { l.classList.add('active'); }
+        else { l.classList.remove('active'); }
+      }
+    });
+  }
+  lenis.on('scroll', updateActive);
+  updateActive();
+
+  /* ── Back to Top ── */
+  const btt = document.getElementById('back-to-top');
+  lenis.on('scroll', function(e){
+    const st = e.scroll || window.pageYOffset;
+    if (st > 600) { btt.classList.add('visible'); }
+    else { btt.classList.remove('visible'); }
+  });
+
+  /* ── Mobile Menu ── */
+  document.getElementById('menu-toggle').addEventListener('click', function(){
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-link').forEach(function(l){
+    l.addEventListener('click', function(){ document.getElementById('sidebar').classList.remove('open'); });
+  });
+
+  /* ── VF Custom Cursor ── */
+  if (!isScreenshot && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.documentElement.classList.add('vf-cursor-on');
+    const cur = document.getElementById('vf-cursor');
+    const ring = document.getElementById('vf-cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', function(e){
+      mx = e.clientX; my = e.clientY;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    });
+
+    function followRing(){
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(followRing);
+    }
+    requestAnimationFrame(followRing);
+
+    document.querySelectorAll('a, button, .card, .nav-link').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cur.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ cur.classList.remove('hover'); });
+    });
+  }
+
+  /* ── VF Rise Animation on Scroll ── */
+  const riseEls = document.querySelectorAll('.vf-rise');
+  function checkRise(){
+    riseEls.forEach(function(el){
+      if (el.classList.contains('visible')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  lenis.on('scroll', checkRise);
+  checkRise();
+
+  /* ── H1 Title Char Stagger ── */
+  if (!isScreenshot) {
+    const h1 = document.querySelector('.header h1');
+    if (h1) {
+      const txt = h1.textContent;
+      h1.textContent = '';
+      const chars = txt.split('');
+      chars.forEach(function(ch, i){
+        const span = document.createElement('span');
+        span.className = 'vf-char';
+        span.textContent = ch;
+        span.style.transitionDelay = (i * 0.015) + 's';
+        h1.appendChild(span);
+      });
+      setTimeout(function(){
+        h1.querySelectorAll('.vf-char').forEach(function(s){ s.classList.add('visible'); });
+      }, 1800);
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
