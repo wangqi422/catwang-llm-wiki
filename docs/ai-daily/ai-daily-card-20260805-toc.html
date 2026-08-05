@@ -545,19 +545,24 @@ html.screenshot-mode .vf-fade, html.screenshot-mode .vf-rise-100, html.screensho
     }
   });
 
-  // Custom cursor
-  const cursor = document.getElementById('vfCursor'), cursorRing = document.getElementById('vfCursorRing');
-  if (cursor && cursorRing && !reduced) {
+  // Custom cursor (兼容 7/10 版本的 rAF + lerp 写法，避免 gsap.set 覆盖 -50% 居中)
+  const cursor = document.getElementById('vfCursor');
+  const cursorRing = document.getElementById('vfCursorRing');
+  if (cursor && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
     document.documentElement.classList.add('vf-cursor-on');
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
-    gsap.ticker.add(function() {
-      gsap.set(cursor, { x: mouseX, y: mouseY });
-      gsap.set(cursorRing, { x: mouseX, y: mouseY, delay: 0.06 });
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+    window.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
     });
+    (function animRing() {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      requestAnimationFrame(animRing);
+    })();
     document.querySelectorAll('a, button, .card, .data-chip, .nav-link').forEach(el => {
-      el.addEventListener('mouseenter', function() { cursor.classList.add('hover'); });
-      el.addEventListener('mouseleave', function() { cursor.classList.remove('hover'); });
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
   }
 })();
