@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 干货周报 · Issue #14 · 2026.07.28–08.02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF;
+  --paper-2: #ECE6D2;
+  --paper-3: #E8E2D0;
+  --ink: #2A241B;
+  --ink-soft: #5C5345;
+  --ink-faint: rgba(42, 36, 27, 0.35);
+  --pink: #E1A4C2;
+  --lemon: #D6DD63;
+  --blush: #E8C9B6;
+  --sage: #B7C7A8;
+  --lilac: #C9BEDC;
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --border: rgba(42, 36, 27, 0.14);
+  --border-strong: rgba(42, 36, 27, 0.3);
+  --sidebar-w: 260px;
+  --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242, 238, 223, 0.6);
+  --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #E1A4C2;
+  --sidebar-active-bg: rgba(225, 164, 194, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ Back to Archive Button ═══════ */
+.back-archive-btn {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  padding: 9px 18px; border-radius: 10px;
+  background: rgba(42,36,27,0.08); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); color: var(--ink-soft);
+  font-family: "Noto Sans SC", sans-serif; font-size: 13px; font-weight: 400;
+  text-decoration: none; transition: all 0.2s;
+}
+.back-archive-btn:hover { background: rgba(214,221,99,0.2); border-color: var(--lemon); color: var(--ink); }
+
+/* ═══════ Sidebar ═══════ */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg);
+  overflow-y: auto; z-index: 100;
+  padding: 32px 0 40px;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(242,238,223,0.2); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.sidebar-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 2px; color: var(--sidebar-accent);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.sidebar-header h1 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; font-size: 22px;
+  color: var(--sidebar-text-hover); line-height: 1.2;
+}
+.sidebar-header h1 em { font-style: italic; font-weight: 400; }
+.sidebar-meta {
+  margin-top: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 11px; color: rgba(242,238,223,0.35);
+}
+
+.nav-section { padding: 8px 16px; }
+.nav-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(242,238,223,0.3);
+  text-transform: uppercase; padding: 12px 8px 6px;
+}
+.nav-link {
+  display: block; padding: 8px 12px;
+  color: var(--sidebar-text); text-decoration: none;
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400;
+  border-radius: 6px; transition: all 0.2s; margin-bottom: 2px;
+}
+.nav-link:hover { color: var(--sidebar-text-hover); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--sidebar-accent); background: var(--sidebar-active-bg); font-weight: 500; }
+.nav-link .nav-num {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; margin-right: 6px; opacity: 0.6;
+}
+.nav-link.active .nav-num { opacity: 1; }
+.nav-sub { padding-left: 28px; font-size: 12px !important; }
+
+.sidebar-dots {
+  display: flex; gap: 8px; padding: 20px 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px;
+}
+.sidebar-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+
+/* ═══════ Main ═══════ */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; }
+.page { max-width: 860px; margin: 0 auto; padding: 56px 56px 60px; }
+
+/* ═══════ Typography ═══════ */
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-weight: 500; color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
+}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; }
+
+/* ═══════ Header ═══════ */
+.header { margin-bottom: 56px; position: relative; scroll-margin-top: 32px; }
+.header-kicker {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 16px;
+}
+.header h1 { font-size: 64px; line-height: 0.95; letter-spacing: -0.015em; margin-bottom: 16px; }
+.header .lead {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 17px; font-weight: 400; color: var(--ink-soft);
+  max-width: 560px; line-height: 1.7;
+}
+.header .swatches { position: absolute; right: 0; top: 8px; display: flex; gap: 12px; }
+.header .swatches i { width: 32px; height: 32px; border-radius: 50%; display: block; }
+.header-meta {
+  margin-top: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.meta-tag {
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px; font-weight: 400; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+
+/* ═══════ Thesis ═══════ */
+.thesis { margin-bottom: 56px; scroll-margin-top: 32px; }
+.thesis-opener {
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-style: italic; font-size: 26px; line-height: 1.35;
+  color: var(--ink); margin-bottom: 28px; max-width: 660px;
+}
+.thesis-opener::first-letter {
+  font-size: 68px; float: left; line-height: 0.85;
+  padding: 4px 10px 0 0; font-style: normal; font-weight: 500;
+}
+.thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.thesis-card { border-radius: 20px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.thesis-card:nth-child(1) { background: var(--pink); }
+.thesis-card:nth-child(2) { background: var(--lemon); }
+.thesis-card:nth-child(3) { background: var(--blush); }
+.thesis-card:nth-child(4) { background: var(--sage); }
+.thesis-card-label {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.7;
+}
+.thesis-card-body {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--ink);
+}
+.thesis-card-body b { font-weight: 600; }
+.thesis-tagline {
+  background: var(--card-bg); border-radius: 16px; padding: 18px 24px;
+  border-left: 4px solid var(--pink);
+}
+.thesis-tagline p {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.7;
+}
+
+/* ═══════ Sections ═══════ */
+.section { margin-bottom: 52px; scroll-margin-top: 32px; }
+.section-chrome { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.section-kicker { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 16px; color: var(--ink-soft); }
+.section-count { font-family: "Work Sans", sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; }
+.section-title { font-family: "Noto Sans SC", sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.section-sub {
+  font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 15px;
+  color: var(--ink-soft); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+
+/* ═══════ Cards ═══════ */
+.card {
+  background: var(--card-bg); border-radius: 28px; padding: 28px 32px;
+  margin-bottom: 18px; scroll-margin-top: 32px;
+}
+.card-chrome { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--ink); }
+.card-title { font-family: "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); flex: 1; }
+.card-tag {
+  font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink-soft); padding: 4px 12px;
+  border-radius: 999px; background: var(--paper-2);
+}
+.card-desc {
+  font-family: "Noto Sans SC", "Work Sans", sans-serif; font-size: 14px;
+  font-weight: 300; line-height: 1.85; color: var(--ink-soft); margin-bottom: 14px;
+}
+.card-desc strong { font-weight: 500; color: var(--ink); }
+
+.sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.sub-card { border-radius: 16px; padding: 14px 16px; }
+.sub-card:nth-child(4n+1) { background: var(--pink); }
+.sub-card:nth-child(4n+2) { background: var(--lemon); }
+.sub-card:nth-child(4n+3) { background: var(--blush); }
+.sub-card:nth-child(4n) { background: var(--sage); }
+.sub-card-title {
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 12px; color: var(--ink); opacity: 0.65; margin-bottom: 4px;
+}
+.sub-card-body { font-family: "Noto Sans SC", sans-serif; font-size: 12px; font-weight: 400; line-height: 1.6; color: var(--ink); }
+
+.code-block {
+  background: var(--ink); border-radius: 18px; padding: 20px 24px; margin-top: 14px;
+  font-family: "JetBrains Mono", "Work Sans", monospace;
+  font-size: 12px; font-weight: 300; color: var(--paper); line-height: 1.85; white-space: pre-wrap;
+}
+.code-block .cmt { color: rgba(242, 238, 223, 0.4); }
+.code-block .key { color: var(--pink); }
+.code-block .str { color: var(--lemon); }
+
+.source {
+  margin-top: 14px; font-family: "Cormorant Garamond", serif;
+  font-style: italic; font-size: 12px; color: var(--ink-faint);
+  padding-top: 10px; border-top: 1px dashed var(--border);
+}
+
+/* ═══════ Highlight section (Workflows) ═══════ */
+.section-highlight {
+  background: var(--blush); margin-left: -56px; margin-right: -56px;
+  padding: 48px 56px; margin-bottom: 52px; scroll-margin-top: 32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color: var(--ink-soft); border-color: var(--border-strong); }
+.section-highlight .card { background: rgba(255,255,255,0.7); }
+
+/* ═══════ Gallery ═══════ */
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.gallery-item { border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+.gallery-item:nth-child(6n+1) { background: var(--pink); }
+.gallery-item:nth-child(6n+2) { background: var(--lemon); }
+.gallery-item:nth-child(6n+3) { background: var(--blush); }
+.gallery-item:nth-child(6n+4) { background: var(--sage); }
+.gallery-item:nth-child(6n+5) { background: var(--lilac); }
+.gallery-item:nth-child(6n) { background: var(--pink); }
+.gallery-num { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--ink); }
+.gallery-title { font-family: "Noto Sans SC", sans-serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gallery-desc { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+
+/* ═══════ Footer ═══════ */
+.footer {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-left { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.footer-right { font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-faint); }
+
+/* ═══════ Progress bar ═══════ */
+.progress-bar { position: fixed; top: 0; left: var(--sidebar-w); width: calc(100% - var(--sidebar-w)); height: 3px; z-index: 99; }
+.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--lemon), var(--sage)); transition: width 0.1s ease-out; }
+
+/* ═══════ Back to top ═══════ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: rgba(42,36,27,0.08); border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; backdrop-filter: blur(8px);
+}
+.back-to-top:hover { background: rgba(225,164,194,0.2); border-color: var(--pink); transform: scale(1.1); }
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top svg { width: 18px; height: 18px; fill: var(--ink); }
+
+/* ═══════ Mobile ═══════ */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; left: 16px; z-index: 200;
+  width: 40px; height: 40px; background: var(--sidebar-bg);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+  color: var(--sidebar-text-hover); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .page { padding: 48px 24px 80px; }
+  .header h1 { font-size: 42px; }
+  .menu-toggle { display: flex; }
+  .progress-bar { left: 0; width: 100%; }
+  .section-highlight { margin-left: -24px; margin-right: -24px; padding: 36px 24px; }
+  .back-archive-btn { right: 16px!important; top: 12px!important; font-size: 12px!important; padding: 7px 14px!important; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+<a href="index.html" class="back-archive-btn">&#8592; 返回归档</a>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Practical Weekly</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <div class="sidebar-meta">2026.07.28 – 08.02 &middot; Issue No. 14</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>标题 &amp; 概览</a>
+    <a href="#thesis" class="nav-link"><span class="nav-num">&middot;</span>本周结论</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Tools &amp; Apps</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&#167;1</span>实用工具箱</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek V4 Flash</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Kimi K3 开源</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>MiniMax H3</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Workflows</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&#167;2</span>高效工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>GPT-5.6 成本重构</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">5.</span>MCP 无状态部署</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Methods &amp; Prompts</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&#167;3</span>方法论与 Prompt</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">6.</span>Claude Opus 5 实战</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">7.</span>SeedRealtime 交互</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">8.</span>Wan2.6 视频 Pipeline</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">iv. Priority</div>
+    <a href="#s4" class="nav-link"><span class="nav-num">&#167;4</span>推荐上手顺序</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+
+</nav>
+
+<!-- ═══════ MAIN ═══════ -->
+<div class="main">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Practical Weekly &middot; Issue No. 14</div>
+    <h1>AI <em>干货</em>周报</h1>
+    <p class="lead">国产开源狂潮 + 全球巨头降价 &middot; 8 条立刻能用的干货</p>
+    <div class="header-meta">
+      <span class="meta-tag">扫描范围 65 信源</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">精选 8 条</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">3 大板块</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.07.28 – 08.02</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <div class="thesis" id="thesis">
+    <p class="thesis-opener">
+      这周是名副其实的「国产开源 + 巨头降价」双线轰炸周：月之暗面把 2.8T 参数的 Kimi K3 完整权重甩上 HuggingFace，DeepSeek V4 Flash 正式版 API 公测，MiniMax H3 全模态上线——三家国产模型同时亮剑。另一边 OpenAI 把 GPT-5.6 Luna 砍价 80%，Anthropic 用 Claude Opus 5 同价替换打防守反击。MCP 协议本周完成史上最大升级——从有状态转向无状态 HTTP，Agent 基础设施终于可以像普通 Web 服务一样部署了。
+    </p>
+    <div class="thesis-grid">
+      <div class="thesis-card">
+        <div class="thesis-card-label">DeepSeek V4 Flash</div>
+        <div class="thesis-card-body">正式版 API 公测，Agent 能力飞跃，<b>成本比 GPT-5.6 Luna 降价后还低 60%</b></div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">Kimi K3 开源</div>
+        <div class="thesis-card-body"><b>2.8T MoE</b> 史上最大开源模型，1M 上下文，HuggingFace 权重免费下载</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">GPT-5.6 降价</div>
+        <div class="thesis-card-body">Luna <b>-80%</b>，Terra -20%，Sol 新增 Fast 模式，成本重构正当时</div>
+      </div>
+      <div class="thesis-card">
+        <div class="thesis-card-label">MCP 无状态升级</div>
+        <div class="thesis-card-body">Agent 基础设施史上最大更新，<b>Serverless 部署零成本</b></div>
+      </div>
+    </div>
+    <div class="thesis-tagline">
+      <p>&#128161; 一句话总结：AI 竞争从"拼模型参数"转向"拼性价比 + 工程化"，国产开源模型密集亮剑 + 模型成本断崖式下降 + Agent 基础设施成熟，是这个夏天给开发者最大的礼物。</p>
+    </div>
+  </div>
+
+  <!-- §1 实用工具箱 -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Tools &amp; Apps</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#128736;&#65039; 实用工具箱</div>
+    <div class="section-sub">3 个本周立刻能试的 AI 工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">DeepSeek V4 Flash 正式版 &middot; Agent 能力飞跃</span>
+        <span class="card-tag">DeepSeek</span>
+      </div>
+      <div class="card-desc">
+        7 月 31 日开放 API 公测，与预览版同结构仅重做后训练，但 <strong>Agent 能力实现质的飞跃</strong>（工具调用、多步骤执行、代码生成）。AI 智能指数 50 分，仅比 GPT-5.6 Luna（51 分）低 1 分。缓存命中 98% 折扣，竞品普遍仅 90%。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">AI 智能指数</div><div class="sub-card-body">50（Luna 为 51，差距仅 1 分）</div></div>
+        <div class="sub-card"><div class="sub-card-title">成本优势</div><div class="sub-card-body">单任务比 Luna 降价后仍低 60%</div></div>
+        <div class="sub-card"><div class="sub-card-title">缓存命中</div><div class="sub-card-body">98% 折扣（竞品 90%）</div></div>
+      </div>
+      <div class="source">&compfn; @deepseek_ai &middot; api-docs.deepseek.com &middot; Artificial Analysis</div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Kimi K3 完整权重开源 &middot; 史上最大开源模型</span>
+        <span class="card-tag">月之暗面</span>
+      </div>
+      <div class="card-desc">
+        月之暗面在 HuggingFace 公开 <strong>2.8T MoE 完整权重</strong>，896 路由专家每 Token 仅激活 16 个，原生视觉理解 + <strong>1M 上下文</strong>。同步开源注意力内核、MoE 通信库和 Agent 基础设施。曾用 32 Agent 27 分钟挖掘 Redis 零日漏洞。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">参数规模</div><div class="sub-card-body">2.8T MoE（896 专家）</div></div>
+        <div class="sub-card"><div class="sub-card-title">上下文</div><div class="sub-card-body">100 万 Token</div></div>
+        <div class="sub-card"><div class="sub-card-title">API 定价</div><div class="sub-card-body">$0.30 / $3.00 / $15.00</div></div>
+      </div>
+      <div class="source">&compfn; @Kimi_Moonshot &middot; huggingface.co/moonshotai/Kimi-K3</div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">MiniMax H3 全模态模型 &middot; 文本+图像+音频一站式</span>
+        <span class="card-tag">MiniMax</span>
+      </div>
+      <div class="card-desc">
+        国内首个将文本、图像、音频三模态整合进单一模型的产品级方案，对标 Google Gemini 全模态路线。单一 API 端点覆盖三种模态，<strong>无需拼接多个模型</strong>。
+      </div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">文本</div><div class="sub-card-body">对话、分析、创作</div></div>
+        <div class="sub-card"><div class="sub-card-title">图像</div><div class="sub-card-body">理解与生成</div></div>
+        <div class="sub-card"><div class="sub-card-title">音频</div><div class="sub-card-body">语音合成与识别</div></div>
+      </div>
+      <div class="source">&compfn; @MiniMax_AI &middot; api.minimax.chat</div>
+    </div>
+  </div>
+
+  <!-- §2 高效工作流 (Highlight) -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Workflows &amp; Hacks</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">&#9889; 高效工作流</div>
+    <div class="section-sub">2 套立刻能省钱的实操方案</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">GPT-5.6 降价 80% 后的成本重构指南</span>
+        <span class="card-tag">OpenAI</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 7 月 30 日将 GPT-5.6 Luna 输入砍到 $0.20/M（降 80%），Terra 降 20%，Sol 新增 Fast 模式（2.5× 吞吐）。关键是 <strong>不要一刀切</strong>——不同任务用不同模型。以下是决策矩阵：
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">批量客服/审核</div><div class="sub-card-body">旧选型 Terra → 新选型 Luna，成本 <b>-80%</b></div></div>
+        <div class="sub-card"><div class="sub-card-title">日常 Agent 工作流</div><div class="sub-card-body">旧选型 Luna → 新选型 DeepSeek V4 Flash，成本 <b>-60%</b></div></div>
+        <div class="sub-card"><div class="sub-card-title">高智商推理</div><div class="sub-card-body">保持 Claude Opus 5，同价但智力升级</div></div>
+        <div class="sub-card"><div class="sub-card-title">低延迟 Agent</div><div class="sub-card-body">Sol Fast 模式，2.5× 吞吐，成本 ×2</div></div>
+      </div>
+      <div class="source">&compfn; @OpenAI &middot; StackSpend &middot; VentureBeat</div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">MCP 无状态协议升级 &middot; Agent 基础设施部署实战</span>
+        <span class="card-tag">MCP</span>
+      </div>
+      <div class="card-desc">
+        MCP 2026-07-28 规范完成史上最大升级：协议核心从双向有状态转向 <strong>无状态请求/响应</strong>架构。MCP Server 现在可以像普通 Web 服务一样部署到 Serverless 平台，水平扩展零成本。
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">Step 1</div><div class="sub-card-body">升级 SDK（TS/Python/Go/C# 均已支持）</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2</div><div class="sub-card-body">移除 Session ID、initialize 握手逻辑</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3</div><div class="sub-card-body">切换到 Streamable HTTP + MRTR 交互</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 4</div><div class="sub-card-body">长任务改用 Tasks 扩展（handle 模式）</div></div>
+      </div>
+      <div class="source">&compfn; MCP Blog &middot; @AnthropicAI &middot; VentureBeat</div>
+    </div>
+  </div>
+
+  <!-- §3 方法论与 Prompt -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Methods &amp; Prompts</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">&#129504; 方法论与 Prompt</div>
+    <div class="section-sub">3 个可复用的方法论</div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Claude Opus 5 高智商任务实战 &middot; 什么时候该用 Opus 而不是 Fable</span>
+        <span class="card-tag">Anthropic</span>
+      </div>
+      <div class="card-desc">
+        Claude Opus 5 同价替换 Opus 4.8，前沿智力接近 Fable 5 但价格只有一半。核心理念：<strong>智力足够即可，不是所有任务都需要最强模型。</strong>
+      </div>
+      <div class="code-block"><span class="cmt"># 决策规则</span>
+<span class="key">IF</span> 跨多步推理 <span class="key">AND</span> 预算敏感 → <span class="str">Claude Opus 5</span>
+<span class="key">IF</span> 绝对最高智力 <span class="key">AND</span> 预算充足 → <span class="str">Claude Fable 5</span>
+<span class="key">IF</span> 高吞吐 + 低成本 → <span class="str">DeepSeek V4 Flash</span>
+<span class="key">IF</span> 多模态任务 → <span class="str">GPT-5.6 Sol / MiniMax H3</span></div>
+      <div class="sub-grid-3">
+        <div class="sub-card"><div class="sub-card-title">CursorBench</div><div class="sub-card-body">仅落后 Fable 5 的 0.5%</div></div>
+        <div class="sub-card"><div class="sub-card-title">ARC-AGI 3</div><div class="sub-card-body">3 倍于次优模型</div></div>
+        <div class="sub-card"><div class="sub-card-title">价格</div><div class="sub-card-body">只有 Fable 5 的一半</div></div>
+      </div>
+      <div class="source">&compfn; @AnthropicAI &middot; anthropic.com/news</div>
+    </div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">字节 SeedRealtime 全双工 &middot; 实时音视频 AI 交互设计范式</span>
+        <span class="card-tag">字节跳动</span>
+      </div>
+      <div class="card-desc">
+        字节发布 SeedRealtime 音视频全双工大模型（已上线豆包 App），核心理念：<strong>AI 不再是轮流发言的对讲机，而是能边听边说、随时打断的真实对话对象。</strong>对交互设计是范式级转变。
+      </div>
+      <div class="code-block"><span class="cmt"># 设计基于 SeedRealtime 的 [应用场景]：</span>
+<span class="key">1.</span> 用户触发方式：[语音唤醒 / 按钮 / 自动检测]
+<span class="key">2.</span> AI 实时感知：[说话内容 / 语气 / 情绪 / 环境音 + 人脸 / 手势]
+<span class="key">3.</span> AI 输出模式：[语音回复 / 屏幕叠加层 / 动作指令]
+<span class="key">4.</span> 中断处理：[随时打断 / 等待回合结束]
+<span class="key">5.</span> 状态管理：[保存上下文 / 丢弃重新开始]</div>
+      <div class="source">&compfn; @BytedanceTalk &middot; 字节 Seed 团队</div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">阿里 Wan2.6 全链路视频生成 &middot; 从一句话到成片的工业化 Pipeline</span>
+        <span class="card-tag">阿里通义</span>
+      </div>
+      <div class="card-desc">
+        阿里通义万相 Wan2.6 打通「文本→分镜脚本→视频片段→配音→剪辑」全链路，<strong>不再是单一的文生视频工具，而是一个视频制作操作系统。</strong>
+      </div>
+      <div class="sub-grid">
+        <div class="sub-card"><div class="sub-card-title">Step 1 · 分镜生成</div><div class="sub-card-body">Wan2.6 文本模式生成 N 个分镜描述</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 2 · 视频生成</div><div class="sub-card-body">Wan2.6 图生视频，保持风格一致</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 3 · 配音</div><div class="sub-card-body">MiniMax H3 语音合成旁白</div></div>
+        <div class="sub-card"><div class="sub-card-title">Step 4 · 输出</div><div class="sub-card-body">片段拼接 + 字幕叠加 → 成片</div></div>
+      </div>
+      <div class="source">&compfn; @Alibaba_Qwen &middot; tongyi.aliyun.com/wanxiang</div>
+    </div>
+  </div>
+
+  <!-- §4 推荐上手顺序 -->
+  <div class="section" id="s4">
+    <div class="section-chrome">
+      <span class="section-kicker">iv. Priority Guide</span>
+      <span class="section-count">8 items</span>
+    </div>
+    <div class="section-title">&#127919; 推荐上手顺序</div>
+    <div class="section-sub">按「学习成本 × 价值收益」排序，从低门槛高回报开始</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <span class="gallery-num">1</span>
+        <span class="gallery-title">DeepSeek V4 Flash 替换</span>
+        <span class="gallery-desc">学习极低，收益极高：换 API endpoint 即可</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">2</span>
+        <span class="gallery-title">GPT-5.6 成本重构</span>
+        <span class="gallery-desc">学习极低，收益极高：按决策矩阵重新分配任务</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">3</span>
+        <span class="gallery-title">Claude Opus 5 切换</span>
+        <span class="gallery-desc">学习极低，收益高：同价换更强推理</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">4</span>
+        <span class="gallery-title">MCP 无状态迁移</span>
+        <span class="gallery-desc">学习中，收益高：Serverless 部署零成本</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">5</span>
+        <span class="gallery-title">MiniMax H3 试用</span>
+        <span class="gallery-desc">学习极低，收益高：注册即可体验全模态</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">6</span>
+        <span class="gallery-title">Wan2.6 视频 Pipeline</span>
+        <span class="gallery-desc">学习中，收益高：视频制作全链路打通</span>
+      </div>
+    </div>
+    <div class="gallery-grid" style="margin-top:14px;">
+      <div class="gallery-item">
+        <span class="gallery-num">7</span>
+        <span class="gallery-title">SeedRealtime 交互设计</span>
+        <span class="gallery-desc">学习高，收益中：实时 AI 范式探索</span>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">8</span>
+        <span class="gallery-title">Kimi K3 自部署</span>
+        <span class="gallery-desc">学习高，收益高：需 ≥ 64 张卡的大规模部署</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      AI 干货周报 &middot; 2026.07.28 – 08.02<br>
+      每周一上午推送 &middot; 小柒AI速递
+    </div>
+    <div class="footer-right">Issue No. 14</div>
+  </div>
+
+</div><!-- /page -->
+</div><!-- /main -->
+
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z"/></svg>
+</div>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressFill').style.width = progress + '%';
+  // Back to top visibility
+  const btn = document.getElementById('backToTop');
+  btn.classList.toggle('visible', scrollTop > 400);
+});
+
+// ScrollSpy for sidebar active link
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const el = document.getElementById(href.slice(1));
+      if (el) sections.push({ link, el });
+    }
+  });
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    const viewMiddle = window.scrollY + 120;
+    for (const s of sections) {
+      if (s.el && s.el.offsetTop <= viewMiddle) current = s;
+    }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  });
+})();
+</script>
+
+</body>
+</html>

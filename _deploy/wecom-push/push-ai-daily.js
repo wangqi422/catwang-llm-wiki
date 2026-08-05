@@ -123,7 +123,7 @@ function extractPushMarkdown(mdContent, dateStr) {
   if (items.length === 0) {
     // 兜底：从 ### #N ⭐ 标题提取
     mdLines.forEach(l => {
-      const m = l.match(/^### #(\d+) ⭐ (.+)/);
+      const m = l.match(/^### #(\d+) (?:⭐ )?(.+)/);
       if (m) items.push({ num: m[1], title: m[2], score: '', fire: '' });
     });
   }
