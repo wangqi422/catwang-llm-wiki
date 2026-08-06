@@ -62,6 +62,17 @@ description: "统一日报流水线 Skill：合并 AI Daily 速报卡片 与 COD
     - h1 字符 stagger 0.015s 溅出
     - 章节滚动用 vf-rise-100（translateY 100px）+ power4.out
     - **截图模式自动跳过**：URL 加 `?screenshot=1` 或 `html.screenshot-mode` class 即可，已在 `screenshot.js` 自动处理
+  - **AIGC 速报分支硬性必备元素（2026-08-06 起强制，缺一不可）**：
+    1. **「编辑点评」长文段落**（位置：在 `.data-strip` 之后、`.footer` 之前）：
+       ```html
+       <div class="edit-note">
+         <p><strong>🎯 编辑点评</strong></p>
+         <p>[3-5 段总结：今日最大看点 + 行业意义 + 对 CODM 宣发团队的具体建议]</p>
+       </div>
+       ```
+       必须是编辑视角的复盘，**不能漏**——2026-08-06 第一次推送就因为漏了这一段被退回。
+    2. **Data Strip 4 张数据卡**（每张带 `.data-label` + `.data-value`），4 色：粉 / 柠檬 / 腮红 / 鼠尾草
+    3. **生成完后必须 grep 验证**：`grep -c "编辑点评" ai-daily-card-YYYYMMDD-toc.html` ≥ 1（编辑点评段必须存在）。不达标即为不合格，**必须补回后重生成**。
 
 ### Phase 4: 归档 + 发布 + 推送（AIGC 分支必须执行全部步骤）
 
@@ -86,10 +97,37 @@ git add docs/ai-daily/
 git commit -m "feat: AIGC daily YYYY.MM.DD"
 git push origin main
 ```
-- 等待 ~30 秒 GitHub Actions 自动部署
 - 在线地址：`https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-YYYYMMDD-toc.html`
 
-**Step 4.3 — 推送企业微信群**：
+**Step 4.2a — URL 验证（⚠️ 强制 · 推送前必须通过）**：
+
+> **规则**：企微推送前，**必须先验证 H5 在线链接是否可以正常访问**。只有返回 HTTP 200 才能推送；返回 404 必须修复后再推送。
+
+**验证流程**：
+1. 用 `WebFetch` 工具访问 TOC H5 的在线 URL，检查页面标题/内容是否正常加载
+2. 如果返回 **200** → ✅ 通过，继续 Step 4.3
+3. 如果返回 **404** 或其他错误 → ❌ 阻塞，进入修复流程
+
+**修复流程（按顺序执行，每步完成后重新验证）**：
+1. **检查 Git Push 是否成功**：`git fetch origin && git log --oneline origin/main -3`，确认远程有最新 commit
+   - 如果远程没有 → 重新 push：`git push origin main`
+2. **检查 GitHub Pages 部署状态**：`gh run list --workflow "Deploy to GitHub Pages" --limit 3`
+   - 查看最新 run 的 status/conclusion，确认部署已完成
+   - 如果部署仍在排队 → 等待（`gh run watch <RUN_ID>`）
+3. **排查 submodule 损坏**（最常见 404 根因）：`git submodule status` 检查是否有损坏的 submodule 引用
+   - 症状：workflow 日志中有 `fatal: No url found for submodule path 'xxx'` 或 checkout exit code 128
+   - 修复：`git rm --cached <损坏的submodule路径> && rm -rf .git/modules/<名称>`
+   - commit + push 后等新 workflow 部署完成
+4. **检查 Pages 源配置**：`gh api repos/wangqi422/catwang-llm-wiki/pages --jq '{build_type, source}'`
+   - 通常应为 `build_type: workflow, source path: /`（根目录）
+   - 如果配置不对 → 切回正确配置并触发 rebuild
+5. **强制触发 Pages rebuild**：如果以上都正常但仍 404 → `gh api repos/wangqi422/catwang-llm-wiki/pages/builds --method POST`
+6. **重复验证**：修复后重新用 WebFetch 验证 URL，直到返回 200
+7. **仍然失败**：不推送，记录异常日志，通知用户手动检查
+
+**验证通过标志**：URL 返回 200，H5 页面标题/内容正常加载。
+
+**Step 4.3 — 推送企业微信群（⚠️ 必须 Step 4.2a 通过后才能执行）**：
 ```bash
 node _deploy/wecom-push/push-ai-daily.js
 ```
