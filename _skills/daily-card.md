@@ -128,11 +128,19 @@ git push origin main
 **验证通过标志**：URL 返回 200，H5 页面标题/内容正常加载。
 
 **Step 4.3 — 推送企业微信群（⚠️ 必须 Step 4.2a 通过后才能执行）**：
+
+**AIGC 日报（2026-08-07 起默认走海报模式，推双群）**：
 ```bash
-node _deploy/wecom-push/push-ai-daily.js
+node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD --dry   # 先预检
+node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD         # 实发
 ```
+- 推送内容：一条 `markdown_v2` = 海报图片 + 「点击看更多内容」链接
+- 目标群：`config.json` → `aiDailyWebhooks`（当前 2 个群）
+- 详见 §2.0
+
+**旧方式（文字摘要，已不作为默认）**：`node _deploy/wecom-push/push-ai-daily.js`
 - 推送内容：① Markdown 文字摘要（标题列表 + 一句话总结）→ ② H5 在线链接
-- 如果 push 脚本不存在或 webhook 未配，手动提示用户
+- 仅在海报链路故障、或用户明确要求纯文字时使用
 
 **Step 4.4 — 记录日志**：
 - 更新 `log.md`
@@ -142,7 +150,7 @@ node _deploy/wecom-push/push-ai-daily.js
 
 ## 2. AIGC 速报分支（原 daily-card）
 
-### 2.0 海报模式（分享用，可选）
+### 2.0 海报模式（★ AI Daily 默认发布方式 · 2026-08-07 起）
 
 除 9:16 长卡片外，另有一套**海报**，适合微信群 / 朋友圈 / PPT 首页分享。
 视觉规范沿用 `ai-weekly-poster` 系列：暖色纸质底（`--paper:#F2EEDF`）+ 粉/柠檬/杏/鼠尾草四色圆点。
