@@ -190,7 +190,7 @@ node _deploy/wecom-push/push-poster.js --date YYYYMMDD --dry
 node _deploy/wecom-push/push-poster.js --date YYYYMMDD
 
 # 只推一个群
-node _deploy/wecom-push/push-poster.js --date YYYYMMDD --group "群 A（0c6ad956）"
+node _deploy/wecom-push/push-poster.js --date YYYYMMDD --group "群 A"
 
 # Pages挂了 → base64 直传（两条消息，不依赖公网 URL）
 node _deploy/wecom-push/push-poster.js --date YYYYMMDD --mode split
@@ -204,6 +204,33 @@ node _deploy/daily-card/screenshot-poster.js --html docs/ai-daily/ai-daily-poste
 ```
 
 **push-poster.js 参数**：`--date` / `--mode md2|split` / `--dry` / `--group "群名"` / `--no-wait` / `--png <本地路径>` / `--pngurl <公网URL>` / `--url <H5链接>` / `--text "自定义文案"`
+
+---
+
+## Webhook 凭据配置（安全）
+
+⚠️ **仓库是 public 的，`config.json` 里只放占位符，绝不能填真实 key**（任何人拿到 key 就能往群里发消息）。
+
+凭据解析走 `_deploy/wecom-push/resolve-webhooks.js`，优先级：
+
+| 优先级 | 来源 | 适用场景 |
+|---|---|---|
+| 1 |环境变量 `WECOM_AI_DAILY_KEYS="key1,key2"` | CI / 自动化 |
+| 2 | `config.local.json`（已 gitignore） | 本机日常（当前用这个） |
+| 3 | `config.json` | 仅当值不是 `YOUR_*` 占位符时才生效 |
+
+**本机配法**（`_deploy/wecom-push/config.local.json`）：
+
+```json
+{
+  "aiDailyWebhooks": [
+    { "name": "群 A", "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=真实key" },
+    { "name": "群 B", "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=真实key" }
+  ]
+}
+```
+
+`--dry` 预检会打印「凭据来源」和脱敏后的 key（只显示前 8 位），可用来确认读的是哪份配置。未解析到凭据时脚本会打印三种配法引导并退出。
 
 ---
 

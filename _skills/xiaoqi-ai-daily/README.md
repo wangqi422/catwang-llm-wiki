@@ -43,7 +43,26 @@ AI 日报 / AIGC 日报 / 今日 AI /跑日报 / 发日报 / 补发日报 / 日�
 | 仓库 | `catwang-llm-wiki`（脚本和数据都在里面） |
 | Node | puppeteer 已装在 `_deploy/` 和仓库根目录 |
 | `gh` CLI | 已登录，用于 `gh auth token` 注入 push |
-| 企微 webhook | 配在 `_deploy/wecom-push/config.json` → `aiDailyWebhooks` |
+| 企微 webhook | ⚠️ **不要填进 `config.json`**（本仓库是 public）。真实 key 放 `_deploy/wecom-push/config.local.json`（已 gitignore）或走环境变量 `WECOM_AI_DAILY_KEYS="key1,key2"`。解析逻辑见 `_deploy/wecom-push/resolve-webhooks.js` |
+
+## Webhook 凭据配置
+
+`config.json` 里只有`YOUR_*_KEY` 占位符，脚本会自动识别并跳过。真实凭据按以下优先级解析：
+
+| 优先级 | 来源 | 适用 |
+|---|---|---|
+| 1 | 环境变量 `WECOM_AI_DAILY_KEYS="key1,key2"` | CI / 自动化 |
+| 2 | `_deploy/wecom-push/config.local.json`（gitignore） | 本机开发 |
+| 3 | `config.json`（仅非占位符时生效） | 向后兼容 |
+
+本机配法：
+
+```bash
+cp _deploy/wecom-push/config.json _deploy/wecom-push/config.local.json
+# 然后把 YOUR_*_KEY 换成真实 key
+```
+
+`--dry` 预检会打印凭据来源和脱敏 key（前 8 位），可确认读的是哪份配置。
 
 ## 日常使用
 
@@ -55,7 +74,7 @@ node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD --dry   # 预
 node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD         # 实发
 ```
 
-完整流程、命令速查、12 条坑位、9 项验证清单见 [SKILL.md](./SKILL.md)。
+完整流程、命令速查、13 条坑位、9 项验证清单见 [SKILL.md](./SKILL.md)。
 
 ## 相关
 
