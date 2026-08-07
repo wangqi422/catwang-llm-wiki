@@ -8,7 +8,11 @@
   ],
   "aiDailyWebhooks": [
     {
-      "name": "AI 日报群 1",
+      "name": "群A（0c6ad956）",
+      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65"
+    },
+    {
+      "name": "群 B（ee15fec4）",
       "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ee15fec4-c667-4e34-a2c0-f3415c6d6ac7"
     }
   ],
