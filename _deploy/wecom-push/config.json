@@ -6,9 +6,15 @@
       "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65"
     }
   ],
+  "aiDailyWebhooks": [
+    {
+      "name": "AI 日报群 1",
+      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ee15fec4-c667-4e34-a2c0-f3415c6d6ac7"
+    }
+  ],
   "githubPagesBase": "https://wangqi422.github.io/catwang-llm-wiki",
   "mentionAll": false,
-  "note": "webhook 字段保持向后兼容；webhooks 数组用于多群推送；lexiang 配置用于乐享知识库推送",
+  "note": "webhook 字段保持向后兼容；webhooks 数组用于 CODM 竞品日报多群推送；aiDailyWebhooks 数组用于 AI Daily 海报多群推送（push-poster.js / publish-ai-daily-poster.js）；lexiang 配置用于乐享知识库推送",
   "lexiang": {
     "_comment": "腾讯乐享知识库 API 配置 — 需要管理员在乐享后台创建接口凭证",
     "appKey": "",
@@ -20,7 +26,10 @@
     "enabled": false
   },
   "usage": {
-    "push-ai-daily.js": "AIGC 日报推送到企微群（Markdown 摘要 + PNG 图片）",
+    "publish-ai-daily-poster.js": "★ AI Daily 海报一条龙发布（生成→截图→push→推多群），2026-08-07 起为默认方式",
+    "push-poster.js": "AI Daily 海报推送到 aiDailyWebhooks 全部群（md2 单条 = 图片+链接）",
+    "push-ai-daily.js": "AIGC 日报推送到企微群（Markdown 摘要 + PNG 图片，旧方式）",
+    "push-ai-weekly.js": "AI干货周报推送到企微群（Markdown 摘要 + H5 链接）",
     "push-competitive-daily.js": "CODM 竞品日报推送到企微群（Markdown 摘要 + PNG 长图）",
     "push-to-lexiang.js": "AIGC 日报 + CODM 竞品日报推送到腾讯乐享知识库"
   }

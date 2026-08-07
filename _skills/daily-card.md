@@ -142,6 +142,131 @@ node _deploy/wecom-push/push-ai-daily.js
 
 ## 2. AIGC 速报分支（原 daily-card）
 
+### 2.0 海报模式（分享用，可选）
+
+除 9:16 长卡片外，另有一套**海报**，适合微信群 / 朋友圈 / PPT 首页分享。
+视觉规范沿用 `ai-weekly-poster` 系列：暖色纸质底（`--paper:#F2EEDF`）+ 粉/柠檬/杏/鼠尾草四色圆点。
+
+**两种比例**（`--ratio`，默认 3:4）：
+
+| 比例 | 尺寸 | 布局 | 输出文件名 | 适用 |
+|------|------|------|-----------|------|
+| `3:4` | 1440×1920 | 纵向单栏，8 条全部上彩卡 | `ai-daily-poster-YYYYMMDD.png` | 微信群 / 朋友圈（推荐） |
+| `16:9` | 1920×1080 | 左右双栏，TOP4 彩卡 + 4 条列表 | `ai-daily-poster-YYYYMMDD-16x9.png` | PPT 首页 / 横屏展示 |
+
+```bash
+# 3:4 竖版（默认，微信里看最舒服）
+node _deploy/daily-card/generate-poster.js --date YYYYMMDD
+node _deploy/daily-card/screenshot-poster.js --html docs/ai-daily/ai-daily-poster-YYYYMMDD.html
+
+# 16:9 横版
+node _deploy/daily-card/generate-poster.js --date YYYYMMDD --ratio 16:9
+node _deploy/daily-card/screenshot-poster.js --html docs/ai-daily/ai-daily-poster-YYYYMMDD-16x9.html
+```
+
+`screenshot-poster.js` 会**自动嗅探 HTML 里 body 的 width/height**作为截图尺寸，不用手动指定比例。
+
+**数据来源映射**：
+
+| 海报元素 | 来源 |
+|---------|------|
+| 副标题 | `ai-daily-card-YYYYMMDD-toc.html` 的 `<p class="lead">`（比 MD 可靠，MD 里只有 `>` 引用行） |
+| 彩色卡片 | MD 概览表格（3:4 全 8 条 / 16:9 前 4 条），关键实体自动加粗 |
+| Also today 列表 |仅 16:9：MD 概览表格第 5–8 条 |
+| 均分 chip | 8 条评分平均值 |
+| 底部 tagline | 编辑点评中的「一句话：xxx」 |
+
+**坑位提醒**：
+- 两个脚本都必须在 `_deploy/` 或仓库根目录下运行（puppeteer 装在那里，别的目录会 MODULE_NOT_FOUND）
+- puppeteer 启动必须带 `--no-sandbox --disable-setuid-sandbox`，否则 Windows 下 Chrome 起不来（已内置）
+- 副标题截断阈值：3:4 为 62 字（可折两行），16:9 为 58 字；TOC HTML 不存在时回落到 MD 提取
+
+**设计 DNA（必须跟 H5 卡片同源，2026-08-07 用户拍板）**：
+- 暖纸底 `#F2EEDF` + 暖棕墨 `#2A241B`
+- 四色系：粉 `#E1A4C2` / 黄 `#D6DD63` / 桃 `#E8C9B6` / 绿 `#B7C7A8`
+- 半透白卡 `rgba(255,255,255,0.55)` 替代硬白卡
+- Cormorant Garamond italic 做序号 + 数字标签
+- 四色圆点 swatches（顶栏）+ 彩色 data chips（meta 行）
+- Hero 卡片用粉色底做强调区，tagline 用 `paper-2` 底色圆角
+- **不要**用白底 + 玫红大数字风格（曾被否）、**不要**8 条等宽彩卡条纹（曾被否）
+
+**推送企微群（海报场景，2026-08-07 用户拍板固化为标准流程）**：
+
+> ⭐ **AI Daily 的默认发布方式**（2026-08-07 起）：海报 + 「点击看更多内容」链接，一条 `markdown_v2` 消息，推送到 `config.json` 的 `aiDailyWebhooks` 全部群。
+
+**首选：一条龙脚本（推荐日常使用）**
+
+```bash
+# 全流程：生成海报 → 截图 → git push → 等 Pages → 推所有群
+node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD
+
+# 全程预检不发不推（强烈建议先跑一次）
+node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD --dry
+
+# 海报已 push 过，只补推群
+node _deploy/wecom-push/publish-ai-daily-poster.js --date YYYYMMDD --skip-git
+```
+
+脚本内含 5 步：生成 HTML → Puppeteer 截图 → git add/commit/push（gh token 注入）→ 轮询等 Pages 就绪（最多 3 分钟）→ 推送多群。
+
+**固定输出格式**（一条 `markdown_v2`，不要改）：
+
+```markdown
+![](https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-YYYYMMDD.png)
+
+[点击看更多内容](https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-YYYYMMDD-toc.html)
+```
+
+图片直接在群里渲染，下方一行蓝色可点击链接跳 H5 日报。content 约 209 字节，远低于 4096 上限。
+
+**多群配置**：`_deploy/wecom-push/config.json` → `aiDailyWebhooks` 数组
+
+```json
+"aiDailyWebhooks": [
+  { "name": "AI 日报群 1", "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" },
+  { "name": "AI 日报群 2", "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=yyy" }
+]
+```
+
+脚本自动遍历全部群，群间隔 800ms 避免触发频率限制。`--group "群名"` 可只推指定群。
+
+**单独推送（不走一条龙）**：`_deploy/wecom-push/push-poster.js`
+
+```bash
+node _deploy/wecom-push/push-poster.js --date YYYYMMDD --dry   # 预检
+node _deploy/wecom-push/push-poster.js --date YYYYMMDD         # md2 单条（默认）
+node _deploy/wecom-push/push-poster.js --date YYYYMMDD --mode split   # 备选：两条
+```
+
+**可选参数**：`--png <本地路径>` / `--pngurl <公网图片URL>` / `--url <H5链接>` / `--text "自定义文案"` / `--group "群名"` / `--no-wait`（跳过 Pages 检测）
+
+| | `md2`（默认，推荐） | `split`（备选） |
+|---|---|---|
+| 消息条数 | **1 条**（图+链接同条） | 2 条 |
+| msgtype | `markdown_v2` | `image` + `markdown` |
+| 图片来源 | 公网 URL（需先 push Pages） | base64 直传（本地即可） |
+| 体积限制 | content ≤ 4096 字节（URL 很短，无压力） | 图片 base64 前 ≤ 2MB |
+| 兼容性 | 客户端 < 4.1.36 降级为纯文本 | 全版本正常 |
+| 何时用 | 日常 | Pages 挂了 / 来不及部署 |
+
+<details>
+<summary>历史错误记录（勿再走此路）</summary>
+
+曾误判"webhook 不支持 image 嵌图，只能发 file 附件"，用 `upload_media?type=file` + `msgtype=file` 发海报，结果群里显示成灰色文件附件要点开下载，观感差。**根因**：`msgtype=image` 走 base64 + md5 直传，压根不经过 `upload_media`。
+
+</details>
+
+**坑位提醒（推送）**：
+- **`msgtype=image` 走 base64 + md5 直传，不用 `upload_media`** —— 最容易踩的坑
+- `upload_media` 只支持 `type=file`（`type=image` 会得 40004），拿它的 media_id 发 image 消息会 40009
+- **不要用 `msgtype=file` 发图** —— 群里显示成灰色文件附件，要点开下载，观感差
+- `markdown_v2` 不支持 `<font color>` 和 `@群成员`；旧版 `markdown` 不支持 `![](url)` 图片语法
+- webhook 频率限制：**≤ 20 条/分钟**
+- webhook 已发消息**无法撤回**，发前务必 `--dry` 预检
+- **git push 密码交互问题**：`gh` CLI 已登录但 `git push` 仍报 `could not read Username`（credential-helper 找不到 /dev/tty）。绕过：`GH_TOKEN=$(gh auth token) && git -c "url.https://x-access-token:${GH_TOKEN}@github.com/.insteadOf=https://github.com/" push origin main`（已内置在一条龙脚本）
+- **"发我看看"≠"发群里"**：用户说"先发我测试"是要在对话窗口预览，不是推群。推群前必须先在对话里展示预览并等确认
+- 文字摘要模式（`push-ai-daily.js`，2026-05-31 定的"摘要+H5链接"）仍保留，但**海报模式已成为 AI Daily 默认发布方式**
+
 ### 2.1 目标
 
 从 `raw/daily-reports/AIGC_Daily_Report_YYYYMMDD.md` 中提取 TOP N 条目，生成 **1080×1920 满屏 9:16 卡片**。
