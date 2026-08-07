@@ -43,17 +43,11 @@ const crypto = require('crypto');
 const https = require('https');
 
 const REPO_ROOT = path.resolve(__dirname, '../..');
-const CONFIG_PATH = path.join(__dirname, 'config.json');
+const { resolveWebhooks, printSetupHelp, maskUrl } = require('./resolve-webhooks');
 
-// ── 读配置 ────────────────────────────────
-let cfg = {};
-try {
-  cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-} catch (e) {
-  console.error(`✗ 读取 config.json 失败: ${e.message}`);
-  process.exit(1);
-}
-const PAGES_BASE = process.env.GITHUB_PAGES_BASE || cfg.githubPagesBase || 'https://wangqi422.github.io/catwang-llm-wiki';
+// ── 读配置（ENV → config.local.json → config.json）──
+const resolved = resolveWebhooks(__dirname);
+const PAGES_BASE = resolved.githubPagesBase;
 
 // ── 参数解析 ──────────────────────────────
 function arg(name, fallback = null) {
@@ -79,20 +73,18 @@ if (!['md2', 'split'].includes(MODE)) {
 }
 
 // ── 解析目标群 ────────────────────────────
-let targets = Array.isArray(cfg.aiDailyWebhooks) ? cfg.aiDailyWebhooks.filter((w) => w.url) : [];
-if (process.env.WECOM_WEBHOOK_KEY) {
-  targets = [{ name: 'ENV 指定群', url: `https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${process.env.WECOM_WEBHOOK_KEY}` }];
-}
+let targets = resolved.aiDailyWebhooks;
 if (groupFilter) {
-  targets = targets.filter((w) => w.name === groupFilter);
+  const all = targets;
+  targets = all.filter((w) => w.name === groupFilter);
   if (targets.length === 0) {
-    console.error(`✗ 未找到群「${groupFilter}」，config.json 里aiDailyWebhooks 可选：`);
-    (cfg.aiDailyWebhooks || []).forEach((w) => console.error(`    - ${w.name}`));
+    console.error(`✗ 未找到群「${groupFilter}」，可选：`);
+    all.forEach((w) => console.error(`    - ${w.name}`));
     process.exit(1);
   }
 }
 if (targets.length === 0) {
-  console.error('✗ config.json 里aiDailyWebhooks 为空，请先配置群 webhook');
+  printSetupHelp('aiDailyWebhooks');
   process.exit(1);
 }
 
@@ -114,6 +106,8 @@ if (MODE === 'md2') console.log(`  图片 URL : ${pngUrl}`);
 console.log(`  H5 链接  : ${h5Url}`);
 console.log(`  链接文案 : ${linkText}`);
 console.log(`  目标群   : ${targets.map((t) => t.name).join(' / ')}（共 ${targets.length} 个）`);
+console.log(`  凭据来源 : ${resolved.source}`);
+if (DRY) targets.forEach((t) => console.log(`             ${t.name} → ${maskUrl(t.url)}`));
 console.log('');
 
 // ── 构造消息 ──────────────────────────────

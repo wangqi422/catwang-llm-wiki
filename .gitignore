@@ -15,6 +15,9 @@ Thumbs.db
 .env
 *.token
 token-cache/
+# 企微 webhook 真实凭据（config.json 只放占位符，真实 key 放 config.local.json）
+config.local.json
+**/config.local.json
 
 # Large media (track with Git LFS if needed)
 *.psd

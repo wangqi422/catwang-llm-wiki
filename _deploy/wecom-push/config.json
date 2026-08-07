@@ -1,26 +1,32 @@
 {
-  "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65",
+  "_SECURITY_NOTE": "⚠️ 本文件在 public 仓库中，禁止填入真实 webhook key。真实凭据请放config.local.json（已 gitignore）或走环境变量。解析逻辑见 resolve-webhooks.js",
+  "_HOW_TO_CONFIGURE": [
+    "方式 1（推荐 CI/自动化）：export WECOM_AI_DAILY_KEYS=\"key1,key2\"",
+    "方式 2（推荐本机）：复制本文件为 config.local.json，把YOUR_..._KEY 换成真实 key",
+    "方式 3（单群临时）：export WECOM_WEBHOOK_KEY=\"key\""
+  ],
+  "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=YOUR_COMPETITIVE_GROUP_KEY",
   "webhooks": [
     {
       "name": "竞品日报群",
-      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65"
+      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=YOUR_COMPETITIVE_GROUP_KEY"
     }
   ],
   "aiDailyWebhooks": [
     {
-      "name": "群A（0c6ad956）",
-      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=0c6ad956-b53d-4287-8b39-3063de43dc65"
+      "name": "群 A",
+      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=YOUR_AI_DAILY_GROUP_A_KEY"
     },
     {
-      "name": "群 B（ee15fec4）",
-      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ee15fec4-c667-4e34-a2c0-f3415c6d6ac7"
+      "name": "群 B",
+      "url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=YOUR_AI_DAILY_GROUP_B_KEY"
     }
   ],
   "githubPagesBase": "https://wangqi422.github.io/catwang-llm-wiki",
   "mentionAll": false,
   "note": "webhook 字段保持向后兼容；webhooks 数组用于 CODM 竞品日报多群推送；aiDailyWebhooks 数组用于 AI Daily 海报多群推送（push-poster.js / publish-ai-daily-poster.js）；lexiang 配置用于乐享知识库推送",
   "lexiang": {
-    "_comment": "腾讯乐享知识库 API 配置 — 需要管理员在乐享后台创建接口凭证",
+    "_comment": "腾讯乐享知识库 API 配置 — 需要管理员在乐享后台创建接口凭证。真实凭据同样应放 config.local.json",
     "appKey": "",
     "appSecret": "",
     "staffId": "",
@@ -32,8 +38,9 @@
   "usage": {
     "publish-ai-daily-poster.js": "★ AI Daily 海报一条龙发布（生成→截图→push→推多群），2026-08-07 起为默认方式",
     "push-poster.js": "AI Daily 海报推送到 aiDailyWebhooks 全部群（md2 单条 = 图片+链接）",
+    "resolve-webhooks.js": "webhook 凭据统一解析模块（ENV → config.local.json → config.json）",
     "push-ai-daily.js": "AIGC 日报推送到企微群（Markdown 摘要 + PNG 图片，旧方式）",
-    "push-ai-weekly.js": "AI干货周报推送到企微群（Markdown 摘要 + H5 链接）",
+    "push-ai-weekly.js": "AI 干货周报推送到企微群（Markdown 摘要 + H5 链接）",
     "push-competitive-daily.js": "CODM 竞品日报推送到企微群（Markdown 摘要 + PNG 长图）",
     "push-to-lexiang.js": "AIGC 日报 + CODM 竞品日报推送到腾讯乐享知识库"
   }

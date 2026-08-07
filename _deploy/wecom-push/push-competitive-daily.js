@@ -25,21 +25,13 @@ const { execSync } = require('child_process');
 
 // ── 配置 ──────────────────────────────────────────
 const WIKI_ROOT = path.resolve(__dirname, '..', '..');
-let configWebhook = '';
-let configWebhooks = []; // 多群推送支持
-let configGitPages = 'https://wangqi422.github.io/catwang-llm-wiki';
+const { resolveWebhooks } = require('./resolve-webhooks');
 
-try {
-  const configPath = path.join(__dirname, 'config.json');
-  if (fs.existsSync(configPath)) {
-    const cfg = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-    configWebhook = cfg.webhook || '';
-    if (Array.isArray(cfg.webhooks) && cfg.webhooks.length > 0) {
-      configWebhooks = cfg.webhooks.filter(w => w.url);
-    }
-    if (cfg.githubPagesBase) configGitPages = cfg.githubPagesBase;
-  }
-} catch (e) { /* ignore */ }
+// 凭据解析：ENV → config.local.json → config.json（占位符会被忽略）
+const _resolved = resolveWebhooks(__dirname);
+const configWebhook = _resolved.webhook;
+const configWebhooks = _resolved.webhooks; // 多群推送支持
+const configGitPages = _resolved.githubPagesBase;
 
 const DEFAULT_WEBHOOK = process.env.WECOM_WEBHOOK || configWebhook;
 const GITHUB_PAGES_BASE = process.env.GITHUB_PAGES_BASE || configGitPages;
