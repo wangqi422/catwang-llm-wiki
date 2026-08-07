@@ -226,6 +226,14 @@ node _deploy/daily-card/screenshot-poster.js --html docs/ai-daily/ai-daily-poste
   ```bash
   GH_TOKEN=$(gh auth token) && git -c "url.https://x-access-token:${GH_TOKEN}@github.com/.insteadOf=https://github.com/" push origin main
   ```
+- **`git push` 输出被 shell 吞掉**（2026-08-07 新发现）：push 后 stdout/stderr 全空、连后面的 `echo` 都没输出、退出码 1，但**实际可能已推送成功**。
+  - 不要信 push 的返回码，用 `gh api` 验证真实状态：
+    ```bash
+    gh api repos/wangqi422/catwang-llm-wiki/commits/main --jq '.sha[0:7]'   # 远端
+    git rev-parse --short HEAD                # 本地
+    ```
+  - Bash 反复失败时改用 PowerShell 工具执行 push（实测有效）
+  - 加 `| grep -v libpng` 过滤噪音反而更容易触发输出被吞，先看完整输出再过滤
 
 **数据相关**：
 - 海报副标题取 TOC HTML 的 `<p class="lead">`（MD 里只有 `>` 引用行，不可靠）
