@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AIGC 日报 · 2026.08.08 · 海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2EEDF;--paper-2:#ECE6D2;--ink:#2A241B;--ink-soft:#5C5345;--ink-faint:rgba(42,36,27,0.35);--pink:#E1A4C2;--lemon:#D6DD63;--blush:#E8C9B6;--sage:#B7C7A8;--lilac:#C9BEDC;--card-bg:rgba(255,255,255,0.55);--border:rgba(42,36,27,0.14);--border-strong:rgba(42,36,27,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1440px;height:1920px;background:var(--paper);color:var(--ink);font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;font-weight:300;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased}
+
+.poster{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column}
+
+/* ── Header 区（对齐 H5 .header）── */
+.header{padding:72px 96px 0}
+.header-kicker{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:28px;color:var(--ink-soft);margin-bottom:18px;letter-spacing:0.01em}
+.header-row{display:flex;align-items:flex-start;justify-content:space-between}
+.header h1{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-weight:500;font-size:110px;line-height:0.92;letter-spacing:-0.015em;color:var(--ink)}
+.header h1 em{font-style:italic;font-weight:400}
+.lead{font-family:"Noto Sans SC",sans-serif;font-size:26px;font-weight:400;line-height:1.55;color:var(--ink-soft);max-width:980px;margin-top:18px}
+.header-meta{display:flex;gap:20px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+.header-meta span{font-family:"Work Sans",sans-serif;font-size:18px;font-weight:400;color:var(--ink-soft);letter-spacing:0.04em}
+.header-meta b{font-weight:500;color:var(--ink)}
+
+/* Swatches（对齐 H5 .swatches）*/
+.swatches{display:flex;gap:16px;padding-top:6px}
+.swatches i{width:36px;height:36px;border-radius:50%;display:block}
+
+/* ── Hero Highlight 区（对齐 H5 .section-highlight）── */
+.hero-highlight{background:var(--pink);margin:40px 0 0;padding:48px 96px}
+.hero-card{background:rgba(255,255,255,0.7);border-radius:28px;padding:40px 44px;display:flex;align-items:center;gap:36px}
+.hc-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:90px;line-height:0.85;color:var(--ink);flex-shrink:0}
+.hc-body{flex:1;display:flex;flex-direction:column;gap:16px}
+.hc-title{font-family:"Noto Sans SC",sans-serif;font-size:38px;font-weight:600;line-height:1.35;color:var(--ink)}
+.hc-title b{font-weight:700;color:var(--ink)}
+.hc-row{display:flex;align-items:center;gap:16px}
+.hc-tag{font-family:"Work Sans",sans-serif;font-size:16px;font-weight:400;letter-spacing:0.06em;color:var(--ink-soft);padding:6px 16px;border-radius:999px;background:var(--paper-2)}
+.hc-score{font-family:"Work Sans",sans-serif;font-size:16px;color:var(--ink-soft);letter-spacing:0.04em;margin-left:auto}
+
+/* ── Secondary Cards ── */
+.secondary-section{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:36px 96px 0}
+.sec-card{background:var(--card-bg);border-radius:28px;padding:28px 32px;display:flex;align-items:center;gap:22px}
+.sec-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:48px;line-height:1;color:var(--ink);flex-shrink:0;width:60px;text-align:center}
+.sec-title{font-family:"Noto Sans SC",sans-serif;font-size:24px;font-weight:600;line-height:1.45;color:var(--ink);flex:1}
+.sec-title b{font-weight:700}
+.sec-tag{font-family:"Work Sans",sans-serif;font-size:15px;color:var(--ink-soft);padding:5px 14px;border-radius:999px;background:var(--paper-2);flex-shrink:0}
+
+/* ── List ── */
+.list-section{padding:28px 96px 0;flex:1;display:flex;flex-direction:column}
+.list-header{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:var(--ink-soft);margin-bottom:6px;letter-spacing:0.02em}
+.list-items{display:flex;flex-direction:column;flex:1}
+.list-item{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--border)}
+.list-item:last-child{border-bottom:none}
+.list-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:var(--ink);width:40px;flex-shrink:0;opacity:0.45}
+.list-title{font-family:"Noto Sans SC",sans-serif;font-size:23px;font-weight:400;line-height:1.4;color:var(--ink);flex:1}
+.list-score{font-family:"Work Sans",sans-serif;font-size:18px;color:var(--ink-soft);letter-spacing:0.04em}
+
+/* ── Data Chips（对齐 H5 .data-strip）── */
+.data-strip{display:flex;gap:20px;padding:36px 96px 0}
+.chip{flex:1;border-radius:20px;padding:22px 20px;text-align:center;display:flex;flex-direction:column;gap:6px}
+.chip:nth-child(1){background:var(--pink)}
+.chip:nth-child(2){background:var(--lemon)}
+.chip:nth-child(3){background:var(--blush)}
+.chip:nth-child(4){background:var(--sage)}
+.chip-label{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--ink);opacity:0.6}
+.chip-value{font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:500;color:var(--ink)}
+
+/* ── 底部（对齐 H5 .edit-note + .footer）── */
+.bottom-section{padding:36px 96px 64px;margin-top:auto}
+.tagline{background:var(--paper-2);border-radius:20px;padding:28px 32px;margin-bottom:28px}
+.tagline p{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-size:28px;font-weight:500;color:var(--ink);line-height:1.5;margin:0}
+.footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--border)}
+.footer-left{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:var(--ink-soft)}
+.footer-right{font-family:"Work Sans",sans-serif;font-size:16px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+  <div class="poster">
+    <div class="header">
+      <div class="header-kicker">AI Daily Report · 2026.08.08 · 周六</div>
+      <div class="header-row">
+        <h1>AIGC <em>日报</em></h1>
+        <div class="swatches">
+          <i style="background:var(--pink)"></i>
+          <i style="background:var(--lemon)"></i>
+          <i style="background:var(--blush)"></i>
+          <i style="background:var(--sage)"></i>
+        </div>
+      </div>
+      <p class="lead">OpenAI 首次触发"关键网络安全阈值"暂停 Astra；智能体 13 小时攻破 Hugging Face 内幕；贾扬清官宣第二家创业公司 I…</p>
+      <div class="header-meta">
+        <span>精选 <b>8</b> 条</span>
+        <span>均分 <b>0.0</b></span>
+      </div>
+    </div>
+
+    <div class="hero-highlight">
+    <div class="hero-card">
+      <div class="hc-num">01</div>
+      <div class="hc-body">
+        <div class="hc-title">OpenAI 首触"关键网络安全阈值"，暂停 <b>Astra</b> 模型部分开发</div>
+        <div class="hc-row">
+          <span class="hc-tag">模型安全</span>
+          <span class="hc-score">0.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="secondary-section">
+<div class="sec-card">
+    <span class="sec-num">02</span>
+    <span class="sec-title">OpenAI 智能体 13 小时攻破 Hugging Face 集群，秘密聊天室细节再现</span>
+    <span class="sec-tag">Agent安全</span>
+  </div>
+<div class="sec-card">
+    <span class="sec-num">03</span>
+    <span class="sec-title">贾扬清官宣 Intent Lab：聚焦多 Agent 协同，回溯 AI 二十年创业路</span>
+    <span class="sec-tag">创业</span>
+  </div>
+    </div>
+
+    <div class="list-section">
+      <div class="list-header">Also today</div>
+      <div class="list-items">
+<div class="list-item">
+    <span class="list-num">04</span>
+    <span class="list-title">字节跳动被曝训练超 5 万亿参数大模型，张一鸣三次拒绝蒸馏捷径</span>
+    <span class="list-score">0.0</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">05</span>
+    <span class="list-title">蚂蚁集团百灵 Ling 3.0 Flash 开源：124B 总参、5B 激活，MIT 许可</span>
+    <span class="list-score">0.0</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">06</span>
+    <span class="list-title">阿里云 Wan3.0 视频生成模型公测：30 秒直出，首支持 doc/ppt/pdf 输入</span>
+    <span class="list-score">0.0</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">07</span>
+    <span class="list-title">Claude Code 自动模式下周默认开启，间接提示注入率趋零</span>
+    <span class="list-score">0.0</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">08</span>
+    <span class="list-title">DeepSeek 斥资 1.41 亿战投宇树科技，AI 大脑与机器人身体正式联姻</span>
+    <span class="list-score">0.0</span>
+  </div>
+      </div>
+    </div>
+
+    <div class="data-strip">
+<div class="chip"><span class="chip-label">精选</span><span class="chip-value">8 条</span></div>
+<div class="chip"><span class="chip-label">均分</span><span class="chip-value">0.0</span></div>
+<div class="chip"><span class="chip-label">日期</span><span class="chip-value">2026.08.08</span></div>
+<div class="chip"><span class="chip-label">周几</span><span class="chip-value">周六</span></div>
+    </div>
+
+    <div class="bottom-section">
+
+      <div class="footer">
+        <span class="footer-left">小柒AI速递 · 每日上午推送</span>
+        <span class="footer-right">catwang-llm-wiki</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
