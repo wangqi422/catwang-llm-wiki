@@ -232,6 +232,22 @@ node _deploy/daily-card/screenshot-poster.js --html docs/ai-daily/ai-daily-poste
 
 `--dry` 预检会打印「凭据来源」和脱敏后的 key（只显示前 8 位），可用来确认读的是哪份配置。未解析到凭据时脚本会打印三种配法引导并退出。
 
+**检测 key 是否有效（不污染群消息）**：
+
+⚠️ **不要用 `msgtype=text` 探测** —— 会真的往群里发消息且无法撤回。用故意残缺的 payload：
+
+```bash
+curl -s -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=<key>" \
+  -H "Content-Type: application/json" -d '{}'
+```
+
+| 返回 | 含义 |
+|---|---|
+| `errcode: 40008`（invalid msgtype） | **key 有效**（能通过鉴权，只是消息体不合法） |
+| `errcode: 93000`（invalid webhook url） | **key 已失效** |
+
+**换 key 后务必删除旧机器人** —— 企微「新增机器人」不会让旧机器人失效，旧 key 仍能发消息。路径：群设置 → 群机器人 → 删除旧的。
+
 ---
 
 ## Pitfalls
