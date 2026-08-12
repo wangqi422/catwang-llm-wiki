@@ -101,6 +101,10 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
 .data-chip:nth-child(4n)   { background:var(--sage); }
 .data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
 .data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
 .footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
 .footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
 .footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
@@ -130,6 +134,7 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
   .menu-toggle { display:flex; }
   .progress-bar { left:0; width:100%; }
   .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
   .data-strip { flex-wrap:wrap; }
   .data-chip { flex:1 1 45%; }
 }
@@ -325,6 +330,15 @@ h1 em,h2 em { font-style:italic; font-weight:400; }
     <div class="data-chip"><div class="data-label">思维链破解</div><div class="data-value">8.8</div></div>
     <div class="data-chip"><div class="data-label">Gemini 10亿</div><div class="data-value">8.6</div></div>
     <div class="data-chip"><div class="data-label">Avg Score</div><div class="data-value">8.3</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 25 期</strong>。今天的几条重磅新闻组合在一起，传递出一个清晰信号：<strong>AI 产业正从技术竞赛全面转向生态博弈</strong>。</p>
+    <p><strong>英伟达的"三级跳"</strong>是本期最大的结构性看点——从卖卡到卖模型再到卖生态，Nemotron 3.5 + Switchyard 路由库 + Nemotron 4 预告，意味着全球最强 AI 硬件厂商正在试图定义"模型怎么用、怎么连、怎么组合"。这是一个比任何单一模型发布都更深远的变化——当模型标准被硬件厂商定义时，所有模型厂商都将面临生态锁定的压力。</p>
+    <p><strong>思维链加密被破解</strong>则敲响了一记实操警钟：闭源模型的推理保护被证明形同虚设。这不是学术秀，而是对每一个把敏感数据通过 API 输给闭源模型的团队的提醒——你喂给模型的不只是 Prompt，更是潜在的蒸馏素材。本地开源模型（如 Nemotron 3.5 / Qwen 系）做好私有部署，才是核心资产的安全底线。</p>
+    <p>中国市场这边，<strong>DeepSeek 的逆势涨价</strong>意义深远——涨价 60% 后调用量反而涨 18%，第一次验证了国产模型的"能力溢价"路径。价格战正式结束，API 成本中枢上移已不可逆，高频批量任务需要考虑本地模型降本。</p>
+    <p>对 CODM 宣发团队而言，今天的信号聚焦在两个可直接落地的方向：<strong>① Qwen-Image-3.0 的中文海报直出能力可以用作 KV/活动长图的日常出图链路</strong>；<strong>② Seedance 2.5 的 30 秒原生长视频 + 多模态参考，可以替代部分外包预演用于版本预告的前期提案</strong>。视频 + 图像这两个 AIGC 工具体验的质变，正好对应宣发素材生产的两大核心需求。</p>
   </div>
 
   <div class="footer">
