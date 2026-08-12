@@ -37,4 +37,27 @@ if (!Array.isArray(sandbox.window.BLACKCELL_ASSETS) || sandbox.window.BLACKCELL_
   throw new Error('Asset data did not expose 30 browser-ready records');
 }
 
+const appSandbox = {
+  window: { BLACKCELL_ASSETS: sandbox.window.BLACKCELL_ASSETS },
+  document: {
+    documentElement: { classList: { add() {} } },
+    readyState: 'loading',
+    addEventListener() {}
+  },
+  console
+};
+vm.createContext(appSandbox);
+vm.runInContext(app, appSandbox);
+const api = appSandbox.window.BlackCellArchive;
+if (!api) throw new Error('Missing window.BlackCellArchive API');
+for (const name of ['filterAssets', 'renderGallery', 'openAsset', 'closeAsset', 'moveAsset']) {
+  if (typeof api[name] !== 'function') throw new Error(`Missing application function ${name}`);
+}
+const all = api.filterAssets('all');
+const duplicates = api.filterAssets('duplicate');
+if (all.length !== 30) throw new Error(`All filter returned ${all.length}`);
+if (duplicates.length !== 2 || duplicates.some((item) => item.sourceStatus !== 'duplicate')) {
+  throw new Error('Duplicate filter returned incorrect records');
+}
+
 console.log('PASS: static page contract');
