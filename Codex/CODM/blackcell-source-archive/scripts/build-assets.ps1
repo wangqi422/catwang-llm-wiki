@@ -22,42 +22,27 @@ $officialBlog = 'https://www.callofduty.com/blog/2023/12/call-of-duty-modern-war
 $officialVideo = 'https://www.youtube.com/watch?v=CTDdmSbGT_k'
 
 $timestamps = @{
-    '浼佷笟寰俊鎴浘_1784725582768.jpg'  = '00:27.50'
-    '浼佷笟寰俊鎴浘_17847255903535.jpg' = '00:13.20'
-    '浼佷笟寰俊鎴浘_17847255994659.jpg' = '00:20.40'
-    '浼佷笟寰俊鎴浘_17847256603041.jpg' = '00:10.90'
-    '浼佷笟寰俊鎴浘_17847257013278.jpg' = '00:30.60'
-    '浼佷笟寰俊鎴浘_17847257165693.jpg' = '00:30.60'
-    '浼佷笟寰俊鎴浘_17847257331697.jpg' = '00:10.50'
-    '浼佷笟寰俊鎴浘_17847257463073.jpg' = '00:31.80'
-    '浼佷笟寰俊鎴浘_17847257678682.jpg' = '00:31.20'
-    '浼佷笟寰俊鎴浘_17847257876836.jpg' = '00:10.50'
-    '浼佷笟寰俊鎴浘_17847257961066.jpg' = '00:20.50'
-    '浼佷笟寰俊鎴浘_1784725804106.jpg'  = '00:20.40'
-    '浼佷笟寰俊鎴浘_17847258337091.jpg' = '00:27.80'
-    '浼佷笟寰俊鎴浘_17847258414632.jpg' = '00:31.20'
-    '浼佷笟寰俊鎴浘_17847258638143.jpg' = '00:32.30'
-    '浼佷笟寰俊鎴浘_17847258725659.jpg' = '00:32.30'
-    '浼佷笟寰俊鎴浘_17847258804302.jpg' = '00:30.60'
-    '浼佷笟寰俊鎴浘_17847259208988.jpg' = '00:14.80'
+    'asset-008' = '00:27.50'
+    'asset-009' = '00:13.20'
+    'asset-010' = '00:20.40'
+    'asset-011' = '00:10.90'
+    'asset-012' = '00:30.60'
+    'asset-013' = '00:30.60'
+    'asset-014' = '00:10.50'
+    'asset-015' = '00:31.80'
+    'asset-016' = '00:31.20'
+    'asset-017' = '00:10.50'
+    'asset-018' = '00:20.50'
+    'asset-019' = '00:20.40'
+    'asset-020' = '00:27.80'
+    'asset-021' = '00:31.20'
+    'asset-022' = '00:32.30'
+    'asset-023' = '00:32.30'
+    'asset-024' = '00:30.60'
+    'asset-025' = '00:14.80'
 }
-
-$posterNames = @(
-    '01 榛戦噾 02.jpg',
-    '浼佷笟寰俊鎴浘_17847253591201.jpg',
-    '浼佷笟寰俊鎴浘_17847262924755.jpg',
-    '浼佷笟寰俊鎴浘_17847268622774.jpg',
-    '浼佷笟寰俊鎴浘_17847268956619.jpg'
-)
-
-$derivedNames = @(
-    '01 榛戦噾 01.jpg',
-    '浼佷笟寰俊鎴浘_17847252194125.jpg',
-    '浼佷笟寰俊鎴浘_17847253355674.jpg',
-    '浼佷笟寰俊鎴浘_17847254237691.jpg',
-    '浼佷笟寰俊鎴浘_178478380134.png'
-)
-
+$posterIds = @('asset-002','asset-005','asset-026','asset-027','asset-028')
+$derivedIds = @('asset-001','asset-003','asset-004','asset-006','asset-030')
 function New-Thumbnail {
     param([string]$InputPath, [string]$OutputPath)
     $source = [System.Drawing.Image]::FromFile($InputPath)
@@ -110,22 +95,22 @@ for ($index = 0; $index -lt $sourceFiles.Count; $index++) {
     $videoTimestamp = $null
     $learningValue = 'Use as a supporting reference only; do not let it override verified camera, identity, or layout sources.'
 
-    if ($timestamps.ContainsKey($name)) {
+    if ($timestamps.ContainsKey($id)) {
         $status = 'official_video_frame'
         $category = 'video-frame'
         $confidence = 0.86
-        $evidence = "Perceptual match against the official 41.15-second Season 1 BlackCell trailer near $($timestamps[$name])."
+        $evidence = "Perceptual match against the official 41.15-second Season 1 BlackCell trailer near $($timestamps[$id])."
         $officialUrl = $officialVideo
-        $videoTimestamp = $timestamps[$name]
+        $videoTimestamp = $timestamps[$id]
         $learningValue = 'Study camera height, body direction, weapon foreground, blocking, and real environmental depth.'
-    } elseif ($posterNames -contains $name) {
+    } elseif ($posterIds -contains $id) {
         $status = 'official_poster'
         $category = 'poster'
         $confidence = 0.9
         $evidence = 'Campaign key art or reward presentation associated with the official MWIII Season 1 BlackCell release.'
         $officialUrl = $officialBlog
         $learningValue = 'Study Abolisher identity, black-gold material hierarchy, headline scale, and reward-grid structure.'
-    } elseif ($derivedNames -contains $name) {
+    } elseif ($derivedIds -contains $id) {
         $status = 'derived_layout'
         $category = 'layout'
         $confidence = 0.84

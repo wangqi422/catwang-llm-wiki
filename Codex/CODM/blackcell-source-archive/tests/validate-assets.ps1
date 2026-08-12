@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot)
 )
 
@@ -19,6 +19,11 @@ if (($assets | Where-Object sourceStatus -eq 'duplicate').Count -ne 2) {
     throw "Expected 2 duplicate records"
 }
 if (($assets | Group-Object id).Count -ne 30) { throw 'Asset IDs are not unique' }
+$expectedCounts = @{ official_video_frame = 18; official_poster = 5; derived_layout = 5; duplicate = 2; unverified = 0 }
+foreach ($state in $expectedCounts.Keys) {
+    $actual = @($assets | Where-Object sourceStatus -eq $state).Count
+    if ($actual -ne $expectedCounts[$state]) { throw "Expected $($expectedCounts[$state]) $state records, got $actual" }
+}
 
 foreach ($asset in $assets) {
     foreach ($field in @('id','fileName','localPath','thumbnailPath','width','height','category','sourceStatus','confidence','evidence','learningValue')) {

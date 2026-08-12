@@ -25,6 +25,7 @@ for (const id of requiredIds) {
   if (!html.includes(`id="${id}"`)) throw new Error(`Missing #${id}`);
 }
 if (!html.includes('css/styles.css')) throw new Error('Missing stylesheet link');
+if (!html.includes('rel="icon"')) throw new Error('Missing inline favicon');
 if (!html.includes('js/assets-data.js') || !html.includes('js/app.js')) throw new Error('Missing scripts');
 if (!css.includes('@media (prefers-reduced-motion: reduce)')) throw new Error('Missing reduced-motion support');
 if (/border-radius\s*:/.test(css)) throw new Error('Rounded corners are forbidden');
