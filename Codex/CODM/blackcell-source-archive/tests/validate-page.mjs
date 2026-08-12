@@ -60,4 +60,23 @@ if (duplicates.length !== 2 || duplicates.some((item) => item.sourceStatus !== '
   throw new Error('Duplicate filter returned incorrect records');
 }
 
+const requiredEditorial = [
+  '可见证据', '专业推断', '可复用规则', '禁止项',
+  '视频帧负责', 'Abolisher 海报负责', 'Battle Pass 平面负责',
+  '镜头与机位', '构图与纵深', '人物动作', '武器关系',
+  '光源组织', '色彩比例', '材质层级', '排版系统',
+  'https://www.callofduty.com/blog/2023/12/call-of-duty-modern-warfare-III-warzone-season-1-blackcell-battle-pass-bundles',
+  'CTDdmSbGT_k',
+  'https://cdn.akamai.steamstatic.com/steam/apps/256985544/movie_max.mp4',
+  'https://www.gamespot.com/videos/modern-warfare-iii-warzone-season-1-blackcell-battle-pass-upgrade-trailer/2300-6462998/'
+];
+for (const marker of requiredEditorial) {
+  if (!html.includes(marker)) throw new Error(`Missing editorial marker: ${marker}`);
+}
+for (const item of sandbox.window.BLACKCELL_ASSETS) {
+  if ((item.sourceStatus === 'official_poster' || item.sourceStatus === 'official_video_frame') && !item.officialUrl) throw new Error(`Official item lacks URL: ${item.id}`);
+  if (item.sourceStatus === 'official_video_frame' && !item.videoTimestamp) throw new Error(`Video item lacks timestamp: ${item.id}`);
+  if (item.sourceStatus === 'duplicate' && !item.duplicateOf) throw new Error(`Duplicate lacks primary: ${item.id}`);
+}
+
 console.log('PASS: static page contract');
