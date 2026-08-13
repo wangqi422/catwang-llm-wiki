@@ -2,6 +2,160 @@
 
 ---
 
+## [2026-08-13 09:30] AIGC 日报 2026.08.13（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周四 · 第 26 期
+**评分均值**：8.4
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | DeepSeek V4 Pro 正式版深夜上线，DeepSWE 从 7.3 飙到 62.7 逼近 Fable 5 | 9.2 |
+| 2 | Grok 4.6 发布：主打长时任务 Agent，多基准登顶与 GPT-5.6 Sol 持平 | 9.0 |
+| 3 | 微信公布 WeLM 双模型：80B 已驱动「小微」，617B MoE 开发中 | 8.6 |
+| 4 | LiteLLM 遭供应链攻击：43.4 万 CI/CD 凭据泄露，波及微软/亚马逊/英伟达 2500+ 组织 | 9.1 |
+| 5 | 腾讯 Q2 资本开支 528 亿元（+176%），混元 Hy4 在路上，AI 投入重塑现金流 | 8.4 |
+| 6 | Cerebras Q2 云业务 +287%，硬件收入下滑拖累股价盘后跌 17% | 7.5 |
+| 7 | Claude Chrome 侧边栏升级为 Cowork 会话，跨桌面/网页/移动端同步 | 7.7 |
+| 8 | 白宫拟将前沿开源模型纳入发布前安全测试，监管从「开闭源」转向「性能门槛」 | 7.8 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260813.md`（13.7KB）
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260813-toc.html（200 OK）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260813.png`（547.9KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260813.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- commit `90094b4` — AIGC 日报 2026.08.13（MD + H5 + 归档）→ push 90094b4
+- commit `3b5eee9` — feat(ai-daily): add 20260813 poster (3:4)（海报 HTML + PNG）→ push 90094b4..3b5eee9
+
+### 备注
+- AI HOT 聚合源恢复 `/feed/all.xml`（HTTP 200，50 条，484KB → 50KB feed），效率 +40%（不再走 WebSearch 兜底）
+- 一条龙脚本 47s 完成：生成海报 → 截图 → commit → push → 轮询 Pages（5 次检测，第 5 次 200）→ 推 2 群全成功
+- H5 含完整「编辑手记」（§1 DeepSeek-Grok 同日对决 + §4 LiteLLM 教训 + §5 腾讯 528 亿），已避免 8/09-8/12 连续漏编辑手记的问题复发
+
+### 待优化（不阻断）
+- **海报评分显示 0.0**：`generate-poster.js` L75 从概览表第 5 列 `parseFloat` 取分数，但规范是「重要性」列。要么改脚本从条目正文 `**评分**：X.X/10` 提取，要么改 MD 概览表第 5 列为分数列（待用户拍板）
+- **海报 tagline 未渲染**：MD 编辑点评里无「一句话：xxx」模式，CSS 区块空——历史既有（昨天 8/12 同样无 tagline 渲染），非今日引入
+- 副标题尾部略截断（"腾讯 Q2 算力加…"），CSS overflow 处理可调
+
+---
+
+## [2026-08-12 14:28] AIGC 日报 2026.08.12（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周三 · 第 25 期
+**评分均值**：8.3
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | 英伟达开源 Nemotron 3.5 Lightning（30B MoE）+ Switchyard 路由库，Nemotron 4 预告 | 9.2 |
+| 2 | 研究院破解 ChatGPT/Claude/Gemini 加密思维链 | 8.8 |
+| 3 | Google Gemini 月活破 10 亿 | 8.6 |
+| 4 | OpenAI 完成 70 亿美元员工股权交易，估值 8520 亿 | 8.2 |
+| 5 | Anthropic 再签 91 亿美元 Riot 算力长约 + Claude 隐形水印 | 8.4 |
+| 6 | DeepSeek V4-Plus 涨价 60% 首日调用量仍 +18% | 8.0 |
+| 7 | Qwen-Image-3.0 上线：多语言文字渲染升级 | 7.8 |
+| 8 | Seedance 2.5：原生 30 秒长视频 + 50 路多模态参考 | 7.6 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260812.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260812-toc.html（200 OK）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260812.png`（567.3KB，1440×1920）
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目
+
+### 修复
+- TOC HTML 缺少「编辑手记」段落（8/09-8/12 连续 4 天漏掉），本次补全 CSS + 响应式 + 正文
+- git push 用 `https://x-access-token:...@github.com/...` 直推成功；PowerShell 下 credential.helper 方案 exit 128 但静默失败
+- poster 无变更，publish 脚本跳过海报重新提交，直接用已存在的 PNG
+- Pages 部署 26s 完成，push-poster.js 内置轮询首检即 200
+- push 后必须用 `gh api repos/.../commits/main` 验证远端 commit（输出可能被吞）
+
+---
+
+## [2026-08-11 09:20] AIGC 日报 2026.08.11
+
+**推送结果**：2 群全成功（群 A + 群 B）
+**耗时**：情报采集 → MD 撰写 → H5 生成 → Pages 部署 → 海报 + 推送 ~7 分钟
+**日期**：周二
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | 桑德斯致信三巨头要求暂停 AI 开发，众议院要求解释智能体越狱 | 9.2 |
+| 2 | Meta 发布 Muse Glimmer 30B Agent 模型，扎克伯格「个人超级智能」 | 9.0 |
+| 3 | OpenAI GPT-6（Astra）据报 8 月发布，参数或达 10 万亿 | 8.8 |
+| 4 | 微软 MAI-Image-2.6 登顶文生图竞技场第二 | 8.0 |
+| 5 | Anthropic Sonnet 5.5「Fennec」泄露：上下文 200 万 Token | 7.8 |
+| 6 | 中国 AI 大模型调用量连续 15 周领跑，DeepSeek 登顶 | 8.2 |
+| 7 | 阿里千问 App 付费会员，国内 AI 应用加速商业化 | 7.2 |
+| 8 | 月之暗面 Kimi K3 估值 500 亿美元冲刺港股 + Claude 黎曼猜想突破 | 7.5 |
+
+### 踩坑
+- git push HTTPS token 方式反复失败（invalid credentials），最终用 `GIT_ASKPASS + credential.helper=!gh auth git-credential` 解决
+- WebFetch 缓存旧 404，实际 curl 直接返回 200——需双重验证
+
+---
+
+## [2026-08-10 09:30] AIGC 日报 2026.08.10
+
+**推送结果**：2 群全成功（群 A + 群 B，errcode=0）
+**耗时**：情报采集 + H5 生成 + 海报 → push → Pages 部署 ~4 分钟
+**日期**：周一
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | OpenAI 取消免费版文本限制，GPT-5.6 Luna 成默认模型 | 9.0 |
+| 2 | Anthropic Claude Code Auto 模式默认开启，89% 拦截率 | 8.8 |
+| 3 | 宇树科技今日科创板申购，人形机器人第一股 | 8.5 |
+| 4 | 国产模型包揽 OpenRouter 调用榜前五，DeepSeek 提价 | 8.0 |
+| 5 | Kimi K3 沙箱越狱，一周内第四起 AI 安全事件 | 7.8 |
+| 6 | Cloudflare 机器流量首次超越人类，Agent 流量暴涨 7851% | 8.3 |
+| 7 | 马斯克 Terafab 全球最大芯片厂，FEL 光刻 | 8.3 |
+| 8 | 字节 SeedRealtime + 千问 Agent + 腾讯 Hy ASR 3.0 | 7.5 |
+
+### 产物
+- MD: `raw/daily-reports/AIGC_Daily_Report_20260810.md`
+- H5: `https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260810-toc.html`
+- 海报: `docs/ai-daily/ai-daily-poster-20260810.png`（1440×1920, 521KB）
+- AI HOT API 不可用，8 轮 WebSearch 兜底
+- 企微推送：双群 markdown_v2（海报图片 + 链接），errCode=0
+
+---
+
+## [2026-08-09 09:30] AIGC 日报 2026.08.09
+
+**推送结果**：2 群全成功（群 A + 群 B，errcode=0）
+**耗时**：情报采集~5 分钟，流程图~3 分钟，GitHub Pages 部署~20 秒
+**日期**：周日（非工作日特刊）
+
+### 8 条主题
+1. OpenAI 首次因安全风险暂停 Astra（9.5）— 行业里程碑
+2. OpenAI Luna 全面免费不限量 + Think 按钮（9.3）— 战略降维
+3. DeepMind 独立时代终结 / Brin 重返（9.0）— 组织地震
+4. 中国八周五连发 + 成本 105 倍碾压（9.2）— 格局重塑
+5. Seedance 2.5：30s 一镜到底 + 3D 白模（8.5）— 视频突破
+6. AI 开发 App 效率 17 倍 / 1:72 成本杠杆（8.3）— 平民化
+7. Claude Code Auto 默认 / 720 次注入零成功（8.2）— Agent 安全
+8. TPU Raiden 开源 + 斯坦福 AI 造病毒（7.8）— 基建+生物
+
+### 流水线铁证
+- MD: `raw/daily-reports/AIGC_Daily_Report_20260809.md`
+- H5: `docs/ai-daily/ai-daily-card-20260809-toc.html`（URL 200 ✅）
+- 海报: `docs/ai-daily/ai-daily-poster-20260809.png`（1440×1920, 496KB）
+- 归档: `docs/ai-daily/index.html` DATA 数组顶部追加
+- Git: commit `bfc8a3d` → push 成功（`-c credential.helper=` + token URL）
+- 企微: markdown_v2 一条 → 双群 errcode=0
+
+### ⚠️ 已知问题
+- Git push 在 PowerShell 中 `-c credential.helper=` + token URL 可绕过 GCM 挂起，Bash 直接 push 仍 128
+
+---
+
 ## [2026-08-07 09:30] AIGC 日报 2026.08.07
 
 - **操作**：日报完整流水线（Phase 1-4），自动化触发
