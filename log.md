@@ -2,6 +2,70 @@
 
 ---
 
+## [2026-08-15 09:30] AIGC 日报 2026.08.15（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周六 · 第 28 期
+**评分均值**：8.2
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | 阿里 Qwen3.8-27B 开源：270 亿原生多模态，部分基准超 Claude Opus 4.6 Max，家用显卡可跑 | 9.0 |
+| 2 | Claude Code v2.1.233 发布：新增 GitLab MR 支持，Auto Mode 默认启用 | 7.9 |
+| 3 | Anthropic 推出水印检测 API + 第二期风险报告 | 7.8 |
+| 4 | OpenAI 年化营收破 400 亿美元，CRO 换帅、关停 Atlas 浏览器 | 8.8 |
+| 5 | 英伟达削减 OpenAI 数据中心担保至 1200 亿以下，并持股 SpaceX 约 210 亿 | 8.6 |
+| 6 | Databricks 完成 50 亿美元融资，估值 1900 亿，AI 智能体驱动 | 8.5 |
+| 7 | X 开源「For You」推荐算法，公开推荐权重与训练代码 | 7.5 |
+| 8 | 可灵 2.1 上线首尾帧功能，转场与文本响应能力升级 | 7.6 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260815.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260815-toc.html（200 OK）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260815.png`（551.5KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260815.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `8e99ef9` MD + H5 + 归档 index
+- `f43bb0e` 海报 3:4
+- 均 push origin/main 成功（token URL 直推，一次通过）
+
+---
+
+## [2026-08-14 09:30] AIGC 日报 2026.08.14（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周五 · 第 27 期
+**评分均值**：8.5
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | DeepSeek Harness v0.1 开源：24 小时狂揽 3.3 万星，「一切皆插件」改写 Agent 底座 | 9.3 |
+| 2 | 智谱 GLM-5.3 发布：基座没变靠后训练 Scaling，编程能力开源第一 | 9.0 |
+| 3 | OpenAI 预览 GPT-5.6 Sol Ultrafast：Cerebras 加持 14 倍速、750 token/s | 8.8 |
+| 4 | Google Gemini 3.7 Flash 发布：Agent 主力模型降价 50%，DeepMind 换帅反击 | 8.7 |
+| 5 | Anthropic 估值或破 2 万亿美元，最快 10 月 IPO，Q2 首度盈利 | 8.9 |
+| 6 | 消息称苹果与阿里合作，专门针对中国市场训练 AI 模型 | 7.9 |
+| 7 | MiniMax Music 3.0 + H3 双发布：5 分钟音乐生成 + 视频编辑榜登顶 | 7.8 |
+| 8 | Meta 开源回归：Muse Glimmer 落地 + 预告 Muse Spark 1.2 权重，扎克伯格长文定调 | 7.7 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260814.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260814-toc.html（200 OK）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260814.png`（535.2KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260814.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `e66be67` MD + H5 + 归档 index
+- `b07fb6e` 海报 3:4
+- 均 push origin/main 成功（token URL 直推，一次通过）
+
+---
+
 ## [2026-08-13 09:30] AIGC 日报 2026.08.13（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
