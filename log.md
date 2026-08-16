@@ -2,6 +2,37 @@
 
 ---
 
+## [2026-08-16 09:30] AIGC 日报 2026.08.16（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周日 · 第 29 期
+**评分均值**：8.2
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | SpaceX 600 亿美元全股票收购 Cursor 正式完成，Cursor 并入 SpaceXAI | 9.2 |
+| 2 | Anthropic Q2 营收超 115 亿美元首次盈利，签 20 年 91 亿美元算力长约 | 9.0 |
+| 3 | 白宫联合 OpenAI/Google/Anthropic 制定 Agent 预发布安全审查框架 | 7.8 |
+| 4 | 台积电美国投资加码至 2650 亿美元，押注 A16 制程 | 8.5 |
+| 5 | 欧盟 DMA 向 Google 下达约束性命令，AI 助手 Android 平权倒计时 | 8.4 |
+| 6 | 2026 上半年全球 AI 投资破 5100 亿美元，超 2025 全年 | 7.6 |
+| 7 | 小红书开源 dots3-note：280B MoE 三模态 Agent 模型，512K 上下文 | 7.9 |
+| 8 | AI 会议工具 tl;dv 泄露 18 万条会议录制，多租户隔离薄弱 | 7.5 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260816.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260816-toc.html（200 OK）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260816.png`（528.8KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260816.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `b214ab8` — AIGC日报 20260816: MD + TOC H5 + 归档
+- `f017a63` — feat(ai-daily): add 20260816 poster (3:4)
+
+---
+
 ## [2026-08-15 09:30] AIGC 日报 2026.08.15（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
