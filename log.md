@@ -2,6 +2,43 @@
 
 ---
 
+## [2026-08-17 09:30] AIGC 日报 2026.08.17（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周一 · 第 30 期
+**评分均值**：8.3
+
+### 8 条日报
+| # | 标题 | 评分 |
+|---|------|------|
+| 1 | Anthropic 发布 186 页风险报告，披露内部模型 Model 2 与真实安全事故 | 9.2 |
+| 2 | 支付巨头 Stripe 敲定超 70 亿美元收购 AI 网关 OpenRouter | 9.0 |
+| 3 | DeepSeek 峰谷定价今日生效高峰翻倍，Harness 42 小时破 10 万星 | 8.8 |
+| 4 | 筹备 IPO 之际，OpenAI 悄然解散灾难性风险防范团队 | 8.5 |
+| 5 | GPT-5.6 Sol 在 Codex 开启 1M 上下文，Ultrafast 极速模式最高 14 倍速 | 8.0 |
+| 6 | 斯坦福 AI 指数：中国 84% 看好 AI，美国仅 38% | 7.8 |
+| 7 | Grok Imagine 精准编辑：一次编辑自动拆分 47 段逐步执行 | 7.5 |
+| 8 | 多家银行竞推"算力贷"：以 Token 消耗数据作为授信依据 | 7.5 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260817.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260817-toc.html（curl 实测 HTTP 200，27757 字节）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260817.png`（528.1KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260817.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `ade5cad` MD + H5 + 归档首页
+- `c920f75` 海报 HTML + PNG
+- push 一次通过（token URL 直推），远端 = 本地 = c920f75
+
+### 执行记录
+- AI HOT `/feed/all.xml` 正常（50 条，50KB）；`/all?mode=` 接口返回 HTML 已弃用，以 feed 为准
+- H5 部署：workflow queued → `gh run watch` 30s 内完成
+- 一条龙 publish-ai-daily-poster.js：海报生成 → 截图 → push → Pages 第 4 次检测 200 → 双群推送（markdown_v2 单条 209 字节）
+
+---
+
 ## [2026-08-16 09:30] AIGC 日报 2026.08.16（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
