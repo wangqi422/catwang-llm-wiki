@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.08.25</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.08.25 &middot; 星期二 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>阿里 Wan3.0 视频大模型</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>DeepSeek V4-Flash-Vision</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>智谱 GLM-5.3 编程专模</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>MiniMax H3 生态集成</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek 启动 IPO</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">2.</span>微软 Aion 智能体 OS</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§2</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>GPT-5.6 Sol 降价</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code v2.1.243</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.08.25 &middot; Tue</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">阿里 Wan3.0 视频大模型 30秒+文档输入 · DeepSeek 启动 IPO 710亿美元 · 智谱 GLM-5.3 漏洞识别 84.5% 超 GPT-5.6 · 微软 Aion 智能体 OS · OpenAI 降价 + Claude Code 更新</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.08.25</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">Wan3.0 文档直出 30 秒视频，DeepSeek V4-Flash-Vision 补齐视觉，GLM-5.3 编程开源第一，MiniMax H3 GB200 提速 27.7 倍</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">阿里 Wan3.0 视频生成大模型正式上线：30秒视频+文档输入+专业运镜</span>
+        <span class="card-tag">🎬 视频生成</span>
+      </div>
+      <div class="card-desc">
+        阿里巴巴视频生成大模型 <strong>Wan3.0</strong> 正式上线，是国内首个支持 <strong>30 秒单次生成</strong>的视频大模型，同时<strong>首次支持 doc/xls/ppt/pdf/md 等文档格式输入</strong>——角色、道具、声音、空间关系、风格等维度可保持一致性，<strong>最多 20 份参考素材</strong>，支持推拉摇移跟等专业运镜。API 定价 480P/720P/1080P 每秒 0.3/0.6/1.2 元，限时 7 折期 8 月 24 日至 9 月 23 日。公测期间已进入企业生产流程，应用于短剧、广告、文旅传播等场景——<strong>"剧本→成片"链条被压到最少</strong>，对宣发团队是"一稿多版"生产力的数量级提升。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">DeepSeek 发布 V4-Flash-Vision 多模态视觉模型：补齐视觉短板，1000图<20美分</span>
+        <span class="card-tag">👁️ 多模态</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek 上线实验性多模态视觉模型 <strong>V4-Flash-Vision-Exp</strong>，<strong>多模态 Agent 能力逼近 Opus-4.8</strong>——1000 张图片分析成本不到 <strong>20 美分</strong>，约为 Claude Opus 的 <strong>1/80</strong>。同步上线 <strong>Files API</strong> 支持图片/文件跨会话复用，把视觉理解从「一次性调用」升级为「可持续 Agent 资产」。视觉补齐后 DeepSeek 形成<strong>「文本+视觉+Files 持久化」全模态闭环</strong>，Agent 场景成本与可组合性显著提升，1/80 成本打开视觉 Agent 普惠。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">智谱 GLM-5.3 编程专模发布：漏洞识别 84.5% 超 GPT-5.6，两周后开源</span>
+        <span class="card-tag">🛡️ 编程</span>
+      </div>
+      <div class="card-desc">
+        智谱发布 <strong>GLM-5.3 编程专模</strong>：编程能力较前代提升 <strong>50%</strong>，在 Terminal Bench 3.0 取得<strong>开源模型第一</strong>，性能接近 Claude Fable 5。<strong>CyberGym 漏洞识别率 84.5%</strong>（超 GPT-5.6 Sol 的 83.3%），DeepSWE v1.1 拿到 66.9。模型权重<strong>两周后开源</strong>，同步上线 ZCode、AutoClaw 配套工具；荣耀 YOYO Claw 虾虾大脑宣布率先接入。「基座 + 后训练放大 + 垂直场景」路径在编程/安全场景验证可行，<strong>国产模型在企业级代码审计上具备替换潜力</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">MiniMax H3 生态集成索引发布：GB200 上推理提速 27.7 倍</span>
+        <span class="card-tag">⚡ 推理加速</span>
+      </div>
+      <div class="card-desc">
+        MiniMax 发布 <strong>Awesome MiniMax H3 Integrations</strong> 生态集成索引，覆盖 24GB VRAM 本地 ComfyUI 部署到企业级 SGLang 与 vLLM-Omni。NVIDIA SANA 团队的 <strong>Sol Engine</strong> 把 H3 视频生成延迟大幅压缩——<strong>单块 GB200 上 10s/768p 视频从 414s 降至 14.93s（27.7 倍加速）</strong>，5s 视频达 22.2 倍加速。H3 已上线 5 天日均处理 8 万亿 token，是中国模型出海 OpenRouter 调用量第一。<strong>「模型 + 部署工具链」成为新范式</strong>，视频生成从批处理进入交互式生产。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">DeepSeek 启动 IPO 拟科创板 710 亿美元估值，微软 Aion 智能体 OS 曝光无开始菜单的 AI 原生系统</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">DeepSeek 启动 IPO 筹备，拟科创板上市：估值 710 亿美元</span>
+        <span class="card-tag">💰 IPO</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek <strong>启动 IPO 筹备</strong>，计划于<strong>年内向科创板递交上市申请</strong>，预计 2027 年正式挂牌。<strong>新一轮融资投前估值约 710 亿美元</strong>（约合 5000 亿元人民币），首轮募资据报突破 500 亿元。投资方名单涵盖<strong>腾讯、宁德时代、京东、网易以及国家人工智能产业基金</strong>。四个月内估值从约 100 亿美元上涨至 5000 亿元（约 <strong>5 倍跳涨</strong>），已被视为「基础设施级」资产——DeepSeek API 价格策略与开放程度可能受 IPO 节奏影响。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">微软 Aion 智能体系统曝光：Copilot 为核心，无开始菜单的 AI 原生 OS</span>
+        <span class="card-tag">🤖 智能体OS</span>
+      </div>
+      <div class="card-desc">
+        微软 <strong>Project Aion</strong>（内部名 <strong>CopilotOS</strong>）曝光，定位为面向企业、没有开始菜单的 AI 原生系统，可在运行 AOSP、Win3 甚至 Windows 11 的 AI 专用设备上运行。系统基于 <strong>Microsoft Edge 浏览器和 Web3 轻量化 Windows 代码库</strong>构建，<strong>无传统开始菜单/桌面图标/任务栏应用</strong>——一切基于 AI 交互。点击 Copilot 按钮后看到 3 张卡片（"Stay on Top"/"Create something new"/"News of the day"）；任务栏<strong>图标由对话内容动态生成</strong>（示例中「鸡尾酒杯」代表毛伊岛餐饮对话），Figma/VS Code 等企业级应用被捆绑进 AI OS 入口。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">OpenAI GPT-5.6 降价 20-33% 美头部进入价格战，Claude Code v2.1.243 团队级 FinOps + 无密钥登录</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 下调 GPT-5.6 Sol API 价格超 20%：输入 $4/输出 $20 持续至 11月</span>
+        <span class="card-tag">💸 降价</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 自 8 月 21 日起将面向开发者的 <strong>GPT-5.6 Sol</strong> 基准价格下调逾 20%：<strong>输入价格下调 20%，输出价格下调 33%</strong>。新价格为每百万输入 token <strong>4 美元</strong>、输出 <strong>20 美元</strong>，该优惠至少持续至 <strong>11 月 21 日</strong>。同期，谷歌同步下调 Gemini 3.7 Flash 定价约一半——<strong>美头部 AI 模型 8 月密集降价</strong>，「模型稀缺溢价」窗口正式关闭。市场解读为 OpenAI 在 Anthropic IPO 关键期用价格战对冲对手的「高端叙事」。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Code v2.1.243 发布：/usage 循环统计、模型选择器与无密钥登录</span>
+        <span class="card-tag">🛠️ 开发工具</span>
+      </div>
+      <div class="card-desc">
+        <strong>Claude Code v2.1.243</strong> 发布：新增 <strong>/usage 的 Loops 细分统计</strong>、<strong>可自定义的 modelPicker 设置</strong>、<strong>promptCacheTtl 与 subagentPromptCacheTtl 配置</strong>，以及<strong>组织级 modelPricing 管理</strong>。同步支持<strong>无密钥登录</strong>流程（不再强制每次配置 API key），并对 subagent 行为做了稳定性修复。<strong>团队级 FinOps + 无密钥登录 + 模型选择解耦</strong>，是 AI 编程工具向「企业级基础设施」演进的标志性版本。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Wan3.0 时长</div><div class="data-value">30s</div></div>
+    <div class="data-chip"><div class="data-label">IPO 估值</div><div class="data-value">710亿</div></div>
+    <div class="data-chip"><div class="data-label">漏洞识别</div><div class="data-value">84.5%</div></div>
+    <div class="data-chip"><div class="data-label">推理提速</div><div class="data-value">27.7×</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 32 期</strong>，AI HOT 聚合 100+ 条近 30h 动态，信息密度极高。主线非常清晰：<strong>「中国 AI 三线齐发：Wan3.0 视频 + DeepSeek 多模态 + GLM-5.3 编程 + DeepSeek IPO」vs「海外头部降价与新 OS：Aion + GPT-5.6 降价 + Claude Code」</strong>。今天的八条，正是这两条线的浓缩。</p>
+    <p><strong>最值得宣发团队关注的是 #1 阿里 Wan3.0</strong>。文档直出 30 秒视频 + 20 份参考素材一致性 + 专业运镜内建，是当下可直接落地的提效路径——脚本/PDF 直接喂 Wan3.0 出 30 秒成片，把"剧本→成片"中间环节压到最少。限时 7 折期至 9 月 23 日，建议在 39.x 素材产线做试点。配合 #4 MiniMax H3 GB200 上 27.7 倍提速（10s 视频从 414s 降至 14.93s），KV/动效素材的生产成本与周期都结构性下降。</p>
+    <p><strong>行业级信号是 #5 DeepSeek IPO</strong>。710 亿美元估值、5 倍跳涨、腾讯/京东/宁德/网易/国家 AI 产业基金全谱系背书——中国大模型进入"估值兑现"窗口。叠加 #2 V4-Flash-Vision 视觉补齐（1/80 Opus 成本）与 #3 GLM-5.3 编程开源第一，DeepSeek + 智谱 + 阿里构成中国 AI 的「模型 + 多模态 + 编程 + 视频」全栈矩阵。</p>
+    <p><strong>海外侧的范式重写在 #6 微软 Aion</strong>。"无开始菜单的 OS"是 30 年前提的彻底打破——任务栏图标由对话内容动态生成，OS 变成"对话 + 卡片 + 空间"。Figma/VS Code 被捆绑进 AI OS 入口，长期看设计/开发协作工具的"系统级可达性"会重排。#7 GPT-5.6 降价 20-33% 则标志"模型稀缺溢价"窗口关闭，AI 公司估值锚点向性价比漂移。</p>
+    <p>落到宣发工作，本期六条可执行线索：<strong>① Wan3.0 30秒视频+文档输入，直接喂脚本出成片（39.x 素材产线试点）；② DeepSeek V4-Flash-Vision 视觉 1/80 Opus 成本，视觉 Agent 化工作流可低成本接入；③ GLM-5.3 编程专模作为本地化代码审计备选；④ H3 GB200 27.7 倍提速，单条 10s 视频进入交互式迭代；⑤ GPT-5.6 Sol 降价 20-33%，长输出场景成本可重算；⑥ Claude Code v2.1.243 团队级 FinOps 与无密钥登录，工具在企业 IT 接入阻力下降</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.08.25<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
