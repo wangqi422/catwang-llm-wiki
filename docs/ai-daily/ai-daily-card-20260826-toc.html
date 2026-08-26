@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.08.26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.08.26 &middot; 星期三 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI Jalapeño 自研芯片</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI Bel 模型 10T</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>字节豆包工作 Agent</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>MiniMax-M3 智能体成本</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic IPO 30万亿</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">2.</span>Stability AI B 轮融资</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Claude 记忆机制统一</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code v2.1.246</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.08.26 &middot; Wed</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">OpenAI 自研芯片 Jalapeño 首秀超英伟达 GB300 · 曝 Bel 模型 10T 参数预训练 · 字节「豆包工作」Agent 发布 · Anthropic IPO 30 万亿美元 TAM · Stability AI B 轮 EA 参投</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.08.26</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">OpenAI 自研芯片 Jalapeño 首秀超英伟达 GB300，曝 Bel 模型 10T 预训练完成，字节豆包工作 Agent 发布，MiniMax-M3 智能体成本最低</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 首款自研芯片 Jalapeño 首秀：吞吐/能效/延迟全面超英伟达 GB300</span>
+        <span class="card-tag">🔧 自研芯片</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 在 Hot Chips 公布首款自研推理 ASIC <strong>Jalapeño</strong> 首批实测，与博通联合开发，在吞吐、能效、延迟上<strong>全面超越英伟达 GB200 与 GB300</strong>。标称功耗仅 <strong>700W</strong>（约为 GB300 1400W 的一半），台积电先进制程 + HBM4（216 GiB / 15.4 TB/s）。InferenceX 基准上：GPT-OSS 120B 单用户出词 <strong>1459 tokens/s</strong>（GB200 的 2.7 倍），DeepSeek R1 670B 端到端延迟 <strong>1.65 秒</strong>（GB300 的 5.99 秒），整体<strong>每瓦 AI 吞吐提升 1.5~1.9 倍</strong>。设计到流片仅 <strong>9 个月</strong>，Codex 辅助设计让 SIMD 面积减 8%、矩阵引擎减 10%——<strong>英伟达 CUDA 护城河首现裂缝</strong>，算力进入「GPU + ASIC 多路线并存」时代。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 曝完成 Bel 模型预训练：超 10T 参数，冲击 AGI 阈值</span>
+        <span class="card-tag">🚀 AGI</span>
+      </div>
+      <div class="card-desc">
+        X 消息源爆料，OpenAI 已完成代号 <strong>Bel</strong> 的新一代大模型预训练，是 Doug 模型的直接继任者，<strong>总参数量超过 10 万亿（10T）</strong>，定位 GPT-6 之后的基座模型，甚至可能成为达到 AGI 阈值模型的底座。Doug 经强化学习后预计成为 Astra 和 GPT-6 的基础。爆料称 Anthropic 因算力限制暂无应对 Astra 的方案。<strong>注：OpenAI 官方未确认，属传闻</strong>。10T 若属实将刷新基座规模纪录（GPT-4 约 1.8T、Fable 5 约 5T）；<strong>Jalapeño + Bel + 全场景 Agent 构成 OpenAI「芯片 + 模型 + 应用」全栈 AGI 押注</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">字节「豆包工作」Agent 正式发布：与飞书深度打通，桌面 Agent 元年</span>
+        <span class="card-tag">🤖 Agent</span>
+      </div>
+      <div class="card-desc">
+        字节跳动 8 月 25 日正式发布生产力 Agent 产品与品牌 <strong>「豆包工作」</strong>，可<strong>自主拆解任务、调用工具、持续推进复杂工作流程</strong>，并与<strong>飞书深度打通</strong>——授权范围内调用飞书聊天记录、文档、会议纪要、日程等企业上下文。获授权后跨软件操作浏览器和电脑，长任务可调用云电脑继续执行（本地关机不中断），支持多 Agent 组队。飞书（7/30）、TRAE 与扣子（8/24）团队已先后并入豆包。<strong>字节/腾讯/阿里三巨头正面交锋「桌面 Agent 元年」</strong>，国内桌面 AI 办公智能体三个月访问量翻两倍。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">MiniMax-M3 智能体任务成本 0.018 美元，真实任务榜单最低</span>
+        <span class="card-tag">💡 智能体</span>
+      </div>
+      <div class="card-desc">
+        MiniMax 旗舰模型 <strong>M3</strong> 在一项真实世界智能体基准测试中，仅需 <strong>0.018 美元</strong>就端到端完成「创建收件箱、撰写并发送商务邮件」的完整任务，<strong>成本居榜单最低</strong>且确实完成任务。M3 总参数 428B、激活 23B，采用自研 MSA 稀疏注意力架构，支持 1M tokens 超长上下文，输入每百万 token 2.1 元、输出 8.4 元。<strong>「低成本 Agent 部署」路径跑通</strong>——高频小任务型 Agent（批量处理、信息归集、自动化邮件）进入可忽略成本区间。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">Anthropic 拟披露 30 万亿美元 TAM 冲击史上最大 IPO，Stability AI 7600 万美元 B 轮获三大音乐巨头 + EA 参投</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 拟披露 30 万亿美元 TAM：目标估值 2 万亿、募资最高 1000 亿</span>
+        <span class="card-tag">💰 IPO</span>
+      </div>
+      <div class="card-desc">
+        《华尔街日报》援引知情人士报道，Anthropic 将在 IPO 招股书中提出<strong>超 30 万亿美元</strong>的潜在市场规模（TAM），<strong>打破 SpaceX 28.5 万亿美元的纪录</strong>，成商业史上最庞大市场叙事。目标估值约 <strong>2 万亿美元</strong>（高于 SpaceX 1.77 万亿），拟募资最高 <strong>1000 亿美元</strong>（高于 SpaceX 860 亿），预计最快 9-10 月上市。底气来自财务：<strong>2026 Q2 单季营收 116 亿美元，首次实现调整后营业利润为正</strong>，预计 2028 年收入 1900~2000 亿美元。AI 进入「估值兑现」高峰期。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Stability AI 7600 万美元 B 轮：环球/索尼/华纳音乐 + EA 参投</span>
+        <span class="card-tag">🎮 融资</span>
+      </div>
+      <div class="card-desc">
+        Stable Diffusion 母公司 <strong>Stability AI</strong> 完成 <strong>7600 万美元 B 轮融资</strong>，累计融资 2.32 亿美元。投资阵容极具战略色彩：<strong>环球音乐、索尼音乐、华纳音乐三大音乐巨头 + 游戏巨头艺电（EA）</strong>，另加 AMD Ventures 与 Pacific Alliance Ventures。资金用于完善音乐/视频/图像「创意生产」产品套件。<strong>资本表即战略宣言</strong>——三大音乐 + EA 既是财务投资方也是共同开发与分发伙伴，Stability 从「卖模型」转向「共建专业创意工具」；<strong>EA 直接下场投 AI 创作工具，是游戏行业 AI 原生化的明确信号</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">Claude 记忆机制统一跨 Chat 与 Cowork 打通，Claude Code v2.1.246 修复通配符权限等问题</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude 记忆机制统一：跨 Chat 与 Cowork 打通记忆功能</span>
+        <span class="card-tag">🧠 记忆</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 更新 Claude 记忆机制，<strong>打通 Cowork 与聊天的记忆功能</strong>——在 Claude 聊天中沉淀的记忆可在 Cowork 工作空间复用，反之亦然。此前记忆分散在不同产品线，这次统一让「Claude 记住你」跨场景生效，正向部分用户逐步推送。<strong>「统一记忆」是 Agent 长期价值的地基</strong>，Claude 从「无状态调用」转向「有状态伙伴」。呼应 DeepSeek Files API，「持久上下文」正成为头部模型的产品标配。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Code v2.1.246 发布：修复 Bash 通配符权限、全屏模式等问题</span>
+        <span class="card-tag">🛠️ 开发工具</span>
+      </div>
+      <div class="card-desc">
+        <strong>Claude Code v2.1.246</strong> 发布，主要修复多项工程问题：<strong>Bash 通配符权限处理、全屏模式、后台会话</strong>等 bug。相比昨日 v2.1.243（/usage 循环统计、modelPicker、无密钥登录）的功能密集版，本次是小版本修复。Anthropic 保持<strong>「功能 + 修复」双线高频发版</strong>（隔一天一发），AI 编程工具迭代进入企业级稳定阶段；「通配符权限」修复关乎安全边界，反映其在企业级安全合规上的投入。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Jalapeño 功耗</div><div class="data-value">700W</div></div>
+    <div class="data-chip"><div class="data-label">Bel 参数量</div><div class="data-value">10T</div></div>
+    <div class="data-chip"><div class="data-label">IPO 目标估值</div><div class="data-value">2万亿</div></div>
+    <div class="data-chip"><div class="data-label">智能体成本</div><div class="data-value">$0.018</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 33 期</strong>，AI HOT 聚合 100 条近 30h 动态，主线高度集中：<strong>「OpenAI 三连：自研芯片 Jalapeño + Bel 模型 + 全场景 Agent」vs「Anthropic 30 万亿 TAM 冲击史上最大 IPO」</strong>，叠加<strong>字节豆包工作入场、桌面 Agent 元年开打</strong>的国产主线。</p>
+    <p><strong>最值得宣发团队关注的是 #1 OpenAI Jalapeño 芯片</strong>。700W 打 1400W 的每瓦效率碾压 + 「AI 辅助造芯片」9 个月流片闭环，印证了「AI 提效 AI 工具」的飞轮——这对宣发产线同样适用。#2 Bel 模型 10T 参数属传闻，谨慎采信，但「芯片 + 模型 + Agent」全栈押注的格局信号是真的。</p>
+    <p><strong>行业级信号是 #5 Anthropic IPO + #3 豆包工作</strong>。前者 30 万亿 TAM + 2 万亿估值 + 1000 亿募资，标志 AI 进入「估值兑现」高峰期；后者标志「桌面 Agent 元年」集团军正面交锋——字节/腾讯/阿里齐刷刷把枪口对准办公桌面，桌面 AI 办公智能体三个月访问量翻两倍。</p>
+    <p><strong>落到宣发工作，本期六条可执行线索：① Jalapeño 每瓦效率跃升 → 素材生产成本中长期下探；② 豆包工作/WorkBuddy 承接周报、排期、竞品归集等流程性工作；③ MiniMax-M3 0.018 美元完成智能体任务 → 高频小任务低成本接入；④ Claude 记忆统一 → 团队用 Cowork 沉淀宣发项目上下文；⑤ EA 投资 Stability AI → 游戏行业 AI 原生化信号，保持工具代差优势；⑥ Claude Code 跟进最新修复版规避通配符权限隐患</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.08.26<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
