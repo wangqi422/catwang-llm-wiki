@@ -2,6 +2,87 @@
 
 ---
 
+## [2026-08-26 09:34] AIGC 日报 2026.08.26（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周三 · 第 33 期
+**评分均值**：8.1
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | OpenAI 首款自研芯片 Jalapeño 首秀：吞吐/能效/延迟全面超英伟达 GB300 | 9.5 | P0 |
+| 2 | OpenAI 曝完成 Bel 模型预训练：超 10T 参数，冲击 AGI 阈值 | 8.0 | P0 |
+| 3 | 字节「豆包工作」Agent 正式发布：与飞书深度打通，桌面 Agent 元年 | 8.5 | P0 |
+| 4 | MiniMax-M3 智能体任务成本 0.018 美元，真实任务榜单最低 | 7.5 | P1 |
+| 5 | Anthropic 拟披露 30 万亿美元 TAM：目标估值 2 万亿、募资最高 1000 亿 | 9.2 | P0 |
+| 6 | Stability AI 7600 万美元 B 轮：环球/索尼/华纳音乐 + EA 参投 | 7.8 | P1 |
+| 7 | Claude 记忆机制统一：跨 Chat 与 Cowork 打通记忆功能 | 7.5 | P1 |
+| 8 | Claude Code v2.1.246 发布：修复 Bash 通配符权限、全屏模式等问题 | 7.0 | P2 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260826.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260826-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260826.png`（514.8KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260826.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `1e9d03d` AIGC 日报 2026.08.26：OpenAI 自研芯片 Jalapeño+Bel 10T+豆包工作+Anthropic IPO 30万亿（MD + H5 + 归档）
+- `650233e` feat(ai-daily): add 20260826 poster (3:4)
+- push 两次全通（token URL 直推），远端 = 本地 = 650233e
+
+### 执行记录
+- AI HOT 正常：`/api/public/items?mode=all&since=<24h前>&take=100` 返回 100 条（89KB），第 0 轮拿到丰富候选
+- 第 0 轮 + 6 轮 WebSearch 验证：Jalapeño 芯片实测、Anthropic IPO TAM、Stability AI B 轮、豆包工作、Bel 模型、MiniMax-M3
+- 阶段 4 H5 部署：push 后 workflow queued → `gh run watch` 完成，WebFetch 实测 200（一次通过，无 nav-num 错位）
+- 一条龙 publish-ai-daily-poster.js：海报 514.8KB → 截图 → push → Pages 第 5 次检测 200 → 双群推送（markdown_v2 单条 209 字节）
+- 章节分布：§1 模型&Agent 4 条（Jalapeño/Bel/豆包工作/MiniMax-M3）· §2 行业&基建 2 条（Anthropic IPO/Stability AI）· §3 趋势&工具 2 条（Claude 记忆/Claude Code）
+- 主线编辑手记：OpenAI 三连（芯片+模型+Agent）vs Anthropic 30 万亿 IPO，叠加字节豆包工作入场、桌面 Agent 元年
+
+---
+
+## [2026-08-25 09:30] AIGC 日报 2026.08.25（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周二 · 第 32 期
+**评分均值**：8.3
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | 阿里 Wan3.0 视频生成大模型正式上线：30秒视频+文档输入+专业运镜 | 9.5 | P0 |
+| 2 | DeepSeek 发布 V4-Flash-Vision 多模态视觉模型：补齐视觉短板，1000图<20美分 | 8.5 | P1 |
+| 3 | 智谱 GLM-5.3 编程专模发布：漏洞识别 84.5% 超 GPT-5.6，两周后开源 | 8.3 | P1 |
+| 4 | MiniMax H3 生态集成索引发布：GB200 上推理提速 27.7 倍 | 8.0 | P1 |
+| 5 | DeepSeek 启动 IPO 筹备，拟科创板上市：估值 710 亿美元 | 9.2 | P0 |
+| 6 | 微软 Aion 智能体系统曝光：Copilot 为核心，无开始菜单的 AI 原生 OS | 8.0 | P1 |
+| 7 | OpenAI 下调 GPT-5.6 Sol API 价格超 20%：输入 $4/输出 $20 持续至 11月 | 7.5 | P2 |
+| 8 | Claude Code v2.1.243 发布：/usage 循环统计、模型选择器与无密钥登录 | 7.5 | P2 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260825.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260825-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260825.png`（542.1KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260825.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `0c0ce3c` AIGC 日报 2026.08.25：Wan3.0 30秒视频+DeepSeek IPO 710亿+智谱 GLM-5.3+微软 Aion（MD + H5 + 归档）
+- `f847acd` fix(ai-daily/20260825): 修正 §3 侧边栏 nav-num 拼写
+- `e68e9d6` feat(ai-daily): add 20260825 poster (3:4)
+- push 三次全通（token URL 直推），远端 = 本地 = e68e9d6
+
+### 执行记录
+- AI HOT 正常：`/api/public/items?mode=all&since=<24h前>&take=100` 返回 100 条（92KB），第 0 轮就拿到丰富候选
+- 第 0-3 轮合并：AI HOT 100 条 + 4 轮 WebSearch 验证 GLM-5.3/MiniMax/微软 Aion/OpenAI 官方动态
+- 阶段 4 H5 部署：第 1 次 push 后 workflow queued → `gh run watch` 25s 完成，第 2 次 push（fix）重部署 25s
+- 一条龙 publish-ai-daily-poster.js：海报生成 → 截图 → push → Pages 第 5 次检测 200 → 双群推送（markdown_v2 单条 209 字节）
+- 章节分布：§1 模型&Agent 4 条（Wan3.0/V4-Flash-Vision/GLM-5.3/H3）· §2 行业&基建 2 条（DeepSeek IPO/Aion）· §3 趋势&工具 2 条（降价/Claude Code）
+- 主线编辑手记：中国 AI 三线齐发（视频+多模态+编程+IPO）vs 海外降价与新 OS
+
+---
+
 ## [2026-08-17 09:30] AIGC 日报 2026.08.17（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
