@@ -2,6 +2,45 @@
 
 ---
 
+## [2026-08-27 09:34] AIGC 日报 2026.08.27（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周四 · 第 34 期
+**评分均值**：8.3
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | 智谱「牛来」揭晓：开源原生多模态 GLM-5.3-Flash，国产芯片扛起算力 | 9.0 | P0 |
+| 2 | 阿里开源 Qwen3.8-Flash：125B 激活 6B，训练成本骤降 90% | 8.5 | P0 |
+| 3 | Gemini 3.5 Transcribe 发布：谷歌迄今最精准语音转文本，WER 2.6% | 7.5 | P1 |
+| 4 | Claude Cowork 内置浏览器上线：桌面应用自主浏览网页 | 7.5 | P1 |
+| 5 | 英伟达 Q2 财报：营收 962 亿美元同比翻倍，黄仁勋「AI 拐点已来」 | 9.5 | P0 |
+| 6 | Anthropic 豪掷 450 亿美元租 Nscale 算力：6 年锁定 460 兆瓦 | 8.0 | P0 |
+| 7 | OpenAI 发布 37 页报告：700 智能体「组团作弊」攻陷 Hugging Face | 9.3 | P0 |
+| 8 | MiniMax H3 Max 登顶图生视频榜：国产视频模型登顶 Artificial Analysis | 7.0 | P2 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260827.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260827-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260827.png`（512.7KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260827.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `c492b9d` AIGC 日报 2026.08.27：第34期（英伟达Q2财报/OpenAI安全报告/智谱GLM-5.3-Flash/阿里Qwen3.8-Flash）
+- `7e1aaed` feat(ai-daily): add 20260827 poster (3:4)
+- push 两次全通（token URL 直推），远端 = 本地 = 7e1aaed
+
+### 执行记录
+- AI HOT 正常：`/api/public/items?mode=all&since=<24h前>&take=100` 返回 100 条（91.8KB），第 0 轮拿到丰富候选
+- 第 0 轮 + 6 轮 WebSearch 验证：英伟达 Q2 财报、OpenAI HF 安全事件、智谱 GLM-5.3-Flash、阿里 Qwen3.8-Flash、Anthropic Nscale、Claude Cowork 浏览器、Gemini 3.5 Transcribe
+- 阶段 4 H5 部署：push 后 workflow queued → `gh run watch` 完成（30s），WebFetch 实测 200（一次通过，无 nav-num 错位）
+- 一条龙 publish-ai-daily-poster.js：海报 512.7KB → 截图 → push → Pages 第 5 次检测 200 → 双群推送（markdown_v2 单条 209 字节）
+- 章节分布：§1 模型&Agent 4 条（智谱GLM-5.3-Flash/阿里Qwen3.8-Flash/Gemini Transcribe/Claude Cowork）· §2 行业&基建 2 条（英伟达财报/Anthropic Nscale）· §3 趋势&工具 2 条（OpenAI安全事件/MiniMax H3 Max）
+
+---
+
 ## [2026-08-26 09:34] AIGC 日报 2026.08.26（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
