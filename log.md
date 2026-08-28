@@ -2,6 +2,44 @@
 
 ---
 
+## [2026-08-28 09:40] AIGC 日报 2026.08.28（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周五 · 第 35 期
+**评分均值**：8.2
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | Anthropic 推出 MHS 模型硬件标准：AI 智能体安全操控物理世界 | 9.0 | P0 |
+| 2 | 谷歌 Gemini Omni 1.1 Flash：视频生成升级 4K，场景扩展最长 40 秒 | 8.0 | P1 |
+| 3 | Midjourney 开放 V8.2 图像编辑模型测试：指令编辑 + 以图生图 | 7.5 | P1 |
+| 4 | Cohere 发布 Parse 5：2.3B 视觉语言模型，企业文档一键转 Markdown | 7.0 | P1 |
+| 5 | 英伟达双线动作：拟 130 亿美元收购 Hugging Face + 暂停 AI 云分成 | 9.3 | P0 |
+| 6 | SK 海力士在美 HBM 基地奠基：40 亿美元，2029 年产出首款「美国造」HBM | 7.5 | P1 |
+| 7 | 116 家企业联名信：OpenAI/Anthropic/谷歌/微软呼吁全球 AI 网络防御 | 9.0 | P0 |
+| 8 | 商汤 2026 上半年首次实现 IFRS 盈利：生成式 AI 收入占比近 80% | 8.0 | P1 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260828.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260828-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260828.png`（524.7KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260828.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `fb260a4` AIGC 日报 2026.08.28：第35期（英伟达收购HF/Anthropic MHS/116企业联名/商汤首盈）
+- `945b4c9` feat(ai-daily): add 20260828 poster (3:4)
+- push 两次全通（token URL 直推）
+
+### 执行记录
+- AI HOT 正常：`/api/public/items?mode=all&since=<24h前>&take=100` 返回 100 条（93.8KB），第 0 轮拿到丰富候选
+- 阶段 4 H5 部署：push 后 workflow queued → `gh run watch` 完成（31s），WebFetch 实测 200（一次通过，无 nav-num 错位）
+- 一条龙 publish-ai-daily-poster.js：海报 524.7KB → 截图 → push → Pages 第 5 次检测 200 → 双群推送（markdown_v2 单条 209 字节）
+- 章节分布：§1 模型&Agent 4 条（Anthropic MHS/Gemini Omni 1.1 Flash/Midjourney V8.2/Cohere Parse 5）· §2 行业&基建 2 条（英伟达双线/SK海力士HBM）· §3 趋势&工具 2 条（116企业联名信/商汤盈利）
+
+---
+
 ## [2026-08-27 09:34] AIGC 日报 2026.08.27（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
