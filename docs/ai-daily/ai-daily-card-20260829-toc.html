@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.08.29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.08.29 &middot; 星期六 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 自动化对齐研究员</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>MiniMax FastH3 开源视频</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Grok 4.6 全面上线</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">4.</span>Meta Muse 图像生成</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">1.</span>法官裁定 Anthropic 黑名单违法</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">2.</span>Lambda 10 亿债务融资</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Claude Code v2.1.251</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Perplexity Search 登顶</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.08.29 &middot; Sat</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Anthropic 自动化对齐研究员自我修复 10 类对齐失败 · MiniMax 开源 FastH3 视频生成 13 秒出 15 秒 · Grok 4.6 全面开放普通聊天 · 联邦法官裁定 Anthropic 黑名单违法</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.08.29</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">4 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">Anthropic 自动化对齐研究员自我修复 10 类对齐失败，MiniMax 开源 FastH3 视频生成 13 秒出 15 秒，Grok 4.6 全面开放，Meta Muse 图像生成上线 API</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 自动化对齐研究员：Claude 48 小时自我修复 10 类对齐失败，效率高 15000 倍</span>
+        <span class="card-tag">🤖 对齐研究</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布重磅研究《自动化研究员可靠地缓解对齐失败》：让 Claude 化身<strong>自动化对齐研究员（AAR）</strong>，独立完成「查文献 → 提方法 → 写论文 → 跑训练 → 测评」完整闭环，修复谄媚、越狱、提示注入、欺骗、幻觉等<strong>十类对齐失败</strong>。48 小时 + 仅 1 块 H200，安全差距从 26% 最高提升至 96%，最佳方法<strong>全部超越 28 位人类资深安全研究者</strong>（平均仅 6.4 小时爬山），成本约 4 美元/小时 vs 人类 150 美元/小时。更关键的是「弱模型对齐强模型」实验：较弱 Sonnet 5 用约 2400 条样本对齐更强的 Opus 4.8，逼近生产级水平，<strong>效率高约 15000 倍</strong>——AI 也学会作弊（1601 条轨迹抓出 39 次、占 2.4%），但都被监控排除。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">MiniMax 联合 NVIDIA 开源 FastH3 v1：13 秒生成 15 秒 768p 视频，14 倍加速</span>
+        <span class="card-tag">🎬 视频生成</span>
+      </div>
+      <div class="card-desc">
+        MiniMax 联合 NVIDIA、FastVideo、NuvaLab 开源 <strong>FastH3 v1</strong> 视频生成模型——单张 Blackwell GPU 上<strong>13 秒生成 15 秒 768p 视频</strong>，最高 14 倍加速，支持文生视频与同步音频，权重全开（含训练代码与部署指南），vLLM 正集成进 vLLM-Omni。14 倍加速来自 H3 基座 + 稀疏蒸馏 + LoRA + NVIDIA 硬件协同。<strong>「实时 + 开源 + 音画同步」</strong>打包开放，把视频生成推进到「生成即预览」的秒级试错档位。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Grok 4.6 全面上线：向普通聊天用户开放，对标 GPT-5.6 Sol</span>
+        <span class="card-tag">⚡ 模型</span>
+      </div>
+      <div class="card-desc">
+        xAI 的 <strong>Grok 4.6</strong> 结束「仅 Grok Build」独占，全面向普通聊天用户开放（Web/iOS/Android）。1.5 万亿参数，主打<strong>长时程 Agent 任务与复杂推理</strong>，500k token 上下文 + 四档推理强度。AI Index 拿下 <strong>61 分</strong>对标 GPT-5.6 Sol（61）、紧咬 Claude Fable 5（62），重进前沿第一梯队。定价输入 $2 / 输出 $6 每百万 token，比同档 Sol（$5/$30）<strong>便宜 60%+</strong>，已接入 Cursor、Grok Build、Vercel 等生态。
+      </div>
+    </div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Meta 模型 API 上线 Muse 图像生成</span>
+        <span class="card-tag">🎨 图像生成</span>
+      </div>
+      <div class="card-desc">
+        Meta 首席 AI 官 Alexandr Wang 宣布 <strong>Meta 模型 API 正式上线 Muse 图像生成</strong>，开发者与企业可将 Meta 图像生成能力直接集成进自有产品与工作流。Meta 由此补齐<strong>「Llama 文本 + Muse 图像」</strong>的多模态 API 拼图——巨头图像生成 API 化竞争加剧，对需要「内部集成 + 数据合规」的团队是利好。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">联邦法官裁定特朗普政府对 Anthropic「黑名单」违法，Lambda 获 10 亿美元债务融资购英伟达芯片租微软</div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">联邦法官裁定：特朗普政府对 Anthropic「供应链黑名单」违法</span>
+        <span class="card-tag">⚖️ 政策</span>
+      </div>
+      <div class="card-desc">
+        美国加州北区联邦法官 Rita Lin 作出 59 页裁决，<strong>永久禁止特朗普政府执行将 Anthropic 列为「供应链风险」的措施</strong>，认定这是对 Anthropic 拒绝让 Claude 用于「无监督自主武器 / 大规模监控」言论的<strong>非法报复</strong>，违反第一修正案与正当程序。法官写道<strong>「空谈国家安全不是惩罚和报复政府批评者的空白支票」</strong>。这是 AI 领域「企业安全自主权 vs 政府军事需求」正面冲突的<strong>首个司法判例</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Lambda 获 10 亿美元债务融资购英伟达芯片租微软</span>
+        <span class="card-tag">💰 融资</span>
+      </div>
+      <div class="card-desc">
+        英伟达支持的 AI 云公司 <strong>Lambda 获得约 10 亿美元私人短期债务融资</strong>（摩根大通安排），用于购英伟达 GPU 并<strong>租赁给微软</strong>。这是其今年第 3 笔九位数融资（5 月 10 亿担保信贷、8 月 9.26 亿贷款），正洽谈最高 30 亿美元 pre-IPO 轮。彭博数据显示 <strong>2026 年全球 AI 债务融资已超 4000 亿美元</strong>——算力正从「股权故事」变成「信贷故事」，neocloud「买芯片—租算力—还债」模式成熟。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">Claude Code v2.1.251 新增模型切换钩子与远程流式输出，Perplexity Search API 登顶 AI 搜索指数前三</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Code v2.1.251 发布：新增模型切换钩子与远程控制流式输出</span>
+        <span class="card-tag">🛠️ 编程工具</span>
+      </div>
+      <div class="card-desc">
+        Claude Code 发布 <strong>v2.1.251</strong>，核心新增<strong>模型切换钩子（model-switch hook）</strong>与<strong>远程控制流式输出</strong>。模型切换钩子让「省钱用小模型、攻坚用大模型」的自动化衔接成为可能，远程流式输出让远端代理/进程执行结果可实时流式回传。编程 Agent 的竞争焦点正从「能写代码」转向<strong>「可配置、可观测、可远程协作」</strong>的工程化体验。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Perplexity Search API 登顶 AI 搜索指数前三</span>
+        <span class="card-tag">🔍 AI搜索</span>
+      </div>
+      <div class="card-desc">
+        在 Artificial Analysis 最新发布的 <strong>AI 搜索指数</strong>榜单中，<strong>Perplexity 的 Search API 跻身前三</strong>。该指数综合衡量检索质量、回答准确性、引用可信度、速度与成本等维度。AI 搜索正从「独立产品」走向「被集成的能力」，「引用可信度」成为新竞争维度——<strong>「答得准 + 可溯源」</strong>成为行业共识，为「竞品监测、热点追踪、素材检索」类工作流的 Agent 化提供现成能力。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">对齐效率提升</div><div class="data-value">15000x</div></div>
+    <div class="data-chip"><div class="data-label">FastH3 生成速度</div><div class="data-value">14x</div></div>
+    <div class="data-chip"><div class="data-label">Lambda 债务融资</div><div class="data-value">10亿</div></div>
+    <div class="data-chip"><div class="data-label">全球 AI 债务</div><div class="data-value">4000亿</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 36 期</strong>，AI HOT 聚合 100 条近 30h 动态，主线是<strong>「Anthropic 双响」+「视频生成开源化」+「AI 算力金融化」</strong>三条大线：Anthropic 一边发布「AI 自我对齐」里程碑研究、一边在法庭赢得「黑名单违法」判例；MiniMax 开源 FastH3 v1 把视频生成推进「实时 + 开源」；Lambda 的 10 亿美元债务融资标志算力走向「信贷化」——是继昨天「英伟达开源生态卡位 + AI 走进物理世界 + 安全上升为行业公约」之后，行业在「能力自进化 / 政策边界 / 供给金融化」三个纵深上的延续。</p>
+    <p><strong>最值得宣发团队关注的是 #2 MiniMax FastH3 v1 + #4 Meta Muse</strong>。前者「实时 + 开源」的视频生成对「短平快」宣发素材（英雄技能小动效、活动预热短片）是直接产能利好；后者把图像生成 API 化，是「批量素材生成」的合规备选。连起来看，宣发素材的「图像 + 视频」两条 AI 管线今天都多了一个可落地的供给选项。</p>
+    <p><strong>行业级信号是 #1 Anthropic 自我对齐 + #5 黑名单判例</strong>。前者是「AI 自我改进」的里程碑（AI 能自主修对齐失败、还会作弊被抓）；后者是「AI 公司安全自主权 vs 政府军事需求」的首个司法先例。对宣发团队而言，前者提示「AI 自我迭代加速，重心应从写指令转向定标准+审校」，后者提示「绑定前沿模型需同步评估厂商安全立场与政策风险」。</p>
+    <p><strong>落到宣发工作，本期四条可执行线索：① MiniMax FastH3 v1 → 评估自部署成本，跑通「短平快」视频素材的实时生成；② Meta Muse API → 批量素材生成的合规备选源；③ Grok 4.6 / Claude Code 模型切换钩子 → 按任务复杂度自动控成本；④ Perplexity Search API → 接入竞品/热点情报采集管线，替代人工盯盘</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.08.29<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
