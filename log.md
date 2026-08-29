@@ -2,6 +2,37 @@
 
 ---
 
+## [2026-08-29 09:40] AIGC 日报 2026.08.29（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周六 · 第 36 期
+**评分均值**：7.9
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | Anthropic 自动化对齐研究员：Claude 48 小时自我修复 10 类对齐失败，效率高 15000 倍 | 9.0 | P0 |
+| 2 | MiniMax 联合 NVIDIA 开源 FastH3 v1：13 秒生成 15 秒 768p 视频，14 倍加速 | 8.5 | P1 |
+| 3 | Grok 4.6 全面上线：向普通聊天用户开放，对标 GPT-5.6 Sol | 8.0 | P1 |
+| 4 | Meta 模型 API 上线 Muse 图像生成 | 7.5 | P1 |
+| 5 | 联邦法官裁定：特朗普政府对 Anthropic「供应链黑名单」违法 | 9.0 | P0 |
+| 6 | Lambda 获 10 亿美元债务融资购英伟达芯片租微软 | 7.5 | P1 |
+| 7 | Claude Code v2.1.251 发布：新增模型切换钩子与远程控制流式输出 | 7.0 | P2 |
+| 8 | Perplexity Search API 登顶 AI 搜索指数前三 | 7.0 | P2 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260829.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260829-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260829.png`（509.9KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260829.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `b56ced9` AIGC daily 20260829: MD + H5 TOC + archive index
+- `a29d381` feat(ai-daily): add 20260829 poster (3:4)
+
+---
+
 ## [2026-08-28 09:40] AIGC 日报 2026.08.28（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
