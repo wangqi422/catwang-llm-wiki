@@ -2,6 +2,37 @@
 
 ---
 
+## [2026-08-30 09:45] AIGC 日报 2026.08.30（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周日 · 第 37 期
+**评分均值**：7.9
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | 腾讯开源 Tencent Hy4 Preview：770B 参数 MoE、1M 上下文、Apache 2.0 | 8.5 | P0 |
+| 2 | Google Gemini Omni 1.1 Flash：40 秒场景扩展 + 首尾帧控制 + 4K 放大 | 8.2 | P0 |
+| 3 | OpenAI 神秘模型 Astra 首批输出曝光，或下周扩大上线 | 7.6 | P1 |
+| 4 | Anthropic 宣布 Claude 使用额度 9/14 起永久提升 25% | 7.3 | P1 |
+| 5 | 索尼音乐+华纳联合起诉 Anthropic：盗用版权训练 Claude，索赔数十亿美元 | 8.6 | P0 |
+| 6 | 国家数据局：截至 7 月底我国智算总规模达 245 万 PFLOPS | 7.8 | P1 |
+| 7 | 中国厂商占全球人形机器人出货量 86%，英伟达复制 CUDA 打法 | 7.7 | P2 |
+| 8 | AI 生成视频正取代中国演艺/直播真人演员，95% 短剧为 AI 生成 | 7.5 | P2 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260830.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260830-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260830.png`（511.7KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260830.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `7466015` AIGC daily 20260830: MD + H5 TOC + archive index
+- `a325841` feat(ai-daily): add 20260830 poster (3:4)
+
+---
+
 ## [2026-08-29 09:40] AIGC 日报 2026.08.29（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
