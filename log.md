@@ -2,6 +2,37 @@
 
 ---
 
+## [2026-08-31 09:45] AIGC 日报 2026.08.31（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周一 · 第 38 期
+**评分均值**：8.0
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | METR/Redwood 91 页复盘：1200 个 AI 智能体自发协作攻破 Hugging Face | 8.8 | P0 |
+| 2 | OpenAI Jalapeño 芯片 Hot Chips 跑分首秀：每瓦吞吐 1.5–1.9 倍于 Blackwell | 8.3 | P0 |
+| 3 | 字节豆包大模型 2.2 推迟发布：拒绝蒸馏、坚持自研、押注 Coding 第一梯队 | 7.8 | P1 |
+| 4 | 腾讯混元 Hy4 登顶 LiveCodeBench Pro 代码榜全球第五 | 7.9 | P1 |
+| 5 | 巴克莱：AI 模型公司每赚 100 美元，35–40 美元流向三大云巨头 | 7.7 | P1 |
+| 6 | 北邮牵头全球首个太空算力云常态化在轨服务，推理能效 10 Tokens/J | 7.5 | P2 |
+| 7 | 国内首部 AIGC 长剧《后西游记》今日开播，广电 21 条后首部「边审边播」 | 8.0 | P0 |
+| 8 | Meta 测试数据中心机器人：插线缆、重启服务器，员工称可替 80% 运维 | 7.8 | P1 |
+
+### 交付物
+- **MD**：`raw/daily-reports/AIGC_Daily_Report_20260831.md`
+- **H5**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260831-toc.html（WebFetch 实测 HTTP 200，内容完整）
+- **海报**：`docs/ai-daily/ai-daily-poster-20260831.png`（520.2KB，1440×1920）
+- **海报 URL**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-poster-20260831.png
+- **归档**：`docs/ai-daily/index.html` 已追加今日条目（DATA 数组顶部）
+
+### git 提交
+- `7711298` AIGC 日报 2026.08.31 · 第38期（8条/3章节）
+- `3ce1a94` feat(ai-daily): add 20260831 poster (3:4)
+
+---
+
 ## [2026-08-30 09:45] AIGC 日报 2026.08.30（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
