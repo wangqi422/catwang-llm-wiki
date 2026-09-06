@@ -2009,3 +2009,15 @@
 **⚠️ 注意事项**：
 - Git push 需用 `gh auth token` 方式（Git Bash 下 credential manager 无法交互）
 - push-now.sh 需要更新为 token 认证方式
+
+## AIGC 日报 · 2026.09.06（第 42 期 · 周日）
+
+- 主题：GPT-6 Astra 全量收官 + OpenAI wiki 事件披露框架 + Anthropic IPO 承销商
+- MD：`raw/daily-reports/AIGC_Daily_Report_20260906.md`（8 条，三章节 3/2/3）
+- TOC H5：`docs/ai-daily/ai-daily-card-20260906-toc.html`
+- 海报：`docs/ai-daily/ai-daily-poster-20260906.png`（1440×1920，519.1KB）
+- 归档首页更新：DATA 数组顶部追加 20260906 条目
+- Git：`1c772e1`（MD+H5+归档）→ `b67f09d`（海报）
+- H5 在线 200 校验：✅ 通过
+- 企微推送：双群（群 A + 群 B）markdown_v2 单条，全部成功
+- H5 在线地址：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260906-toc.html
