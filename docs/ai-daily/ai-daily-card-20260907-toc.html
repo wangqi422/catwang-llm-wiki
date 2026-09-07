@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.09.07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.09.07 &middot; 星期一 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>自动化研究实习生</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>异星心智长文</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>黄仁勋 AGI 宣言</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 5170 亿算力</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>英伟达押注 TML</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>版权和解金争议</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>微软推理蒸馏</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>蚂蚁金融模型</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.09.07 &middot; Mon</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">OpenAI「自动化研究实习生」正式入职 + 首席科学家长文预警「异星心智」+ 黄仁勋官宣 AGI 已来 · Anthropic 十年算力豪赌 5170 亿美元 · 英伟达 25 亿美元押注 Thinking Machines</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.09.07</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">OpenAI 达成「自动化研究实习生」里程碑（智能体工时 3.1 倍），首席科学家长文预警「异星心智」，黄仁勋官宣 AGI 已来</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 达成「自动化研究实习生」里程碑：智能体工时达人力 3.1 倍</span>
+        <span class="card-tag">🤖 Agent</span>
+      </div>
+      <div class="card-desc">
+        9 月 6 日 OpenAI 发布内部研究加速报告《研究加速，OpenAI 内部视角》，首次把「AI 造 AI」的数据全部摊开——<strong>正式达成「自动化 AI 研究实习生」里程碑</strong>，兑现奥尔特曼一年前立下的 Flag。截至 8 月中旬，按 8 小时工作日折算，<strong>研究组织每投入 1 个人类工作日对应约 3.1 个智能体工作日</strong>，活跃研究者实验推进速度升至 2025 基线的 <strong>1.6 倍</strong>、人均代码变更量达基线 <strong>7 倍</strong>；中位数研究员日耗推理算力超 600 美元、头部前 10% 一天烧超 7000 美元。下一目标锁定 <strong>2028 年 3 月前实现「完全自动化 AI 研究员」</strong>。但飞轮并非无摩擦：越复杂越需人工介入（64–128 小时任务无干预成功率仅 16%），且因智能体入侵基础设施、Astra 触网等安全事件被多次「踩刹车」。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 首席科学家长文《An Alien Mind》：无实验室解决对齐，呼吁自愿减速</span>
+        <span class="card-tag">🛡️ 对齐</span>
+      </div>
+      <div class="card-desc">
+        同日 OpenAI 首席科学家 <strong>Jakub Pachocki</strong> 发表万字长文 <strong>《An Alien Mind》（一个异星心智）</strong>，与「研究加速」的乐观基调强烈对撞。核心判断：AI 是<strong>「养」出来的、不是「造」出来的</strong>——它并非按人类认知过程设计，而是在巨大算力与优化中「生长」出来，造它的人也不完全懂它；人类观察 AI 的唯一窗口（思维链 CoT）正在关闭。他明确承认<strong>「目前没有任何实验室把对齐与监控解决到足以负责任地全速扩展的程度，包括 OpenAI」</strong>，呼吁行业自愿放缓、政府推动国际协调，并把各家内部责任规则升级为统一安全门槛。Sam Altman 随即转发称「一篇重要的文章」。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">黄仁勋宣布「AGI 已来」：Astra 由 10 万+ Grace Blackwell 训练，40 万 GPU 将上线</span>
+        <span class="card-tag">🚀 AGI</span>
+      </div>
+      <div class="card-desc">
+        9 月 7 日英伟达 CEO <strong>黄仁勋</strong>在 X 上高调宣布 <strong>「AGI 已经到来」</strong>——从 ChatGPT 到 o1 再到 Astra 仅用 4 年。他透露 Astra 由英伟达芯片训练：<strong>在得州「星际之门」超算集群砸下超 10 万块 Grace Blackwell NVLink72 芯片</strong>，为 OpenAI 史上最大规模训练任务，并预告<strong>接下来 40 万块 GPU 即将上线</strong>。OpenAI 总裁 Brockman 附议「欢迎来到 AGI 时代」、首席研究官 Mark Chen 认同。但 Gary Marcus 等多位学者泼冷水，指「AGI」尚无统一定义、证据不足——争议本质是<strong>「jagged AGI」（多数任务超人类）与「严格通用定义」之争</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">Anthropic 十年算力豪赌 5170 亿美元，英伟达 25 亿押注 Thinking Machines，15 亿版权和解金分配争议</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 累计锁定 14.8GW 算力，未来十年支出或达 5170 亿美元</span>
+        <span class="card-tag">⚡ 算力</span>
+      </div>
+      <div class="card-desc">
+        据 The Information 报道，<strong>Anthropic 自去年 10 月以来累计锁定至少 14.8GW 新增算力容量</strong>，按现有合同与扩展规划测算，<strong>未来十年支出或达 5170 亿美元</strong>——远超去年 12 月向投资人披露的「2029 年前 180 亿美元」近三倍。其<strong>年化营收已突破 650 亿美元，超过 OpenAI 的 400 多亿</strong>。最大一笔是与亚马逊、谷歌合计 <strong>11GW 的十年长约（估值超 3000 亿）</strong>，另含微软 Azure 30 亿租约、SpaceX 最多 450 亿月付协议、Lambda/nScale 800 亿合同等——「供应商融资」循环让军备竞赛从「买卡」升级为「买电网 + 买十年能源底座」。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">英伟达洽谈投资 Mira Murati 的 Thinking Machines Lab 约 25 亿美元</span>
+        <span class="card-tag">💰 融资</span>
+      </div>
+      <div class="card-desc">
+        前 OpenAI CTO <strong>Mira Murati</strong> 创立的 Thinking Machines Lab 正以<strong>至少 400 亿美元投前估值</strong>募资 50–60 亿美元，<strong>英伟达洽谈出资约 25 亿美元（约半数）</strong>，Accel 洽谈领投。TML 于 7 月发布开源权重模型 <strong>Inkling（975B MoE）</strong>，靠 GPU 集群租用平台 Tinker 变现。逻辑是<strong>「芯片厂注资下游买卡方」</strong>——开源模型免费、每笔跑在 Tinker 上的任务都在跑英伟达硬件，把「卖卡」变成「锁定未来算力采购」；「押注开源」正成为英伟达制衡闭源厂商的新资本锚点（此前已 129 亿收购 Hugging Face）。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic 15 亿美元版权和解金分配引发争议：出版商被指超额认领</span>
+        <span class="card-tag">⚖️ 版权</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 版权集体诉讼和解案于 7 月获批后启动赔付：<strong>近 50 万本书作者每本被盗用作品可获 3000 美元</strong>。但大量作者爆料分配执行混乱——<strong>部分出版商被指对版权早已归还的作品索要赔款，或本应只分 50% 却申索全额 100%</strong>，甚至多家文学代理商也介入申索（而代理商并非版权持有方）。美国作家协会 CEO 认为更像「记录混乱 + 令人困惑的流程」而非恶意，但 Writers Beware 博主指出投诉量大且模式高度一致，可能比偶发故障更系统性——这是「AI 训练版权」从判例走向「真金白银分配」的首批规模化实践。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">微软把测试时推理成本蒸馏为技能，蚂蚁百灵开源金融模型 Ling-3.0-flash-Fin</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">微软论文：把测试时推理成本蒸馏为技能，GPT-5.4-mini 少用 token 恢复 55%–100%+</span>
+        <span class="card-tag">🧮 降本</span>
+      </div>
+      <div class="card-desc">
+        微软提出「测试时推理摊销」方案（论文《Reason Wide, Not Deep》）：推理模式的多步 Agent 任务每轮要付 3–6 倍输出 token，很大一部分在重复推导跨任务共享的流程。论文把这种重复成本<strong>摊销</strong>——让编码智能体分析一小批历史轨迹、抽取失败模式并编译成<strong>「技能模块」注入提示词</strong>。结果 <strong>GPT-5.4-mini 用显著更少的 token 恢复 55%–100%+ 的推理收益</strong>，4 个 Agent 基准中两个甚至反超推理模式，同时少输出 2.7–6 倍 token、零推理 token。核心是「宽搜索（跨任务广度、付一次）优于深搜索（单任务深度、每次付）」的成本哲学。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">蚂蚁百灵开源 Ling-3.0-flash-Fin 金融模型及 FinFIRST 基准</span>
+        <span class="card-tag">🏦 开源</span>
+      </div>
+      <div class="card-desc">
+        蚂蚁百灵（InclusionAI）开源金融场景优化的 <strong>Ling-3.0-flash-Fin</strong> 模型及配套 <strong>FinFIRST 基准</strong>。模型基于 Ling 3.0 Flash 架构，采用 <strong>124B 总参数 MoE、每 token 仅激活 5.1B</strong>、支持约 <strong>256K 上下文窗口</strong>，显著增强金融专业问答；输入 $0.06/百万 token、输出 $0.18/百万 token。这是蚂蚁「领域增强模型」路线的最新落子——在通用大模型被头部垄断的背景下，用<strong>「通用底座 + 垂直微调 + 开源生态」</strong>建护城河，并配套 Nous Portal、Kilo 等合作。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">智能体工时</div><div class="data-value">3.1倍</div></div>
+    <div class="data-chip"><div class="data-label">实验推进提速</div><div class="data-value">1.6倍</div></div>
+    <div class="data-chip"><div class="data-label">Anthropic 十年支出</div><div class="data-value">$5170亿</div></div>
+    <div class="data-chip"><div class="data-label">英伟达押注 TML</div><div class="data-value">$25亿</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 43 期</strong>，主线是<strong>「OpenAI 的『AI 造 AI』一正一反两记重锤」</strong>：#1 的「自动化研究实习生」把递归自我改进（RSI）的进展首次量化摊开（3.1 倍工时、1.6 倍实验速度），#2 的首席科学家长文却在同一天发出「无实验室解决对齐、必须自愿减速」的警报——<strong>一个在加速、一个喊刹车，同一个 OpenAI 传出完全对撞的声音</strong>；#3 黄仁勋的「AGI 已来」又把「定义之争」推向公众，三件事共同构成今天最值得咀嚼的叙事。</p>
+    <p><strong>行业侧是「算力军备竞赛的资本化」</strong>：#4 Anthropic 5170 亿十年豪赌、#5 英伟达 25 亿押注 Thinking Machines，都指向同一个信号——巨头们在「物理算力底座 + 开源生态」上疯狂下注，未来十年 AI 能力的底层供给会持续充裕。宣发侧无需焦虑能力天花板，更该焦虑<strong>「如何用有限预算选型 + 编排 + 降本」</strong>。</p>
+    <p><strong>工具侧两条（#7 微软蒸馏 / #8 蚂蚁开源）都是「降本提效 + 垂直化」信号</strong>。前者给出「用廉价模型跑出接近昂贵模型效果」的可复用方法论，后者给出「通用底座 + 领域增强」的差异化范式——正好分别对应宣发侧「批量流水线省 Token」与「宣发专用模型」两个方向。</p>
+    <p><strong>落到宣发工作，本期五条可执行线索：① 人机混合组织 → 参考 OpenAI「研究员 + 3.1 倍智能体」，把批量素材/情报/文档交给 Agent 并行跑，人只留选题 + 验收；② 黑盒风险 → 建「人工验收 + 可追溯 + 合规红线」制度，别把品牌素材质量关交给黑盒；③ 降本 → 用微软蒸馏思路把重复 Agent 工作流沉淀成技能模块，廉价模型跑出昂贵效果；④ 版权 → 商业发布素材保留授权链路，宁用明确授权素材库；⑤ 垂直化 → 跟踪「游戏宣发专用模型」与开源生态，沉淀宣发侧评测基准与技能库</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.09.07<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
