@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.09.10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.09.10 &middot; 星期四 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Suno v6 授权音乐模型</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI Defense Factory</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Google 开源 Mantis</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>美指控中国 AI 蒸馏</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>DeepSeek 科创板 IPO</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>苹果折叠屏 iPhone Duo</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>原神 AI 声音仿冒案</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Fable 5.1 文风</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.09.10 &middot; Thu</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Suno v6 首次用唱片业授权数据训练 AI 音乐模型 + 美三机构指控 DeepSeek 等六家中国 AI 公司工业级蒸馏（中方反制）+ DeepSeek 冲刺科创板 5000 亿估值 · 苹果发布首款折叠屏 iPhone Duo · 原神 AI 声音仿冒案宣判赔 75 万</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.09.10</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">Suno v6 用唱片业授权数据训练 AI 音乐模型，OpenAI 发布 Defense Factory，Google 开源 Mantis 漏洞技能包</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Suno v6 发布：首个用唱片业授权数据训练的 AI 音乐模型</span>
+        <span class="card-tag">🎵 音乐</span>
+      </div>
+      <div class="card-desc">
+        9 月 9 日 AI 音乐公司 <strong>Suno</strong> 发布 <strong>v6 模型家族</strong>，这是首个与唱片业合作、用授权数据「从零训练」的模型，合作伙伴包括 <strong>华纳音乐（WMG）、BMG 和 Believe</strong>。v6 分三档：旗舰 v6、实验 v6-wild、免费 v6-mini；支持把 <strong>图片、视频、语音备忘录转化为音乐</strong>、自然语言精确修改单句歌词/单独音轨、多来源混搭。同日退役所有旧模型（旧模型曾深陷「抓取公开音频」版权诉讼）。公司 6 月刚以 54 亿美元估值融资 4 亿美元。这是「AI 音乐从侵权争议走向合法商业化」的样板。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 发布 Defense Factory：Codex 智能体加固数百系统</span>
+        <span class="card-tag">🛡️ 安全 Agent</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 发布 <strong>「Defense Factory」</strong> 案例与参考架构：内部一次 code-red 冲刺中，动员 <strong>250+ 人</strong>、用 <strong>Codex 智能体 + 最新 cyber 模型</strong>，对<strong>数百个内部系统</strong>完成漏洞发现与补丁修复，官方称「发现并修复了原本可能无法发现的漏洞」。这是<strong>「AI 智能体持续发现漏洞、验证、确认修复生效」的闭环</strong>，并公开实操 playbook。信号是「Agent 闭环攻防」成为 AI 安全新范式——智能体从「找问题」升级到「找 + 修 + 验证」。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Google 开源 Mantis：编码智能体漏洞全生命周期技能包</span>
+        <span class="card-tag">🛠️ 开源</span>
+      </div>
+      <div class="card-desc">
+        Google 开源 <strong>Mantis</strong>，一套协议无关的模块化安全审查技能包，可挂到任意编码智能体上，跑完<strong>「发现缺陷 → 过滤误报 → 沙箱复现 → 写最小补丁 → 对补丁再攻击 → 1–10 风险评分」</strong>全生命周期。设计为「技能包」而非独立工具，让 Claude Code、Codex、开源 Agent 都能「装上就用」。与 OpenAI Defense Factory 同日发布，说明「Agent 安全攻防」正被两大巨头同时押注，成为 Agent 规模化落地的「安全底座」。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">美三机构指控中国 AI 公司工业级蒸馏，DeepSeek 冲刺科创板，苹果发布首款折叠屏 iPhone Duo</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">美 NSA/CISA/FBI 指控 DeepSeek 等六家中国 AI 公司工业级蒸馏</span>
+        <span class="card-tag">🌐 地缘政策</span>
+      </div>
+      <div class="card-desc">
+        9 月 8 日美国 <strong>NSA、CISA、FBI</strong> 联合指控 <strong>DeepSeek、月之暗面、阿里巴巴、MiniMax、阶跃星辰、智谱</strong> 六家中国 AI 公司「至少自 2024 年底起」对美国前沿模型开展<strong>工业级蒸馏攻击</strong>，涉及 Claude、GPT、Gemini、Grok，累计提取「数十亿 token、数百万次请求」，称「很可能在中国政府知情下」进行。<strong>中方明确反驳</strong>：外交部称「中国 AI 是自立自强成果」，商务部批评美方「政治化、双重标准、算力垄断」，并表态「必将坚决反制」。事件把「蒸馏」从商业争议升维到地缘科技竞争。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">DeepSeek 冲刺科创板：中信证券辅导，估值 5000 亿</span>
+        <span class="card-tag">💰 IPO</span>
+      </div>
+      <div class="card-desc">
+        据路透社，<strong>DeepSeek 已聘请中信证券筹备科创板上市</strong>，计划年内启动 IPO，最新估值约 <strong>5000 亿元人民币（约 740 亿美元）</strong>。The Information 披露前七个月<strong>营收约 4.75 亿元（2025 年全年十倍）</strong>，综合毛利率 44.6%、API 业务毛利率 82.9%，同期净亏损 7.15 亿元。6 月完成首轮融资 500 亿，7 月启动新一轮，两轮累计超 1000 亿。契机是 6 月证监会把<strong>科创板第五套标准扩至 AI 领域</strong>。上市动因是留人、算力与模型研发。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">苹果发布首款折叠屏 iPhone Duo：AI 辅助设计铰链</span>
+        <span class="card-tag">📱 硬件</span>
+      </div>
+      <div class="card-desc">
+        9 月 10 日凌晨苹果发布<strong>首款折叠屏 iPhone Duo</strong>（国行 15999 元起，顶配 26499 元）与 <strong>iPhone 18 Pro / Pro Max</strong>（首发 2nm 制程 <strong>A20 Pro</strong> 芯片，9999 元起），是新 CEO 特努斯的首秀。iPhone Duo 横向内折、展开 7.6 英寸；<strong>关键铰链由 AI 辅助设计制造</strong>——用 AI 算法为每个铰链精确匹配最佳外壳，配合共焦激光扫描、3D 打印多达 25 层定制光聚合物消折痕。这是「AI 辅助制造 + 生成式设计」走进消费电子顶级量产的公开案例，2nm A20 Pro 双 16 核 NPU 强化端侧 AI 算力。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">原神 AI 声音仿冒案宣判赔 75 万，Claude Fable 5.1 写作风格去谄媚化</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">米哈游《原神》AI 声音仿冒案宣判：被告赔 75 万</span>
+        <span class="card-tag">⚖️ 判例</span>
+      </div>
+      <div class="card-desc">
+        上海浦东法院宣判<strong>上海首例涉 AI 声音仿冒不正当竞争案</strong>：一款 AI 变声软件未经授权提供《原神》<strong>63 款角色声音资源包</strong>，被告承认使用角色<strong>一分钟音频</strong>训练变声模型，被判停止侵权并赔偿米哈游 <strong>75 万元</strong>。这是国内游戏行业「AI 声音克隆」侵权的标志性判例，确立「游戏角色声音属于 IP 方受保护资产，未经授权不得用于训练 AI 模型」的规则，给「AI 配音、AI 角色语音」商业化划了合规线。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Fable 5.1 写作风格变化：破折号降 32%</span>
+        <span class="card-tag">✍️ 写作</span>
+      </div>
+      <div class="card-desc">
+        Arena 分析数万条高推理 Text Arena 输出，对比 Claude Fable 5 与 5.1：<strong>「yes」「exactly」等同意开场语减少 58%</strong>，「honestly」「frankly」等诚实措辞降 45%，<strong>破折号减少 32%</strong>，分号增加 63%。这揭示新一代模型在<strong>刻意「去谄媚化」、弱化口语化强调标点，转向更克制的书面表达</strong>——「写作风格」正从玄学变成可测量、可对标的工程指标，利好追求「正式克制」专业稿的写作场景。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Suno v6 授权伙伴</div><div class="data-value">WMG/BMG</div></div>
+    <div class="data-chip"><div class="data-label">DeepSeek 估值</div><div class="data-value">5000亿¥</div></div>
+    <div class="data-chip"><div class="data-label">iPhone Duo 起价</div><div class="data-value">15999元</div></div>
+    <div class="data-chip"><div class="data-label">原神声音案</div><div class="data-value">赔75万</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 46 期</strong>，主线是<strong>「AI 的合规化与资本化双线并进」</strong>：#1 的 Suno v6 用唱片业授权数据训练，把「AI 音乐」从侵权争议推向合法商业化；#7 的《原神》AI 声音仿冒案宣判，用司法把「角色声音权」划进 IP 保护红线——<strong>一个在「内容生产」端走向合规，一个在「司法判例」端收紧边界</strong>，共同指向：AIGC 的「野蛮生长」阶段正在结束，「授权 + 合规」成为新常态。</p>
+    <p><strong>行业侧是「资本化 + 地缘博弈」的叠加</strong>：#5 DeepSeek 以 5000 亿估值冲刺科创板（中国 AI 龙头资本化），#4 美三机构指控六家中国 AI 公司工业级蒸馏（中方坚决反制）——资本在给「国产 AI」定价，地缘在给「模型边界」划红线，两条线都深刻影响国产模型生态的走向。</p>
+    <p><strong>工具侧两条（#2 Defense Factory / #3 Mantis 安全 Agent，#8 Fable 5.1 写作风格）恰好对应宣发的「质」与「文」</strong>：前者用「闭环攻防 + 开源技能包」示范了「Agent 产出如何可校验」，后者用「去谄媚化」的量化指标让 AI 写作更「正式克制」——一个解决「产出可信」，一个解决「文案质感」，都直接利好宣发自动化的落地质量。</p>
+    <p><strong>落到宣发工作，本期五条可执行线索：① 音乐生产 → AI 音乐进入「可商用」阶段，用「视频画面反向配乐 + 精准改旋律」替代重流程做 CG/PV 配乐，但务必走授权模型；② 合规红线 → 《原神》AI 声音案是直接警示，CODM 角色语音/形象的「AI 克隆」必须先走 IP 授权；③ Agent 落地 → 记住 Defense Factory/Mantis 的「闭环 + 可校验」，批量流水线务必配「发现→产出→自动校验→确认可用」的质检闸门，并关注开源「可插拔质检技能包」；④ 文案质感 → 新版模型「去谄媚化」，更新 Prompt 直接要求「正式、克制、少破折号」；⑤ 供应链 → 关注模型供应商的地缘合规与稳定性，核心生产链路「多源备份、避免单点依赖」</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.09.10<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
