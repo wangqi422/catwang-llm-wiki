@@ -2,6 +2,58 @@
 
 ---
 
+## [2026-09-10 09:36] AIGC 日报 2026.09.10（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周四 · 第 46 期
+**评分均值**：8.0
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260910-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260910.png（497.6KB / 1440×1920）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | Suno v6 发布：首个用唱片业授权数据训练的 AI 音乐模型（WMG/BMG/Believe） | 8.5 | P0 |
+| 2 | OpenAI 发布 Defense Factory：Codex 智能体加固数百系统 | 7.8 | P1 |
+| 3 | Google 开源 Mantis：编码智能体漏洞全生命周期技能包 | 7.7 | P1 |
+| 4 | 美 NSA/CISA/FBI 指控 DeepSeek 等六家中国 AI 公司工业级蒸馏（中方反制） | 8.4 | P0 |
+| 5 | DeepSeek 冲刺科创板：中信证券辅导，估值 5000 亿 | 8.2 | P0 |
+| 6 | 苹果发布首款折叠屏 iPhone Duo：AI 辅助设计铰链 + 2nm A20 Pro | 8.1 | P0 |
+| 7 | 米哈游《原神》AI 声音仿冒案宣判：被告赔 75 万 | 7.6 | P1 |
+| 8 | Claude Fable 5.1 写作风格变化：破折号降 32%，同意开场语降 58% | 7.4 | P1 |
+
+### 流水线摘要
+- **阶段 1 情报采集**：AI HOT `mode=all&since=24h` 一把过 100 条 88.0KB；叠加 4 轮 WebSearch（DeepSeek 蒸馏、苹果 Duo、DeepSeek IPO、Suno v6）补足中文报道
+- **阶段 2 MD**：3 章节 3/3/2（§1 模型&Agent / §2 行业&基建 blush 高亮 / §3 趋势&工具）
+- **阶段 3 H5 + 归档**：TOC H5 + 归档 DATA 数组顶部追加；Git: `447733c` MD+H5+归档 → `03c3ff1` 海报；`gh run watch` 部署成功
+- **阶段 4 URL 200 校验**：✅ WebFetch 通过（首次），无 submodule 异常
+- **阶段 5 海报 + 推群**：海报 497.6KB / 1440×1920，Pages 第 5 次检测 200，双群 markdown_v2 单条 209 字节，2/2 成功
+- **合规要点**：#4 蒸馏指控客观呈现双方方立场（美方指控 + 外交部「"自立崛起" + 商务部反制"），符合客观报道原则
+
+---
+
+## [2026-09-09 09:35] AIGC 日报 2026.09.09（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周三 · 第 45 期
+**评分均值**：8.0
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260909-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260909.png（501.0KB / 1440×1920）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | Meta 发布个人智能体 Muse：扎克伯格站台，连接购物/订票/支付 | 8.6 | P0 |
+| 2 | OpenAI 用 1 万智能体 88 小时求解 Navier-Stokes 千年难题 | 8.8 | P0 |
+| 3 | OpenAI 发布 ChatGPT Images 2.5：延迟降 50% + Sketch 涂鸦生图 | 8.4 | P0 |
+| 4 | Inception 发布扩散 LLM Mercury 2.5：智能提升 40%，1107 tok/s | 7.5 | P1 |
+| 5 | Cognition（Devin）以 480 亿美元估值融资 20 亿美元 | 8.2 | P0 |
+| 6 | 蚂蚁百灵开源首个原生多模态 Ling-3.0-flash-VL：124B MoE | 7.4 | P1 |
+| 7 | Runway 发布 Adobe 插件：Premiere/AE 时间线内直接生图生成视频 | 7.7 | P1 |
+| 8 | DeepSeek Flash 系列降价：输出每百万 Token 4 元 | 7.3 | P1 |
+
+---
+
 ## [2026-09-08 09:38] AIGC 日报 2026.09.08（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
