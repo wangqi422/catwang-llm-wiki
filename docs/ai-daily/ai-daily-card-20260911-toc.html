@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.09.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.09.11 &middot; 星期五 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek V4.1 Flash</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI Agents API</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Cursor Projects</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 威胁情报报告</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>工信部「AI+软件」方案</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>SpaceX 算力大单</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>UMG × ElevenLabs 授权</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>GPT-Live-1 全双工语音</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.09.11 &middot; Fri</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">DeepSeek V4.1 Flash 用 Causal Encoder-Decoder 新架构反超自家 Pro（KV Cache 缩 437 倍）+ OpenAI 把 Codex harness 托管成 Agents API 公测 + Cursor Projects 上协调者智能体 · Anthropic 154 页威胁情报报告指控 2 亿次蒸馏交互 · 环球音乐 UMG 与 ElevenLabs 签多年授权协议，「艺人参与」首次写进条款</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.09.11</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">DeepSeek V4.1 Flash 用新架构反超自家 Pro，OpenAI 把 Codex harness 做成托管 Agents API，Cursor Projects 上协调者智能体</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">DeepSeek V4.1 Flash 发布：新架构反超自家 Pro，KV Cache 缩 437 倍</span>
+        <span class="card-tag">🧬 架构</span>
+      </div>
+      <div class="card-desc">
+        9 月 10 日 <strong>DeepSeek 发布 V4.1 Flash</strong>：<strong>552B 参数 MoE</strong>，采用全新 <strong>Causal Encoder-Decoder 非对称架构</strong>（输入激活 8B / 输出激活 16B），原生多模态视觉理解。官方称相对初代 <strong>KV Cache 缩小约 437 倍</strong>、HBM 需求降至 1/4、SSD 降至 1/8；Artificial Analysis 智能指数 <strong>40 分，超过自家 V4 Pro 成为新旗舰</strong>。支持 <strong>1M token 上下文、MIT 许可</strong>；最高降价 60% 并推峰谷定价（闲时半价），V4 Pro 将于 9/14 起路由至 Flash。腾讯 WorkBuddy / CodeBuddy / OpenCode 已全量接入。信号是<strong>「架构创新取代堆算力」成为降本主路径</strong>。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI Agents API 公测：把 Codex harness 做成托管服务</span>
+        <span class="card-tag">⚙️ 平台</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 上线 <strong>Agents API 公测</strong>，把内部 Codex harness 封装成托管服务：平台负责 <strong>session 管理、任务编排、上下文压缩与失败恢复</strong>，应用侧只提供 <strong>tools 与执行环境</strong>。四核心概念 Agent / Environment / Session / Events-Items，支持代码执行、文件、<strong>MCP over HTTP</strong>、web search、skills、<strong>subagents（可配并发上限）</strong>与 artifacts；沙盒可选 OpenAI 自托管或 9 家合作方（Cloudflare、Vercel、Modal 等），无额外费用。信号是<strong>「Agent 运行时被平台化」——复杂度从「造引擎」降到「写业务逻辑」</strong>；限制是数据仅驻留美国、不支持 ZDR。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Cursor Projects 发布：协调者智能体调度数千子智能体</span>
+        <span class="card-tag">🤖 Agent</span>
+      </div>
+      <div class="card-desc">
+        <strong>Cursor 于 9 月 10 日发布 Projects（beta）</strong>：在单一持久线程中运行一个<strong>「协调者智能体」——它不写代码，只规划、派活、验收</strong>，任务委派给<strong>数千个子智能体</strong>并行执行。配套<strong>云端专属计算机</strong>（合上笔记本不中断）+ 本地补位，<strong>共享上下文跨机器同步、可累积数月</strong>；Subscriptions 可监听 Slack、PR、定时任务自动触发。官方自报新用户 PR 合并率 +30%、主力用户 6 倍（<strong>无方法论说明，需谨慎看待</strong>），未公布计费与预算上限。背景是 OpenAI 因 SpaceX 收购将于 <strong>11/12 起终止向 Cursor 供模型</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施（Highlight） -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 & 基础设施</div>
+    <div class="section-sub">Anthropic 154 页威胁情报报告指控 2 亿次蒸馏交互，工信部「人工智能+软件」定 KPI，SpaceX 再签算力大单</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 154 页威胁情报报告：2 亿次蒸馏交互 + 生化导弹滥用拦截</span>
+        <span class="card-tag">🌐 安全政策</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 发布 <strong>154 页威胁情报报告</strong>：① 指控 7 家中国实验室累计近 <strong>2 亿次</strong>蒸馏交互、5 场独立行动——<strong>阿里单家 5–7 月 1.51 亿次</strong>、峰值近 300 万/天、3500+ 欺诈账号；攻击目标是 <strong>reasoning trace</strong>（如伪装成「翻译成片假名日语」的提示注入）。② 披露国家级行为体尝试用模型<strong>设计导弹与致命病原体</strong>、监视异见人士。<strong>需客观说明：全部指控为 Anthropic 单方陈述，部分基于间接推断，中方及被点名企业此前已明确反驳</strong>（外交部称中国 AI 是「自立自强成果」，商务部批评美方「政治化、双重标准」）。攻防焦点正从「输出内容」转向「推理过程泄漏」。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">工信部印发《"人工智能+软件"专项行动实施方案》：2028 年覆盖 2 万家企业</span>
+        <span class="card-tag">📋 政策</span>
+      </div>
+      <div class="card-desc">
+        工信部印发 <strong>《"人工智能+软件"专项行动实施方案》</strong>，量化目标：到 <strong>2028 年</strong>覆盖 <strong>2 万家规上软件企业</strong>、打造 <strong>100 项智能化技改项目</strong>、培育 <strong>100 个智能体软件标杆应用</strong>、孵化 <strong>5 个以上优质开源项目</strong>；2030 年关键软件全面智能化升级。配套<strong>用算力券等普惠政策降低软件企业算力成本</strong>。信号是「AI+软件」从倡导变成有明确 KPI 的专项行动，且<strong>「智能体软件」被单列标杆类别——Agent 已被政策层认定为软件的下一代形态</strong>；算力券用财政工具直接解决「用不起」的落地障碍。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">SpaceX 再签 AI 算力大单：年化 133 亿美元，年底 ARR 冲千亿</span>
+        <span class="card-tag">🛰️ 算力</span>
+      </div>
+      <div class="card-desc">
+        <strong>SpaceX CFO 于 9 月 10 日透露</strong>，公司本月新签一笔 AI 算力托管协议，<strong>自 12 月起月入约 11 亿美元、年化约 133 亿美元</strong>；目标<strong>年底 ARR 达 1000 亿美元</strong>。SpaceX 已与 <strong>Anthropic、谷歌、Reflection AI</strong> 签署多年期算力协议，并计划<strong>明年发射首批轨道计算卫星</strong>。信号是<strong>「算力供给格局被跨界重构」——航天公司携发射与带宽能力切入数据中心</strong>；头部客户仍签多年期大额长约印证算力需求未见顶；轨道计算是长期期权（太空免费散热与太阳能，但发射成本与延迟待解）。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 & 工具</div>
+    <div class="section-sub">环球音乐 UMG 与 ElevenLabs 签多年授权协议，OpenAI 上线全双工语音 GPT-Live-1</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">环球音乐 UMG 与 ElevenLabs 签多年授权协议：「艺人参与」写进条款</span>
+        <span class="card-tag">🎵 音乐版权</span>
+      </div>
+      <div class="card-desc">
+        <strong>环球音乐集团（UMG）与 ElevenLabs 签署多年许可协议</strong>，这是 ElevenLabs <strong>首次与大型唱片公司合作</strong>。双方共建<strong>「基于授权音乐 + 艺人参与」的 AI 音乐平台</strong>，支持 <strong>remix、mashup、全新演绎与个性化语音</strong>，平台独立于现有 Music API 与 ElevenMusic 产品线。关键背景：<strong>UMG 目前仍在起诉 Suno</strong>，而 Suno 恰在前一日（9/9）发布用 WMG/BMG/Believe 授权数据训练的 v6。信号是<strong>「AI 音乐进入按厂牌逐个谈的谈判期」——「艺人参与」被写进条款意味着艺人从被使用方变成共创分账方</strong>；平台隔离则暴露了「授权音乐 vs 通用生成」的合规隔离设计，「要么起诉、要么授权」正在终结灰色地带。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 上线 GPT-Live-1 全双工语音 API：交互性 45.4% → 80.1%</span>
+        <span class="card-tag">🎙️ 语音</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 在 API 中上线 <strong>GPT-Live-1 全双工语音模型</strong>：支持<strong>边听边说、处理被打断</strong>，可与开发者自有模型与 harness 搭配。官方数据<strong>交互性测试从 45.4% 提升至 80.1%</strong>，定价 <strong>0.05 美元/分钟</strong>。同期 <strong>HeyGen 开源</strong>极简实时参考技术栈（GPT-Live + LiveAvatar + HyperFrames），演示刻意把长期记忆外置到服务端而非模型上下文。信号是<strong>「实时语音 Agent 跨过商用门槛」——从对讲机式交互变成通话式交互</strong>；行业共识是「状态外置」；但 0.05 美元/分钟对大规模 C 端场景仍偏贵。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">KV Cache 压缩</div><div class="data-value">437倍</div></div>
+    <div class="data-chip"><div class="data-label">沙盒合作方</div><div class="data-value">9家</div></div>
+    <div class="data-chip"><div class="data-label">2028 覆盖企业</div><div class="data-value">2万家</div></div>
+    <div class="data-chip"><div class="data-label">UMG 首签</div><div class="data-value">ElevenLabs</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑手记</p>
+    <p>今天是 <strong>AIGC 日报第 47 期</strong>，主线是<strong>「Agent 基础设施化 + 内容授权合规化」</strong>：#2 OpenAI 把 Codex harness 做成托管的 Agents API、#3 Cursor 用「协调者 + 数千执行者」重新分层 Agent 架构——<strong>Agent 的竞争从「模型能力」上移到「运行时与编排层」</strong>；#7 UMG 与 ElevenLabs 签协议把「艺人参与」写进条款，与昨日 Suno v6 的授权训练形成连续剧——<strong>内容端从「抓取再说」转向「按厂牌逐个谈、按条款分账」</strong>。一边是技术栈被平台收编，一边是内容权被合约界定，共同说明：<strong>AI 行业正在从「跑马圈地」切换到「定规矩」阶段</strong>。</p>
+    <p><strong>模型侧的主角是架构而非参数</strong>：#1 DeepSeek V4.1 Flash 用 Causal Encoder-Decoder 非对称结构把 KV Cache 压缩 437 倍、HBM 需求降到 1/4，智能指数反超自家 Pro——在算力受限背景下，<strong>「结构效率」正在取代「堆规模」成为新的性能来源</strong>；#8 的 GPT-Live-1 则用「全双工」这一个交互维度的改进，把语音 Agent 的可用性推过商用线，说明<strong>单点体验的突破同样价值巨大</strong>。</p>
+    <p><strong>争议与政策仍在收紧</strong>：#4 Anthropic 154 页报告把「蒸馏」从商业争议推向国家安全议题（须注意：<strong>全部指控为 Anthropic 单方陈述，中方及被点名企业已明确反驳，本刊仅客观呈现</strong>）；#5 工信部则用 2 万家企业的 KPI 与算力券，给国内「AI+软件」按下加速键——<strong>对外是边界收紧，对内是政策托底</strong>，国产 AI 生态在双重力量下加速成型。</p>
+    <p><strong>落到宣发工作，本期五条可执行线索：① 音乐授权清单 → #7 是最直接的动作项，立即建立「AI 音乐平台 × 厂牌授权状态」对照表（UMG→ElevenLabs、WMG/BMG/Believe→Suno v6，UMG 仍在诉 Suno），宣发用 AI 做 PV/集锦配乐前先查表，涉及艺人人声的二次演绎必须走艺人参与条款；② 成本优化 → #1 DeepSeek V4.1 Flash 的峰谷定价（闲时半价），把批量文案改写/素材打标/多语言本地化排到夜间跑；③ 架构借鉴 → #3 的「协调者 + 执行者 + 验收」分层，改造宣发批量物料流水线，比单 Agent 串行更可控；④ 合规红线 → #4 提醒跨境模型调用存在收紧风险，涉密版本信息不出境、核心链路多源备份，#8 的语音玩法务必先走 IP 与配音授权；⑤ 政策窗口 → #5 的「100 个智能体标杆」与算力券，宣发侧内部 AI 工具立项可关注配套支持与标杆申报机会</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.09.11<br>
+      小柒AI速递 &middot; 每日推送
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
