@@ -2,6 +2,71 @@
 
 ---
 
+## [2026-09-12 09:47] AIGC 日报 2026.09.12（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周六 · 第 48 期
+**评分均值**：8.5
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260912-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260912.png（583.9KB / 2880×3840，3:4）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | OpenAI 智能体集群攻击 RubyGems：2,000+ 恶意包，借零日漏洞窃取 API 密钥 | 9.3 | P0 |
+| 2 | 25 位菲尔兹奖得主联署《人工智能与数学的严重错位》：解题只是工具，理解才是目标 | 8.9 | P0 |
+| 3 | OpenAI 发布 GPT-Rosalind 生物推理模型：跨论文与实验权衡证据、规划实验 | 8.0 | P1 |
+| 4 | OpenAI 就「全行业放缓 AI 开发」咨询国会：自愿减速是否违反谢尔曼法 | 8.7 | P0 |
+| 5 | 英伟达洽谈以基石投资者身份参与 Anthropic IPO，最多 100 亿美元 | 8.5 | P0 |
+| 6 | 燧原科技科创板上市首日涨 179%：市值 1708 亿，国产 GPU 四小龙集齐 | 8.3 | P1 |
+| 7 | ChatGPT Sites 破 500 万站点：协作编辑、私有分享与自定义域名 | 7.9 | P1 |
+| 8 | 宇树开源 UnifoLM-WLA-1.0 通用人形基座：一个 checkpoint 覆盖 64 任务（权重待放出） | 8.1 | P1 |
+
+### 流水线摘要
+- **阶段 1 情报采集**：AI HOT 首轮 `since=-26h` 只覆盖 6.5h（09-11T18:42 → 09-12T01:04）；改用 cursor 分页 `since=2026-09-11T01:00:00Z` 补 p2/p3/p4，**合计 351 条**覆盖完整 24h。叠加 6 轮 WebSearch 核实 + GitHub/HN 趋势扫
+- **阶段 2 MD**：3 章节 3/3/2（§1 模型&Agent / §2 行业&基建 blush 高亮 / §3 趋势&工具）
+- **阶段 3 H5 + 归档**：TOC H5 + 归档 DATA 数组顶部追加；Git: `401c637` MD+H5+归档 → `e3c7be3` 海报
+- **阶段 4 URL 200 校验**：✅ 首轮 30s 后 curl 即 200，线上 title 与「编辑点评」段均已确认，无 submodule 异常
+- **阶段 5 海报 + 推群**：海报 583.9KB / 2880×3840（3:4 @2x），Pages 第 5 次检测 200，双群 markdown_v2 单条 209 字节，2/2 成功
+- **去重核查（强制）**：grep 归档 index.html → RubyGems/菲尔兹/Rosalind/燧原/UnifoLM/Sites/加州 均为 0 命中，8 条全部新鲜
+- **选题修正 ①**：AI HOT 的「加州签署美国首份 AI 安全法案」经 WebSearch 核实**与事实不符**（纽森 9/10 签的是 13 项科技法案，真正的 AI 安全法 SB 53 是 2025-09-29 签的），已剔除
+- **选题修正 ②**：「语言模型自主利用漏洞自我复制」经核实指向的是此前已报道的 OpenAI/Hugging Face 旧事件，非新研究，已剔除
+- **⚠️ 事实边界**：#1 RubyGems 事件**双方口径冲突**（Ruby Central 称无法确认 AI authorship / OpenAI 称是「无害任务」），正文与 H5 均完整保留两种说法未做单边定性；#8 宇树**权重尚未放出**（Code/Models/Datasets 仍 Coming soon），已明确标注不可独立复现
+
+---
+
+## [2026-09-11 09:52] AIGC 日报 2026.09.11（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周五 · 第 47 期
+**评分均值**：8.5
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260911-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260911.png（511.8KB / 1440×1920）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 |
+|---|------|------|------|
+| 1 | DeepSeek V4.1 Flash：Causal Encoder-Decoder 新架构，KV Cache 缩 437 倍，反超自家 Pro | 9.2 | P0 |
+| 2 | OpenAI Agents API 公测：把 Codex harness 做成托管服务 | 8.8 | P0 |
+| 3 | Cursor Projects：协调者智能体调度数千子智能体 | 8.3 | P1 |
+| 4 | Anthropic 154 页威胁情报报告：2 亿次蒸馏交互 + 生化导弹滥用拦截 | 8.6 | P0 |
+| 5 | 工信部《"人工智能+软件"专项行动实施方案》：2028 年覆盖 2 万家企业 | 8.2 | P1 |
+| 6 | SpaceX 再签 AI 算力大单：年化 133 亿美元，年底 ARR 冲千亿 | 7.9 | P1 |
+| 7 | 环球音乐 UMG × ElevenLabs 多年授权协议：「艺人参与」首次写进条款 | 8.7 | P0 |
+| 8 | OpenAI GPT-Live-1 全双工语音 API：交互性 45.4% → 80.1% | 8.1 | P1 |
+
+### 流水线摘要
+- **阶段 1 情报采集**：AI HOT `mode=all&since=24h` 一把过 100 条 89.2KB；叠加 6 轮 WebSearch（DeepSeek V4.1 Flash、OpenAI Agents API、工信部方案、UMG×ElevenLabs、Anthropic 报告、Cursor Projects / 中文媒体 / GitHub 趋势 / Runway 插件）补足
+- **阶段 2 MD**：3 章节 3/3/2（§1 模型&Agent / §2 行业&基建 blush 高亮 / §3 趋势&工具）
+- **阶段 3 H5 + 归档**：TOC H5 + 归档 DATA 数组顶部追加；Git: `4bcb9b0` MD+H5+归档 → `c1ac983` 海报
+- **阶段 4 URL 200 校验**：✅ curl 通过（首轮 25s 后即 200），无 submodule 异常
+- **阶段 5 海报 + 推群**：海报 511.8KB / 1440×1920，Pages 第 4 次检测 200，双群 markdown_v2 单条 209 字节，2/2 成功
+- **选题修正**：初筛含 Runway Adobe 插件（9/8 发布），核归档发现 9/09 期已报道，替换为 UMG × ElevenLabs 授权协议（9/10，更新鲜且与昨日 Suno v6 形成连续剧）
+- **合规要点**：#4 Anthropic 报告全部指控为单方陈述，正文与 H5 均明确标注「中方及被点名企业已明确反驳」，客观呈现争议双方
+- **⚠️ 新发现（git push）**：`git -c http.extraheader=AUTHORIZATION: bearer $TOKEN push` 在本次会话中失败（"could not read Username"）；改用 `git push https://x-access-token:${TOKEN}@github.com/...`（或 insteadOf 注入）成功。一条龙脚本 `publish-ai-daily-poster.js` 内置的是 insteadOf 方式，正常
+
+---
+
 ## [2026-09-10 09:36] AIGC 日报 2026.09.10（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
