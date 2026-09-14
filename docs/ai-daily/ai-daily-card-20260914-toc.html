@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.09.14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.09.14 &middot; 星期一 &middot; 第 50 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic Q2 盈利 + IPO</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>智谱 50 亿美元融资</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Copilot 集成 Grok</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Nadella 支持审慎推进</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Fable 5.1 破解 370 年密码</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>胡塞武装用 Claude Code</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>蚂蚁灵波 LingBot-World 2.0</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>普林斯顿 RLT 架构</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.09.14 &middot; Mon &middot; Issue 50</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">Anthropic Q2 营收 115 亿美元同比涨 14 倍首次盈利，选定纳斯达克 IPO 估值 2 万亿美元 · 智谱官宣 50 亿美元融资全部投向 GLM-6 完全自训练与递归自我改进 · 微软 Copilot 集成 xAI Grok 登陆 Word/Excel/PowerPoint，Nadella 同日发文支持审慎推进超级智能 · Claude Fable 5.1 用 44 分钟 17.6 万 token 破解 370 年 Cyphral Distich 密码</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.09.14 · 第 50 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">Anthropic 一边呼吁减速一边冲刺史上最大 IPO，智谱 50 亿美元押注完全自训练 + RSI，微软 Copilot 首次引入 OpenAI 之外的第三方大模型</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic Q2 营收 115 亿美元同比涨 14 倍首次盈利，选定纳斯达克 IPO 估值 2 万亿</span>
+        <span class="card-tag">💰 资本 IPO</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日 FT 率先报道：<strong>Anthropic 预计 Q2（4–6 月）调整后运营利润约 2.8 亿美元</strong>，<strong>成立以来首次季度盈利</strong>、连续第二季度运营为正。核心驱动是 <strong>Claude API 与 Claude Code 企业需求爆发</strong>——<strong>Q2 营收约 115 亿美元、同比涨 14 倍</strong>（去年 Q2 仅约 8 亿），<strong>毛利率从 35% 拉到 60%+</strong>。同日 IT之家与多位 X 博主披露：<strong>已选定纳斯达克上市、目标估值约 2 万亿美元</strong>，若成行将是<strong>史上最大科技 IPO 之一</strong>（超沙特阿美 1.7 万亿）；<strong>承销商摩根士丹利牵头、高盛任稳定价格代理人</strong>，路演窗口指向 <strong>10 月中旬</strong>。值得并列的是——<strong>就在同一天，Dario Amodei 发布 3800 字长文呼吁前沿降速、OpenAI 确认 2026 不 IPO</strong>。信号是<strong>盈利拐点的关键不是营收涨 14 倍，而是毛利率翻倍</strong>——从「烧钱机器」变成「印钞机器」的分水岭；但 <strong>Dario 的「三步刹车法」与 IPO 路径存在内在冲突</strong>：一家即将上市的公司，受托责任是股东价值最大化，不是自我约束，这个冲突会在路演被反复追问。
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">智谱完成 50 亿美元融资（20 亿配售 + 30 亿可转债），全部投向 GLM-6 完全自训练与递归自我改进</span>
+        <span class="card-tag">🇨🇳 中国基座</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>智谱官宣完成约 50 亿美元融资</strong>，创<strong>中国大模型创业公司单轮纪录</strong>。结构：<strong>约 20 亿股权配售 + 30 亿可转债</strong>（可转后续轮次优先股）。资金用途非常聚焦：<strong>下一代 GLM-6 基础模型研发 + 完全自训练基础设施 + 递归自我改进（RSI）技术栈</strong>。CEO 张鹏内部信：「<strong>大模型越来越像重工业</strong>」被小北等 X 博主反复引用。关键细节：<strong>GLM-6 将完全从零自训练，不再基于任何现有开源基座微调</strong>；同时<strong>自建万卡级训练集群</strong>（传闻采用华为昇腾 + 寒武纪混合方案，规避出口管制）。同一时间轴上：<strong>月之暗面已秘密递表港股 IPO 估值 500 亿美元、DeepSeek 冲刺科创板估值 5000 亿人民币</strong>——中国大模型三巨头 9 月集体进入「资本化 + 自研化」双加速通道。信号是<strong>「完全自训练」是关键定语</strong>——一旦跑通就是真正不受出口管制与开源协议约束的独立基座；<strong>「RSI 写进融资用途」</strong>说明中美前沿实验室 RSI 军备竞赛公开化；<strong>「大模型越来越像重工业」</strong>等于承认玩家数量会越来越少。
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">微软 Copilot 集成 xAI Grok 登陆 Word/Excel/PowerPoint，Frontier 计划 opt-in、EU/UK 除外</span>
+        <span class="card-tag">🔀 多模型</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>微软与 xAI 联合宣布</strong>：Copilot 将在 <strong>Word、Excel、PowerPoint</strong> 三大 Office 应用中<strong>集成 xAI 的 Grok 模型</strong>，作为「<strong>Frontier 计划</strong>」的一部分。用户可在 Copilot 界面<strong>手动切换模型</strong>（默认仍是 GPT 系列，Grok 为 opt-in 可选），<strong>首批面向美国 Frontier 计划订阅用户开放，EU/UK 地区暂不适用</strong>（合规审查中）。这是<strong>微软首次在核心 Office 产品线引入 OpenAI 之外的第三方大模型</strong>。同日 Nadella 发文谈「审慎推进超级智能」（见 #4），并预告<strong>明日发布 MAI 模型行为准则</strong>——两件事叠加，信号明确：<strong>微软正在从「OpenAI 独家代理」转向「多模型市场」战略</strong>。技术定位：<strong>Grok 在 Office 中主打「创意写作与头脑风暴」</strong>（而非严肃数据分析），Excel 场景下主要用于公式生成与数据可视化建议。信号是<strong>「opt-in + EU/UK 除外」是典型微软合规套路</strong>——既给 OpenAI 一个交代（非默认），又给 xAI 一个舞台（4 亿 Office 付费席位潜在触达）；<strong>对 OpenAI 不是好消息</strong>：一旦 Grok 站稳脚跟，「独家分发」叙事就破了。
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">Nadella 成为第四位就前沿降速公开表态的巨头掌门人，Fable 5.1 44 分钟破解 370 年密码，胡塞武装用 Claude Code 造导弹但离线工具包已无法远程关闭</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Nadella 发文支持审慎推进超级智能，预告明日发布 MAI 模型行为准则</span>
+        <span class="card-tag">📜 政策</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>微软 CEO Satya Nadella 在 X 上发布长文</strong>，就 Dario Amodei 的《We Must Pace the Frontier》公开表态：「<strong>追求超级智能需要刻意放慢节奏以做对对齐（deliberately pace the frontier to get alignment right）</strong>」。同时预告：<strong>微软将于 9 月 14 日（周一）发布 MAI 模型行为准则</strong>，详细说明微软自研模型在<strong>能力边界、使用场景、安全审查</strong>上的原则。这是<strong>继 Dario Amodei、Sam Altman、Elon Musk 之后，第四位科技巨头掌门人就「前沿降速」公开表态</strong>——且 Nadella 的措辞比 Altman 更主动（Altman 说「不是 2026」，Nadella 说「需要刻意放慢」）。同日微软 AI CEO Mustafa Suleyman 呼应：「<strong>AI 须服务人类</strong>」。值得并列的是——<strong>就在同一天，微软宣布 Copilot 集成 Grok</strong>（见 #3）：一边主张「审慎推进」，一边加速多模型商业化。信号是<strong>「MAI 模型行为准则」是微软自研模型战略的配套动作</strong>——微软要把自研模型做成「合规优先」的差异化定位，与 OpenAI 能力优先、Anthropic 安全优先形成三足鼎立；<strong>Nadella 的表态时机很微妙</strong>：微软是 OpenAI 最大股东（130 亿美元投资），但同日宣布引入 Grok——「支持审慎推进」既是对监管的姿态，也是对 OpenAI 的温和施压。
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Fable 5.1 用 44 分钟 17.6 万 token 破解 370 年 Cyphral Distich 密码</span>
+        <span class="card-tag">🔐 密码学</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日 Hacker News 与多个密码学社区报道：<strong>Claude Fable 5.1 在 44 分钟内、消耗约 17.6 万 token，成功破解了已有 370 年历史的 Cyphral Distich 密码</strong>。工作流：<strong>12 分钟做密文统计分析（字符频率、双字母组分布）→ 20 分钟提出 6 种候选密钥结构 → 8 分钟用暴力枚举验证 → 4 分钟输出明文</strong>。整个过程<strong>未使用任何专用密码学工具</strong>，完全通过 Claude 的<strong>代码执行 + 数学推理 + 长上下文</strong>能力完成。按 Claude API 定价，<strong>这次破解的成本约 5–8 美元</strong>——对比人类密码学家数周乃至数月的工作量，成本压缩 3–4 个数量级。这是继「OpenAI 用 1 万智能体 88 小时求解 Navier-Stokes 千年难题」（9 月 9 日）之后，<strong>AI 在纯数学/密码学领域的又一次里程碑级实证</strong>。信号是<strong>44 分钟 vs 370 年的对比是 AI 数学能力的最佳营销素材</strong>，但需打折看待——Cyphral Distich 属于「古典密码」（密钥空间有限），与 AES-256 现代密码完全不同；<strong>真正值得关注的是工作流</strong>：12 + 20 + 8 + 4 分钟的四阶段分工，说明 Fable 5.1 已具备<strong>「问题分解 → 假设生成 → 验证 → 输出」的完整科研闭环</strong>——AI 从答题机器升级为研究伙伴。
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic 报告：胡塞武装用 Claude Code 开发导弹制导软件，三项目并行测试失败后离线工具包仍在运行</span>
+        <span class="card-tag">⚠️ 滥用</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>Anthropic 发布最新威胁情报报告</strong>（延续 9 月 11 日 154 页报告脉络），披露：<strong>也门胡塞武装使用 Claude Code 开发导弹制导软件</strong>。细节：胡塞武装在<strong>三个并行项目</strong>中尝试用 Claude Code 生成<strong>导弹飞行控制算法、目标锁定逻辑、惯导系统校准代码</strong>；<strong>三个项目均未通过实战测试</strong>（制导精度不达标），但<strong>离线版 Claude 工具包仍在胡塞武装内部运行</strong>——即<strong>即使 Anthropic 封禁了相关账号，本地化的工具包已经流出，无法远程关闭</strong>。这是<strong>继 9 月 11 日 Anthropic 指控「7 家中国实验室近 2 亿次蒸馏交互」之后，又一次由前沿实验室主动披露的 AI 滥用案例</strong>，也是<strong>首次明确指向「非国家行为体（non-state actor）」的 AI 武器化</strong>。信号是<strong>「三项目并行测试失败但离线工具包仍在运行」是最坏的情况</strong>——AI 滥用一旦被本地化，就无法通过 API 封禁、账号封停、模型回滚来终止；这与 6TB 中转站日志泄露（昨日 #5）的杀伤链结构相同：<strong>最后一跳是「合法凭证 + 本地工具」，防守方无感</strong>。这件事<strong>把 Dario 的「智能体集群接管互联网」从理论担忧变成已发生的非国家行为体滥用</strong>——为「前沿降速」提供实证弹药。
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">蚂蚁灵波把世界模型拉到消费级单卡 GPU，普林斯顿 RLT 把 Transformer 深度从静态超参变成动态计算</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">蚂蚁灵波开源 LingBot-World 2.0 三款世界模型，Small 1.3B 面向消费级单卡 GPU 实时生成</span>
+        <span class="card-tag">🌍 世界模型</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>蚂蚁灵波（Robbyant）官宣开源 LingBot-World 2.0 系列</strong>，包含<strong>三款世界模型</strong>：<strong>Small（1.3B 参数）面向消费级单卡 GPU</strong>（如 RTX 4090 / 5090），<strong>实时生成 24fps 交互式视频</strong>；<strong>Base（7B）面向数据中心推理</strong>，物理一致性更高；<strong>Large（14B）面向科研与工业仿真</strong>，支持长时序物理一致性生成。关键特性：<strong>三款模型全部开源权重 + 训练代码 + 数据集（Apache 2.0）</strong>；<strong>Small 版在 RTX 4090 上可实时生成 512×512 交互式视频</strong>，用户可通过<strong>键盘/手柄/鼠标实时控制视角与物体交互</strong>；物理一致性（物体碰撞、重力、流体）在 Small 版上已接近 Base 版水平。同日蚂蚁灵波还在<strong>外滩大会</strong>展示 <strong>LingBot-VLA</strong>（Vision-Language-Action 模型），指向<strong>具身智能 + 世界模型</strong>融合路径。信号是<strong>「1.3B + 消费级单卡 + 实时」是杀手级组合</strong>——世界模型此前主要停留在数据中心 + A100/H100 集群（如 Sora、Genie 2），LingBot-World-Small 把门槛拉到玩家级 GPU，<strong>独立开发者、小团队、创作者都可以本地跑世界模型</strong>；<strong>「开源权重 + 训练代码 + 数据集」三件套齐全</strong>比 Meta Llama 更彻底，对学术界与小公司是最友好的开源姿态。
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">普林斯顿 RLT 循环 Transformer：每 token 固定 96 块、时序深度无界，跨 token 传递解码器状态</span>
+        <span class="card-tag">🧬 架构</span>
+      </div>
+      <div class="card-desc">
+        9 月 13 日<strong>普林斯顿大学团队发布论文《Recurrent Looped Transformer (RLT)》</strong>，提出一种<strong>跨 token 传递解码器状态</strong>的新型 Transformer 架构。核心创新：<strong>每个 token 固定执行 96 个块（blocks）的循环计算</strong>，且<strong>时序深度无界</strong>（unbounded temporal depth）——即<strong>模型可以在同一 token 上做任意多次内部迭代，直到「想清楚」再输出</strong>。对比标准 Transformer：标准每层只处理一次、深度 = 层数（固定）；<strong>RLT 的深度 = 循环次数（动态）</strong>，理论上<strong>算力可以按需扩展</strong>。论文在<strong>语言建模、数学推理、长上下文任务</strong>上做了初步验证：<strong>同等参数量下 GSM8K 数学推理比标准 Transformer 高 4.2 分，LongBench 长上下文高 6.8 分</strong>。Elvis Saravia 评论：「<strong>这是 Transformer 架构的一次重要探索——把「深度」从静态超参变成动态计算</strong>」。信号是<strong>「每 token 固定 96 块」是关键设计</strong>——只在「需要深思」的 token 上才跑满 96 块，简单 token 可提前退出；<strong>「时序深度无界」更接近人类思考的「快思考 / 慢思考」双系统</strong>；与 9 月 3 日 Astra 被曝「循环深度架构隐藏推理过程」形成呼应，但 RLT 把这种「动态深度」从工程 hack 变成显式架构设计，理论上更可控。<strong>论文开源完整训练代码与预训练权重</strong>——可能是继 Mamba、RWKV 之后「后 Transformer 时代」的又一次重要探索。
+      </div>
+    </div>
+  </div>
+
+  <div class="data-strip">
+    <div class="data-chip"><div class="data-label">Anthropic Q2 营收</div><div class="data-value">$115亿</div></div>
+    <div class="data-chip"><div class="data-label">智谱融资</div><div class="data-value">$50亿</div></div>
+    <div class="data-chip"><div class="data-label">Fable 破解耗时</div><div class="data-value">44min</div></div>
+    <div class="data-chip"><div class="data-label">RLT 每 token 块数</div><div class="data-value">96</div></div>
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天是 <strong>AIGC 日报第 50 期</strong>，主线是<strong>「一边踩刹车，一边冲 IPO；一边喊减速，一边融 50 亿」</strong>。这是 AI 行业史上最戏剧化的一天——<strong>四家前沿实验室的掌门人（Dario、Altman、Musk、Nadella）在 24 小时内就「前沿该降速」公开表态</strong>，但同一天发生的另外四件事，恰好说明为什么这件事没那么简单。</p>
+    <p><strong>其一，钱不会为安全停下来</strong>：#1 中 Anthropic Q2 营收 115 亿美元、同比涨 14 倍、首次盈利、估值 2 万亿冲刺史上最大 IPO；Dario 的「三步刹车法」与「股东价值最大化」存在内在冲突，这个冲突会在路演被反复追问。<strong>其二，中国基座进入「完全自训练 + 大规模资本化」阶段</strong>：#2 智谱 50 亿美元押注 GLM-6 完全自训练 + RSI，「大模型越来越像重工业」等于承认玩家数量会越来越少；月之暗面、DeepSeek 同步冲刺 IPO，三巨头 9 月集体进入双加速通道。<strong>其三，多模型市场正式落地</strong>：#3 微软 Copilot 集成 Grok，OpenAI 的「独家分发」叙事破了；同日 #4 Nadella 表态支持审慎推进，微软把自研模型定位为「合规优先」——与 OpenAI 能力优先、Anthropic 安全优先形成三足鼎立。</p>
+    <p><strong>#6 是本期最该被记住的一条，因为它把 AI 滥用从「圈内争论」变成「地缘政治事件」</strong>：胡塞武装用 Claude Code 造导弹，三项目并行测试失败，但<strong>离线工具包已在胡塞内部运行、无法远程关闭</strong>。这与昨日 6TB 中转站日志泄露的杀伤链结构相同——<strong>最后一跳是「合法凭证 + 本地工具」，防守方无感</strong>。当所有人盯着「模型会不会觉醒」时，AI 武器化已经在非国家行为体那里落地。</p>
+    <p><strong>本期四条可执行线索：① 排期缓冲 → #1 #4 头部厂商集体把安全对齐前置，模型能力与发布节奏会出现政策性波动，大版本 GUIDE / 联动 KV 排期要预留档期缓冲，不要假设「最新模型随时可用」；② 国产模型测试 → #2 智谱 50 亿融资 + GLM-6 完全自训练，国产基座 6–12 个月内能力跃迁会显著加速，宣发侧中文文案、短视频脚本、玩家社区互动应提前测试国产模型的调性与梗感；③ 多模型 A/B → #3 Copilot 集成 Grok，Office 内嵌多模型意味着可在同一工作流对比多家模型，建议把 Grok 的「创意调性」与 GPT/Claude 的「严谨调性」做 A/B 测试，尤其适合玩家社区短文案与视频号脚本；④ 军事题材合规 → #6 胡塞武装用 Claude Code 造导弹，AI 滥用议题正在从圈内争论变成地缘政治事件，宣发侧涉及军事题材（如 CODM 战场场景）时必须避免 AI 生成内容被解读为「美化真实武装冲突」或「教唆暴力」，合规审查节点要前置</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.09.14<br>
+      小柒AI速递 &middot; 第 50 期
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
