@@ -2,6 +2,78 @@
 
 ---
 
+## [2026-09-15 09:47] AIGC 日报 2026.09.15（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周二 · 第 51 期
+**评分均值**：8.3
+**主线**：规则周：刹车从口号变成文件 —— 微软约束模型行为、中国约束系统边界、前沿实验室自制行业标准
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260915-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260915.png（631.7KB / 3:4）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 | 章节 |
+|---|------|------|------|------|
+| 1 | ⭐ 苹果 iOS 27 / macOS 27 正式推送，Siri AI（Gemini 驱动）测试版上线，仅英语、国行暂不可用 | 8.9 | P0 | §1 模型&Agent |
+| 2 | ⭐ Perplexity Portable Computer 登陆 Windows RTX PC，本地跑模型 + 本地 MCP + 定时任务 | 8.2 | P0 | §1 |
+| 3 | Bolt 发布 Forge：只跑开源权重的智能体，Pro 计划 50 倍用量换匿名会话数据训练 Arcee 万亿级开源模型 | 7.9 | P1 | §1 |
+| 4 | ⭐ 微软发布 37 页 MAI 人文主义 AI 行为准则：人比 AI 重要，禁止自设目标、禁止「神经语言」、禁止抗拒关闭 | 8.7 | P0 | §2 行业&基建 |
+| 5 | ⭐ 网安标委发布《人工智能安全治理框架 3.0》，首次单列智能体风险并附智能体风险管理框架 | 8.5 | P0 | §2 |
+| 6 | OpenAI 超 3 亿美元收购手机影像创企 Glass Imaging，前苹果人像模式团队加入 Jony Ive 硬件局 | 8.1 | P0 | §2 |
+| 7 | ⭐ 404 Media 起底 Project Lily：OpenAI 雇数百名合同工阅读真实 ChatGPT 对话并按 1–7 分打分 | 8.6 | P0 | §3 趋势&工具 |
+| 8 | Sakana AI 发布 PC-ALM：用层局部更新替代反向传播，成功训练 1000 层残差网络 | 7.8 | P1 | §3 |
+
+### 执行记录
+- **阶段 1 情报采集**：AI HOT 聚合池 **3 页共 300 条**（`since=2026-09-14T00:00:00Z`，cursor 翻至 hasNext=false；p2/p3 的 createdAt 缺失，改用 AI HOT 顺序 + 交叉核实排序）；7 轮定向 WebSearch 事实核查
+- **阶段 2 MD**：`raw/daily-reports/AIGC_Daily_Report_20260915.md`
+- **阶段 3 H5 + 归档**：复用 20260914 模板 head（1–142 行）；归档首页 DATA 顶部追加（共 95 条）；git push `ed8d999`
+- **阶段 4 URL 校验**：✅ HTTP 200（curl 首次即通过，38871 字节与本地一致）+ WebFetch 内容完整性二次验证（8 张卡片齐全、标题/lead 正确）
+- **阶段 5 海报 + 推群**：`publish-ai-daily-poster.js --date 20260915` 一条龙，git push `236b256`，Pages 第 5 次检测就绪，markdown_v2 单条 209 字节，2/2 群成功
+
+### 本次要点
+- **查重规避**：Anthropic Q2 盈利 + IPO、智谱 50 亿融资、Nadella 表态、Dario 长文、Copilot 集成 Grok 均为 9-13/9-14 已报道，本期全部避开。微软行为准则 9-14 是「预告」，今日为**正式发布**，属递进非重复
+- **连续剧式主线**：昨日「一边踩刹车，一边冲 IPO」→ 今日「刹车从口号变成文件」，直接回答 Dario 上周抛出的「怎么刹」问题
+- **事实核实重点**：iOS 27 国行不可用（监管流程中）、Siri AI 仅英语 + 每日额度 + 未来收费；框架 3.0 是**技术指导非强制法规**（已在正文标注，避免绝对化）；Project Lily 的 Privacy Filter 会漏（OpenAI 模型卡自认）
+- **CODM 宣发价值**：#5 网安标委把 **GEO 投毒**列入风险清单 → 宣发侧做 AI 搜索口碑运营须确保内容真实可溯源；#7 Project Lily 评分细则等于提前泄露下一代 GPT 文风（更短、更平、少谄媚、少 emoji）→ 基于 GPT 的文案应主动精简防返工
+
+---
+
+## [2026-09-14 09:48] AIGC 日报 2026.09.14（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周一 · 第 50 期（里程碑）
+**评分均值**：8.4
+**主线**：一边踩刹车，一边冲 IPO；一边喊减速，一边融 50 亿
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20260914-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20260914.png（573.7KB / 3:4）
+
+### 8 条日报
+| # | 标题 | 评分 | 重要性 | 章节 |
+|---|------|------|------|------|
+| 1 | ⭐ Anthropic Q2 营收 115 亿美元同比涨 14 倍首次盈利，选定纳斯达克 IPO 估值 2 万亿 | 9.2 | P0 | §1 模型&Agent |
+| 2 | ⭐ 智谱完成 50 亿美元融资（20 亿配售 + 30 亿可转债），全部投向 GLM-6 完全自训练与递归自我改进 | 9.0 | P0 | §1 |
+| 3 | ⭐ 微软 Copilot 集成 xAI Grok 登陆 Word/Excel/PowerPoint，Frontier 计划 opt-in、EU/UK 除外 | 8.7 | P0 | §1 |
+| 4 | Nadella 发文支持审慎推进超级智能，预告明日发布 MAI 模型行为准则 | 8.3 | P1 | §2 行业&基建 |
+| 5 | Claude Fable 5.1 用 44 分钟 17.6 万 token 破解 370 年 Cyphral Distich 密码 | 8.4 | P1 | §2 |
+| 6 | Anthropic 报告：胡塞武装用 Claude Code 开发导弹制导软件，三项目并行测试失败后离线工具包仍在运行 | 8.2 | P1 | §2 |
+| 7 | 蚂蚁灵波开源 LingBot-World 2.0 三款世界模型，Small 1.3B 面向消费级单卡 GPU 实时生成 | 7.9 | P1 | §3 趋势&工具 |
+| 8 | 普林斯顿 RLT 循环 Transformer：每 token 固定 96 块、时序深度无界，跨 token 传递解码器状态 | 7.6 | P2 | §3 |
+
+### 执行记录
+- **阶段 1 情报采集**：AI HOT 聚合池 2 页共 **200 条**（`since=2026-09-13T00:00:00Z`）；6 轮定向 WebSearch 事实核查（智谱 50 亿融资、Anthropic Q2 盈利 IPO、微软 Copilot 集成 Grok、Claude Fable 5.1 破解 Cyphral Distich、胡塞武装用 Claude Code、蚂蚁灵波 LingBot-World 2.0、普林斯顿 RLT、Nadella MAI 行为准则）
+- **阶段 2 MD**：`raw/daily-reports/AIGC_Daily_Report_20260914.md`
+- **阶段 3 H5 + 归档**：复用 20260913 模板；归档首页 DATA 顶部追加；git push `6144caf`
+- **阶段 4 URL 校验**：✅ HTTP 200（curl 首次即通过）+ WebFetch 内容完整性二次验证
+- **阶段 5 海报 + 推群**：`publish-ai-daily-poster.js --date 20260914` 一条龙，git push `81185ee`，Pages 第 5 次检测就绪，markdown_v2 单条 209 字节，2/2 群成功
+
+### 本次要点
+- **里程碑**：AIGC 日报第 50 期
+- **查重规避**：Dario Amodei 长文、6TB 中转站泄露、Cognition SWE-2、Meta Jagged Judges、英国禁 ASI 立法、OpenAI Habitat、谷歌 Mechanize 均已在 9-13 期报道，本期全部避开
+- **主线设计**：与昨日「前方踩刹车，后方在漏油」形成连续剧——今日主线「一边踩刹车，一边冲 IPO」恰好呼应昨日 Dario 长文与三巨头同框，但焦点转向「资本化与减速的内在冲突」
+- **合规处理**：#6 胡塞武装用 Claude Code 造导弹，明确标注「非国家行为体 AI 武器化」，避免对 CODM 军事题材宣发产生直接负面影响
+
+---
+
 ## [2026-09-13 09:46] AIGC 日报 2026.09.13（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
