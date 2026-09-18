@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.09.18</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.09.18 &middot; 星期五 &middot; 第 54 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 研发自动化指数 26%</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Meta Muse for Mac</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Helix 2.5 零样本 56%</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>华为昇腾 960 超节点</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>NYT 案「最大劳动窃取」</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>OpenAI 逼近霍奇猜想</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Qwen3.8-Omni-Flash</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>智能体占推理流量 70%</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.09.18 &middot; Fri &middot; Issue 54</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">自我加速第一次被量化，代价也第一次被记账 —— Anthropic 交出「研发自动化指数」：Claude 已主导自家 26% 的 AI 研发，半年前还不到 1% · Meta 把个人智能体 Muse 推上 Mac，直接操作你的本地文件 · Figure 让机器人第一次走进 30 个陌生家庭就能干活，零样本成功率 9% → 56% · 华为发布业界首个 NPO 超节点昇腾 960，960DT 提前三个季度 · 纽约时报案解封文件里，微软高管把 AI 抓取写成了「人类历史上最大规模的劳动窃取」</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.09.18 · 第 54 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">「AI 造 AI」第一次有了百分比，智能体第一次拿到了你电脑的钥匙，机器人第一次进陌生家门就能干活——三件事指向同一个转折：能力增长的燃料，正在从「更多人工」换成「更多已有智能」</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 发布前沿 AI 研发进度测量体系：Claude 已主导 26% 内部 AI 研发，半年前还不到 1%</span>
+        <span class="card-tag">📏 递归自我改进</span>
+      </div>
+      <div class="card-desc">
+        9 月 17 日 Anthropic 发布《衡量前沿实验室内部 AI 发展速度》指标体系，一口气给出三组可公开对照的数字：<strong>AI 参与下一代 AI 研发的程度</strong>、<strong>对内部智能体的监督能力</strong>、<strong>算力在研发与安全之间的分配</strong>。这是第一次有头部实验室把「AI 造 AI」拆成可测量、可复现、可跨实验室对比的指标，而不是停留在长文与演讲里。核心是<strong>研发自动化指数（R&amp;D Automation Index）</strong>，采用 Epoch AI 的 AL0–AL5 六级标度：截至 2026 年 8 月，Claude <strong>主导（AL4）约 26% 的 AI 研发工作</strong>，处于「AI 协作（AL3）」及以上占比<strong>超过 90%</strong>，但在任何被测子集上都<strong>尚未达到 AL5 完全自主</strong>——而 2026 年 2 月这个数字还<strong>不到 1%</strong>，半年从 1% 冲到 26%。方法论是自下而上搭的：从 7 月每一周的内部工作记录、Slack 与文档中抽样覆盖研发闭环每个部门 <strong>20% 的员工</strong>，由 Claude 梳理每人当周任务得到约 <strong>1.5 万个</strong>细粒度任务，再归纳成 <strong>542 个</strong>层级节点（378 个叶子节点），该任务树<strong>被冻结</strong>以便每次测量跑在同一篮子工作上，并按<strong>人时加权</strong>。打分环节：每个节点由 Claude 研究该工作在公司的实际做法，再由<strong>独立的 Claude 评判模型</strong>打自动化等级，且只能引用当月及更早证据。交叉验证结果很有意思——<strong>模型与人完全一致率 59%，人与人之间只有 35%</strong>，相差不超过一级的比例 <strong>97%</strong>。监督数据同样公开：最常用内部平台上任意时刻约 <strong>3 万个智能体</strong>在跑研究与工程任务，在线监控在动作执行前<strong>覆盖 100%</strong>、通常几秒内完成检查，8 月分析超 <strong>十亿次</strong>决策、拦截率 <strong>0.002%</strong>（约 1/47000），被拦截动作一周内人工复核；离线监控每周标记约 <strong>10 万条</strong>对话、约 <strong>50 条</strong>最高优先级升级人工。算力分配上，测量周内约 <strong>6%</strong> 的 AI 研发算力投向安全，只看 AI 驱动的研发则升至 <strong>12%</strong>。Anthropic 自己点了三个局限：冻结的任务篮子无法记录「新出现的工种」、用自家模型评判自家系统可能犯同类错误、数字未经第三方验证，并建议由第三方或其他实验室模型交叉核验。信号是<strong>RSI 之争从「要不要减速」的立场对抗，转向了「用哪把尺子量」的技术对抗——谁定义指标，谁就掌握了合规的坐标系</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">Claude 主导</div><div class="data-value">26%</div></div>
+        <div class="data-chip"><div class="data-label">2 月基线</div><div class="data-value">&lt;1%</div></div>
+        <div class="data-chip"><div class="data-label">任务节点</div><div class="data-value">542</div></div>
+        <div class="data-chip"><div class="data-label">在跑智能体</div><div class="data-value">3 万</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Meta 发布 Muse for Mac：个人智能体从云端虚拟机走进你的本地电脑</span>
+        <span class="card-tag">💻 个人智能体</span>
+      </div>
+      <div class="card-desc">
+        9 月 17 日扎克伯格在 X 上宣布 <strong>Muse for Mac</strong> 正式上线。Muse 是 Meta 9 月初推出的个人智能体产品线，此前以<strong>云端虚拟机</strong>形态运行、通过 iPhone App 或 WhatsApp 下达任务（发邮件、订机票、填表单、跟进长期目标）；这次登陆 Mac，把能力从「云端代劳」推进到「直接操作你的本地电脑」。官方原话：它跨<strong>应用、文件、日历、备忘录和消息</strong>工作，而你能控制它能访问什么。落地能力围绕三件琐事：<strong>整理下载文件夹</strong>、<strong>找回「失踪」文件</strong>、<strong>汇总信息与备忘录</strong>，并可连接 Messages、日历与备忘录实现跨应用打通，Meta 称「更多功能还在路上」。宣传重点是那句「<strong>经你明确许可</strong>」——这既是卖点也是当前智能体产品共同的坎：一个能读你文件、理你信息的 AI，权限划在哪里直接决定用户敢不敢真的放手。 可用性上<strong>免费 + 周额度</strong>，付费解锁更高额度，目前<strong>仅美国区</strong>；Mac 版距 iOS 版仅九天。需要区分的是，Meta 今年 8 月已推出过独立桌面应用（读屏、系统级听写、快捷键唤起），但那是「更懂桌面的聊天助手」，<strong>Muse 才是真正的智能体</strong>。时间点上撞了苹果 Siri AI 升级——Siri 能执行部分动作但还不是完整智能体系统，OpenAI 与 Anthropic 也在往桌面端推。信号是<strong>智能体的主战场正从聊天框转向操作系统桌面，「能否拿到本地执行权」成了新的产品分水岭</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">距 iOS 版</div><div class="data-value">9 天</div></div>
+        <div class="data-chip"><div class="data-label">覆盖端</div><div class="data-value">Mac</div></div>
+        <div class="data-chip"><div class="data-label">收费</div><div class="data-value">免费+额度</div></div>
+        <div class="data-chip"><div class="data-label">地区</div><div class="data-value">仅美国</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Figure 发布 Helix 2.5：30 个陌生家庭零样本成功率 9% → 56%，首条「人类→机器人」迁移 Scaling Law</span>
+        <span class="card-tag">🦾 具身智能</span>
+      </div>
+      <div class="card-desc">
+        Figure 于 9 月 17 日发布 Helix 2.5，称其为公司迄今最强的神经网络。团队在自有全球人类行为数据集 <strong>Index</strong> 上做预训练，从一个基础模型微调出「整理客厅、折毛巾、铺床」三种行为，然后把 Figure 03 带进湾区 <strong>30 户从未采集过任何数据的真实家庭</strong>。合计 <strong>420 次试验成功 237 次，约 56%</strong>。最硬的是那组对照实验：两个策略用同一批任务数据、同一套结构与超参、同一套盲评流程，<strong>唯一变量是初始化</strong>——随机权重起步的零样本成功率 <strong>9%</strong>，Index 预训练起步的 <strong>56%</strong>，差 6 倍多。这第一次把「人类行为数据到底值多少」量化到了具体百分点。需要厘清口径：<strong>零样本指的是房子和物品，不是任务</strong>——三项行为仍靠别处采集的微调数据定义，30 户家里一条数据没采，评测用的玩具、毛巾、床品都事先隔离，先 AI 核查再人工复核确认没进过训练集，所有家庭共用同一固定检查点。成功判定极其苛刻、<strong>不给部分分</strong>：客厅要 13–15 件玩具全部进筐，毛巾要四条全折好并进筐（另按 A/B/C 评折叠质量），铺床要两个枕头和被子四角都归到床上三分之一区域并抻平；超时或需人工介入即判失败。另外两个数字：<strong>数据减半、泛化扩大 30 倍</strong>——相比在评测环境内直接采数据的 Helix 02，Helix 2.5 只用一半适配数据就打平成功率，还额外泛化到 30 个全新家庭；<strong>首条人类→人形机器人迁移 Scaling Law</strong>——在 Index 嵌套子集上训练 4 个模型、数据量跨度 8 倍，每次翻倍损失都平滑下降，<strong>开训前就能把最大一轮测试损失预测到小数点后四位</strong>，预测误差仅占全程跌幅 <strong>0.54%</strong>。定性上最直观的是<strong>自我纠错</strong>：机器人会后退重新站位、变换姿态、绕到床的另一侧修正折叠。赌注已摆上台面：Index 每秒产出约 <strong>35 分钟</strong>全新人类行为数据，Figure 已承诺 <strong>35 亿美元</strong>算力，本月还与 Nscale 签下多年期协议锁定约 <strong>10 万块</strong> Vera Rubin GPU，合同总规模最高约 <strong>60 亿美元</strong>。争议也要记：Physical Intelligence 的 Tony Zhao 当天质疑这个分母——「干有用的活」要泛化与可靠两头都站住，成功一半还谈不上可用。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">零样本</div><div class="data-value">56%</div></div>
+        <div class="data-chip"><div class="data-label">无预训练</div><div class="data-value">9%</div></div>
+        <div class="data-chip"><div class="data-label">测试家庭</div><div class="data-value">30 户</div></div>
+        <div class="data-chip"><div class="data-label">Scaling 预测误差</div><div class="data-value">0.54%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">华为用系统架构换时间，把路线图排到 2029 年；纽约时报案把「训练数据从哪来」钉上了法庭；OpenAI 则被曝在逼近第二道千禧年难题——能力在往前冲，账本也被摊在了桌面上</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">华为发布业界首个 NPO 超节点昇腾 960：4096 卡、8E FP8、1PB HBM，960DT 提前三个季度</span>
+        <span class="card-tag">🔧 算力基建</span>
+      </div>
+      <div class="card-desc">
+        9 月 17 日第十一届华为全联接大会在上海开幕，副董事长、轮值董事长汪涛发布 <strong>昇腾 960 超节点</strong>并更新芯片路线图。华为 AI 战略被一句话概括：核心是算力，坚持硬件变现，用「<strong>超节点 + 集群</strong>」打造中国算力底座。技术核心是自研的下一代近封装光学（NPO）产品 <strong>Hi-ONE</strong>，单引擎传输容量 <strong>7.2T</strong>，是业界首个量产、目前传输能力最大、也是唯一内置光源的 NPO 产品。相比 CPO（光学器件与交换芯片同基板封装、故障后无法单独更换），<strong>NPO 保留光引擎可插拔、可独立维护</strong>的特性，在良率与运维成本之间取平衡；华为已在全球光互联标准组织 <strong>OIF</strong> 提出 NPO 标准立项建议。规格上，单个昇腾 960 超节点 <strong>4096 卡</strong>规模，最大提供 <strong>8E FP8</strong> 算力、<strong>1PB</strong> HBM 容量；用 <strong>5500 个</strong> Hi-ONE 替代原本需要的 <strong>48000 颗</strong> 800G 光模块，降低超 <strong>550 千瓦</strong>功耗，系统无故障运行时间提升 1 倍，可用度 <strong>99.8%</strong>；基于灵衢架构 RTT 时延最低 <strong>2 微秒</strong>。时间表整体前移：昇腾 960 性能翻番，<strong>960DT 提前三个季度、2027 年 Q1 就绪</strong>，960PR 提前一个季度、2027 年 Q3 就绪，风冷与液冷版超节点分别于 2027 年 Q3、Q4 上市；路线图首次延伸至 2029 年——<strong>昇腾 970（2028）、昇腾 980（2029）</strong>，坚持一年一代，依托「τ（韬）定律」实现算力规格持续翻倍。为什么押超节点：华为称 10 万卡已成训练十万亿级 SOTA 模型的标配，但传统服务器架构导致集群内通信超过训练时间的 <strong>40%</strong>，严重制约 MFU；马尔科夫实验室仿真显示 4K 超节点组成的 10 万卡集群，比 8 卡服务器同规模集群 <strong>MFU 提升 2.75 倍</strong>。落地进度：昇腾 910C 超节点已累计部署超 <strong>1000 套</strong>，950 超节点已规模商用。信号是<strong>在先进制程受限的前提下，华为把竞争从单颗芯片性能转向「互联 + 系统协同」，用系统级架构弥补工艺代差</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">单超节点</div><div class="data-value">4096 卡</div></div>
+        <div class="data-chip"><div class="data-label">算力</div><div class="data-value">8E FP8</div></div>
+        <div class="data-chip"><div class="data-label">960DT</div><div class="data-value">2027Q1</div></div>
+        <div class="data-chip"><div class="data-label">MFU 提升</div><div class="data-value">2.75×</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">纽约时报案解封文件：微软高管称 AI 抓取是「人类历史上最大规模的劳动窃取」</span>
+        <span class="card-tag">⚖️ 版权诉讼</span>
+      </div>
+      <div class="card-desc">
+        持续三年的《纽约时报》诉 OpenAI 与微软版权案出现新进展：一份未删节法庭文件解封，多名高管此前被涂黑的内部表述首次公开。微软应用科学总监 <strong>Brent Hecht</strong> 在内部备忘录中称，未经许可复制数百万篇新闻文章，可能构成「<strong>人类历史上最大规模的劳动窃取</strong>」。杀伤力在于这出自<strong>被告方而非原告</strong>：Hecht 还质疑两家公司的「合理使用」抗辩，认为若凭此获胜将「彻底嘲弄『合理使用』这一概念本身」；OpenAI 政策总监 Jack Clark 内部写道公司的工作「将日益导致我们创造出能够替代那些定义社会『文化』之人的劳动力的系统」；ChatGPT 负责人 <strong>Nick Turley</strong> 承认产品对出版商构成「生存威胁」，内部讨论中把聊天机器人描述为「基本上具有替代性」。关于付费墙：文件显示当研究员 Nick Ryder 向总裁 Greg Brockman 提到一个「绕过纽约时报付费墙的窍门」时，Brockman 回复「<strong>啊不错</strong>」；OpenAI 被指构建 WebText / WebText2 数据集、不成比例依赖抓取来的新闻内容，并在数据进模型前<strong>刻意剥离版权声明</strong>——因为研究人员「不希望模型向用户输出版权声明」。「末日循环」也是微软自己提的：Hecht 在 2024 年 1 月内部演示中把点击下滑描述为 doom loop，会「同时损害我们模型的性能和整个网络」，原话是「一个终端产品威胁到其核心供应商的经济基础，这是极不寻常的，但这正是我们为 LLM 业务在其『内容供应链』方面所创造的处境」。数据有多惨：微软数据显示 Copilot「答案引擎」导致纽约时报域名点击率相比传统 Bing 搜索下降最多 <strong>93%</strong>，涉诉机构整体降幅区间 <strong>51%–94%</strong>。Nadella 在证词中承认聊天机器人「从新闻网站那里拿走了点击量」，并称若早知 OpenAI 抓取并训练了付费墙内容，他会行使「微软的权利」要求重新训练。案件已进入「是否应作出即决判决」的争点，特朗普政府曾提交意见主张训练 AI 属合理使用。<strong>需保留的说明</strong>：这批信息很大一部分来自纽约时报自己的诉讼摘要，部分原始证据仍处封存状态，引述脱离了原始语境，OpenAI 与微软尚未回应置评。信号是<strong>案件核心已从「能不能抓」转向「训练即侵权还是合理使用」，判决将直接决定下一代模型的训练数据成本</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">NYT 点击降幅</div><div class="data-value">93%</div></div>
+        <div class="data-chip"><div class="data-label">涉诉机构降幅</div><div class="data-value">51-94%</div></div>
+        <div class="data-chip"><div class="data-label">诉讼时长</div><div class="data-value">3 年</div></div>
+        <div class="data-chip"><div class="data-label">悬赏/赔偿</div><div class="data-value">待定</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">OpenAI 被曝接近攻克霍奇猜想，有望拿下第二道千禧年难题</span>
+        <span class="card-tag">🧮 AI 数学</span>
+      </div>
+      <div class="card-desc">
+        9 月 17 日《The Information》援引一名了解解法的人士称，OpenAI 已接近攻克千禧年大奖难题中的<strong>霍奇猜想（Hodge Conjecture）</strong>。这是七个每题 100 万美元的世纪难题之一，目前仅剩五道未解。OpenAI 员工预计「不久后」出解，但<strong>官方公告可能延后</strong>——公司正在权衡如何与数学界协作发布，避免重演上一次的公关危机。前情提要：9 月 8 日 OpenAI 宣布内部未公开模型（性能远超已发布的 GPT-6 Astra）解决了<strong>纳维-斯托克斯存在性与光滑性问题</strong>，该消息激怒数学界、引发「AI 抄了数学家成果」的指控，OpenAI 随后撤回了下月 Caltech Mathathon 的赞助；据报道解纳维-斯托克斯用的是下一个预训练模型的变体、代号「<strong>Doug</strong>」，可能已花掉数百万美元。霍奇猜想研究的是：由多项式方程定义的几何形状中，某些拓扑特征能否始终用更简单的代数结构（更小的几何切片）来描述——《科学美国人》称它「大概是七道千禧年难题中最抽象的一道」。为什么啃数学：部分研究员认为继软件工程之后，数学是大模型最自然的下一块试验场——<strong>两者都依赖一步步逻辑推理，且结果往往可以自动验证对错</strong>；有人判断过去一年席卷软件工程的自动化进程，未来 <strong>6 至 9 个月</strong>也可能在数学领域上演。<strong>真正的目标是 RSI</strong>：攻克高难度数学是推动机器学习研究自动化的路径，而研究自动化正是「AI 开发 AI」的关键一步；若模型能处理这个级别的难题，也可能意味着它有能力处理生物学、化学中难度相当的问题。数学界的反弹仍在继续：批评者指出 AI 公司热衷于快速产出未解难题的解法，却对「验证解法」这类不体面的学术工作兴趣缺缺——第三方专家和克莱数学研究所的验证可能要花数年；多位数学家已签署公开信谴责 OpenAI。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">千禧年难题</div><div class="data-value">第 2 道</div></div>
+        <div class="data-chip"><div class="data-label">单项奖金</div><div class="data-value">100 万美元</div></div>
+        <div class="data-chip"><div class="data-label">模型代号</div><div class="data-value">Doug</div></div>
+        <div class="data-chip"><div class="data-label">自动化预判</div><div class="data-value">6-9 月</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个把音视频理解的成本砍到几乎可以忽略，一个告诉你推理流量的七成已经不再来自「一问一答」——两件事共同改写了多模态智能体的经济账</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">阿里发布 Qwen3.8-Omni-Flash：1M 上下文原生全模态，音频输入成本下降超 98%</span>
+        <span class="card-tag">🎛️ 全模态</span>
+      </div>
+      <div class="card-desc">
+        阿里千问团队于 9 月 17 日发布原生全模态模型 <strong>Qwen3.8-Omni-Flash</strong>，支持文本、图像、音频、视频四类输入，上下文窗口 <strong>100 万 token</strong>。官方副题一句话概括定位：「<strong>Omni Senses. Agentic Delivery.</strong>」——从「能看懂音视频」升级到「基于音视频把活干完」。三个关键数字：29 项评测平均分较上代 Qwen3.5-Omni-Plus 提升 <strong>超 25%</strong>；音频输入每小时 API 价格下降 <strong>超 98%</strong>；音视频输入每小时下降 <strong>超 93%</strong>。机制上采用<strong>粗到细的证据收集策略</strong>：不再线性处理整段长视频，而是由智能体按用户问题自主决定分析哪些片段，单次查询 token 消耗从 145,736 降到 79,117（约 <strong>-45.7%</strong>），同时 OmniVideoBench 准确率从 63.4 升到 67.8。配套两个工具：<strong>Qwen-MM-Plugins</strong> 是连接多模态理解与工具执行的网关；<strong>Qwen-Live Harness</strong> 是面向实时全模态交互的开源运行时，管理长对话中的记忆与上下文。benchmark 细节：WildClawBench-MM +36.5 分、AgenticVBench +22.3 分、UniClawBench 69.6、LongAudioSpan +8.3、OmniCap-IF CSR +8.5 / ISR +14.1；AliMeeting DER 从 88.11 降到 3.35、cpWER 从 89.61 降到 17.18。官方称音视频结果接近 Gemini 3.8 Flash、整体音频表现超过它。<strong>定价才是主攻方向</strong>：音视频 AI 落地长期被成本卡住——一小时会议录音全量处理常常比人工标注还贵，所以行业普遍「抽帧压缩、掐头去尾」；价格砍掉九成多，等于把按小时计费的场景（客服质检、会议纪要、直播内容理解）从演示推向规模化。<strong>需要保留的怀疑</strong>：所有数字均出自官方自报，独立复现尚未出现；另有产品文档列出更保守的 64K 上下文与 16K 最大输出，与「原生 1M」口径存在差异；「插件与运行时开源」与「模型权重开源」是两码事，权重范围尚未明确。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">上下文</div><div class="data-value">1M</div></div>
+        <div class="data-chip"><div class="data-label">音频降价</div><div class="data-value">98%</div></div>
+        <div class="data-chip"><div class="data-label">能力均分</div><div class="data-value">+25%</div></div>
+        <div class="data-chip"><div class="data-label">Token 节省</div><div class="data-value">45.7%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">SemiAnalysis：智能体流量已占全部推理流量 70% 以上，KV Cache 成新瓶颈</span>
+        <span class="card-tag">📊 推理架构</span>
+      </div>
+      <div class="card-desc">
+        分析机构 SemiAnalysis 报告，<strong>智能体（agentic）流量现已占全部推理流量的 70% 以上</strong>。这不是渐进变化——它意味着推理服务的主要负载形态已经从「一问一答」彻底切换为「多轮长程任务」。智能体负载有四个定义性特征：<strong>① 多轮</strong>（单次会话几十到几百轮，带来极重的 KV cache 复用）；<strong>② 长上下文</strong>（系统提示词、工具定义与轮次累积让上下文快速增长）；<strong>③ 高前缀复用</strong>（线性对话中第 n 轮输入嵌入了第 n-1 轮输出，只要存储允许，缓存与重算的比值随 n 增长趋近于 1）；<strong>④ 子智能体突发</strong>（会话派生出带全新上下文的短命子智能体，形成脉冲式 KV cache 访问模式）。对服务架构的直接影响是：<strong>瓶颈从「算力够不够」转向「KV cache 怎么存、怎么调度」</strong>——谁能把缓存命中率做高、把突发调度做平，谁的成本结构就领先一代。旁证来自多个方向：思科实测一个 Open Deep Research 智能体单次任务产生 26.8 MB 网络流量、访问 44 个网页源，流量比人工执行增加 <strong>450%</strong>，其中 70% 的增量流量与 AI 推理相关；AI 推理流持续时长约为普通网页事务的 <strong>2 倍</strong>，约 <strong>9%</strong> 的推理流上行流量大于下行（普通网页流仅约 0.5%）。思科建模预测 2026–2035 年企业网络流量在智能体普及情形下增长约 <strong>9 倍</strong>，不普及则约 2.5 倍。算力结构也在同步变化：SemiAnalysis 另一组估算显示 OpenAI 与 Anthropic 的<strong>预训练算力占比将从 67% 骤降至 7%</strong>，后训练与强化学习从 5% 升至 <strong>55%</strong>，推理占 <strong>38%</strong>——下一轮硬件竞争的关键不只是算力，而是<strong>内存带宽</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">智能体占比</div><div class="data-value">70%+</div></div>
+        <div class="data-chip"><div class="data-label">预训练占比</div><div class="data-value">67%→7%</div></div>
+        <div class="data-chip"><div class="data-label">RL 占比</div><div class="data-value">55%</div></div>
+        <div class="data-chip"><div class="data-label">任务流量增幅</div><div class="data-value">450%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天最值得记住的一句话是 Anthropic 给出的那个百分比：<strong>26%</strong>。</p>
+    <p>过去半年里，「递归自我改进」一直是个只能用形容词讨论的东西——Amodei 写长文说它已经出现，批评者说这是营销话术，中间地带是一片空对空。Anthropic 这次做的事，是把形容词换成了尺子：<strong>冻结 542 个任务节点、按人时加权、用独立模型打分、再拉真人盲评交叉验证</strong>，最后给出一个可以公开追踪、可以跨实验室对比的数字。方法论本身比 26% 这个数值更重要——它把「谁说了算」从立场之争变成了技术之争。顺带一提，那组交叉验证数字相当耐人寻味：<strong>模型与人的一致率 59%，人与人之间只有 35%</strong>。</p>
+    <p>同一天发生的事恰好构成这个数字的注脚。OpenAI 被曝逼近霍奇猜想，若成真就是不到一个月内第二道千禧年难题，而这条线的真实目标是研究自动化；Figure 让机器人第一次走进 30 个陌生家庭就能干活，靠的不是场景调参而是大规模人类行为预训练，<strong>9% 到 56% 的跳变说明「通用先于定制」这条路径在具身智能上同样成立</strong>。三条新闻指向同一件事：<strong>能力增长的燃料，正在从「更多人工」换成「更多已有智能」</strong>。</p>
+    <p>另一边是账本。纽约时报案解封文件里那句「人类历史上最大规模的劳动窃取」，出自微软高管而非原告律师——这种自认的杀伤力远超外部指控，它提醒所有人：<strong>今天所有模型的能力，都建立在一份尚未结账的历史账单上</strong>。华为把 960DT 提前三个季度，是另一种记账方式——在工艺受限的前提下用系统架构换时间，一年一代的路线图已经排到 2029 年。</p>
+    <p>一句话版本：<strong>能力在自我加速，代价在被追认。</strong></p>
+    <p><strong>本期四条可执行线索：① 把「AI 渗透率」做成可度量指标 → #1 照搬 Anthropic 的任务树方法，把宣发链路（KV 设计 / 文案 / 素材切片 / 社媒投放）拆成节点逐个标注 AI 主导还是人工主导、按工时加权，半年后能拿到一条真实曲线，而不是拍脑袋的「提效 X%」；② 通用底座优先于场景微调 → #3 Figure 的结论（预训练贡献 6 倍差距）与 AI 生图的经验同构，与其为每版 KV 重训 LoRA，不如先做厚「光影 / 镜头 / 材质」的风格底座，再单点定义版本需求；③ 提前梳理素材授权状态 → #5 NYT 案的走向会推动内容授权市场定价重估，字体、音乐、第三方图库的授权链条要能说清，避免标准收紧时被动返工；④ 智能体工作流要省上下文而非省调用 → #8 七成推理流量已来自智能体，成本大头在长上下文与缓存复用，同一批素材的多轮迭代尽量复用同一会话，别每轮都重喂全量素材</strong>。</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      AIGC 日报 &middot; 2026.09.18<br>
+      小柒AI速递 &middot; 第 54 期
+    </div>
+    <div class="footer-right">
+      Powered by CodeBuddy &middot; 小柒运营
+    </div>
+  </div>
+
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
