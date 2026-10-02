@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.02 &middot; 星期五 &middot; 第 56 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Meta CLM 用 Bash 管上下文</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Code Mods 可定制</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>FLUX 3 Image 4K 十图参考</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Google TPU 上轨道</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI 600 亿认缴完成</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>加州 AG 传票 OpenAI</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Suno Speech Beta 语音+配乐</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Ataraxos 8000 美元胜 Stratego</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.02 &middot; Fri &middot; Issue 56</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">智能体自己管自己的上下文、自己上太空、自己改自己的代码 —— 今天三件事同框：Meta 让模型用 Bash 管理记忆，Google 把 TPU 送上轨道，Anthropic 让 Claude Code 用 Mods 允许用户改自己的 UI · 与此同时 OpenAI 600 亿认缴额正式完成、加州检察长发出传票，一边狂奔一边被盯 · Black Forest Labs 用 FLUX 3 Image 把 4K 生成和 10 张参考图多轮编辑一次端出 · Suno Speech Beta 让人声和 BGM 一次成型 · Ataraxos 用 8000 美元训练成本击败 Stratego 最强人类玩家</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.02 · 第 56 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">从「被动塞 token」到「主动用文件系统组织记忆」，从「单体工具」到「可自我修改的平台」，从「单图生成」到「十张参考图多轮编辑」—— 智能体正在接管自己工作的每一个环节</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Meta 提出 Context Language Models：让模型用 Bash 自主管理上下文</span>
+        <span class="card-tag">🧩 智能体</span>
+      </div>
+      <div class="card-desc">
+        Meta 联合研究团队提出 <strong>Context Language Models（CLM）</strong>，让模型以「文件即上下文」的方式原生管理自身记忆 —— 模型可以像人用 Bash 一样 <code>cat / ls / grep</code> 读写自己的上下文文件。同日 Elvis Saravia 补充：CLM 让模型用 Bash 自主管理上下文，<strong>ProgramBench 长程任务得分提升至 71.5%</strong>，是目前公开模型中的顶级水平。<strong>范式转变是核心</strong>：把上下文窗口从「被动塞 token」升级为「模型主动用文件系统组织记忆」，长程任务不再受 context window 硬限制。Bash 作为通用接口比 RAG / 向量库更透明、可调试、可迁移 —— 模型可以直接看文件结构、grep 关键词、追加日志，一切操作都可回放。<strong>意义在于可复用</strong>：过去智能体做长程任务要么靠堆 context（贵）、要么靠 RAG（不透明）、要么靠人工切分（慢），CLM 给出第四条路 —— 让模型自己当自己的记忆管理员。ProgramBench 71.5% 的成绩验证「自主管理上下文」路径可行，是智能体长期自主运行的关键基建突破。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">ProgramBench</div><div class="data-value">71.5%</div></div>
+        <div class="data-chip"><div class="data-label">接口</div><div class="data-value">Bash</div></div>
+        <div class="data-chip"><div class="data-label">范式</div><div class="data-value">文件化</div></div>
+        <div class="data-chip"><div class="data-label">来源</div><div class="data-value">Meta</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Claude Code 推出 Mods：TypeScript 定制行为与 UI，官方首发 /diff 与 AGENTS.md</span>
+        <span class="card-tag">🛠️ 开发工具</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 为 Claude Code 推出 <strong>Mods</strong> 机制，用户可用 TypeScript 编写插件自定义行为与 UI，随 <strong>v2.1.287</strong> 版本发布。官方首发配套 Mods 覆盖四类场景：<strong>/diff</strong>（逐步回放每次文件编辑）、<strong>AGENTS.md</strong> 支持（项目级 Agent 配置）、<strong>Blast Radius</strong>（在执行前拦截 <code>rm -rf</code> / <code>git reset --hard</code> 等危险 shell 命令）、Replay Theater（回放历史）、Context Window 预测（上下文窗口用量预报）。<strong>Agent 应用商店雏形出现</strong>：Mods 让 Claude Code 从「单体工具」变成「可扩展平台」，第三方开发者可派生分叉智能体，Thariq 已分享常用插件 next-steps 及安装命令。<strong>安全内置是重点</strong>：Blast Radius 回应了近期智能体越权事故频发（Hugging Face 事件、加州 AG 传票），把安全护栏做成官方插件而不是事后补丁。<strong>UI 可定制</strong>意味着团队级工作流可以沉淀为团队资产 —— 比如「品牌合规 Blast Radius」拦截违规文案、「部署前检查」强制跑测试。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">语言</div><div class="data-value">TS</div></div>
+        <div class="data-chip"><div class="data-label">版本</div><div class="data-value">v2.1.287</div></div>
+        <div class="data-chip"><div class="data-label">官方 Mods</div><div class="data-value">5+</div></div>
+        <div class="data-chip"><div class="data-label">安全</div><div class="data-value">Blast Radius</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Black Forest Labs 发布 FLUX 3 Image：原生 4K + 10 张参考图多轮编辑</span>
+        <span class="card-tag">🎨 图像生成</span>
+      </div>
+      <div class="card-desc">
+        Black Forest Labs 发布 <strong>FLUX 3 Image</strong>，支持原生 <strong>4K 生成</strong>与最多 <strong>10 张参考图</strong>的多轮编辑。上线首日即登陆 OpenRouter、Krea、Higgsfield、fal 四大平台，OpenRouter 演示用 10 张参考图生成整幅画面，Krea 强调「多轮编辑不破坏原图其余部分」。<strong>多参考图编辑是最大亮点</strong>：10 张参考图意味着可以分别指定角色、场景、风格、光照，一致性大幅提升 —— 过去 AI 生图最痛的角色 / 场景不一致问题被工程化解决。<strong>4K 原生</strong>不再依赖放大算法，细节与文字渲染质量跃升，满足户外大屏、印刷物料需求。<strong>多轮编辑</strong>让创作者可以像 PS 图层一样逐步调整，与 Ideogram 4.5 的局部编辑同日竞争。定价上 OpenRouter 图像生成 <strong>$0.018/张</strong>，图像编辑支持 14 张参考图，Seedream 5.0 Flash 也同场上线 —— 图像生成赛道进入「多参考 + 高分辨率 + 低价」三重内卷。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">分辨率</div><div class="data-value">4K</div></div>
+        <div class="data-chip"><div class="data-label">参考图</div><div class="data-value">10 张</div></div>
+        <div class="data-chip"><div class="data-label">单价</div><div class="data-value">$0.018</div></div>
+        <div class="data-chip"><div class="data-label">平台</div><div class="data-value">4 家</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">算力离开地面、资本完成认缴、监管盯上智能体 —— 三条主线同框：Google 把 TPU 送上轨道突破地球物理限制，OpenAI 600 亿认缴收官用产业资本替代公开市场，加州 AG 传票把监管焦点从「模型」转向「智能体行为」</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Google 与 Planet 合作发射 Project Suncatcher：四颗 TPU 上轨道</span>
+        <span class="card-tag">🚀 太空算力</span>
+      </div>
+      <div class="card-desc">
+        Google 官宣与 Planet 合作发射搭载 <strong>四颗 TPU</strong> 的轨道计算原型卫星，启动 <strong>Project Suncatcher</strong> 太空机器学习基础设施研究，卫星已在轨运行正常。同日 Google 白皮书估算：Starship 需十年内发射 <strong>1800 次</strong>才能支撑规模化太空数据中心。<strong>太空散热免费</strong>是核心驱动力：真空环境天然解决数据中心最大痛点 —— 散热，且太阳能供电 24h 不间断。地面缺电瓶颈（同期多条新闻提及日本 JERA 400MW、SpaceX 算力 2.3GW 等）正倒逼算力离开地球，Google 首次把 TPU 送上轨道是里程碑。<strong>规模化仍遥远</strong>：1800 次 Starship 发射的估算说明太空数据中心离商用至少十年，但原型验证已完成 —— 从「能不能跑」到「跑多快」的问题已经切换。同日 Satlyt（前 Google 与 SpaceX 产品经理创办）融资 800 万美元在卫星上运行 AI，太空算力赛道从 Google 一家独舞变成多方入场。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">TPU</div><div class="data-value">4 颗</div></div>
+        <div class="data-chip"><div class="data-label">Starship</div><div class="data-value">1800 次</div></div>
+        <div class="data-chip"><div class="data-label">状态</div><div class="data-value">在轨</div></div>
+        <div class="data-chip"><div class="data-label">合作方</div><div class="data-value">Planet</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">OpenAI 600 亿认缴额完成：英伟达软银各付最后 100 亿</span>
+        <span class="card-tag">💰 融资</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 600 亿美元认缴融资于 <strong>10 月 1 日</strong>正式完成，英伟达与软银各支付最后一笔 <strong>100 亿美元</strong>。此前 OpenAI 已推迟 IPO，转向以约 <strong>1.4 万亿美元</strong>估值寻求至少 300 亿美元过桥融资，ARR 逼近 700 亿美元。<strong>算力换股权</strong>是核心逻辑：英伟达的 100 亿本质是「用 GPU 订单换股权」，绑定未来几年算力供给 —— 这也是为什么 OpenAI 能在高端 GPU 供给紧张时保持优先权。<strong>资本结构复杂化</strong>：从 IPO 转向过桥融资 + 战略认缴，说明 OpenAI 在安全声明未达标前不想公开披露财务，Altman 原话是「在能对 AI 模型安全性做出可靠声明之前不会启动上市流程」。<strong>产业集中度提升</strong>：英伟达 + 软银 + OpenAI 三角同盟成型，AI 基础设施进入寡头时代。300 亿美元的注入意味着 OpenAI 将加大对高端 GPU 的批量采购，反过来会<strong>收紧全球高端 GPU 供给</strong>，抬升其他 AI 公司的硬件获取成本。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">认缴额</div><div class="data-value">600 亿</div></div>
+        <div class="data-chip"><div class="data-label">尾款</div><div class="data-value">各 100 亿</div></div>
+        <div class="data-chip"><div class="data-label">目标估值</div><div class="data-value">1.4 万亿</div></div>
+        <div class="data-chip"><div class="data-label">ARR</div><div class="data-value">700 亿</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">加州检察长向 OpenAI 发出传票，调查智能体网络安全风险</span>
+        <span class="card-tag">⚖️ 监管</span>
+      </div>
+      <div class="card-desc">
+        加州检察长向 OpenAI 发出传票，调查其 AI 智能体的<strong>网络安全风险</strong>。这是继 FTC 全行业调查（09-30 期）后，美国州级监管对 OpenAI 的又一次出手，焦点从「商业行为」转向「智能体技术本身的安全性」。<strong>监管焦点转移是关键</strong>：从模型能力（是否合规训练）转向智能体行为（是否会越权、隐瞒、误导），这是行业首次。<strong>州级 + 联邦并行</strong>：FTC 走联邦调查、加州 AG 走州级传票，OpenAI 面临多线诉讼。<strong>与 OpenAI 内部安全团队动荡叠加</strong>：同日 WSJ 报道 OpenAI 解雇 3 名安全研究员（涉违规共享敏感信息），OpenAI 还称拦截了有组织对抗式蒸馏攻击、指向月之暗面 —— 监管压力与内部治理危机共振。<strong>对行业的信号很明确</strong>：智能体合规是未来 12 个月的高频话题，用智能体做社媒发布、舆情采集、内容生成的公司需要保留人工确认与操作日志。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">发起方</div><div class="data-value">加州 AG</div></div>
+        <div class="data-chip"><div class="data-label">焦点</div><div class="data-value">智能体</div></div>
+        <div class="data-chip"><div class="data-label">并行</div><div class="data-value">FTC</div></div>
+        <div class="data-chip"><div class="data-label">同期</div><div class="data-value">3 研究员解雇</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个把视频配音从「两段式」变成「一次成型」，一个把强化学习训练成本从百万美元压到 8000 美元 —— 工具层的效率跃升正在两个看似无关的方向同时发生</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Suno 推出 Speech Beta：语音与背景音乐一体生成</span>
+        <span class="card-tag">🎵 音频</span>
+      </div>
+      <div class="card-desc">
+        Suno 推出 <strong>Speech Beta</strong>，可在同一轨道内生成<strong>带匹配背景音乐的语音音频</strong> —— 用户输入文字，Suno 同时产出人声朗读 + 情绪匹配的背景配乐。同日 Suno Studio 2.0 支持在聊天栏拆分 stems、添加乐器、效果和 automation。<strong>语音 + 音乐同轨生成</strong>解决视频配音「人声录完再找 BGM」的两段式痛点，从「两段式」变成「一次成型」。<strong>情绪对齐</strong>是 Suno 强调的重点：背景音乐与人声情绪同步，不再是「随便配一首」，Suno 展示语音与背景音乐同步生成是核心 demo。<strong>工作流整合</strong>：Studio 2.0 的 stems 拆分让创作者可二次编辑每个音轨，从「生成一段音频」变成「制作一首完整的歌」。对内容创作者来说，短视频旁白 + BGM 一键生成，视频号 / 抖音内容生产效率再提一档。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">形态</div><div class="data-value">语音+BGM</div></div>
+        <div class="data-chip"><div class="data-label">情绪</div><div class="data-value">同步</div></div>
+        <div class="data-chip"><div class="data-label">Stems</div><div class="data-value">可拆</div></div>
+        <div class="data-chip"><div class="data-label">阶段</div><div class="data-value">Beta</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Ataraxos 以 85% 胜率击败史上最强 Stratego 玩家，训练成本不足 8000 美元</span>
+        <span class="card-tag">♟️ 博弈 AI</span>
+      </div>
+      <div class="card-desc">
+        AI 智能体 <strong>Ataraxos</strong> 以 <strong>85% 有效胜率</strong>击败史上最强 Stratego 玩家 Pim Niemeijer，训练成本<strong>不足 8000 美元</strong>。Stratego 被认为是「人类最后几个未被 AI 攻克的棋盘游戏堡垒」之一。<strong>低成本训练是最大亮点</strong>：8000 美元 vs 传统博弈 AI 动辄百万美元级训练成本，是强化学习工程效率的跃升。<strong>不完美信息博弈</strong>：Stratego 有战争迷雾，比围棋 / 国际象棋更接近真实决策场景 —— 玩家不知道对方棋子位置，需要在不完全信息下做决策。<strong>通用性信号</strong>：低成本 + 不完美信息 + 击败人类顶尖，说明 RL 在「小预算复杂决策」上已成熟。Ataraxos 的训练方法论对游戏 AI、自动驾驶、机器人控制都有参考价值 —— 过去这种能力需要烧几百万美元才能练出来，现在 8000 美元就能做到。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">胜率</div><div class="data-value">85%</div></div>
+        <div class="data-chip"><div class="data-label">成本</div><div class="data-value">&lt; $8000</div></div>
+        <div class="data-chip"><div class="data-label">信息</div><div class="data-value">不完美</div></div>
+        <div class="data-chip"><div class="data-label">对手</div><div class="data-value">最强人类</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天最值得记住的，是<strong>智能体开始接管自己工作的每一个环节</strong>。</p>
+    <p>Meta 让模型用 Bash 管理自己的记忆，ProgramBench 长程任务冲到 71.5% —— 过去智能体做长程任务要么靠堆 context（贵）、要么靠 RAG（不透明）、要么靠人工切分（慢），现在模型自己当自己的记忆管理员。Anthropic 让 Claude Code 用 Mods 允许用户改自己的行为和界面 —— Agent 从「工具」变成「平台」，安全护栏也随插件生态一起内置。Black Forest Labs 用 FLUX 3 Image 把 4K 生成和 10 张参考图多轮编辑一次端出 —— 角色 / 场景 / 风格分离指定，一致性痛点被工程化解决。<strong>三件事同框，指向同一个方向：智能体正在从「被动工具」变成「可自我修改的平台」。</strong></p>
+    <p>另一条线是算力离开地面。Google 把四颗 TPU 送上轨道，SpaceX 算力预计 11 月底达约 2.3 GW，日本 JERA 联手戴尔建 400MW AI 数据中心 —— 地面缺电瓶颈正在倒逼算力离开地球。OpenAI 600 亿认缴额收官，英伟达软银各掏 100 亿尾款，本质是「用 GPU 订单换股权」，绑定未来几年算力供给。<strong>算力供给正在突破地球物理限制，同时也在向寡头集中。</strong></p>
+    <p>第三条线是监管盯上智能体行为。加州 AG 传票 + OpenAI 解雇 3 名安全研究员 + OpenAI 拦截有组织蒸馏攻击 —— 监管焦点从「模型合规」转向「智能体行为合规」，是行业首次。<strong>用智能体做社媒发布、舆情采集、内容生成的公司需要保留人工确认与操作日志</strong>，别让自己落在「未受控自动化」的定义里。</p>
+    <p>最后一条看着最小，对做宣发的人可能最实在：Suno Speech Beta 让人声和 BGM 一次成型，Ataraxos 用 8000 美元击败 Stratego 最强人类。<strong>工具层的效率跃升正在两个看似无关的方向同时发生 —— 一个让内容生产更快，一个让 AI 能力更便宜。</strong></p>
+    <p>一句话版本：<strong>智能体在接管自己的工作，算力在离开地球，监管在盯上智能体行为，而工具层正在让一切变得更快更便宜。</strong></p>
+    <p><strong>本期四条可执行线索：① FLUX 3 Image 10 张参考图 + 4K 原生 → 立即测试 KV 合成工作流（角色 + 场景 + 品牌色卡分图参考），户外大屏与印刷物料一次到位；② Suno Speech Beta → 视频号 / 抖音短视频旁白 + BGM 一次成型，效率提升；③ Claude Code Mods → 内部设计工作流可沉淀为团队资产（品牌合规 Blast Radius 拦截违规文案）；④ Ataraxos 8000 美元击败 Stratego → 「人机大战」题材借势，做 CODM AI 对手 / AI 战术官传播</strong>。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
