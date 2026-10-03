@@ -1,0 +1,56 @@
+# ============================================================
+# 太空题材组件库 (快刷用)
+# ============================================================
+
+mood_base:
+  - "cinematic 3D render, AAA sci-fi concept art, highly detailed, epic space theme"
+
+scenes:
+  - "a colossal ring space station orbiting a glowing planet"
+  - "a lone astronaut drifting weightless in deep space"
+  - "a fleet of starships jumping through a wormhole"
+  - "a futuristic space station interior with holographic displays"
+  - "a battle mecha fighting outside a space station"
+  - "a derelict space station drifting in a nebula"
+  - "a spacewalk EVA repairing a giant solar array"
+  - "an orbital shipyard building a massive mothership"
+  - "a cockpit view flying through an asteroid field"
+  - "a space colony dome city under a starry sky"
+
+palettes:
+  - "cool blue-and-silver metallic palette, clean crisp lighting"
+  - "cool blue-and-silver metallic palette, clean crisp lighting"
+  - "deep space navy and black with cyan rim light"
+  - "icy pale-blue and white, crisp cold luminous"
+  - "dark base with crimson-red alert accents, crisis glow"
+  - "clean white-and-blue palette, bright airy high-tech"
+  - "purple-violet nebula tones, cosmic and vivid"
+  - "titanium grey with cold blue-white industrial light"
+
+shots:
+  - "wide establishing shot, vast cosmic scale"
+  - "dramatic low-angle hero shot"
+  - "tight dramatic close-up, shallow depth of field"
+  - "three-quarter dynamic angle"
+  - "over-the-shoulder shot with depth layers"
+  - "weightless floating composition, zero-gravity drama"
+
+extra_modifiers:
+  - "intense dramatic tension, powerful dynamic energy"
+  - "serene vast and awe-inspiring atmosphere"
+  - "mysterious atmospheric mood"
+  - ""
+
+objects:
+  - "glowing reactor core"
+  - "floating space debris"
+  - "distant Earth"
+  - "solar panel arrays"
+  - "escape pods"
+  - "nebula clouds"
+
+quality: "strong visual hierarchy, premium quality, NOT cluttered NOT noisy, no text no logo no watermark"
+
+aspect_pool: ["16:9", "16:9", "16:9", "21:9"]
+
+low_weight_keywords: []

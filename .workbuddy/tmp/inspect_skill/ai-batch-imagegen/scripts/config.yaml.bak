@@ -1,0 +1,31 @@
+auto_clean_tabs: true
+cdp: http://127.0.0.1:9222
+output_dir: D:/WorkBuddy/imagegen-output
+platforms:
+  mj:
+    enabled: true
+    force_relax: true
+    interval_sec: 31
+    stylize: 80
+    versions:
+    - --v 6
+    - --v 7
+    - --v 8.1
+  woa:
+    enabled: false
+    models:
+      gemini:
+        quality: null
+        ratio: '16:9'
+        res: 4K
+        thinking: 深入
+      openai:
+        quality: 高质量
+        ratio: '16:9'
+        res: 超精 4K
+        thinking: null
+task:
+  reconnect_after_fails: 3
+  reference_images: []
+  stop_at: null
+  stop_file: STOP

@@ -1,6 +1,6 @@
 # MEMORY.md — 长期记忆
 
-> 最后更新：2026-07-05
+> 最后更新：2026-08-06
 
 ## 信源架构（65 + 1 模式 · 2026-07-03 起）
 
@@ -12,12 +12,13 @@ AIGC 日报 / 周报共享：**65 X 账号 + 1 聚合源**（AI HOT）。
 - 信源清单：日报 `_skills/daily-card.md` §2.10.1 / 周报 `_skills/weekly-card.md` §2.1.1
 - **加新信源必须两处同步**（2026-07-03 起）
 
-## AI HOT API 基础设施问题（2026-07-05 新增）
+## AI HOT API 基础设施问题（2026-07-05 新增，2026-07-06 恢复）
 
 - **症状**：连续 4 种方法 TLS 失败（Bash/curl、PowerShell、Node.js https、WebFetch）
 - **错误**："Client network socket disconnected before secure TLS connection was established" / "基础连接已经关闭: 发送时发生错误"
 - **绕过**：8 轮 WebSearch 兜底（信源 177 → 25 缩减，但能完成流水线）
-- **下次优化**：检查 DNS / 替代 TLS 库 / 延后重试 3 次
+- **2026-07-06 恢复**：`/feed/all.xml` 正常返回 50 条近 30h 资讯，效率 +40%
+- **下次优化**：仍保持 WebSearch 兜底作为 Plan B；如再次失败检查 DNS / 替代 TLS 库 / 延后重试 3 次
 
 ## AI 资讯 Skill 双轨（2026-07-03）
 
@@ -61,8 +62,9 @@ used_by: []; contribution_count: 0; surfaced_with: []; review_flagged: null
 1. 生成 TOC H5（含 `← 返回归档` 固定按钮 + 顶部 3px 渐变进度条）
 2. 归档首页 `docs/ai-daily/index.html` DATA 数组**顶部追加**
 3. Git add + commit + push origin main（GitHub Actions 自动部署）
-4. 推送企微（**仅文字摘要 + H5 链接，不发 PNG** —— 2026-05-31 起规则）
-5. 更新 `log.md`
+4. **⚠️ URL 验证（强制 · 2026-08-06 新增）**：企微推送前必须用 WebFetch 验证 H5 在线链接返回 200。如果 404 → 排查 submodule 损坏（最常见根因：`git submodule status` → `git rm --cached` + 删 `.git/modules/xxx`）、Pages 部署状态、源配置，修复后重新验证，**只有 200 才能进入下一步**。修复步骤详见 `_skills/daily-card.md` §4.2a / `_skills/weekly-card.md` §4.2a
+5. 推送企微（**仅文字摘要 + H5 链接，不发 PNG** —— 2026-05-31 起规则）
+6. 更新 `log.md`
 
 ⚠️ **PNG 推送已禁用**：`_deploy/wecom-push/push-ai-daily.js` 用 `if (false && hasPng)` 短路
 

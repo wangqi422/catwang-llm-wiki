@@ -1,0 +1,112 @@
+# ============================================================
+# ai-batch-imagegen — components.yaml
+# 题材：崩坏3 × 使命召唤手游 联动 KV
+# 写实 photorealistic 风格
+# 构图公式：品字形三角构图（中心 50% + 两侧各 25%）
+# 视角：30° 仰拍 / 微斜俯瞰（imposing 感）
+# ============================================================
+
+# 通用艺术基调 —— 写实影视级
+mood_base:
+  - "photorealistic cinematic key art, hyperrealistic detail, 8K UHD, ray tracing global illumination, Unreal Engine 5, 35mm anamorphic film still, dramatic rim lighting"
+  - "AAA key visual, photoreal CGI render, volumetric god rays, atmospheric haze, film grain, depth of field, motion blur on edges"
+  - "epic collaboration promotional artwork, photoreal military sci-fi aesthetic, dramatic chiaroscuro lighting, lens flare"
+  - "cinematic triple-A game key art, Octane Render, subsurface scattering on skin, physically based rendering, soft cinematic key light"
+
+# 场景骨架 —— 联动的核心是"两个世界的碰撞"
+# 设计：休伯利安舰桥元素(崩坏3) + 战术指挥中心(CODM) + 崩坏能战场
+scenes:
+  # 1. 室内/舰桥类 - 崩坏3 标志场景
+  - "inside the Hyperion bridge with holographic tactical displays showing both Honkai energy signatures and Call of Duty battle maps, large window showing orbital view of Earth under attack"
+  - "vast command bridge of an aircraft carrier blended with Honkai altar, central holographic table projecting 3D battle plans, control panels with stigmata runes etched into metal"
+  - "mystical cathedral-like chamber with tactical command center, stained glass windows depicting valkyries and operators, central altar with glowing Honkai core"
+  # 2. 室外战场类 - CODM 元素
+  - "ruined urban battlefield with Honkai crystals growing through destroyed Humvees and concrete, ley lines glowing violet under rubble, military sandbags forming a defensive perimeter"
+  - "storm-ravaged military outpost at twilight, ARC reactors and Honkai energy pylons side by side powering a forward base, sandbag walls and broken radar dishes"
+  - "abandoned combat zone where squad tents meet Honkai ritual circles, soldiers' rifles leaning against crystal obelisks, searchlights cutting through violet mist"
+  # 3. 决战气氛
+  - "epic clifftop overlooking both a high-tech military staging area and a swirling Honkai portal, banners of St. Freya academy fluttering in the wind, helicopters in formation"
+  - "massive hangar bay opening to a battlefield outside, Valkyrie mechs and military helicopters sharing the same refueling deck, dramatic sunset light streaming in"
+  - "rooftop of a partially destroyed skyscraper with both Honkai energy beams and military spotlights piercing the stormy sky, search-and-rescue helicopters circling"
+
+# 调色板 —— 崩坏3 紫白青 + CODM 军事色
+palette:
+  - "violet and electric purple lighting, deep navy background, platinum white highlights, teal cyan accents"
+  - "stormy indigo sky, magenta Honkai energy, gunmetal grey armor, gold-stamped emblems"
+  - "crimson red emergency lights, deep purple shadows, frost-white armor plating, holo-blue HUD glow"
+  - "teal and violet duotone, deep black background, silver metallic highlights, warm amber tactical lamps"
+  - "ash grey military tones, glowing magenta crystals, off-white armor panels, navy undersuit"
+
+# 镜头与构图 —— 品字形 + 三七律
+shots:
+  # 主镜头（中心主体，1 选 1）
+  - "low-angle 30 degree upward shot, central character in the middle ground taking 50% of frame, two flanking characters in the back taking 25% each"
+  - "heroic low-angle shot, the lead character stepped forward toward camera at center, two other characters in the rear with offset V-formation"
+  - "dynamic 3/4 angle, central character lunging forward with weapon raised, two side characters in tactical side-step poses"
+  - "cinematic wide shot, three characters in classic triangle formation (品字形), central one closer to camera at lower third, two side characters at upper thirds"
+  - "Dutch angle low shot, central character wielding oversized weapon in foreground, two characters visible in V-formation behind"
+  # 比例三七律
+  - "anamorphic widescreen 2.39:1 aspect, left two-thirds filled with central hero, right one-third has a Honkai energy beam and a flanking teammate"
+
+# 姿态库 —— 战斗姿态（不是立正站好，是动作中）
+poses:
+  - "dynamic mid-combat pose, weapon raised diagonally, body twisting, weight on back foot, cape or coat tails sweeping"
+  - "tactical ready stance, knees slightly bent, rifle held at low ready, head turned to look back over shoulder, partner visible behind"
+  - "heroic overhead weapon swing, body arched backward, weapon held high with both hands, eyes glowing with energy"
+  - "stepping out of shadow into light, one hand extending a glowing Honkai ability, the other hand holding a tactical sidearm"
+  - "sprinting forward with weapon at hip-fire, dust kicking up, hair and coat streaming in motion, side teammates running in lockstep"
+  - "crouching tactical reload, magazine mid-insert, eyes locked on target, partner covering from the side"
+  - "back-to-back formation, central character in the middle, two characters back to her on either side, all aiming outward at different threats"
+  - "leaping acrobatic pose, one knee drawn up, weapon firing downward, the side teammates in mid-dodge"
+  - "sweeping cape reveal, character standing in beam of light turning dramatically, weapon lowered but still smoking, teammates emerging from flanks"
+
+# 服装元素 —— 崩坏3 + CODM 融合
+# 设计：把女武神装甲 + 现代战术装备结合
+outfit_mix:
+  - "Honkai valkyrie battle armor with tactical plate carrier strapped over, kneepads, comms headset, mag pouches, Saint Freya academy insignia on shoulder"
+  - "modern military operator uniform with valkyrie gauntlets glowing violet, energy wings manifesting on back, drop-leg holster, ARC reactor mounted on chest"
+  - "tactical flight suit with Honkai-patterned jacket over it, armored chest plate, Honkai stigmata marks visible on cheek, operator helmet under arm"
+  - "PMC operator kit with valkyrie-grade powered exoskeleton attachments, energy core visible at the spine, custom-painted rifle with Honkai motif"
+  - "long valkyrie coat with tactical belt, ARC-tech shoulder pauldrons, sidearm holstered, baton magnetized to thigh"
+
+# 武器库 —— 崩坏3 标志性 + CODM 现代枪
+weapons:
+  - "fusion of twin pistols and Honkai energy blades, energy construct forming a rifle"
+  - "ARC energy sword held in one hand and tactical assault rifle in the other, both weapons charging up"
+  - "dual-wield Honkai greatswords crossed on back and an underbarrel grenade launcher on a modern carbine"
+  - "oversized Honkai cannon mounted on a railgun tripod, modern operator kit around it, control panels glowing"
+  - "energy bow fully drawn with arrow of light, tactical quiver on back, sidearm on hip"
+
+# 背景元素 —— 崩坏3 经典视觉符号
+# 设计：崩坏能、光翼、圣痕、虚数之树 + CODM 军事元素
+background_elements:
+  - "soaring Honkai energy wings manifesting behind central character, searchlights from helicopters crossing, contrails in violet sky"
+  - "Honkai energy particles drifting through the air, military flares in the distance, parachute drops in the background, refueling tanker"
+  - "towering crystal obelisks of pure Honkai energy flanking the composition, tactical satellites overhead, comms relay towers"
+  - "the Stigmata visual pattern projected as a tactical HUD overlay, low-poly tactical map projected on ground, soldiers in the far background"
+  - "Honkai ley-line grid glowing underfoot, broken highway signs and collapsed overpass behind, search-and-rescue convoys in the far distance"
+
+# 关键视觉焦点 —— 中心高光
+focal_elements:
+  - "the central character bathed in a column of white-violet light from above, the side characters in dramatic rim light"
+  - "all three characters casting shadows that converge into a single Honkai stigma pattern on the ground"
+  - "central character holding a glowing Honkai core aloft, light radiating outward in a star pattern illuminating teammates"
+  - "energy beam from the Honkai core piercing through the scene, with a military helicopter in silhouette crossing the beam"
+  - "central character's eyes emitting soft violet glow, the Honkai stigmata mark on her forehead illuminated"
+
+# 装饰细节（低权重，避免画面杂乱）
+low_weight_keywords:
+  - "faint tactical HUD overlay"
+  - "subtle lens flare"
+  - "smoke wisps"
+  - "distant rotor wash dust"
+  - "energy particle motes"
+  - "faint scan-line effect on peripheral equipment"
+
+# 反向提示 —— 必须避免的（保证构图正确）
+negative_prompts:
+  - "no anime cel-shading, no chibi proportions, no over-stylized 2D illustration look"
+  - "no text, no logo, no watermark, no speech bubble, no comic panel borders"
+  - "no extra fingers, no extra limbs, no melted armor, no distorted faces"
+  - "no weapon floating disconnected from hands, no body parts blending into background"
+  - "no oversaturated candy colors, no flat shading, no 2D vector look"

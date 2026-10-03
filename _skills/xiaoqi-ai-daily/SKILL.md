@@ -282,6 +282,13 @@ curl -s -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=<key>" \
 - 海报副标题取 TOC HTML 的 `<p class="lead">`（MD 里只有 `>` 引用行，不可靠）
 - MD 概览表格格式不能改，海报生成器依赖它解析
 - 日报条目 <3 条 → 停止，提示内容不足
+- **MD 的 8 条编号必须与 H5 章节连续对齐**：§1 = #1–#3、§2 = #4–#6、§3 = #7–#8，nav 的 `nav-sub` 每章节再从 1. 重新计数。定稿前先按章节分组排好，再回头改概览表顺序
+- **定稿前必做归档查重**：`docs/ai-daily/index.html` 的 DATA 是 `eval` 解析（键名有时带引号有时不带，`JSON.parse` 不可靠），grep top10 的 `desc` 字段确认 8 条不重复
+
+**H5 生成相关**：
+- 模板 head 取前 **142 行**（142 行才是 `</head>`），尾部从 `back-to-top` 那一行（约第 390 行）到文件末尾整体复用
+- 拼装后必查三项：`<title>` 日期已改、`</head>` 只出现 1 次、`class="card" id="item-` 共 8 个
+- **log.md 顶部第一条没有 `---` 前导且文件是 CRLF**：插入新条目时用 `## [YYYY-MM-DD HH:MM]` 直接做 anchor，正则写 `\r?\n`，插完再补 `---`
 
 ---
 

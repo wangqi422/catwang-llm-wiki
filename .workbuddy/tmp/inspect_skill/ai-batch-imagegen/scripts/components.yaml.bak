@@ -1,0 +1,60 @@
+# ============================================================
+# 提示词组件库 — 改这个文件就能换题材, 无需改任何 Python
+# 生成器对各维度做随机笛卡尔积, 几十×十几×几十 ≈ 上百万种不重复骨架
+# 低权重项: 用"重复条目"或写进 low_weight_keywords 来降低出现概率
+# ============================================================
+
+# 每条都注入的题材基底 (改成你的项目主题)
+mood_base:
+  - "cinematic 3D render, AAA game promotional concept art, highly detailed, epic"
+
+# 场景 (主语/画面内容) — 越多越发散
+scenes:
+  - "a vast futuristic city skyline at dusk"
+  - "an ancient ruined temple reclaimed by nature"
+  - "a high-tech command center interior"
+  - "a lone hero standing on a cliff overlooking a battlefield"
+  - "a bustling neon cyberpunk street"
+  - "a serene floating island in the sky"
+
+# 色调 (重复=权重高)
+palettes:
+  - "cool blue-and-silver palette, clean crisp lighting"
+  - "cool blue-and-silver palette, clean crisp lighting"
+  - "warm golden-hour tones, soft cinematic glow"
+  - "dramatic black-and-red high contrast"
+  - "muted desaturated grey-blue, moody"
+  - "vibrant teal-and-orange cinematic contrast"
+
+# 镜头/构图 (按需调权重, 想多特写就多写几条 close-up)
+shots:
+  - "wide establishing shot, vast scale"
+  - "dramatic low-angle hero shot"
+  - "tight dramatic close-up, shallow depth of field"
+  - "three-quarter dynamic angle"
+  - "symmetrical centered composition"
+  - "over-the-shoulder shot with depth layers"
+
+# 可选维度: 氛围/张力修饰 (留空或删掉则不注入)
+extra_modifiers:
+  - "intense dramatic tension, powerful dynamic energy"
+  - "calm and serene atmosphere"
+  - "mysterious and atmospheric mood"
+  - ""
+
+# 可选: 点缀物体 (生成器有概率随机点缀 0-2 个, 避免画面花哨)
+objects:
+  - "glowing energy core"
+  - "floating debris"
+  - "ancient statue"
+  - "neon signage"
+  - "distant mountains"
+
+# 每条都注入的质量/约束
+quality: "strong visual hierarchy, premium quality, NOT cluttered NOT noisy, no text no logo no watermark"
+
+# MJ 横版比例池 (woa 在脚本里走 config 的 ratio)
+aspect_pool: ["16:9", "16:9", "16:9", "21:9"]
+
+# 降权关键词: 命中则有概率重抽 (把不想要的方向压低占比)
+low_weight_keywords: []

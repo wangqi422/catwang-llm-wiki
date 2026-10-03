@@ -1,0 +1,49 @@
+# CODM × 崩坏3 联动 批量出图配置
+# 用途: 御三家女武神发散 10+ 张概念图
+# 平台: 司内 3000 (woa) 双模型
+# 制图时间: 2026-07-02 19:30
+
+auto_clean_tabs: true
+cdp: http://127.0.0.1:9222
+output_dir: D:/WorkBuddy/codm-x-bh3
+
+platforms:
+  # ============ 司内 3000 双模型 ============
+  woa:
+    enabled: true
+    models:
+      # GPT-Image2: 多角色群像强项, 适合三人同框/复杂场景
+      openai:
+        quality: 高质量
+        ratio: '16:9'
+        res: 超精 4K
+        thinking: null
+      # Gemini: 单角色一致性极好, 适合单人特写
+      gemini:
+        quality: null
+        ratio: '16:9'
+        res: 4K
+        thinking: 深入
+
+  # ============ MJ 备用(暂不开启)============
+  mj:
+    enabled: false
+    force_relax: true
+    interval_sec: 31
+    stylize: 80
+    versions:
+      - --v 6
+      - --v 7
+      - --v 8.1
+
+# ============ 任务控制 ============
+task:
+  # 不垫图(纯文本发散, 让模型自由发挥)
+  reference_images: []
+
+  # 最多发 ~15 条后自动停 (10+ 张要求)
+  stop_at: null
+  stop_file: STOP
+
+  # 司内登录态 6-8h 过期自愈
+  reconnect_after_fails: 3
