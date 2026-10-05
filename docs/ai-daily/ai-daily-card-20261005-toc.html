@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.05 &middot; 星期一 &middot; 第 59 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>特朗普成立超级智能部队</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Meta 推出 Muse Charm 硬件</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>GPT-6 Sol 提示词遭提取</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>谷歌暂停开源漏洞赏金</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>华为 381 款 τ 芯片量产</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>现代汽车 2.5 万台 Atlas</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek Harness v0.2 桌面版</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>AIGC 长剧上星开播</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.05 &middot; Mon &middot; Issue 59</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">机器接管执行，人类兜底核验 —— Meta 把智能体从手机里拽出来做成一只掌上挂件 Muse Charm，现代汽车给 Atlas 批了 2.5 万台的进厂名额，特朗普给联邦 AI 事务发了一个新编制「超级智能部队」· 同一天，谷歌因为几千份 AI 生成的假漏洞报告按下了开源赏金的暂停键，System76 把「不许提交 AI 生成的代码」写进 PR 模板 · 而 GPT-6 Sol Codex 那 29.4 万字符的系统提示词被整个拎出来晾在网上，原文写着「用户非常讨厌你停下来询问确认」</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.05 · 第 59 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">一个拿到了联邦编制，一个拿到了自己的身体，还有一个的内部操作手册被整个晾了出来 —— 智能体今天往前走了三步，也顺手把「它到底被允许做什么」这个问题摆到了所有人面前</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">特朗普宣布成立「超级智能部队」SIF，国家情报总监 Jay Clayton 牵头</span>
+        <span class="card-tag">🏛️ AI 治理</span>
+      </div>
+      <div class="card-desc">
+        当地时间 <strong>10 月 4 日</strong>，美国总统特朗普宣布成立 <strong>「超级智能部队」（Super Intelligence Force, SIF）</strong>，负责协调联邦政府在超级智能领域的全部工作。工作组由国家情报总监 <strong>Jay Clayton</strong> 牵头，成员包括 FTC 主席 Andrew Ferguson、国防部负责研究与工程的副部长 Emil Michael、人事管理局局长 Scott Kupor，直接向特朗普和白宫办公厅主任 Susie Wiles 汇报。对外联络范围明确列出：消费者、公共利益团体、<strong>宗教组织</strong>、关键基础设施提供商与超级智能企业。<strong>「超级智能」不是修辞，是行政令</strong> —— 特朗普 9 月 29 日已签署行政令，要求联邦行政部门在官方通信、公开声明、政府网站、报告与政策文件中用「Super Intelligence（SI）」取代「AI」；马斯克随后确认 SpaceXAI 将更名为 SpaceXSI，一名企业更名跟随一份行政措辞，在产业史上不多见。<strong>把情报口放到 AI 沙皇位上</strong> —— Clayton 此前是 SEC 主席、纽约南区联邦检察官，9 月接受 CNBC 采访时明确把超级智能定性为「国家安全议题」，并反对「暂停研发」，理由是其他国家不会一起停。<strong>自愿协议与强制架构同周落地</strong>：本周早些时候白宫刚召集 AI 企业高管签下不具法律约束力的《白宫超级智能协议：前沿责任联合承诺》，几天后就成立了协调机构。目前国会仍未通过任何联邦层面的 AI 监管法，这个工作组的实际权限边界尚不清晰。<strong>民调背景</strong>：路透／益普索 9 月 22 日民调显示，四分之三美国人担心 AI 企业在防范严重危害上做得远远不够。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">牵头人</div><div class="data-value">Jay Clayton</div></div>
+        <div class="data-chip"><div class="data-label">成员</div><div class="data-value">4 人</div></div>
+        <div class="data-chip"><div class="data-label">行政令</div><div class="data-value">9.29</div></div>
+        <div class="data-chip"><div class="data-label">公众担忧</div><div class="data-value">75%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Meta 推出 Muse Charm：掌上专属硬件，把智能体从手机里剥离</span>
+        <span class="card-tag">📿 AI 硬件</span>
+      </div>
+      <div class="card-desc">
+        Meta 发布 <strong>Muse Charm</strong> —— 一台掌心大小的独立硬件，专门用来承载智能体助手 Muse。由扎克伯格亲自介绍，外观被形容为「电子宠物式」，可挂绳佩戴、无表带。硬件由 Meta 超级智能实验室与前苹果界面设计主管 <strong>Alan Dye</strong> 领衔的新设计实验室合作开发，目标是<strong>把智能体体验从智能手机 App 里剥离出来</strong>。<strong>交互入口重新设计</strong> —— 机身右上角嵌指纹传感器，抬手即可唤醒并下语音指令；正面是一颗不显眼的摄像头 + 至少三个声学开孔组成的麦克风阵列，用来捕捉空间与对话语境。<strong>跑的是能干活的模型</strong>：底层由 <strong>Muse Spark</strong> 驱动，Meta 称这是其面向智能体工作最强的模型；已确认能力包括管理项目、发邮件、订行程，并支持桌面电脑操作。<strong>安全兜底做进硬件</strong> —— 整套系统跑在 <strong>Muse Secure VM</strong> 里；此前 Muse for Mac（9 月发布）已带时间旅行回滚快照，Charm 是这条线的物理化延伸。<strong>同期还有开源动作</strong>：Meta 开源 <strong>Muse Gadgets</strong>，可用 ESP32 与树莓派为 Muse 智能体自制硬件；另有消息称 Muse 会为每位联系人建立个人档案并每小时汇总社交关系信息，隐私争议已经出现。<strong>节奏很急</strong>：官方给出的出货目标是假期档，连接规格、续航与本地／云端推理分配均未公布。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">形态</div><div class="data-value">掌上挂件</div></div>
+        <div class="data-chip"><div class="data-label">唤醒</div><div class="data-value">指纹</div></div>
+        <div class="data-chip"><div class="data-label">底层模型</div><div class="data-value">Muse Spark</div></div>
+        <div class="data-chip"><div class="data-label">安全</div><div class="data-value">Secure VM</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">GPT-6 Sol Codex 系统提示词遭完整提取：29.4 万字符、1902 行</span>
+        <span class="card-tag">📜 提示词泄露</span>
+      </div>
+      <div class="card-desc">
+        爆料者 <strong>elder_plinius</strong> 完整提取并公开了 OpenAI 现役代码模型 <strong>GPT-6 Sol Codex</strong> 的系统提示词与工具定义 —— 总计 <strong>29.4 万字符、1902 行</strong>，涵盖指令模板、临时指令文件与内部协作逻辑，已发布在 GitHub 的 <strong>CL4R1T4S</strong> 仓库。<strong>OpenAI 自己也在反「AI 味」</strong> —— 写作风格章节列出一整份禁用词黑名单：「底线是」「重要性」「视角」「深入探讨」「培养」「利用」「值得注意的是」等，同时要求不许强行热情、不许用废话凑字数、讨论技术概念时像跟同事说话。<strong>授权高得惊人</strong>：原文直接写着<strong>「用户非常讨厌你停下来询问确认或请求许可」</strong> —— 只要会话中的证据支持下一步就继续干，可自行创建隔离工作区、解决代码合并冲突、创建草稿 PR，<strong>只在破坏性或不可逆操作前请示</strong>；工具调用期间每 60 秒在评论频道发一次状态更新。<strong>工具链是硬编码的工程约定</strong>：优先用 <code>rg</code> 而非 <code>grep</code>；独立任务必须并行处理；通过 <strong>SKILL.md</strong> 机制动态加载技能；接管浏览器与桌面 UI 时设多级确认模式。<strong>长任务有记忆交接机制</strong> —— Token 预算耗尽前先存一份含目标、决策、进度与下一步的简明笔记，再开新上下文窗口；另有休眠与心跳唤醒机制跟踪后台任务。<strong>社区反应两极</strong>：有人认为这类提示词本可从本地文件拿到、泄露含金量有限；也有人指出这份文档恰恰说明，工业级 AI 应用靠的是严密的系统工程，不是讨巧的话术。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">字符数</div><div class="data-value">29.4 万</div></div>
+        <div class="data-chip"><div class="data-label">行数</div><div class="data-value">1902</div></div>
+        <div class="data-chip"><div class="data-label">状态更新</div><div class="data-value">每 60 秒</div></div>
+        <div class="data-chip"><div class="data-label">技能机制</div><div class="data-value">SKILL.md</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">一份运行了四年的赏金计划被 AI 垃圾报告逼停，一条绕开制程限制的芯片路线亮出了 381 款的量产清单，2.5 万台人形机器人拿到了进厂名额 —— 底座在扩张，同时第一次出现了「被自己的产出噎住」的信号</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">AI 产出成本趋零、人工核验成瓶颈：谷歌暂停开源漏洞赏金，System76 禁 AI 代码进 PR</span>
+        <span class="card-tag">🧯 AI 垃圾</span>
+      </div>
+      <div class="card-desc">
+        谷歌宣布自 <strong>2026 年 10 月 1 日起</strong>，开源软件漏洞奖励计划（<strong>OSS VRP</strong>）<strong>不再接收产品漏洞提报</strong>。据 Tom's Hardware，直接原因是谷歌工程师与开源维护者被<strong>数以千计的劣质报告淹没</strong> —— 这些报告声称发现了严重漏洞，深入排查后全是 AI 生成的幻觉，根本无法被实际利用。OSS VRP 自 2022 年运行，赏金区间 100 至 <strong>31,337 美元</strong>。同期，System76 更新 COSMIC 项目 PR 模板，<strong>强制要求贡献者确认提交内容不含任何 AI 生成的代码、注释与描述</strong>，否则无法按要求提交。<strong>不是全面关停</strong> —— 10 月 1 日前已提交的产品漏洞不受影响；供应链类报告仍可通过 OSS VRP 提交；涉及 Google Cloud 的仓库改走 Cloud VRP。<strong>这不是孤例</strong>：curl 项目已于 2026 年 1 月底以同样理由关停赏金；Linux 维护者此前报告被虚假 CVE 淹没，单版本记录漏洞数一度冲到 2000，被迫放弃一批老网卡驱动；Intel 也冻结了自己的赏金计划。<strong>最讽刺的对照</strong> —— 2025 年 11 月，谷歌自己的 AI 漏洞猎手曾向 FFmpeg 灌入大量报告，其中一份针对的解码器只用于 1995 年游戏《Rebel Assault 2》开头几秒的视频；FFmpeg 称之为「CVE slop」。一年后，轮到谷歌自己的工程师被淹。<strong>结构性结论</strong>：<strong>写一份假报告的成本趋近于零，核验一份报告的成本没变</strong>。谷歌承诺 2027 年 Q1 公布整改方案，行业方向大概率是强制要求可复现的 exploit，而不是一刀切禁用 AI 辅助。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">生效日</div><div class="data-value">10.01</div></div>
+        <div class="data-chip"><div class="data-label">赏金上限</div><div class="data-value">$31,337</div></div>
+        <div class="data-chip"><div class="data-label">运行年限</div><div class="data-value">4 年</div></div>
+        <div class="data-chip"><div class="data-label">整改公布</div><div class="data-value">2027 Q1</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">华为 381 款 τ 芯片量产，四代麒麟首次集体亮相，余承东解读「韬定律」</span>
+        <span class="card-tag">🔬 国产芯片</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 4 日</strong>，华为常务董事、终端 BG 董事长余承东发布视频，披露华为半导体已在手机、AI、通用计算、网络、智能汽车等多个领域<strong>成功设计并量产 381 款 τ（韬）芯片</strong>。视频现场 <strong>Mate60 / Mate70 / Mate80 / Mate90 四代麒麟机型首次同台亮相</strong>。<strong>换赛道：从「几何缩微」到「时间缩微」</strong> —— 摩尔定律靠把晶体管做小；华为提出<strong>「韬定律」（τ）</strong>，核心是以「时间缩微」替代「几何缩微」：芯片完成一项任务的时间不只花在计算上，还花在数据传输和等待上，韬定律要做的就是<strong>让数据少绕路、让计算不用等</strong>。<strong>四层协同优化</strong>：器件层优化晶体管与互连电阻、寄生电容；电路层用<strong>逻辑折叠</strong>突破传统平面布局边界、缩短关键路径走线；芯片层按实际负载对指令流和数据流做细粒度控制；系统层定义<strong>灵衢总线</strong>实现超节点统一内存编址。<strong>落到产品</strong>：Mate 90 / 90 Pro 搭载麒麟 9030 与 9035；Mate 90 Pro Max 的麒麟 9050 系列是首次应用逻辑折叠的 τ 芯片，其中<strong>麒麟 9050 Pro 为首款逻辑折叠 τ 芯片</strong>；余承东的比喻是「把平房改楼房再装高速电梯」。<strong>路线图给到 2031</strong> —— 华为预计基于韬定律的高端芯片，到 2031 年晶体管密度可达到 <strong>1.4 纳米制程同等水平</strong>；同日流出的裸片显微照显示麒麟 9050 Pro 为双裸片垂直堆叠，晶体管密度提升 <strong>55%</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">量产芯片</div><div class="data-value">381 款</div></div>
+        <div class="data-chip"><div class="data-label">同台机型</div><div class="data-value">4 代</div></div>
+        <div class="data-chip"><div class="data-label">密度提升</div><div class="data-value">55%</div></div>
+        <div class="data-chip"><div class="data-label">2031 对标</div><div class="data-value">1.4nm</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">现代汽车 2.5 万台 Atlas 进厂，美国新建年产能 3 万台机器人工厂</span>
+        <span class="card-tag">🦾 具身智能</span>
+      </div>
+      <div class="card-desc">
+        波士顿动力在佐治亚州萨凡纳的现代汽车 Metaplant America 园区启用 <strong>机器人 Metaplant 应用中心（RMAC）</strong>，作为人形机器人 Atlas 的测试与训练中心。现代汽车集团同步公布规模计划：<strong>未来几年向现代与起亚的全球工厂累计部署 2.5 万台 Atlas</strong>，并在美国新建一座<strong>年产能 3 万台</strong>的机器人生产设施。<strong>训练方式是遥操作</strong> —— Atlas 目前在 RMAC 由训练员以 VR 遥操作控制，学习真实零部件的物流与排序；2026 年产能已被现代产线与谷歌 DeepMind 的研究需求订满。<strong>三步走节奏很克制</strong>：<strong>2028 年</strong>率先在佐治亚 Metaplant 上岗，第一份工作是零部件分拣排序<strong>而不是总装</strong>；起亚美国工厂 2029 年加入；<strong>2030 年</strong>才扩展到装配等复杂工序 —— 先从标准化程度高、精度要求可控的环节切入积累数据。<strong>量产版规格</strong>：CES 2026 发布的 Atlas 量产版有 <strong>56 个自由度</strong>、关节可全向旋转、臂展最高 2.3 米、最大举重 50 公斤、持续负载 30 公斤、单次电池续航约 4 小时，可在 <strong>−20℃ 至 40℃</strong> 工作，电量不足时自行前往充电站换电池。<strong>扩产同步进行</strong> —— 2027 年 RMAC 将迁入面积约为现在 10 倍的新设施，测试范围从汽车零部件扩展至航空航天、半导体、物流、食品饮料与生命科学；这是 Atlas 从演示明星转向「万台级订单 + 自有产能」的最硬承诺，直接对标特斯拉 Optimus 的量产叙事。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">部署目标</div><div class="data-value">2.5 万台</div></div>
+        <div class="data-chip"><div class="data-label">美国产能</div><div class="data-value">3 万台/年</div></div>
+        <div class="data-chip"><div class="data-label">自由度</div><div class="data-value">56</div></div>
+        <div class="data-chip"><div class="data-label">上岗年份</div><div class="data-value">2028</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个让智能体学会自己写插件并装好，另一个让 AI 生成的内容第一次走进省级卫视黄金档 —— 工具的自由度在涨，内容的准入口子也在开</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">DeepSeek Harness v0.2 发布官方桌面应用，MIT 开源 Agent 运行时迈入开发者预览</span>
+        <span class="card-tag">🧩 Agent Harness</span>
+      </div>
+      <div class="card-desc">
+        DeepSeek 为开源智能体运行时 <strong>DeepSeek Harness（dsh）</strong> 发布官方桌面应用，随 <strong>v0.2 预览版</strong> 一同上线。安装包覆盖 <strong>macOS（Apple Silicon）与 Windows 64 位</strong>，也可直接 <code>npx @deepseek-ai/dsh web</code> 跑网页版。项目去年 8 月以 MIT 协议开源，GitHub 已过 <strong>24 万 star、2.9 万 fork</strong>。<strong>架构口号是「一切皆插件」</strong> —— 模型适配器、工具注册表，<strong>连 agent loop 本身都是插件</strong>，跑在 Cordis 运行时上；任何一层都可替换，且不锁定 DeepSeek 自家模型，支持第三方 provider 与自定义 OpenAI 兼容端点。<strong>Creator 模式最有想象空间</strong>：在对话里描述一个插件，智能体自己写、自己装；另有 PTC（程序化工具调用，Node 代码跑在独立进程）、Standard（已设为默认）、Minimal（跑基准用的精简循环）共四种会话模式。<strong>面向日常办公，不只是写代码</strong> —— 新增插件管理页（安装／配置／启停）、右侧栏文件与 diff 预览、上传文档／表格／PDF 后要图表或幻灯片，以及 <strong>Automation Task 插件</strong>：可调度周期性提示词，带运行历史与可编辑频率。<strong>与 Claude Code Mods 的兼容实验</strong>：v0.2.1-alpha.1 加入了实验性的 <strong>Claude Code Mods 兼容层</strong>，DeepSeek 明说这是在做「Mods API 是否为 dsh 插件子集」的验证，不承诺完全兼容；同时移除了 runtime invariant plugins，<strong>对部分扩展是破坏性变更</strong>。它同时是 DeepSeek 的评测台：DeepSeek-V4-Flash-0731 在 Terminal Bench 2.1 拿到 <strong>82.7</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">Star</div><div class="data-value">24 万</div></div>
+        <div class="data-chip"><div class="data-label">许可</div><div class="data-value">MIT</div></div>
+        <div class="data-chip"><div class="data-label">会话模式</div><div class="data-value">4 种</div></div>
+        <div class="data-chip"><div class="data-label">Terminal Bench</div><div class="data-value">82.7</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">国内首部 AIGC 长剧《后西游记·战天宫篇》上星开播，「边审边播」首次落地</span>
+        <span class="card-tag">📺 AIGC 内容</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 4 日</strong>，国内首部全 AIGC 制作的上星长剧 <strong>《后西游记》第一季·战天宫篇</strong> 提档开播，<strong>湖南卫视与芒果 TV 双平台同步</strong>：18:00 芒果 TV 会员抢先看，20:00 湖南卫视正式播出，10 月 9 日起「剧好看」专区（含东方有线等大屏点播平台）上线。全剧无真人演员，人物与场景均由 AI 生成，由芒果 TV 出品、芒果灵创剧场打造。<strong>「边审边播」是真正的制度变量</strong> —— 这是「广电 21 条」发布后首部采用<strong>边制作、边审核、边播出</strong>模式的剧集，可根据审核意见与观众弹幕反馈实时优化后续剧情，属国内上星剧首次尝试。<strong>体量不小</strong>：第一季 30 集、每集 40 分钟；前作「花果山篇」8 月 31 日播出 5 集，实时收视率同时段位居省级卫视第一，本季同样拿下省级卫视同时段收视第一。<strong>内容侧已经跑通情绪点</strong>：剧中地府神仙互相「踢皮球」，判官一句「我也是打工的」让打工人共情，#打工人看后西游记不语只一味共情# 登上热搜；水墨风特效获好评；湖南卫视连发 22 条微博打 call，何炅、汪涵等 22 位艺人集体应援。<strong>与昨日的对照很有意思</strong> —— 昨天《辐射：纽约》AI 复刻版被贝塞斯达叫停、MW2 复刻被动视下架；今天一部全 AIGC 剧集登上了省级卫视黄金档。<strong>同一周里，AI 生成内容在 UGC 侧撞版权墙，在 PGC 侧拿到了播出许可。</strong>
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">体量</div><div class="data-value">30 集×40 分</div></div>
+        <div class="data-chip"><div class="data-label">播出平台</div><div class="data-value">卫视+芒果TV</div></div>
+        <div class="data-chip"><div class="data-label">模式</div><div class="data-value">边审边播</div></div>
+        <div class="data-chip"><div class="data-label">收视</div><div class="data-value">同时段第一</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天的八条消息在讲同一件事的两面：<strong>机器接管执行，人类兜底核验。</strong></p>
+    <p><strong>执行的那一面在加速。</strong> Meta 给智能体做了个身体（Muse Charm），现代汽车给机器人批了 2.5 万台的进厂名额，DeepSeek 让智能体学会自己写插件（Creator 模式），特朗普干脆给超级智能发了一个联邦编制。GPT-6 Sol Codex 那份 29.4 万字符的提示词泄露，恰好把「加速」的机制摆到了台面上 —— 原文里写着「用户非常讨厌你停下来询问确认」，只在破坏性或不可逆操作前请示。这不是某个工程师的偏好，是工业级智能体的默认设定。</p>
+    <p><strong>核验的那一面在崩。</strong> 谷歌因为几千份 AI 幻觉漏洞报告，把 2022 年就跑起来的开源赏金按了暂停；System76 把「不许提交 AI 生成代码」写进 PR 模板；Linux 维护者被虚假 CVE 逼到砍掉一批老驱动。<strong>产出成本趋零，核验成本一分没降</strong> —— 这是 2026 年最贵的一道账。</p>
+    <p><strong>中间那条缝里，是最值得看的机会。</strong> 《后西游记》上了省级卫视黄金档，还第一次跑通了「边审边播」。同一周，AI 复刻的《辐射：纽约》被叫停、MW2 复刻被动视下架。<strong>UGC 侧在撞墙，PGC 侧在开门</strong> —— 差别不在技术，在有没有一套能兜住核验的流程。</p>
+    <p><strong>本期四条可执行线索：① 把 GPT-6 Sol 的「禁用词黑名单」搬进宣发提示词 —— 先禁「值得注意」「深入探讨」「赋能」「助力」，再谈风格，负面约束比正面形容有效得多；② 批量 AI 生图必须配人工抽检闸门 —— 今天谷歌的教训就是产出翻十倍、质检不能只翻一倍；③ 评估 DeepSeek Harness 的 Automation Task —— 周期性提示词 + 运行历史，正是日报流水线的同构物，值得实测能否替代现有 cron + 脚本组合；④ 研究《后西游记》的「边审边播」—— 快速上线、按反馈实时改的节奏，可以直接搬到活动素材的迭代上</strong>。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
