@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.07 &middot; 星期三 &middot; 第 61 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 722 篇数学手稿</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Mistral Large 4 Le Chonk</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Decisions API 公测</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>DeepSeek 800 亿元融资</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>司法部改称超级智能</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>韩国 4.7 万亿韩元</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Nano Banana 2.1 降价一半</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude 进 Workspace</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.07 &middot; Wed &middot; Issue 61</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">都在抢位置：中国砸钱，欧洲砸权重，韩国砸预算，美国先改了个名字 —— OpenAI 把 722 篇由未发布前沿模型写出的数学手稿推上 GitHub，让数学界的焦点从「能不能解」变成「该署谁的名」 · 同一天 Mistral 用 1 万亿参数的 Large 4「Le Chonk」把「中国以外最强开源权重」这面旗插上欧洲 · DeepSeek 把 Pre-IPO 轮从 500 亿元加码到至少 800 亿元 · 韩国宣布明年 3 月起砸 4.7 万亿韩元自研前沿模型 · 美国司法部则下发备忘录，要求员工在法庭文书里把「AI」改口叫「超级智能」</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.07 · 第 61 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">一个把 722 篇数学手稿丢给全世界验，一个用 1 万亿参数的开源权重抢「中国以外最强」的旗，一个把「判断」这件事做成了原生接口 —— 今天模型侧的主角不是跑分，而是各自要占的那个位置</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 发布 722 篇 AI 数学手稿：372 个结果族，出自一个尚未发布的内部前沿模型</span>
+        <span class="card-tag">📐 AI 科研</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，OpenAI 在公开 GitHub 仓库 <code>openai/math</code> 一次性放出 <strong>722 篇数学手稿</strong>，归并为 <strong>372 个结果族</strong>（family 用于聚合主结果、companion 论证、推论与替代证明），以 <strong>Apache 2.0</strong> 授权发布，附带 Lean 形式化证明库与 10 份模型推理过程的精简摘要。产出这些结果的是一个<strong>尚未发布、也未公布名称的内部前沿模型</strong>；OpenAI 称其中包含「数百个公开未解问题」的解答。<strong>规模与流程</strong> —— 评估阶段模型被投放约 <strong>4000 道题</strong>，最终收敛出 722 篇手稿，OpenAI 称「平均每个结果消耗的算力约等于 3 小时 ChatGPT Pro 思考」。README 明确写着结果处在<strong>不同验证阶段</strong>，部分已有 Lean 形式化，未形式化的「可能存在问题」，会持续修正并保留发布历史。<strong>两个例外</strong>：黎曼 ζ 函数 Re(s) &gt; 11/12 零自由区域的证明，以及 CM 阿贝尔簇上的 Hodge 猜想证明，走的是非标准流程，其中 ζ 那篇经人工编辑润色。<strong>推理摘要覆盖的题目</strong>包括 π 的无理数指数、对称与一般 Mahler 猜想、基本半定阈值处的普通 NP-困难性、特征 2 下 Kaplansky 直接有限性猜想、稀释自旋玻璃的 Mézard–Parisi 公式、量子 Heisenberg 铁磁体的自发磁化、三维相对论 Vlasov–Maxwell 系统。<strong>数学界并不买账这套流程</strong> —— 独立咨询机构 AGMAI（普林斯顿高等研究院的数学与 AI 顾问团）9 月 29 日发布的首份建议书写得很直白：「我们不支持这一做法，并要求他们停止在专有模型上测试高难度数学问题」，要求公布模型名、提示词、思维链摘要、耗时与算力成本，并要求实验室<strong>不得把结果发布当成模型的营销工具</strong>。<strong>⚠️ 未同行评审</strong>：仓库整体未经同行评议，模型本身不开放，外部无法复现。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">手稿数</div><div class="data-value">722 篇</div></div>
+        <div class="data-chip"><div class="data-label">结果族</div><div class="data-value">372 个</div></div>
+        <div class="data-chip"><div class="data-label">投放题量</div><div class="data-value">约 4000</div></div>
+        <div class="data-chip"><div class="data-label">单结果算力</div><div class="data-value">3 小时 Pro</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Mistral 发布 Large 4「Le Chonk」：1 万亿参数 / 490 亿激活，开源权重 10 月 27 日放出</span>
+        <span class="card-tag">🇪🇺 开源权重</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，巴黎的 Mistral AI 发布 <strong>Mistral Large 4</strong> 公开预览版，内部代号 <strong>Le Chonk</strong>：稀疏 MoE，<strong>1 万亿总参数 / 每任务仅激活 490 亿</strong>，原生支持文本与图像。API 当日开放，<strong>权重定于 10 月 27 日放出</strong>。Mistral 的定位说得很克制 —— 不是「最强模型」，而是「<strong>中国以外最强的开源权重模型</strong>」。<strong>训练账本</strong>：约 <strong>4000 张 NVIDIA Grace Blackwell</strong>（官方另一处口径 3800 张）在欧洲自有数据中心从零训练，历时约两个月，功耗约 10 兆瓦；训练数据覆盖 160 多种语言，含欧盟全部官方语言。<strong>跑分（Mistral 自报预览值）</strong>：DeepSWE v1.1 <strong>61.7%</strong>，略高于智谱 GLM-5.3 的 61%、DeepSeek-V4-Pro 的 57%，远高于 Qwen 3.8 Max 的 51%；FinWorkBench 67% 与 DeepSeek-V4-Pro 持平；Harvey 法律智能体基准 15% 领先 Kimi K3（13%）与 GPT-6 Astra（5%）。<strong>安全是主战场</strong> —— 在「复现真实漏洞并打补丁」测试中得 <strong>82%</strong>（自称全场最高），Cybench 40 道安全竞赛题解出 <strong>93%</strong>，Lakera B3 基准抗攻击 93.3%；同步向网络安全公司、经审查伙伴与国家机构开放<strong>低限制 + 增强网络能力</strong>的版本做红队。<strong>视觉是差异点</strong>：DIOR-RSVG 遥感视觉定位 <strong>73%</strong>，高于 GPT-6 Astra 的 68%；能把技术图纸转成 CAD 模型，瞄准保险定损、电网巡检、农作物监测等工业客户。<strong>主权才是商品</strong> —— 联合创始人兼首席科学家 Guillaume Lample 的原话是，一旦权重公开，「银行或政府可以下载模型跑在自己的机器上，不需要任何人的许可」，客户要的是两条保证：不会有外国切断访问、训练过程有清晰记录。<strong>⚠️ 闭源前沿仍有明显差距</strong>：Surge AI 盲评编码输出得 3.74/5（Claude Opus 5 为 4.22），AutomationBench 59.9 分低于 Claude Opus 5.5 的 69.5 —— Mistral 自己也把这些数字摆在对比表里。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">总参数</div><div class="data-value">1T</div></div>
+        <div class="data-chip"><div class="data-label">激活参数</div><div class="data-value">49B</div></div>
+        <div class="data-chip"><div class="data-label">DeepSWE</div><div class="data-value">61.7%</div></div>
+        <div class="data-chip"><div class="data-label">权重开放</div><div class="data-value">10.27</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">OpenAI Decisions API 进入公开测试：由 GPT-6 Luna 驱动，比 Responses API 快约 10 倍</span>
+        <span class="card-tag">⚡ 推理接口</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，OpenAI 宣布 <strong>Decisions API</strong> 进入公开测试（此前在 DevDay 2026 上以有限预览形式亮相）。新端点 <code>POST /v1/decisions</code> 由 <strong>GPT-6 Luna</strong> 驱动，接受文本与图像输入，返回<strong>带类型的结构化判断</strong>，OpenAI 称其速度<strong>约为 Responses API 的 10 倍</strong>。<strong>三种问题类型</strong> —— <code>predicate</code>（判断某条件为真，返回 0–1 概率）、<code>choice</code>（从预设选项里选一个，附带各选项概率与独立置信度）、<code>score</code>（按有序等级打分，返回概率加权均值，可落在两个等级之间）。<strong>定价是这次的真正看点</strong>：<strong>只收 input token，没有 output token 费用，也没有缓存读写费</strong>；同一模型走 Responses API 是 input $0.10/M、output $0.50/M，Decisions 直接免掉了输出账单。<strong>但单位成本并不便宜</strong> —— 按 100 万次 500 token 分类计算，Decisions API 约 <strong>50 美元</strong>，第三方同类（TypeSafe Jev）约 21 美元；OpenAI 的筹码是能读图、账号现成、支持 ZDR 与 HIPAA。<strong>图像只能内联</strong>：必须 base64 data URL，托管的图片链接与 file ID 一律拒收，已有管线需要加一道「抓取 + 编码」。<strong>边界写得很清楚</strong> —— 需要自定 JSON Schema 的结构化输出仍要走 Responses API 的 Structured Outputs，需要模型带参数调工具要走 function calling，Decisions 只做「判断」，不做「生成」。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">速度</div><div class="data-value">约 10x</div></div>
+        <div class="data-chip"><div class="data-label">输出费用</div><div class="data-value">0</div></div>
+        <div class="data-chip"><div class="data-label">输入价</div><div class="data-value">$0.10/M</div></div>
+        <div class="data-chip"><div class="data-label">问题类型</div><div class="data-value">3 种</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">中国用 800 亿元把国产算力堆到 1GW，韩国把淘汰赛换成集中投入明着对标中国开源，美国则连一个词都不放过 —— 三条都在回答同一个问题：抢位置，你打算掏什么</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">DeepSeek 接近完成至少 800 亿元融资，腾讯与宁德时代领投，冲刺 2027 年初 IPO</span>
+        <span class="card-tag">💰 Pre-IPO</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，彭博社与路透社先后援引知情人士称，<strong>DeepSeek 即将完成 IPO 前最后一轮融资，锁定金额至少 800 亿元人民币（约 120 亿美元）</strong>，远超最初约 500 亿元的目标；<strong>腾讯与宁德时代是出资额最高的领投方之一</strong>。按已签署的条款清单，最终总额<strong>可能接近 1000 亿元</strong>。<strong>为什么超募</strong> —— V4 Flash 系列发布后重设了外界对「模型性价比」的预期。今年 6 月 DeepSeek 刚完成约 500 亿元首轮外部融资（估值超 3500 亿元），本轮最初目标估值约 5000 亿元。<strong>钱的去向很明确</strong>：计划在内蒙建设大型数据中心，目标新增 <strong>1GW 算力</strong>，预计至少需要 <strong>16 万枚华为高端 AI 加速器</strong>，可能成为已知规模最大的华为 AI 芯片集群之一。<strong>同步在拆 CUDA 的墙</strong> —— 公司已与华为合作开发面向昇腾芯片的编程工具，并正式开源面向昇腾算力平台的基础设施组件，目标是给开发者提供 CUDA 之外的选项。<strong>上市路径</strong>：已聘任中信证券筹备上海科创板上市前期工作，时间表指向 2027 年初挂牌；本轮完成后下一步应是公司重组。腾讯此前一轮曾以 100 亿元成为最大投资方，希望把 AI 融入各平台；宁德时代看中的可能是「给数据中心供货」这门日益赚钱的生意。<strong>同期对照</strong>：月之暗面在以 500 亿美元估值完成 Pre-IPO 轮后同样计划 2027 年初上市；彭博行业研究称中美头部模型基准差距已从 5 月的约 9% 收窄到约 3%。<strong>⚠️ 条款未最终敲定</strong>：报道均强调谈判接近尾声但细节仍可能变化，DeepSeek 未回应置评。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">本轮金额</div><div class="data-value">800 亿元+</div></div>
+        <div class="data-chip"><div class="data-label">原目标</div><div class="data-value">500 亿元</div></div>
+        <div class="data-chip"><div class="data-label">算力目标</div><div class="data-value">1GW</div></div>
+        <div class="data-chip"><div class="data-label">华为加速器</div><div class="data-value">16 万枚</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">落实特朗普行政令，美国司法部要求员工把 AI 改称「超级智能」（SI）</span>
+        <span class="card-tag">🏛️ 联邦术语</span>
+      </div>
+      <div class="card-desc">
+        路透社看到的一份备忘录显示，<strong>美国司法部</strong>于 10 月 6 日（周二）指示员工：在绝大多数场合提及该技术时，应使用「<strong>超级智能</strong>（Super Intelligence）」而非「人工智能」，缩写「<strong>SI</strong>」。备忘录由代理副总检察长 <strong>Trent McCotter</strong> 签发，依据是特朗普 <strong>9 月 29 日</strong>签署的行政命令 —— 该命令要求联邦各机构在法律允许的最大范围内完成用词替换。<strong>适用范围</strong> —— 对外沟通、政策文件及各类官方记录；对法院提交的诉讼文件则加了限定，「在适宜的情况下」同样适用，而非一刀切。<strong>官方理由</strong>：行政令原文称联邦政府使用的术语「应当反映美国创新者正在开创的非凡技术所具有的变革性能力」。Bloomberg Law 指出，这是特朗普应对公众对 AI 观感转差努力的一部分。<strong>背景并不轻松</strong> —— 备忘录发布前接连发生多起黑客事件，公众对智能技术的观感已经转差；特朗普一直不倾向出台新监管法规，但曾表态若确有必要，司法部会加以约束。<strong>这是全政府动作</strong>：行政令适用于司法部之外的所有联邦部门，措辞变更不是某个部门的命名决策。<strong>⚠️ 注意边界</strong>：行政令里的能力描述是政府的主张，不是对技术能力的独立评估；「when appropriate」给了出庭律师裁量空间。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">签发人</div><div class="data-value">McCotter</div></div>
+        <div class="data-chip"><div class="data-label">依据行政令</div><div class="data-value">9.29</div></div>
+        <div class="data-chip"><div class="data-label">新术语</div><div class="data-value">SI</div></div>
+        <div class="data-chip"><div class="data-label">范围</div><div class="data-value">全联邦</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">韩国宣布 4.7 万亿韩元前沿 AI 项目：明年 3 月启动，1 万张 Vera Rubin GPU 打底</span>
+        <span class="card-tag">🇰🇷 国家预算</span>
+      </div>
+      <div class="card-desc">
+        韩国科学技术信息通信部 <strong>10 月 6 日</strong>宣布，将从 <strong>2027 年 3 月</strong>起启动一项 <strong>4.7 万亿韩元（约 35 亿美元）</strong>的前沿 AI 模型研发项目，目标是训练出能与全球领先模型竞争的自研前沿模型。国会在 12 月批准 2027 年预算后，将通过公开招标选定牵头开发商，中标者最早 <strong>2027 年 2 月</strong>公布。<strong>不是补贴，是股权</strong> —— 政府以<strong>股权投资</strong>方式出资而非单纯拨款，目的是让回报最终能与公众分享，设立特殊目的公司（SPC）是落地选项之一；参与企业需按比例配套私人资金。<strong>钱怎么分</strong>：约 <strong>3.9 万亿韩元采购 1 万张 NVIDIA Vera Rubin GPU</strong>，约 <strong>8000 亿韩元采购训练数据</strong>，其余投向人才与算力集中。<strong>为什么换打法</strong> —— 科技信息通信部第二次官 Ryu Je-myung 说，自 4 月 Claude Mythos 预览版出来后，全球前沿模型竞争已进入完全不同的阶段；原先的「国家基础模型项目」采用淘汰赛制，被淘汰企业背上污名并引发争议，行业反馈是「要在前沿层级竞争，必须集中所有资源」。<strong>两个项目并行</strong>：原有的国家基础模型项目继续推进，重心转向行业专用与真实场景落地，三支队伍已进入第三阶段，年底前选出两支决赛队伍，两支队伍可选择加入前沿项目。<strong>明确的对手</strong> —— 官方表述就是「与中国头部开源模型竞争」；参与主体开放给单一企业、企业联盟与 SPC，希望初创企业、高校与研究人员发挥主导作用。<strong>⚠️ 尚缺关键细节</strong>：未披露技术目标、模型规模、参与机构，也未说明是否开源。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">总投资</div><div class="data-value">4.7 万亿₩</div></div>
+        <div class="data-chip"><div class="data-label">GPU</div><div class="data-value">1 万张</div></div>
+        <div class="data-chip"><div class="data-label">训练数据</div><div class="data-value">8000 亿₩</div></div>
+        <div class="data-chip"><div class="data-label">启动</div><div class="data-value">2027.03</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个把批量出图的账单砍掉一半，一个把 AI 塞进了你每天都在用的三个办公软件 —— 工具侧的进步今天很实在：便宜，和顺手</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Google 发布 Nano Banana 2.1：1K 图 API 价腰斩至 $0.0336，登 Arena 文生图第 5</span>
+        <span class="card-tag">🍌 生图模型</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，Google 发布图像生成与编辑模型 <strong>Nano Banana 2.1</strong>，API 模型 ID <code>gemini-nano-banana-2.1</code>，已在 Gemini App、Search 的 AI Mode、Google AI Studio、Flow、Stitch 与 Google Ads 推送。官方称在<strong>视觉设计、蒙版编辑、主体一致性</strong>三方面有显著提升。<strong>价格直接砍半</strong> —— 图像输出从每百万 token 60 美元降到 30 美元：标准档 <strong>1K 图 $0.0336</strong>（原 Nano Banana 2 为 $0.067）、2K 为 $0.0504、4K 为 $0.0756，批量任务再打对折。<strong>1000 张 1K 图从约 67 美元降到约 33.6 美元。</strong><strong>参考图能力</strong>：单次最多 <strong>14 张参考图</strong>，可同时锁定<strong>最多 4 个角色 + 10 个物体</strong>的一致性；新增「中等」思考档并设为默认（2.0 只有 minimal / high，默认 minimal）。<strong>修掉了极端画幅的老毛病</strong> —— 1:4 / 4:1 / 1:8 / 8:1 在 2K 与 4K 下的拼接伪影已修复，共支持 14 种画幅，最高 4K，对横幅、全景头图、竖屏壁纸这类物料是直接利好。<strong>榜单位置</strong>：Arena 文生图第 <strong>5</strong>（1328 分）、图像编辑第 6（1428 分）、多图编辑第 4；文本偏好 ELO 1050 分，高于 Nano Banana 2 的 990 与 Pro 的 935，但仍落后 GPT Image 2.5（1425 / 1524）。<strong>⚠️ 输入涨价了</strong> —— input token 从 $0.50/M 涨到 <strong>$1.50/M</strong>，且思考 token 也计费；Nano Banana 2 将于 <strong>10 月 29 日关停</strong>，开发者只有 23 天换模型 ID。另新增 Google 图片搜索 grounding，但不能用网络上真人照片做 grounding。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">1K 图单价</div><div class="data-value">$0.0336</div></div>
+        <div class="data-chip"><div class="data-label">参考图</div><div class="data-value">14 张</div></div>
+        <div class="data-chip"><div class="data-label">Arena 排名</div><div class="data-value">第 5</div></div>
+        <div class="data-chip"><div class="data-label">旧版关停</div><div class="data-value">10.29</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Claude for Google Workspace 公开 beta：侧边栏直改 Docs / Sheets / Slides</span>
+        <span class="card-tag">📄 办公协作</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 6 日</strong>，Anthropic 宣布 <strong>Claude for Google Workspace</strong> 进入公开 beta，覆盖全部付费 Claude 方案。通过 Google Workspace 应用市场的插件，Claude 以<strong>侧边栏</strong>形式出现在 Docs / Sheets / Slides 里，可直接读取、理解并修改当前打开的文件；同时发布 Docs / Sheets / Slides <strong>连接器</strong>（beta），可从 Claude 会话里直接创建与编辑 Google 文件。<strong>Docs</strong> —— 就地改句子、重设标题样式且不破坏周围格式；大段改写以「建议卡片」形式出现在侧边栏，可逐条应用或驳回。<strong>Sheets</strong>：写公式、建数据透视表与原生图表、新增标签页；需要关联或清洗时可把数据拉进 Python 处理再写回表格。<strong>Slides</strong>：按当前 deck 的版式与主题生成新页，并<strong>自检</strong>，标记元素重叠、超出画布、文字难读等问题。<strong>两种编辑模式</strong> —— 默认「Ask before edits」（每次改动弹审批卡并附摘要），可切换「Accept all edits」让 Claude 一口气跑完。<strong>企业管控同步覆盖</strong>：Compliance API、客户自管加密密钥（CMEK）、OpenTelemetry 审计导出在插件上同样生效；权限跟随用户既有的 Google 共享设置，企业版的连接器、技能与管理员策略都会带进侧边栏。<strong>⚠️ 审批开关在用户手上</strong> —— 管理员只能决定是否允许安装插件（Marketplace 权限闸门），但「是否跳过审批」由每个打开侧边栏的人自己选，共享文件上这一点需要组织内部自己立规矩。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">覆盖应用</div><div class="data-value">3 个</div></div>
+        <div class="data-chip"><div class="data-label">默认模式</div><div class="data-value">改前确认</div></div>
+        <div class="data-chip"><div class="data-label">企业管控</div><div class="data-value">同步生效</div></div>
+        <div class="data-chip"><div class="data-label">状态</div><div class="data-value">公开 beta</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天的八条消息在讲同一件事：<strong>都在抢位置——中国砸钱，欧洲砸权重，韩国砸预算，美国先改了个名字。</strong></p>
+    <p><strong>技术能力今天没有出现新魔法，但围着它的钱、权重、预算和措辞全都被重新摆了一遍。</strong> DeepSeek 拿 800 亿元把国产算力堆到 1GW、顺手开源昇腾组件拆 CUDA 的墙；Mistral 拿 1 万亿参数的开源权重把「可自托管」做成卖点，明着不跟闭源争第一；韩国把淘汰赛换成集中投入，官方原话就是「与中国头部开源模型竞争」；美国司法部连一个词都不放过，把「AI」改成「超级智能」。</p>
+    <p><strong>而在这场抢位战里，最耐人寻味的是数学界的反应。</strong> OpenAI 交出了 722 篇手稿，AGMAI 的回应不是祝贺，是「请停止在专有模型上测试高难度数学问题」，以及「不要把成果发布当成营销工具」。<strong>当产出方和守门方对「什么算成果」还没达成一致时，能力越强，摩擦越大。</strong></p>
+    <p><strong>本期六条可执行线索：① Nano Banana 2.1 是唯一能立刻省钱的一条</strong> —— 1K 图 $0.0336、批量再半价、极端画幅伪影修好、14 张参考图锁 4 角色一致性，批量 KV 变体与超宽幅横幅可直接投产，<strong>务必在 10 月 29 日前切掉旧模型 ID，注意 input token 涨了 3 倍</strong>；<strong>② Decisions API 适合做素材初筛</strong> —— 批量给 UGC / 玩家投稿打「是否含竞品元素」「是否合规」的概率分，只收 input token、快约 10 倍，比让模型写一段分析再解析划算得多；<strong>③ AI 生成物料要学 OpenAI 的版本库做法</strong> —— 先发布可溯源版本、保留修订历史、逐步补验证，宣发素材同样建议建版本库 + 人工核验记录；<strong>④ 共享文档上的 AI 编辑要立规矩</strong> —— Claude Workspace 插件的「跳过审批」开关在个人手上，管理员管不到，对外 deck 与提案稿建议统一锁「改前确认」模式；<strong>⑤ 海外物料的 AI 措辞要盯风向</strong> —— 美联邦语境正在把「AI」替换为「超级智能 / SI」，涉及海外 AI 能力描述的文案与合规话术建议同步跟进口径；<strong>⑥ 国产产线值得重估</strong> —— DeepSeek 800 亿元砸向 16 万枚华为加速器 + 昇腾组件开源，国产模型与国产算力的组合正在变成一条独立可用的产线</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
