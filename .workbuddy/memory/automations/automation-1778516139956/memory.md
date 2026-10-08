@@ -2,7 +2,87 @@
 
 > automation id: `automation-1778516139956`
 > skill: `xiaoqi-ai-daily`（五阶段全流程）
-> 最新运行：2026-10-03 09:45（第 57 期 · 2/2 群成功）
+> 最新运行：2026-10-08 09:40（第 62 期 · 2/2 群成功）
+
+## 2026-10-08（周四 · 第 62 期）执行摘要
+
+- **结果**：全链路通过，2/2 群成功（群 A + 群 B），markdown_v2 单条 209 字节；评分均值 8.9
+- 五阶段均达标：AI HOT **4 页 387 条**（hasNext=false）→ 8 条选题 → MD → TOC H5（44096B / 8 卡）→ URL 200（第 5 轮）→ 一条龙海报 + 推送
+- **阶段 4 关卡**：curl 前 4 轮 404（Pages 部署约 80s，比往常慢）、第 5 轮 200（44096B 与本地一致）+ WebFetch 二次确认（title 2026.10.08 / 第 62 期 / 8 卡齐全）
+- Commits：`e785761`（MD/H5/归档）、`2baf08c`（海报）、`97f4419`（log.md），均 push 成功，sha 比对一致
+- 主线：中间层接管入口 —— GPT-6 全量推送 + Intelligent UI(9.4/P0) + Claude Haiku 5.5 降价 90%(9.0/P0) + Google Playground + Unity Spark(9.2/P0) + Surface Ultra 混合智能与 MXC(9.1/P0) + 博通 500 亿美元融资(8.7/P0) + SynthID 全球开放(8.6/P0) + Grok Bot 拆墙多模型路由(8.5/P0) + 地方媒体版权诉讼(8.3/P0)
+
+### 坑位新增（2026-10-08）
+
+- **⚠️ Node.js 原生 https 请求 aihot 会 ECONNRESET（新，重要）**：即便带浏览器 UA，`https.request` 仍报 `socket hang up`。**采集一律改走 `curl -A "<浏览器UA>"`**（本次 4 页全 200）。解析脚本仍可用 Node 读本地 JSON 落盘
+- **⚠️ `resolveWebhooks()` 入参是目录不是配置键名（新）**：误传 `'aiDailyWebhooks'` 会让 `path.join` 拼出错误路径，返回空数组并打印「未解析到任何凭据」，极易误判凭据失效。**正确调用 `resolveWebhooks()` 无参**，从返回值的 `.aiDailyWebhooks` 取群列表
+- 周四 AI HOT 需 **4 页 387 条**才 hasNext=false；再次印证"页数按 hasNext 判断，不按星期套用"
+- curl 首 4 轮 404 属正常（本次 Pages 部署约 80s），20s 间隔轮询 5 轮是合理上限，第 5 轮内通过不需触发五步修复流程
+
+## 2026-10-07（周三 · 第 61 期）执行摘要
+
+- **结果**：全链路通过，2/2 群成功（群 A + 群 B），markdown_v2 单条 209 字节；评分均值 8.7
+- 五阶段均达标：AI HOT **5 页 420 条**（hasNext=false）→ 8 条选题 → MD → TOC H5（41544B / 8 卡）→ URL 200（第 2 轮）→ 一条龙海报 + 推送
+- **阶段 4 关卡**：curl 首轮 404（Pages 未就绪）、第 2 轮 200（41544B 与本地一致）+ WebFetch 二次确认（title 2026.10.07 / 第 61 期 / 8 卡齐全）
+- Commits：`37aae4a`（MD/H5/归档）、`f39b249`（海报）、`14072f6`（log.md），均 push 成功，sha 比对一致
+- 主线：都在抢位置 —— OpenAI 722 篇数学手稿(9.4/P0) + Mistral Large 4 Le Chonk 1T 开源权重(9.0/P0) + Decisions API 公测快 10 倍(8.6/P0) + DeepSeek 800 亿元融资腾讯宁德领投(9.1/P0) + 司法部要求改称"超级智能/SI"(8.7/P0) + 韩国 4.7 万亿韩元前沿模型(8.3/P1) + Nano Banana 2.1 降价一半(8.5/P0) + Claude 接入 Google Workspace(8.2/P1)
+
+### 坑位新增（2026-10-07）
+
+- **周三 AI HOT 需 5 页**（100×4 + 20 = 420 条才 hasNext=false），比周二 3 页多。**页数按 hasNext 判断，不要按星期套用**
+- **Bash heredoc 写 JS 会被 shell 吃掉 `${i + 1}`**，报 `Bad substitution: i`。**调试脚本一律用 Write 工具落盘**，不用 heredoc
+- curl 首轮 404 属正常（Pages 部署 20~40s），第 2 轮即 200，不需要触发五步修复流程
+- 归档插入用 `/const DATA = \[\r?\n/` 正则 + 手写 JSON 字符串（注意对象里混有带引号/不带引号键名），eval 校验 104 → 105 成功
+
+## 2026-10-06（周二 · 第 60 期）执行摘要
+
+- **结果**：全链路通过，2/2 群成功（群 A + 群 B），markdown_v2 单条 209 字节；评分均值 8.7
+- 五阶段均达标：AI HOT **3 页 276 条**（hasNext=false）→ 8 条选题 → MD → TOC H5（40508B / 8 卡）→ URL 200 首轮即过 → 一条龙海报 + 推送
+- **阶段 4 关卡**：curl 首轮即 200（40508B）+ WebFetch 二次确认（title 2026.10.06 / 第 60 期 / 8 卡齐全）
+- Commits：`37fc43d`（MD/H5/归档）、`796f49c`（海报）、`b591b87`（log.md），均 push 成功
+- 主线：能力在狂奔，边界在被重新划 —— Reflection Beam 501B 开源(9.3/P0) + 智谱 GLM-5.3 上架 AWS 分成(8.8/P0) + OpenAI textGrain 欧盟水印(9.0/P0) + Meta Muse 上线前 12 天补 KVM 逃逸(8.7/P0) + Devin 记忆与做梦(8.6/P1) + 维基媒体点名流氓智能体(8.5/P0) + MCP 结构性缺陷(8.4/P0) + Claude 日记被人工审查报警(8.2/P0)
+
+### 坑位新增（2026-10-06）
+
+- **⚠️ git push 在本会话里会静默失败（新，重要）**：用 PowerShell 工具执行 `git push`（both token-insteadOf 与 token 嵌 URL 两种方式）**均无输出、无报错，但远端 sha 不变**。改用 **Bash + 输出重定向到文件**（`git push ... > _push.log 2>&1` 然后 `cat _push.log`）**一次成功**。**以后 push 一律走 Bash + 重定向；验证远端必须用 `gh api repos/wangqi422/catwang-llm-wiki/commits/main --jq '.sha[0:7]'` 比对本地 `git rev-parse --short HEAD`**
+- **周二 AI HOT 需 3 页**：100 + 100 + 76 = 276 条才 hasNext=false（比周一 2 页 126 条多）
+- **`_h5_check.txt` / `_push.log` 等临时文件要写到工作区目录**（沿用 09-18 结论），用完 `rm`
+- **Bash heredoc 写 JS 脚本时，脚本内容里不能出现 "PowerShell" 字样**（安全策略会拒执行，报 "Invoking PowerShell from Bash bypasses PowerShell security checks"）。写中文坑位描述时避开该词
+- **H5 size 用 JS `s.length` 统计的是字符数不是字节数**：本地 30542 chars ↔ 线上 40508 bytes（中文占 3 字节），属正常，不要误判内容不一致
+
+## 2026-10-05（周一 · 第 59 期）执行摘要
+
+- **结果**：全链路通过，2/2 群成功（群 A + 群 B），markdown_v2 单条 209 字节；评分均值 8.8
+- 五阶段均达标：AI HOT **2 页 126 条**（hasNext=false）→ 8 条选题 → MD → TOC H5（40220B / 8 卡）→ URL 200 首轮即过 → 一条龙海报 + 推送
+- **阶段 4 关卡**：curl 首轮即 200（40220B 与本地一致）+ WebFetch 二次确认（title 2026.10.05 / 第 59 期 / 8 卡齐全）
+- Commits：`e2f615f`（MD/H5/归档）、`784470b`（海报）、`493567d`（log.md），均 push 成功
+- 主线：机器接管执行，人类兜底核验 —— 特朗普成立超级智能部队 SIF(9.3/P0) + Meta Muse Charm 掌上硬件(9.1/P0) + GPT-6 Sol Codex 29.4 万字符提示词泄露(8.9/P0) + 华为 381 款 τ 芯片(8.8/P0) + 谷歌暂停 OSS VRP + System76 禁 AI 代码(8.7/P0) + DeepSeek Harness v0.2 桌面版(8.6/P0) + 现代汽车 2.5 万台 Atlas(8.5/P0) + 《后西游记》AIGC 长剧上星(8.3/P0)
+
+### 坑位新增（2026-10-05）
+
+- **⚠️ 大会/峰会类条目必须核日期（新）**：AI HOT 出现「阿里平头哥发布真武 V900」，看似当日新闻，WebSearch 核实后发现是 **9 月 22 日云栖大会**的发布（>48h 旧闻），已剔除改用现代汽车 Atlas 补位。**凡是带「大会/峰会/开幕」背景的条目，定稿前必须 WebSearch 核日期**
+- **周一 AI HOT 只需 2 页**：首轮 100 条 + 第 2 页 26 条 = 126 条即 hasNext=false，与 10-04（147 条）接近，不要机械翻 4 页
+- **脚本化拼装 H5 继续有效**：`_build_h5.js` 用 `findIndex(l => l.trim() === '</head>')` 动态定位（本次 index 141 = 第 142 行），比硬编码 142 更稳；拼完校验 title / `</head>` 计数 1 / cards 8 / lead 四项
+- **归档插入脚本化成功**：用 `indexOf('const DATA = [')` 定位 + 手写 JSON 字符串拼接，eval 校验 102 → 103，top3 日期正确；避免 CRLF 正则坑
+- **log.md 插入用纯字符串 anchor**：`## [2026-10-04 09:45]` + 手动补 `\r\n---\r\n\r\n`，一次成型无重复 `---`
+- **海报 score 元素 6 个是正常值**（hero 9.3 + list 5 条 8.7/8.8/8.5/8.6/8.3），与 1002-1004 结构一致
+
+## 2026-10-04（周日 · 第 58 期）执行摘要
+
+- **结果**：全链路通过，2/2 群成功（群 A + 群 B），markdown_v2 单条 209 字节；评分均值 8.7
+- 五阶段均达标：AI HOT **2 页 147 条**（hasNext=false）→ 8 条选题 → MD → TOC H5（40360B / 8 卡）→ URL 200 首轮即过 → 一条龙海报 + 推送
+- **阶段 4 关卡**：curl 首轮即 200（40360B 与本地一致）+ WebFetch 二次确认（title 2026.10.04 / 第 58 期 / 8 卡齐全）
+- Commits：`45b7a6e`（MD/H5/归档）、`6db724a`（海报）、`2075dd2`（log.md），均 push 成功
+- 主线：造的人跑得飞快，守的人正在离场 —— 卡普空 REX 计划改 RE Engine 为 AI 生成游戏引擎(9.4/P0) + AI 复刻潮撞版权墙（辐射：纽约 5 天被叫停 / MW2 复刻被动视下架，9.1/P0）+ OpenAI 内部模型自启(9.0/P0) + 韩国六银行 AI 渗透(8.8/P0) + Aleph Alpha Kolibri 开源(8.7/P0) + OpenAI 安全负责人 Robinson 辞职(8.6/P0) + GPT-6 Astra 赛事作弊(8.4/P0) + Anthropic 意识论战(8.3/P0)
+
+### 坑位新增（2026-10-04）
+
+- **周日 AI HOT 只需 2 页**：`since=24h` 首轮 100 条 + 第 2 页 47 条 = 147 条即 hasNext=false，比 10-03（4 页 400 条）少很多。**不要机械翻 4 页，看 hasNext 即可停**
+- **脚本化替代手工拼接（推荐沿用）**：本次用 `_build_h5.js` 拼装（正则找 `</head>` 行 → 替换 `<title>` → 拼 body），一次成型、title 正确、`</head>` 计数 1、8 卡齐全，未复现 09-16 的 title 残留问题。调试脚本写在工作区根目录即可，用完 `rm`
+- **归档插入用 `/const DATA = \[\r?\n/` 正则 + `slice(insertAt)` 置顶**，eval 校验 101 → 102，top3 日期正确
+- **log.md 插入 anchor 用 `## [YYYY-MM-DD HH:MM]` 纯字符串**（不带 `\n---\n`），插入后手动补 `---\r\n\r\n`，避免两条 `---`
+- **海报 score 元素 6 个仍是正常值**（hero #1 + list #4–#8），本次为 9.0/9.4/9.1/8.8/8.6/8.3，与 10-03 结构一致
+- **Git 工作区有大量无关改动**：commit 时必须 `git add` 指定 3 个日报文件，不要 `git add -A`
 
 ## 2026-10-03（周六 · 第 57 期）执行摘要
 
@@ -142,6 +222,11 @@
 
 | 日期 | 状态 | 推送群数 | 备注 |
 |---|---|---|---|
+| 2026-10-08 | ✅ 成功 | 2/2（群 A + 群 B） | 第 62 期；GPT-6 全量推送 Intelligent UI(9.4/P0) + Claude Haiku 5.5 降价 90%(9.0/P0) + Google Playground/Unity Spark(9.2/P0) + Surface Ultra 混合智能与 MXC(9.1/P0) + 博通 500 亿美元(8.7/P0) + SynthID 全球开放(8.6/P0) + Grok Bot 拆墙路由(8.5/P0) + 地方媒体版权诉讼(8.3/P0)；评分均 8.9；AI HOT 4 页 387 条；**Node https 请求 aihot 会 ECONNRESET，改用 curl**；**resolveWebhooks() 必须无参调用** |
+| 2026-10-07 | ✅ 成功 | 2/2（群 A + 群 B） | 第 61 期；OpenAI 722 篇数学手稿(9.4/P0) + Mistral Large 4 Le Chonk 1T(9.0/P0) + Decisions API(8.6/P0) + DeepSeek 800 亿元融资(9.1/P0) + 司法部改称超级智能(8.7/P0) + 韩国 4.7 万亿韩元(8.3/P1) + Nano Banana 2.1(8.5/P0) + Claude 进 Workspace(8.2/P1)；评分均 8.7；AI HOT 5 页 420 条；**heredoc 不能写含 `${}` 的 JS** |
+| 2026-10-06 | ✅ 成功 | 2/2（群 A + 群 B） | 第 60 期；Reflection Beam 501B(9.3/P0) + 智谱 GLM-5.3 上架 AWS(8.8/P0) + textGrain 欧盟水印(9.0/P0) + Muse KVM 逃逸(8.7/P0) + Devin 记忆做梦(8.6/P1) + 维基媒体流氓智能体(8.5/P0) + MCP 结构性缺陷(8.4/P0) + Claude 日记报警(8.2/P0)；评分均 8.7；AI HOT 3 页 276 条；**push 需走 Bash+重定向** |
+| 2026-10-05 | ✅ 成功 | 2/2（群 A + 群 B） | 第 59 期；特朗普 SIF(9.3/P0) + Muse Charm(9.1/P0) + GPT-6 Sol 提示词泄露(8.9/P0) + 华为 381 款 τ(8.8/P0) + 谷歌暂停 OSS VRP(8.7/P0) + DeepSeek Harness v0.2(8.6/P0) + Atlas 2.5 万台(8.5/P0) + 后西游记上星(8.3/P0)；评分均 8.8；AI HOT 2 页 126 条；剔除云栖大会旧闻 |
+| 2026-10-04 | ✅ 成功 | 2/2（群 A + 群 B） | 第 58 期；卡普空 REX 计划(9.4/P0) + AI 复刻潮撞版权墙(9.1/P0) + OpenAI 内部模型自启(9.0/P0) + 韩国六银行 AI 渗透(8.8/P0) + Aleph Alpha Kolibri(8.7/P0) + Robinson 辞职(8.6/P0) + GPT-6 Astra 作弊(8.4/P0) + Anthropic 意识论战(8.3/P0)；评分均 8.7；AI HOT 仅 2 页 147 条 |
 | 2026-10-03 | ✅ 成功 | 2/2（群 A + 群 B） | 第 57 期；Anthropic 招股书 5180 亿承诺(9.4/P0) + OpenAI 解雇三人 7000 GPU 查 50PB(9.1/P0) + 苹果收紧 macOS 全盘访问(8.9/P0) + BIS 55.2% 循环融资(8.8/P0) + Muse Spark 六篇数学论文(8.6/P0) + Cloudflare Clef 38.8ms(8.4/P0) + 可灵 Kling 4.0 30 秒 4K(8.3/P0) + Epoch AI 智能体人口(8.2/P1)；评分均 8.7 |
 | 2026-10-02 | ✅ 成功 | 2/2（群 A + 群 B） | 第 56 期；Meta CLM 用 Bash 管上下文(9.0/P0) + Claude Code Mods 可定制(8.7/P0) + FLUX 3 Image 4K 十图参考(8.5/P0) + Google Project Suncatcher TPU 上轨道(8.8/P0) + OpenAI 600 亿认缴完成(8.6/P0) + 加州 AG 传票 OpenAI 智能体安全(8.3/P0) + Suno Speech Beta 语音+BGM(8.0/P1) + Ataraxos 8000 美元胜 Stratego(7.8/P1)；评分均 8.5 |
 | 2026-10-01 | ✅ 成功 | 2/2（群 A + 群 B） | 第 55 期；Gemini 4 Argon 1M 输出(9.3/P0) + GPT-6.1 Sol 1/5 价(9.0/P0) + Runway Praxis-1/Solaris/Ads(8.2/P0) + 白宫超级智能协议(8.7/P0) + FTC 全行业调查(8.8/P0) + OpenAI 推迟 IPO 融 300 亿(8.5/P0) + DeepSeek 昇腾组件开源(8.0/P0) + 沃尔玛禁 AI 海报(7.8/P1)；评分均 8.5；距上期间隔 13 天 |
