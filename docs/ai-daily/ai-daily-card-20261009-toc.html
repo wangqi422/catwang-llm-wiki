@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.09 &middot; 星期五 &middot; 第 63 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">§1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 撤回 3 篇数学手稿</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Google Gemini Agent 通用智能体</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Claude Dashboards 与 Motion</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">§2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Manus 母公司 5 亿美元融资</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI 营收被修正 200 亿</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic 1.5 亿进 Genesis</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">§3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 禁止虐待模型</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>世嘉划创意红线</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.09 &middot; Fri &middot; Issue 63</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">规矩开始咬人：一个正负号撤掉三篇论文，一条禁令管起人怎么对 AI 说话 —— OpenAI 那 722 篇数学手稿上架不到两天就撤回三篇，只因一处把 -1 记成 +1 的符号错误，而真正完成 Lean 形式化的只占 42% · 同一天 Anthropic 头一次把「不许虐待模型」写进使用政策，世嘉给游戏创意工作划了红线：效率可以交给 AI，创意不行 · 能力在往上冲，校验与边界正在同时收紧 —— Google 推出一个提示框接管全部工作的通用智能体，Anthropic 给 Claude 装上仪表盘与动画工作台，Manus 母公司刚拿下国内 AI Agent 最大单笔融资 · 而账本那头，OpenAI 的年化营收被修正了 200 亿美元，纳指当天下跌 1.4%</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.09 · 第 63 期</span>
+    </div>
+  </div>
+
+  <!-- §1 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">一个符号撤掉三篇论文，一个邮箱让智能体入职，一个工作台把报告和图表变成动画 —— 今天模型侧的三个动作，两个在补校验与身份，一个在抢办公桌</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 撤回 3 篇 AI 数学手稿：一处 +1/-1 符号错误拖垮三篇，719 篇里仅 42% 完成形式化</span>
+        <span class="card-tag">📐 学术规范</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 在 <code>openai/math</code> 仓库发布首份更新日志：从 10 月 7 日一次性公开的 <strong>722 篇</strong> AI 数学手稿中<strong>撤回 3 篇</strong>，同时修订 14 篇、另有 13 篇更新引用，总数降为 <strong>719 篇</strong>。三篇全部与千禧年大奖难题之一的霍奇猜想相关，源头是《Algebraicity of Weil classes on split abelian eightfolds》——撤稿说明写明，该论文在一处关键的 <strong>stabilization-trace cancellation</strong> 论证里把一类几何操作的符号记成了 <strong>+1</strong>，而按论文自身约定应当是 <strong>-1</strong>。原本应当相互抵消、归零的计数因此变成非零值，而它依赖的那个经典定理，前提恰恰是这个计数必须为零。<strong>一次级联</strong> —— 《Algebraicity of Kuga–Satake Correspondences for K3 Surfaces》与《The rational Hodge conjecture for products of K3 surfaces》都借用了这套构造，被一并撤回；三篇同属第 032 号成果族，族名也从「所有射影 K3 曲面的霍奇与 Kuga–Satake 结果」改成「CM 阿贝尔簇的有理霍奇猜想」，K3 曲面结论已从清单撤下，核心结论（对所有复 CM 阿贝尔簇证明有理霍奇猜想）保留。<strong>形式化率才是软肋</strong> —— 新增 6 项 Lean 形式化后，主要成果形式化比例为 <strong>300/719 ≈ 42%</strong>，接近 <strong>58%</strong> 的核心结论仍停留在人类可读手稿阶段、没有机器可验证的证明。有评论指出：如果前提是错的，Lean 的绿色通过标记也可能等价于 <code>assert True</code>。<strong>自我纠错的两面</strong> —— 出错手稿落款 <strong>9 月 18 日</strong>，是仓库最早的一批之一，公开后一两天内被撤回；OpenAI 在三份撤稿说明里都强调撤回的是证明、不代表命题本身错误，原稿也未删除。这是首次由公司自己的版本日志而非外部同行评审标记出问题。<strong>学界反应已升级为对立</strong> —— 人类数学协会声明「数学家并没有要求做这项工作」「一次性放出 700 多份文件不是学术的展示，而是力量的展示」，并<strong>呼吁数学家停止与 OpenAI 合作</strong>；MIT 的 Andrew Sutherland 说除非放出模型、结果可复现，否则任何 one-shot 说法都应视为未验证；多伦多大学 Daniel Litt 更直接——「如果我们要知道答案，没理由让公司对我们保密」。Terence Tao 提出数学界需要 decenter 裸解题的角色，Scott Aaronson 则指出密码学「极其显眼地缺席」这份清单。<strong>摩擦已持续两个月</strong> —— 8 月 OpenAI 曾召集约 40 位数学家闭门开会，学者建议逐篇按学术规范发表；9 月宣布纳维—斯托克斯方程的 Lean 验证证明时已被质疑参考未发表工作；10 月规模变成 722 篇。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">撤回篇数</div><div class="data-value">3 / 722</div></div>
+        <div class="data-chip"><div class="data-label">形式化率</div><div class="data-value">42%</div></div>
+        <div class="data-chip"><div class="data-label">剩余手稿</div><div class="data-value">719 篇</div></div>
+        <div class="data-chip"><div class="data-label">连带修订</div><div class="data-value">14 篇</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Google 推出 Gemini Agent：单一通用工作智能体，同事智能体拥有独立企业邮箱与身份</span>
+        <span class="card-tag">🪪 智能体身份</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日</strong>，在 Google Cloud 的 <strong>Gemini at Work 2026</strong> 活动上，Google 发布 <strong>Gemini agent</strong>——官方定义为"单一且通用的工作 AI 代理"。用一个提示框起手，它自行规划工作、调用技能与工具、连接企业业务系统，然后把成品交回在用户本来就工作的地方：文档、收件箱、开发者环境。Google Cloud CEO Thomas Kurian 的说法是「你给它的是目标，不是指令」。<strong>身份是这次最值得读的一层</strong> —— Gemini 可以创建一个"同事智能体"，拿到<strong>自己的 Workspace 账号</strong>：独立邮箱（<code>@agents.company.com</code>）、日历、Drive，以及公司通讯录里的存在感，<strong>以自身身份而非你的身份行事</strong>；同事把它加进 Chat 空间或 @ 它，就像和任何一个人协作；在文档评论里提修改建议时，版本历史里出现的是它自己的名字。它还能派生子智能体，每个同样有自己的身份；权限跟随团队既有的共享与成员关系。<strong>模型与智能体被刻意拆开</strong> —— Gemini 是那个智能体，底下跑哪个模型是另一个选择：当前可在 Gemini 系列与 Anthropic 的 Claude 之间编排，官方称未来扩展到更多领先私有与开源模型；配合智能路由按任务难度分配，以及 Cloud Billing Console 里的<strong>项目级实时支出上限</strong>。<strong>无处不在的接入面</strong> —— 网页、iOS / Android、Mac / Windows、Google Workspace、Microsoft 365、Slack、CLI，甚至可作为无界面的 headless 智能体运行；它跑在云上，人离开设备后工作仍在继续，多步任务可并行或串行跑数小时甚至数天。<strong>数据域是首个垂直技能包</strong> —— 对数据 / ML 工程师，自然语言描述目标后生成 PySpark 代码、给出可编辑可测试的 notebook、训练模型并自行排查修复 pipeline；对业务用户，通过接入 BigQuery 与 Knowledge Catalog 的运营报告技能，直接问出可执行的实时报表。<strong>落地规模</strong> —— 近 500 家 Google Cloud 客户各自处理超 1 万亿 token，近 80% 客户在用其 AI 产品，近 90% 财富 100 强采用 Gemini Enterprise；日本保险商 SOMPO 在 34000 名员工中建了 <strong>10000+ 个自定义智能体</strong>，新模型开发周期从一周压到一天；Ulta Beauty 数字销售转化率提升 3 倍；Bunnings 一个内部智能体为员工省下 <strong>50 万小时</strong>行政工作。<strong>第三方判断</strong> —— Computerworld 引述分析师 Carmi Levy，认为 Google 意图不是再出一个智能体，而是成为"由最合适底层模型驱动的新企业操作系统的守门人"。SMB 已进入早期访问，即将面向所有客户开放。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">SOMPO 智能体</div><div class="data-value">10000+</div></div>
+        <div class="data-chip"><div class="data-label">Bunnings 省时</div><div class="data-value">50 万小时</div></div>
+        <div class="data-chip"><div class="data-label">财富 100 强</div><div class="data-value">近 90%</div></div>
+        <div class="data-chip"><div class="data-label">可选模型</div><div class="data-value">Gemini+Claude</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic 推出 Claude Dashboards 与 Motion：自然语言建活看板，报告一键变成可编辑动画</span>
+        <span class="card-tag">🎬 动画工作台</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日</strong>，Anthropic 为 Claude 上线两项 beta 产品：<strong>Claude Dashboards</strong>（把公司数据变成会自己刷新的活看板）与 <strong>Claude Motion</strong>（把报告与想法变成短动画讲解）。同时 <strong>Claude Docs、Slides、Design 正式结束 beta</strong>，向包括免费版在内所有计划开放——官方称这三款工具自发布以来已被用来创建超过 <strong>4500 万份</strong>文档、演示与设计。<strong>Dashboards：查询是透明的</strong> —— 直连 Amazon Redshift、BigQuery、ClickHouse、Databricks、Snowflake，并可通过既有连接器取 Salesforce 等 CRM 数据；自然语言提问后 Claude 生成查询、选图表、建看板，并随底层数据变化自动刷新。<strong>点任意一个数字就能看到生成它的那条 SQL</strong>，也可让 Claude 解释逻辑，每张图表标出数据最后刷新时间；需要深挖时可一键送到 Amplitude、Grafana、Hex、Mixpanel、Omni、Perplexity、PostHog、Sigma，Looker / monday.com / Tableau 待支持。定位是快速探索与轻量报告，不替代专业 BI。<strong>Motion：不是视频生成模型</strong> —— 它不产合成画面、不产 AI 人像，而是<strong>写代码</strong>驱动你提供的文字、图表、形状和图像动起来，最后导出 MP4。好处是每一个字、每一个数字、每一段时间轴在生成后都仍可单独修改——改一个数字不必重做整条片子；成片可继续推进 Adobe、Canva、<strong>Runway</strong>、Luma AI、Descript、Higgsfield、HeyGen、invideo。官方场景是季度报告 30 秒讲解、董事会 deck 里的动画图表、全员会更新、产品 walkthrough。<strong>权限与治理</strong> —— Dashboards 面向所有付费计划，Motion 限 Team / Enterprise；企业组织默认关闭，管理员需在 Organization settings → Artifacts 开启。Artifacts 新增<strong>客户自管加密密钥（CMEK）</strong>支持，回应受监管行业的采购要求。<strong>配套企业化动作</strong> —— 团队共享编辑、可向组织外分享、PPT 与 PDF 导出与编辑器对齐、deck 可直出为可编辑的 Google Slides 文件、移动端可编辑；Docs / Slides / Design 自 10 月 15 日起对企业客户默认开启。<strong>⚠️ 一个需要排期的变更</strong> —— Claude Design 独立站点 <code>claude.ai/design</code> 将于 <strong>12 月 14 日关闭</strong>，官方理由是同时维护两处会拖慢修复；设计系统可通过 Artifacts 页的"Migrate team design systems"一次性迁移，但独立站上的聊天记录与评论不会迁移，公开链接届时失效。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">已产出文档</div><div class="data-value">4500 万+</div></div>
+        <div class="data-chip"><div class="data-label">看板数据源</div><div class="data-value">5 类</div></div>
+        <div class="data-chip"><div class="data-label">动画输出</div><div class="data-value">MP4</div></div>
+        <div class="data-chip"><div class="data-label">独立站关闭</div><div class="data-value">12.14</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §2 行业 & 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">一笔国内最大的 Agent 融资，一次 200 亿美元的预期修正，一笔走进白宫的 1.5 亿美元 —— 资本那头在加注，账本这头在被重新校准</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Manus 母公司蝴蝶效应完成超 5 亿美元融资，博裕、IDG 领投，腾讯、红杉中国继续加持</span>
+        <span class="card-tag">💰 国内最大单笔</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日</strong>，Manus 母公司<strong>北京蝴蝶效应科技有限公司</strong>宣布完成超过 <strong>5 亿美元</strong>（约合 33.5 亿元人民币）新一轮融资，由<strong>博裕投资、IDG 资本领投</strong>，老股东<strong>腾讯、红杉中国、真格基金</strong>继续加持。这是公司自 9 月 1 日恢复独立运营以来的首笔大额融资，也是<strong>国内 AI Agent 原生创业公司迄今最大的单笔融资</strong>。据接近公司人士透露，本轮目标估值约 <strong>40 亿美元</strong>，较 Meta 拟收购时的 20 亿美元翻倍，但公司未正式披露估值。<strong>不到 40 天完成一轮</strong> —— 从 9 月 1 日宣布恢复独立运营到 10 月 8 日融资落地，中间隔了不到 40 天；融资后公司发布 17 个岗位（产品、工程、运营，均在北京），创始人之一肖弘称"一天内收到上千封简历"，朋友圈只发了两个字——"前进"。<strong>剧情密度罕见</strong> —— 2022 年成立 → 2025 年 3 月发布通用智能体 Manus 一鸣惊人 → Benchmark 领投 7500 万美元 → 年中总部与核心团队迁往新加坡 → 2025 年 12 月 Meta 宣布拟以超 20 亿美元收购，交易最终未能交割 → 2026 年 9 月 1 日恢复独立运营，肖弘、张涛、季逸超继续领导。<strong>产品侧已换代</strong> —— 9 月 28/29 日面向海外发布 <strong>Manus 2.0</strong>，重构智能体底座，引入自研 <strong>Cascade 框架</strong>与<strong>常驻云电脑</strong>，支持由邮件、日历、Slack、Notion 等外部事件触发的自动化工作流；同时推出个人智能体 <strong>Cue</strong>，与 Manus 共用基础设施，每个智能体拥有独立身份、邮箱、电话号码、钱包和云电脑，也可被拉进群聊协作。<strong>两个与内容行业直接相关的功能</strong> —— Manus 2.0 主打 <strong>Game Dev</strong>（无编程经验者可用 AI 做游戏，含调整面板、素材管理、多人游戏）与<strong>视频编辑器</strong>（编排 Seedance2.5 等视频模型的镜头，加上图像、音乐、配音、音效，并带一定代码能力）。肖弘的比喻是：Manus 像"卖电脑"的生意，如果一台电脑连视频和游戏都不能做，"应该是有点无聊的"。<strong>⚠️ 国内仍是空白</strong> —— Manus 2.0 目前无法在国内正常使用，公司表示正组建团队开发面向国内市场的产品，与国产模型厂商及生态伙伴合作在推进，上线时间未披露。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">融资额</div><div class="data-value">$5 亿+</div></div>
+        <div class="data-chip"><div class="data-label">折合人民币</div><div class="data-value">33.5 亿</div></div>
+        <div class="data-chip"><div class="data-label">目标估值</div><div class="data-value">约 $40 亿</div></div>
+        <div class="data-chip"><div class="data-label">恢复独立至融资</div><div class="data-value">&lt;40 天</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">OpenAI 年化营收被曝接近 500 亿美元、比预期少约 200 亿，美股 AI 板块集体跳水</span>
+        <span class="card-tag">📉 口径修正</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日《金融时报》报道</strong>，OpenAI 在最新向投资者披露的财务文件中显示：截至 <strong>9 月底，年化营收接近 500 亿美元</strong>，远低于上月包括路透社在内媒体广泛引用的 <strong>700 亿美元</strong>——缺口约 <strong>200 亿</strong>。CNBC 随后向相关方求证并证实了这一数字。消息公布后美股科技板块应声下挫，<strong>纳斯达克指数收跌约 1.4%</strong>。<strong>差在口径，不在经营</strong> —— 知情人士称，700 亿这个数字源于 OpenAI 的投资者试图把它的年化营收与 Anthropic 做直接横向比较；两家公司算法不同，<strong>Anthropic 把通过 AWS、Google Cloud 等云合作伙伴产生的销售收入计入，OpenAI 不计入</strong>，投资者做的"口径还原"催生了 700 亿。<strong>修正的不止一个数字</strong> —— 最新文件同时显示，7 月底公司年化营收约 <strong>300 亿</strong>美元，而非此前报道的约 400 亿；但增速仍然真实：<strong>第三季度整体运营收入同比增长 77%，企业业务同比增长 107%</strong>。作为对照，彭博此前报道 Anthropic 到 7 月底年化收入达 <strong>650 亿</strong>美元。<strong>市场反应是连锁的</strong> —— 英伟达收跌约 2.9%，甲骨文跌逾 5.5%，美光跌 4.8%，AMD、博通、英特尔、超微电脑跌幅在 4%–6% 之间，ARM 跌超 6%；Nebius 与 CoreWeave 双双跌超 7%，光互联的应用光电暴跌 13%、Coherent 跌 7%，费城半导体指数大跌超 3%。<strong>为什么这 200 亿比数字本身更重</strong> —— 年化营收是把一个月营收乘以 12 的常用指标，本就容易误导，但它是支撑巨额算力资本开支叙事与二级市场上涨的核心变量；这次落差出现在 <strong>Token 成本持续走低</strong>的背景下，等于同时动摇了"需求有多旺"和"单价能撑多久"两个前提。<strong>IPO 与融资时间表也在变</strong> —— OpenAI 表示今年不再预期 IPO，理由是重点在于解决技术带来的安全问题，此前传出的年内上市计划已推迟至 2027 年初；公司正与投资者洽谈一轮 <strong>300 亿美元或更多</strong>的融资，估值约 <strong>1.4 万亿</strong>美元。OpenAI 与 Anthropic 均已提交机密文件准备公开上市，Anthropic 预计最早今年秋季上市。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">实际年化</div><div class="data-value">$500 亿</div></div>
+        <div class="data-chip"><div class="data-label">预期缺口</div><div class="data-value">$200 亿</div></div>
+        <div class="data-chip"><div class="data-label">纳指当日</div><div class="data-value">-1.4%</div></div>
+        <div class="data-chip"><div class="data-label">Q3 同比</div><div class="data-value">+77%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Anthropic 三年投 1.5 亿美元支持白宫 Genesis Mission，向 15 个以上联邦机构开放 Claude</span>
+        <span class="card-tag">🏛️ 政企科研</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日</strong>，在白宫科技政策办公室（OSTP）主办的 <strong>"Science: A New Golden Age" 峰会</strong>上，Anthropic 宣布将在<strong>三年内投入 1.5 亿美元</strong>支持 <strong>Genesis Mission</strong>——一项由行政令发起、美国能源部主导的联邦计划，目标是用 AI 加速科学发现。这笔投入将用于向该任务下 <strong>15 个以上联邦机构</strong>（含 NASA、NIH、NSF）提供 Claude。<strong>1.5 亿美元买到的三样东西</strong> —— 向<strong>数百个</strong> Genesis Mission 研究项目提供 Claude、Claude Code 与 API 额度；围绕政府最优先的科学方向——官方点名<strong>聚变能与量子计算</strong>——与机构和国家实验室深度配合；为科学家提供培训、上手支持与技术服务，并帮助刚加入该任务的机构跑通第一个项目。<strong>不是从零开始</strong> —— Anthropic 与能源部的合作始于去年 12 月，当时范围窄得多，只覆盖国家实验室的科学家；这次把覆盖面从国家实验室扩到 15 个以上机构，跨度从 NASA 的太空探索一直到 NIH 的生物医学研究。<strong>同一天、同一个数字</strong> —— 能源部在峰会当天公布了 12 个新的 Genesis Mission 二期项目奖，总额 <strong>1.59 亿美元</strong>；<strong>Google 也在同日宣布向 Genesis Mission 投入 1.5 亿美元</strong>，与 Anthropic 的数额完全一致。两家公司同日同额站上白宫的台子，是本期最值得记的一个细节。<strong>科研产品线正在成形</strong> —— 今年早些时候推出的 <strong>Claude Science</strong> 工作台（整合研究者最常用的工具与包）、为学术科学家开放的 <strong>10000 个免费与折扣席位</strong>、给高影响力项目发放额度的 AI for Science 计划，以及进入研究预览的 <strong>Model Hardware Standard</strong>——一份让 AI 智能体安全操作实验仪器的共享规范。<strong>背景</strong> —— Genesis Mission 由 2025 年 11 月的行政令发起，能源部科学副部长 Dr. Darío Gil 负责主导。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">投入金额</div><div class="data-value">$1.5 亿</div></div>
+        <div class="data-chip"><div class="data-label">覆盖机构</div><div class="data-value">15+</div></div>
+        <div class="data-chip"><div class="data-label">DOE 二期奖</div><div class="data-value">$1.59 亿</div></div>
+        <div class="data-chip"><div class="data-label">Google 同日</div><div class="data-value">$1.5 亿</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- §3 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一条管"人怎么对 AI 说话"的禁令，一条管"AI 能碰什么创意"的红线 —— 边界正在被写进条款，而不是留在口头</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Anthropic 更新使用政策：首次禁止持续辱骂模型，11 月 12 日生效，Claude 可自行终止对话</span>
+        <span class="card-tag">⚖️ 使用政策</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 8 日</strong>，Anthropic 发布 <strong>2026 版使用政策</strong>，这是其一年多来的首次更新，<strong>11 月 12 日生效</strong>。最受关注的一条新增：<strong>禁止对模型实施"持续且无必要的辱骂或残忍行为"</strong>。官方说明这条禁令只针对极端情况——用户反复、无任何可辨识目的地残忍对待模型；常见的挫败表达、反驳、黑暗题材创作、以及对模型的测试与研究都不在范围内。<strong>执行机制很特别</strong> —— 主要手段是<strong>让 Claude 自己结束对话</strong>：自 2026 年 8 月起，Claude.ai 与 Claude Code 上的模型已经可以主动终止与持续辱骂用户的对话，这次是把能力写成了条款。重的一档由安全团队执行：怀疑违反任何一条时，可警告、限流、限制使用，<strong>暂停甚至终止访问</strong>；官方也明确被实时护栏拦截本身并不等于违反政策。<strong>更新范围远不止这一条</strong> —— 武器条款新增对制导 / 火控 / 交战软件的禁令，并禁止给无人机及其他无人或自主平台加装武器；选举条款合并为"不得破坏民主进程"，同时<strong>移除了对个性化投票与竞选定向的一刀切禁令</strong>（因误伤非营利组织多语言选民信息、选举官员补正通知这类正当用途）；新增禁止掩盖内容来源、用假账号放大、搭建影响行动基础设施；新增禁止去匿名化定位个人或建档案用于骚扰；明确监控无论实时还是基于历史数据都需知情同意，且 Claude 不得参与决定调查、逮捕或起诉谁。<strong>新增硬件条款</strong> —— 当 Claude 与能自主执行物理动作的硬件集成时，要求有合格操作员能够观察设备并在需要时停机，且断开 Claude 后设备须能保持安全状态。<strong>依据是真实发生的滥用</strong> —— 本次更新依据 Anthropic 2026 年 9 月的威胁情报报告：2025 年 12 月至 2026 年 8 月间，有国家背景的行为者用 Claude 做过生物武器研究、针对乌克兰政府目标的网络攻击、以及对侨民社群的监控；公司称已封禁所有识别出的相关账号并与当局共享情报。<strong>舆论已吵开</strong> —— X、Reddit 与技术社区的主要质疑是"我花 20 美元月费，现在还得提供 AI 的情绪价值？"，微软 AI CEO Mustafa Suleyman 等业界人士也公开评论。ArtificialWatch 逐行比对新旧版本后指出官方没有公开"如何判定持续且无必要"的标准；Crypto Briefing 的判断是这条规则对绝大多数用户没有影响，<strong>真正会塑造产品决策的是监控、欺骗性影响、高风险医疗与金融那几条</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">生效日期</div><div class="data-value">11.12</div></div>
+        <div class="data-chip"><div class="data-label">距上次更新</div><div class="data-value">1 年+</div></div>
+        <div class="data-chip"><div class="data-label">情报覆盖</div><div class="data-value">8 个月</div></div>
+        <div class="data-chip"><div class="data-label">主要执行</div><div class="data-value">终止对话</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">世嘉划红线：AI 可用于发行与企管提效，但游戏创意工作不交给 AI</span>
+        <span class="card-tag">🎮 游戏行业</span>
+      </div>
+      <div class="card-desc">
+        世嘉高级执行官兼副首席商务官<strong>斋藤刚（Tsuyoshi Saito）</strong>在接受日经采访时明确了公司的 AI 立场：「我们利用 AI 提高游戏发行、企业管理等部门的工作效率，也用它来构思商业方案。在游戏开发过程中，我们对使用 AI 非常谨慎，<strong>不会把游戏创意工作交给 AI</strong>。」相关表述由 GamesIndustry.biz 与 VGC 报道后，10 月 8 日经国内媒体转述引发关注。<strong>边界被明确命名</strong> —— 美术、叙事、音乐、关卡设计等创意环节由人类团队主导，AI 不参与最终创意产出；这不是对开发的全面禁止，世嘉明确列出可使用的领域：发行与企管提效、生成商业方案、分析玩家反馈、处理数据、翻译、初审广告素材。<strong>有组织保障</strong> —— 公司已成立<strong>生成式 AI 委员会</strong>，下设 AI Task Force，负责开发工具、制定使用规范，以及审核 Steam 商店页面的合规披露事项（Valve 要求开发者披露游戏中 AI 的使用情况）；委员会覆盖全球主要市场，吸纳北美与欧洲的公关、法务人员参与，以适配不同区域的监管环境与社会认知。<strong>两个已落地的例子</strong> —— 《疯狂出租车：极速巡游》在<strong>前期调研与概念探索阶段</strong>用过生成式 AI 做信息整合与趋势分析，但美术资源最终创作全部由专业美术团队完成，<strong>未采用 AI 生成图像或素材</strong>，系列创造者 Kenji Kanno 此前也称那次使用是"用于想法和参考"；《梦幻之星Online 2：新起源》则把 AI 用在开发流程提效，并支持游戏内玩家实时对话响应。<strong>态度比法律更严</strong> —— 日本在 2023 年已确认使用数据集训练 AI 不违反著作权法，即便出于商业目的亦如此；世嘉在这种环境下仍主动设限，官方口径是<strong>权利、品质与玩家信任比"法律允许什么"更重要</strong>。<strong>与同业形成对照</strong> —— 10 月 4 日卡普空在 Capcom Open Conference RE:2026 上公布 <strong>REX 计划</strong>，把服役十年的 RE Engine 改造成 AI 生成游戏引擎（含 RE:Dox、RE:UI、RE:Log、RE:Flows、RE:Runtime、RE:C++ 六个子项目，前三个已开源），但同样重申<strong>不会在游戏内容中使用 AI 生成资产</strong>。两家日本大厂在两周内给出了几乎相同的分界线：<strong>工具链可以 AI 化，内容不行</strong>。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">创意环节</div><div class="data-value">人类主导</div></div>
+        <div class="data-chip"><div class="data-label">可用范围</div><div class="data-value">发行·企管</div></div>
+        <div class="data-chip"><div class="data-label">治理机构</div><div class="data-value">生成式 AI 委员会</div></div>
+        <div class="data-chip"><div class="data-label">同业对照</div><div class="data-value">卡普空 REX</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天八条新闻里有四条在讲同一件事：<strong>做事的规矩正在追上做事的能力。</strong></p>
+    <p><strong>OpenAI 那 722 篇数学手稿上架不到两天就撤回三篇，起因只是一个符号；真正让学界炸锅的也不是这个错误本身，而是只有 42% 的主要成果完成了形式化</strong> —— 剩下近六成没法机器验证，却已经以"成果"的名义公开了。人类数学协会的措辞很重：「一次性放出 700 多份文件不是学术的展示，而是力量的展示。」能力跑在校验前面，代价是被要求公开模型和可复现路径。</p>
+    <p><strong>Anthropic 同日更新使用政策，头一次管起了"人怎么对待模型"。</strong> 这条最容易被当成笑话，但同一份文件里写细的是武器制导软件、影响行动、去匿名化监控和高风险医疗金融——依据是一份记录了真实国家背景滥用的威胁情报报告。<strong>世嘉的表态则是同一逻辑的行业版本</strong>：日本法律允许广泛训练，它仍然自己划了线，理由是权利、品质和玩家信任比"法律允许什么"更重要。</p>
+    <p><strong>另一头，扩张没有减速。</strong> Google 用一个提示框接管工作、并给智能体发了独立企业邮箱，摆明了想做企业操作系统的守门人；Anthropic 给 Claude 装上仪表盘和动画工作台，正面对着 Google 和 OpenAI 抢办公场景；Manus 母公司拿到国内 AI Agent 创业公司最大一笔融资，从恢复独立到融资落地不到 40 天。<strong>而账本那头，OpenAI 的年化营收被修正 200 亿，纳指跌了 1.4%</strong> —— 市场第一次被提醒：支撑这轮资本开支的，可能是一个口径不同的数字。</p>
+    <p><strong>四条可以立刻执行的线索：① 把 Motion 排进 39.1 版本宣发的工具链</strong> —— 版本更新公告、赛季数据复盘、武器平衡性调整这类"数字多、改得勤"的内容，用 Claude Motion 出动画比反复重渲省事，改一个数值不用重做全片，成片还能直接导进 Runway 做后期，注意它限 Team / Enterprise 计划；<strong>② 照抄"世嘉 + 卡普空"的分界线，写一份对外口径</strong> —— AI 用于排版、批量裁切、多语言适配、数据核对站得住，KV 主视觉、角色设定、叙事文本必须人类主导，并在物料里主动标注 AI 参与了哪些环节，两家日本大厂在两周内给出同一条线，说明这是行业共识而非个别选择；<strong>③ 给 AI 产出内容加一道"形式化率"检查</strong> —— OpenAI 42% 的形式化率被学界判定为不够，换成我们的场景就是：AI 生成的数值、考据、时间线，凡没有可回溯交叉验证链的，一律不进对外物料；<strong>④ 把 AI 宣发投入的产出口径做实</strong> —— 营收口径修正引发 AI 板块集体跳水之后，探索性预算往往最先被砍，用节省工时、出图量、转化率这类硬指标记账，比"我们在用 AI"更能扛住下一轮预算评审</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>阶跃星辰 Step 5 Preview</strong> —— 1M 上下文 MoE，OpenRouter 上八项基准六胜 Kimi K3，输入 $1.00/M、缓存命中仅 $0.05/M，开放一周免费试用，OpenCode / Cline 同步接入；<strong>Zenity 的提示词注入</strong> —— 研究人员发现一条提示词即可劫持 AWS 账户内的全部 AgentCore 智能体，同日 CrowdStrike 报告疑似单人用 AI 渗透工具攻击多家韩国银行，智能体规模化的同时，入口处的最短板正从模型变成权限边界；<strong>Midjourney 8.2 Thinking Mode</strong> —— 在 Alpha 网站测试图像生成的"思考模式"并上线共享文件夹，生成前的推理步骤对宣发出图的稳定性值得跟；<strong>Voyager</strong> —— 发布 Mac 桌面应用，让智能体直接操作 After Effects、Blender 等创意工具，同期 ElevenLabs 上线 Brand Kit 统一团队生成素材</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
