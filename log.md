@@ -1,5 +1,20 @@
 # 操作日志 | Operation Log
 
+## [2026-10-09 09:38] AIGC 日报 2026.10.09（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周五 · 第 63 期
+**评分均值**：8.7
+**主线**：规矩开始咬人：一个正负号撤掉三篇论文，一条禁令管起人怎么对 AI 说话 —— OpenAI 在 722 篇数学手稿公开不到两天后撤回 3 篇，起因是《Algebraicity of Weil classes on split abelian eightfolds》一处 stabilization-trace cancellation 论证把 -1 记成 +1，连带拖垮两篇依赖同一构造的 K3 曲面论文，仓库剩 719 篇而 Lean 形式化率仅 300/719 ≈ 42%；Google 在 Gemini at Work 2026 发布单一通用工作智能体 Gemini agent，同事智能体拥有独立 Workspace 账号与 @agents.company.com 邮箱，可跨 Gemini 与 Claude 编排模型并设项目级支出上限；Anthropic 推出 Claude Dashboards（直连 5 类数仓、点数字可看背后 SQL）与 Motion（写代码做动画而非视频扩散模型，导出 MP4 且可继续进 Runway 后期），Docs / Slides / Design 同步结束 beta 全量开放；Manus 母公司蝴蝶效应完成超 5 亿美元融资（博裕、IDG 领投，腾讯红杉中国真格加持，目标估值约 40 亿美元），为国内 AI Agent 创业公司最大单笔、距恢复独立不到 40 天；金融时报披露 OpenAI 截至 9 月底年化营收接近 500 亿美元、比流传的 700 亿少约 200 亿（口径差异：Anthropic 计入云合作伙伴收入、OpenAI 不计入），纳指当日收跌 1.4%；Anthropic 三年投 1.5 亿美元支持白宫 Genesis Mission 向 15+ 联邦机构开放 Claude，Google 同日同额注资、能源部同日公布 1.59 亿美元二期项目奖；Anthropic 一年多来首次更新使用政策，首次禁止持续且无必要地辱骂模型（11 月 12 日生效，主要靠 Claude 自行终止对话），同时写细武器制导软件、影响行动、去匿名化监控等条款；世嘉明确 AI 只用于发行与企管提效、不把游戏创意工作交给 AI，与卡普空 REX 计划形成「工具链可 AI 化、内容不行」的同一条行业分界
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20261009-toc.html
+**海报路径**：docs/ai-daily/ai-daily-poster-20261009.png（593.9KB / 1440×1920）
+**URL 校验**：curl 前 5 轮 404（Pages 本次部署耗时 7m32s，远慢于往常 30s）→ gh run watch 确认部署成功后第 1 轮即 200（49748B 与本地一致）+ WebFetch 内容二次确认（title 2026.10.09、第 63 期、8 卡齐全）
+**Commits**：1054132（MD/H5/归档）、79d1214（海报）
+**情报量**：AI HOT 4 页 381 条（hasNext=false，24h 完整覆盖）+ 8 条定向核实
+**坑位**：**Pages 部署可能慢到 7 分钟（新，重要）** —— 20s 间隔轮询 5 轮仍 404 时，不要直接判定链路故障；先 curl 前一天 H5 与 index.html 做对照（本次两者均 200，说明 Pages 本身正常），再用 gh run list / gh run watch 确认部署状态，本次 watch 到 7m32s 完成、随后首轮即 200。**海报 PNG 建议单独先推** —— 先在一条龙之外单独 commit + push PNG 并轮询到 200，再跑 publish-ai-daily-poster.js --date YYYYMMDD --skip-git，可避免脚本内 3 分钟 Pages 等待上限被慢部署击穿
+
+---
+
 ## [2026-10-08 09:40] AIGC 日报 2026.10.08（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
