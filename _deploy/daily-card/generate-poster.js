@@ -80,7 +80,7 @@ function extractData(mdContent) {
   }
 
   // 评分回填：概览表「重要性」列是 P0/P1/P2，parseFloat 会得 0；从详情区「评分：X.X/10」提取真实分数
-  const scoreRe = /###\s*#(\d+)[\s\S]*?评分[：:]\s*([\d.]+)/g;
+  const scoreRe = /###\s*#(\d+)[\s\S]*?评分[^：:]*?[：:]\s*([\d.]+)/g;
   let sm;
   while ((sm = scoreRe.exec(mdContent)) !== null) {
     const num = sm[1];
@@ -227,7 +227,7 @@ body{width:1440px;height:1920px;background:var(--paper);color:var(--ink);font-fa
 .header-row{display:flex;align-items:flex-start;justify-content:space-between}
 .header h1{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-weight:500;font-size:110px;line-height:0.92;letter-spacing:-0.015em;color:var(--ink)}
 .header h1 em{font-style:italic;font-weight:400}
-.lead{font-family:"Noto Sans SC",sans-serif;font-size:26px;font-weight:400;line-height:1.55;color:var(--ink-soft);max-width:980px;margin-top:18px}
+.lead{font-family:"Noto Sans SC",sans-serif;font-size:26px;font-weight:400;line-height:1.55;color:var(--ink-soft);max-width:980px;margin-top:18px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .header-meta{display:flex;gap:20px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
 .header-meta span{font-family:"Work Sans",sans-serif;font-size:18px;font-weight:400;color:var(--ink-soft);letter-spacing:0.04em}
 .header-meta b{font-weight:500;color:var(--ink)}
@@ -253,7 +253,7 @@ body{width:1440px;height:1920px;background:var(--paper);color:var(--ink);font-fa
 .sec-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:48px;line-height:1;color:var(--ink);flex-shrink:0;width:60px;text-align:center}
 .sec-title{font-family:"Noto Sans SC",sans-serif;font-size:24px;font-weight:600;line-height:1.45;color:var(--ink);flex:1}
 .sec-title b{font-weight:700}
-.sec-tag{font-family:"Work Sans",sans-serif;font-size:15px;color:var(--ink-soft);padding:5px 14px;border-radius:999px;background:var(--paper-2);flex-shrink:0}
+.sec-tag{font-family:"Work Sans",sans-serif;font-size:15px;color:var(--ink-soft);padding:5px 14px;border-radius:999px;background:var(--paper-2);flex-shrink:0;max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ── List ── */
 .list-section{padding:28px 96px 0;flex:1;display:flex;flex-direction:column}
