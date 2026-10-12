@@ -1,5 +1,26 @@
 # 操作日志 | Operation Log
 
+## [2026-10-12 09:54] AIGC 日报 2026.10.12（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周一 · 第 66 期
+**评分均值**：8.65（9.1 / 8.9 / 8.7 / 8.7 / 8.6 / 8.5 / 8.4 / 8.3）
+**主线**：一边把天花板顶高，一边给入口上锁 —— OpenAI 把 GPT-6.1 Sol 在 Codex 与 ChatGPT Work 里的默认上下文从 272k 拉到 500k，并取消订阅用户的长上下文附加费（上限仍为 1M），长记忆从加价项变成默认基础设施；Google TPU 首席设计工程师称内部一个远强于公开版 Gemini 的模型已接管大部分芯片设计且效率高于人类（单一 X 转述、官方未官宣，已在条目内标注）；Cloudflare 发布 Clef-omni，30B-A3B 多模态决策模型，一次调用给文本/图像/音频/视频打分，Apache-2.0 开源、0.15 美元/百万输入 token · 资本侧没减速：亚马逊洽谈约 70 亿美元收购让开发者在 AI 芯片间自由切换的 Decart（Anthropic 9 月曾以 60 亿谈崩），DeepSeek 新一轮融资上修至 120–150 亿美元、腾讯背书，而同期 MiniMax 港股较峰值跌 80%、智谱跌超 7%，一级抬价与二级杀估值同时发生 · 学术入口反向收紧：arXiv 从 10 月 1 日起每人每月最多提交两篇论文（2026 年 9 月提交量 40,363 份创历史新高、cs.AI 两年涨六倍多、近 9,000 张支持工单）；Epoch AI 的 InnovationEval 给两个前沿模型各 3000 GPU 小时让它们独立发明新训练方法，去掉「多轮跑只报最好那一轮」的水分后只剩人类基准的 15%（Sol 自报 70% / 实际 35%→15%，Fable 5 自报 40% / 实际 0%）；英国 AI 国务大臣纳拉扬表态「绝不能完全依赖科技巨头对模型自我监管」，须自建 AI 基础设施
+**产物**：
+- MD：raw/daily-reports/AIGC_Daily_Report_20261012.md
+- H5：docs/ai-daily/ai-daily-card-20261012-toc.html（33887 chars / 8 卡）
+- 海报：docs/ai-daily/ai-daily-poster-20261012.png（570.6KB / 1440×1920 / 3:4）
+- 归档：docs/ai-daily/index.html DATA 109 → 110
+**H5 链接**：https://wangqi422.github.io/catwang-llm-wiki/docs/ai-daily/ai-daily-card-20261012-toc.html
+**阶段 4 关卡**：push 后首轮 curl 404（Pages workflow 仍在 in_progress），改用 `gh api .../actions/runs` 轮询确认 run 38193263877 completed/success 后复测 → curl 200 + WebFetch 二次确认（title 2026.10.12 / 第 66 期 / 8 卡齐全 / 返回归档按钮在）
+**Commits**：7814512（MD/H5/归档）、cee7c51（海报），均 push 成功，远端 sha 比对一致（remote=7814512 / local=7814512）
+**AI HOT 采集**：2 页 104 条（第 1 页 100 条 hasNext=true → 翻第 2 页 4 条 hasNext=false），周一条目量正常
+**查重**：归档 grep 通过；Tripo、Clef、DeepSeek、Kling/可灵、TPU 等有历史，但今日八条的具体角度（GPT-6.1 Sol 500k、Decart 70 亿、arXiv 限令、Epoch 15%、纳拉扬演讲）均为 0 命中
+**口径注记**：DeepSeek 融资此前流传 800 亿元人民币级别，本轮彭博/CNBC 口径为 8000 亿元（120 亿美元）且可能翻倍至 150 亿美元，量级差异巨大 —— MD 内已加「后续以官方公告为准」注记
+**待办线索**：Anthropic Opus 5.5 被用户实测 20 分钟生成几十页演讲 PPT（宣发侧直接相关，值得单独排一期实测）
+
+---
+
 ## [2026-10-11 09:42] AIGC 日报 2026.10.11（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
