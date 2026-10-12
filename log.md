@@ -18,6 +18,7 @@
 **查重**：归档 grep 通过；Tripo、Clef、DeepSeek、Kling/可灵、TPU 等有历史，但今日八条的具体角度（GPT-6.1 Sol 500k、Decart 70 亿、arXiv 限令、Epoch 15%、纳拉扬演讲）均为 0 命中
 **口径注记**：DeepSeek 融资此前流传 800 亿元人民币级别，本轮彭博/CNBC 口径为 8000 亿元（120 亿美元）且可能翻倍至 150 亿美元，量级差异巨大 —— MD 内已加「后续以官方公告为准」注记
 **待办线索**：Anthropic Opus 5.5 被用户实测 20 分钟生成几十页演讲 PPT（宣发侧直接相关，值得单独排一期实测）
+**海报修复（09:58）**：首版海报 #2/#3 卡片文字竖排塌陷（根因：.sec-tag flex-shrink:0 遇上长来源 tag 挤掉标题宽度）、底部 footer 溢出被截（根因：lead 过长撑爆 1920px）—— 修 generate-poster.js（sec-tag 限宽 240px 省略号 + lead clamp 4 行），重新生成/截图/提交/推群，**群 A/B 各收到 2 条**（首版 + 修复版），修复 commit 938c4b1
 
 ---
 
