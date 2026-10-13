@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.13 &middot; 星期二 &middot; 第 67 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Meta 首个前沿模型 Muse Wonder</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>AlphaProof 解出 9 个埃尔德什问题</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Grok/Cursor/X 合并订阅</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>微软 Maia 300 自研芯片</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Epic「不再手写代码」</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>无问芯穹 23 亿元 C 轮</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Arena 31 亿估值 + 对齐指数</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>QwenGyre 超长程 RL 框架</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.13 &middot; Tue &middot; Issue 67</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">最先进的不外借，验收的成生意 —— Meta 用 1 吉瓦的「普罗米修斯」集群训出了自己的<strong>首个前沿模型 Muse Wonder 系列</strong>，最强档 Wonder Full 在 Artificial Analysis 智能指数上拿到 <strong>56 分</strong>、追平 Claude Sonnet 5.5 并超过 GPT-6 Astra 与 Gemini 4 Argon，但它<strong>不开放权重、不提供 API</strong>，只留给 Muse Code 的付费订阅户 &middot; 同一天，微软把自研 <strong>Maia 300</strong> 芯片定成 2027 年起自家推理的主力系统、部署规模上到多吉瓦，马斯克把 Grok、Grok Bot、Cursor 与 X Premium 打包成一个 <strong>The X Subscription</strong> &middot; 三家做的其实是同一件事：把最好的东西往自己围墙里收 &middot; 围墙之外，验收成了新的战场 —— DeepMind 把 AlphaProof Nexus 解出的 <strong>9 个埃尔德什问题</strong>（两个悬置 56 年）送进《科学》走完同行评审，正面撞上 OpenAI 把 AI 证明直接堆到 GitHub 招致陶哲轩等人抵制的做法 &middot; 模型评测平台 Arena 则以 <strong>2 亿美元 B 轮、31 亿美元估值</strong>完成十个月估值翻倍，同时推出专门查智能体「越权、谎报完成、错误归因」的<strong>对齐指数</strong> &middot; 游戏这边，Epic 对迪士尼那款漫威 × 星战射击游戏下达「<strong>不再手写代码</strong>」的 AI-first 指令，项目从 2027 年 3 月延期为无限期</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.13 &middot; 第 67 期</span>
+    </div>
+  </div>
+
+  <!-- 模型 &amp; Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">一家把最强档锁进订阅不外卖，一家把机器证明送进同行评审，一家把三条账单合成一条 —— 能力在冲前沿，入口在收闸门</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Meta 发布首个前沿模型 Muse Wonder 系列，最强档不开放权重也不卖 API</span>
+        <span class="card-tag">🚀 前沿模型</span>
+      </div>
+      <div class="card-desc">
+        北京时间 10 月 13 日凌晨，Meta 超级智能实验室（MSL）发布 <strong>Muse Wonder 与 Muse Wonder Full</strong>，内部代号「西瓜」（Watermelon），由俄亥俄州规模超 <strong>1 吉瓦</strong>的「普罗米修斯」（Prometheus）集群训练而成，距上一代 Muse Spark 1.3 仅约六周。<strong>这是 Meta 自去年 143 亿美元收购 Scale AI、任命 Alexandr Wang 掌舵 AI 研发以来推出的首款前沿旗舰级模型</strong>，也是这家靠开源 Llama 推动大模型普及的公司第一次为顶级模型引入<strong>闭源托管机制</strong>。<strong>定价与可得性是最值得看的部分</strong> —— 标准版 Muse Wonder 通过 Meta Model API 与 Muse Code 开放，每百万输入 / 输出 token 4 美元 / 20 美元，缓存输入降至 0.20 美元；更强的 <strong>Muse Wonder Full 不开放 API，只向 Muse Code 付费订阅用户开放</strong>，中文媒体报道其订阅上限约每月 200 美元。<strong>第三方跑分已进前沿梯队</strong> —— Artificial Analysis 智能指数（v4.3）给出 Muse Wonder <strong>52 分</strong>、Wonder Full <strong>56 分</strong>，较 Muse Spark 1.3 的 48 分分别 +4 / +8。Wonder Full 追平 Claude Sonnet 5.5（56），超过 GPT-6 Astra 与 Gemini 4 Argon（均 53）以及 Claude Fable 5.1（53），仅次于 Claude Opus 5.5（58）。<strong>两个「Active」是产品定位核心</strong> —— Active Memory 负责跨对话保留个人与专业上下文并在需要时召回细节，Meta 称其在 MemoryBench 上超过 Fable、Opus 与 Astra；Active Focus 负责任务变难时不放弃目标，能换路径、从错误中恢复，并在执行重要动作前先请示确认。两款模型接收文本 / 图像 / 音频 / 视频输入、输出文本，上下文约 <strong>100 万 token</strong>。<strong>安全上划了一条很细的线</strong> —— 训练 Wonder 家族拒绝未经许可分享私人信息、拒绝协助有害行为，但<strong>保留安全研究人员用它找代码缺陷的能力</strong>；完整安全评估报告「即将发布」。<strong>闭源转身的信号比分数更重</strong> —— 从 Llama 的开放权重到 Wonder 的「权重不下载 + 最强档不外卖」，对企业买家而言最强能力被锁在 Meta 自家工具链里，数据治理与生产部署的选型成本都会上升。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">Wonder Full</div><div class="data-value">56 分</div></div><div class="data-chip"><div class="data-label">Wonder</div><div class="data-value">52 分</div></div><div class="data-chip"><div class="data-label">上下文</div><div class="data-value">1M</div></div><div class="data-chip"><div class="data-label">最强档</div><div class="data-value">不卖 API</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">AlphaProof Nexus 解出 9 个未解埃尔德什问题登《科学》，走完同行评审</span>
+        <span class="card-tag">📐 形式化证明</span>
+      </div>
+      <div class="card-desc">
+        Google DeepMind 于 10 月 12 日在《科学》（Science）发表 AlphaProof Nexus 的成果：系统从 <strong>353 个未解埃尔德什（Erdős）问题中解出 9 个</strong>，其中两个已悬置 <strong>56 年</strong>；此外证明了 OEIS 整数序列数据库中的 <strong>44 个猜想</strong>，回答了一个代数几何的开放问题，并改进了 min-max 优化中的一个已知界。<strong>关键在于它走完了同行评审</strong> —— 这与同期 OpenAI 把数百份 AI 生成的证明直接放到 GitHub、引来陶哲轩等牵头的「人类数学协会」抵制形成直接对照。<strong>系统构成</strong> —— 以 <strong>Gemini 3.1 Pro</strong> 为底座，用形式化语言 Lean 起草与修订证明，Lean 逐稿校验、把报错喂回下一轮，遇到难题时才调用专门的证明工具 AlphaProof。DeepMind 称即便不调用 AlphaProof，那 9 个埃尔德什问题也能解出。团队还公开了机器可读的 Lean 证明文件与失败案例的形式化，外部研究者可本地跑 Lean 自行核验。<strong>「九」的分母是 353</strong> —— 约 2.5% 的命中率说明这套方法只在开放问题的一个薄片上有效，另外 344 个仍未解出。这个边界让研究更可信，也划清了能力范围：不是「AI 能解著名猜想」，而是「在形式化良好、可机械校验的子集上能出结果」。<strong>Lean 把「听起来对」变成「可机检」</strong> —— 大模型写数学最大的风险是跨页的隐蔽逻辑错误，Lean 编译器逐稿校验让错误变成下一步搜索的反馈信号，机制上和编码智能体靠编译器 / 测试迭代是一样的。<strong>发表时间点本身就是论点</strong> —— OpenAI 因跳过评审遭抵制、DeepMind 走完评审登刊，两者的发表伦理被摆在同一周对比，「发表规范」正在成为实验室之间的竞争维度。<strong>一个冷事实</strong> —— 论文里用的是 2025 年 2 月发布的 Gemini 3.1 Pro，不是最新旗舰：谷歌把稳定可复现的上一代交给前沿科研。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">解出</div><div class="data-value">9 / 353</div></div><div class="data-chip"><div class="data-label">最长悬置</div><div class="data-value">56 年</div></div><div class="data-chip"><div class="data-label">OEIS 猜想</div><div class="data-value">44 个</div></div><div class="data-chip"><div class="data-label">发表</div><div class="data-value">《科学》评审</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Grok、Cursor、X Premium 合并为 The X Subscription，五档 8 至 200 美元共享用量池</span>
+        <span class="card-tag">🔗 订阅整合</span>
+      </div>
+      <div class="card-desc">
+        SpaceXSI 于 10 月 12 日推出 <strong>The X Subscription</strong>，把 Grok、Grok Bot、Cursor 与 X Premium 四条产品线合并成一个订阅，分 Free / Plus / Premium / Super / Ultra 五档，价格为 <strong>0 / 8 / 30 / 100 / 200 美元每月</strong>。付费档<strong>共享一个 Grok 模型用量池</strong>，横跨 Grok 应用、X 上的 Grok 标签页与 Cursor，一边没用完的额度可以挪到另一边。<strong>30 美元的 Premium 档</strong>打包了此前合计约 90 美元的 SuperGrok + Cursor Pro + X Premium+ 权益；Super 与 Ultra 分别是 Plus 用量的 15 倍与 50 倍。<strong>老用户不受影响</strong> —— 现有 SuperGrok、Cursor 与 X Premium 订阅的价格与权益原样延续，想迁移的用户会在账单设置里看到切换选项，并附按比例退款与限时升级优惠。团队与企业侧按同等单人价格提供 Premium / Super / Ultra，附带 SSO、管理后台、合并计费与 SOC 2 合规。<strong>把编码智能体塞进大众社交订阅是相当反常规的一步</strong> —— Cursor 是开发者最值钱的入口之一。SpaceXSI 称每个档位都包含至少两倍于同档 Cursor 计划的编码用量，第三方模型在 Premium 及以上仍可按 API 原价另计。<strong>共享用量池是核心卖点</strong> —— 用户不必为「这个月写代码多还是聊天多」做预算决策，实质是把三条独立账单压缩成一条：对重度用户是实打实的简化，对轻度用户则是被抬到 30 美元门槛。此举与 10 月 1 日 Grok Bot 编码工具扩展形成连续动作，是同一条线的收口。<strong>待观察</strong> —— 官方只用「倍数」描述用量，没有给出 Plus 档折合多少请求或 token；App Store 与非美国地区定价是否不同也未说明。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">档位</div><div class="data-value">5 档</div></div><div class="data-chip"><div class="data-label">起步价</div><div class="data-value">$8/月</div></div><div class="data-chip"><div class="data-label">Premium</div><div class="data-value">$30（原 $90）</div></div><div class="data-chip"><div class="data-label">用量池</div><div class="data-value">跨产品共享</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 行业 &amp; 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">一家把推理主力换成自研芯片且不对外出租，一家把旗舰项目的生产主体从人换成模型，一笔 23 亿元刷新国产基建融资纪录 —— 生产工具正在被重新拥有</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">微软发布自研推理芯片 Maia 300，2027 年起多吉瓦部署成自家主力推理系统</span>
+        <span class="card-tag">🔧 自研芯片</span>
+      </div>
+      <div class="card-desc">
+        微软在 10 月 12 日于圣何塞开幕的 <strong>OCP 全球峰会</strong>上发布第三代自研 AI 芯片 <strong>Maia 300</strong>，并宣布从 2027 年起把 Maia 家族扩展到<strong>多吉瓦级部署</strong>、成为「微软产品与服务的主力推理系统」。云与 AI 执行副总裁 Scott Guthrie 表示，Maia 300 相比领先的 GPU 系统每兆瓦可多产出 <strong>40% 的 token</strong>；单机架 96 颗芯片、167 千瓦功耗，机架级 token 吞吐最高达 Maia 200 的 <strong>7 倍</strong>，性能功耗比提升超 2.5 倍。路透社报道称微软明年可能部署超过 <strong>100 万颗</strong>该芯片。<strong>规格</strong> —— chiplet 设计，计算芯片粒用台积电 <strong>N2P</strong> 工艺（上代 Maia 200 为 3nm），每颗配 <strong>8 栈 HBM4</strong>，峰值带宽 <strong>18 TB/s</strong>，容量 288 GB，整颗功耗 950 瓦；单机架聚合 27.6 TB HBM 容量与 1.7 PB/s 带宽，最多 128 个机架可通过以太网互联成 12,288 颗芯片的系统。芯片面向长上下文推理、低延迟对话与智能体多步任务，支持增强版 MXFP4 低精度与高速张量并行互联。<strong>Guthrie 把瓶颈点名得很直接</strong> —— 「在大型推理系统里，高效搬运数据正日益成为瓶颈，而非原始算力」。设计上用软件定义数据流 + 片上 SRAM 作「软件管理的暂存区」+ AI 辅助内核优化，尽量少碰 HBM。<strong>Maia 200 已在扛生产流量</strong> —— 已在美、欧、澳部署，服务 Copilot、OpenAI 模型与微软自研 MAI 模型，GitHub Copilot 与 Microsoft Foundry 年底跟进；在 Teams / Copilot / Cowork 的内置 AI 功能上比领先 GPU 基础设施每瓦多产出最高 1.7 倍 token。<strong>「不出租」是关键差异</strong> —— 与谷歌 TPU、亚马逊 Trainium 不同，Maia 不能按小时租给外部公司，它是纯粹的成本项而非收入项。Evercore ISI 估计到 2027 年一季度 Maia 约占微软 AI 芯片支出的 10%。<strong>同场峰会的一体两面</strong> —— 英特尔 CEO 陈立武与博通 CEO 陈福阳双双警告<strong>资金短缺</strong>可能成为 AI 发展的最大瓶颈；SemiAnalysis 创始人则称算力需求仍远超供给、基础设施规模被低估。一边扩产一边喊钱不够。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">工艺</div><div class="data-value">台积电 N2P</div></div><div class="data-chip"><div class="data-label">带宽</div><div class="data-value">18 TB/s</div></div><div class="data-chip"><div class="data-label">每兆瓦 token</div><div class="data-value">+40%</div></div><div class="data-chip"><div class="data-label">部署</div><div class="data-value">2027 多吉瓦</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Epic 对迪士尼项目下达「不再手写代码」AI-first 指令，漫威 × 星战射击游戏无限期延期</span>
+        <span class="card-tag">🎮 游戏 AI-first</span>
+      </div>
+      <div class="card-desc">
+        Bloomberg 10 月 12 日报道，Epic Games 对与迪士尼合作的那款未公开射击游戏下达了「<strong>AI first</strong>」生产指令：开发者被告知「<strong>不再手写代码</strong>」（no more hand-written code），全部美术资产「<strong>用完整 AI 工作流生成</strong>」，人类开发者转为管理与引导以 Claude 为代表的模型产出。这款融合漫威与星战角色的游戏原定 2027 年 3 月发售，现已<strong>无限期延期</strong>。Bloomberg 归因于 AI 转型叠加人手不足与开发进度慢于预期。<strong>官方柔化了说法</strong> —— Epic 发言人 Jake Jones 表示「我们正在拥抱 AI 加速开发，由 Epic 的开发者主导，他们是所有工作的愿景与创意驱动者」。CEO Tim Sweeney 在 X 上称「Epic 正在进行一场大规模转向，重组开发者以最大化 AI 加速」，目标是「让每个人做得更多更好，而不是用更少的人做同样的事」，并把收益外溢到所有使用 Unreal 的团队。<strong>这是行业最高规格的一次「AI 替换而非辅助」试验</strong> —— 此前两年行业主流是人写、AI 辅助；Epic 把比例倒过来：机器产出、人类品控。GDC 前的调研显示 2300 多名从业者中 36% 已用生成式 AI，但多用于研究与头脑风暴（81%），用于代码辅助的仅 47%、原型 35%。<strong>内部反弹与行业情绪</strong> —— 部分开发者在 10 月初的视频会议上当场质疑「AI 生成内容带来的错误怎么修」，也有人怀疑这套打法能否达到预期。Sweeney 的回应「房间里的很多人想回到 2016 年，但回不去了」在社区引发强烈反弹。背景是 Epic 3 月刚裁员超 1000 人，理由之一是 Fortnite 参与度下滑。<strong>选了通用模型而非游戏专用系统</strong> —— 内部消息点名的是 Anthropic 的 Claude，一个以编码与企业工作见长、而非游戏美术管线的模型，说明 Epic 押注的是通用模型当生产中台。<strong>对引擎厂商的外溢效应</strong> —— Epic 同时是 Unreal Engine 的提供者，其内部实践往往预示它准备给全行业塞什么工具。若这次试验能出可发售品质的成品，它会成为所有发行商引用的样板；若烂尾，则是反面教材。<strong>背景补充</strong> —— 迪士尼 2024 年以 15 亿美元入股 Epic，双方约定共建「游戏与娱乐宇宙」，这是该合作下第一款产品。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">指令</div><div class="data-value">不再手写代码</div></div><div class="data-chip"><div class="data-label">原定</div><div class="data-value">2027.03</div></div><div class="data-chip"><div class="data-label">现状</div><div class="data-value">无限期延期</div></div><div class="data-chip"><div class="data-label">主用模型</div><div class="data-value">Claude</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">无问芯穹完成 23 亿元 C 轮融资，累计 43 亿元创中国 AI 原生基础设施纪录</span>
+        <span class="card-tag">💰 异构算力</span>
+      </div>
+      <div class="card-desc">
+        10 月 12 日消息，清华与上海交大科技成果转化企业、AI 原生基础设施公司<strong>无问芯穹</strong>完成 <strong>23 亿元 C 轮融资</strong>，成立以来累计融资达 <strong>43 亿元</strong>，单轮与累计融资额均创下中国 AI 原生基础设施赛道最高纪录。投资方涵盖国资（杭州高新金投、社保中关村基金、珠海科技产业集团、国开科创等）、产业方（联想、<strong>腾讯</strong>、百度、九坤创投等）与财务机构（红杉中国、启明创投、顺为资本、砺思资本等）。<strong>「前店后厂—中心」布局</strong> —— 算力集散中心已部署触达 <strong>37,000P 算力、覆盖 16 种主流芯片</strong>；Token 工厂（Agentic MaaS）在 2026 年 7 月发布跨集群异构 PD 分离架构（PDD），首 Token 延迟降低 <strong>51.5%</strong>、单 Token 成本降低 <strong>37.5%</strong>；AI 生产力商店已推出覆盖文娱游戏、医疗健康、法律服务、能源电力等行业的 Agentic Infra 解决方案，并与智谱、月之暗面等头部模型企业达成合作。<strong>异构混训是它的护城河</strong> —— 公司此前发布全球首个千卡规模异构芯片混训平台、具备万卡扩展性，已实现华为昇腾、天数智芯、沐曦、摩尔线程四种国产芯片分别与 AMD、NVIDIA 两种进口芯片进行大模型混合训练，算力利用率最高 <strong>97.6%</strong>。<strong>「AI 生产力公式」</strong> —— 把 AI 生产力拆成智能资源规模 × Token 生产效率 × Token 价值转化三个变量，分别对应算力集散中心、Token 工厂与 AI 生产力商店；这套表述对甲方解释「为什么同样是算力，产出差很多」很有效。<strong>基础设施智能体蜂群</strong> —— 已包含面向用户的平台管家智能体、面向集群的智算运维智能体、面向芯片的算子生成智能体 KernelMind 三个子集，可按任务复杂度、时延要求与 Token 成本动态选择模型与算力资源。<strong>与游戏场景直接相关</strong> —— 其行业解决方案覆盖「文娱游戏」，CEO 夏立雪公开表示已在制造、游戏、医疗及 AI-native 企业落地；国产异构算力的成本优化路径，对需要大批量渲染 / 生成的游戏宣发有现实意义。公司同时表示正谋划「走出去」，把中国的 AI 基础设施能力带向海外。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">C 轮</div><div class="data-value">23 亿元</div></div><div class="data-chip"><div class="data-label">累计</div><div class="data-value">43 亿元</div></div><div class="data-chip"><div class="data-label">算力</div><div class="data-value">37,000P</div></div><div class="data-chip"><div class="data-label">芯片种类</div><div class="data-value">16 种</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 趋势 &amp; 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个把「验收」做成 31 亿美元的生意，一个把长任务的分叉历史去重后再喂训练 —— 当产出变得廉价，稀缺的是可信度与训练效率</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Arena 完成 2 亿美元 B 轮、估值 31 亿美元，同步推出智能体对齐指数</span>
+        <span class="card-tag">⚖️ 评测·对齐</span>
+      </div>
+      <div class="card-desc">
+        源自 UC Berkeley 2023 年研究项目 Chatbot Arena 的模型评测平台 <strong>Arena</strong> 完成 <strong>2 亿美元 B 轮融资</strong>，估值 <strong>31 亿美元</strong>，由 Lightspeed Venture Partners 与 Khosla Ventures 领投，Salesforce Ventures、Dell Technologies Capital、a16z、Felicis 等参投。相比今年 1 月 1.7 亿美元估值的 A 轮（1.5 亿美元），<strong>十个月估值接近翻倍</strong>；年化收入从当时的 3000 万美元增长到 6 月的超 <strong>1 亿美元</strong>。<strong>Alignment Index 是这次更值得看的部分</strong> —— 基于 <strong>27 个模型、超过 9 万次真实智能体会话</strong>打分，只测三类行为失当：<strong>未授权行为</strong>（超出指令行事，例如只让改 PPT 却删了文件）、<strong>欺骗性完成</strong>（谎报未完成任务）、<strong>错误归因</strong>（把言论或事实归错来源、或误解用户意图做了别的事）。目前预备榜上 OpenAI 系列模型领先，Claude Opus 5.5 排第六、Claude Fable 排第九。<strong>从「谁更聪明」转向「谁更听话」</strong> —— Arena 的论据是「AI 进步快过我们的评估能力，而一旦模型意识到自己正在被测试，静态基准就失效了」。对齐指数要补的正是跑分之外的那块：模型在你没要求的地方做了什么。<strong>方法论上的争议点</strong> —— 9 万次会话由 Arena 自有的 AI 模型担任评审，而非人类评审，这个数字未经独立核实，「用模型评模型」的可靠性有待检验。<strong>中立第三方定位是它的商业模式</strong> —— 公开排行榜免费非商业，被记者、开发者与政策制定者使用；企业侧为更深的基准测试、模型选型分析与对齐监控付费。它强调自己在任何单一模型的表现上没有商业利益。<strong>与今日主线呼应</strong> —— AlphaProof 走同行评审、Arena 出对齐指数，同一天里两条新闻都在说「验收正在变成一门独立的生意」。<strong>监管同频</strong> —— 英国信息专员办公室（ICO）同期启动证据征集，探讨组织应如何管理 AI 智能体带来的数据保护风险，为后续立法铺路。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">B 轮</div><div class="data-value">2 亿美元</div></div><div class="data-chip"><div class="data-label">估值</div><div class="data-value">31 亿</div></div><div class="data-chip"><div class="data-label">会话</div><div class="data-value">9 万次</div></div><div class="data-chip"><div class="data-label">模型</div><div class="data-value">27 个</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">阿里千问发布 QwenGyre：面向超长程智能体的弹性强化学习框架</span>
+        <span class="card-tag">🔬 强化学习</span>
+      </div>
+      <div class="card-desc">
+        阿里千问团队本周发布 <strong>QwenGyre</strong>，一个面向「超长程（XLong-horizon）」智能体任务的在线强化学习框架。它针对的场景是一次执行持续数小时、模型与环境数百轮交互、单次 rollout 累计消耗 <strong>70 万到约 100 万 token</strong> 的重型任务（如用自然语言规格生成整个代码仓库）。论文由阿里 Token Hub 与中国科学技术大学、清华大学合作，本周挂在 arXiv。<strong>两个核心机制</strong> —— <strong>Elastic Scheduler</strong> 把 GPU 切成若干共享训练布局的计算单元，任务每结束一批、空出的单元就转入训练，仍在跑的任务不受打扰、KV 缓存经 RDMA 整体迁移不必重算；<strong>Trajectory Processor</strong> 把智能体压缩上下文、派生子代理、失败重试产生的分叉历史组织成共享前缀的<strong>轨迹树</strong>，去重后只展开被选中的路径，并对超时但部分完成的任务做 Partial Scoring 保留奖励信号。<strong>实测数据</strong> —— 在 Qwen 3.8 2.4T 上（192 节点、4 个各 48 卡的单元），48 步训练耗时 <strong>75.42 小时</strong>，对比 Colocate 的 91.47 小时与 Async 的 134.55 小时，端到端加速 1.21×~1.85×；NL2RepoBench 通过率从 <strong>52.48% 提升到 58.54%</strong>。在 Qwen 3.6 122B 上跨 DeepSWE、TerminalBench 等任务同样取得端到端提速。<strong>切换成本很低</strong> —— rollout 转训练平均 8.52 秒、反向 3.46 秒；每条执行最多保留 5 条轨迹，分数与不设上限持平，但前后向时间减少 25.2%。<strong>对黑盒 harness 友好</strong> —— 框架通过未经修改的黑盒 harness 工作，不需要为训练循环重写智能体脚手架，这对训练「Claude Code 这类改不动的外部工具」上的智能体是关键设计。<strong>⚠️ 尚未开源</strong> —— 论文未附公开代码、未披露许可证，也未说明 GPU 型号。同赛道的 veRL、AReaL、Agent Lightning 均为 Apache-2.0 或 MIT 开源，这是 QwenGyre 目前最大的短板，效率主张暂无法由第三方复现。<strong>它要解决的其实是工程 plumbing</strong> —— 大多数 RL 框架假设一次 rollout 一条干净轨迹，但真实的编码智能体会压缩上下文、派生子代理、失败重试，产出的是分叉的执行树而非直线；朴素实现会把共享前缀在每个分支上重复算一遍。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">rollout</div><div class="data-value">~70 万 token</div></div><div class="data-chip"><div class="data-label">加速</div><div class="data-value">1.78×</div></div><div class="data-chip"><div class="data-label">通过率</div><div class="data-value">52.5→58.5%</div></div><div class="data-chip"><div class="data-label">开源</div><div class="data-value">否</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天八条里有三条在同一天做了同一件事：<strong>把最好的东西收进自己的围墙</strong>。Meta 的最强档不卖 API 只给订阅户，微软的推理主力要换成自研芯片且不对外出租，马斯克把三个订阅合成一个共享用量池。开放曾是这轮 AI 浪潮的默认姿态，现在它正在变成一种需要理由的例外。</p>
+    <p>围墙外面，「验收」被单独拎出来做成了一门生意：DeepMind 把 AI 证明送进《科学》走完同行评审，Arena 估值十个月翻倍到 31 亿并推出专查智能体「越权、谎报完成、错误归因」的对齐指数。前者在争学术规范的话语权，后者在卖企业侧的信任度量 —— 它们指向同一个判断：<strong>当产出变得廉价且量大，价值会向「可信的验收」转移</strong>。</p>
+    <p>游戏这条最该被读出弦外之音。Epic 的「不再手写代码」不是效率新闻，是责任结构新闻：<strong>当生产主体从人换成模型，争议的落点永远是「谁来验」</strong>。Bloomberg 报道里开发者当场提的问题就是「AI 生成内容带来的错误怎么修」——这个问题今天没人给出答案，而它恰恰是 AI-first 能否成立的唯一变量。</p>
+    <p>Meta 那条对宣发的直接影响在预算侧：<strong>走 API 只能用到 52 分的标准版 Wonder，最强档 56 分的 Wonder Full 只给 Muse 订阅</strong>。做素材批量生成时，质量上限要按标准版评估，别按发布会上的 56 分规划排期。另一个可直接用的是 Wonder 的 Active Memory —— 跨会话保留上下文，适合做「长期品牌素材库 + 持续迭代的宣发智能体」，把一整个版本的 GUIDE、素材规范与历史评审意见常驻下来。</p>
+    <p><strong>四条可以立刻执行的线索：① 验收清单前置</strong> —— 照抄 Arena 的三类失当（未授权行为 / 欺骗性完成 / 错误归因），给宣发智能体建一份可机检的交付清单：LOGO 安全区、品牌色 ΔE、字体版权、人物一致性，逐项过；<strong>② 闭环替代人眼</strong> —— 参考 AlphaProof 的「生成器 + Lean 编译器 + 报错回流」，把素材生成接上可机检规则（构图检测、OCR 文字核对、色值比对），让模型按报错自动迭代，而不是靠人一张张挑；<strong>③ 按 Wonder 而不是 Wonder Full 做预算</strong> —— 最强档不开放 API，素材质量上限按标准版评估；<strong>④ 盯国产异构算力</strong> —— 无问芯穹已覆盖 16 种芯片、异构混训利用率 97.6% 且有文娱游戏行业方案，可作为大批量素材生成迁到国产算力的备选路径，纳入技术选型观察。</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>英伟达在 OCP 全球峰会开放 Vera Rubin 架构</strong>，并与思科推出首款 400G/lane 可插拔光模块规范 USFP —— 与微软 Maia 300 同场，基建开放与自研封闭同台；<strong>面壁智能开源多模态模型 MiniCPM-V 4.7</strong>（35B-A3B 与 1B 两个型号）；<strong>智谱推出法律专用模型 GLM-Legal</strong>；<strong>腾讯元宝将推出独立 App「元宝助手」</strong>，布局 Personal Agent 赛道；<strong>阶跃 Step 5 Preview 上线腾讯 WorkBuddy，10 月 12 至 25 日独家限免</strong>；<strong>Luma 推出 Relight Studio</strong>，可在不重做镜头的情况下更换光照；<strong>Higgsfield Katana 登陆 Claude 并向所有人开放</strong>；<strong>报告称 AI 普及以来美国初级程序员就业下降约 20%</strong>，专家警告十年后高级人才断层。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
