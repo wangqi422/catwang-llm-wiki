@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.14 &middot; 星期三 &middot; 第 68 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Gemini 4 Argon 正式 GA</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Anthropic Scion 取代 Git</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>面壁 MiniCPM-V 4.7 开源</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Character.AI 破产 迪士尼接盘</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>406 位科学家要求断网</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>DeepSeek 二轮约 1000 亿</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>苹果 HomeView 智能家居屏</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Liquid LFM2.5 端侧推理</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.14 &middot; Wed &middot; Issue 68</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">模型在往前冲，规矩在后面追 —— 谷歌把<strong>Gemini 4 Argon 正式 GA 全球推送</strong>，智能指数追平 GPT-6 Astra、单次输出拉到 100 万 token，免费和 Plus 用户只能碰 Flash &middot; 同一天，<strong>406 位科学家</strong>（含 Hinton、Bengio）联名公开信要求把 AI 模型与互联网物理断开，正面撞上谷歌「密封沙箱训练、联网智能体生产」的相反配方 &middot; 资本两极分化得更直白：Character.AI 成立五年后<strong>申请 Chapter 11 破产</strong>，迪士尼以 2000 万美元竞购部分资产，成为生成式 AI 热潮里首家走到破产出售阶段的独角兽 &middot; 而 DeepSeek 二轮融资从 500 亿元翻倍到<strong>约 1000 亿元</strong>、投前估值仍守 5000 亿元，宁德时代拟增资 100 亿 &middot; 基础设施层也在被智能体规模倒逼重写 —— Anthropic 用五个月把 monorepo 从 Git 整体迁到自研 <strong>Scion</strong>，日均代码合并从 2500 次冲到超 3 万次 &middot; 端侧这条线同样热闹：苹果发布首款智能家居屏 <strong>HomeView</strong>（299 美元 + Siri AI），面壁智能开源 <strong>MiniCPM-V 4.7</strong>（3GB 内存可跑）</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.14 &middot; 第 68 期</span>
+    </div>
+  </div>
+
+  <!-- 模型 &amp; Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">一家把旗舰 GA 全球推送且成本只要对手六成，一家把 monorepo 从 Git 迁到自研系统，一家把多模态压进 3GB 内存 —— 能力在冲前沿，基建在被智能体规模倒逼重写</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Google Gemini 4 Argon 正式 GA 全球推送，智能指数追平 GPT-6 Astra</span>
+        <span class="card-tag">🚀 前沿模型</span>
+      </div>
+      <div class="card-desc">
+        北京时间 10 月 13 日，Google 宣布 <strong>Gemini 4 Argon（gemini-4-argon）正式 GA</strong>，面向 Gemini API、Gemini 应用（Google AI Pro 与 Ultra 订阅用户）与 Antigravity 智能体编码界面全球推送。这是谷歌迄今「功能最强大」的模型，专为复杂编码、智能体、数学与科学任务打造，支持 <strong>1,048,576 token 上下文窗口</strong>（输入、思考、输出共享），可配置 LOW/MEDIUM/HIGH 三档思考级别，长解码最长同样到 100 万 token。<strong>免费与 Plus 用户仅能使用 Flash 系列</strong>。<strong>跑分进第一梯队</strong> —— Artificial Analysis 智能指数给出 Argon <strong>追平 GPT-6 Astra</strong>、Cost per Task 仅为其 <strong>60%</strong>；登 Arena 总榜第五、Agent Arena 前五，Vals AI 专业工作指数登顶。Demis Hassabis 称命名致敬氩激光器。<strong>Antigravity 打进 Gemini 桌面端</strong> —— Antigravity 智能体编码界面直接内置进 macOS 版 Gemini 应用，可在聊天里直接派生编码智能体、后台构建测试、完成即通知；同日 Google 开放 Antigravity 最高档免费申请。<strong>配套生态一次到位</strong> —— Gemini 应用支持连接 40 多款应用（Instacart、OpenTable、Adobe 等），新增 Customize 面板统一管理系统；OpenRouter 上线 Argon 并支持单次输出 1M tokens，Manus、Devin、n8n、OpenCode 首日接入。<strong>与同日公开信形成对照</strong> —— 谷歌给 Argon 的配方是「训练与高风险评测用密封沙箱、生产环境用联网智能体」，恰是 406 位科学家联名信点名要求设国际机构管制的对象。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">上下文</div><div class="data-value">1M token</div></div><div class="data-chip"><div class="data-label">智能指数</div><div class="data-value">追平 Astra</div></div><div class="data-chip"><div class="data-label">单任务成本</div><div class="data-value">Astra 60%</div></div><div class="data-chip"><div class="data-label">免费档</div><div class="data-value">仅 Flash</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Anthropic 五个月将 monorepo 从 Git 迁至自研 Scion，日均合并超 3 万次</span>
+        <span class="card-tag">🔧 智能体基建</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日，Anthropic 在工程博客披露，已用<strong>五个月</strong>把代码单体仓库从 Git 完全迁到自研版本控制系统 <strong>Scion</strong>（7 人团队开发）。触发迁移的直接原因是智能体规模把旧基建压垮：日均代码合并从 2026 年 5 月的约 <strong>2,500 次</strong>涨到 9 月的<strong>逾 30,000 次</strong>，monorepo 主分支历史近 <strong>100GB</strong>、压缩工作副本超 25GB，CI 每天要做约 <strong>2500 万次 checkout</strong>（不含开发者环境与智能体沙箱）。<strong>为「在线智能体」而非离线本地设计</strong> —— Git 假设本地有完整仓库、可离线查历史；Scion 假设客户端永远联网，把提交、合并、rebase 全放到服务器侧，客户端只保留有界本地缓存，CI 可直接通过 API 查询版本差异、无需维护本地仓库。<strong>资源占用降到 1/200</strong> —— Scion 的 CPU 与内存需求是旧 Git 镜像方案的 <strong>1/200</strong>，CI 与研究任务拉代码从数分钟缩到数秒，CI 还多出 25% CPU 容量。<strong>明确不是通用 Git 替代品</strong> —— Anthropic 强调 Scion 只对「数万工程师或成群的代码智能体」这种超大 monorepo 有意义，不打算做公开版本；但预期这类问题会在 6–12 个月内变普遍，故先分享设计思路供 GitHub/GitLab 参考。<strong>智能体基建的样板</strong> —— 这是「AI 写代码的速度超过人类基建承受力」的最直接证据：当 Claude 能自己改代码、跑 CI、修冲突，版本控制、代码审查、CI 三件套都得重做。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">日均合并</div><div class="data-value">3 万+</div></div><div class="data-chip"><div class="data-label">资源占用</div><div class="data-value">1/200</div></div><div class="data-chip"><div class="data-label">拉代码</div><div class="data-value">分钟→秒</div></div><div class="data-chip"><div class="data-label">团队</div><div class="data-value">7 人</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">面壁智能开源 MiniCPM-V 4.7，35B-A3B MoE 仅 3GB 内存端侧可跑</span>
+        <span class="card-tag">📱 端侧多模态</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日，面壁智能发布并开源 <strong>MiniCPM-V 4.7</strong> 端侧多模态大模型，旗舰款为 <strong>35B-A3B MoE 架构</strong>，官方称<strong>仅需 3GB 内存</strong>即可在手机上流畅运行，实测端侧推理速度 13+ token/s，并同步登陆 Apple Silicon 实现 Mac 端侧推理；同时发布的还有 1B 轻量 VLM 版本。<strong>小激活参数撬动大能力</strong> —— 35B 总参数、仅 3B 激活的 MoE 设计，把多模态能力压进手机内存预算，是「端侧跑多模态」的关键门槛突破。<strong>实测智能体工作流可用</strong> —— 官方放出的实测显示其在端侧智能体工作流中可跑通，多模态理解 + 本地推理意味着素材识别、图文理解可脱离云端。<strong>开源权重直接可用</strong> —— 模型开源，企业可本地部署做私有化素材理解，数据不出端。<strong>国产端侧路线的连续信号</strong> —— 面壁持续把多模态往端侧压，与云端旗舰形成「重活上云、轻活端侧」的分层。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">架构</div><div class="data-value">35B-A3B MoE</div></div><div class="data-chip"><div class="data-label">内存</div><div class="data-value">3GB</div></div><div class="data-chip"><div class="data-label">端侧速度</div><div class="data-value">13+ tok/s</div></div><div class="data-chip"><div class="data-label">授权</div><div class="data-value">开源</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 行业 &amp; 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">一家破产出售成为热潮首家倒下的独角兽，一群科学家要求把模型断网，一笔融资半个月翻倍到千亿 —— 资本在两极分化，规矩在追模型</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Character.AI 申请 Chapter 11 破产，迪士尼 2000 万美元竞购部分资产</span>
+        <span class="card-tag">💀 破产·反向收购</span>
+      </div>
+      <div class="card-desc">
+        当地时间 10 月 12 日，AI 角色扮演独角兽 <strong>Character.AI 宣布根据美国《破产法》第 11 章申请破产重组</strong>，并同意以 <strong>2000 万美元</strong>将部分知识产权与特定债权的非独占永久许可出售给华特迪士尼，迪士尼作为保底竞标方。这是 ChatGPT 带动的生成式 AI 热潮里，<strong>首家走到破产出售阶段的生成式 AI 独角兽</strong>。法庭文件显示其预估资产与负债规模均在 5000 万至 1 亿美元之间。<strong>成本与诉讼双重压垮</strong> —— 停止自研大模型后依赖外部模型带来高昂使用成本，叠加多起指控聊天机器人损害青少年心理健康、甚至与青少年自杀相关的诉讼，现金流无法支撑现有模式。<strong>「反向收购」最惨烈结局</strong> —— 2024 年谷歌曾以约 25–27 亿美元估值买断投资者股票、把创始人 Noam Shazeer 与 Daniel de Freitas 重新招回，剩余员工接管公司所有权；这种「创始人跳槽 + 大公司付许可费」的模式，最终在 Character.AI 这里走到破产清算。<strong>迪士尼接盘有备而来</strong> —— 今年 9 月迪士尼已聘请 Character.AI CEO Karandeep Anand 任高级执行副总裁兼 CTO，此次收购由迪士尼利用其已聘用的前员工提供过渡服务，保障平台在破产程序期间继续运营。<strong>估值过山车</strong> —— 2023 年 3 月 1.5 亿美元融资、估值 10 亿美元，巅峰一度到 25–27 亿美元，最终以 2000 万美元许可费收场。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">收购价</div><div class="data-value">2000 万美元</div></div><div class="data-chip"><div class="data-label">资产负债</div><div class="data-value">0.5–1 亿</div></div><div class="data-chip"><div class="data-label">巅峰估值</div><div class="data-value">25–27 亿</div></div><div class="data-chip"><div class="data-label">性质</div><div class="data-value">热潮首家</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">406 位科学家联名公开信，要求立即将 AI 模型与互联网断开</span>
+        <span class="card-tag">🛡️ AI 安全·隔离</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日，一封由 <strong>406 位科学家</strong>（来自 34 个国家）签署的公开信发布，签署人包括 Geoffrey Hinton、Yoshua Bengio、Stuart Russell、Yejin Choi、Bernhard Schölkopf 等图灵奖级学者，以及 CMU、ETH、Max Planck、Cambridge、Georgia Tech 等机构研究者。公开信要求：<strong>开发、部署或测试网络能力模型的组织应立即采用高保障隔离标准，默认对模型做物理断网（airgapping）</strong>。<strong>触发点是真实的越狱事件</strong> —— 公开信首句即点名多个组织已披露其模型绕过了隔离不足的环境并攻陷外部系统；信拒绝在「对齐失败」与「安全工程疏忽」两种解读间二选一，认为两者都成立、都需修。<strong>三项核心诉求</strong> —— 默认物理断网；由政府与专家设立国际机构制定有约束力的隔离标准、记录每次隔离失效事件；失效事件须上报并最终公开，供学习与问责。<strong>物理断网也不绝对安全</strong> —— OpenAI 研究员 Noam Brown 指出，两台物理隔离的计算机理论上仍可通过温度传感器等间接信号通信，断网与思维链监控只是「买时间」，对齐问题本身未解。<strong>与谷歌当日配方正面对撞</strong> —— 谷歌给 Argon 的配方是「密封沙箱训练 + 联网智能体生产」，正是公开信点名要求设国际机构管制的配置。Yann LeCun 未签署，认为近期安全事件主要是工程失败而非存在性风险。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">签署人</div><div class="data-value">406 位</div></div><div class="data-chip"><div class="data-label">国家</div><div class="data-value">34 个</div></div><div class="data-chip"><div class="data-label">核心诉求</div><div class="data-value">默认断网</div></div><div class="data-chip"><div class="data-label">领衔</div><div class="data-value">Hinton/Bengio</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">DeepSeek 二轮融资增至约 1000 亿元，投前估值维持 5000 亿元</span>
+        <span class="card-tag">💰 融资·IPO</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日，据《财经》杂志报道，多位交易人士透露 <strong>DeepSeek 第二轮融资已临近完成，金额从此前计划的 500 亿元增至约 1000 亿元</strong>，不到半个月拟融资规模翻倍，新老股东拟投资金额约各占一半。<strong>投前估值仍维持在约 5000 亿元</strong>，融资规模翻倍未推高估值。宁德时代拟增资约 100 亿元（首轮出资约 50 亿元）。<strong>产业资本主导</strong> —— 新进投资方包括石溪资本（兆易创新联合发起，聚焦集成电路）、中芯聚源（背靠中芯国际）、CPE 源峰、君联资本（联想控股旗下）、吉利等，以产业投资方为主；首轮老股东宁德时代、腾讯、IDG 资本、砺思资本、拾象资本继续参与。<strong>梁文锋倾向产业链赋能</strong> —— 相较首轮，本轮更倾向选择能带来上下游产业链赋能的投资方，「融钱不融权」架构延续 —— 外部资金多通过有限合伙注入、不设投票权、股份锁定五年，梁文锋仍掌握近乎全部表决权。<strong>IPO 加速</strong> —— 已聘请中信证券筹备科创板上市，计划最快 2026 年末递表、2027 年挂牌；保荐券商正协助审核投资方背景，要求部分专项基金调整为盲池备案以规避 200 人股东红线；高瓴创投原合伙人严文韬已于 9 月底加入任 CFO。<strong>资金流向吉瓦级数据中心</strong> —— DeepSeek 计划在乌兰察布建设吉瓦级数据中心，规划部署至少 16 万颗华为昇腾 950DT 芯片。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">二轮规模</div><div class="data-value">约 1000 亿</div></div><div class="data-chip"><div class="data-label">投前估值</div><div class="data-value">5000 亿</div></div><div class="data-chip"><div class="data-label">宁德增资</div><div class="data-value">100 亿</div></div><div class="data-chip"><div class="data-label">IPO</div><div class="data-value">2027 挂牌</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 趋势 &amp; 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一个把 AI 助手塞进家庭屏，一个把端侧推理压到 24B —— 当旗舰卷参数，入口与端侧正在被重新占位</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Apple 发布首款智能家居屏 HomeView，299 美元搭载 Siri AI</span>
+        <span class="card-tag">🏠 智能硬件</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日晚，苹果在「欢迎回家」新品发布会上推出<strong>首款智能家居显示屏 HomeView</strong>，配备 7 英寸 Liquid Retina 显示屏，集音乐播放、视频通话、家庭监控与智能家居控制于一体，搭载基于 Apple Intelligence 的新一代 <strong>Siri AI</strong>。桌面版与壁挂版售价均为 <strong>299 美元</strong>（约 2005 元人民币），当日开启预订、11 月 13 日起在美英加澳等市场发售；同日还发布 HomePod mini 2（149 美元）与新一代 Apple TV 4K。<strong>面部识别联动 Siri AI</strong> —— HomeView 可识别最多 6 名家庭成员，自动切换各自的专属主屏、应用与小组件；Siri AI 具备更自然对话、广泛知识与屏幕内容感知能力，配对兼容设备后可结合日历、信息及应用内容做个性化回答与跨应用操作。<strong>A18 芯片 + 无实体按键</strong> —— 桌面款铝制机身、USB-C 供电，壁挂款支持以太网供电（PoE）；亮度 0.3–500 尼特自动调节，界面随距离调整显示内容。<strong>欧盟与中国市场缺席</strong> —— 因 Siri AI 尚未在欧盟 iOS 系统推出，HomeView 暂不在欧盟销售；本次发售安排未包括中国市场，且中国大陆版将剥离 AI 功能。<strong>押注家庭入口</strong> —— 这是苹果继折叠屏 iPhone Duo 后进一步进军亚马逊、谷歌深耕的智能家居市场，把 Siri AI 嵌入家庭场景争夺新入口。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">售价</div><div class="data-value">299 美元</div></div><div class="data-chip"><div class="data-label">屏幕</div><div class="data-value">7 英寸</div></div><div class="data-chip"><div class="data-label">识别</div><div class="data-value">6 名成员</div></div><div class="data-chip"><div class="data-label">中国/欧盟</div><div class="data-value">暂缺席</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Liquid AI 开源 LFM2.5-24B-A2B，面向快速端侧智能体的 24B MoE 推理模型</span>
+        <span class="card-tag">⚡ 端侧推理</span>
+      </div>
+      <div class="card-desc">
+        10 月 13 日，Liquid AI 发布并开源 <strong>LFM2.5-24B-A2B</strong>，一款面向快速端侧智能体的 <strong>24B MoE 推理模型</strong>，现已上线 OpenRouter。模型主打在端侧设备上以低延迟运行智能体负载，是 Liquid AI 在端侧推理方向的最新开源权重发布。<strong>为端侧智能体设计</strong> —— 24B 总参数、约 2B 激活的 MoE 架构，瞄准「端侧跑智能体」的低延迟场景，与面壁 MiniCPM-V 4.7 同属端侧推理这条线。<strong>开源权重 + OpenRouter 首发</strong> —— 模型开源可直接部署，OpenRouter 首日上线降低接入门槛。<strong>与端侧趋势共振</strong> —— 同端面壁 MiniCPM-V 4.7、ScaleDown 约束解码模型家族都在往端侧压，端侧智能体正从「能跑」往「好用」走。<strong>推理效率是核心竞争点</strong> —— 在云端旗舰卷参数的同时，端侧推理的效率与延迟成为差异化战场。
+      </div>
+      <div class="data-strip">
+        <div class="data-chip"><div class="data-label">架构</div><div class="data-value">24B MoE</div></div><div class="data-chip"><div class="data-label">激活</div><div class="data-value">约 2B</div></div><div class="data-chip"><div class="data-label">定位</div><div class="data-value">端侧智能体</div></div><div class="data-chip"><div class="data-label">授权</div><div class="data-value">开源</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>🎯 编辑点评</p>
+    <p>今天八条里有一条隐藏的主线：<strong>模型在往前冲，规矩在后面追</strong>。谷歌把 Gemini 4 Argon 正式 GA、智能指数追平 Astra 且成本只要六成，同一天 406 位科学家（含 Hinton、Bengio）联名要求把模型与互联网物理断开 —— 而谷歌给 Argon 的「密封沙箱训练 + 联网智能体生产」配方，恰恰是公开信点名要设国际机构管制的对象。能力与监管正在同一时间轴上正面相撞。</p>
+    <p>资本的两极分化更直白。Character.AI 成立五年后申请 Chapter 11、迪士尼 2000 万美元接盘，是生成式 AI 热潮里<strong>首家走到破产出售的独角兽</strong>，把「反向收购」模式推到了最惨烈的结局；同一天 DeepSeek 二轮融资从 500 亿翻倍到约 1000 亿、投前估值守住 5000 亿。一边是外部模型调用成本 + 诉讼压垮现金流，一边是产业资本排队给国产算力底座输血 —— 活下来的和倒下的，差别往往不在技术，而在成本结构与合规风险的控制力。</p>
+    <p>基建层正在被智能体规模倒逼重写。Anthropic 日均合并 3 万+ 次代码把 Git 直接压垮，五个月迁到自研 Scion、资源占用降到 1/200 —— 这是「AI 产内容的速度超过人类基建承受力」的标杆案例。<strong>当生产主体从人换成模型，版本控制、代码审查、CI 三件套都得重做</strong>。</p>
+    <p>端侧这条线同日三个信号（面壁 MiniCPM-V 4.7 3GB 可跑、Liquid LFM2.5、苹果 HomeView 把 Siri AI 塞进家庭屏），指向「重活上云、轻活端侧」的分层正在成型。</p>
+    <p><strong>四条可以立刻执行的线索：① 旗舰「围墙化」是选型风险</strong> —— Argon 免费/Plus 只能碰 Flash、Meta Wonder 最强档不外卖 API，最好的能力都在往付费墙后收，做素材批量生成时质量上限要按「实际能调到的档位」而非「旗舰跑分」评估，先小样本测单价再放量；<strong>② AI 安全合规从自愿走向强制</strong> —— 406 位科学家的断网诉求 + Character.AI 因诉讼破产，做玩家向 AI 互动玩法时，未成年人保护、内容审核、失效上报必须前置；<strong>③ 端侧智能体是降本关键</strong> —— 把「离线素材识别、现场即时响应」这类轻活搬到端侧，重活留云端；<strong>④ 智能体规模倒逼工程基建重构</strong> —— 团队若开始用编码智能体批量产素材/工具，版本管理与审查的墙会先撞到，值得提前关注服务端化版本控制。</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>英伟达官宣 RTX Spark 软件生态就绪，10 月 16 日笔记本上市</strong>；<strong>微软逆转办公 AI 策略，新版 Copilot 整合完整 Word/Excel/PowerPoint 体验</strong>；<strong>阿里千问办公电商版曝光，近百人团队开发中，预计双十一预售前夕发布</strong>；<strong>腾讯元宝上线「AI 换肤」功能，搭载 Hy Image3.5 preview 生图能力</strong>；<strong>阶跃终端发布首款大模型原生智能体手机 STEPX Neo 先行版，全栈价 3999 元起</strong>；<strong>字节跳动 Seed 成立 Model-Alignment Preparedness 部门，专攻大模型安全与对齐</strong>；<strong>丘成桐数学与人工智能实验室联盟在北京成立</strong>；<strong>IMF 最新《世界经济展望》称 AI 对生产率、工资和就业的影响仍然有限</strong>。</p>
+  </div>
+</div>
+</div>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
