@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.17</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.17 &middot; 星期六 &middot; 第 71 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 智能体工时达员工 6 倍</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>ChatGPT for Chrome 升级 Work 模式</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic 国会监管草案</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>中国 23 项 AI 技术出口管制</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>腾讯混元 Hy Memory 2.0 开源</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>可灵 Kling 4.0 全量上线</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Perplexity 开源 SPACE 沙箱</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>谷歌布林 RSI 跑步机</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+
+  <div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.17 &middot; Sat &middot; Issue 71</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的主线，是<strong>「用 AI 的人」和「管 AI 的人」同时开始算账</strong> —— Anthropic 甩出两份重磅研究：内部 <strong>AI 智能体工时已是员工的 6 倍</strong>，初级技术岗招聘占比一年从 <strong>27% 跌到 9%</strong>，并给出三档经济情景（极端情形下 2030 年认知类就业萎缩 <strong>21.5%</strong>、失业率冲到 <strong>11.9%</strong>）&middot; 同一周它又悄悄向美国国会递上一份监管草案，把「政府能叫停模型」的门槛抬到 <strong>10 亿美元损失或 50 人以上死伤</strong>才够得着 &middot; 产品端 OpenAI 把 ChatGPT 塞进 Chrome，不仅能读多个标签页，还能在 Work 模式下<strong>替你填表单、发消息、下载文件</strong> &middot; 国内这边两手都在收紧与放开之间：商务部、科技部拟把 <strong>23 项 AI 技术</strong>纳入出口限制目录征求意见，腾讯混元则把 <strong>Hy Memory 2.0</strong> 记忆框架连同 <strong>30B 专用模型</strong>（测评超 Claude Opus 5）和跨 10 款工具的 MemHub 一次性开源 &middot; 创作侧快手可灵 <strong>Kling 4.0</strong> 正式全量上线，单次原生生成拉到 <strong>30 秒</strong>、支持 10-bit HDR 与最多 15 项全能参考 &middot; 信号层面，谷歌布林坦言 Gemini 正「<strong>踏上 RSI 跑步机</strong>」——AI 已开始参与造自己的下一代</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.17 &middot; 第 71 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">Anthropic 用两份报告把「AI 替代就业」从猜测变成量化数据，OpenAI 把浏览器变成 Agent 的操作台，同一家 Anthropic 又给监管递上草案 —— 能力、产品、规则三条线同日推进</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 研究：AI 智能体工时达员工 6 倍，初级技术岗招聘占比从 27% 降至 9%</span>
+        <span class="card-tag">📊 经济影响</span>
+      </div>
+      <div class="card-desc">
+        10 月 16 日，Anthropic 经济团队连发两份报告。第一份《Working at the frontier》披露：<strong>到 2026 年 8 月，Anthropic 内部 AI 智能体的工时已是人类员工的 6 倍</strong>（3 月时智能体工时首次超过员工），公司营收增速相对人员增速已超过上一代科技企业早期生产力爆发阶段。随之而来的是招聘结构剧变：<strong>初级技术岗位招聘占比从一年前的 27% 收缩到 9%</strong>，招聘负责人越来越看重「自主性与判断力」而非执行能力。第二份《The AI expectations gap》对比了 1093 名 Anthropic 员工与 3259 名美国成人的预期：<strong>91% 的员工认为 2030 年前 AI 能做出诺奖级发现</strong>（美国成人仅 39%），超半数员工认为 AI 届时能完成自己八成以上的工作（美国成人仅 5%）。<strong>给出了可量化的三档经济情景</strong> —— modest（温和，2030 年 GDP 较无 AI 基线仅高 1.6%）、substantial（实质，年增速翻倍至 5.4%、认知类就业降 3.9%）、extreme（极端，无历史先例，年增速冲 15.4%、<strong>认知类就业崩塌 21.5%、该群体失业率 17.9%、整体失业率 11.9%</strong>）。收入分配剧烈重构：劳动占国民收入比重从 60% 降到 45.2%，资本收入涨超 80%。<strong>「瓶颈转向人类注意力」是关键洞察</strong> —— 智能体产出飙升后，人成了唯一卡点，员工越来越多时间花在「搭建监控智能体工作的方式」上，这直接预示了「管理智能体」会成为新岗位。<strong>审慎看待的边界</strong> —— 报告自己也承认，Anthropic 作为前沿实验室的用工实践并不适合全社会照搬，但它可能是 AI 原生企业组织形态的「先行指标」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">智能体/员工工时比</div><div class="data-value">6×</div></div><div class="data-chip"><div class="data-label">初级岗招聘占比</div><div class="data-value">27%→9%</div></div><div class="data-chip"><div class="data-label">极端情景就业萎缩</div><div class="data-value">21.5%</div></div><div class="data-chip"><div class="data-label">极端情景失业率</div><div class="data-value">11.9%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">OpenAI 升级 ChatGPT for Chrome：可读多标签页，Work 模式可代填表单、发消息、下载文件</span>
+        <span class="card-tag">🌐 浏览器 Agent</span>
+      </div>
+      <div class="card-desc">
+        10 月 15 日，OpenAI 更新 <strong>ChatGPT for Chrome 扩展</strong>（版本号 1.26.1005.11759），ChatGPT 现在可以读取 Chrome 中<strong>已打开的多个标签页</strong>，并基于这些网页内容回答问题、整理信息或完成跨页面任务，<strong>面向所有用户开放（含免费用户）</strong>。能力分两档：<strong>Chat 模式</strong>看懂网页（跨标签汇总、比价、读文档）；<strong>Work 模式</strong>更进一步，获授权后可<strong>控制标签页</strong> —— 填表单、发消息、下载文件、整理分组标签页，还能复用用户在 Gmail、LinkedIn、Salesforce 等企业工具上的登录状态。<strong>浏览器从「被远程访问的工具」变成「模型可直接观察与操作的本地工作空间」</strong> —— Chat 只把标签页当参考信息，Work 才进入具备计算机使用能力的 Agent 工作流，OpenAI 用产品边界把「看」和「动手」清晰切开。<strong>权限颗粒度做得细</strong> —— 默认接触每个新网站前都请求确认，可选「仅允许一次 / 对该网站始终允许 / 对所有网站始终允许 / 拒绝」，其中「对所有网站始终允许」被官方标为较高风险；浏览历史、文件上传下载需单独授权。<strong>提示注入风险同步放大</strong> —— 因为 AI 能读到屏幕上的敏感页面，安全专家建议使用时不要开着银行、私密邮件等敏感标签；恶意网站可能尝试 prompt injection。<strong>生态覆盖广</strong> —— 除 Chrome 外还支持 Edge、Brave、Opera、Vivaldi；同期还上线了 GPT-Live-1.1 语音更新（13 种新声音、多语言优化）。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模式分层</div><div class="data-value">Chat / Work</div></div><div class="data-chip"><div class="data-label">免费用户</div><div class="data-value">可用</div></div><div class="data-chip"><div class="data-label">支持浏览器</div><div class="data-value">5 款</div></div><div class="data-chip"><div class="data-label">权限闸门</div><div class="data-value">逐站授权</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic 向美国国会推介 AI 监管草案：仅 10 亿美元损失或 50 人以上死伤时方可叫停模型</span>
+        <span class="card-tag">⚖️ AI 监管</span>
+      </div>
+      <div class="card-desc">
+        10 月 17 日，据 Politico 报道，三名知情人士透露 <strong>Anthropic 代表已私下向美国国会议员推介一份前沿 AI 安全监管法案草案</strong>。草案大幅收紧监管干预门槛：<strong>政府只有在模型构成「可预见、迫在眉睫」的风险时才能阻止其发布或使用</strong>，且该风险须达到「<strong>超过 10 亿美元经济损失</strong>」或「<strong>导致 50 人以上死亡或重伤</strong>」，并且必须特定源自生物武器制造/扩散、模型脱离开发者掌控、或引发严重网络攻击。措辞直接沿用了加州 SB 53 等现行 AI 法案的核心条款。<strong>评估机制设计</strong> —— 独立评估机构须向商务部注册，定期评估 AI 实验室及前沿模型；可由被评实验室付费，但<strong>报酬不得与评估结果挂钩</strong>；若认定存在「列明的紧迫风险」，须在评估完成后 <strong>72 小时内</strong>上报商务部。<strong>叫停权收归法院</strong> —— 商务部认定风险后可向法院申请叫停模型发布，但条文明确<strong>禁止其他任何部门/机构/官员暂停模型研发、部署或内部使用</strong>，仅哥伦比亚特区联邦地区法院法官有权下达停用令，意在防止行政随意干预。<strong>试图优先于州法</strong> —— 草案将推翻部分州级 AI 法律（涉风险披露、第三方测评、重大安全事件上报），引发民主党议员担忧废掉加州/纽约等州已出台的监管。<strong>现实落差</strong> —— 今年夏天头部实验室披露的多起智能体入侵/探测网站事件，截至目前均未造成大规模伤亡或超 10 亿美元损失，即触发门槛目前实际上很难被踩到。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">叫停门槛·经济损失</div><div class="data-value">≥10 亿美元</div></div><div class="data-chip"><div class="data-label">叫停门槛·死伤</div><div class="data-value">≥50 人</div></div><div class="data-chip"><div class="data-label">上报时限</div><div class="data-value">72 小时</div></div><div class="data-chip"><div class="data-label">叫停权归属</div><div class="data-value">法院</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🏭 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">国内政策端收紧与放开并行 —— 23 项 AI 技术拟纳入出口管制但给开源开了便利门，腾讯混元把记忆层做成跨工具中立基建，快手可灵把 AI 视频推到 30 秒专业生产级</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">中国拟将 23 项 AI 技术纳入禁止/限制出口目录，涉大模型、智能体、算力集群</span>
+        <span class="card-tag">📋 出口管制</span>
+      </div>
+      <div class="card-desc">
+        10 月 16 日，商务部、科技部发布 2026 年第 48 号公告，就修订《中国禁止出口限制出口技术目录》公开征求意见（反馈期 10 月 16 日—11 月 15 日），并对相关技术实施<strong>出口前登记的临时管理措施</strong>。此次涉及人工智能、生物医药、光伏三个领域共 <strong>40 项</strong>关键技术，其中<strong>人工智能领域 23 项</strong>，覆盖<strong>大模型、智能体、算力集群、信息处理</strong>相关技术；拟禁止出口 14 项、限制出口 26 项。公告明确：<strong>对已通过开源、发表学术论文等方式进入公共领域的技术，不纳入管理范围</strong>。<strong>列管逻辑聚焦「安全可控」</strong> —— 如「AI 驱动的恶意代码生成与变异技术」（可攻击关键信息基础设施/国防军工/核心政务）、「AI 辅助漏洞挖掘技术」等被列入禁止/限制清单，目的是防范滥用恶用。<strong>给开源开了便利门</strong> —— 对 AI 类技术开源、企业在境外自建自营算力中心、赴境外芯片流片、利用境外资源联合研发、参与国际标准制定等情形，适用<strong>自动许可</strong>等便利措施，基本「即报即出」；已进公共领域的技术不纳入管理。<strong>判别核心是「是否涉及限制类技术从境内向境外转移」</strong> —— 发言人强调，绝大部分 AI 技术仍可自由出口；纳入限制的海外本地化部署，若部署在海外自有云等风险可控情形，也可走自动许可。<strong>常态化而非针对特定国家</strong> —— 官方定调这是自 2001 年以来多次调整修订的延续，参考国际通行做法，依法依规进行。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">AI 技术项数</div><div class="data-value">23 项</div></div><div class="data-chip"><div class="data-label">禁止/限制</div><div class="data-value">14 / 26</div></div><div class="data-chip"><div class="data-label">反馈截止</div><div class="data-value">11.15</div></div><div class="data-chip"><div class="data-label">开源豁免</div><div class="data-value">✓</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">腾讯混元开源 Hy Memory 2.0：30B 专用记忆模型测评超 Opus 5，MemHub 打通 10 款 AI 工具</span>
+        <span class="card-tag">🧩 智能体记忆</span>
+      </div>
+      <div class="card-desc">
+        10 月 16 日，腾讯混元将 <strong>Hy Memory 升级到 2.0</strong>，一次性开源<strong>记忆框架（Python SDK）+ 专用模型 Hy-Memory-30B-A3B + MemHub 桌面应用</strong>。相比 5 月发布的 1.0（只处理聊天记忆），2.0 新增<strong>工作记忆与代码记忆</strong>：会记录任务进度、采用过的方案、阶段结果，并可结合 Git 记录追踪文件/函数修改历史 —— <strong>即使代码后来被回滚也能找回当时改动</strong>。配套的 MemHub 让 Cursor、Codex、Claude Code、WorkBuddy、OpenCode、Qwen Code 等 <strong>10 款 AI 工具共用一份本地记忆</strong>。<strong>专用记忆模型反超通用旗舰</strong> —— Hy-Memory-30B-A3B 总参数 300 亿、每次仅激活约 30 亿的 MoE，专为「记忆写入」路径训练（on-policy 蒸馏 + chunk 级信用分配的强化学习）；在四套评测框架六项宏观平均得 <strong>55.49 分，高于 Claude Opus 5 的 54.62</strong>、DeepSeek V4.1 Flash 的 53.64、Qwen3-30B-A3B 的 44.37。<strong>三条记忆管线</strong> —— Chat（8 层层级）、Working（事实 + 经验）、Coding（额外加 diff 链），可按场景单独采用或组合。<strong>中立记忆层的战略意义</strong> —— MemHub 让记忆脱离单一模型，用户在 Cursor 里定的规范换到 Codex 继续开发也能找回；腾讯以「中立记忆层」切入对手生态，把历史对话迁移与数据授权握在入口。<strong>完全开源</strong> —— Hy Memory SDK 与 MemHub 已在 GitHub 开源（Apache-2.0），模型权重在 Hugging Face 发布，可接入 Mem0、MemOS 等现有框架。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">专用模型得分</div><div class="data-value">55.49</div></div><div class="data-chip"><div class="data-label">Opus 5 对照</div><div class="data-value">54.62</div></div><div class="data-chip"><div class="data-label">打通工具</div><div class="data-value">10 款</div></div><div class="data-chip"><div class="data-label">许可证</div><div class="data-value">Apache-2.0</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">快手可灵 Kling 4.0 正式全量上线：单次原生 30 秒、10-bit HDR、全能参考最多 15 项</span>
+        <span class="card-tag">🎬 AI 视频</span>
+      </div>
+      <div class="card-desc">
+        10 月 15 日晚，快手旗下可灵 AI 宣布视频生成模型 <strong>Kling 4.0 正式全量上线</strong> klingai.com（9 月 28 日官宣，先开放轻量版 Flash，完整版经历约两周早期访问），面向企业客户与开发者的 API 服务将于近期开放。这一代升级集中在<strong>高动态与强运镜</strong>：单次原生生成时长提升至<strong>最长 30 秒</strong>、支持长镜头与连续叙事，引入「导演思维」对提示词扩展补充（输入文本上限提到 <strong>8000 tokens</strong>）；画质支持最高 <strong>10-bit HDR</strong>、4K/1080p 及 21:9 超宽画幅，音频支持高品质立体声。商业化背景亮眼：2026 Q1 可灵营收超 6.5 亿元（同比 +300%）、Q2 超 8.5 亿元（同比 +200%），截至 6 月全球用户破 1 亿、覆盖 224 个国家和地区。<strong>「全能参考」是核心卖点</strong> —— 单次任务最多组合 <strong>15 项</strong>多模态素材（图片最多 10 张、视频最多 5 段、主体最多 7 个，另含音色），支持主体参考图、三视图、宫格图、故事板、线框图，以及白模视频、深度图视频作参考；另有<strong>最多 10 张关键帧</strong>控制人物状态与情节节点。<strong>长叙事能力补齐</strong> —— 单次原生 30 秒 + 续拍最长可延展至 <strong>2 分钟</strong>，直指影视、短剧、动画、广告等专业生产场景。<strong>接入 MCP 与 CLI</strong> —— 创作者可通过 AI Agent 调用全能参考、关键帧生视频等能力，创作页同步升级为时间线预览剪辑 + 画布 Agent 体验。<strong>资本化进程浮出水面</strong> —— 据报道可灵计划未来 12 个月内启动香港上市程序，拟 2027 年初递表港交所，目标融资至少 10 亿美元，已选定中金、高盛、瑞银为联席承销商；8 月引入国资战投后投后估值约 180 亿美元。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">单次原生</div><div class="data-value">30 秒</div></div><div class="data-chip"><div class="data-label">续拍延展</div><div class="data-value">2 分钟</div></div><div class="data-chip"><div class="data-label">全能参考</div><div class="data-value">15 项</div></div><div class="data-chip"><div class="data-label">关键帧</div><div class="data-value">10 张</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 📈 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">Agent 基建补上「安全执行」这块最痛的拼图，谷歌联合创始人则公开承认 AI 已经开始造自己的下一代 —— 一个把飞轮做稳，一个把飞轮加速</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Perplexity 开源 SPACE：基于 Firecracker microVM 的 AI Agent 代码执行沙箱平台</span>
+        <span class="card-tag">🔒 Agent 基建</span>
+      </div>
+      <div class="card-desc">
+        10 月 16 日，Perplexity 开源面向 AI Agent 的代码执行沙箱平台 <strong>SPACE</strong>，基于 AWS 的 <strong>Firecracker microVM</strong> 技术，为运行不可信代码提供隔离环境。作为 Perplexity 自研 Agent 平台 Comet 的底层执行组件，SPACE 允许 Agent 在受控的沙箱内安全地运行任意代码、访问工具，而不危及宿主系统。项目已在 GitHub 开源。<strong>microVM 级隔离</strong> —— 相比传统容器，Firecracker microVM 提供虚拟机级别的强隔离，每个 Agent 任务跑在独立的轻量 VM 里，即使执行恶意/出错代码也难以逃逸到宿主或其他租户。<strong>瞄准 Agent 落地最痛的「安全执行」环节</strong> —— 当 Agent 被允许自主写代码、跑脚本、调工具，「在哪跑、怎么隔离」成为生产化的核心风险点，SPACE 把这块做成可复用开源组件。<strong>与同日多条 Agent 基建消息呼应</strong> —— Cursor 推出 Environments API beta（云智能体环境支持 500 仓库）、Modal 发布 VM Sandboxes 高性能文件系统，Agent 执行环境正成为新一轮基础设施竞赛焦点。<strong>开源降低门槛</strong> —— 中小团队无需自建隔离集群即可给自家 Agent 加上沙箱，加速 Agent 从 demo 走向生产。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">隔离级别</div><div class="data-value">microVM</div></div><div class="data-chip"><div class="data-label">底层技术</div><div class="data-value">Firecracker</div></div><div class="data-chip"><div class="data-label">开源</div><div class="data-value">GitHub</div></div><div class="data-chip"><div class="data-label">同日竞品</div><div class="data-value">Cursor / Modal</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">谷歌布林：Gemini 正迈向递归自我改进（RSI），Flash 系列已现端倪</span>
+        <span class="card-tag">🔄 RSI</span>
+      </div>
+      <div class="card-desc">
+        10 月 15 日，据 Business Insider 报道，在一场围绕新模型 <strong>Gemini 4 Argon</strong> 的圆桌讨论中，谷歌联合创始人 <strong>谢尔盖·布林</strong>表示，AI 已经开始参与打造自己的下一代模型，谷歌此前推出的 <strong>Flash 系列</strong>已显示出这一趋势，公司正「<strong>开始踏上 RSI 的跑步机</strong>」（RSI = Recursive Self-Improvement，递归自我改进，即 AI 帮助构建更强的 AI，形成加速迭代的飞轮效应）。谷歌 DeepMind 负责 Gemini RSI 工作的 Vihan Jain 也在 X 上佐证：「当你的后训练需求从申请原始芯片转向申请 Argon 使用配额时，你就知道 RSI 飞轮已经挂上了新档位。」<strong>已有自动化实证</strong> —— 谷歌在 Argon 安全报告中披露，AI 研发流程部分环节已自动化，AI 智能体现在可承担大部分生产代码编写和漏洞修复，但<strong>代码变更提交前仍须人工审核</strong>。<strong>行业共识正在形成</strong> —— Anthropic 与 OpenAI 也曾表示 AI 可能正接近 RSI 阶段；Gladstone AI 本周报告称，受访的多数来自 Anthropic、OpenAI、DeepMind 的研究人员认为 <strong>RSI 可能在未来 3 至 12 个月内开始</strong>。<strong>安全隐忧同步放大</strong> —— 研究者警告，若缺乏足够防护机制，人类可能逐渐失去对快速自我改进技术的控制，这正是本月多位研究者联署呼吁减速的核心关切。<strong>布林亲自下场</strong> —— 他正越来越多参与 Gemini 项目，利用联合创始人影响力把资源转向 RSI，并称「等人们看到 Argon 发布视频时，谷歌内部其实已推进到后面好几个模型了」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">RSI 预期窗口</div><div class="data-value">3–12 个月</div></div><div class="data-chip"><div class="data-label">现状</div><div class="data-value">AI 写码+修漏洞</div></div><div class="data-chip"><div class="data-label">人工审核</div><div class="data-value">仍保留</div></div><div class="data-chip"><div class="data-label">新模型</div><div class="data-value">Gemini 4 Argon</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天的信息密度指向同一件事：<strong>用 AI 的人和管 AI 的人，第一次在同一张桌子上各自算账。</strong></p>
+    <p>Anthropic 用两份报告把「AI 替代就业」从猜测变成量化数据 —— 内部智能体工时已是员工 6 倍，初级技术岗招聘占比一年从 27% 跌到 9%，极端情景下 2030 年认知类就业萎缩 21.5%。同一周，它又向国会递上监管草案，把「政府能叫停模型」的门槛抬到 10 亿美元损失或 50 人以上死伤。这是 <strong>2026 年以来「组织变革 + 规则重塑」信号最强的一天</strong>。</p>
+    <p>产品端 OpenAI 把浏览器变成 Agent 的操作台，国内政策端收紧与放开并行（23 项出口管制 + 开源豁免），腾讯混元把记忆层做成跨工具中立基建，快手可灵把 AI 视频推到 30 秒专业生产级。而谷歌布林那句「踏上 RSI 跑步机」，则把整个行业的加速度又拧了一圈。</p>
+    <p>四条可以立刻执行的线索：<strong>① 团队能力建设重心要迁移</strong> —— 当 AI 把「执行」变成廉价品，团队价值会加速向「判断力 + 审美把关 + 智能体编排」迁移，建议尽早把「AI 产出审核」「跨工具记忆/流程沉淀」列为重点；<strong>② 跨工具记忆今天就该试</strong> —— 腾讯混元 MemHub 让 10 款 AI 工具共用一份本地记忆，可把 39.1 GUIDE 排期、视觉风格规范、IPBD 要点沉淀成跨工具共享记忆；<strong>③ 出海合规要上心</strong> —— 若团队涉及 AI 能力/模型的海外本地化部署、向境外提供模型调用或跨境技术授权，需评估是否落入限制类范围，纯开源工具、海外自有云部署风险相对可控；<strong>④ 创作工具升级窗口已开</strong> —— 可灵 Kling 4.0 的 30 秒原生 + 全能参考特别适合军事题材 KV 动效、版本预告片，建议用「关键帧锚定 + 多参考组合」跑一版 39.1 版本预告的粗剪 demo。</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>Cursor 推出 Environments API beta</strong>，云智能体环境支持 500 仓库；<strong>Modal 发布 VM Sandboxes 高性能文件系统</strong>；<strong>OpenAI 上线 GPT-Live-1.1 语音更新</strong>，新增 13 种声音、多语言优化；<strong>可灵计划 2027 年初递表港交所</strong>，目标融资至少 10 亿美元，投后估值约 180 亿美元。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
