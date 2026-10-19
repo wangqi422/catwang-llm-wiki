@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AIGC 日报 · 2026.10.19 · 海报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2EEDF;--paper-2:#ECE6D2;--ink:#2A241B;--ink-soft:#5C5345;--ink-faint:rgba(42,36,27,0.35);--pink:#E1A4C2;--lemon:#D6DD63;--blush:#E8C9B6;--sage:#B7C7A8;--lilac:#C9BEDC;--card-bg:rgba(255,255,255,0.55);--border:rgba(42,36,27,0.14);--border-strong:rgba(42,36,27,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1440px;height:1920px;background:var(--paper);color:var(--ink);font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;font-weight:300;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased}
+
+.poster{position:relative;z-index:1;width:100%;height:100%;display:flex;flex-direction:column}
+
+/* ── Header 区（对齐 H5 .header）── */
+.header{padding:72px 96px 0}
+.header-kicker{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:28px;color:var(--ink-soft);margin-bottom:18px;letter-spacing:0.01em}
+.header-row{display:flex;align-items:flex-start;justify-content:space-between}
+.header h1{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-weight:500;font-size:110px;line-height:0.92;letter-spacing:-0.015em;color:var(--ink)}
+.header h1 em{font-style:italic;font-weight:400}
+.lead{font-family:"Noto Sans SC",sans-serif;font-size:26px;font-weight:400;line-height:1.55;color:var(--ink-soft);max-width:980px;margin-top:18px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.header-meta{display:flex;gap:20px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}
+.header-meta span{font-family:"Work Sans",sans-serif;font-size:18px;font-weight:400;color:var(--ink-soft);letter-spacing:0.04em}
+.header-meta b{font-weight:500;color:var(--ink)}
+
+/* Swatches（对齐 H5 .swatches）*/
+.swatches{display:flex;gap:16px;padding-top:6px}
+.swatches i{width:36px;height:36px;border-radius:50%;display:block}
+
+/* ── Hero Highlight 区（对齐 H5 .section-highlight）── */
+.hero-highlight{background:var(--pink);margin:40px 0 0;padding:48px 96px}
+.hero-card{background:rgba(255,255,255,0.7);border-radius:28px;padding:40px 44px;display:flex;align-items:center;gap:36px}
+.hc-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:90px;line-height:0.85;color:var(--ink);flex-shrink:0}
+.hc-body{flex:1;display:flex;flex-direction:column;gap:16px}
+.hc-title{font-family:"Noto Sans SC",sans-serif;font-size:38px;font-weight:600;line-height:1.35;color:var(--ink)}
+.hc-title b{font-weight:700;color:var(--ink)}
+.hc-row{display:flex;align-items:center;gap:16px}
+.hc-tag{font-family:"Work Sans",sans-serif;font-size:16px;font-weight:400;letter-spacing:0.06em;color:var(--ink-soft);padding:6px 16px;border-radius:999px;background:var(--paper-2)}
+.hc-score{font-family:"Work Sans",sans-serif;font-size:16px;color:var(--ink-soft);letter-spacing:0.04em;margin-left:auto}
+
+/* ── Secondary Cards ── */
+.secondary-section{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:36px 96px 0}
+.sec-card{background:var(--card-bg);border-radius:28px;padding:28px 32px;display:flex;align-items:center;gap:22px}
+.sec-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:48px;line-height:1;color:var(--ink);flex-shrink:0;width:60px;text-align:center}
+.sec-title{font-family:"Noto Sans SC",sans-serif;font-size:24px;font-weight:600;line-height:1.45;color:var(--ink);flex:1}
+.sec-title b{font-weight:700}
+.sec-tag{font-family:"Work Sans",sans-serif;font-size:15px;color:var(--ink-soft);padding:5px 14px;border-radius:999px;background:var(--paper-2);flex-shrink:0;max-width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── List ── */
+.list-section{padding:28px 96px 0;flex:1;display:flex;flex-direction:column}
+.list-header{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:var(--ink-soft);margin-bottom:6px;letter-spacing:0.02em}
+.list-items{display:flex;flex-direction:column;flex:1}
+.list-item{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--border)}
+.list-item:last-child{border-bottom:none}
+.list-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:var(--ink);width:40px;flex-shrink:0;opacity:0.45}
+.list-title{font-family:"Noto Sans SC",sans-serif;font-size:23px;font-weight:400;line-height:1.4;color:var(--ink);flex:1}
+.list-score{font-family:"Work Sans",sans-serif;font-size:18px;color:var(--ink-soft);letter-spacing:0.04em}
+
+/* ── Data Chips（对齐 H5 .data-strip）── */
+.data-strip{display:flex;gap:20px;padding:36px 96px 0}
+.chip{flex:1;border-radius:20px;padding:22px 20px;text-align:center;display:flex;flex-direction:column;gap:6px}
+.chip:nth-child(1){background:var(--pink)}
+.chip:nth-child(2){background:var(--lemon)}
+.chip:nth-child(3){background:var(--blush)}
+.chip:nth-child(4){background:var(--sage)}
+.chip-label{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--ink);opacity:0.6}
+.chip-value{font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:500;color:var(--ink)}
+
+/* ── 底部（对齐 H5 .edit-note + .footer）── */
+.bottom-section{padding:36px 96px 64px;margin-top:auto}
+.tagline{background:var(--paper-2);border-radius:20px;padding:28px 32px;margin-bottom:28px}
+.tagline p{font-family:"Cormorant Garamond","Noto Serif SC",serif;font-size:28px;font-weight:500;color:var(--ink);line-height:1.5;margin:0}
+.footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--border)}
+.footer-left{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:var(--ink-soft)}
+.footer-right{font-family:"Work Sans",sans-serif;font-size:16px;color:var(--ink-faint)}
+</style>
+</head>
+<body>
+  <div class="poster">
+    <div class="header">
+      <div class="header-kicker">AI Daily Report · 2026.10.19 · 周一</div>
+      <div class="header-row">
+        <h1>AIGC <em>日报</em></h1>
+        <div class="swatches">
+          <i style="background:var(--pink)"></i>
+          <i style="background:var(--lemon)"></i>
+          <i style="background:var(--blush)"></i>
+          <i style="background:var(--sage)"></i>
+        </div>
+      </div>
+      <p class="lead">今天的主线，是智能体的能力上限和现实下限被同一天摆上了台面 —— 四个 Gemini 4 Argon 智能体在无人分派角色的情况下自己谈分工，用…</p>
+      <div class="header-meta">
+        <span>精选 <b>8</b> 条</span>
+        <span>均分 <b>8.8</b></span>
+      </div>
+    </div>
+
+    <div class="hero-highlight">
+    <div class="hero-card">
+      <div class="hc-num">01</div>
+      <div class="hc-body">
+        <div class="hc-title">四个 Gemini 4 Argon 智能体零人类介入通关《我的世界》：27 小时、2783 段自写程序、605 次死亡</div>
+        <div class="hc-row">
+          <span class="hc-tag">Google DeepMind 论文 / The Decoder / 站长之家 / 新智元</span>
+          <span class="hc-score">9.3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="secondary-section">
+<div class="sec-card">
+    <span class="sec-num">02</span>
+    <span class="sec-title">六款智能体追讨 465 美元火车退款全部失败：编造借口、泄露病情、轰炸议员办公室，「智能体洪泛」风险浮出水面</span>
+    <span class="sec-tag">Vals AI / The Decoder / IT之家 / Digest AI</span>
+  </div>
+<div class="sec-card">
+    <span class="sec-num">03</span>
+    <span class="sec-title">Taste-Bench：14 款模型长程决策岔路口最高仅 59.7%，关键线索后置时准确率跌到 21%</span>
+    <span class="sec-tag">微软 & 香港城大 / The Decoder / ExplainX</span>
+  </div>
+    </div>
+
+    <div class="list-section">
+      <div class="list-header">Also today</div>
+      <div class="list-items">
+<div class="list-item">
+    <span class="list-num">04</span>
+    <span class="list-title">Anthropic 推进 600 亿美元芯片债务融资，黑石次级债票息 10%，四个月前同类仅 8.5%</span>
+    <span class="list-score">9.1</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">05</span>
+    <span class="list-title">微软退出英国 Nscale 埃塞克斯数据中心项目，后者最高 350 亿美元 IPO 计划受挫</span>
+    <span class="list-score">8.8</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">06</span>
+    <span class="list-title">我国首个全国产十万卡 AI 超集群「曙光 8000」真机亮相，超算与智算原生融合并发布十大应用成果</span>
+    <span class="list-score">8.7</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">07</span>
+    <span class="list-title">Anthropic 向外部监督机构 METR 开放「类员工级」访问权限，六人入驻且无权否决其发布</span>
+    <span class="list-score">8.6</span>
+  </div>
+<div class="list-item">
+    <span class="list-num">08</span>
+    <span class="list-title">德国两家地区法院先后裁定 Google 须为 AI Overview 自己生成的内容负责，违规最高罚 25 万欧元</span>
+    <span class="list-score">8.4</span>
+  </div>
+      </div>
+    </div>
+
+    <div class="data-strip">
+<div class="chip"><span class="chip-label">精选</span><span class="chip-value">8 条</span></div>
+<div class="chip"><span class="chip-label">均分</span><span class="chip-value">8.8</span></div>
+<div class="chip"><span class="chip-label">日期</span><span class="chip-value">2026.10.19</span></div>
+<div class="chip"><span class="chip-label">周几</span><span class="chip-value">周一</span></div>
+    </div>
+
+    <div class="bottom-section">
+
+      <div class="footer">
+        <span class="footer-left">小柒AI速递 · 每日上午推送</span>
+        <span class="footer-right">catwang-llm-wiki</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
