@@ -1,5 +1,23 @@
 # 操作日志 | Operation Log
 
+## [2026-10-20 09:35] AIGC 日报 2026.10.20（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 2 群全成功（群 A + 群 B）
+**日期**：周二 · 第 74 期
+**评分均值**：8.86（9.4 / 9.0 / 8.9 / 9.2 / 9.0 / 8.6 / 8.5 / 8.3）
+**主线**：今天没人再讨论智能体能做什么，讨论的全是它手里握着什么 —— 微软把企业内部智能体正式划为「内部威胁」：Guardian Agents 在每个动作发生之前持续监督，动态权限让智能体从零权限起步只拿任务级时限授权，本地智能体发现类型从 25 种扩到 60 种（含 Claude Code、OpenAI Codex、GitHub Copilot），纳德拉称「最值得信赖的智能体系统，是设计成让我们可以最不信任那个模型的系统」（9.4/P0）· MiniMax 发布 M3.1 Flash：428B MoE、约 23B 激活、1M 上下文，输入 $0.15/1M 且无长上下文附加费，权重 10 月 23 日放出，OpenRouter 上的隐身模型「Space Bunny」即其早期版本（9.0/P0）· fal 联合 Black Forest Labs 推出 FLUX 3 Max：图生视频 Elo 从 1089 提到 1139，10 秒视频生成耗时从 126.44 秒压到 10.95 秒，首发 $0.0425/秒并给三周 75% 折扣（8.9/P0）· Norforge 披露一名黑客用不到 100 个汉字的指令驱动开源智能体平台 Cairn，对美加澳日四国 1200 多个站点发起攻击、攻陷 100 多个，单次成功耗时约 23 小时、成本约 50 美元，受害者含 John Deere、SharkNinja、Cummins（9.2/P0）· 美国国土安全部公开禁令，要求联邦文职机构移除全部 DeepSeek 产品，并禁止采购基于其模型开发的第三方服务，依据 2018 年《联邦采购供应链安全法》，命令 7 月 24 日签发、10 月 19 日才公开（9.0/P0）· Tenstorrent 完成 15 亿美元 E 轮，投后估值 62 亿美元较 2024 年的 26 亿翻番，此前曾与英特尔、高通洽谈收购而选择独立（8.6/P0）· OpenAI 攻坚低资源编程语言：MultiLangBench 20 语言从零写 SQLite 引擎平均通过率 87.4%（前代 26.8%），COBOL 迁移高推理档达 97.9%（8.5/P1）· AI 让游戏创意更容易被偷：独立工作室 Alliance Arts 因担心 Demo 被 AI 复刻，推迟 Steam Next Fest 公开试玩改为闭门（8.3/P1）
+**产物**：
+- MD：raw/daily-reports/AIGC_Daily_Report_20261020.md
+- H5：docs/ai-daily/ai-daily-card-20261020-toc.html（Soft Editorial + TOC / 8 卡 / 3 章节 / 32087 chars / 42490B）
+- 海报：docs/ai-daily/ai-daily-poster-20261020.png（631.0KB / 2880×3840 / 3:4）
+- 归档：docs/ai-daily/index.html DATA 顶部追加 2026-10-20（117 → 118）
+**Commits**：86f9762（MD + H5 + 归档）、4171ff3（海报），均 push 成功，远端 sha 比对一致
+**阶段 4 关卡**：sleep 25s 后 curl 首轮即 HTTP 200，线上 42490B 与本地**完全一致（0 字节差）**；WebFetch 二次确认 title「AIGC 日报 · 2026.10.20」/ 第 74 期 / 8 卡齐全 / 编辑点评与返回归档按钮在
+**推送格式**：markdown_v2 单条 209 字节（海报图 + 「点击看更多内容」链接）；Pages 第 5 次检测 200
+**采集**：AI HOT 3 页共 201 条（hasNext=false，覆盖 10-19 09:32Z ~ 10-20 01:18Z），强制带浏览器 UA；WebSearch 6 轮核实候选选题
+**查重**：grep 归档页剔除 5 条 —— Meta Muse Glimmer 30B（模型本体 2026-08-10 已发布，今日仅技术报告，属二次传播）、NVIDIA Nemotron 3.5 Super VL（10-16 已报）、可灵 Kling 4.0（10-17 已报）、日本演员协会 AI 语音准则（10-15 事件，>48h）、Anthropic × Nscale 450 亿（10-19 已报 Nscale）
+
+---
 ## [2026-10-19 09:35] AIGC 日报 2026.10.19（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 2 群全成功（群 A + 群 B）
