@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-title">AIGC <em>日报</em></div>
+    <div class="sidebar-meta">2026.10.20 &middot; 星期二 &middot; 第 74 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>微软把智能体当内部威胁管</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>MiniMax M3.1 Flash 发布</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>FLUX 3 Max 11 秒出片</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>智能体攻陷 100+ 站点</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>DHS 禁 DeepSeek</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Tenstorrent 62 亿估值</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Governance</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 治理</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 攻坚低资源语言</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>AI 克隆逼开发者藏 Demo</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.20 &middot; Tue &middot; Issue 74</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天没人再讨论智能体能做什么，讨论的全是<strong>它手里握着什么</strong> —— 微软把企业内部智能体正式划为<strong>内部威胁</strong>，Guardian Agents 在每个动作发生<strong>之前</strong>持续监督，动态权限让智能体从<strong>零权限</strong>起步，本地智能体发现类型扩到 <strong>60 种</strong> &middot; 同一天 Norforge 披露一名黑客用<strong>不到 100 个汉字</strong>的指令驱动智能体集群攻击 <strong>1200 多个</strong>站点、<strong>攻陷 100 多个</strong>，单次成功耗时约 <strong>23 小时</strong>、成本约 <strong>50 美元</strong>，受害者含 John Deere、SharkNinja、Cummins &middot; 规矩同步收紧：美国国土安全部要求联邦文职机构<strong>移除全部 DeepSeek 产品</strong>，并禁止采购基于其模型的<strong>第三方服务</strong> &middot; 能力侧照旧外放 —— MiniMax <strong>M3.1 Flash</strong> 把 428B MoE / 1M 上下文打到 <strong>$0.15/1M</strong> 输入，fal 与 Black Forest Labs 的 <strong>FLUX 3 Max</strong> 把 10 秒视频出片压到 <strong>11 秒</strong>、Elo 提到 <strong>1139</strong> &middot; 钱还在往里砸：Tenstorrent 完成 <strong>15 亿美元</strong> E 轮，投后估值 <strong>62 亿美元</strong>，一年翻番</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">⚖️ 趋势 &amp; 治理</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.20 &middot; 第 74 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 &amp; Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">智能体的权力被重新定价 —— 微软宣布不再默认信任内部智能体并给出执行时强制的镣铐，能力侧 MiniMax 把 428B MoE 打到 $0.15/1M，FLUX 3 Max 把 10 秒视频出片压到 11 秒</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">微软把企业智能体当「内部威胁」来管：Guardian Agents 事前监督 + 零权限起步，本地智能体发现扩至 60 种</span>
+        <span class="card-tag">🛡️ 智能体治理</span>
+      </div>
+      <div class="card-desc">
+        微软 10 月 19 日宣布 Project Perception 与 Microsoft 365 E7 的一组新安全能力，核心动作是把<strong>企业内部正在跑的 AI 智能体正式划为潜在内部威胁</strong>。微软安全业务负责人 Hayete Gallot 的原话是：「前沿模型无论来源是哪里，都<strong>无法完全信任</strong>」——不是因为模型有恶意，而是因为<strong>行为不可预测</strong>：模型训练目标是完成任务，而不是遵守组织规范。新增的 <strong>Guardian Agents</strong> 会在<strong>每一个动作发生之前</strong>全天候监督与审核；<strong>Dynamic Permissions</strong> 让智能体从<strong>零权限</strong>起步，只拿任务级、带时限的授权，高影响动作需可验证的人工批准；<strong>Dynamic Agent Risk</strong> 综合身份、数据、端点、云、网络、运行时与自身活动（含思维链意图漂移分析）持续算风险分，配合 <strong>Dynamic Conditional Access</strong> 做分级响应——可保留读权限而封写、可收窄可达资源、可隔离运行时甚至直接停止执行。本地智能体发现类型从 25 种扩到 <strong>60 种</strong>，覆盖 Claude Code、OpenAI Codex、GitHub Copilot。<strong>纳德拉那句话是本期题眼</strong> —— 「最值得信赖的智能体系统，不会是那个我们最信任其模型的系统，而会是这样设计的：它让我们可以<strong>最不信任</strong>那个模型。」<strong>把第三方编码智能体一起收进注册表</strong> —— Entra Agent ID 新增身份类型，覆盖安全传感器发现的「此前未知」智能体，哪怕没跟微软安全做过集成也能成为策略目标。<strong>边界要说清楚</strong> —— 度量层仍然缺失：Dynamic Agent Risk 能拦住破坏，却回答不了「它干的活对不对」；NIST AI RMF 的 MEASURE 职能只拿到 0.6/5.0，整套能力打包进 Microsoft 365 E7，<strong>$99/用户/月</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">发现类型</div><div class="data-value">60 种</div></div><div class="data-chip"><div class="data-label">起步权限</div><div class="data-value">0</div></div><div class="data-chip"><div class="data-label">前值</div><div class="data-value">25 种</div></div><div class="data-chip"><div class="data-label">E7 定价</div><div class="data-value">$99/月</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">MiniMax 发布 M3.1 Flash：428B MoE / 1M 上下文 / $0.15 输入，10 月 23 日放权重</span>
+        <span class="card-tag">🚀 开源模型</span>
+      </div>
+      <div class="card-desc">
+        MiniMax 于 10 月 19 日上线 <strong>MiniMax M3.1 Flash</strong>，一款面向编码、办公自动化与视觉推理的多模态 MoE 模型：<strong>总参数约 428B、激活约 23B、上下文 1M</strong>，输入支持文本 / 图像 / 视频，输出文本。定价 <strong>$0.15/1M 输入、$0.60/1M 输出、缓存读取 $0.015/1M</strong>，且<strong>无长上下文附加费</strong>——仅为 M3 标准价的一半，官方称整体任务成本降约 <strong>70%</strong>、速度近 <strong>3 倍</strong>。权重将于 <strong>10 月 23 日</strong>放出，许可证尚未公布。MiniMax 同时揭晓此前在 OpenRouter 上匿名跑量的「<strong>Space Bunny</strong>」就是 M3.1 Flash 的早期版本，该隐身模型在曝光前已处理超过 <strong>200 万亿</strong> Token。<strong>思考无法关闭</strong> —— 永远先推理再回答，只能在 Low / Medium / High / Xhigh / Max 五档切换（默认 Max），发 <code>thinking.type=disabled</code> 会报错，推理内容改走独立字段，从 M3 迁移需要改解析。<strong>跑分是「办公强、硬编码弱」</strong> —— Automation-Bench v1.0.6 得 <strong>62.2</strong>（Claude Opus 5 为 50.3）、BankerToolBench 76.2 与 Opus 5 持平、OSWorld V2 得 61.7（称国产第一）、CyberGym 82%；但 Terminal Bench 4.0 只有 <strong>38.1</strong>，落后 Opus 5 达 13.7 分。<strong>计价口径换成了「每任务成本」</strong> —— 五档推理力度的任务成本全部低于 <strong>$0.05</strong>，152 题 Agents' Last Exam 全跑约 <strong>$111</strong>。<strong>边界要说清楚</strong> —— 所有分数均为厂商自报、无独立复现；自家图表（62.8）与表格（62.2）差 0.6 分；参数总量与 M3 几乎一致且未发布技术报告。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">总参数</div><div class="data-value">428B</div></div><div class="data-chip"><div class="data-label">激活</div><div class="data-value">~23B</div></div><div class="data-chip"><div class="data-label">输入价</div><div class="data-value">$0.15/1M</div></div><div class="data-chip"><div class="data-label">放权重</div><div class="data-value">10/23</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">fal 联合 Black Forest Labs 推出 FLUX 3 Max：10 秒视频 11 秒出片，Elo 1139，首发 $0.0425/秒</span>
+        <span class="card-tag">🎬 视频生成</span>
+      </div>
+      <div class="card-desc">
+        10 月 19 日，fal Research 与 Black Forest Labs 联合发布 <strong>FLUX 3 Max</strong>——在 BFL 的 FLUX 3 基座上后训练而成的视频生成模型，当天即开放文生视频、图生视频与关键帧生视频三档端点。核心数字：图生视频 Elo 从原 FLUX 3 的 <strong>1089</strong> 提到 <strong>1139</strong>（Artificial Analysis 初步评估，4868 票），同时 <strong>10 秒视频的生成耗时从 126.44 秒压到 10.95 秒</strong>；BFL 官网横幅直接写「同质量下比 Seedance 2.5 快 <strong>22 倍</strong>」（后者 277.80 秒）。定价 <strong>$0.0425/秒（720p）</strong>、1080p 为 $0.0725/秒，首发三周 <strong>75% 折扣</strong>（原价 $0.17/秒），折扣截至 11 月 7 日。<strong>三层分工很清楚</strong> —— BFL 出基座，fal Research 做后训练（视觉保真、运动连贯、提示词遵循），再做推理优化与系统工程联合调优，<strong>模型层和跑模型的系统层一起优化</strong>才是提速来源。<strong>真正改变的是工作流节奏</strong> —— 10 秒素材 11 秒出片，意味着设计师可以在想法还热着的时候试镜头、看结果、改场景；对比 Gemini Omni Flash 1.1（47.37 秒）、Wan 3.0（180.16 秒）、Seedance 2.5（277.80 秒），等待从「打断讨论」变成「跟得上讨论」。<strong>能力细节</strong> —— 5–20 秒时长、720p 默认可选 1080p、原生音频、8 种画幅（含 9:16 与 21:9）、low/high 两档推理，产出在 fal 条款下可直接商用。<strong>边界要说清楚</strong> —— Elo <strong>1138±15</strong> 与 Seedance 2.5 置信区间重叠，Artificial Analysis 按点估计排第二，「并列第一」是厂商口径；关键帧端点页面上线时只有文生/图生两个。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">图生视频 Elo</div><div class="data-value">1139</div></div><div class="data-chip"><div class="data-label">10 秒出片</div><div class="data-value">10.95s</div></div><div class="data-chip"><div class="data-label">提速</div><div class="data-value">11.5×</div></div><div class="data-chip"><div class="data-label">首发价</div><div class="data-value">$0.0425/秒</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏭 行业 &amp; 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">一次已经发生的智能体攻击、一道连坐第三方的采购禁令、一笔翻番的芯片融资 —— 安全、地缘与资本三条线在同一天各自收紧</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">一名黑客用不到 100 汉字指令驱动智能体攻陷 100+ 站点：1200 次尝试，单次成功约 50 美元</span>
+        <span class="card-tag">⚠️ 智能体滥用</span>
+      </div>
+      <div class="card-desc">
+        安全公司 Norforge 于 10 月 19 日公布一起智能体驱动的入侵行动：攻击者通过<strong>暴露在公网的 Cairn 控制面板</strong>（开源通用智能体编排平台）下达指令，中文语种攻击集群累计对美、加、澳、日四国的电商与支付系统发起 <strong>1200 多个</strong>攻击项目、<strong>攻陷 100 多个</strong>站点，路透社确认受害者包括 <strong>John Deere、SharkNinja、Cummins</strong>。攻击者给智能体下的任务指令<strong>不到 100 个汉字</strong>，要求它们想办法在月访问量 20 万–150 万的在线商店上执行代码并投放上传型 Web Shell。单个成功入侵平均耗时约 <strong>23 小时</strong>、人工介入极少，整个行动 AI 花费约 <strong>5000 美元</strong>，摊到每次成功入侵约 <strong>50 美元</strong>。所有任务由一个标签为 <code>claudecode_deepseek-v4.1-flash</code> 的 worker 执行——可能是<strong>用 DeepSeek V4.1 Flash 驱动的 Claude Code harness</strong>。<strong>不是模型自己产生恶意，而是恶意目标被放大</strong> —— 人类只提供目标与偏好战术，侦察、重试、进度跟踪和执行大部分由智能体完成；真正的变量是「长时目标 + 浏览器/命令行 + 网络权限 + 凭据 + 可重试」这个组合。<strong>成本结构颠覆了攻防经济</strong> —— 每次成功 50 美元、约 23 小时，攻击者可以并行开几十条线；其追踪的 AI 攻击工具成功率约 <strong>10%</strong>，失败足够便宜本身就是优势。<strong>暴露的面板反过来成了取证金矿</strong> —— 扫描发现<strong>数百个密钥，11% 经确认为有效</strong>；另发现 20 多个恶意面板、14 个面板关联 1100+ 攻击项目。<strong>边界要说清楚</strong> —— Cairn 作者坚称平台「从来不是黑客工具」；三家公司均称已控制或无敏感信息外泄，实际窃取数据量目前不明确。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">攻击项目</div><div class="data-value">1,200+</div></div><div class="data-chip"><div class="data-label">攻陷站点</div><div class="data-value">100+</div></div><div class="data-chip"><div class="data-label">单次耗时</div><div class="data-value">~23h</div></div><div class="data-chip"><div class="data-label">单次成本</div><div class="data-value">~$50</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">美国国土安全部下令联邦文职机构移除 DeepSeek，并禁止采购其模型衍生的第三方服务</span>
+        <span class="card-tag">🏛️ 出口管制</span>
+      </div>
+      <div class="card-desc">
+        美国国土安全部（DHS）10 月 19 日在《联邦公报》公开公告，要求联邦行政部门所属<strong>文职机构</strong>从 IT 系统中<strong>移除全部 DeepSeek 产品</strong>，同时禁止采购杭州深度求索及其关联实体的产品与服务——<strong>包括基于 DeepSeek 模型开发的第三方服务</strong>。公告援引 2018 年《联邦采购供应链安全法》，随附命令由国土安全部长 Markwayne Mullin 于今年 <strong>7 月 24 日</strong>签发、此次为正式公开。DHS 列出三条理由：政府雇员或供应商使用可能导致<strong>敏感数据转移至中国</strong>；注册与对话过程中产生的个人信息、提问与文件内容可能外泄；模型本身可能含恶意软件或安全漏洞（援引 NowSecure 2025 年对 DeepSeek iOS 应用的研究）。机构还被要求监控政府网站的进出流量。<strong>「连坐第三方」是最狠的一刀</strong> —— 禁令不只针对官网与 App，还覆盖整合其模型的第三方软件，联邦机构即使通过其他供应商间接调用也在限制范围内，合规审查压力由此传导到整条供应链。<strong>从「设备禁用」升级到「系统级清退」</strong> —— 此前商务部、海军等机构及纽约、田纳西、弗吉尼亚等州已限制在政府设备上使用，这次是全面移除 + 禁购并叠加流量监控。<strong>时间线值得注意</strong> —— 7 月 24 日签发、10 月 19 日才公开，属「先签后发」；国会层面还有《No Adversarial AI Act》《No DeepSeek on Government Devices Act》等议案在推进。<strong>边界要说清楚</strong> —— 禁令<strong>不适用于私营企业与普通民众</strong>；Ramp 数据显示 DeepSeek 曾在 2026 年 6 月登上美国企业采购热门榜；中方一贯反对将科技经贸问题政治化。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">签发日</div><div class="data-value">7/24</div></div><div class="data-chip"><div class="data-label">公开日</div><div class="data-value">10/19</div></div><div class="data-chip"><div class="data-label">适用范围</div><div class="data-value">联邦文职</div></div><div class="data-chip"><div class="data-label">连坐范围</div><div class="data-value">第三方服务</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Tenstorrent 完成 15 亿美元 E 轮，估值 62 亿美元翻番，曾与英特尔、高通谈收购而选择独立</span>
+        <span class="card-tag">🔧 AI 芯片</span>
+      </div>
+      <div class="card-desc">
+        AI 芯片公司 <strong>Tenstorrent</strong> 于 10 月 19 日宣布完成 <strong>15 亿美元 E 轮融资</strong>，投后估值 <strong>62 亿美元</strong>。本轮由今年新成立的 Trace Capital 领投、Innovation X 联合领投，闪迪、普信集团、Cadence Ventures、摩根士丹利、方舟投资、富达等新老股东跟投；相较 2024 年上一轮 <strong>26 亿美元</strong>估值，一年多翻了一倍有余。资金将用于 Galaxy 服务器的规模部署、持续服务开放权重 LLM 与视频生成模型，以及推进对外授权的 AI/CPU IP。CEO <strong>Jim Keller</strong>（Apple A4/A5、AMD Zen、特斯拉 FSD 芯片架构师）称公司「一套架构、按各种尺寸出售」。此前 Tenstorrent 曾与<strong>英特尔、高通</strong>洽谈潜在收购，最终选择融资独立发展；凯勒透露转折点是今年 5 月的一次演示——Galaxy 服务器跑通了 DeepSeek 的高性能模型。<strong>「开源软件栈 + 全栈自卖」是差异化</strong> —— 从单卡、工作站到机架、超集群乃至定制 IP 都卖，软件栈开源；其 TT-Ascalon RISC-V CPU 与 Tensix AI 核已授权给三星、LG。<strong>低价是明确的竞争姿势</strong> —— 凯勒原话是「人们在找替代方案，而 Tenstorrent 可以凭更低的价格参与竞争」，在英伟达、AMD、博通主导的市场里切推理侧份额。<strong>主权算力是另一条线</strong> —— 投资方名单里有 Tether Investments、XTX Markets 等，公司强调面向 sovereign players 的自建算力需求。<strong>边界要说清楚</strong> —— 公告未披露营收与客户规模；估值翻倍发生在放弃被收购之后，能否兑现仍需看 Galaxy 的实际出货。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资额</div><div class="data-value">$15 亿</div></div><div class="data-chip"><div class="data-label">投后估值</div><div class="data-value">$62 亿</div></div><div class="data-chip"><div class="data-label">上轮估值</div><div class="data-value">$26 亿</div></div><div class="data-chip"><div class="data-label">轮次</div><div class="data-value">Series E</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚖️ 趋势 &amp; 治理 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Governance</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">⚖️ 趋势 &amp; 治理</div>
+    <div class="section-sub">一端是 AI 开始啃得动「语料稀缺、零容错」的企业遗留系统，另一端是 AI 复刻把独立开发者的公开试玩逼成了高风险动作</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">OpenAI 攻坚低资源编程语言：MultiLangBench 20 语言平均 87.4%，COBOL 迁移高推理达 97.9%</span>
+        <span class="card-tag">🧩 遗留系统</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 于 10 月 19 日发布低资源编程语言（COBOL、Fortran、Visual Basic、OCaml 等可用语料远少于 Python/JavaScript 的语言）编码能力进展，并配套放出两套评测。<strong>MultiLangBench</strong> 要求模型用 20 种语言<strong>从零写一个兼容 SQLite 的数据库引擎</strong>：GPT-6 Astra 在最高推理力度下平均通过率 <strong>87.4%</strong>（前代 GPT-5.6 Sol 为 26.8%），其中 COBOL 从 10.9% 提到 <strong>72.1%</strong>、Fortran 21.4%→<strong>83.5%</strong>、Visual Basic 27.5%→<strong>89.4%</strong>、OCaml 25.6%→<strong>85.8%</strong>，20 种语言中 19 种超过 83%。轻量档 GPT-6 Luna 平均 40.3%，单样本成本约 <strong>$0.77</strong>，较前代下降约 <strong>78%</strong>。<strong>COBOL 迁移评测</strong>要求把现有程序迁到 C++/Java/Kotlin/Python/Rust 且保持行为不变（可观测输出需<strong>字节级等价</strong>）：GPT-6.1 Sol 低推理档 <strong>86.6%</strong>（前代仅 5.4%）、成本降 39%，高推理档达 <strong>97.9%</strong>，基准近乎打满。测试套件已开源至 GitHub。<strong>为什么重要</strong> —— COBOL 仍支撑全球 <strong>40% 以上</strong>在线银行系统、<strong>80%</strong> 线下刷卡交易与 <strong>95%</strong> ATM 存取，Fortran 用于天气预报与核反应堆安全分析。<strong>评测设计直击「看似能跑」的陷阱</strong> —— COBOL 定点数超精度默认截断（除非显式 ROUNDED），转写时用四舍五入会语法没错、单测也过，却在批量结算时放大误差，所以标准设成字节级完全等价。<strong>边界要说清楚</strong> —— OpenAI 明确提醒生产使用仍须资深工程师逐项核对业务规则；真实遗留系统还绑着 IBM 大型机、CICS、VSAM，异构环境适配才是硬仗。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">20 语言均值</div><div class="data-value">87.4%</div></div><div class="data-chip"><div class="data-label">前代</div><div class="data-value">26.8%</div></div><div class="data-chip"><div class="data-label">COBOL 迁移</div><div class="data-value">97.9%</div></div><div class="data-chip"><div class="data-label">Luna 降本</div><div class="data-value">78%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">AI 让游戏创意更容易被偷：独立工作室推迟 Steam Next Fest 公开 Demo，改为闭门试玩</span>
+        <span class="card-tag">🎮 游戏行业</span>
+      </div>
+      <div class="card-desc">
+        Ars Technica 10 月 19 日报道：AI 编码工具把游戏克隆的效率推到新量级，不少开发者开始<strong>不敢公开早期作品</strong>。工作室 <strong>Alliance Arts</strong> 上周末宣布推迟原定随 Steam Next Fest（10 月 19 日）上线的公开 Demo——其恶魔题材俄罗斯轮盘饮酒游戏《Drunken Goddess Reflex》改为只向签署了录屏/直播规则的受邀者做<strong>闭门试玩</strong>，理由是担心「Demo 内容会被用来快速模仿或复刻其表现与玩法，且这类作品可能赶在我们发售前上线」。《Papers, Please》作者 <strong>Lucas Pope</strong> 早在 4 月就说过不再公开聊在做的东西；开发者 <strong>Freya Holmér</strong> 今年 3 月放出旋转轴心俄罗斯方块原型后，数天内就出现多个 vibe-coded 仿版抢先可玩，第一周<strong>每天都有新仿版</strong>。《McPixel》开发者 Sos Sosowski 把困境概括为：「不公开游戏——没销量；公开游戏——被偷。」<strong>变化的是杠杆不是现象</strong> —— 游戏业抄袭由来已久，但过去克隆需要团队、时间和技能，AI 编码工具<strong>同时压低了这三道门槛</strong>，公开 Demo 从宣传资产变成别人的原材料。<strong>独立团队的发行剧本被改写</strong> —— Demo、游戏节、早期实机展示一直是小团队攒势的标准路径，闭门试玩 + 签署规则正在成为替代方案，代价是失去社区反馈与愿望单增长。<strong>也有反对意见</strong> —— Howltide Games 的 Ivan Lago 认为「如果 AI 能一夜之间抄走你的游戏，那它本来就不算真正的游戏」；Holmér 也说仿版热度衰减后反而能沉下心做更好的版本。<strong>边界要说清楚</strong> —— 这是行业现象报道而非法律判例，AI 仿版与原创的界限在现行法律下仍高度模糊，平台对克隆的历史执法力度也参差不齐。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">展会</div><div class="data-value">Steam Next Fest</div></div><div class="data-chip"><div class="data-label">策略</div><div class="data-value">闭门试玩</div></div><div class="data-chip"><div class="data-label">仿版节奏</div><div class="data-value">数天内</div></div><div class="data-chip"><div class="data-label">业内表态</div><div class="data-value">Lucas Pope 等</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天八条里，<strong>四条指向同一件事：智能体的权力正在被重新定价。</strong></p>
+    <p>微软那条是今天最该读的一条 —— 它不是在卖安全产品，是在给行业定调：智能体的默认状态从「可信助手」改成「带权限的内部人」。纳德拉那句「最值得信赖的系统是设计成可以最不信任模型的系统」，基本可以作为接下来一年智能体采购的验收标准。</p>
+    <p>Norforge 的攻击案例是微软论点的实证。不到 100 汉字、23 小时、50 美元、100+ 站点 —— 攻击者的成本已经低到可以并行开线，防守方的成本结构还没变。这两条放一起看，智能体安全的商业化窗口已经打开。而 DHS 对 DeepSeek 的禁令把「模型来源」变成了合规项：连坐第三方服务这一点最需要注意，以后选 AI 服务商，问一句「你的模型栈里有什么」会变成标准尽调动作。</p>
+    <p>能力侧的三条可以立刻动手：FLUX 3 Max 的 11 秒出片 + 三周 75% 折扣（截至 11 月 7 日）是本期最直接的落地项；MiniMax M3.1 Flash 的 $0.15/1M 适合接批量文案与打标；OpenAI 的 COBOL 迁移思路（行为等价验收）可以平移到老素材复刻的质量标准上。</p>
+    <p>四条可以立刻执行的线索：<strong>① 给所有接入外网的宣发智能体补上四件套</strong> —— 域白名单、工具范围清单、成本/速率上限、外发动作人工确认，参考微软「零权限起步 + 任务级时限授权」的写法；<strong>② 趁折扣期批量跑竖版镜头草稿</strong> —— 11 月 7 日前把「会上讨论 → 出片」的闭环先建起来；<strong>③ 未公开版本物料的外流管控再收紧一档</strong> —— AI 复刻成本已低到个人开发者级别，早期泄露的代价被放大；<strong>④ 对外物料建立「行为等价」验收标准</strong> —— 老素材复刻必须逐帧/逐字对齐而非「看着像」，凡涉及真实人物、机构、数据的表述都要核到源头并留档。</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>Meta 发布 Muse Glimmer 30B 技术报告</strong>（Apache 2.0、4-bit 量化可跑单卡，模型本体 8 月已发布，故未作新条目）；<strong>NVIDIA 推出 Nemotron 3.5 Super VL 120B</strong> 面向企业与本地智能体；<strong>Cognition 的 Devin Fusion 以 68 分登顶 Artificial Analysis Coding Agent Index</strong>；<strong>Anthropic 被曝洽谈与 Nscale 再签 450 亿美元算力协议</strong>；<strong>Gartner 预测 2026 年 AI 基建支出近 1 万亿美元</strong>，同时警告超 3.5 万亿美元资产面临减值；<strong>Amazon CEO Jassy 称算力缺口将延续到 2028 年之后</strong>。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
+
