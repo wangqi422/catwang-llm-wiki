@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CG动画武器使用规范 · 美国标准枪械动作表现指南 V2.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+:root {
+  --bg:#0D0D0D; --card:#141414; --yellow:#FFE600;
+  --text:#fff; --text-85:rgba(255,255,255,0.85); --text-65:rgba(255,255,255,0.65);
+  --text-55:rgba(255,255,255,0.55); --text-40:rgba(255,255,255,0.4);
+  --line:rgba(255,255,255,0.08); --sidebar-w:260px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter','Noto Sans SC',sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.6;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#080808;}
+::-webkit-scrollbar-thumb{background:#333;border-radius:3px;}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#FFE600,#FF6B35);z-index:1000;transition:width 0.1s;}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:#080808;border-right:1px solid var(--line);overflow-y:auto;z-index:100;padding:32px 0 40px;}
+.sidebar-header{padding:0 24px 24px;border-bottom:1px solid var(--line);margin-bottom:16px;}
+.sidebar-brand{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.sidebar-brand-bar{width:4px;height:18px;background:var(--yellow);}
+.sidebar-brand-label{font-size:11px;font-weight:800;letter-spacing:0.2em;color:var(--yellow);text-transform:uppercase;}
+.sidebar-title{font-size:18px;font-weight:900;letter-spacing:-0.5px;}
+.sidebar-meta{margin-top:8px;font-size:11px;color:var(--text-40);letter-spacing:0.05em;}
+.nav-link{display:block;padding:8px 24px;color:var(--text-55);text-decoration:none;font-size:13px;font-weight:500;transition:all 0.2s;border-left:2px solid transparent;}
+.nav-link:hover{color:var(--text-85);background:rgba(255,255,255,0.03);}
+.nav-link.active{color:var(--yellow);background:rgba(255,230,0,0.08);border-left-color:var(--yellow);font-weight:700;}
+.nav-num{display:inline-block;width:28px;font-size:11px;font-weight:800;color:var(--text-40);letter-spacing:0.05em;}
+.nav-link.active .nav-num{color:var(--yellow);}
+.back-archive{display:block;margin:16px 24px 0;padding:10px 16px;text-align:center;font-size:12px;font-weight:600;color:var(--text-55);text-decoration:none;border:1px solid var(--line);transition:all 0.2s;}
+.back-archive:hover{color:var(--yellow);border-color:rgba(255,230,0,0.35);background:rgba(255,230,0,0.06);}
+.main{margin-left:var(--sidebar-w);padding:40px 48px;max-width:880px;}
+.header{text-align:center;padding:48px 0 36px;border-bottom:1px solid var(--line);margin-bottom:36px;}
+.header .kicker{color:var(--yellow);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;}
+.header h1{font-size:28px;font-weight:900;margin:12px 0;letter-spacing:-0.5px;}
+.header .lead{color:var(--text-55);font-size:14px;max-width:600px;margin:0 auto;}
+.header .meta{color:var(--text-40);font-size:11px;margin-top:16px;letter-spacing:0.1em;}
+@media(max-width:900px){.sidebar{display:none;}.main{margin-left:0;padding:20px;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand"><div class="sidebar-brand-bar"></div><span class="sidebar-brand-label">Weapon Reference</span></div>
+    <div class="sidebar-title">武器规范 <span style="color:var(--yellow)">V2.0</span></div>
+    <div class="sidebar-meta">CG Animation &middot; 2026.05</div>
+  </div>
+  <a href="#s00" class="nav-link" data-section="s00"><span class="nav-num">&sect;00</span>后坐力基准</a>
+  <a href="#s01" class="nav-link" data-section="s01"><span class="nav-num">&sect;01</span>突击步枪</a><a href="#s02" class="nav-link" data-section="s02"><span class="nav-num">&sect;02</span>冲锋枪</a><a href="#s03" class="nav-link" data-section="s03"><span class="nav-num">&sect;03</span>散弹枪</a><a href="#s04" class="nav-link" data-section="s04"><span class="nav-num">&sect;04</span>狙击步枪</a><a href="#s05" class="nav-link" data-section="s05"><span class="nav-num">&sect;05</span>半自动步枪</a><a href="#s06" class="nav-link" data-section="s06"><span class="nav-num">&sect;06</span>轻机枪</a><a href="#s07" class="nav-link" data-section="s07"><span class="nav-num">&sect;07</span>手枪</a><a href="#s08" class="nav-link" data-section="s08"><span class="nav-num">&sect;08</span>大口径重机枪</a><a href="#s09" class="nav-link" data-section="s09"><span class="nav-num">&sect;09</span>火箭筒</a><a href="#s10" class="nav-link" data-section="s10"><span class="nav-num">&sect;10</span>匕首</a>
+  <a href="index.html" class="back-archive">&larr; 返回归档</a>
+</aside>
+
+<main class="main">
+  <div class="header">
+    <div class="kicker">CG ANIMATION WEAPON REFERENCE GUIDE</div>
+    <h1>武器使用规范</h1>
+    <div class="lead">美国标准枪械动作表现指南 V2.0 &middot; 含真实弹药参考</div>
+    <div class="meta">突击步枪 / 冲锋枪 / 散弹枪 / 狙击步枪 / 半自动步枪 / 轻机枪 / 手枪 / 重机枪 / RPG / 匕首</div>
+  </div>
+
+  <section id="s00" style="margin-bottom:56px;">
+    <div style="border-left:4px solid #FFE600;padding-left:20px;margin-bottom:24px;">
+      <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;00</span>
+      <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">后坐力基准</h2>
+      <span style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">RECOIL BASELINE</span>
+    </div>
+    <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+      <p style="color:rgba(255,255,255,0.65);font-size:13px;margin-bottom:16px;">在设定动画关键帧时，理解不同口径和重量带来的自由后坐力能量（Free Recoil Energy）至关重要。后坐力能量直接决定了角色射击时身体的位移和震动幅度。</p>
+      
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FFE600;padding:6px 8px;">后坐力等级</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">能量范围</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">动画表现</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">适用武器</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;color:#4CAF50;">微弱</td><td style="padding:6px 8px;">&lt; 6 ft-lbs</td><td style="padding:6px 8px;">枪身轻微震动，射手几乎无位移</td><td style="padding:6px 8px;">手枪(9mm)、冲锋枪</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;color:#FFE600;">轻度</td><td style="padding:6px 8px;">6-10 ft-lbs</td><td style="padding:6px 8px;">枪口可见上跳，可保持连续射击</td><td style="padding:6px 8px;">突击步枪(5.56mm)</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;color:#FF6B35;">中度</td><td style="padding:6px 8px;">10-20 ft-lbs</td><td style="padding:6px 8px;">枪口上跳明显，需重新获取瞄准基线</td><td style="padding:6px 8px;">半自动步枪、狙击(.308)</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;color:#FF4444;">强烈</td><td style="padding:6px 8px;">20-30 ft-lbs</td><td style="padding:6px 8px;">剧烈枪口上跳，射手身体明显后倾</td><td style="padding:6px 8px;">散弹枪(12号)</td></tr>
+<tr><td style="padding:6px 8px;color:#9C27B0;">极端</td><td style="padding:6px 8px;">&gt; 30 ft-lbs</td><td style="padding:6px 8px;">毁灭性冲击，需两脚架或固定阵地</td><td style="padding:6px 8px;">重机枪/反器材(.50 BMG)</td></tr>
+</table>
+<h4 style="color:#FFE600;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FFE600;padding-left:12px;">主要武器后坐力数据对比</h4>
+<table style="width:100%;border-collapse:collapse;font-size:12px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FFE600;padding:4px 8px;">型号</th><th style="text-align:left;color:#FFE600;padding:4px 8px;">口径</th><th style="text-align:left;color:#FFE600;padding:4px 8px;">空枪重量</th><th style="text-align:left;color:#FFE600;padding:4px 8px;">后坐力</th><th style="text-align:left;color:#FFE600;padding:4px 8px;">射速</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">M4A1</td><td style="padding:4px 8px;">5.56×45mm</td><td style="padding:4px 8px;">2.95 kg</td><td style="padding:4px 8px;">~5.5</td><td style="padding:4px 8px;">700-950</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">HK416</td><td style="padding:4px 8px;">5.56×45mm</td><td style="padding:4px 8px;">3.5 kg</td><td style="padding:4px 8px;">~5.5</td><td style="padding:4px 8px;">850</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">AK-47</td><td style="padding:4px 8px;">7.62×39mm</td><td style="padding:4px 8px;">4.8 kg</td><td style="padding:4px 8px;">~7.1</td><td style="padding:4px 8px;">600</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">MP5</td><td style="padding:4px 8px;">9×19mm</td><td style="padding:4px 8px;">2.54 kg</td><td style="padding:4px 8px;">~3-4</td><td style="padding:4px 8px;">800</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">Rem. 870</td><td style="padding:4px 8px;">12 Gauge</td><td style="padding:4px 8px;">3.2 kg</td><td style="padding:4px 8px;">~20-25</td><td style="padding:4px 8px;">泵动</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">M24 SWS</td><td style="padding:4px 8px;">.308 Win</td><td style="padding:4px 8px;">5.4 kg</td><td style="padding:4px 8px;">~18.3</td><td style="padding:4px 8px;">栓动</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">Barrett M82</td><td style="padding:4px 8px;">.50 BMG</td><td style="padding:4px 8px;">14 kg</td><td style="padding:4px 8px;">~83.2</td><td style="padding:4px 8px;">半自动</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">M14</td><td style="padding:4px 8px;">7.62×51mm</td><td style="padding:4px 8px;">4.1 kg</td><td style="padding:4px 8px;">~18.3</td><td style="padding:4px 8px;">750</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">M249 SAW</td><td style="padding:4px 8px;">5.56×45mm</td><td style="padding:4px 8px;">7.5 kg</td><td style="padding:4px 8px;">~5.5</td><td style="padding:4px 8px;">750-1000</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">Glock 17</td><td style="padding:4px 8px;">9×19mm</td><td style="padding:4px 8px;">0.63 kg</td><td style="padding:4px 8px;">~4-5</td><td style="padding:4px 8px;">半自动</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:4px 8px;">M2 Browning</td><td style="padding:4px 8px;">.50 BMG</td><td style="padding:4px 8px;">38 kg</td><td style="padding:4px 8px;">极端</td><td style="padding:4px 8px;">450-600</td></tr>
+<tr><td style="padding:4px 8px;">RPG-7</td><td style="padding:4px 8px;">85mm PG-7V</td><td style="padding:4px 8px;">7.0 kg</td><td style="padding:4px 8px;">无后坐(后喷焰)</td><td style="padding:4px 8px;">单发</td></tr>
+</table>
+
+    </div>
+  </section>
+
+  
+    <section id="s01" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #FFE600;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;01</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">突击步枪</h2>
+        <span style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">ASSAULT RIFLE</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M4A1 / HK416 / AK-47</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FFE600;padding:6px 8px;">型号</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">口径</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">重量</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">射速</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M4A1</td><td style="padding:6px 8px;">5.56×45mm</td><td style="padding:6px 8px;">2.95 kg</td><td style="padding:6px 8px;">~5.5 ft-lbs</td><td style="padding:6px 8px;">700-950</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">HK416</td><td style="padding:6px 8px;">5.56×45mm</td><td style="padding:6px 8px;">3.50 kg</td><td style="padding:6px 8px;">~5.5 ft-lbs</td><td style="padding:6px 8px;">850</td></tr>
+<tr><td style="padding:6px 8px;">AK-47</td><td style="padding:6px 8px;">7.62×39mm</td><td style="padding:6px 8px;">4.80 kg</td><td style="padding:6px 8px;">~7.1 ft-lbs</td><td style="padding:6px 8px;">600</td></tr>
+</table>
+<h4 style="color:#FFE600;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FFE600;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">单发射击</p>
+<p style="color:#aaa;font-size:13px;margin:0;">枪口微抬（约2-3度），射手肩部轻微受力，准星迅速回落至原位。整个后坐力循环约0.1秒。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">连发射击</p>
+<p style="color:#aaa;font-size:13px;margin:0;">枪身呈现高频向后震颤，枪口有向右上方偏转趋势（膛线旋转导致），射手通过身体前倾和手臂下压克服。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">重量感</p>
+<p style="color:#aaa;font-size:13px;margin:0;">虽然较轻（约3kg），但在快速转身、切换目标时，仍需表现出武器前部的惯性和摆动延迟。</p>
+</div>
+<h4 style="color:#FFE600;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FFE600;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">C-Clamp握法</b> — 辅助手伸直握住护木前端，拇指跨过护木顶部向下压，其余四指在下方托住。最大程度控制枪口上跳。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">现代等腰站姿</b> — 双脚与肩同宽，身体正面朝向目标，重心前移，双肩下沉。枪托紧贴肩窝凹槽。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">贴腮瞄准</b> — 头部自然下倾，面颊紧贴枪托，视线与瞄准镜/机械瞄具平齐。保持自然的颈部角度。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=XwnLhXnCkDE" target="_blank" style="color:#FFE600;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ M4A1 Full Auto Slow Motion</a>
+<a href="https://www.youtube.com/watch?v=phwDMrau_7Y" target="_blank" style="color:#FFE600;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Inside the M4 Carbine (4K)</a>
+<a href="https://www.youtube.com/watch?v=Nli5Z36AheE" target="_blank" style="color:#FFE600;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ AR vs AK Comparison</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">5.56×45mm NATO (M4A1/HK416)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 55-77 grain (3.56-5.0g) | 弹壳长度: 44.7mm (黄铜) | 初速: 940 m/s | 枪口能量: ~1,767 J<br>枪口焰特征: 中等大小星形闪光，持续时间短。抛壳轨迹向右后方。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">7.62×39mm (AK-47)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 122-123 grain (7.9g) | 弹壳长度: 38.7mm (钢制/黄铜) | 初速: 715 m/s | 枪口能量: ~2,010 J<br>枪口焰特征: 较大火球，橙黄色，持续时间略长。弹壳呈明显的锥度。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page05_img1.jpeg" alt="5.56mm NATO 与 7.62×39mm 弹药尺寸对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">5.56mm NATO 与 7.62×39mm 弹药尺寸对比</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page05_img2.jpeg" alt="M4卡宾枪夜间射击枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">M4卡宾枪夜间射击枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page05_img3.jpeg" alt="5.56mm NATO 黄铜空弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">5.56mm NATO 黄铜空弹壳</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page05_img4.jpeg" alt="7.62×39mm 钢壳/黄铜壳对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">7.62×39mm 钢壳/黄铜壳对比</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page06_img1.png" alt="突击步枪 (M4A1) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">突击步枪 (M4A1) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s02" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #00E5FF;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;02</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">冲锋枪</h2>
+        <span style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">SUBMACHINE GUN</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">MP5 / FN P90 / MAC-10</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#00E5FF;padding:6px 8px;">型号</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">口径</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">重量</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">射速</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">MP5</td><td style="padding:6px 8px;">9×19mm</td><td style="padding:6px 8px;">2.54 kg</td><td style="padding:6px 8px;">~3-4 ft-lbs</td><td style="padding:6px 8px;">800</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">FN P90</td><td style="padding:6px 8px;">5.7×28mm</td><td style="padding:6px 8px;">2.54 kg</td><td style="padding:6px 8px;">~2-3 ft-lbs</td><td style="padding:6px 8px;">900</td></tr>
+<tr><td style="padding:6px 8px;">MAC-10</td><td style="padding:6px 8px;">.45 ACP/9mm</td><td style="padding:6px 8px;">2.84 kg</td><td style="padding:6px 8px;">~5-6 ft-lbs</td><td style="padding:6px 8px;">1090</td></tr>
+</table>
+<h4 style="color:#00E5FF;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #00E5FF;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">射击反馈</p>
+<p style="color:#aaa;font-size:13px;margin:0;">全自动射击时，枪身只有极小幅度的水平和垂直震颤。射手身体姿态几乎不受影响，可保持完美的移动射击姿态。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">机动性</p>
+<p style="color:#aaa;font-size:13px;margin:0;">武器短小精悍，角色在狭窄空间（走廊、门口）内的切角动作应极其迅速流畅，没有长枪管带来的阻碍感。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">MAC-10特殊性</p>
+<p style="color:#aaa;font-size:13px;margin:0;">射速极高（1090发/分），因体积小重量轻，全自动时枪口会剧烈抖动，难以精确控制。</p>
+</div>
+<h4 style="color:#00E5FF;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #00E5FF;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">紧凑持枪</b> — 辅助手握住弹匣匣套前方或垂直握把。双肘自然下垂，紧贴身体两侧，减小暴露面积。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">高位准备</b> — 未交火状态下枪口微抬，视线越过瞄准具观察前方；发现目标后只需微调角度即可射击。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">CQB战术</b> — 在室内清房时，枪口始终指向威胁方向。通过门口时缩短持枪距离，防止枪管暴露或被夺。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/shorts/WxqgBcUyuog" target="_blank" style="color:#00E5FF;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ HK MP5 Slow Motion Shot Breakdown</a>
+<a href="https://www.youtube.com/shorts/DKrMbidvh6k" target="_blank" style="color:#00E5FF;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Shooting the MP5 in Slow Mo</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">9×19mm Parabellum (MP5/MAC-10)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 115-147 grain (7.5-9.5g) | 弹壳长度: 19.15mm (黄铜) | 初速: 360-400 m/s | 枪口能量: ~500-600 J | 枪口焰: 较小，短促闪光。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">5.7×28mm (FN P90)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 31-40 grain | 弹壳长度: 28.83mm (特殊涂层) | 初速: 715 m/s | 外观类似缩小版步枪弹，极高初速和穿甲能力，后坐力极小。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page08_img1.jpeg" alt="常见手枪/冲锋枪口径尺寸对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">常见手枪/冲锋枪口径尺寸对比</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page08_img2.jpeg" alt="冲锋枪夜间射击枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">冲锋枪夜间射击枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page08_img3.jpeg" alt="9mm/.45 ACP 空弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">9mm/.45 ACP 空弹壳</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page09_img1.png" alt="冲锋枪 (MP5) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">冲锋枪 (MP5) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s03" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #FF4444;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;03</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">散弹枪</h2>
+        <span style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">SHOTGUN</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">Remington 870 / Mossberg 500 / Benelli M4</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FF4444;padding:6px 8px;">型号</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">口径</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">重量</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">类型</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">Remington 870</td><td style="padding:6px 8px;">12 Gauge</td><td style="padding:6px 8px;">3.2-3.6 kg</td><td style="padding:6px 8px;">~20-25 ft-lbs</td><td style="padding:6px 8px;">泵动式</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">Mossberg 500</td><td style="padding:6px 8px;">12/20 Gauge</td><td style="padding:6px 8px;">3.4 kg</td><td style="padding:6px 8px;">~20-25 ft-lbs</td><td style="padding:6px 8px;">泵动式</td></tr>
+<tr><td style="padding:6px 8px;">Benelli M4</td><td style="padding:6px 8px;">12 Gauge</td><td style="padding:6px 8px;">3.5 kg</td><td style="padding:6px 8px;">~15-20 ft-lbs</td><td style="padding:6px 8px;">半自动</td></tr>
+</table>
+<h4 style="color:#FF4444;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF4444;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">后坐力冲击</p>
+<p style="color:#aaa;font-size:13px;margin:0;">每次击发枪口发生剧烈上跳（约15-20度），枪托狠狠向后撞击射手肩窝。上半身被迫后仰，需明显肌肉发力恢复。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">泵动上膛</p>
+<p style="color:#aaa;font-size:13px;margin:0;">击发后辅助手用力向后拉动护木抛出粗大的塑料弹壳，再猛烈向前推入新弹。动作要有明显的顿挫感和力量感。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">弹丸扩散</p>
+<p style="color:#aaa;font-size:13px;margin:0;">散弹枪发射时枪口火焰巨大，鹿弹/独头弹的后坐力最强。减装弹后坐力约降低30-40%。</p>
+</div>
+<h4 style="color:#FF4444;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF4444;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">对抗姿态</b> — 前导脚大幅度迈出，重心几乎全部压在前腿上。身体采用极具侵略性的前倾站姿对抗后坐力。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">死锁肩窝</b> — 枪托必须死死抵住肩窝深处，任何缝隙都会导致射击时严重的撞击伤害和精度下降。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">推拉发力</b> — 射击手向后拉握把，辅助手向前推护木，形成对抗张力以稳定枪身。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=t9Kt7pOpXsg" target="_blank" style="color:#FF4444;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Slow Mo 12ga Shotgun Slug Destruction</a>
+<a href="https://www.youtube.com/watch?v=mbeiwnf6LXA" target="_blank" style="color:#FF4444;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Shotguns vs Watermelons Ballistic High-Speed</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">12 Gauge (12号口径)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹壳长度: 70mm (2¾"), 76mm (3"), 89mm (3½") | 材质: 塑料外壳+黄铜底座 | 初速: 370-450 m/s | 枪口能量: ~3,000-4,000 J</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">弹药种类差异</p>
+<p style="color:#aaa;font-size:13px;margin:0;"><b style="color:#FF4444;">鹿弹</b>: 包含多枚铅丸(00号鹿弹含8-9枚8.4mm铅丸)，近战用。<br><b style="color:#FF4444;">独头弹</b>: 单枚重型铅弹，中距离和破坏掩体。<br><b style="color:#FF4444;">鸟弹</b>: 包含大量细小铅砂。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page11_img1.jpeg" alt="12 Gauge 散弹不同长度规格对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">12 Gauge 散弹不同长度规格对比</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page11_img2.jpeg" alt="散弹枪夜间射击枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">散弹枪夜间射击枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page11_img3.jpeg" alt="12 Gauge 塑料弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">12 Gauge 塑料弹壳</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page11_img4.png" alt="散弹内部结构图：鸟弹、鹿弹与独头弹" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">散弹内部结构图：鸟弹、鹿弹与独头弹</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page12_img1.png" alt="散弹枪 (Remington 870) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">散弹枪 (Remington 870) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s04" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #4CAF50;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;04</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">狙击步枪</h2>
+        <span style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">SNIPER RIFLE</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M24 SWS / Barrett M82 / AWM</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#4CAF50;padding:6px 8px;">型号</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">口径</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">重量</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">类型</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M24 SWS</td><td style="padding:6px 8px;">7.62×51mm</td><td style="padding:6px 8px;">5.4 kg</td><td style="padding:6px 8px;">~18.3 ft-lbs</td><td style="padding:6px 8px;">栓动式</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">Barrett M82</td><td style="padding:6px 8px;">.50 BMG</td><td style="padding:6px 8px;">14.0 kg</td><td style="padding:6px 8px;">~83.2 ft-lbs</td><td style="padding:6px 8px;">半自动/管退</td></tr>
+<tr><td style="padding:6px 8px;">AWM</td><td style="padding:6px 8px;">.338 Lapua</td><td style="padding:6px 8px;">6.5 kg</td><td style="padding:6px 8px;">~37.7 ft-lbs</td><td style="padding:6px 8px;">栓动式</td></tr>
+</table>
+<h4 style="color:#4CAF50;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #4CAF50;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">击发瞬间</p>
+<p style="color:#aaa;font-size:13px;margin:0;">M24等栓动步枪击发时枪身有明显向后平推，伴随中等幅度枪口上扬。Barrett M82击发时巨大气流吹起周围尘土，枪管有明显向后收缩（管退式原理）。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">拉栓动作</p>
+<p style="color:#aaa;font-size:13px;margin:0;">击发后，右手离开扳机，向上旋转枪栓柄，向后拉到底抛壳，再向前推并向下闭锁。动作干脆利落。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">呼吸节奏</p>
+<p style="color:#aaa;font-size:13px;margin:0;">瞄准阶段枪身随角色呼吸产生缓慢、有规律的起伏。击发通常发生在呼气末端的屏息瞬间。</p>
+</div>
+<h4 style="color:#4CAF50;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #4CAF50;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">卧姿射击</b> — 最稳定的狙击姿势。身体与枪管轴线呈微小角度，双腿分开贴地。依赖骨骼而非肌肉支撑武器。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">两脚架支撑</b> — 使用两脚架支撑枪管前方，辅助手握拳垫在枪托下方，通过挤压调节高低角。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">扳机控制</b> — 使用食指第一指节指腹接触扳机，缓慢、平滑地向正后方施加压力，直到击发。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=AhXaER53CHQ" target="_blank" style="color:#4CAF50;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Firing a .50 Cal Sniper Rifle in Slow Motion</a>
+<a href="https://www.youtube.com/watch?v=wWky58gKShY" target="_blank" style="color:#4CAF50;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ 50 BMG At 1000 Yards</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">7.62×51mm NATO / .308 Win (M24)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 147-175 grain | 初速: 838 m/s | 枪口能量: ~3,304 J | 枪口焰: 大型星形闪光，伴随明显冲击波。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">.338 Lapua Magnum (AWM)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 250-300 grain | 初速: 880-915 m/s | 枪口能量: ~6,525 J | 专为远距离狙击设计，后坐力明显大于7.62mm。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">.50 BMG / 12.7×99mm (Barrett M82)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 647-800 grain (42-52g) | 弹壳长度: 99mm | 初速: 890 m/s | 枪口能量: ~18,050 J | 枪口焰极其巨大，制退器将冲击波和火焰向两侧后方喷射，扬起大量尘土。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page14_img1.jpeg" alt=".50 BMG 与 .22 LR 弹药尺寸对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">.50 BMG 与 .22 LR 弹药尺寸对比</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page14_img2.jpeg" alt="Barrett .50 Cal 射击瞬间" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">Barrett .50 Cal 射击瞬间</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page14_img3.jpeg" alt=".308 Win 黄铜弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">.308 Win 黄铜弹壳</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page14_img4.jpeg" alt=".50 BMG 巨型空弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">.50 BMG 巨型空弹壳</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page15_img1.png" alt="狙击步枪 (M24) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">狙击步枪 (M24) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s05" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #FF6B35;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;05</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">半自动步枪</h2>
+        <span style="color:#FF6B35;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">SEMI-AUTO RIFLE</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M14 / M1 Garand / FN SCAR-H</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF6B35;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FF6B35;padding:6px 8px;">型号</th><th style="text-align:left;color:#FF6B35;padding:6px 8px;">口径</th><th style="text-align:left;color:#FF6B35;padding:6px 8px;">重量</th><th style="text-align:left;color:#FF6B35;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#FF6B35;padding:6px 8px;">弹容量</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M14</td><td style="padding:6px 8px;">7.62×51mm</td><td style="padding:6px 8px;">4.10 kg</td><td style="padding:6px 8px;">~18.3 ft-lbs</td><td style="padding:6px 8px;">20发</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M1 Garand</td><td style="padding:6px 8px;">.30-06 Spr.</td><td style="padding:6px 8px;">4.31 kg</td><td style="padding:6px 8px;">~21.3 ft-lbs</td><td style="padding:6px 8px;">8发漏夹</td></tr>
+<tr><td style="padding:6px 8px;">FN SCAR-H</td><td style="padding:6px 8px;">7.62×51mm</td><td style="padding:6px 8px;">3.86 kg</td><td style="padding:6px 8px;">~18.3 ft-lbs</td><td style="padding:6px 8px;">20发</td></tr>
+</table>
+<h4 style="color:#FF6B35;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF6B35;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #FF6B35;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF6B35;font-size:12px;font-weight:600;margin:0 0 4px;">后坐力反馈</p>
+<p style="color:#aaa;font-size:13px;margin:0;">每次击发都有坚实的向后推力，枪口上跳幅度中等（约5-8度）。连续快速单发射击时，枪口有累积上扬趋势。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF6B35;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF6B35;font-size:12px;font-weight:600;margin:0 0 4px;">M1 Garand特有动作</p>
+<p style="color:#aaa;font-size:13px;margin:0;">打完8发漏夹中最后一发子弹时，漏夹伴随清脆的"叮"(Ping)声向上弹出。这是该枪独有的标志性动画。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF6B35;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF6B35;font-size:12px;font-weight:600;margin:0 0 4px;">单发节奏</p>
+<p style="color:#aaa;font-size:13px;margin:0;">半自动步枪强调沉稳的单发射击节奏。每次击发后需要约0.3-0.5秒重新获取瞄准基线。</p>
+</div>
+<h4 style="color:#FF6B35;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF6B35;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF6B35;">传统托握</b> — 辅助手多采用从下方托住护木的传统握法。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF6B35;">稳固站姿</b> — 需要更宽的步距和更明显的身体前倾，以对抗7.62mm弹药的冲击。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF6B35;">精确射手定位</b> — 通常作为精确射手步枪使用，利用掩体或两脚架增加稳定性。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=e-R-D_v0udk" target="_blank" style="color:#FF6B35;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Slow Mo Muzzle Exit Compilation</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF6B35;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #FF6B35;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF6B35;font-size:12px;font-weight:600;margin:0 0 4px;">7.62×51mm NATO / .308 Win</p>
+<p style="color:#aaa;font-size:13px;margin:0;">全威力步枪弹，比5.56mm长约14mm，弹头重一倍以上。后坐力是5.56mm的3倍左右。抛出的弹壳更长更重，落地声音更沉闷。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF6B35;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF6B35;font-size:12px;font-weight:600;margin:0 0 4px;">.30-06 Springfield (M1 Garand)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹壳长度63.3mm，比7.62×51mm更长，装药量更大。枪口能量约3,800-4,000 J，后坐力强劲。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page17_img1.jpeg" alt="各类步枪/手枪弹药口径全景对比" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">各类步枪/手枪弹药口径全景对比</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page17_img2.jpeg" alt="7.62mm半自动步枪射击枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">7.62mm半自动步枪射击枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page17_img3.jpeg" alt="7.62×51mm/.30-06 黄铜弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">7.62×51mm/.30-06 黄铜弹壳</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#FF6B35;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page18_img1.png" alt="半自动步枪 (M14) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">半自动步枪 (M14) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s06" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #4CAF50;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;06</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">轻机枪</h2>
+        <span style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">LIGHT MACHINE GUN</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M249 SAW / M240B</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#4CAF50;padding:6px 8px;">型号</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">口径</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">重量</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#4CAF50;padding:6px 8px;">射速</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M249 SAW</td><td style="padding:6px 8px;">5.56×45mm</td><td style="padding:6px 8px;">7.5/10 kg</td><td style="padding:6px 8px;">~5.5 ft-lbs</td><td style="padding:6px 8px;">750-1000</td></tr>
+<tr><td style="padding:6px 8px;">M240B</td><td style="padding:6px 8px;">7.62×51mm</td><td style="padding:6px 8px;">12.5 kg</td><td style="padding:6px 8px;">~18.3 ft-lbs</td><td style="padding:6px 8px;">650-950</td></tr>
+</table>
+<h4 style="color:#4CAF50;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #4CAF50;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">重量体现</p>
+<p style="color:#aaa;font-size:13px;margin:0;">角色提枪奔跑或举枪瞄准时，动作应显得迟缓且吃力。枪身惯性极大，停止移动时枪口会有轻微晃动。M249全重约10kg。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">持续射击</p>
+<p style="color:#aaa;font-size:13px;margin:0;">长点射（5-10发）时，虽然单发后坐力小，但连续震动会累积。枪身产生低频、大振幅抖动，射手需不断调整姿态。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">弹链动态</p>
+<p style="color:#aaa;font-size:13px;margin:0;">射击时暴露在外的弹链随供弹机构拉动产生剧烈抖动和跳跃，抛壳窗如瀑布般喷吐弹壳和弹链节。</p>
+</div>
+<h4 style="color:#4CAF50;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #4CAF50;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">腰际射击</b> — 紧急遭遇或移动压制时，射手将枪托夹在腋下或抵在腰际，利用曳光弹修正弹道。动作粗犷有力。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">两脚架部署</b> — 标准战术是寻找掩体，展开两脚架进行卧姿或依托射击。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#4CAF50;">弹药管理</b> — 200发弹链箱重约3kg，换弹动作：打开供弹盖→取出空箱→装入新弹链→关闭供弹盖→拉机柄上膛。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=TNzvZL_uPUU" target="_blank" style="color:#4CAF50;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Full-Auto Machine Guns Compilation</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">弹链供弹 (Belt-Fed)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">机枪主要使用M27(5.56mm)或M13(7.62mm)可散式弹链节。射击时，子弹被抽入弹膛，金属弹链节随空弹壳一起被抛出武器外。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #4CAF50;padding:10px 14px;margin:8px 0;">
+<p style="color:#4CAF50;font-size:12px;font-weight:600;margin:0 0 4px;">曳光弹 (Tracer Rounds)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">机枪弹链通常按 4:1 的比例混合普通弹与曳光弹。曳光弹在飞行中尾部燃烧发光（通常为红色/橙色），帮助射手修正弹道。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page20_img1.jpeg" alt="M249 SAW 连续射击枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">M249 SAW 连续射击枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page20_img2.jpeg" alt="激发前的弹链" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">激发前的弹链</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page20_img3.jpeg" alt="激发后的弹壳与弹链节" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">激发后的弹壳与弹链节</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page20_img4.jpeg" alt="M249 SAW 弹链供弹系统全览" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">M249 SAW 弹链供弹系统全览</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page20_img5.jpeg" alt="地面堆积的弹壳与弹链节" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">地面堆积的弹壳与弹链节</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#4CAF50;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page21_img1.png" alt="轻机枪 (M249 SAW) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">轻机枪 (M249 SAW) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s07" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #FFE600;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;07</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">手枪</h2>
+        <span style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">PISTOL</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M1911 / Glock 17 / Beretta M9 / SIG P320</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FFE600;padding:6px 8px;">型号</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">口径</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">重量</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">后坐力</th><th style="text-align:left;color:#FFE600;padding:6px 8px;">弹容量</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">M1911</td><td style="padding:6px 8px;">.45 ACP</td><td style="padding:6px 8px;">1.10 kg</td><td style="padding:6px 8px;">~7-8 ft-lbs</td><td style="padding:6px 8px;">7-8发</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">Glock 17</td><td style="padding:6px 8px;">9×19mm</td><td style="padding:6px 8px;">0.63 kg</td><td style="padding:6px 8px;">~4-5 ft-lbs</td><td style="padding:6px 8px;">17发</td></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">Beretta M9</td><td style="padding:6px 8px;">9×19mm</td><td style="padding:6px 8px;">0.95 kg</td><td style="padding:6px 8px;">~4-5 ft-lbs</td><td style="padding:6px 8px;">15发</td></tr>
+<tr><td style="padding:6px 8px;">SIG P320</td><td style="padding:6px 8px;">9×19mm</td><td style="padding:6px 8px;">0.84 kg</td><td style="padding:6px 8px;">~4-5 ft-lbs</td><td style="padding:6px 8px;">17/21发</td></tr>
+</table>
+<h4 style="color:#FFE600;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FFE600;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">套筒运动</p>
+<p style="color:#aaa;font-size:13px;margin:0;">击发瞬间套筒以极快速度向后滑动抛壳并复进，整个过程通常在几帧内完成。需要表现金属碰撞的干脆感。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">枪口翻转</p>
+<p style="color:#aaa;font-size:13px;margin:0;">由于握把轴线低于枪管轴线，后坐力导致枪口向上翻转。9mm翻转幅度小且恢复快；.45口径翻转幅度明显更大。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">空仓挂机</p>
+<p style="color:#aaa;font-size:13px;margin:0;">打完最后一发子弹后，套筒会被空仓挂机锁定在后方位置。插入新弹匣后按下释放钮，套筒向前复进上膛。</p>
+</div>
+<h4 style="color:#FFE600;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FFE600;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">虎口高卡</b> — 射击手虎口尽可能高地卡入握把后方凹槽，以降低枪管轴线与手腕的距离，减少枪口翻转。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">辅助手包裹</b> — 辅助手掌根填补射击手留在握把侧面的空隙，四指包裹射击手四指。双拇指前指贴在套筒座左侧。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FFE600;">等腰站姿</b> — 双臂向前伸出但手肘保持微曲以吸收后坐力，双手向内挤压握把形成360度包裹。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=e-R-D_v0udk" target="_blank" style="color:#FFE600;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Glock & 1911 Slow Motion Shooting</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">9×19mm vs .45 ACP</p>
+<p style="color:#aaa;font-size:13px;margin:0;">9mm弹头较轻(115gr)，初速较高，枪口焰相对短促；.45 ACP弹头重且大(230gr)，初速低(亚音速)，推力感更强，弹壳呈粗短圆柱形。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FFE600;padding:10px 14px;margin:8px 0;">
+<p style="color:#FFE600;font-size:12px;font-weight:600;margin:0 0 4px;">抛壳动画细节</p>
+<p style="color:#aaa;font-size:13px;margin:0;">手枪抛壳通常向右侧或右后方飞出。空弹壳在空中会高速旋转。由于手枪离射手面部较近，动画中常可见弹壳从射手视线边缘掠过。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page23_img1.jpeg" alt="手枪射击瞬间枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">手枪射击瞬间枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page23_img2.jpeg" alt="夜间手枪枪口焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">夜间手枪枪口焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page23_img3.jpeg" alt=".45 ACP/9mm 空弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">.45 ACP/9mm 空弹壳</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#FFE600;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page24_img1.png" alt="手枪 (Glock 17) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">手枪 (Glock 17) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s08" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #9C27B0;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;08</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">大口径重机枪</h2>
+        <span style="color:#9C27B0;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">HEAVY MACHINE GUN</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">M2 Browning / DShK</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#9C27B0;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#9C27B0;padding:6px 8px;">型号</th><th style="text-align:left;color:#9C27B0;padding:6px 8px;">口径</th><th style="text-align:left;color:#9C27B0;padding:6px 8px;">重量</th><th style="text-align:left;color:#9C27B0;padding:6px 8px;">有效射程</th><th style="text-align:left;color:#9C27B0;padding:6px 8px;">射速</th></tr>
+<tr><td style="padding:6px 8px;">M2 Browning</td><td style="padding:6px 8px;">.50 BMG</td><td style="padding:6px 8px;">38.0 kg</td><td style="padding:6px 8px;">1800m</td><td style="padding:6px 8px;">450-600</td></tr>
+</table>
+<h4 style="color:#9C27B0;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #9C27B0;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #9C27B0;padding:10px 14px;margin:8px 0;">
+<p style="color:#9C27B0;font-size:12px;font-weight:600;margin:0 0 4px;">毁灭性震动</p>
+<p style="color:#aaa;font-size:13px;margin:0;">射击时产生极其猛烈的震动，整个三脚架或车载枪架都会随之剧烈摇晃。枪管有明显的短后坐运动（M2特征）。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #9C27B0;padding:10px 14px;margin:8px 0;">
+<p style="color:#9C27B0;font-size:12px;font-weight:600;margin:0 0 4px;">枪口焰与冲击波</p>
+<p style="color:#aaa;font-size:13px;margin:0;">巨大的枪口焰，若带有制退器会向两侧喷射星形火焰。强大的冲击波会吹飞枪口下方数米内的尘土和杂物。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #9C27B0;padding:10px 14px;margin:8px 0;">
+<p style="color:#9C27B0;font-size:12px;font-weight:600;margin:0 0 4px;">重型抛壳</p>
+<p style="color:#aaa;font-size:13px;margin:0;">M2从机匣正下方抛出巨大且沉重的黄铜弹壳（单枚重约110克）和金属弹链节，落地有沉闷的金属撞击声。</p>
+</div>
+<h4 style="color:#9C27B0;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #9C27B0;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#9C27B0;">蝴蝶扳机操作</b> — 射手双手握住双铲形握把(Spade Grips)，用双拇指同时按下中间的蝴蝶形扳机进行击发。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#9C27B0;">肩部支撑</b> — 虽然有三脚架支撑，但射手仍需将肩部紧紧顶住机匣后方或肩托，用身体重量协助稳定枪身。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#9C27B0;">供弹管理</b> — 弹链极其沉重（100发重约16kg），通常需要副射手协助托举弹链进入供弹口。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://www.youtube.com/watch?v=XwnLhXnCkDE" target="_blank" style="color:#9C27B0;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ M2 .50 Cal Machine Gun Fire U.S. Marines</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#9C27B0;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #9C27B0;padding:10px 14px;margin:8px 0;">
+<p style="color:#9C27B0;font-size:12px;font-weight:600;margin:0 0 4px;">.50 BMG / 12.7×99mm NATO</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头重量: 647-800 grain (42-52g) | 弹壳长度: 99mm | 初速: 890 m/s | 枪口能量: ~18,050 J | 是步枪弹能量的10倍以上。弹壳极其粗大。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #9C27B0;padding:10px 14px;margin:8px 0;">
+<p style="color:#9C27B0;font-size:12px;font-weight:600;margin:0 0 4px;">12.7×108mm (DShK)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">苏系重机枪弹药，弹壳比.50 BMG稍长（108mm），性能相近。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page26_img1.jpeg" alt="M2 Browning .50 Cal 夜间射击" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">M2 Browning .50 Cal 夜间射击</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page26_img2.jpeg" alt="激发前的 .50 BMG 弹链" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">激发前的 .50 BMG 弹链</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page26_img3.jpeg" alt="激发后的 .50 BMG 弹壳与弹链节" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">激发后的 .50 BMG 弹壳与弹链节</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page26_img4.jpeg" alt=".50 Cal 射击后地面堆积的巨型弹壳" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">.50 Cal 射击后地面堆积的巨型弹壳</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#9C27B0;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page27_img1.png" alt="大口径重机枪 (M2 Browning) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">大口径重机枪 (M2 Browning) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s09" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #FF4444;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;09</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">火箭筒</h2>
+        <span style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">ROCKET LAUNCHER</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">RPG-7 / AT4</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#FF4444;padding:6px 8px;">型号</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">口径</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">重量</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">有效射程</th><th style="text-align:left;color:#FF4444;padding:6px 8px;">穿甲</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">RPG-7</td><td style="padding:6px 8px;">85mm (PG-7V)</td><td style="padding:6px 8px;">7.0 kg</td><td style="padding:6px 8px;">200/500m</td><td style="padding:6px 8px;">260mm RHA</td></tr>
+<tr><td style="padding:6px 8px;">AT4</td><td style="padding:6px 8px;">84mm</td><td style="padding:6px 8px;">6.7 kg</td><td style="padding:6px 8px;">300m</td><td style="padding:6px 8px;">400mm RHA</td></tr>
+</table>
+<h4 style="color:#FF4444;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF4444;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">无后坐力发射</p>
+<p style="color:#aaa;font-size:13px;margin:0;">RPG发射时，射手肩部几乎感受不到后坐力（后喷焰抵消了反作用力），但身体会因巨大的声浪和冲击波产生本能的震颤。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">后方喷焰 (Backblast)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">发射瞬间，发射筒后方喷出巨大的锥形火焰和高速气流，危险区域可达后方30米。会扬起巨量尘土。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">火箭弹飞行</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹体飞出发射筒约10米后，火箭发动机点火，弹体尾部喷出尾焰并加速，同时展开稳定尾翼旋转飞行。</p>
+</div>
+<h4 style="color:#FF4444;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #FF4444;padding-left:12px;">持枪与战术规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">肩扛姿势</b> — 发射筒中段扛在右肩上。右手握住前方的手枪式握把，左手握住后方的辅助握把。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">侧身防冲击</b> — 身体侧向目标，重心略微前移。头部紧贴光学瞄准镜或机械瞄具，佩戴护目镜和耳罩防震。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#FF4444;">后方清空</b> — 发射前必须大喊"Backblast Area Clear!"，确保尾焰危险区内没有友军或墙壁。</p>
+<div style="background:#1a1a1a;padding:10px 14px;margin:12px 0;border:1px solid #222;">
+<p style="color:#666;font-size:11px;margin:0 0 6px;">REFERENCE VIDEOS</p>
+<a href="https://gizmodo.com/slow-motion-video-of-firing-a-rpg-shows-the-massive-bac-1697505142" target="_blank" style="color:#FF4444;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ RPG-7 Firing Slow Motion Backblast</a>
+<a href="https://www.youtube.com/watch?v=OZaNtK1l8cI" target="_blank" style="color:#FF4444;font-size:12px;text-decoration:none;display:block;margin:2px 0;">→ Rocket Launchers and The Dangers of Back-Blast</a>
+</div>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">PG-7V 反坦克高爆弹 (HEAT)</p>
+<p style="color:#aaa;font-size:13px;margin:0;">弹头直径: 85mm | 全弹长: 约950mm | 全重: 2.25 kg | 初速: 115 m/s (助推后达300 m/s) | 弹头前部呈尖锥形，后部连接细长的火箭发动机和发射药管。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #FF4444;padding:10px 14px;margin:8px 0;">
+<p style="color:#FF4444;font-size:12px;font-weight:600;margin:0 0 4px;">发射原理</p>
+<p style="color:#aaa;font-size:13px;margin:0;">击发后，发射药将弹体推出发射管（产生后喷焰）；弹体飞出约11米后，火箭发动机点火加速飞行，减少了对射手的烧伤风险。</p>
+</div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0;"><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page29_img1.jpeg" alt="RPG-7 发射后方喷焰" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">RPG-7 发射后方喷焰</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page29_img2.jpeg" alt="PG-7V 反坦克高爆弹战斗部" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">PG-7V 反坦克高爆弹战斗部</figcaption></figure></div><div style="background:#141414;padding:4px;"><figure style="margin:0"><img src="_weapon_imgs/page29_img3.jpeg" alt="RPG-7 发射瞬间高速摄影" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">RPG-7 发射瞬间高速摄影</figcaption></figure></div></div>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#FF4444;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page30_img1.png" alt="火箭筒 (RPG-7) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">火箭筒 (RPG-7) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+    <section id="s10" style="margin-bottom:56px;">
+      <div style="border-left:4px solid #00E5FF;padding-left:20px;margin-bottom:24px;">
+        <span style="color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;">&sect;10</span>
+        <h2 style="color:#fff;font-family:Inter,sans-serif;font-size:22px;margin:4px 0;font-weight:700;">匕首</h2>
+        <span style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.1em;">COMBAT KNIFE</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px;margin-left:12px;">KA-BAR USMC / M9 刺刀</span>
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">技术参数 &amp; 动画表现</h3>
+        
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px;">
+<tr style="border-bottom:1px solid #222;"><th style="text-align:left;color:#00E5FF;padding:6px 8px;">型号</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">刃长</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">全长</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">重量</th><th style="text-align:left;color:#00E5FF;padding:6px 8px;">刃材</th></tr>
+<tr style="border-bottom:1px solid #1a1a1a;"><td style="padding:6px 8px;">KA-BAR USMC</td><td style="padding:6px 8px;">7"/178mm</td><td style="padding:6px 8px;">11.875"/302mm</td><td style="padding:6px 8px;">318g</td><td style="padding:6px 8px;">1095碳钢</td></tr>
+<tr><td style="padding:6px 8px;">M9 刺刀</td><td style="padding:6px 8px;">7"/178mm</td><td style="padding:6px 8px;">12.25"/311mm</td><td style="padding:6px 8px;">370g</td><td style="padding:6px 8px;">不锈钢</td></tr>
+</table>
+<h4 style="color:#00E5FF;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #00E5FF;padding-left:12px;">动画表现要点</h4>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">攻击动作</p>
+<p style="color:#aaa;font-size:13px;margin:0;">挥砍(Slash)动作要迅猛带出残影；穿刺(Thrust)动作要直线发力，利用身体重心前移增加破坏力。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">防守反击</p>
+<p style="color:#aaa;font-size:13px;margin:0;">利用非持刀手进行格挡、控制敌人武器臂，随后持刀手瞬间突入致命部位。动作强调速度和爆发力。</p>
+</div>
+<div style="background:#1a1a1a;border-left:2px solid #00E5FF;padding:10px 14px;margin:8px 0;">
+<p style="color:#00E5FF;font-size:12px;font-weight:600;margin:0 0 4px;">重量感</p>
+<p style="color:#aaa;font-size:13px;margin:0;">虽然匕首很轻（约318g），但攻击动作需要全身协调发力。挥砍时手臂、肩膀和腰部的旋转要协调一致。</p>
+</div>
+<h4 style="color:#00E5FF;font-size:13px;letter-spacing:0.15em;margin:16px 0 8px;border-left:3px solid #00E5FF;padding-left:12px;">握法与格斗规范</h4>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">正握 (Saber Grip)</b> — 刀刃朝前，拇指压在刀柄上方或护手上。距离最长，适合挥砍和中距离对峙。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">反握 (Reverse Grip)</b> — 刀刃朝下，从拳头下方伸出。极近距离内穿刺力量最大，CQC中极具杀伤力。</p>
+<p style="color:#aaa;font-size:13px;line-height:1.8;"><b style="color:#00E5FF;">格斗站姿</b> — 侧身站立，持刀手在后（隐藏意图并保护武器），非持刀手在前（测距、格挡和控制）。重心放低，保持步法灵活。</p>
+
+      </div>
+
+      <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:20px 24px;margin-bottom:12px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">弹药 &amp; 真实参考</h3>
+        
+        
+      </div>
+
+      <div style="background:#141414;border:1px solid #1a1a1a;padding:20px 24px;">
+        <h3 style="color:#00E5FF;font-family:Inter,sans-serif;font-size:12px;letter-spacing:0.2em;margin:0 0 16px;text-transform:uppercase;border-bottom:1px solid #222;padding-bottom:8px;">动作关键插图</h3>
+        <div style="margin:16px 0;"><div style="background:#141414;padding:4px;margin:8px 0;"><figure style="margin:0"><img src="_weapon_imgs/page32_img1.png" alt="匕首 (KA-BAR) 标准动作姿势分解" style="width:100%;display:block;border:1px solid #222;" loading="lazy" /><figcaption style="color:#666;font-size:11px;padding:6px 0;text-align:center;font-family:Inter,sans-serif;">匕首 (KA-BAR) 标准动作姿势分解</figcaption></figure></div></div>
+      </div>
+    </section>
+
+  <footer style="border-top:1px solid #1a1a1a;padding:32px 0;text-align:center;">
+    <p style="color:var(--text-40);font-size:12px;">CG Animation Weapon Reference Guide V2.0 &middot; J3&middot;宣发设计组&middot;小柒&amp;AI整理</p>
+    <p style="color:var(--text-40);font-size:11px;margin-top:8px;opacity:0.6;">Backfire Rifle Recoil Table / U.S. Marine Corps M249 Manual / U.S. Army FM 3-22.9 / NATO STANAG 4172</p>
+  </footer>
+</main>
+
+<script>
+window.addEventListener('scroll',function(){var h=document.documentElement;var p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('progressBar').style.width=p+'%';});
+var secs=document.querySelectorAll('section[id]');var links=document.querySelectorAll('.nav-link[data-section]');
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});var link=document.querySelector('.nav-link[href="#'+e.target.id+'"]');if(link)link.classList.add('active');}});},{threshold:0.15});
+secs.forEach(function(s){obs.observe(s);});
+</script>
+</body>
+</html>
