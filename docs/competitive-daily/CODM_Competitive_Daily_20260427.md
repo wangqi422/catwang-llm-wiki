@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-27"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-27
+updated: 2026-04-27
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月27日
 
 ## 📊 今日概览
@@ -206,3 +220,20 @@
 - 在社媒公开「玩家反馈 → 调整决策」的处置记录，把响应过程本身做成宣发内容
 - 用「快速响应」建立 CODM「最听玩家意见的头部竞技手游」心智，与三角洲的「大牌代言」形成差异化
 
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

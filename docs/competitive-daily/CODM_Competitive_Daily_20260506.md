@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-05-06"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-06
+updated: 2026-05-06
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年5月6日
 
 ## 📊 今日概览
@@ -171,3 +185,20 @@ BF6 用"经典地图重制+全新模式（海战）"组合拳做 S3 发布，既
 **对 CODM 的启示**
 - CODM 哥斯拉联动的抖音内容运营节奏需加强，联动武器皮肤的"炫酷展示"类短视频是高传播品类
 - 建议参考暗区突围"路明非级别操作"的UGC激励模式，刺激玩家自发内容产出
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

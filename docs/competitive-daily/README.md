@@ -40,3 +40,12 @@
 - **更新频率**：工作日每日更新
 - **推送渠道**：企业微信群（精简 Markdown + 完整 HTML 链接）
 - **生成 Skill**：`_skills/daily-card.md`（统一日报流水线）
+
+
+---
+## 知识关联
+
+**相关 Wiki 节点**：[[INDEX-by-type]] · [[2026-04-11-obsidian-ai-second-brain]] · [[codm-aigc-workflow]]
+
+---
+*返回 [[INDEX-by-type]]*

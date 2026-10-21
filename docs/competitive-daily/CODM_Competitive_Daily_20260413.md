@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-13"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-13
+updated: 2026-04-13
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月13日（周日）
 
 📌 重点速览
@@ -29,3 +43,20 @@
 1. **三角洲行动×古墓丽影联动视觉**：跨IP联动是当前FPS品类重要宣发手段，劳拉角色融入军事射击场景的视觉融合方案值得关注，可参考其海报风格处理IP角色与原生世界观的视觉统一性。
 2. **三角洲行动前瞻直播视觉包装**：赛季主题「回声」围绕声波/水下作战核心，前瞻直播采用多栖环境（水下+陆地）的视觉语言，蓝绿色调+声波纹理的设计方向可供CODM赛季KV参考。
 3. **Battlefield 6 Season视觉体系**：Hunter/Prey主题的狩猎者vs猎物对立视觉叙事，Season更迭的视觉连续性处理手法值得借鉴。
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

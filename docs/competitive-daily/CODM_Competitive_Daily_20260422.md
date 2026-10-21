@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-22"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-22
+updated: 2026-04-22
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月22日
 
 ## 📊 今日概览
@@ -134,3 +148,20 @@ BF6路线图中「服务器浏览器+经典地图重制+社区共建」引发极
 **对 CODM 的启示**
 - 长线运营中经典地图重制（如重生岛）的社区情感价值不可低估
 - 可考虑公布CODM长期内容路线图，增强社区信心和玩家留存预期
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

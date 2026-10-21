@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-30"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-30
+updated: 2026-04-30
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 # CODM 竞品日报 | 2026年4月30日
 
 > 每工作日 9:40 自动生成 | 推送时间：2026-04-30 09:40
@@ -204,3 +218,20 @@
 - 虽然移动端难以直接复刻海战，但可关注BF6的端游内容趋势，预判CODM未来可能的内容方向
 - BF6的"大地图"概念可转化为CODM的"大战场"模式设计参考
 - 海战元素的视觉语言（舰艇、水面特效）可作为CODM未来新地图/模式的视觉参考
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

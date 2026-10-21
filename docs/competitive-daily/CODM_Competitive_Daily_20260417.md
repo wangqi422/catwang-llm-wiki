@@ -1,4 +1,4 @@
----
+﻿---
 title: "CODM 竞品情报日报 2026-04-17"
 type: daily-report
 category: competitive-intelligence
@@ -156,3 +156,20 @@ CODM 选择在三角洲 S9 上线次日（4/17）前后密集释放 S4 消息，
 
 *情报采集时间：2026-04-17 09:30 | 分析师：小柒*
 *数据来源：微博、B站、YouTube、X/Twitter、callofduty.com、17173、TapTap、Dot Esports、Pocket Gamer*
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

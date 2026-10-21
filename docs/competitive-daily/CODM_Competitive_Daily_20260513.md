@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-05-13"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-13
+updated: 2026-05-13
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年5月13日（星期二）
 
 ## 📊 今日概览
@@ -164,3 +178,20 @@ BF6 推出首个排位大逃杀模式（Ranked BR Quads），标志着端游FPS�
 **对 CODM 的启示**
 - 重大联动或赛季开启时可参考"登录即送N抽"的简单回流钩子
 - 评测团/主播矩阵的预热模式可复制到CODM S5预热期
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

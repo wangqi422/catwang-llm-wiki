@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-29"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-29
+updated: 2026-04-29
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月29日
 
 ## 📊 今日概览
@@ -191,3 +205,20 @@
 1. **5/1早8点抢占先机**：抢先发布五一登录活动主视觉，打时间差
 2. **S4下半程引入顶流**：考虑国内头部主播/明星联动，扩大受众圈层
 3. **货币直送+限定外观**：优化福利策略，增加付费转化
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

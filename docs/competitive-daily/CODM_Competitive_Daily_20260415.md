@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-15"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-15
+updated: 2026-04-15
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月15日
 
 📌 重点速览
@@ -53,3 +67,20 @@
 2. **暗区突围×闪魂实体收藏卡D-2**：跨界实体周边的发售倒计时营销——"黑卡蒂刺破硝烟"暗黑美学调性的倒计时海报设计
 3. **战区手游停服 → CODM承接**：竞品自己退场带来的用户迁移窗口，CODM可考虑针对性承接营销
 4. **BF6大版本后首日社区热**：经典机制（除颤器）回归引发怀旧讨论的情怀营销包装策略
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

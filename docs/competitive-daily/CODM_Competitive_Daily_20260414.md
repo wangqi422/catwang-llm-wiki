@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-14"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-14
+updated: 2026-04-14
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月14日
 
 📌 重点速览
@@ -29,3 +43,20 @@
 1. **三角洲×古墓丽影联动视觉**：劳拉"持枪又美又飒"的形象处理+30周年纪念包装，IP联动海报的经典角色现代化演绎手法值得参考——如何在保留原IP辨识度的同时融入射击游戏视觉语言
 2. **暗区突围×闪魂实体收藏卡**：游戏IP跨界实体周边的视觉设计——角色卡面+枪械涂装的包装设计，"黑卡蒂刺破硝烟"的暗黑美学文案+视觉调性，跨界营销新思路
 3. **CODM"赛博养猫"萌系营销**：射击游戏做反差萌营销的参考案例，猫系武器皮肤的IP化视觉包装，打破品类刻板印象的创意方向
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

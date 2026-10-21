@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-20"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-20
+updated: 2026-04-20
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月20日
 
 ## 📊 今日概览
@@ -170,3 +184,20 @@
 | 三角洲行动 | S9上线+古墓丽影联动预热 | ██████████ 10/10 | 赛季+IP双线 |
 | 暗区突围 | 一周年庆+4500债券+电竞赛事 | ████████░░ 8/10 | 周年庆全面铺开 |
 | Battlefield 6 | 2026路线图+海战模式公布 | ██████░░░░ 6/10 | 长线路线图提振信心 |
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-05-15"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-15
+updated: 2026-05-15
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年5月15日（星期四）
 
 ## 📊 今日概览
@@ -230,3 +244,20 @@
 *信源：17173、EA 官网/IGN、腾讯财报、Activision、Arena Breakout 官网、PUBG Mobile*
 
 *生成时间：2026-05-15 10:35 | J3宣发设计组 · 小柒&AI分析*
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

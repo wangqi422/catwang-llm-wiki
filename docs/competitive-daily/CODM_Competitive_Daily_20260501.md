@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-05-01"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-05-01
+updated: 2026-05-01
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年5月1日
 
 ## 📊 今日概览
@@ -245,3 +259,20 @@ Battlefield 6在2026年路线图中展示了极强的「长线诚意」——7�
 - CODM的赛季更新节奏（每月一次）比BF6（每2-3月一次）更快，应强化「高频更新、持续新鲜」的差异化定位
 - BF6的「经典地图回归」策略（Golmud Railway、Wake Island）证明情怀牌有效，CODM可考虑在BR模式中复刻更多经典地图（如Nuketown、Terminal等）
 - 关注BF6排位赛上线后的电竞生态发展，评估对CODM电竞用户的潜在分流
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-05]] · 返回 [[INDEX-by-type]]*

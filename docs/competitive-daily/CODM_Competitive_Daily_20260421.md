@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-21"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-21
+updated: 2026-04-21
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月21日
 
 ## 📊 今日概览
@@ -130,3 +144,20 @@
 **对 CODM 的启示**
 - S4周期内可叠加社区赛事和创作者生态活动，避免IP联动热度首周后快速衰减
 - 暗区突围4500点券的周年庆力度表明免费货币大放送仍是DAU拉升的有效手段
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*

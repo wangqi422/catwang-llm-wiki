@@ -1,3 +1,17 @@
+﻿---
+title: "CODM 竞品日报 2026-04-28"
+type: daily-report
+capture_type: article
+track: work
+created: 2026-04-28
+updated: 2026-04-28
+tags:
+  - codm
+  - competitive
+  - daily-report
+  - game-design
+---
+
 🗓️ 竞品日报 · 2026年4月28日
 
 ## 📊 今日概览
@@ -210,3 +224,20 @@
 - 大版本宣发应拆解为**多个独立话题点**，按「版本预告 → 明星/IP联动官宣 → 核心玩法上线 → 福利高峰」的节奏分阶段释放
 - 每个阶段之间不超过3天，保持社区热度的连续性
 - 在B站、抖音、微博分别定制不同形式的物料（B站长视频、抖音短视频、微博图文），最大化覆盖
+
+
+---
+
+## Related
+
+- [[codm-asset-pipeline]] — CODM 素材获取流程
+- [[codm-vfx-system]] — CODM 特效分类体系
+- [[cod-cg-production]] — COD CG 制作体系
+- [[iw-engine]] — IW Engine 引擎演进
+- [[ai-campaign-prototyping]] — AI 营销活动原型制作
+- [[content-creation-methodology]] — 内容创作方法论
+- [[codm-aigc-workflow]] — CODM AIGC 工作流
+- [[2026-05-09-codm-project-resources]] — CODM 项目资料团队结构与素材指南
+
+---
+*月度索引：[[daily-index-2026-04]] · 返回 [[INDEX-by-type]]*
