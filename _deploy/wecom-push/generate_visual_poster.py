@@ -46,7 +46,8 @@ body{position:relative;background:#0A0C10;font-family:"PingFang SC","Microsoft Y
 .th-lb{position:absolute;left:0;right:0;bottom:0;height:36px;line-height:36px;text-align:center;
   background:rgba(8,10,14,.8);color:#fff;font-size:16px;font-weight:700;letter-spacing:.22em}
 .foot{position:absolute;left:0;right:0;bottom:18px;text-align:center;
-  font-family:Consolas,monospace;font-size:12px;letter-spacing:.3em;color:rgba(255,255,255,.5)}
+  font-family:Consolas,"方正兰亭黑Pro 简","方正兰亭黑","FZLanTingHei",monospace;font-size:12px;letter-spacing:.3em;color:rgba(255,255,255,.5)}
+.foot .cn{font-family:"方正兰亭黑Pro 简","方正兰亭黑","FZLanTingHei",sans-serif;font-weight:500;letter-spacing:.36em}
 """
 
 def b64(p):
@@ -75,7 +76,7 @@ def main():
     ap.add_argument('--subtitle', required=True)
     ap.add_argument('--stats', default='')
     ap.add_argument('--no', dest='issue', default='NO.003')
-    ap.add_argument('--foot', default='PRODUCED FOR CODM MARKETING · 小柒运营')
+    ap.add_argument('--foot', default='PRODUCED FOR CODM MARKETING · <span class="cn">小柒运营</span>')
     ap.add_argument('--out', required=True)
     ap.add_argument('--scale', type=int, default=2, choices=[1, 2])
     a = ap.parse_args()
