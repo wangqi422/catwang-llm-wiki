@@ -161,15 +161,15 @@ def main():
         paths.append(ARCHIVE / md.name)
     git_publish(paths)
 
-    # 5. 推送两件套
-    md_text = md.read_text(encoding='utf-8') if md and md.exists() else f'# 使命召唤竞品视觉日报 {date_str}'
-    content = build_push_markdown(md_text, page_url, date_str)
-    print('\n--- push preview ---\n' + content + '\n---')
-    send_webhook({'msgtype': 'markdown', 'markdown': {'content': content}})
-    if host_png and host_png.exists():
-        img = host_png.read_bytes()
-        send_webhook({'msgtype': 'image', 'image': {
-            'base64': base64.b64encode(img).decode(), 'md5': hashlib.md5(img).hexdigest()}})
+    # 5. 推送（AI 日报同款：push-poster.js 一条 markdown_v2 = 海报图 + 「点击看更多内容」）
+    png_arg = str(host_png) if host_png and host_png.exists() else str(PAGES_DIR / host_name.replace('.html', '.png'))
+    png_url = f'{PAGES_BASE}/docs/competitive-daily/{Path(png_arg).name}'
+    cmd = ['node', str(WIKI_ROOT / '_deploy' / 'wecom-push' / 'push-poster.js'),
+           '--png', png_arg, '--pngurl', png_url, '--url', page_url,
+           '--text', '点击看更多内容', '--group', '竞品视觉日报群']
+    r = subprocess.run(cmd, cwd=str(WIKI_ROOT))
+    if r.returncode != 0:
+        raise SystemExit('push-poster.js 推送失败')
     print('🎉 归档 + 发布 + 推送完成')
     print('🔗', page_url)
 
