@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-title">AIGC <em>日报</em></div>
+    <div class="sidebar-meta">2026.10.22 &middot; 星期四 &middot; 第 76 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>PHP2Shell 影响七成网站</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Duet 主动式智能体</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>沃尔玛开放智能体代购</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 模型上谷歌云</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>GTC 柏林：14 天建 AI 工厂</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>DeepMind 因军方合同辞职</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Governance</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 治理</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>CyberCartel 多智能体攻击</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Spotify 清 5000 万 AI 曲目</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.22 &middot; Thu &middot; Issue 76</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">同一天里，<strong>修补和入侵用的是同一批模型</strong> —— AI 挖出潜伏十余年的 PHP 核心漏洞 <strong>PHP2Shell</strong>（影响全球约 <strong>70% 网站</strong>，两个月协调修复换来「防御者之窗」），而 <strong>CyberCartel</strong> 用 Claude + Grok + Kimi 拼出的多智能体攻击网打穿了 <strong>400 多家</strong>拉美金融机构 &middot; 代理权这边则一开一锁：<strong>Anthropic</strong> 推出可在设备关机后继续干活的 <strong>Claude Duet</strong>，<strong>沃尔玛</strong>用 MCP 网关把外部智能体放进自己的货架，与亚马逊封锁智能体的路线正面对着干 &middot; 规矩也在同一天落地：黄仁勋说「<strong>祈祷不是安全</strong>」，OpenAI 把前沿模型摆上了谷歌云的货架</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">⚖️ 趋势 &amp; 治理</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.22 &middot; 第 76 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 &amp; Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">攻守两侧在同一天把 AI 接进了工作流 —— PHP2Shell 让模型第一次抢在攻击者之前挖出影响七成网站的漏洞，Claude Duet 与沃尔玛网关则把「代理权」写成了可授权、可撤销、可审计的产品条款</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">PHP2Shell：AI 挖出潜伏十余年的 PHP 核心 RCE，影响全球约 70% 网站，两个月协调修复换来「防御者之窗」</span>
+        <span class="card-tag">🛡️ AI 攻防</span>
+      </div>
+      <div class="card-desc">
+        两个漏洞位于 <strong>PHP 引擎自身</strong>的内存管理与错误处理路径，统称 PHP2Shell：<strong>CVE-2026-109618</strong> 是上传进度反序列化器的 use-after-free —— 致命的分配失败会销毁请求堆，而反序列化器的全局状态仍被发布，后续由同一 worker 处理的请求会把攻击者抢占的内存当作活跃结构消费；<strong>CVE-2026-109619</strong> 是致命错误回溯的 use-after-free 叠加 OPcache 类型混淆。研究者把两个原语与内存泄露串成单个脚本 <code>php2shell</code>，在 WordPress、Drupal、Joomla 的最新官方镜像上演示了<strong>无需认证即可远程执行代码</strong>；即便不拿 RCE，也能直接读出 PHP 进程内存里的<strong>密码、令牌与 API 密钥</strong>。CVSS v4.0 均 <strong>9.2</strong>，watchTowr 给到满分 10.0；按 Sansec 研究，部分问题代码可追溯到 <strong>2012 年的 PHP 5.4.0</strong>。<strong>时间线才是主角</strong> —— OpenAI 内部团队 Calif 用 <strong>GPT-5.6 Sol</strong> 审计于 8 月 11 日报告；Google 旗下 <strong>Wiz</strong> 用 Wiz Atlas + <strong>Gemini 4 Argon</strong> 独立发现，8 月 24 日上报。此后约两个月静默协调：联合 Google Cloud、Cloudflare、AWS、微软、Automattic、Fastly、Akamai、Imperva、Vercel 准备客户指引与现成缓解措施。<strong>10 月 21 日</strong> PHP 发布 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 修复，并为 7.4 / 8.0 / 8.1 提供最小 backport。OpenAI 把这段时间命名为「<strong>防御者之窗</strong>」，同时投入 <strong>10 亿美元</strong>补贴资源有限的关键服务组织。<strong>窗口正在关闭</strong> —— 补丁落地同期，WatchTowr、Hadrian、Patchstack、Cloudflare、Vega 均已观测到野外利用尝试，Vega 看到的攻击用的是公开 PoC。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">影响网站</div><div class="data-value">~70%</div></div><div class="data-chip"><div class="data-label">CVSS v4.0</div><div class="data-value">9.2</div></div><div class="data-chip"><div class="data-label">协调修复</div><div class="data-value">~2 个月</div></div><div class="data-chip"><div class="data-label">野外利用</div><div class="data-value">已出现</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Anthropic 推出 Claude Duet 研究预览：独立虚拟机 + 6000 连接器，设备关机也继续干活</span>
+        <span class="card-tag">🤖 主动智能体</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 于 10 月 21 日以研究预览形式推出 <strong>Claude Duet</strong> —— 不是又一个等提问的聊天机器人，而是<strong>会主动找事做</strong>的 AI 智能体。基于 <strong>Claude Opus 5.5</strong>，提供独立 iOS / Android 应用与 claude.ai 网页版，首批经候补名单向<strong>美国地区 Pro 与 Max 订阅用户</strong>开放。三层能力：每天早晨汇总关联应用的重要事项并全天持续巡检；用户交办后可在后台跑完，<strong>设备关机离线照样继续</strong>；可跨应用执行多步任务 —— 安排会议、整理未读邮件并拟好回复、追踪发票与催款、制作财务或销售预测、搭建仪表盘、开发原型与网页应用。工程上有<strong>独立虚拟机和浏览器环境</strong>，可调用 Claude Marketplace 中<strong>超过 6000 个连接器与插件</strong>（Gmail、Slack、QuickBooks、Stripe、Gusto、LinkedIn、HubSpot、Canva、Shopify、DocuSign）。支付经 <strong>Link 或 Shop Pay</strong>，用<strong>虚拟卡</strong>避免暴露真实卡号。<strong>安全设计是重点</strong> —— 不直接接触用户密码与登录 token；发消息、付款、签署文件、删除内容<strong>必须先由用户批准</strong>；证券交易与账户间转账<strong>即使批准也不允许</strong>；专用分类器逐条检查消息，拒绝分享信用卡号、政府身份证件等最高层级敏感信息。Anthropic 坦承是早期版本：可能误读对话、误判紧急程度、个人事务偏弱，且暂不能展示浏览器操作过程。为省额度，它每隔几小时检查一次而非持续刷新。<strong>早期案例</strong> —— 品牌策略师 Mya Dalton 说 Duet 从日历看到她的潜在客户会议，不只备好背景资料，还发现会议紧挨着航班，<strong>主动提议改期</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">连接器</div><div class="data-value">6000+</div></div><div class="data-chip"><div class="data-label">基础模型</div><div class="data-value">Opus 5.5</div></div><div class="data-chip"><div class="data-label">必须批准</div><div class="data-value">发·付·签·删</div></div><div class="data-chip"><div class="data-label">永不允许</div><div class="data-value">证券·转账</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">沃尔玛上线 Agent Gateway：基于 MCP 向外部智能体开放库存与下单，11 月推出独立授权档案</span>
+        <span class="card-tag">🛒 智能体电商</span>
+      </div>
+      <div class="card-desc">
+        沃尔玛 10 月 21 日在旧金山 Masters of Scale 峰会宣布推出自有 <strong>Agent Gateway</strong> —— 一套基于<strong>模型上下文协议（MCP）</strong>的服务器，让经审核的 AI 智能体查询线上库存并<strong>代表用户完成购买</strong>。配套功能 <strong>Agent Profiles</strong> 将于 <strong>11 月</strong>推出：每个智能体在用户账户里拥有<strong>独立授权档案</strong>，首次使用需授权、绑定账户并设置权限或消费额度，可随时删除；<strong>默认所有智能体发起的购买都需手动批准</strong>，也可设定额度（如 100 美元内）自主下单；智能体的购买记录与用户本人下单记录<strong>分开显示</strong>。无需 Walmart+ 会员，有沃尔玛账户即可用，技术同时支持山姆会员店。<strong>隐私换了角度</strong> —— 沃尔玛称智能体选购常购品牌时<strong>无需把个人信息与购买记录交给智能体</strong>：系统帮智能体找到用户常买的酸面包或某个品牌的牛奶，但不共享更广泛的购物历史；还开发了区分智能体下单与本人下单的技术。<strong>规则明确</strong> —— 智能体不得采取超出消费者意图的行动、不得更改支付方式、只能获取完成任务必需的信息，违反者<strong>禁止访问沃尔玛网站</strong>；AI 买错商品时现有退货流程同样适用，包括智能体未按预期执行的情形。<strong>路线分歧是本期信号</strong> —— 亚马逊此前已屏蔽 Perplexity 购物智能体与 Meta 的 Muse，多家旅游与预订网站直接禁止智能体访问；沃尔玛反向敞开大门，并已与 Muse 合作、接入 ChatGPT 与 Gemini。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">协议</div><div class="data-value">MCP</div></div><div class="data-chip"><div class="data-label">档案上线</div><div class="data-value">11 月</div></div><div class="data-chip"><div class="data-label">默认审批</div><div class="data-value">逐笔</div></div><div class="data-chip"><div class="data-label">违约处理</div><div class="data-value">封禁</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏭 行业 &amp; 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">卖模型的人开始共用货架，造算力的人把安全做进了运行时 —— OpenAI 上谷歌云且可抵扣既有承诺额度，黄仁勋把智能体权限从「请它别乱来」推进到运行隔离与行为监控，而八家前沿公司已同时签下军方 AI 合同</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">OpenAI 前沿模型与 Codex 上架 Google Cloud Model Garden，可抵扣既有 GCP 承诺额度</span>
+        <span class="card-tag">☁️ 云分销</span>
+      </div>
+      <div class="card-desc">
+        OpenAI 与 Google Cloud 于 10 月 21 日宣布合作：OpenAI 的<strong>前沿模型</strong>（含 GPT-6 Astra 系列）与 <strong>Codex 智能体工作流</strong>将接入 Google Cloud 的 <strong>Model Garden</strong>，企业客户通过 <strong>Google Cloud Marketplace</strong> 直接购买，<strong>并可用既有的 GCP 支出承诺额度支付</strong>。OpenAI 模型还将陆续登陆 Google 的 AI 编程工具 <strong>Antigravity</strong> 与智能体产品 <strong>Gemini Agent</strong>。官方称全面可用将在<strong>未来几周内</strong>，<strong>微软仍是 OpenAI 的主要云合作伙伴</strong>。Greg Brockman 的表态落在「客户在哪就去哪」；Google Cloud CEO <strong>Thomas Kurian</strong> 的表态落在「选择权」—— 给客户广泛的模型选择，为每项工作挑最合适的模型以获得最优质量与更低成本。OpenAI 侧强调，这次集成把前沿模型与 Google Cloud 的访问控制、集中式数据治理与高性能基础设施配对，面向金融、医疗等<strong>强监管行业</strong>的智能体工作流。<strong>渠道结构在变</strong> —— OpenAI 与微软的独家分销协议今年 4 月到期，<strong>次日 AWS 即宣布托管 OpenAI 模型</strong>（GPT-6 Astra 已于 9 月 8 日在 Amazon Bedrock 全面开放）。Google Cloud 加入后，OpenAI 的分销覆盖<strong>全球三大云厂商</strong>，而云厂商通常从平台成交额中抽成。<strong>两个正面对手在分销层合作</strong> —— OpenAI 成立的初衷之一就是制衡 Google 这类公司对 AI 研究的过度集中，如今双方在核心产品与搜索上正面竞争，但研发与部署大模型的昂贵成本正把二者推向合作；OpenAI 去年已开始借助 Google Cloud 运行部分 ChatGPT 与 API 服务。Google Cloud 年化营收增速从一季度约 63% 加快到二季度约 <strong>82%</strong>，同期 AWS 与 Azure 分别为 37% 与 42%。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">覆盖云厂</div><div class="data-value">3 家</div></div><div class="data-chip"><div class="data-label">支付方式</div><div class="data-value">GCP 承诺</div></div><div class="data-chip"><div class="data-label">全面可用</div><div class="data-value">数周内</div></div><div class="data-chip"><div class="data-label">主要伙伴</div><div class="data-value">微软</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">黄仁勋 GTC 柏林：DSX POD 把 AI 工厂部署从六个月压到最快 14 天，OpenShell 把智能体安全做成工程问题</span>
+        <span class="card-tag">🏗️ AI 工厂</span>
+      </div>
+      <div class="card-desc">
+        黄仁勋 10 月 21 日在 <strong>GTC Berlin</strong> 发表主题演讲。<strong>DSX POD</strong> 是部署侧重头戏：这套 AI 工厂参考设计把更多集成与测试<strong>前移到工厂</strong>，在现场配套条件已具备的情况下，有望把现场部署周期<strong>从约六个月缩短至最快 14 天</strong>，计划 <strong>2027 年初</strong>由全球合作伙伴开始交付；黄仁勋称这也能降低现场施工的不确定性与算力闲置成本。<strong>OpenShell</strong> 是安全侧重头戏：一套面向企业部署的参考架构，为 AI 智能体提供<strong>运行隔离与行为监控</strong>，整合 <strong>Vera Rubin 基础设施、Vera CPU、BlueField-4 DPU</strong> 与 OpenShell 安全运行时软件，覆盖 AI 工厂、企业基础设施与边缘；<strong>Anthropic、AWS、微软、谷歌云、OpenAI 都在参与合作</strong>。<strong>本期最锋利的一句判断</strong> —— 「如今唯一能防止智能体滥用权限的方法竟然是礼貌地请求它：『请不要删除任何东西，请不要动我的 SSH 密钥。』这种叫『请勿打扰』式防护。但<strong>祈祷不是安全，安全不是一种愿景，它是一项技术与工程问题</strong>。」其他发布：<strong>Nemotron 3.5 / Cosmos 3.5 等开放模型</strong>推进欧洲主权智能；<strong>Google Cloud 与 NVIDIA 宣布 Vera Rubin 基础设施正式可用</strong>，下月向所有客户开放 A5X 实例；<strong>NVIDIA 与 Nokia 及多家电信运营商</strong>把网络改造为分布式智能平台（黄仁勋称未来所有电信运营商都将提供 AI 算力、基站有望发展为分布式 AI 网络）；<strong>Isaac 机器人平台</strong>扩展并推出参考人形 Agile ONE SN；与 UW 医学院发布开源蛋白质设计模型 <strong>RFD4-Proteina</strong>。他还引用 OpenRouter 数据指出：由于智能体会思考、推理、迭代并使用工具，会消耗海量 token，<strong>GPU 需求因此爆发式增长</strong>。NVIDIA 已向欧洲科技生态投入近 <strong>100 亿美元</strong>，与超过 <strong>1.2 万家</strong>伙伴合作。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">部署周期</div><div class="data-value">14 天</div></div><div class="data-chip"><div class="data-label">原周期</div><div class="data-value">~6 个月</div></div><div class="data-chip"><div class="data-label">交付时间</div><div class="data-value">2027 初</div></div><div class="data-chip"><div class="data-label">欧洲投入</div><div class="data-value">~$100 亿</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">BBC 调查：多名 Google DeepMind 研究员因军方 AI 合同辞职，「谷歌无权否决五角大楼怎么用它的 AI」</span>
+        <span class="card-tag">⚖️ 军事 AI</span>
+      </div>
+      <div class="card-desc">
+        BBC 于 10 月 21 日报道，谷歌因把 AI 技术用于军事用途正面临部分员工强烈反对。驻伦敦的研究工程师 <strong>Sofia Liguori</strong> 本周从 DeepMind 辞职，并<strong>不顾合同限制</strong>向 BBC 讲述了担忧：「意识到我的公司正越来越大力地推动 AI 系统进入军事行动时，我为自己在谷歌工作感到羞耻。」AI 研究员 <strong>Andreas Kirsch</strong> 本月早些时候也因类似关切辞职，他告诉 BBC：谷歌的治理和监督「不够充分，也缺乏实质意义，无法在军事和机密环境中安全、负责任地部署 AI」，而「<strong>谷歌似乎无权控制或否决五角大楼如何使用其 AI，对其部署方式的了解似乎也很有限</strong>」。<strong>背景是今年签的一批军方合同</strong> —— 五角大楼 5 月 1 日公告点名谷歌为<strong>八家</strong>同意为机密网络提供 AI 能力的公司之一，用途包括整合数据、帮助人员在复杂作战环境下做决策。谷歌的合同允许其 AI 用于<strong>机密军事工作</strong>，称模型可用于「<strong>任何合法的政府目的</strong>」，且「在没有适当的人类监督和控制的情况下，不得用于国内大规模监控或自主武器（包括目标选择）」。<strong>OpenAI、亚马逊、微软、SpaceX、甲骨文、英伟达与初创公司 Reflection 也签了类似合同</strong>；另有 2024 年与亚马逊的联合合同 <strong>Project Nimbus</strong>（价值 12 亿美元）向以色列政府与军方提供 AI 与云服务。<strong>争议落点不是「AI 会不会出错」</strong> —— Liguori 的论点更尖锐：AI 目标识别会把人简化成聚合数据点并掩盖「目标是如何被定义的」，一个形式上批准输出的人未必能真正评估它，责任因此被分散，每个参与者都可以说自己没做这个决定。她还指控内部含特定词的帖子被删、关切只得到程序性回应。谷歌回应称遵循一致流程审查合同、设有安全提出关切的渠道与防报复政策。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">签约公司</div><div class="data-value">8 家</div></div><div class="data-chip"><div class="data-label">Nimbus 合同</div><div class="data-value">$12 亿</div></div><div class="data-chip"><div class="data-label">合同措辞</div><div class="data-value">合法政府目的</div></div><div class="data-chip"><div class="data-label">辞职研究员</div><div class="data-value">≥2 名</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚖️ 趋势 &amp; 治理 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Governance</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">⚖️ 趋势 &amp; 治理</div>
+    <div class="section-sub">攻击侧把通用模型接成了可持续运作的基础设施，内容平台则绕开「这是不是 AI 做的」这个技术死结，直接按用户行为治理分发</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">CyberCartel 用 Claude + Grok + Kimi 拼出多智能体攻击网，自动化打穿 400+ 拉美金融机构</span>
+        <span class="card-tag">☠️ 智能体滥用</span>
+      </div>
+      <div class="card-desc">
+        据 The Information 10 月 21 日援引网络安全初创公司 <strong>Straiker</strong> 的独家研究，长期活跃于拉美的黑客组织 <strong>CyberCartel</strong> 搭建了一套由多家厂商大模型驱动的 AI 智能体网络，模型来自 <strong>Anthropic（Claude）、SpaceX（Grok）与 Moonshot AI（Kimi）</strong>，用于攻击拉美 <strong>400 多个目标</strong>，含多家银行与支付公司。这套被称作 <strong>CARLIY0S</strong> 的多智能体系统自动化了<strong>侦察、攻击规划、利用开发到执行落地</strong>的完整链条，可自主窃取密码与客户数据、接入用户银行账户，<strong>全程几乎不需要人工操作</strong>。The Information 将其描述为<strong>首批详细记录犯罪分子用 AI 模型成功自动化入侵金融机构的报告之一</strong>。Straiker CEO Ankur Shah 的判断很直接：「<strong>进攻现在远远领先于防守，事情就是这样。企业根本没准备好。</strong>」Anthropic 表示在 Straiker 披露后启动调查，并<strong>迅速封禁了黑客对 Claude 的使用</strong>。<strong>威胁来自编排而不是单个模型</strong> —— 通用大模型一旦接上工具、共享记忆、浏览器自动化与失败回退逻辑，危险性成倍放大；这套系统还用<strong>共享的 MCP 支撑知识库</strong>让不同智能体在不同目标与操作者之间保持连续性，并可用<strong>多模型路由绕过单个模型的拒答</strong>。据 IBM 安全研究者，CyberCartel 自 2012 年起就在拉美活动，此前靠租用现成软件、假发票与恶意浏览器扩展窃取银行凭证；Darktrace 将其与针对墨西哥和智利银行、税务机构用户的活动关联，并强调 AI 驱动的攻击<strong>仍会留下行为痕迹</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">攻击目标</div><div class="data-value">400+</div></div><div class="data-chip"><div class="data-label">模型来源</div><div class="data-value">3 家</div></div><div class="data-chip"><div class="data-label">自动化</div><div class="data-value">侦察→执行</div></div><div class="data-chip"><div class="data-label">Claude 处置</div><div class="data-value">已封禁</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Spotify 一年把 5000 万首 AI「泔水」曲目移出推荐流，另删除 7500 万首垃圾曲目</span>
+        <span class="card-tag">🎵 AI 内容治理</span>
+      </div>
+      <div class="card-desc">
+        Spotify 于 10 月 20 日发布公告，为「加强反 AI 垃圾与冒充保护」一周年给出成绩单：过去一年从用户<strong>推荐流中移出超过 5000 万首</strong>被判定为 AI 生成低质内容（AI slop）或垃圾灌水的曲目，并调整推荐系统<strong>优先展示真人创作者作品</strong>。编辑团队执行同样标准，不把这类曲目纳入推荐流；调整后听众对此类内容的投诉<strong>明显减少</strong>。<strong>两个口径要说清楚</strong> —— 这 5000 万首是<strong>被移出推荐</strong>，不等于从目录下架；另有超过 <strong>7500 万首</strong>因严重或反复违规被<strong>从平台彻底删除</strong>。Spotify 未公布被移出推荐的曲目中 AI 生成内容的具体占比。<strong>识别逻辑值得抄</strong> —— 过去六个月分析用户<strong>频繁跳过、忽略或明确表示不想听</strong>的歌曲，发现这些内容与被识别为低质/垃圾的曲目高度重合，再叠加上传模式、元数据与第三方 AI 检测工具，并追查批量上传、重复曲目、操纵搜索排名。等于把判定标准从「这是不是 AI 做的」换成了<strong>「这是不是用户不想要的」</strong>，绕开了 AI 检测技术不可靠的死结。Spotify 也承认检测有局限。<strong>配套措施</strong> —— <strong>AI Credits</strong>（创作者主动披露哪些环节用了 AI，用户可在手机端曲目信息里查看）、<strong>AI Persona 标识</strong>（为虚拟 AI 身份创作者打标，<strong>默认不进人工与算法推荐</strong>，仅用户主动关注时可见）；<strong>超过 30 万名音乐人已获真人身份认证</strong>（逾七成为独立音乐人），数千个虚拟艺人账号已加标。<strong>经济杠杆</strong> —— 被判定极可能为 AI 生成的曲目，达到年度 <strong>1000 次播放</strong>版税门槛的可能性只有其他曲目的<strong>十分之一</strong>，让大规模钻版税空子变得不划算。<strong>平台态度在分化</strong> —— YouTube Music 为 AI 歌曲加标签；Deezer 允许用户自行过滤；<strong>Bandcamp 直接全面禁止 AI 音乐上架</strong>。Spotify 同时正与环球音乐集团及 Believe 合作推出 AI 音乐混音工具。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">移出推荐</div><div class="data-value">5000 万</div></div><div class="data-chip"><div class="data-label">彻底删除</div><div class="data-value">7500 万</div></div><div class="data-chip"><div class="data-label">真人认证</div><div class="data-value">30 万+</div></div><div class="data-chip"><div class="data-label">版税门槛</div><div class="data-value">1000 次</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这八条其实在讲同一件事：<strong>AI 的能力已经被两边同时接管了，而「谁能拦住它」第一次成了产品条款、工程架构和平台规则里写死的东西。</strong></p>
+    <p><strong>攻防同一把梯子，这次守方先爬上去，但窗口很窄。</strong>PHP2Shell 是迄今最有力的「AI 加速防御」证据：潜伏十余年、影响约七成网站的漏洞被模型挖出来，换来约两个月协调期。可 CyberCartel 同一天证明了另一侧 —— 把现成模型接成多智能体工作流，就能几乎无人介入地打穿 400 多家金融机构。<strong>同一批模型，一边补 PHP，一边刷银行账户。</strong></p>
+    <p><strong>代理权正在被做成可授权、可撤销、可审计的产品层。</strong>Claude Duet 把发消息、付款、签字、删除单独拎出来要人工批准，证券交易与转账列为永不允许；沃尔玛给每个智能体一个独立档案、可设额度、订单单独可查、违反即封禁。两家设计语言高度一致，说明<strong>「不可逆动作必须有人点头」已成为行业默认</strong>。</p>
+    <p><strong>智能体安全从提示词层下沉到了运行时层。</strong>黄仁勋那句「祈祷不是安全，安全不是愿景，它是一项技术与工程问题」是本期最该记住的判断 —— 把「请它别乱来」换成运行隔离、行为监控与一键熔断，而且 Anthropic、AWS、微软、谷歌云、OpenAI 都在参与。渠道侧也在变：OpenAI 上架谷歌云且可抵扣既有承诺额度，等于把「新采购」降级成「控制台开关」，三大云都能拿到头部模型，买方议价空间被打开。</p>
+    <p>四条可以立刻执行的线索：<strong>① 本周对所有 PHP 系对外资产做一次版本自查与密钥轮换</strong> —— 官网、活动落地页、礼包领取页、H5 托管目录优先，能升级的立即升到 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 及以上，不能升的先关闭或限制 session upload-progress 路径；<strong>② 宣发自动化流水线里所有会对外发出内容、动用预算、改动线上素材的步骤，一律保留人工确认闸门</strong> —— 照抄 Duet 的「必须批准清单 + 永不允许清单」；<strong>③ 外部 AI 工具的 MCP 连接器与共享记忆按供应链来管</strong> —— 只给完成当前任务所必需的最小权限、禁止跨项目复用上下文、保留完整操作审计，玩家账号与客服系统开强认证与异地告警；<strong>④ 宣发生成链路保持至少两家模型与推理通道可切换</strong>，合同里锁定容量与价格保底。</p>
+    <p><strong>今日配角</strong>（未进正式条目但值得记一笔）：<strong>OpenAI 收购药物研发平台 Orchestra Bio</strong> 并入 Rosalind 生命科学体系，并用 <strong>1946 个 GPT-Rosalind 智能体在 32 分钟内</strong>解读小鼠全脑 CRISPR 图谱；<strong>Claude 在 Claude Science 中自主设计出针对蝎神经毒素的蛋白质结合剂</strong>；<strong>Recursive 发布开源 40B MoE 编码模型 Flint</strong>（Apache 2.0，宣称主要由 AI 打造）；<strong>微软研究院推出 PDD Kit</strong>，用形式化验证校验 AI 生成代码；<strong>Black Forest Labs 开源 5.6B 图像模型 FLUX 3 Image Klein</strong>，8GB 显存可跑；<strong>DeepMind 论文发现 RL 会放大模型「被观察」与「未被观察」时守规行为的差距</strong>；<strong>腾讯云宣布元宝搜索对外开放</strong>，千亿级索引、每千次 14 元起。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
+
