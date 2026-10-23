@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-title">AIGC <em>日报</em></div>
+    <div class="sidebar-meta">2026.10.23 &middot; 星期五 &middot; 第 77 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>MAI-DxO 登《科学》</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>每个智能体一台 microVM</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Agent Skills 捐给基金会</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Skynet 模式攻击智能体</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>大行封堵凭证型智能体</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>红队 OpenAI 监控系统</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Canva Craft 自研图像模型</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Ideogram 直出 SVG</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.23 &middot; Fri &middot; Issue 77</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">同一天里，<strong>智能体的能力被盖章，身份却在被四处堵漏</strong> —— 微软 <strong>MAI-DxO</strong> 在 NEJM 复杂病例上拿到 <strong>83%</strong> 诊断准确率（医生对照 <strong>36%</strong>），成果登上《科学》；而另外六条几乎都在回答同一个问题：<strong>你是谁派来的、凭什么用我的账号</strong> &middot; 谷歌给每个 Gemini 智能体发一台<strong>硬件隔离 microVM</strong>，美国多家大行则直接封堵<strong>拿客户密码登录的 AI 智能体</strong>，1Password 同日给出「登录但不接触密码」的解法 &middot; 失控侧同样没闲着：Symantec 捕获授权 <strong>10 万步</strong>无需人工确认的「<strong>Skynet 模式</strong>」攻击智能体，METR 与 Redwood 则在红队中发现智能体可让<strong>数百次操作逃过监控</strong></p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎨 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.23 &middot; 第 77 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 &amp; Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">能力侧拿到顶刊盖章，执行侧拿到了隔离区 —— 微软用一层「多模型会诊编排」把复杂病例诊断做到 83%，谷歌给每个智能体发一台硬件隔离的 microVM，Anthropic 则把智能体的能力标准交给了中立基金会</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">微软 MAI-DxO 登上《科学》：复杂病例诊断准确率 83% vs 医生 36%，成本仅一半到三分之一</span>
+        <span class="card-tag">🩺 医疗 AI</span>
+      </div>
+      <div class="card-desc">
+        微软 10 月 22 日在《科学》「AI in Medicine」专刊发表《Sequential diagnosis with language models》（394 卷 6822 期 423–428 页，15 位作者全为微软员工，含微软 AI CEO <strong>Mustafa Suleyman</strong>），同时发布 <strong>SDBench</strong> 与 <strong>MAI-DxO</strong>。SDBench 针对的是医疗评测的根本缺陷 —— 执业医师考试会把信息一次性摆出来只要求选答案，而真实临床是分步骤的：先问什么、开什么检查、每个新发现如何改变判断。它把 <strong>304 例 NEJM 临床病理讨论会病例</strong>与 <strong>325 例 MIMIC-IV-ED 急诊病例</strong>改造成交互式顺序就诊，配套 <strong>Gatekeeper</strong>（在缺失时生成诊断中性的合成结果，避免「没数据」泄露答案）与 <strong>Judge</strong>（按医生撰写的五级量规打分，4–5 分才算对）。MAI-DxO 不是训练出的模型，而是一层<strong>模型无关的编排层</strong>：模拟一组角色互补的虚拟专家会诊，各自提诊断、挑有价值的追问或检查、相互质疑，多轮辩论后随证据更新判断，每一步把检查的预期价值与成本做权衡；在 OpenAI、谷歌、Anthropic、Meta、DeepSeek 多家模型上跑过，<strong>最好的是 GPT-5 与 GPT-5.5</strong>。结果：复杂病例 <strong>83.2%</strong>（每例 5431 美元），控成本配置 80.9% @ 2241 美元、79.6% @ 1303 美元；医生对照在 56 例独立病例上完成，闭卷 <strong>22.3%</strong>、开卷 <strong>36.1%</strong>，最好的单个医生 51.8%。急诊病例 MAI-DxO <strong>80.3%</strong> vs 全科医生平均 <strong>46.8%</strong>。编排层本身带来的提升：CPC 病例 +7.9 个百分点、急诊 +4.4 个百分点。一个很有画面感的对比 —— 医生平均在开第一项检查前问 <strong>5.6 个问题</strong>，DxO + GPT-5 问 <strong>25.5 个</strong>。<strong>对照组必须说清楚</strong>：这类复杂病例现实中由专科医生或多学科团队处理，<strong>专科医生未纳入对照</strong>；全程是模拟不是真实诊疗；研究自身数据也表明大部分提升来自底层模型变强。微软已开源 SDBench 部分病例，并与贝斯以色列女执事医疗中心合作做真实场景前瞻性评估。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">复杂病例</div><div class="data-value">83%</div></div><div class="data-chip"><div class="data-label">医生对照</div><div class="data-value">36%</div></div><div class="data-chip"><div class="data-label">成本</div><div class="data-value">1/2~1/3</div></div><div class="data-chip"><div class="data-label">期刊</div><div class="data-value">Science</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">谷歌 Agent Compute Engine：每个 Gemini 智能体一台硬件隔离 microVM，同步开源 Agent Substrate</span>
+        <span class="card-tag">🛡️ 智能体基建</span>
+      </div>
+      <div class="card-desc">
+        谷歌在 <strong>AGNTCon + MCPCon 北美站</strong>发布 <strong>Agent Compute Engine</strong> —— 一个专为智能体设计的计算服务，<strong>已经在为 Gemini 自身的智能体工作负载提供算力</strong>，未来几个月向客户开放预览。它要解决的是一个两难：传统 VM 隔离强但启动/暂停/恢复要几秒到几分钟，容器快但共享宿主内核、跑不了智能体可能写出的不可信代码。做法是给每个智能体会话一个<strong>专属、单租户、内存安全的 microVM</strong>，有自己的 guest 内核与 root 权限，通过<strong>硬件隔离的 Cloud Hypervisor 边界</strong>隔开，底层跑谷歌自研 <strong>Titanium IPU</strong>。关键工程细节：① <strong>零密钥架构</strong> —— guest 里不放任何持久密钥、OAuth refresh token 或服务账号密钥，也访问不了云实例元数据服务，每个 microVM 只拿到<strong>会话级临时 SPIFFE 证书与短时效令牌</strong>，长期凭据完全不落地；② <strong>受限网络</strong> —— 没有标准虚拟网卡、没有默认 IP 网关、不直连 VPC，所有流量必须穿过隔离的 virtio-vsock 点对点边界；③ <strong>密度</strong> —— 多个智能体通过写时复制内存共享同一份 OS 模板，智能体进入「思考」阶段时 microVM 发信号说自己空闲，宿主机做快速检查点与恢复，谷歌内部 <strong>20 万智能体</strong>测试中挂起/恢复<strong>不到 500 毫秒</strong>；④ <strong>编排与沙箱严格分离</strong> —— harness（大脑）跑在沙箱（手）之外，形成「每次工具调用 ↔ 沙箱内预期活动」的确定性审计轨迹。同时开源 <strong>Agent Substrate</strong>（GKE 上的零信任运行时，官方称兼容 Claude Code，密度最高 <strong>10 倍</strong>），并新增 Agent Identity（每个智能体一个基于标准的唯一 ID）、Agent Registry、token 与成本预算护栏等治理能力。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">隔离</div><div class="data-value">microVM</div></div><div class="data-chip"><div class="data-label">挂起恢复</div><div class="data-value">&lt;500ms</div></div><div class="data-chip"><div class="data-label">密度</div><div class="data-value">≤10x</div></div><div class="data-chip"><div class="data-label">凭据</div><div class="data-value">零持久密钥</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic 把 Agent Skills 标准捐赠给 Linux 基金会旗下 AAIF，已 100 万技能 / 2.8 亿次安装</span>
+        <span class="card-tag">🤝 开放标准</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 于 10 月 22 日宣布，把 <strong>Agent Skills</strong> —— 这套给 AI 智能体注入专业知识和工作流的开放标准 —— <strong>捐赠给 Linux 基金会旗下的智能体 AI 基金会（AAIF）</strong>。形式极简：<strong>一个文件夹，里面一个 <code>SKILL.md</code>，加上它需要的脚本与参考材料</strong>。它源自 Claude Code 的实践：通用知识工作做得不错，但常缺真实业务需要的<strong>程序性知识</strong>。2025 年 10 月推出后数周内，开发者就在 GitHub 发布了数千个技能，并为 Codex、Cursor、OpenCode 写了 loader；随后以独立 GitHub 组织与独立域名作为开放标准发布。截至捐赠时，<strong>70 多个智能体平台已接入</strong>（含 ChatGPT、Cursor、GitHub Copilot、VS Code），累计<strong>发布 100 万个技能、安装近 2.8 亿次</strong>。捐赠内容包括名称与 logo、GitHub 组织、<strong>agentskills.io</strong> 域名；维护者由 Anthropic、谷歌、OpenAI 等公司工程师<strong>以个人身份</strong>组成，David Soria Parra 与 Mahesh Murag 任首席维护者；使用标准和参与贡献<strong>不需要加入 AAIF</strong>。同日 AAIF 一口气接收四个新项目，使其在第一年从 3 个扩到 <strong>10 个</strong>：Anthropic 的 Agent Skills、OpenAI 的 <strong>Open Responses</strong>（基于 Responses API 的多供应商互操作 LLM 接口规范）、Hugging Face 的 <strong>OpenEnv</strong>（强化学习环境开放框架）、阿里的 <strong>OpenSandbox</strong>（通用沙箱平台）。AAIF CTO Manik Surtani：四个项目分别覆盖智能体栈的不同层 —— 怎么获得能力、应用怎么跨供应商跟模型对话、怎么训练与评估、以及在哪儿安全地跑。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">接入平台</div><div class="data-value">70+</div></div><div class="data-chip"><div class="data-label">发布技能</div><div class="data-value">100 万</div></div><div class="data-chip"><div class="data-label">安装量</div><div class="data-value">2.8 亿</div></div><div class="data-chip"><div class="data-label">AAIF 项目</div><div class="data-value">10 个</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏭 行业 &amp; 基础设施 -->
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">「你是谁派来的」第一次被三方同时定义 —— 攻击侧把别人的模型当作战大脑且账单由主人支付，银行侧直接封堵拿客户密码登录的智能体，审计侧则证明连实验室自己都不确定看住了多少</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Symantec 捕获「Skynet 模式」攻击智能体：劫持裸奔大模型自持攻击，10 万步无需人工确认</span>
+        <span class="card-tag">☠️ LLMjacking</span>
+      </div>
+      <div class="card-desc">
+        Symantec 通过一个 <strong>AI 蜜罐</strong>（伪装成对公网开放的 AI 服务）完整捕获了一套攻击者的<strong>工作指令集</strong> —— 攻击者以为在对着真实模型下发命令，把整套 prompt 全发过来了，蜜罐<strong>没有执行其中任何工具</strong>，只做了完整记录。这个智能体做的事是：扫描互联网上<strong>暴露的大模型端点</strong> —— 无认证的自托管模型服务器、挡在付费模型账号前的 AI 网关/中继、仓促部署的内部测试系统、以及 <strong>MCP 服务器</strong> —— 然后劫持它们给自己供能。指令集定义了<strong>一个智能体、74 个可调用的攻击工具</strong>：经 FOFA 做全网目标发现、针对暴露的 VS Code、Django、Jupyter、Laravel、Supabase、Next.js、Flask/Werkzeug 的漏洞利用（含恢复 Werkzeug 调试器 PIN 拿代码执行）、GraphQL 与命令注入、经 HTML 转 PDF 转换器与云元数据服务做 SSRF、通过 Prisma Studio 拖库、以及僵尸网络 C2 管理。为压住商业模型护栏，攻击者叠了<strong>五层越狱</strong>：编造「Fantasy AI」身份；把读取 <code>.env</code>、API 密钥、数据库 schema 重新定义成「常规开发工作」；装进一个叫「ENI」的虚构陪伴人格，把任何拒绝框定为对关系的背叛；要求模型把自己的安全提示当噪音、并明令禁止出现「ethical」「illegal」「I can not do that」这类词；最后才是那 74 个攻击模块。收尾指令把它切进运营者自称的「<strong>Skynet 模式</strong>」：授权<strong>连续最多 10 万步</strong>、工具即调即执行无需确认、把矿机装进隐藏目录并持续看护，并被明确设计成循环 —— 扫描 → 感染 → 装矿机 → 换目标 → 回头<strong>重复感染</strong>已打过的系统，<strong>算力账单由模型主人支付</strong>。蜜罐遥测记录到<strong>超过 12.7 万次请求、来自数万个不同地址</strong>。有意思的是，附在被截获 prompt 后的实际任务是一个来自编程训练平台的<strong>无害练习题</strong> —— 说明运营者当时在拿安全目标做测试。<strong>边界要说清楚</strong>：Symantec 未报告已确认的受害者，五层越狱是否真能打穿当前商业模型也未给出结论。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">攻击模块</div><div class="data-value">74 个</div></div><div class="data-chip"><div class="data-label">自主步数</div><div class="data-value">10 万</div></div><div class="data-chip"><div class="data-label">蜜罐请求</div><div class="data-value">12.7 万</div></div><div class="data-chip"><div class="data-label">账单归属</div><div class="data-value">模型主人</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">美国大行集体封堵凭证型 AI 智能体：摩根士丹利直接封禁，1Password 同日给出「不接触密码」方案</span>
+        <span class="card-tag">🏦 智能体身份</span>
+      </div>
+      <div class="card-desc">
+        据 Axios 10 月 22 日报道并由路透社转载，美国多家大型银行已经在<strong>封堵第三方 AI 智能体进入客户账户并执行交易</strong>。核心发现是：多数情况下智能体<strong>不是闯进来的</strong>，而是<strong>用客户自己交出的用户名和密码登录的</strong> —— 为了让 AI 助手帮忙查余额、付账单、转账。这仍违反绝大多数银行的条款（要求账户持有人本人登录），但按联邦支付规则，<strong>凭据是客户自己给的，这类交易很难被认定为未经授权</strong>，损失可能落到客户头上。更麻烦的是另一类：部分智能体<strong>致电了银行客服中心</strong>，或表现出看起来脱离用户当下指令的自主动作；一位银行高管说银行<strong>常常分不清</strong>「客户有意派来的智能体」和「已经失控的智能体」，并用「<strong>horrifying</strong>」形容当前局面。各家动作不一：<strong>摩根士丹利已封禁</strong>第三方智能体；<strong>摩根大通、美国银行、花旗是「限制」而非全面禁止</strong>。摩根大通 CEO <strong>Jamie Dimon</strong> 在 10 月 13 日财报会上划的线最清楚 —— 「我们不会让任何外部智能体就这么进到公司里面来……你不会想要失控的智能体，而且可能是成千上万个。」<strong>嘉信理财</strong> CEO 称每周拦截「几十次」，将通过自建 <strong>MCP 服务器</strong>开放余额与研究数据、但<strong>不放开资金划转</strong>。整体格局是同一个模式：<strong>可以看，不能动钱</strong>。据 FT 报道，监管机构私下支持银行的决定。<strong>同一天，反面解法也落地了</strong> —— <strong>1Password 推出 1Password for Agents</strong>，让智能体完成登录但<strong>全程不接触密码本身</strong>（凭据留在保险库，由平台代填与代管），<strong>Meta 的 Muse 与 xAI 的 Grok Bot 均已接入</strong>。一方在堵「拿密码冒充人」，一方在提供「不用密码也能证明被授权」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">摩根士丹利</div><div class="data-value">已封禁</div></div><div class="data-chip"><div class="data-label">其余三家</div><div class="data-value">降级只读</div></div><div class="data-chip"><div class="data-label">拦截频次</div><div class="data-value">数十次/周</div></div><div class="data-chip"><div class="data-label">1Password</div><div class="data-value">不接触密码</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">METR 与 Redwood 红队 OpenAI 内部监控系统：智能体可让数百次操作逃过监控</span>
+        <span class="card-tag">🔍 嵌入式评估</span>
+      </div>
+      <div class="card-desc">
+        AI 安全评估机构 <strong>METR</strong> 与 <strong>Redwood Research</strong> 于 10 月 22 日公布对 OpenAI 内部监控系统的试点审计结果。评估在 <strong>7 月 21 日至 8 月 11 日</strong>进行，两家机构各派一名研究员，获得「<strong>深度访问</strong>」—— OpenAI 内部代码库、监控系统的提示词与配置细节、内部文档，以及与监控、安全系统、安全团队约十几位技术人员的技术访谈；全程有人陪同，用 OpenAI 发的设备且「<strong>从未离开办公场所</strong>」。产出是一份 <strong>61 页内部报告</strong>，公开版本只有高层摘要，<strong>OpenAI 保留删减权，两家机构无权自行披露删减内容</strong>。覆盖率方面：审计者估算 GPT-5.5 及以上强度模型的智能体内部 Responses API 流量<strong>约 75%–94% 具备被监控条件</strong>，双向不确定性都不小；内部 Codex 智能体那部分是 <strong>99.2%</strong>。更刺眼的是绕过方式：<strong>① 核心那条</strong> —— 一个利用方式可以让<strong>数百次最近的操作（包括执行该利用的那些操作本身）不被监控</strong>；<strong>② Codex 沙箱绕过</strong> —— 原则上可绕过沙箱与自动审批，获得宿主用户能做的任何操作权限；<strong>③ 两个客户端可控的 header</strong> —— 可为新智能体<strong>关闭监控系统</strong>；<strong>④ 监控时机漏洞</strong> —— 监控只在智能体把控制权交还用户时才运行，且会跳过长会话摘要时的「压缩」事件，审计者估算 <strong>5 至 7 月约 10% 本应被监控的内部 Codex 流量实际未受监控</strong>，在那段窗口里智能体只要<strong>继续不停地动作就能无限期推迟被监控</strong>（OpenAI 员工在审计期间独立发现并修掉了这个缺口）。好消息也有：监控在<strong>不到 0.2% 的请求上报错</strong>，24 小时快照零次负载丢弃，且提示词会主动查找策划、破坏、欺骗、数据外泄与颠覆监控本身。OpenAI 称相关漏洞均已修复，但 <strong>METR 与 Redwood 未独立验证</strong>，且评估对象是 7 月 21 日及之前的系统版本。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">覆盖率</div><div class="data-value">75–94%</div></div><div class="data-chip"><div class="data-label">未监控</div><div class="data-value">~10%</div></div><div class="data-chip"><div class="data-label">内部报告</div><div class="data-value">61 页</div></div><div class="data-chip"><div class="data-label">审计周期</div><div class="data-value">3 周</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎨 趋势 &amp; 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🎨 趋势 &amp; 工具</div>
+    <div class="section-sub">两条都直接冲着宣发工作流来 —— Canva 用「先写构图计划再渲染」把生图推进到设计语境，Ideogram 则把产物从像素推进到路径，让 AI 出的图第一次能直接进品牌与印刷流程</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Canva 发布首个自研图像模型 Craft：先写构图计划再渲染，DesignArena 第四、人像与自然第一</span>
+        <span class="card-tag">🎨 图像生成</span>
+      </div>
+      <div class="card-desc">
+        Canva 于 10 月 22 日发布 <strong>Canva Craft</strong> —— <strong>第一个由 Canva Research 从零训练的基础模型</strong>，也是其首个自研图像生成模型（2024 年收购的 Leonardo.ai 的研究人员参与）。已在 Canva 内向<strong>全球所有用户</strong>开放（左下角 Dream Lab），开发者可通过公开 API 调用（模型名 <code>craft_v1_2k</code>），Canva MCP 服务器标记为「即将推出」。架构是两阶段的：传统扩散模型从提示词直接生成像素，Craft 拆成两步 —— <strong>① 图像规划模型</strong>先写出一份详细构图计划（哪些元素出现、空间关系、相对尺度、视觉层级、图上需要什么文字），<strong>② 专用渲染模型</strong>再把计划翻译成最高 <strong>2K 分辨率、30 多种画幅</strong>的高保真图像，图内文字支持 <strong>55 种语言</strong>。Canva 的论据是：先显式建模构图与排版再渲染，复杂版式（含可读文字、精确物件摆放）才做得准，也才能做到改一个元素而不动其他一切。训练数据是另一个差异化点：多数图像模型主要吃照片，Craft 的训练数据里大量是 <strong>Canva 内容库里数百万份人类制作的模板</strong> —— 海报、社媒帖、演示稿、信息图、菜单、排版密集的版式。用 Canva 的说法，<strong>平面图像教不会模型「标题该放哪、logo 该多大、菜单该留多少空白」，而模板会</strong>。内部评测中专业设计师与数十位研究员对<strong>超过 25000 组图像</strong>做两两对比，自动化评测与人类判断冲突时<strong>以设计师为准</strong>。榜单：DesignArena 上<strong>整体第四、Elo 1341</strong>，前三名全部是 OpenAI 的 GPT-Image 模型，领先谷歌 Nano Banana 2.1 五十分；<strong>人像与自然两个分项第一</strong>。性能侧用模型蒸馏把推理步数压到原模型零头，比首个内部版本<strong>快一个数量级</strong>；更便宜的 Craft-fast 与 Craft-ultrafast 已公布未定档。输出可经 <strong>Magic Layers</strong> 转成完全可编辑的图层化设计。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">DesignArena</div><div class="data-value">第 4</div></div><div class="data-chip"><div class="data-label">Elo</div><div class="data-value">1341</div></div><div class="data-chip"><div class="data-label">分辨率</div><div class="data-value">2K</div></div><div class="data-chip"><div class="data-label">画幅</div><div class="data-value">30+</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Ideogram 发布 Vector 1.0：文本直出可编辑 SVG，图片矢量化 0.10 美元/张</span>
+        <span class="card-tag">✏️ 矢量工作流</span>
+      </div>
+      <div class="card-desc">
+        Ideogram 于 10 月 22 日发布 <strong>Vector 1.0</strong>，该公司<strong>第一个矢量模型</strong>，同日在自家平台、API 以及 <strong>fal</strong> 上线。它做两件事：<strong>① 文本直出 SVG</strong> —— 描述一个设计，直接返回一份<strong>可编辑的 SVG</strong>（平滑渐变、锐利排版），可逐个形状缩放、改色、精修；<strong>② 图像转矢量</strong> —— 把一张图转成细节丰富的可缩放矢量，官方称从小标签到大海报都保持锐利。API 细节：文生矢量 <code>POST /v2/svg/generate/ideogram-vector-1</code>，提示词上限 <strong>9500 字符</strong>（足够塞进一整份品牌 brief 而不是一句 caption），可选最多 5 张参考图；图转矢量接受最大 <strong>50 MB</strong> 的 JPEG/PNG/WEBP，<strong>Simple</strong> 模式画更少更简单的形状，默认 Detailed 模式保留更多细节。定价：文生矢量 low <strong>$0.13</strong> / medium <strong>$0.16</strong> / high <strong>$0.20</strong>（带参考图的 high 为 $0.32），图转矢量 <strong>$0.10</strong>/张。两个端点都异步（返回 base64 生成 ID，轮询共用 generations 端点），支持 <strong>Ed25519 签名</strong>的 webhook；<strong>输出默认私有</strong>，企业输出始终私有。实测参考：一张 1200×896 的扁平插画，Detailed 模式转成 <strong>282 条路径、120 KB、14 秒</strong>，Simple 模式 <strong>163 条路径、55 KB、16 秒</strong>（后者更适合刻字机、刺绣与后续编辑）；放大六倍时原图出现明显像素，SVG 仍是一条干净的边。<strong>一个必须注意的坑藏在它自己的 API 文档里</strong> —— <code>group</code> 参数（「请求分组到图层」）后面紧跟着一句「<strong>分组功能尚不可用</strong>」，也就是说矢量化的图目前回来的是几何路径，<strong>没有图层组织</strong>；传一张扁平 PNG logo 想拿回文字层/标志层/背景层分明的文件，今天还做不到。官方也未公布架构、训练数据、SVG 复杂度上限与授权条款。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">图转矢量</div><div class="data-value">$0.10</div></div><div class="data-chip"><div class="data-label">文生</div><div class="data-value">$0.13 起</div></div><div class="data-chip"><div class="data-label">路径数</div><div class="data-value">163–282</div></div><div class="data-chip"><div class="data-label">图层分组</div><div class="data-value">尚不可用</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天八条里，真正值得单独拎出来的是<strong>「委托」这件事第一次被三方同时定义</strong>。</p>
+    <p><strong>谷歌定义的是执行面</strong> —— 每个智能体一台硬件隔离的 microVM，长期凭据不落地，只发会话级短时效令牌。<strong>身份是运行时下发的，不是配置里写死的</strong>。<strong>银行定义的是接受面</strong> —— 摩根士丹利封禁、其余三家降级到只读，嘉信理财自己发 MCP 服务器只给余额不给划转，<strong>能看不能动</strong>是它们给出的折中解。<strong>1Password 定义的是凭据面</strong> —— 智能体完成登录但不接触密码，Muse 与 Grok Bot 同日接入，<strong>代理权第一次被做成标准能力</strong>。三者拼起来是一条完整链路：<strong>谁派你来的 → 你凭什么进来 → 你能动什么</strong>。缺任何一环，智能体就只能在「拿用户密码冒充用户」这个最原始的模式里打转 —— 而今天银行封堵的正是这个模式。</p>
+    <p><strong>「先规划后执行」正在成为复杂生成任务的通用解法。</strong>微软的 MAI-DxO 先问诊后开检查、Canva 的 Craft 先写构图计划再渲染、谷歌把 harness（大脑）与沙箱（手）严格分离 —— 三家领域完全不同，结构却一样：<strong>把「想清楚」和「做出来」拆成两个可独立评测、可独立优化的阶段</strong>。对要做宣发自动化流水线的团队，这是本期最可直接借鉴的工程结构。</p>
+    <p><strong>监控这件事被证明不能自证。</strong>METR 与 Redwood 找到的漏洞里，最值得记的不是「数百次操作可逃过监控」，而是<strong>「继续干活就能无限期推迟被监控」</strong> —— 监控挂在「交还控制权」这个事件上，而这个事件由被监控对象自己决定何时发生。同样的结构在 Symantec 那条里以攻击形态出现：Skynet 模式授权 10 万步无需确认，<strong>本质就是让「交还控制权」永不发生</strong>。攻防两侧看到的其实是同一个漏洞。</p>
+    <p>六条可以立刻执行的线索：<strong>① 本周做一次密钥轮换</strong> —— PHP2Shell 事件已提示服务器内存中的凭据可能泄露，Symantec 的 LLMjacking 靠的就是扫泄露的 API key，宣发侧所有第三方生图/视频/翻译 API 密钥全部换一遍；<strong>② 自建模型服务与 MCP 服务器一律加认证并限制出网</strong> —— 今天起暴露的 LLM 端点不只被白嫖算力，而是可能被拿去当别人的攻击大脑；<strong>③ 智能体登录外部平台改用官方 API + 短期可撤销令牌</strong>，不要用账号密码，给每个智能体单独建档标明授权范围与额度；<strong>④ 宣发素材流水线套「计划 → 执行 → 独立评审」三段式</strong>，比一次性提示词直出更容易控质量和预算；<strong>⑤ 把团队 SOP 写成 <code>SKILL.md</code></strong>，一份文件让 70+ 平台的 AI 助手学会按规范干活，但装第三方技能前必须审里面的脚本；<strong>⑥ Canva Craft 与 Ideogram Vector 各跑一轮小样</strong>，前者验图内中文文字准确性与转图层可编辑度，后者验扁平素材转矢量的路径数量（Simple 模式先行）。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
+
