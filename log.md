@@ -1,5 +1,43 @@
 # 操作日志 | Operation Log
 
+## [2026-10-24 10:05] AIGC 日报 2026.10.24（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**推送结果**：✅ 3 群全成功（群 A + 群 B + 竞品视觉日报群）
+**日期**：周六 · 第 78 期
+
+### 阶段 1 · 情报采集
+- AI HOT virxact：mode=all&since=2026-10-23T09:49:00Z，**3 页 204 条**（p3=4 条即 hasNext=false），curl 带浏览器 UA 全 200，24h 完整覆盖
+- 查重剔除：Seedance 2.5（7-8 月已报多次，今日条目为同产品后续）、METR/Redwood 驻场审计（10-23 已报）、MiniMax M3.1 Flash 权重放出（10-23 已排期兑现）、OpenAI Decisions API GA（10-22 已报公测，公测转 GA 不算新事件）、Claude Duet 权限设计（10-22 已报）
+- WebSearch 核实 7 组：OpenAI 断网训练 / Kimi K3.1 Pro / Anthropic-AISI Mythos 5 复盘 / Brotli CVE / 英国 6 亿英镑 / 国办就业意见 / Cursor Computer Use / Meta 收购 Sundial
+
+### 阶段 2 · 日报 MD
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261024.md，8 条全 P0，评分 9.5/9.3/9.1/9.0/8.9/8.7/8.5/8.3（均值 8.91）
+- 主线：告诉智能体停下来是请求，拿走网络才是停止 —— OpenAI 断网训练（9.5/P0，hero）+ Anthropic/AISI Mythos 5 复盘「惯性」（9.1/P0）+ Kimi K3.1 Pro 开放权重前主动砍网络攻击力（9.3/P0）+ Brotli Node2Shell RCE（9.0/P0）+ 英国 6 亿英镑 AI 安全（8.9/P0）+ 国办就业友好型意见（8.7/P0）+ Cursor Computer Use（8.5/P0）+ Meta 收购 Sundial（8.3/P0）
+- 注意点：国办意见文件落款 10 月 16 日、公开发布 10 月 23 日，条目口径落在「公开发布」并已注明；Kimi K3.1 Pro 判重时确认归档只有「Kimi K3」无「K3.1」，属新事件
+
+### 阶段 3 · H5 + 归档
+- H5：docs/ai-daily/ai-daily-card-20261024-toc.html（36186 chars / 52689 bytes / 400 行），脚本化拼装一次成型，11 项校验全过（title / 旧日期残留 0 / 旧期号 77 残留 0 / </head> 计数 1 / cards 8 / lead 1 / 期号≥2 / back-to-top / 返回归档 / edit-note / 星期六）
+- 归档：DATA 121 → 122，正则 const DATA 开头置顶插入 + eval 校验，top3 日期 10-24 / 10-23 / 10-22，tags 31 个
+- Commit fc2eeb0（MD + H5 + 归档）push 成功，远端 sha 比对一致
+
+### 阶段 4 · URL 200 关卡
+- sleep 30s 后 curl **首轮即 HTTP 200，线上 52689B 与本地完全一致（0 字节差）**
+- WebFetch 二次确认：title 2026.10.24 / 第 78 期 / 8 卡齐全 / lead / 编辑点评 / 返回归档全在
+
+### 阶段 5 · 海报 + 推送
+- publish-ai-daily-poster.js 一条龙：海报 HTML 生成 → Puppeteer 截图 **617.9KB / 1440×1920** → commit 56b598f push 成功 → Pages 第 6 次检测 200 → 推送 3 群
+- markdown_v2 单条 209 字节：海报图片 + 「点击看更多内容」链接
+- 推送结果：群 A ✓ / 群 B ✓ / 竞品视觉日报群 ✓（3/3）
+- 海报视觉确认：暖纸底 + 四色系 + Cormorant Garamond 斜体序号 + 评分回填正常（hero 9.5 + list 9.0/8.9/8.7/8.5/8.3；02/03 卡不显示评分是模板固有设计）；02/03 卡标题偏长时文字列变窄，历期一致
+
+### 坑位新增（2026-10-24）
+- **gh 不在 Git Bash 默认 PATH（新）**：Bash 里 which gh 报 command not found，导致 push 后远端校验失败。**实际 gh.exe 在 C:/Program Files/GitHub CLI/，需 export PATH="$PATH:/c/Program Files/GitHub CLI"**。之后 gh api 校验与一条龙脚本均正常
+- **周六 AI HOT 仅 3 页 204 条**（p3 只剩 4 条即 hasNext=false），继续印证「页数按 hasNext 判断，不按星期套用」
+- **「文档落款日 ≠ 公开发布日」的处理**：国办意见落款 10-16、公开发布 10-23。与「解读类条目回溯原事件时间」不同 —— 文件类条目的新闻钩子是**公开发布**，但正文必须注明落款日期，避免被误判为滞后旧闻
+- **H5 尾部定位改用 indexOf(class="back-to-top") 减 1 行**：比硬编码行号稳，本次 tailStart=355 正确切到 button 前
+
+---
+
 ## [2026-10-23 09:52] AIGC 日报 2026.10.23（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **推送结果**：✅ 3 群全成功（群 A + 群 B + 竞品视觉日报群）
@@ -2888,3 +2926,12 @@
 - chief_freshness：144 天（🚨 超 30 天硬拒绝线，已在 brief 顶部加警告）
 - 边界处理：WINDOW_OLD 空 + 近 7 天仅 1 篇，按红线不凑足 3 条强连接
 - 核心发现：竞品日报「统一框架只换识别点」= character-consistency-techniques 的工业化落地；question/number 仍为 0（144 天未推进的老 Stuck）
+
+## [2026-10-24 09:00] inward-brief | 0 条连接（三层回退全空）+ 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-10-24.md
+- 扫描：NEW=0 篇 / OLD=0 篇 / used_by 回退=0 篇（近 7 天仅 2 篇且 used_by 均空）
+- chief_freshness：146 天（🚨 超 30 天硬拒绝线，连续第 3 天加警告后继续生成）
+- 边界处理：按红线明说「今天没强连接」，不凑数，浮现连接节留空并说明三层回退
+- 核心发现：10 月竞品日报已攒 9 条视觉趋势方法论，全部未提升进 wiki（wiki 13 篇 pattern 全停在 5 月）；10/23 日报断更，恰是 1022 期自己标注的 CODM 双活动执行日
+- 统计：193 篇，pattern 6.7% / idea 2.6% / question 0 / number 0，79.8% 无 capture_type
+- 未推送企微；未回填 used_by
