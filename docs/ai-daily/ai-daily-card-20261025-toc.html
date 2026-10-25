@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.25</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.25 &middot; 星期日 &middot; 第 79 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 开源 sandbox-runtime</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Block 发布 Dessa 语音模型</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>NVIDIA Nemotron Bolt E4B 4GB</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>宾州签署 AI 欺骗性广告法</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>瑞典政府封禁 ChatGPT/Claude</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>信通院词元报告：日均 500 万亿</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>harness 只买账单不买通过率</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>澳国脚授权 AI 数字分身</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.25 &middot; Sun &middot; Issue 79</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天没有一条「大模型又变强了」的新闻，主角换成了<strong>边界</strong> —— 而且全都是可以安装、可以引用、可以计价的那种。Anthropic 把 Claude Code 的隔离层开源成 npm 包 <strong>sandbox-runtime（srt）</strong>，给任意命令加个 <code>srt</code> 前缀就把进程关进「文件 + 网络」双重笼子，不依赖 Docker，内部把权限弹窗砍掉 <strong>84%</strong> &middot; 宾夕法尼亚州州长 10 月 22 日签署《人工智能欺骗性广告法》（SB 806 / Act 99），<strong>首次把披露义务从「合成表演者」扩展到全部合成内容</strong>，罚款上限 <strong>3000 美元</strong>，<strong>12 月 21 日生效</strong> &middot; 瑞典政府办公厅 <strong>10 月 26 日</strong>起封掉办公电脑上的 ChatGPT 与 Claude 网页端 —— <strong>被封的不是模型，是「没有合同的接入方式」</strong> &middot; Block（Jack Dorsey）发布 <strong>Dessa</strong>，号称全球首个<strong>完全用人类语音、不用任何文本和预训练模型</strong>训出的全双工语音模型，一台 <strong>GB200 NVL72</strong> 训完、MacBook 本地跑 &middot; NVIDIA 放出 <strong>Nemotron 3.5 Bolt E4B 4GB</strong>，把会调工具的对话智能体塞进约 <strong>4GB</strong> 显存，官方演示直接点名<strong>游戏 NPC</strong> &middot; 信通院报告：<strong>6 月国内词元日均消耗约 500 万亿</strong>，是 2025 年 12 月的近 4 倍，归一化均价 <strong>6.8 元 → 13.46 元</strong> &middot; 两条冷静剂：两项研究称<strong>花哨 harness 最多让账单涨 3–5 倍，通过率差异却落在重跑噪声里</strong>；澳国脚 Volpato 把 AI 肖像独家授权给 Callandor，<strong>肖像第一次被当成可授权、可分成、可拦截的资产</strong>在卖</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.25 &middot; 第 79 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">能力侧今天集体「往小里走、往边界里装」 —— Anthropic 把隔离做成一个 npm 包，Block 把语音模型做成不需要文字的东西，NVIDIA 把会调工具的智能体压进 4GB 显存并直接点名游戏 NPC</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 开源 sandbox-runtime（srt）：OS 级无容器沙箱，Claude Code 同款隔离层，装个前缀就生效</span>
+        <span class="card-tag">🔒 智能体安全</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 把支撑 Claude Code「沙箱化 bash 工具」的那层隔离运行时单独开源，以 <strong>@anthropic-ai/sandbox-runtime</strong>（命令行名 <code>srt</code>）发布在 npm 上，当前 <strong>v0.0.81</strong>、约 <strong>11.4 MB</strong>、许可 <strong>Apache-2.0</strong>，需 Node.js ≥ 22.12。用法极简：全局安装后把 <code>srt</code> 加在任何命令前，该进程及其<strong>整棵进程树</strong>即被限制。关键设计是<strong>不用容器</strong> —— macOS 走 <code>sandbox-exec</code> + 动态生成的 <strong>Seatbelt</strong> 配置，Linux 走 <strong>bubblewrap</strong> 并剥离网络命名空间，Windows 为 <strong>alpha</strong>（专用本地账户 + WFP 出向围栏 + NTFS ACL）。默认策略遵循最小权限：<strong>读默认放行、写默认拒绝、网络默认全封且需域名白名单</strong>，出网只能经宿主机上的 HTTP / SOCKS5 代理。还支持域名通配、Unix socket 白名单、实验性 TLS 终止、凭据掩码与 AWS SigV4 签名。对 MCP 用户最实用：把 <code>.mcp.json</code> 里某个服务器的 <code>command</code> 从 <code>npx</code> 换成 <code>srt</code>，规则写在 <code>~/.srt-settings.json</code>，<strong>无需审代码即可隔离第三方 MCP 服务器</strong>。Anthropic 自报：内部启用后 Claude Code 的<strong>权限弹窗减少了 84%</strong>。边界：这是研究预览，Windows 后端明确列出了会绕过围栏的系统服务流量。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">版本</div><div class="data-value">v0.0.81</div></div><div class="data-chip"><div class="data-label">许可</div><div class="data-value">Apache-2.0</div></div><div class="data-chip"><div class="data-label">弹窗减少</div><div class="data-value">84%（自报）</div></div><div class="data-chip"><div class="data-label">容器依赖</div><div class="data-value">无</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Block 发布 Dessa：全球首个纯语音训练的全双工语音模型，单台 GB200 训出、MacBook 本地跑</span>
+        <span class="card-tag">🗣️ 语音原生</span>
+      </div>
+      <div class="card-desc">
+        Jack Dorsey 旗下 Block 发布语音模型 <strong>Dessa</strong>，官方定位「迄今最真实的<strong>全双工（full-duplex）语音模型</strong>」——可<strong>边听边说</strong>，音频进、音频出，中间<strong>没有转写层</strong>。训练方式最激进：完全用人类语音从零训练，<strong>不使用任何文本、不基于任何预训练模型</strong>，模型靠「听」学会语言、口音、停顿、呼吸节奏、幽默反讽，以及<strong>什么时候该闭嘴</strong>。算力只用了一台 <strong>NVIDIA GB200 NVL72</strong>。Block 的理由：现有语音 AI「把你的声音转成文字，扔掉了大量文字承载不了的信息 —— 世界上最强的 AI 也听不出你的感受，这很荒谬，而且有潜在危险」。演示中，说到上班累了语气真的变疲惫、句中遇到好笑处会自然笑出来、用户卡住时会像真人一样倒吸气接话。官方称推理<strong>快于实时</strong>，可在 <strong>MacBook Pro M4 Max 及以上</strong>本地运行、无需联网。但状态是<strong>研究预览</strong>：<strong>无参数量、无 API、无定价、无权重、无公开评测</strong>，仅开放候补名单，且只先邀请一小批 <strong>AI 安全研究者</strong>测试。所有演示均为官方自选自剪的 demo，非独立验证。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">训练数据</div><div class="data-value">纯人类语音</div></div><div class="data-chip"><div class="data-label">算力</div><div class="data-value">1×GB200 NVL72</div></div><div class="data-chip"><div class="data-label">本地运行</div><div class="data-value">M4 Max 及以上</div></div><div class="data-chip"><div class="data-label">可用状态</div><div class="data-value">研究预览</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">NVIDIA 发布 Nemotron 3.5 Bolt E4B 4GB：约 4GB 显存跑多轮工具调用，直指语音助手与游戏 NPC</span>
+        <span class="card-tag">🎮 端侧智能体</span>
+      </div>
+      <div class="card-desc">
+        NVIDIA 于 <strong>10 月 23 日</strong>发布开放小语言模型 <strong>Nemotron 3.5 Bolt E4B 4GB</strong>，基于 Google <strong>Gemma 4 E4B</strong> 做 Nemotron 后训练，总参 <strong>8B / 有效 4B</strong>，<strong>Q4_K_M</strong> 量化（GGUF 6.18 GB），上下文 <strong>64K</strong>，支持 <strong>35 种语言</strong>，许可 <strong>OpenMDW 1.1</strong> 可商用。训练上有个反常识细节：<strong>只用强化学习、不做监督微调</strong>，理由是 SFT 会损害对话自然度。面向智能体的能力包括跨多轮<strong>工具调用</strong>（含异步调用）、可切换的<strong>对话模式</strong>（生成简短、适合朗读的回复）、可配置<strong>推理强度</strong>（可为满足延迟目标设思考上限）。实测（llama.cpp，3K 输入 / 50 输出）：显存 <strong>3.1–5.0 GB</strong>；RTX 5070 12GB 上 <strong>133.4 tokens/秒、首 token 548 毫秒</strong>；Jetson Orin Nano 8GB 上降到 <strong>15.5 tokens/秒、首 token 近 6 秒</strong>。官方把目标场景明确写成<strong>设备与语音助手 / 虚拟与交互角色（游戏内 NPC、同伴角色）/ 嵌入式与工业智能体</strong>，配 <strong>In-Game Inferencing SDK</strong> 与一个完整的铁匠商人 NPC 演示（收款 → 查配方 → 收材料 → 打造 → 交付）。短板同样写在官方表上：Tau2-Bench 仅 <strong>55.1</strong>，Qwen3.5-4B 为 75.1。全部基准均为厂商自测。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">显存占用</div><div class="data-value">3.1–5.0 GB</div></div><div class="data-chip"><div class="data-label">上下文</div><div class="data-value">64K</div></div><div class="data-chip"><div class="data-label">许可证</div><div class="data-value">OpenMDW 1.1</div></div><div class="data-chip"><div class="data-label">Tau2-Bench</div><div class="data-value">55.1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏭 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">边界今天被写成了三种可交付物 —— 一部州法（要标识）、一份采购决定（要合同）、一份监测报告（要计价）</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">宾夕法尼亚州签署《人工智能欺骗性广告法》：AI 广告须加标识，罚款上限 3000 美元，12 月 21 日生效</span>
+        <span class="card-tag">⚖️ AI 广告合规</span>
+      </div>
+      <div class="card-desc">
+        宾州州长 Josh Shapiro 于 <strong>10 月 22 日</strong>签署 <strong>SB 806《人工智能欺骗性广告法》</strong>，列为 <strong>2026 年第 99 号法案</strong>，<strong>签署后 60 天生效（12 月 21 日）</strong>。约束对象是「<strong>合成内容</strong>」——被 AI 显著修改或生成的图像、视频、音频或文本。触发披露的条件<strong>不是「用了 AI」，而是使用方式让消费者对商品性质、来源或真实性产生错误认知</strong>；满足条件时必须带清晰显著的披露，说明「本广告包含经人工智能修改或生成的内容」。标识须同时满足三条：<strong>在合成内容首次出现时就出现、与内容同一媒介、技术上可行时做到永久或极难移除</strong>；视觉按尺寸/颜色/对比度/位置/停留时长判定，音频按音量与语速判定，且须使用广告所面向的语言。<strong>豁免三类</strong>：明显虚构、戏仿讽刺评论批评、纯文本内容。参议院审议时<strong>删除了「明知、轻率或故意」的限定</strong>，即不设明知要件。执行主体为州总检察长或地区检察官，可申请禁令并提起民事诉讼，法院可处<strong>最高 3000 美元</strong>民事罚款并判付律师费；该法<strong>不创设私人诉权</strong>，且披露本身不构成对其他责任的抗辩。立法过程跨党派：参议院 6 月 10 日 <strong>48–2</strong>、众议院 10 月 7 日 <strong>163–40</strong> 通过。The Verge 特别指出：<strong>适用范围按投放地判断，不按制作地</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">生效日</div><div class="data-value">2026-12-21</div></div><div class="data-chip"><div class="data-label">罚款上限</div><div class="data-value">$3,000</div></div><div class="data-chip"><div class="data-label">参议院</div><div class="data-value">48–2</div></div><div class="data-chip"><div class="data-label">众议院</div><div class="data-value">163–40</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">瑞典政府办公厅 10 月 26 日起封禁办公电脑上的 ChatGPT 与 Claude，改用已签合同的 Copilot</span>
+        <span class="card-tag">🏛️ 政府采购</span>
+      </div>
+      <div class="card-desc">
+        据瑞典国家公共广播公司 Sveriges Radio（Ekot）<strong>10 月 23 日</strong>报道，瑞典<strong>政府办公厅（Regeringskansliet）</strong>将从 <strong>10 月 26 日</strong>起禁止工作人员通过办公电脑直接访问 <strong>ChatGPT 与 Claude 网页版</strong>，引导员工改用已获批的 <strong>Microsoft Copilot</strong>。数字化总监 <strong>Mikael Wettercrantz</strong> 在内部网说明：使用<strong>未签订协议的 AI 服务</strong>可能对信息安全造成影响；办公厅在审查 Copilot 后进一步加强了安全防护，但拒绝披露具体措施。关键细节是<strong>这不是封模型，是封接入方式</strong>：员工仍可通过办公厅自研的 <strong>Intric</strong> 平台调用 ChatGPT 与 Claude 的模型。微软 365 Copilot 本身也能调用 Claude 模型，只是那些模型<strong>被排除在微软欧盟数据边界之外</strong>，在欧盟/EFTA/英国默认关闭，需管理员主动开启 —— 办公厅未说明是否开启。同类措施已扩展：<strong>税务局（Skatteverket）与国家机构管理局（SiS）已封锁，强制执行局（Kronofogden）研究中</strong>。交通管理局今年早些时候的审计发现员工普遍在用<strong>约 10 种 AI 服务</strong>且存在风险，问题既涉及输入信息的敏感度，也涉及对 AI 生成回答的处理方式。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">生效日</div><div class="data-value">10 月 26 日</div></div><div class="data-chip"><div class="data-label">获批替代</div><div class="data-value">Microsoft Copilot</div></div><div class="data-chip"><div class="data-label">,内部通道</div><div class="data-value">Intric 平台</div></div><div class="data-chip"><div class="data-label">已跟进机构</div><div class="data-value">税务局 / SiS</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">信通院词元服务监测报告：6 月国内日均消耗约 500 万亿词元，归一化均价翻倍至 13.46 元</span>
+        <span class="card-tag">📊 词元经济</span>
+      </div>
+      <div class="card-desc">
+        <strong>10 月 23 日</strong>，中国信息通信研究院人工智能研究所、人工智能大模型及软硬件评测工信部重点实验室与中国人工智能产业发展联盟联合发布《大模型词元服务性能监测报告（2026 年）》，基于 <strong>2026 年 1–8 月</strong>监测数据。核心是<strong>量价齐升</strong>：<strong>2026 年 6 月国内词元日均消耗量约 500 万亿</strong>，是 2025 年 12 月的<strong>近 4 倍</strong>；国内词元价格较 2025 年下半年<strong>翻倍</strong>，但<strong>量的增长达到 3 倍</strong>。归一化均价从 2025 下半年的 <strong>6.8 元</strong>涨到 2026 年的 <strong>13.46 元</strong>；国外典型模型平均归一价格约 <strong>117.8 元</strong>，仍显著更高。性能侧：8 月国内平均 TPS <strong>78.23 个</strong>（2025 年均值 38.25），国外典型模型 <strong>112.82 个</strong>仍更优；国内平均首词时延 8 月 <strong>1.26 秒</strong>（2025 年均 0.78 秒），国外 <strong>2.08 秒</strong>（4 月 1.04 秒）同样上升 —— 报告解释 TTFT 上升<strong>并非单纯性能退化</strong>，而是参数量、上下文长度、调用量同步增长的结果。上下文长度变化剧烈：<strong>1M 词元模型占比已达 47.8%</strong>，20 万及以上合计 <strong>95.7%</strong>，较 2025 年底提升<strong>超过 76 个百分点</strong>。开源模型方面 8 月 DeepSeek-V4-Pro 的 TPS 已达 V3.2 的 <strong>2 倍</strong>。报告还指出<strong>同一模型在不同第三方平台的性能差异明显，TPS 差距最大可接近一倍</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">日均词元</div><div class="data-value">≈500 万亿</div></div><div class="data-chip"><div class="data-label">归一均价</div><div class="data-value">6.8→13.46 元</div></div><div class="data-chip"><div class="data-label">国内 TPS</div><div class="data-value">78.23</div></div><div class="data-chip"><div class="data-label">1M 上下文占比</div><div class="data-value">47.8%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📈 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">两条冷静剂：一项是给智能体编排热降温的成本研究，一项是把真人肖像变成可授权资产的生意</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">两项研究称花哨 harness 只买账单不买通过率：单任务成本差 3–5 倍，分数落在重跑噪声内</span>
+        <span class="card-tag">💸 harness 税</span>
+      </div>
+      <div class="card-desc">
+        山东大学 Yangze Liu 与 Zhongyi Han 发表《<strong>What Does a Harness Buy? Tokens, Mostly.</strong>》，用 <strong>5 个模型 × 3 个生产级 harness（Claude Code、OpenCode、mini-SWE-agent）</strong>在 SWE-bench Verified 上对照，再把同一配置重跑多次。通过率：447 题池子上 Claude Code 与极简的 mini-SWE-agent 差距在 <strong>2 个百分点内</strong>；45 道最难题上，换 harness 与「什么都不改重跑」导致的解题翻转比例都是 <strong>13%</strong>。成本：同一模型同一任务，<strong>单任务成本最多差 3 倍</strong>（GLM-5.3-Flash 下 Claude Code 1.81 元 vs OpenCode 0.56 元）。来源是<strong>固定上下文每步重发</strong>：<strong>Claude Code 16581 tokens、OpenCode 7025、mini-SWE-agent 829</strong>。几个反直觉细节：DeepSeek 自家 harness 配自家模型<strong>既不更好也最贵</strong>；Claude Opus 5 移除工具后结果<strong>完全一致</strong>；一年前的旧版本以不到一半成本解出相似数量的任务（当时 Extended Thinking 默认关闭）；<strong>「思考」是唯一真正改变结果的维度</strong>。UC Berkeley Sky Computing Lab 与 Arena 的 <strong>HarnessTax</strong> 研究结论一致：通过率只变动几个百分点，<strong>推理成本最多放大 5 倍</strong>。作者金句：「我们能测到的每一个 harness 效应，都是一种『让模型本可以解出的任务失败』的方式，外加一张账单，而不是通过率。」10 次同配置重跑的分数波动为 <strong>2.2–6.0 个百分点</strong>，比多数榜单用来排序的厂商宣称差距还大。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">成本差</div><div class="data-value">3–5×</div></div><div class="data-chip"><div class="data-label">前缀 tokens</div><div class="data-value">16581 / 7025 / 829</div></div><div class="data-chip"><div class="data-label">重跑波动</div><div class="data-value">2.2–6.0 pt</div></div><div class="data-chip"><div class="data-label">基准</div><div class="data-value">SWE-bench Verified</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">澳国脚 Volpato 独家授权 AI 数字分身：形象、声音、生物特征与表现数据打包给 Callandor</span>
+        <span class="card-tag">🧬 AI 肖像权</span>
+      </div>
+      <div class="card-desc">
+        22 岁、效力意甲萨索洛的澳大利亚国脚 <strong>Cristian Volpato</strong> 于 <strong>9 月中旬</strong>与加州公司 <strong>Callandor</strong> 签约，成为最新一位把 AI 肖像授权变现的职业运动员。近日流传的视频里，他走在宽敞中庭，随后<strong>分身出四个数字分身</strong>出现在十二使徒岩海滩、巨型数字广告牌、镜子前等场景 —— <strong>视频由 AI 生成但获得了本人授权</strong>。协议内容关键：Callandor <strong>独家持有</strong>他的<strong>数字形象、声音、生物特征数据与赛场表现数据</strong>，负责对接品牌合作、变现抽成，并<strong>拦截未经本人许可的相关内容</strong>。联合创始人 Michael Fisk（前索尼影业、美高梅高管）称之为制造「<strong>合成双胞胎</strong>」：球员一直在训练比赛，空闲时间留给家人朋友，会错过大量品牌机会；「只要获得本人许可，品牌方就可以<strong>全天候、全年无休</strong>地使用数字分身」。公司今年 2 月成立，签约者还包括巴西球员若日尼奥与美国帆船选手 Chris Poole，项目仍在试点，同时在探索多语种有声书旁白与球迷互动应用。背景是行业与监管赛跑：<strong>博彩、转播与品牌方越来越多地在未经许可下使用运动员形象</strong>；本月 AFL 应球员工会投诉要求 Sportsbet 停止使用未授权的 AI 球员形象；而澳各大联赛球员合同<strong>尚无任何 AI 条款</strong>。Fisk 自己承认这些分身「在手机上看与真人的观感质感几乎看不出差别」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">授权范围</div><div class="data-value">形象+声音+生物+数据</div></div><div class="data-chip"><div class="data-label">公司成立</div><div class="data-value">2026 年 2 月</div></div><div class="data-chip"><div class="data-label">状态</div><div class="data-value">试点阶段</div></div><div class="data-chip"><div class="data-label">联赛 AI 条款</div><div class="data-value">尚无</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天八条里有一个词反复出现，值得单独拎出来 —— <strong>边界正在被打包成产品</strong>。</p>
+    <p>它今天同时以四种形态出现，而且每一种都可以被直接安装、引用或计价：<strong>沙箱成了 npm 包</strong>（Anthropic 把隔离层抽出来开源，装个包、加个前缀就能生效，隔离从架构讨论变成操作动作）；<strong>披露成了州法</strong>（宾州把「用了 AI」写成可引用的条款，还给出了标识在第几秒、用什么语言、能不能被抹掉）；<strong>权限成了采购条款</strong>（瑞典封掉网页端，但同一个模型在 Intric 里照用 —— 被管的不是模型，是通道）；<strong>词元成了计量单位</strong>（信通院把「日均 500 万亿」摆出来，词元服务正在变成像流量一样可被监测、可被比较的商品）。</p>
+    <p>这四件事的共同点是：<strong>AI 的边界不再靠共识维持，而开始靠可交付物维持。</strong> 这是比任何一次模型发布都更实质的变化 —— 因为它决定了接下来几年里「用 AI」这件事的成本结构长什么样。</p>
+    <p>另一条暗线是<strong>账单开始被认真对待</strong>：词元价格在涨（6.8 元 → 13.46 元）而量涨得更快（3 倍 vs 价格 1 倍）；harness 研究表明同样的模型同样的任务账单可以差 3–5 倍，买到的通过率差异却落在噪声里；21% 的受访企业没有任何自动手段去叫停自家智能体的 token 开销。能力侧今天反而是「往小里走」的一天 —— NVIDIA 把会调工具的智能体压进 4GB，Block 把语音模型压进一台笔记本。<strong>前沿在抢天花板，产业在抢地板。</strong></p>
+    <p>四条可以立刻执行的线索：<strong>① 建 AI 素材台账 + 两套披露模板</strong>（画面内标注 / 音频口播，12 月 21 日前完成，判定按投放地不按制作地）；<strong>② 给本地宣发智能体脚本套 srt</strong>（网络默认全封 + 域名白名单，未发布素材目录写进 denyRead，MCP 服务器 command 换成 srt，Windows 仍是 alpha 需谨慎）；<strong>③ 预算口径从单价改成单任务成本</strong>（同一模型不同第三方平台 TPS 差距最大接近一倍，挑 3 个高频任务实测对比）；<strong>④ 真人形象的 AI 授权链条要书面化到四项资产</strong>（形象、声音、生物特征、表现数据），并为「AI 生成的真人形象」制定内部标识规范。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
+
