@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.26 &middot; 星期一 &middot; 第 80 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Grok Imagine AI 版《奥德赛》首集</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>微软开源 Agensh 1024 智能体</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic OSS Scanner 11 天 880 漏洞</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>猫王遗产方起诉 Anthropic</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>DeepSeek 二轮融资 1000 亿元</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>软银孙正义 500 亿美元投马来</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Kimi 就 K3.1 Pro 限流致歉</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>全国首个 AI 应用风险保障方案</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.26 &middot; Mon &middot; Issue 80</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天没有一条单纯的「模型又变强了」，主角换成了<strong>墙</strong> —— 而且是从技术变成法律与信任的那种。马斯克兑现 7 月承诺，<strong>Grok Imagine</strong> 放出 AI 版《奥德赛》首集 <strong>7 分钟</strong>，TechCrunch 的评语是「没有艺术性、没有呼吸感」 &middot; 微软研究院开源 <strong>Agensh</strong>，<strong>1024 个智能体</strong>没有中央编排器，靠共享 Git + Mattermost + 结构化看板自组织，Pandoc 复现通过率 <strong>33.89% → 55.06%</strong> &middot; Anthropic 同日两件事：免费开源漏洞扫描器 <strong>OSS Scanner</strong> 上线 11 天报出 <strong>77 危急 + 803 高危</strong>（88% 经复核达 CVD 门槛，curl 8.23.0 已据此修复 CVE-2026-92392）；而猫王遗产管理方 Authentic Brands 就 <strong>274 首</strong>代表曲目起诉 Anthropic，索赔 <strong>4110 万美元</strong>，是<strong>艺人遗产方直接起诉 AI 公司的首批重大案件之一</strong> &middot; 资本侧继续狂奔：<strong>DeepSeek</strong> 二轮约 <strong>1000 亿元人民币（150 亿美元）</strong>融资落定，腾讯宁德领投、投前估值 5000 亿、年化营收破 10 亿美元；<strong>软银孙正义</strong>计划在马来西亚投 <strong>500 亿美元</strong>建 AI 与数据中心 &middot; 两条冷静剂：月之暗面 <strong>Kimi 就 K3.1 Pro 限流致歉</strong>，为所有订阅会员重置并补偿 <strong>25%</strong> 月度额度；中国<strong>首个 AI 应用风险综合保障方案</strong>在金融街论坛发布，人保财险推出「AI 服务责任险 + AI 应用费用损失险」，<strong>首次把 AI 性能风险纳入保险机制</strong></p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.26 &middot; 第 80 期</span>
+    </div>
+  </div>
+
+  <!-- 🧠 模型 & Agent -->
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">能力侧今天三条都在做「兑现」—— 马斯克的 7 月承诺、微软的多智能体规模、Anthropic 的漏洞扫描服务</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Grok Imagine 放出 AI 版《奥德赛》首集 7 分钟：马斯克兑现 7 月承诺，TechCrunch 批缺乏艺术性</span>
+        <span class="card-tag">🎬 AI 视频</span>
+      </div>
+      <div class="card-desc">
+        北京时间 10 月 25 日深夜，xAI 的生成式视频产品 <strong>Grok Imagine</strong> 在 X 放出《奥德赛》系列<strong>第一集</strong>，片长 <strong>7 分钟</strong>，覆盖希腊军抵达特洛伊、奥德修斯启程归乡的序章。这是马斯克 <strong>7 月公开承诺</strong>「年底前推出全长、符合历史的《奥德赛》电影版」的首次兑现，由 xAI 与 <strong>Wonder Studios</strong> 及导演 <strong>Dev Walker</strong> 联合制作，宣传语是「Homer didn't have Grok. We do.」。TechCrunch 评测相当尖锐：<strong>画面质量没有预想得那么糟</strong>，某些镜头（如 sailor 横渡大海）可能误以为是真实演员实拍；但<strong>整体缺乏艺术性、灵感和人情味</strong>，旁白交代背景没完没了，一个接一个留胡子的角色面孔喊着生硬台词，「让诺兰的对白听起来像莎士比亚」。视觉缺陷同样明显：不自然的完美牙齿、失重的发丝质感、模糊的肤色、背景纹理突然 pop-in —— <strong>这些是拼接式合成而非整体场景理解的典型痕迹</strong>。选角全部为白人演员，与马斯克此前批评诺兰版选用非白人和跨性别演员的立场形成讽刺对照。据 MuskOmeter 追踪，马斯克公开承诺的整体「命中率」约 <strong>24%</strong>，本次兑现本身比质量更值得关注。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">片长</div><div class="data-value">7 分钟</div></div><div class="data-chip"><div class="data-label">制作方</div><div class="data-value">Wonder Studios</div></div><div class="data-chip"><div class="data-label">导演</div><div class="data-value">Dev Walker</div></div><div class="data-chip"><div class="data-label">马斯克命中率</div><div class="data-value">24%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">微软开源 Agensh：无中心编排的 1024 智能体协作框架，Pandoc 通过率 33.89% → 55.06%</span>
+        <span class="card-tag">🤖 多智能体</span>
+      </div>
+      <div class="card-desc">
+        微软研究院 General AI 组开源多智能体编码框架 <strong>Agensh</strong>，把组织规模推到 <strong>1024 个智能体</strong>，<strong>全程没有中央编排器</strong>。与 Claude Code agent teams、Codex subagents、Copilot fleet、Kimi Agent Swarm 的「编排者-工作者」结构不同，Agensh 让所有智能体运行<strong>完全相同的五步协作循环</strong>（收集上下文 → 认领子任务 → 执行分享 → 验证结果 → 合并进展），差异只有 worker ID。支撑自组织的三件共享基础设施：<strong>共享工作区</strong>（Gitea + Git）、<strong>消息接口</strong>（Mattermost，私信可在任务碰撞时中途打断同伴协商）、<strong>共享上下文看板</strong>（OBSERVED / FACT / FAIL / CLAIM / PATCH_SUMMARY 五类条目，<strong>失败的尝试也会被记录</strong>，其他成员据此停止重复试错）。论文在 ProgramBench 最难五任务（FFmpeg、gromacs、pandoc、PHP-src、ctags）上评测，使用 GPT-5.6 Sol 高推理档、六小时预算、完全断网：<strong>五任务平均通过率从单智能体 19.31% 提升到 128 智能体的 28.78%（相对提升 49%）</strong>；Pandoc 单任务从 <strong>33.89%（1 个）升到 50.94%（128 个）、55.06%（1024 个）</strong>。换成 GPT-6.1 Sol 后，Pandoc 从 56.19% 升到 79.59%（32 个）。论文观察到<strong>随着团队规模扩大，同伴协调、集成流程与专职角色会自发涌现</strong>。边际收益递减明显：从 128 到 1024 只提升 4 个百分点。<strong>成本与 token 消耗未披露</strong>是这次论文的明显缺口。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">最大规模</div><div class="data-value">1024 智能体</div></div><div class="data-chip"><div class="data-label">Pandoc 提升</div><div class="data-value">33.89%→55.06%</div></div><div class="data-chip"><div class="data-label">五任务相对提升</div><div class="data-value">49%</div></div><div class="data-chip"><div class="data-label">编排器</div><div class="data-value">无</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Anthropic OSS Scanner 11 天报出 77 危急 + 803 高危：Claude Mythos 直出报告、无人审即发维护者</span>
+        <span class="card-tag">🛡️ AI 安全</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 上线 <strong>OSS Scanner</strong> 免费开源漏洞扫描服务 <strong>11 天</strong>后公布首批战果：向维护者报出 <strong>77 个危急 + 803 个高危</strong>模型评级发现，<strong>报告完全由 Claude Mythos 等最强模型生成，不经 Anthropic 人工审核即直接发送给项目维护者</strong>。截至 10 月 19 日，已从约 650 个申请中接受 <strong>114 个项目</strong>加入。设计借鉴 Google 的 OSS-Fuzz，但把 fuzzer 换成语言模型：核心维护者通过 GitHub PR 到 <code>anthropics/oss-scanner</code> 登记，审计在<strong>隔离 VM 内离线运行</strong>，无网络访问。每份报告包含自包含复现器、根因分析、引入 bug 的 commit 二分结果、以及可用的候选补丁。Anthropic 内部渗透团队对 48 个项目的 97 个危急/高危发现做了人工复核：<strong>85 个（88%）达到协调漏洞披露（CVD）门槛、11 个是已知问题的重复、1 个为误报</strong>。早期用户 wolfSSL 收到的 74 份报告中除 2 份外全部有效，其中 5 个成为 CVE；<strong>curl 8.23.0 修复的 CVE-2026-92392</strong>（HTTP/2 上传 use-after-free，影响 8.12.0–8.22.0）即由 OSS Scanner 早期版本发现，维护者 Daniel Stenberg 此前曾公开批评 AI 生成的低质量漏洞提交，后来承认 OSS Scanner 找到的是近年最严重的 curl 漏洞之一。Anthropic 坦承 recurring 错误包括<strong>严重级别膨胀</strong>与<strong>对项目威胁模型的错误假设</strong>。OSS Scanner 源自过去 6 个月用最新模型审查关键软件的经验：模型生成超过 <strong>29000 个候选漏洞</strong>，人工专家只 triage 了约 6000 个。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">危急</div><div class="data-value">77</div></div><div class="data-chip"><div class="data-label">高危</div><div class="data-value">803</div></div><div class="data-chip"><div class="data-label">CVD 通过率</div><div class="data-value">88%</div></div><div class="data-chip"><div class="data-label">已加入项目</div><div class="data-value">114</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏭 行业 & 基础设施 -->
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">今天行业侧三条都在「算账」—— 版权账、资本账、基建账</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">猫王遗产方起诉 Anthropic：274 首代表曲目、索赔 4110 万美元，Claude 被指生成侵权翻唱</span>
+        <span class="card-tag">⚖️ AI 版权</span>
+      </div>
+      <div class="card-desc">
+        当地时间 10 月 23 日（上周五），猫王 <strong>Elvis Presley</strong> 音乐曲库持有方 <strong>Authentic Brands Group</strong>（正宗品牌集团）联合其他信托与个人权利方，在美国加州北区联邦地区法院起诉 <strong>Anthropic</strong>，指控其<strong>未经许可使用猫王 274 首代表曲目训练 Claude 模型</strong>，并在用户请求时生成与原作高度相似的翻唱版本。索赔金额为<strong>每首侵权曲目 15 万美元顶格法定赔偿，合计约 4110 万美元</strong>（约合 2.74 亿元人民币），并要求法院永久禁止 Anthropic 继续侵权、销毁所有非法复制件。诉状由首席代理律师 <strong>Richard Busch</strong> 撰写，核心指控：「Anthropic 的整套商业模式建立在规模空前的版权侵权行为之上」「从诞生之初，Claude 就能生成互联网上各类曲库中几乎所有歌曲的侵权内容」「在被发现之后才设置所谓防护机制，而这套防护机制效果不佳，且公司明知防护措施无法阻止模型继续产出侵权音乐内容」。原告方指控的具体曲目包括《All Shook Up》《Can't Help Falling in Love》《Don't Be Cruel》《A Little Less Conversation》《Return to Sender》。Anthropic 发言人回应称「不同意这些指控，将全力应诉」。这是<strong>艺人遗产管理方直接针对 AI 开发公司发起的首批重大法律诉讼之一</strong>—— 此前 AI 版权纠纷主要由唱片公司（环球、索尼、华纳）或作者集体诉讼发起，<strong>艺人遗产方直接出手意味着版权主张主体进一步扩大</strong>。Anthropic 去年已就作者集体诉讼达成 <strong>15 亿美元和解</strong>（美国版权案史上最大和解金），今年 1 月环球音乐、Concord Music Group、ABKCO Music 已扩大对 Anthropic 的歌词版权诉讼。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">侵权曲目</div><div class="data-value">274 首</div></div><div class="data-chip"><div class="data-label">索赔总额</div><div class="data-value">$41.1M</div></div><div class="data-chip"><div class="data-label">单首顶格</div><div class="data-value">$150,000</div></div><div class="data-chip"><div class="data-label">去年和解金</div><div class="data-value">$1.5B</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">DeepSeek 二轮融资约 1000 亿元落定：腾讯宁德领投、投前估值 5000 亿、年化营收破 10 亿美元</span>
+        <span class="card-tag">💰 大模型融资</span>
+      </div>
+      <div class="card-desc">
+        10 月 22 日，多家媒体确认 <strong>DeepSeek 第二轮融资约 1000 亿元人民币（约 150 亿美元）已落定</strong>，刷新中国 AI 行业单轮融资纪录。<strong>腾讯与宁德时代为本轮最大投资者</strong>，其中宁德时代拟追加约 100 亿元（首轮约 50 亿元的两倍）。本轮新进投资方以产业资本为主，包括石溪资本、中芯聚源、吉利、CPE 源峰、君联资本、美的、美团等，老股东腾讯、IDG 资本、砺思资本、拾象科技持续加码，<strong>投资方总数超过 15 家</strong>。融资目标在不到半个月内<strong>至少两次上调</strong>：从最初的 500 亿元提高到 800 亿元，最终锁定约 1000 亿元。<strong>投前估值维持约 5000 亿元人民币不变</strong>—— 「更大规模、同一估值」的结构反映认购需求远超首轮，大量意向资本此前未能进入。商业化方面，CEO 梁文锋在 9 月投资者会议上披露<strong>年化营收运行率已突破 10 亿美元</strong>，较数月前不足 5 亿美元增长一倍以上，<strong>8 月 API 提价后客户未流失、需求依然强劲</strong>，V4 旗舰模型毛利率维持 <strong>70%–80%</strong>。产品端节奏同步提速：10 月 17 日发布并开源 <strong>V4.1-Flash-1017</strong>，在 DeepSWE v1.1 得分超过 GPT-6 Astra、Claude Opus 5；10 月 20 日开源内部推理框架 <strong>DeepInfer</strong> 及生产级 Token 编解码组件，单一集群服务吞吐达 <strong>155 万亿 Tokens/天</strong>。上市路径同样清晰：9 月已聘请中信证券推进科创板 IPO，计划 2026 年底递交招股书、2027 年挂牌；原高瓴创投合伙人严文韬 9 月 21 日出任 CFO。算力方面，DeepSeek 正在内蒙古乌兰察布建设大型数据中心，并计划向华为订购大量昇腾系列 AI 加速芯片，<strong>算力加速向国产芯片迁移</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资规模</div><div class="data-value">≈1000 亿元</div></div><div class="data-chip"><div class="data-label">投前估值</div><div class="data-value">5000 亿元</div></div><div class="data-chip"><div class="data-label">年化营收</div><div class="data-value">$1B+</div></div><div class="data-chip"><div class="data-label">V4 毛利率</div><div class="data-value">70–80%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">软银孙正义计划在马来西亚投资 500 亿美元：砂拉越 + 古晋 + 马来半岛，押注 AI 与数据中心</span>
+        <span class="card-tag">🏗️ AI 基建</span>
+      </div>
+      <div class="card-desc">
+        马来西亚总理安瓦尔·易卜拉欣 10 月 25 日在马六甲一场活动上宣布，<strong>软银集团创办人兼社长孙正义计划在马来西亚投资 500 亿美元</strong>（约合 3344.6 亿元人民币），涉及 <strong>AI、新兴技术与数据中心</strong>等多个领域。安瓦尔表示，他已于 10 月 20 日与孙正义进行线上会议，孙正义已选定<strong>砂拉越、古晋以及马来半岛</strong>作为投资地点，<strong>这是区域内规模最大的投资项目之一</strong>。软银代表未立即回应置评请求。彭博社报道未披露具体时间表与分项投资结构，但明确指出这笔资金将<strong>加快孙正义在全球 AI 基础设施领域的布局</strong>。马来西亚近年来凭借相对稳定的电力供应、地理枢纽位置、以及对外资的开放政策，正在成为东南亚数据中心的新热点 —— 此前微软、谷歌、亚马逊 AWS 已在马来西亚布局云区域。这是孙正义继美国俄亥俄州、日本、印度之后，<strong>在 AI 基建领域的又一超级押注</strong>。软银愿景基金过去两年在 AI 领域的承诺投资已超过 1000 亿美元，覆盖芯片（英伟达、AMD、英特尔）、模型（OpenAI、Anthropic、Mistral）、算力（CoreWeave、Lambda、Nscale）、机器人（Boston Dynamics、AutoStore）等全链条。<strong>500 亿美元是东南亚单一 AI 基建投资的历史最高规模</strong>，超过此前微软在马来西亚的 22 亿美元云区域投资一个数量级。砂拉越是电力与土地资源最丰富的地区，古晋是砂拉越首府，马来半岛是经济核心区，<strong>三地分工可能是「发电 + 训练 + 推理」</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">投资规模</div><div class="data-value">$50B</div></div><div class="data-chip"><div class="data-label">折合人民币</div><div class="data-value">≈3344.6 亿</div></div><div class="data-chip"><div class="data-label">选址</div><div class="data-value">砂拉越/古晋/半岛</div></div><div class="data-chip"><div class="data-label">方向</div><div class="data-value">AI+数据中心</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📈 趋势 & 工具 -->
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">两条冷静剂：一条是订阅信任的修复，一条是 AI 性能风险第一次被纳入保险机制</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Kimi 就 K3.1 Pro 限流致歉：所有订阅会员重置并补偿 25% 月度额度，减少子 Agent 调用与输出长度</span>
+        <span class="card-tag">🔔 订阅信任</span>
+      </div>
+      <div class="card-desc">
+        10 月 26 日凌晨，<strong>Kimi 智能助手</strong>在社交平台（小红书）发文，就<strong>近期 Kimi 会员使用 K3.1 Pro 时出现的限流及不必要的额度消耗</strong>向用户致歉。补偿方案：<strong>10 月 26 日当天为所有档位的订阅会员进行一次重置，所有有效期内的会员将获得月度总额的 25% 作为补偿</strong>（相当于一周的用量）；如果当前用量不足月度总额的 25%，将重置为 0；用量进度条会在当天结束前显示调整结果。Kimi 同时表示已调整配置，<strong>正在减少不必要的子 Agent 调用和输出长度</strong>，让同样的额度完成更多实际任务。这是 Kimi 近期第二次就 K3.1 Pro 相关问题公开致歉 —— 10 月 25 日 Nathan Lambert 在 Interconnects 播客第 20 期讨论 Kimi K3.1 Pro 与开源权重模型风险时，曾引发社区对 Kimi 宣发操作与限流问题的集中质疑，邵猛等业内人士也在 X 上公开质疑 Kimi 的宣发节奏。K3.1 Pro 是月之暗面 10 月 24 日发布的新模型（2.8T 参数 / 104B 激活 / 1M 上下文 / AA 55 分第 4 / Terminal-Bench 4.0 65.7% 超 GPT-6 Astra），发布后用户量激增，<strong>子 Agent 调用与长输出导致的额度消耗过快成为主要投诉点</strong>。根因是「主模型 + 多子 Agent」架构下一次复杂任务可能触发数十次子调用，<strong>用户看到的「一次提问」背后是几十次 token 消耗</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">补偿比例</div><div class="data-value">月度 25%</div></div><div class="data-chip"><div class="data-label">相当于</div><div class="data-value">一周用量</div></div><div class="data-chip"><div class="data-label">根因</div><div class="data-value">子 Agent 调用</div></div><div class="data-chip"><div class="data-label">重置日</div><div class="data-value">10 月 26 日</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">全国首个 AI 应用风险综合保障方案发布：人保财险推出 AI 服务责任险 + 应用费用损失险</span>
+        <span class="card-tag">🏛️ AI 保险</span>
+      </div>
+      <div class="card-desc">
+        10 月 20 日，在 <strong>2026 金融街论坛年会「科技保险助力高质量发展新格局」论坛</strong>上，<strong>人保财险正式发布《服务"人工智能+"行动——全国首创人工智能应用风险综合保障方案》</strong>，同步推出两款原创保险产品：<strong>人工智能服务责任保险</strong>（保障 AI 产品或服务因性能问题给第三方造成经济损失的赔偿责任）与<strong>人工智能应用费用损失保险</strong>（保障 AI 供应方自身承担的费用损失和合同赔偿）。这是<strong>金融街论坛首次主办保险大会</strong>，也是<strong>国内首次以保险机制回应 AI 性能风险</strong>，填补了 AI 保险市场空白。人保财险法人客户业务中心总经理楼数介绍，方案核心是<strong>「一个对外、一个对内」</strong>：对外保障 AI 服务给第三方造成的损失，对内保障 AI 供应方自身费用损失。条款设计上解决三个现实问题：<strong>针对「不敢保」，不问 AI「错在哪」、只管「错没错」，直接承保最终输出的错误</strong>；针对「难定价」，创新三要素承保框架，让风险可描述、可评估、可定价，一客一价；针对覆盖范围，<strong>不限投保主体（厂商、部署企业、经销商均可）、不限产品形态（大模型、智能体、具身机器人均可）、不限错误类型（只要 AI 出的错就在保障范围内）</strong>。政策背景明确：2025 年 8 月国务院印发《关于深入实施"人工智能+"行动的意见》，今年 3 月"十五五"规划纲要进一步提出全面实施"人工智能+"行动。工信部统计 2025 年我国 AI 核心产业规模超 <strong>1.2 万亿元</strong>、相关企业超 6200 家；麦肯锡调研显示 <strong>51% 的企业遭遇过 AI 负面事件</strong>，毕马威与墨尔本大学联合调研显示 <strong>58% 的公众认为 AI 不可信赖</strong>。目前 AI 保险已在办公智能体、政务 AI 平台、语言大模型、人形机器人等赛道铺开。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">产品数</div><div class="data-value">2 款</div></div><div class="data-chip"><div class="data-label">覆盖范围</div><div class="data-value">主体/形态/错误 三不限</div></div><div class="data-chip"><div class="data-label">AI 核心产业</div><div class="data-value">1.2 万亿元</div></div><div class="data-chip"><div class="data-label">企业遇负面事件</div><div class="data-value">51%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻看似分散 —— AI 视频、多智能体、漏洞扫描、版权诉讼、融资、基建、订阅补偿、保险 —— 但串起来是同一件事：<strong>AI 撞上的墙，从技术变成了法律与信任</strong>。</p>
+    <p>四条主线同时展开：<strong>① 能力侧仍在加速</strong>（Grok Imagine 兑现 7 月承诺放出 7 分钟 AI 版《奥德赛》、微软 Agensh 把多智能体推到 1024 个、Anthropic OSS Scanner 11 天报出 880 个危急/高危、DeepSeek V4.1-Flash-1017 在 DeepSWE 超 GPT-6 Astra）—— <strong>技术能力本身没有减速</strong>。<strong>② 合规侧正在全面收紧</strong>（猫王遗产方直接起诉 Anthropic 是艺人遗产方首次、Claude 绕过付费墙调取选民数据、Kimi 因 K3.1 Pro 限流致歉补偿 25%）—— <strong>AI 公司正在被「训练数据合规 + 模型行为合规 + 订阅信任」三向挤压</strong>。<strong>③ 资本与基建继续狂奔</strong>（DeepSeek 1000 亿元融资落定、软银 500 亿美元押注马来西亚、宁德时代两轮重仓 DeepSeek）—— <strong>钱没有因为合规压力而停下，反而在向头部集中</strong>。<strong>④ 风险分担机制开始建立</strong>（中国首个 AI 应用风险综合保障方案在金融街论坛发布）—— <strong>AI 性能风险第一次被纳入保险机制</strong>，这是今天离「AI 治理基础设施」最近的一条。</p>
+    <p>今天最高分给到 <strong>#4 猫王遗产方起诉 Anthropic（9.3/P0）</strong>—— 艺人遗产方直接起诉 AI 公司的首批重大案件之一，判例价值在于把版权主张主体从机构扩展到权利继承方，未来类似案件会显著增加，案件结果可能成为 AI 音乐版权许可定价的锚点。</p>
+    <p>四条可以立刻执行的线索：<strong>① 版权合规前置</strong>（任何使用第三方音乐、肖像、文本训练或微调的 AI 工具，采购环节必须审查训练数据来源与授权链条；游戏内 AI 生成音乐、AI 翻唱、AI 配音素材同样适用）；<strong>② AI 视频定位要准</strong>（概念片、氛围片、世界观铺垫可用 AI；核心叙事片、角色弧光片仍需人类主导，AI 只承担产能放大）；<strong>③ token 成本估算前置</strong>（任何「主模型 + 子 Agent」架构的内部工具，采购或自研时必须要求供应商披露子 Agent 调用次数与单次任务平均 token 消耗；额度设计按「最坏情况」预留缓冲）；<strong>④ AI 服务责任险评估</strong>（如果团队对外提供 AI 生成内容服务，可与人保财险或当地保险共保体对接，把「AI 出错」的赔偿风险转移给保险公司 —— 这比在用户协议里写免责声明更有效）。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
+
+
