@@ -1,5 +1,26 @@
 # 操作日志 | Operation Log
 
+## [2026-10-26 09:35] AIGC 日报 2026.10.26（五阶段全流程 · xiaoqi-ai-daily skill）
+
+**结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.84（9.3/9.2/9.1/9.0/8.9/8.6/8.4/8.2）
+**期号**：第 80 期
+
+- 五阶段：AI HOT 1 页 100 条（hasNext=false，覆盖 2026-10-25T01:37 至 2026-10-26T01:03 完整 24h）→ 8 条选题 → MD（raw/daily-reports/AIGC_Daily_Report_20261026.md）→ TOC H5（docs/ai-daily/ai-daily-card-20261026-toc.html，31151 chars / 41757B / 8 卡，11 项校验全过）→ URL 200（sleep 30s 后 curl 首轮即过，线上 41757B）→ 一条龙海报 + 推送（PNG 641.8KB / 1440×1920，Pages 第 4 次检测 200）
+- 阶段 4 关卡：curl 首轮 HTTP 200，41757B；WebFetch 二次确认 title 2026.10.26 / 第 80 期 / 8 卡 / lead / 编辑点评 / 返回归档全在
+- Commits：060cb66（MD/H5/归档，rebase 后）、a27a943（海报），均 push 成功，远端 sha 比对一致
+- 主线：AI 撞上的墙从技术变成法律与信任 —— 猫王遗产方 Authentic Brands 起诉 Anthropic（274 首代表曲目、索赔 4110 万美元、每首 15 万美元顶格，艺人遗产方直接起诉 AI 公司的首批重大案件之一，9.3/P0，最高分）+ Grok Imagine AI 版《奥德赛》首集 7 分钟（马斯克兑现 7 月承诺，TechCrunch 批缺乏艺术性，9.2/P0）+ 微软开源 Agensh（无中心编排的 1024 智能体协作框架，Pandoc 通过率 33.89% 到 55.06%，五任务相对提升 49%，9.1/P0）+ Anthropic OSS Scanner 11 天 77 危急 + 803 高危（Claude Mythos 直出报告无人审即发维护者，88% 达 CVD 门槛，curl 8.23.0 已据此修复 CVE-2026-92392，9.0/P0）+ DeepSeek 二轮融资约 1000 亿元（腾讯宁德领投、投前估值 5000 亿、年化营收破 10 亿美元，8.9/P0）+ 软银孙正义 500 亿美元投马来西亚 AI 与数据中心（砂拉越 + 古晋 + 马来半岛，东南亚单一 AI 基建投资历史最高规模，8.6/P0）+ Kimi 就 K3.1 Pro 限流致歉（所有订阅会员重置并补偿 25% 月度额度，根因是主模型 + 多子 Agent 架构，8.4/P0）+ 全国首个 AI 应用风险综合保障方案（人保财险推出 AI 服务责任险 + 应用费用损失险，金融街论坛首设保险大会，8.2/P1）
+
+### 坑位新增（2026-10-26）
+
+- **本地与远端分叉时 rebase 拉取（新，重要）**：本次 push 被拒（non-fast-forward），原因是昨天日报跑完后远端已有 5 个新 commit（memory/log/poster/fix/主 commit）但本地 HEAD 未同步。**处理：git stash push -u → git pull --rebase → git stash drop**。rebase 自动跳过本地已应用的 cherry-picks（12 个 warning skipped），最终本地 HEAD 060cb66 与远端一致。**以后遇到 non-fast-forward 一律 rebase，不用 merge**
+- **脚本内部 gh 不在 PATH（新）**：一条龙脚本 publish-ai-daily-poster.js 内部调用 GH_TOKEN=$(gh auth token) 时，gh 不在 Git Bash 默认 PATH。**应对：手动 git push 后再用 --skip-git 补跑推群**。本次海报 commit a27a943 手动 push 成功，再跑 publish-ai-daily-poster.js --date 20261026 --skip-git 一条龙完成 Pages 等待 + 推群
+- **周一 AI HOT 仅 1 页 100 条 hasNext=false（新）**：本次 since=2026-10-25T01:30:00Z 取 100 条即 hasNext=false，覆盖完整 24h（2026-10-25T01:37 至 2026-10-26T01:03）。**继续印证「页数按 hasNext 判断，不按星期套用」**——上周日 10-25 是 3 页 300 条，本周一 10-26 仅 1 页 100 条
+- **H5 脚本化拼装一次成型**：head 用 findIndex 定位 </head>（141 行）+ title replace 前后比对防御 + nav/main/edit-note 全量生成 + tail 用 indexOf 定位 back-to-top（359 行）；11 项校验一次全过
+- **归档插入 112 → 113**，正则置顶 + eval 校验，top3 日期正确
+- **log.md 顶部即昨日日报条目**（anchor ## [2026-10-25 09:58]），用纯字符串 anchor 插在其上
+- **海报 PNG 641.8KB / 1440×1920 正常**；评分回填 6 个（hero #1=9.3 + list #4-#8=9.2/9.1/9.0/8.9/8.6），secondary #2/#3 不显示评分是模板固有设计
+
+---
 ## [2026-10-25 09:58] AIGC 日报 2026.10.25（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.75（9.3/9.1/8.9/9.0/8.7/8.5/8.3/8.2）
@@ -2963,4 +2984,13 @@
 - 边界处理：按红线明说「今天没强连接」，不凑数，浮现连接节留空并说明三层回退
 - 核心发现：10 月竞品日报已攒 9 条视觉趋势方法论，全部未提升进 wiki（wiki 13 篇 pattern 全停在 5 月）；10/23 日报断更，恰是 1022 期自己标注的 CODM 双活动执行日
 - 统计：193 篇，pattern 6.7% / idea 2.6% / question 0 / number 0，79.8% 无 capture_type
+- 未推送企微；未回填 used_by
+
+## [2026-10-26 09:00] inward-brief | 浮现 3 强连接（⭐⭐⭐）+ 2 弱连接（⭐⭐）+ 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-10-26.md
+- 扫描：NEW=31 篇（全部 wiki，raw/work + raw/learn 为 0）/ OLD=0 篇（10/18~10/19 窗口空）
+- chief_freshness：148 天（🚨 超 30 天硬拒绝线，连续第 5 天加警告后继续生成）
+- 边界处理：OLD 窗口空 → 改用 NEW 窗口内部跨主题碰撞 + CHIEF §5 active questions 作老锚，口径已在 brief 内显式声明
+- 核心发现：①昨日 31 篇是**元数据批量改写**（补 capture_type 26+5 / 链接规范化 / 追加「引用此页的日报」反向索引 26 页），**新增内容 0 篇**；②close-the-loop 半自动之问被部分回答——关系层可自动、语义层不可；③引用计数是关键词命中（codm-asset-pipeline 46 篇为反例），不能直接当 contribution_count；④链接规范化后路径语义丢失，Clipper/articles 排除红线只剩 capture_type 能守；⑤log.md 缺 10/23、10/25 两天 inward-brief 留痕
+- 统计：194 篇，pattern 20 (10.3%) / idea 7 (3.6%) / question 0 / number 0 / article 37 (19.1%) / 无标注 130 (67.0%)
 - 未推送企微；未回填 used_by
