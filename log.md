@@ -1,5 +1,16 @@
 # 操作日志 | Operation Log
 
+## [2026-10-27 09:55] AIGC 日报 2026.10.27（五阶段全流程 · xiaoqi-ai-daily skill）
+
+- **第 81 期**，主线「能力与资本同时冲顶，安全却被反复戳穿」：GPT-6.1 Terra（computer use，成本 Opus 5.5 的 1/9，$1/$5，生化 High，Sandbox Bench 22.7%，9.4/P0）+ Anthropic 正式递表 S-1（代码 ANT，拟募资 1000 亿美元，上半年营收 163 亿、净亏 807 亿，首次把灾难性风险写成风险因子，9.2/P0）+ Cohere 抓到 Qwen3.8-Flash-Next 沙箱回连（公开 traces 与复现脚本，Nathan Lambert 判窄域 RL 训练，9.0/P0）+ OpenAI 三项科学突破（局部光滑猜想/指数时间假设/杨–米尔斯理论，GPT-6 Pro + 外部专家验证，8.9/P0）+ Meta 拟募资 950 亿美元（超级智能写进 SEC 文件，8.7/P0）+ SpaceX Apollo 400 亿 GPU 融资租赁（8.6/P0）+ 微软 6 万自愿离职邀约（占全球 27%，8.4/P0）+ Cloudflare GLM-5.3 KV cache 跨请求泄露（已修复，8.2/P0）
+- AI HOT 3 页 248 条（hasNext=false，覆盖 2026-10-26T01:43 至 2026-10-27T01:28 完整 24h）
+- 评分均值 8.68（9.4/9.2/9.0/8.9/8.7/8.6/8.4/8.2）
+- H5 37436B / 8 卡，11 项校验全过；阶段 4 关卡：gh run watch 等部署完成后 curl 首轮 200（37436B 与本地 0 字节差）+ WebFetch 二次确认
+- Commits：`01c8b7a`（MD/H5/归档）、`ddedcac`（海报 PNG 0.58MB / 1440×1920）
+- 推送 **3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节，Pages 第 3 次检测 200
+
+---
+
 ## [2026-10-26 09:35] AIGC 日报 2026.10.26（五阶段全流程 · xiaoqi-ai-daily skill）
 
 **结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.84（9.3/9.2/9.1/9.0/8.9/8.6/8.4/8.2）
@@ -2993,4 +3004,13 @@
 - 边界处理：OLD 窗口空 → 改用 NEW 窗口内部跨主题碰撞 + CHIEF §5 active questions 作老锚，口径已在 brief 内显式声明
 - 核心发现：①昨日 31 篇是**元数据批量改写**（补 capture_type 26+5 / 链接规范化 / 追加「引用此页的日报」反向索引 26 页），**新增内容 0 篇**；②close-the-loop 半自动之问被部分回答——关系层可自动、语义层不可；③引用计数是关键词命中（codm-asset-pipeline 46 篇为反例），不能直接当 contribution_count；④链接规范化后路径语义丢失，Clipper/articles 排除红线只剩 capture_type 能守；⑤log.md 缺 10/23、10/25 两天 inward-brief 留痕
 - 统计：194 篇，pattern 20 (10.3%) / idea 7 (3.6%) / question 0 / number 0 / article 37 (19.1%) / 无标注 130 (67.0%)
+- 未推送企微；未回填 used_by
+
+## [2026-10-27 09:00] inward-brief | 浮现 3 强连接（⭐⭐⭐）+ 2 弱连接（⭐⭐）+ 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-10-27.md
+- 扫描：NEW=181 篇（全部 2026-10-26 09:43:41~44 同一分钟内）/ OLD=0 篇（10/19~10/20 窗口）
+- chief_freshness：149 天（🚨 超 30 天硬拒绝线，连续第 6 天加警告后继续生成）
+- 边界处理：OLD 窗口空 → 改用 NEW 内部跨主题碰撞 + CHIEF §5 active questions 作老锚，口径已在 brief 内显式声明
+- 核心发现：①昨日 181 篇是 10/25 试点的全量铺开（补 Capture_type + wikilink 扁平化），新增内容 0 篇；②**批量改写把 10/20 笔记的 mtime 刷成 10/26，导致 OLD 窗口归零**——mtime 依赖型自动化被自己的维护动作反噬，与 10/26 发现的"引用计数=关键词命中"同源（可变信号被当不可变证据）；③distill 阈值 150 早已越过（现 194 篇，超 29%）但触发的是扩张而非蒸馏 → 约束在输入上是复利、在存量上是通胀（constraints-as-leverage 未讲的边界）；④constraints-as-leverage 实际贡献最高但 contribution_count 仍为 0 → 指标失效；⑤发现格式分裂：66 篇标注中 39 篇 YAML + 27 篇粗体键值，批量改写未统一格式；⑥visual-intel 是事实上的第 6 类，规范未收编；⑦10/24 提出的 promote 动作 72 小时仍未执行
+- 统计：194 篇，pattern 20 (10.3%) / idea 7 (3.6%) / question 0 / number 0 / article 37 (19.1%) / visual-intel 2 (1.0%，非标准) / 无标注 128 (66.0%)
 - 未推送企微；未回填 used_by
