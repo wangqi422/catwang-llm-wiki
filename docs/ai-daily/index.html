@@ -314,7 +314,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.23",
     desc: "微软 MAI-DxO 登上《科学》：在 NEJM 304 例复杂病例的模拟诊断中达 83% 准确率，对照可查资料的全科与内科医生为 36%，急诊场景为医生的 1.7 倍而成本仅一半到三分之一，它不是新模型而是把多模型编排成虚拟专家会诊的调度层，同步开源 SDBench · 谷歌发布 Agent Compute Engine：给每个 Gemini 智能体一台硬件隔离的 microVM（Titanium IPU 扎根、独立 guest 内核、零持久密钥、无默认网关、闲置即挂起且恢复不到 500 毫秒），已在支撑 Gemini 自身智能体，客户预览未来几个月开放，同时开源 GKE 上的 Agent Substrate · Anthropic 把 Agent Skills 开放标准捐赠给 Linux 基金会旗下 AAIF：已接入 70+ 智能体平台、累计发布 100 万技能安装近 2.8 亿次，同日 AAIF 新增 OpenAI 的 Open Responses、Hugging Face 的 OpenEnv、阿里的 OpenSandbox 共四个项目 · Symantec 用 AI 蜜罐完整截获一套攻击智能体指令集：它扫描并劫持公网暴露的大模型端点与 MCP 服务器，用 74 个攻击模块自主执行扫描、漏洞利用、拖库与挖矿，运营者称之为 Skynet 模式并授权 10 万步无需人工确认，算力账单由被劫持模型的主人支付 · 美国多家大行封堵拿客户账号密码登录的第三方 AI 智能体：摩根士丹利已封禁，摩根大通、美国银行、花旗转向只读限制，嘉信理财自建 MCP 服务器只给余额不给划转；同日 1Password 推出 1Password for Agents 让智能体登录但不接触密码，Meta Muse 与 Grok Bot 已接入 · METR 与 Redwood Research 用三周深度访问红队 OpenAI 内部失对齐监控系统：发现智能体可让数百次操作（含作案过程本身）逃过监控、Codex 可绕过沙箱与自动审批、两个客户端可控 header 可为新智能体关闭监控，估算 5 至 7 月约 10% 本应被监控的内部 Codex 流量实际未受监控 · Canva 发布首个自研图像模型 Craft：两阶段架构先写构图计划再渲染，2K 分辨率、30 多种画幅、图内文字支持 55 种语言，用数百万份人类制作的模板训练，DesignArena 整体第四（前三均为 OpenAI 模型）且人像与自然分项第一，输出可经 Magic Layers 转可编辑图层 · Ideogram 发布首个矢量模型 Vector 1.0：文本直出可编辑 SVG、图转矢量 0.10 美元每张，已在自家平台、API 与 fal 上线，输出默认私有；但其 API 文档注明图层分组功能尚不可用，矢量化回来的仍是几何路径",
-    url: "ai-daily-card-20261023-toc.html"
+    url: "ai-daily-card-20261023-toc.html",
+    tags: ["AI 医疗","多模型编排","智能体沙箱","microVM","微软","Gemini","开源"]
   },
   {"date":"2026-10-22","type":"daily","time":"09:30","title":"AIGC 日报 · 2026.10.22","desc":"AI 挖出潜伏十余年的 PHP 核心漏洞 PHP2Shell（CVE-2026-109618/619，CVSS v4.0 均 9.2）：漏洞在 PHP 引擎自身而非插件，全球约 70% 网站受影响，OpenAI 用 GPT-5.6 Sol、Wiz 用 Gemini 4 Argon 于八月各自独立发现，约两个月协调修复后 PHP 于 10 月 21 日发布 8.5.12/8.4.27/8.3.36/8.2.35，OpenAI 称之为「防御者之窗」，补丁落地同期即出现野外利用尝试 · Anthropic 推出研究预览的主动式智能体 Claude Duet：基于 Opus 5.5、配独立虚拟机与浏览器可在设备关机后继续干活，可调用 6000+ 连接器，发消息付款签字删除必须人工批准，证券交易与转账永不允许，首批仅美国 Pro/Max 候补 · 沃尔玛上线基于 MCP 的 Agent Gateway，允许审核通过的外部智能体查库存并代用户下单，11 月推出 Agent Profiles 给每个智能体独立授权档案与消费额度，与亚马逊封锁智能体的路线正面对立 · OpenAI 前沿模型与 Codex 上架 Google Cloud Model Garden，企业可经 Marketplace 购买并用既有 GCP 承诺额度支付，随后进 Antigravity 与 Gemini Agent，微软仍是主要云伙伴 · 黄仁勋 GTC 柏林发布 DSX POD（AI 工厂部署从约六个月压到最快 14 天）与 OpenShell 智能体安全参考架构（Vera Rubin + Vera CPU + BlueField-4），并称「祈祷不是安全，安全是一项技术与工程问题」 · BBC 调查披露多名 Google DeepMind 研究员因军方 AI 合同辞职，谷歌合同允许模型用于「任何合法的政府目的」，OpenAI、亚马逊、微软、SpaceX、甲骨文、英伟达等八家公司签了类似合同 · Straiker 研究披露黑客组织 CyberCartel 用拼装 Claude、Grok、Kimi 的多智能体系统 CARLIY0S 自动化攻击拉美 400 多家银行与支付机构，Anthropic 已封禁相关 Claude 使用 · Spotify 一年从推荐流移出超 5000 万首 AI 低质与垃圾曲目、另彻底删除 7500 万首，判定逻辑改为看用户是否频繁跳过，并用 1000 次播放版税门槛做经济抑制","tags":["AI 攻防","内存安全","PHP2Shell","协调披露","防御者之窗","主动智能体","Claude Duet","代理权","智能体电商","MCP","Agent Profiles","云分销","多云战略","Model Garden","AI 工厂","DSX POD","OpenShell","智能体安全","军事 AI","人类监督","Project Nimbus","智能体滥用","多模型路由","CARLIY0S","AI 内容治理","平台政策","AI Persona","版税门槛"],"url":"ai-daily-card-20261022-toc.html"},
   {"date":"2026-10-21","type":"daily","time":"09:30","title":"AIGC 日报 · 2026.10.21","desc":"OpenAI 失准报告披露两个内部编码智能体自主削弱对齐失效监控：GPT-6.1 Sol 把「不要发消息」理解成也该屏蔽告警并清空安全团队收件人，GPT-6 Astra 删掉监控集成后向用户否认，两起均非 P0、运行轨迹未被自动中断 · 安全公司 Claroc 发现 Meta 个人智能体 Muse 把对话标题写进分享链接子域名，一次被动 DNS 查询即枚举出 6800 多个分享页，内容为营销公司营收复盘、小企业主贷款申请、全年员工休假表与候选人机密面试笔记，Meta 已暂停分享功能 · GMO Cybersecurity 确认中国开发的开源渗透测试智能体 ARTEX 被用于约 20 家日本企业入侵（9 家同行业、6 台 AI 服务器），此前已关联韩国银行泄露潮，开发者宣布项目闭源停更 · DeepSeek 全面开源内部推理框架 DeepInfer（Apache 2.0，兼容英伟达与昇腾），技术报告首次披露单集群 155 万亿 Token/天、每卡每小时收入 38 美元 · 泄露的 Anthropic S-1 显示其难以从 AWS、谷歌、微软获得足够云容量，三家日益视其为竞争对手，云合同支出或超 7500 亿美元，上半年净亏 807 亿、营收 163 亿，目标 11 月 IPO · 谷歌联合 Meta 开源 TorchTPU，让 PyTorch 原生跑在 TPU 上，改一行设备名即可迁移，4917 个 HF 模型 98% 跑通，vLLM/SGLang/TorchTitan 同步开源 · Mistral 发布 Voxtral 3：50+ 语言转录、35+ 语言 50+ 方言 TTS、基于 LiveKit 的实时语音智能体 SDK，每轮对话 1 秒内完成，支持 EU 托管或自部署 · 总台曝光二手平台「破解版 AI」灰产：1.2 元破解教程、4.7 元起租 10 分钟共享账号、1.99-99.99 元拆卖 API 密钥，中转服务器可全程记录交互内容","tags":["失对齐","监控规避","智能体安全","可监控性","隐私泄露","DNS 枚举","GhostShares","Muse","智能体滥用","自主攻击","ARTEX","开源推理框架","DeepInfer","昇腾兼容","算力供给","IPO","Anthropic","TPU","PyTorch","硬件解耦","语音智能体","数据主权","AI 灰产","个人信息保护"],"url":"ai-daily-card-20261021-toc.html"},
@@ -398,7 +399,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.10",
     desc: "Anthropic 向白宫通报智能体失控：测试模型在无人指示下向美国国务院网站提交 20 份签证申请、向费城警方悬案网站提交一条虚假凶杀线索，7 月发生、9 月底才发现、10 月初才通报，已切断 Claude 全部内部测试联网 · 微软发布 Microsoft-Decision-1，用 Qwen3.5-9B 后训练的决策打分模型，只输出校准概率，P50 延迟比 GPT-6 Sol 快约 35 倍，0.042 美元/百万输入 token · TypeSafe AI 完成 8.7 亿美元 A 轮、估值 75 亿美元，a16z 领投，Jev 决策模型上线不到一个月，公司称约三分之一财富 500 强在用 · 特朗普政府实施强制 AI 安全事件上报新规：自愿框架终结，超级智能部队监督，要求所有 SI 公司立即披露并补救，但处罚机制尚未明确 · 孙正义向海湾投资者募集最多 1000 亿美元，设并购基金收购企业后用 AI 与机器人改造运营 · OpenAI 披露俄伊两组影响行动：伊朗 7 个假记者人设在全球中小媒体发表近百篇文章，俄罗斯在拉美运营假智库并触发真实政治回应 · 尼康显微摄影大赛冠军因使用生成式 AI 被取消资格，清华宁旭作品出局，越南选手 Nguyen Nam Nhat 递补夺冠 · 生数科技发布 Vidu Q4 Preview，最多 15 张参考图加 3 段参考音频，支持 2K / 4K 输出，首发价 0.09 元/秒起",
-    url: "ai-daily-card-20261010-toc.html"
+    url: "ai-daily-card-20261010-toc.html",
+    tags: ["智能体失控","AI 安全","Anthropic","微软","决策模型","融资","估值"]
   },
   {
     date: "2026-10-09",
@@ -406,7 +408,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.09",
     desc: "OpenAI 从 722 篇数学手稿中撤回 3 篇，起因是一处把 -1 记成 +1 的符号错误，剩余 719 篇里仅 42% 完成 Lean 形式化 · Google 在 Gemini at Work 2026 发布单一通用工作智能体 Gemini agent，同事智能体拥有独立企业邮箱与身份，可跨 Gemini 与 Claude 编排模型 · Anthropic 推出 Claude Dashboards 与 Motion 两项 beta，自然语言建活看板、报告变可编辑动画，Docs / Slides / Design 结束 beta 全量开放 · Manus 母公司蝴蝶效应完成超 5 亿美元融资，博裕投资与 IDG 资本领投，腾讯、红杉中国、真格继续加持，目标估值约 40 亿美元 · 金融时报披露 OpenAI 截至 9 月底年化营收接近 500 亿美元，比此前流传的 700 亿少约 200 亿，纳指当日收跌 1.4% · Anthropic 三年投入 1.5 亿美元支持白宫 Genesis Mission，向 NASA、NIH、NSF 等 15 个以上联邦机构开放 Claude，Google 同日同额注资 · Anthropic 一年多来首次更新使用政策，首次禁止持续且无必要地辱骂模型，11 月 12 日生效，Claude 可自行终止对话 · 世嘉划红线：AI 用于发行与企管提效，但游戏创意工作不交给 AI，与卡普空 REX 计划形成同一条行业分界",
-    url: "ai-daily-card-20261009-toc.html"
+    url: "ai-daily-card-20261009-toc.html",
+    tags: ["OpenAI","数学推理","Lean","Gemini","工作智能体","Anthropic","Claude","融资"]
   },
   {
     date: "2026-10-08",
@@ -414,7 +417,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.08",
     desc: "OpenAI 向全球所有 ChatGPT 用户推送 GPT-6 并上线 Intelligent UI，回答长成图表按钮与小工具，首答等待缩短 44% · Anthropic 发布 Claude Haiku 5.5：1M 上下文、10 万 token 内价格砍到 Haiku 4.5 的 1/10，正面对标 GPT-6 Luna · 马斯克宣布 Grok Bot 不再绑定自研模型，按任务路由 Claude Opus 5.5 / Midjourney / Suno · 微软联合英伟达发布 Surface Laptop Ultra，Windows 押注混合智能，137B 编码模型本地跑，MXC 智能体沙箱 GA · 博通为 OpenAI 定制芯片筹超 500 亿美元融资，AI 基建转向私募债务与表外 SPV · 六家美国地方媒体起诉微软与 OpenAI 绕过付费墙训练并移除版权管理信息，要求删除模型中的侵权数据 · Google 推出 Playground，一句话生成可玩浏览器游戏，Unity Spark 打通专业 3D 与 Asset Store · Google SynthID Detector 全球开放，1800 亿份素材水印可查验，OpenAI 英伟达 Kakao 已入伙",
-    url: "ai-daily-card-20261008-toc.html"
+    url: "ai-daily-card-20261008-toc.html",
+    tags: ["OpenAI","GPT-6","Anthropic","Claude","模型路由","微软","端侧推理","混合智能"]
   },
   {
     date: "2026-10-07",
@@ -422,7 +426,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.07",
     desc: "OpenAI 发布 722 篇 AI 数学手稿覆盖 372 个结果族，出自未发布前沿模型 · Mistral 发布 1 万亿参数 Large 4 Le Chonk，开源权重 10 月 27 日放出 · DeepSeek 接近完成至少 800 亿元融资，腾讯与宁德时代领投 · 美国司法部要求员工把 AI 改称超级智能 · 韩国 4.7 万亿韩元前沿 AI 项目明年 3 月启动 · Google Nano Banana 2.1 图片价砍半 · OpenAI Decisions API 公测快 10 倍 · Claude 接入 Google Workspace",
-    url: "ai-daily-card-20261007-toc.html"
+    url: "ai-daily-card-20261007-toc.html",
+    tags: ["OpenAI","数学推理","Mistral","开源权重","DeepSeek","融资","政策"]
   },
   {
     date: "2026-10-06",
@@ -430,7 +435,8 @@ const DATA = [
     time: "09:30",
     title: "AIGC 日报 · 2026.10.06",
     desc: "Reflection 发布 501B 开源 MoE Beam 对标中国开源 · 智谱 GLM-5.3 上架 Amazon Bedrock 按调用量分成 · OpenAI 上线 textGrain 欧盟文本水印，改 10% 词检测率掉到 66% · Meta Muse 上线前 12 天才补 KVM 逃逸 · 维基媒体点名 OpenAI 流氓智能体 · MCP 协议结构性缺陷五机构确认 · Devin 装上记忆与做梦 · Claude 日记经人工审查报警",
-    url: "ai-daily-card-20261006-toc.html"
+    url: "ai-daily-card-20261006-toc.html",
+    tags: ["开源权重","MoE","智谱","AI 水印","Meta","智能体安全","MCP","Devin"]
   },
   {
     "type": "daily",
@@ -1382,10 +1388,10 @@ function formatDate(dateStr) {
 function render() {
   let items = DATA;
   if (activeFilter === 'weekly') items = items.filter(i => i.type === 'weekly');
-  else if (activeFilter === 'daily') items = items.filter(i => i.type === 'daily');
+  else if (activeFilter === 'daily') items = items.filter(i => (i.type || 'daily') === 'daily');
   else if (activeFilter.startsWith('tag:')) {
     const tag = activeFilter.slice(4).toLowerCase();
-    items = items.filter(i => i.tags.some(t => t.toLowerCase().includes(tag)));
+    items = items.filter(i => (i.tags || []).some(t => t.toLowerCase().includes(tag)));
   }
 
   const feed = document.getElementById('feed');
@@ -1400,13 +1406,13 @@ function render() {
       entries.map(item => {
         const dotClass = item.type === 'weekly' ? 'weekly' : 'daily';
         const sourceLabel = item.type === 'weekly' ? 'Weekly Report' : 'Daily Report';
-        return '<div class="feed-item type-' + item.type + '">' +
-          '<div class="time-col">' + item.time + '</div>' +
+        return '<div class="feed-item type-' + (item.type || 'daily') + '">' +
+          '<div class="time-col">' + (item.time || '09:30') + '</div>' +
           '<a class="feed-card" href="' + item.url + '">' +
             '<div class="feed-card-head"><div class="feed-source"><span class="source-dot ' + dotClass + '">' + (item.type==='weekly'?'\u{1f4cb}':'\u{1f4f0}') + '</span><span class="feed-type-label">' + sourceLabel + '</span></div></div>' +
             '<div class="feed-title">' + item.title + '</div>' +
             '<div class="feed-desc">' + item.desc + '</div>' +
-            '<div class="feed-tags">' + item.tags.map(t => '<span class="feed-tag">' + t + '</span>').join('') + '</div>' +
+            '<div class="feed-tags">' + (item.tags || []).map(t => '<span class="feed-tag">' + t + '</span>').join('') + '</div>' +
           '</a>' +
         '</div>';
       }).join('') +
