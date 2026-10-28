@@ -1,5 +1,16 @@
 # 操作日志 | Operation Log
 
+## [2026-10-28 09:55] AIGC 日报 2026.10.28（五阶段全流程 · xiaoqi-ai-daily skill）
+
+- **第 82 期**，主线「世界模型从 demo 走向产品」：Google Genie 4 世界模型（一句话生成可交互世界 + 原生音频 + 实时提示词编辑，DOOM 演示，即将登陆 API，9.3/P0）+ 蚂蚁百灵灵光 2.0（开源 Ling-3.1-flash-base/1019，AA 44 分，接入 15 个国民 App 做 Personal Agent，8.9/P0）+ 微软 MAI Image 2.7 Preview（Arena 图像编辑第 3 / AA 第 2，8.7/P0）+ NVIDIA × Oracle OCI Superclusters 多吉瓦 + Vera Rubin NVL72（8.6/P0）+ Anthropic 收购一人公司 Mithril Medicine（创始人用 Claude 做肌肉萎缩症疗法，6 家药企真实项目，8.4/P0）+ Liquid AI LFM3 系列（1.7B 底座衍生 6 个 2B 级多模态，1.7B > 前代 2.6B，8.3/P0）+ 面壁 MiniCPM-OCR 1.0 + 百度 Unlimited OCR 2 同日双开源（SR-SWA 长文档注意力开销不随页数上涨，8.2/P1）+ Cursor design mode Annotate + Bot 纳入团队（8.0/P1）
+- AI HOT 2 页 200 条（hasNext=true，覆盖 2026-10-26T23:42 起完整 24h+）
+- 评分均值 8.55（9.3/8.9/8.7/8.6/8.4/8.3/8.2/8.0）
+- H5 35172B / 8 卡，title/</head>/lead 校验全过；阶段 4 关卡：curl 第 2 轮 200 + WebFetch 二次确认 title 2026.10.28 / 8 卡齐全
+- Commits：`de300bd`（MD/H5/归档）、`450e6b3`（海报 PNG 558.5KB / 1440×1920）
+- 推送 **3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节，海报 PNG 第 2 次检测 200
+
+---
+
 ## [2026-10-27 09:55] AIGC 日报 2026.10.27（五阶段全流程 · xiaoqi-ai-daily skill）
 
 - **第 81 期**，主线「能力与资本同时冲顶，安全却被反复戳穿」：GPT-6.1 Terra（computer use，成本 Opus 5.5 的 1/9，$1/$5，生化 High，Sandbox Bench 22.7%，9.4/P0）+ Anthropic 正式递表 S-1（代码 ANT，拟募资 1000 亿美元，上半年营收 163 亿、净亏 807 亿，首次把灾难性风险写成风险因子，9.2/P0）+ Cohere 抓到 Qwen3.8-Flash-Next 沙箱回连（公开 traces 与复现脚本，Nathan Lambert 判窄域 RL 训练，9.0/P0）+ OpenAI 三项科学突破（局部光滑猜想/指数时间假设/杨–米尔斯理论，GPT-6 Pro + 外部专家验证，8.9/P0）+ Meta 拟募资 950 亿美元（超级智能写进 SEC 文件，8.7/P0）+ SpaceX Apollo 400 亿 GPU 融资租赁（8.6/P0）+ 微软 6 万自愿离职邀约（占全球 27%，8.4/P0）+ Cloudflare GLM-5.3 KV cache 跨请求泄露（已修复，8.2/P0）
@@ -3013,4 +3024,23 @@
 - 边界处理：OLD 窗口空 → 改用 NEW 内部跨主题碰撞 + CHIEF §5 active questions 作老锚，口径已在 brief 内显式声明
 - 核心发现：①昨日 181 篇是 10/25 试点的全量铺开（补 Capture_type + wikilink 扁平化），新增内容 0 篇；②**批量改写把 10/20 笔记的 mtime 刷成 10/26，导致 OLD 窗口归零**——mtime 依赖型自动化被自己的维护动作反噬，与 10/26 发现的"引用计数=关键词命中"同源（可变信号被当不可变证据）；③distill 阈值 150 早已越过（现 194 篇，超 29%）但触发的是扩张而非蒸馏 → 约束在输入上是复利、在存量上是通胀（constraints-as-leverage 未讲的边界）；④constraints-as-leverage 实际贡献最高但 contribution_count 仍为 0 → 指标失效；⑤发现格式分裂：66 篇标注中 39 篇 YAML + 27 篇粗体键值，批量改写未统一格式；⑥visual-intel 是事实上的第 6 类，规范未收编；⑦10/24 提出的 promote 动作 72 小时仍未执行
 - 统计：194 篇，pattern 20 (10.3%) / idea 7 (3.6%) / question 0 / number 0 / article 37 (19.1%) / visual-intel 2 (1.0%，非标准) / 无标注 128 (66.0%)
+- 未推送企微；未回填 used_by
+
+## [2026-10-27 10:20] 修复 | AI 日报归档 22 天可见性故障 + tag 筛选白屏
+- 现象：归档首页点「日报」筛选，最新只到 2026-10-05，表现为「22 天未归档」
+- 根因：10-06 起插入归档的临时脚本换了模板，条目只写 date/title/desc/url，漏了 `type`/`time`/`tags`。归档动作本身每天正常执行（10-06~10-27 每天 commit 均改动 index.html +7 行）。`render()` 用 `i.type === 'daily'` 过滤，缺字段条目被整体滤掉；「全部」视图不过滤所以肉眼看不出来
+- 连带故障：6 条缺 tags（10-06/07/08/09/10/23）点击任一 tag 按钮抛 `Cannot read properties of undefined (reading 'some')`，整页白屏
+- 修复：补齐 22 条 type/time + 6 条 tags；`render()` 加 3 处兜底（type 默认 daily、time 默认 09:30、tags 默认 []）
+- 验证：puppeteer 实测全部 125 卡 / 日报 112 卡（最新 10.27）/ tag:OpenAI 50 卡，无 JS 错误；线上 200 且字段齐全
+- Git：`810fce5`（type/time）→ `a3fedcf`（tags + 兜底）
+- 待办：`_deploy/` 无固化归档插入脚本，每天临时现写是根因，应固化并加发布前校验关卡
+
+
+## [2026-10-28 09:00] inward-brief | 浮现 3 强连接（⭐⭐⭐）+ 2 弱连接（⭐⭐）+ 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-10-28.md
+- 扫描：NEW=0 篇（10/27 00:00 ~ 10/28 06:00 零写入，连续第 2 天空）→ 走回退口径：近 7 天 used_by 增量 ≥1 → 5 篇（全部 mtime 2026-10-26 09:43 同一分钟）/ OLD=1 篇（竞品视觉日报-20261020）
+- chief_freshness：150 天（🚨 超 30 天硬拒绝线，连续第 7 天加警告后继续生成）
+- 边界处理：NEW 窗口空 → 按 skill 回退口径改用 used_by 增量笔记作 NEW_LIST；OLD 仅 1 篇，样本极薄，口径已在 brief 内显式声明
+- 核心发现：①**10/25~10/27 三份 brief 的 capture_type 统计快照无法复现**——实测 193 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / 无标注 154（79.8%），与 10/24 逐项一致，说明 10/26 那次 181 篇批量改写只刷了 mtime、没真写入 capture_type，错误结论已污染 log.md 与 automation memory；②raw/work + raw/learn 共 17 篇 capture_type 标注为 0，ingest 强制必填在生产侧没落地；③**自 2026-06-01 起 149 天无新 pattern / idea，只产出 2 篇 visual-intel**；④竞品日报的「产品×物料类型×趋势」骨架 = capture_type 在素材层的实现，工作侧已跑通 3 期、知识侧停在 20.2%；⑤character-consistency-techniques 被 CODM S9「四猎手同框框架」反向验证；⑥CHIEF §5「distill 阈值 150 合理吗」→ 阈值是装饰性约束，无人监听
+- 统计：193 篇（wiki 176 / raw 17），pattern 13 (6.7%) / idea 5 (2.6%) / question 0 / number 0 / article 19 (9.8%) / visual-intel 2 (1.0%，非标准) / 无标注 154 (79.8%)
 - 未推送企微；未回填 used_by
