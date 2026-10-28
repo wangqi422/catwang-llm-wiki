@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.28 &middot; 星期三 &middot; 第 82 期 &middot; 8 条速报</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">i. 🧠 模型 &amp; Agent</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Genie 4 世界模型</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>蚂蚁灵光 2.0</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>微软 MAI Image 2.7</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">ii. 🏭 行业 &amp; 基础设施</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🏭 行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>NVIDIA×Oracle 多吉瓦</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Anthropic 收购 Mithril</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Liquid LFM3 系列</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">iii. 📈 趋势 &amp; 工具</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📈 趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>OCR 同日双开源</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Cursor Annotate + Bot</a>
+  </div>
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.28 &middot; Wed &middot; Issue 82</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>世界模型从 demo 走向产品</strong>。Google DeepMind 发布 <strong>Genie 4</strong>，一句话生成可交互虚拟世界并同步原生音频，支持实时提示词编辑，皮查伊称其为「迄今最逼真、最具互动性」的世界模型，Ethan Mollick 现场用它跑了 DOOM 演示，Logan Kilpatrick 预告即将登陆 API &middot; 国产侧两条线并行：<strong>蚂蚁百灵</strong>发布灵光 2.0 并开源 <strong>Ling-3.1-flash-base</strong> 与 <strong>Ling-3.1-flash-1019</strong>（评测提升至 44 分），卡兹克实测灵光 2.0 接入 15 个国民级 App 打造个人 Personal Agent；<strong>面壁智能</strong>开源 <strong>MiniCPM-OCR 1.0</strong>，<strong>百度</strong>开源 <strong>Unlimited OCR 2</strong>（SR-SWA 让超长文档解析注意力开销不随页数上涨），OCR 赛道同日双开源 &middot; 微软 <strong>MAI Image 2.7 Preview</strong> 图像编辑模型登上 Arena 第 3 和 Artificial Analysis 第 2，Mustafa Suleyman 宣布 MAI-Image 升至全球图像编辑模型第二 &middot; 算力侧 <strong>NVIDIA 与 Oracle</strong> 将 OCI Superclusters 扩展至多吉瓦规模并上线 <strong>Vera Rubin NVL72</strong> &middot; Anthropic 收购一人公司 <strong>Mithril Medicine</strong>，创始人用 Claude 推进肌肉萎缩症疗法 &middot; Liquid AI 发布 <strong>LFM3 系列</strong>：一个 1.7B 底座衍生六个 2B 级多模态开源权重模型 &middot; Cursor 推出 <strong>design mode Annotate</strong> 标注功能并开始将 Bot 纳入团队</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.28 &middot; 第 82 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">今天能力侧三条都在「从 demo 到产品」—— Genie 4 从论文走向 API、蚂蚁从模型走向国民 App、微软从跟随者爬到榜眼</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Google DeepMind 发布 Genie 4 世界模型：一句话生成可交互虚拟世界并同步原生音频</span>
+        <span class="card-tag">🌍 世界模型</span>
+      </div>
+      <div class="card-desc">
+        Google DeepMind 发布交互式世界模型 <strong>Genie 4</strong> 研究预览版，支持<strong>一句话生成可交互虚拟世界</strong>并<strong>同步原生音频</strong>，用户可实时操控环境并即时编辑提示词。CEO Sundar Pichai 称其为「迄今最逼真、最具互动性」的世界模型；Demis Hassabis 亲自转发。Ethan Mollick 现场用它跑了 <strong>DOOM 演示</strong>，实时生成游戏环境体验流畅。Logan Kilpatrick 预告 <strong>Genie 4 即将登陆 API</strong>。The Verge 报道称可生成「更长更真实的交互体验」，Ars Technica 评价「人物更真实、物理模拟更精确」。<strong>「原生音频 + 实时编辑」是 Genie 4 相比前代最大的跃迁</strong>：Genie 3 只能生成无声世界，Genie 4 把音频当作世界模型的一等公民——脚步声、环境音、物体碰撞全部同步生成，意味着世界模型第一次逼近「完整感官体验」而非「可视化沙盒」。<strong>实时提示词编辑打破「生成即固定」</strong>：用户可以在体验过程中即时修改描述（如「把白天改成夜晚」「加一场雨」），世界实时响应，这把世界模型从「生成一段视频」变成了「持续运行的可编程环境」。<strong>即将登陆 API 是最关键的信号</strong>：Genie 3 发布时无 API 计划，Genie 4 明确预告 API，意味着开发者很快就能把「一句话生成可交互世界」嵌入自己的产品。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型</div><div class="data-value">Genie 4</div></div><div class="data-chip"><div class="data-label">核心能力</div><div class="data-value">实时交互+原生音频</div></div><div class="data-chip"><div class="data-label">演示</div><div class="data-value">DOOM 实时运行</div></div><div class="data-chip"><div class="data-label">API</div><div class="data-value">即将开放</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">蚂蚁百灵发布灵光 2.0 并开源 Ling-3.1-flash-base 与 Ling-3.1-flash-1019</span>
+        <span class="card-tag">🇨🇳 国产模型</span>
+      </div>
+      <div class="card-desc">
+        蚂蚁百灵发布<strong>灵光 2.0</strong>，同步开源 <strong>Ling-3.1-flash-base</strong> 与 <strong>Ling-3.1-flash-1019</strong> 两个模型权重。Artificial Analysis 评测显示 <strong>Ling 3.1 Flash 1019 提升至 44 分</strong>。卡兹克实测灵光 2.0 <strong>接入 15 个国民级 App</strong>（米家、钉钉、支付宝等）打造个人 Personal Agent，展示「国产 personal agent 整合米家钉钉支付宝等应用」的实际体验。<strong>「开源权重 + Personal Agent 产品」双线并行是蚂蚁的差异化打法</strong>：大多数国产厂商要么只开源模型（DeepSeek 路线）要么只做产品（豆包路线），蚂蚁同时推进——开源建生态、产品做体验，两条腿走路。<strong>接入 15 个国民级 App 是灵光 2.0 最有传播力的点</strong>：不是「能调 API」而是「已经接好了你每天在用的 App」，从模型能力到用户可感知的价值之间，蚂蚁把最后一公里走通了。<strong>Personal Agent 赛道正在升温</strong>：本周 Sentient OS（YC F26）发布端侧 AI 读取个人数据生成 markdown，加上灵光 2.0 接入国民 App，「个人智能体管你数字生活」从概念变成产品。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">产品</div><div class="data-value">灵光 2.0</div></div><div class="data-chip"><div class="data-label">开源模型</div><div class="data-value">Ling-3.1-flash × 2</div></div><div class="data-chip"><div class="data-label">AA 评测</div><div class="data-value">44 分</div></div><div class="data-chip"><div class="data-label">接入 App</div><div class="data-value">15 个国民级</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">微软发布 MAI Image 2.7 Preview：图像编辑登 Arena 第 3、Artificial Analysis 第 2</span>
+        <span class="card-tag">🎨 图像编辑</span>
+      </div>
+      <div class="card-desc">
+        微软 AI 发布 <strong>MAI Image 2.7 Preview</strong> 图像编辑模型，登上 <strong>Arena 图像编辑榜第 3</strong> 和 <strong>Artificial Analysis AA-Image-Editing v2.1 第 2</strong>。Mustafa Suleyman 宣布 <strong>MAI-Image 升至全球图像编辑模型第二</strong>。Testing Catalog 报道模型已上线 MDASH 平台。<strong>微软在图像编辑赛道的排名爬升速度惊人</strong>：从 MAI-Image-Flash 到 2.7 Preview，一年内从「没进榜」到「AA 第 2」，说明微软自研图像模型已经跨过从「能用」到「能用且好用」的门槛。<strong>「Preview」标签说明还有上升空间</strong>：2.7 是 preview 版本而非 GA，正式版大概率还会在指令遵循、细节一致性上继续优化。<strong>图像编辑 vs 图像生成的赛道分化</strong>：Arena 和 AA 都在单独做「编辑」榜，说明行业已经把「改图」（inpainting / style transfer / object replacement）从「生成」中独立出来当作一个能力维度评测。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型</div><div class="data-value">MAI Image 2.7</div></div><div class="data-chip"><div class="data-label">Arena 榜</div><div class="data-value">第 3</div></div><div class="data-chip"><div class="data-label">AA 榜</div><div class="data-value">第 2</div></div><div class="data-chip"><div class="data-label">状态</div><div class="data-value">Preview</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">行业侧三条都在「扩大规模」—— 算力扩到多吉瓦、组织缩到一人、模型家族扩到六个</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">NVIDIA 与 Oracle 将 OCI Superclusters 扩展至多吉瓦规模并上线 Vera Rubin NVL72</span>
+        <span class="card-tag">🏗️ 算力基建</span>
+      </div>
+      <div class="card-desc">
+        NVIDIA 与 Oracle 宣布将 <strong>OCI Superclusters 扩展至多吉瓦规模</strong>，并上线 <strong>Vera Rubin NVL72</strong> 与 <strong>Vera CPU</strong>。这是继上周 Meta 950 亿募资、SpaceX Apollo 400 亿 GPU 租赁之后，AI 算力基建的又一重磅动作。<strong>「多吉瓦」是算力规模的新计量单位</strong>：过去说「多少块 GPU」，现在说「多少吉瓦电力」，说明 AI 算力竞争已经从芯片数量竞争升级为能源规模竞争。<strong>Vera Rubin NVL72 上线意味着下一代架构开始交付</strong>：Blackwell 还在放量，Vera Rubin 已经进 Supercluster，NVIDIA 在用代际交替保持对 AMD / 自研芯片的领先窗口。<strong>Oracle 从「数据库公司」变成「AI 算力供应商」</strong>：OCI 在 AI 算力赛道的存在感越来越强，上周 OpenAI 也被曝将使用谷歌云 TPU，云厂商格局正在被 AI 算力需求重写。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">规模</div><div class="data-value">多吉瓦级</div></div><div class="data-chip"><div class="data-label">新架构</div><div class="data-value">Vera Rubin NVL72</div></div><div class="data-chip"><div class="data-label">配套 CPU</div><div class="data-value">Vera CPU</div></div><div class="data-chip"><div class="data-label">平台</div><div class="data-value">Oracle OCI</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Anthropic 收购一人公司 Mithril Medicine：创始人用 Claude 推进肌肉萎缩症疗法</span>
+        <span class="card-tag">💊 AI 制药</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 收购一人公司 <strong>Mithril Medicine</strong>，创始人<strong>用 Claude 推进肌肉萎缩症疗法</strong>研究。Yuchen Jin 评价这是「<strong>真正的单人十亿美元公司范式</strong>」。Anthropic 同时分享 Claude 支持药物研发的早期成果，已用于 <strong>6 家药企的真实药物研发项目</strong>。<strong>「一人公司被收购」是 AI 时代组织形态的标志性事件</strong>：一个人 + Claude 做出被大厂收购的成果，说明 AI 让「个人产出」与「组织产出」的差距急剧缩小。<strong>Anthropic 收购 Mithril 的战略意图</strong>：不是买技术（一人公司技术有限），而是买「Claude 在药物研发中的实战验证案例」——这是 Anthropic 向投资者证明 Claude 在垂直领域价值的最有力叙事。<strong>6 家药企真实项目是比收购本身更重要的信号</strong>：AI for Drug Discovery 从论文走向真实管线，意味着模型能力已经跨过「能辅助」到「被信任用于真实决策」的门槛。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">被收购方</div><div class="data-value">Mithril Medicine</div></div><div class="data-chip"><div class="data-label">团队规模</div><div class="data-value">1 人</div></div><div class="data-chip"><div class="data-label">应用领域</div><div class="data-value">肌肉萎缩症疗法</div></div><div class="data-chip"><div class="data-label">Claude 药企</div><div class="data-value">6 家真实项目</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Liquid AI 发布 LFM3 系列：一个 1.7B 底座衍生六个 2B 级多模态开源模型</span>
+        <span class="card-tag">📦 开源权重</span>
+      </div>
+      <div class="card-desc">
+        Liquid AI 发布 <strong>LFM3 系列</strong>开源权重模型：以 <strong>1.7B 文本底座</strong>衍生出<strong>六个 2B 级多模态模型</strong>，1.7B 文本模型<strong>超越前代 2.6B</strong>。全部开源权重，覆盖文本、视觉、音频等多模态任务。<strong>「一个底座衍生六个模型」是高效的模型家族设计</strong>：不是训练六个独立模型，而是共享 1.7B 底座 + 各自的模态适配层，训练成本和推理成本都大幅降低。<strong>1.7B 超越前代 2.6B 说明小模型效率仍在快速提升</strong>：参数更少、能力更强，端侧部署的经济性持续改善。<strong>LFM3 的定位是「设备端 + 嵌入式」</strong>：2B 级模型可以在手机、IoT、车载等场景本地运行，与 NVIDIA Nemotron Bolt E4B（上周报道）形成端侧小模型赛道的竞争格局。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">底座</div><div class="data-value">1.7B 文本</div></div><div class="data-chip"><div class="data-label">衍生模型</div><div class="data-value">6 个 2B 级</div></div><div class="data-chip"><div class="data-label">提升</div><div class="data-value">1.7B > 前代 2.6B</div></div><div class="data-chip"><div class="data-label">授权</div><div class="data-value">开源权重</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">两条工具信号：一条是 OCR 作为 Agent 前置基础设施被集体加码，一条是编码工具从 IDE 走向协作平台</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">面壁开源 MiniCPM-OCR 1.0 + 百度开源 Unlimited OCR 2：OCR 赛道同日双开源</span>
+        <span class="card-tag">📄 OCR</span>
+      </div>
+      <div class="card-desc">
+        <strong>面壁智能</strong>开源 <strong>MiniCPM-OCR 1.0</strong> 及校验模型 <strong>MiniCPM-OCR Jev</strong>；<strong>百度</strong>开源 <strong>Unlimited OCR 2</strong>，核心创新 <strong>SR-SWA</strong>（Sparse Region-Selective Window Attention）让超长文档解析的注意力开销<strong>尽量不随页数上涨</strong>，支持几十到几百页文档解析。同日两条 OCR 开源发布，赛道竞争白热化。<strong>SR-SWA 解决的是「长文档 OCR 的注意力爆炸」问题</strong>：传统 ViT 处理 100 页文档时注意力矩阵是 O(n²) 增长，SR-SWA 通过稀疏区域选择让开销接近线性，这是「能处理整本书」而非「能处理一页」的技术基础。<strong>同日双开源说明 OCR 是被低估的热赛道</strong>：Agent 时代文档解析是前置能力（读 PDF、读合同、读财报），OCR 精度直接决定下游 Agent 的信息质量。<strong>面壁 + 百度同日发布是国产 OCR 生态的集体信号</strong>：不是巧合，而是 Agent 应用爆发带来的文档解析需求倒逼模型层供给。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">面壁</div><div class="data-value">MiniCPM-OCR 1.0</div></div><div class="data-chip"><div class="data-label">百度</div><div class="data-value">Unlimited OCR 2</div></div><div class="data-chip"><div class="data-label">核心技术</div><div class="data-value">SR-SWA</div></div><div class="data-chip"><div class="data-label">支持页数</div><div class="data-value">几十~几百页</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Cursor design mode 新增 Annotate 标注功能并开始将 Bot 纳入团队</span>
+        <span class="card-tag">🤖 AI 编码</span>
+      </div>
+      <div class="card-desc">
+        Cursor 发布 <strong>design mode Annotate</strong> 功能，支持在设计模式中直接添加标注；同时 CEO Michael Truell 宣布 Cursor <strong>开始将 Bot 纳入团队</strong>管理。Grok Bot 也分享了销售团队共享机器人的用法。<strong>「Annotate」补齐了 design mode 的协作闭环</strong>：过去 design mode 只能看不能标，现在可以像 Figma 一样在界面上加注释，让「设计 → 开发」的沟通成本进一步降低。<strong>「Bot 纳入团队」是 Cursor 从工具走向平台的信号</strong>：不只是「你用 Cursor 写代码」，而是「Cursor 里的 Bot 是你的团队成员」，AI 编码工具正在从 IDE 变成协作平台。<strong>与本周微软 Agent 365 的方向一致</strong>：巨头和独角兽都在把 AI 从「辅助工具」重新定义为「团队成员」，组织形态正在被重新设计。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">新功能</div><div class="data-value">design mode Annotate</div></div><div class="data-chip"><div class="data-label">组织变化</div><div class="data-value">Bot 纳入团队</div></div><div class="data-chip"><div class="data-label">CEO</div><div class="data-value">Michael Truell</div></div><div class="data-chip"><div class="data-label">方向</div><div class="data-value">IDE → 协作平台</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>世界模型从 demo 走向产品，端侧模型从论文走向国民 App</strong>。</p>
+    <p>三条主线同时展开：<strong>① 世界模型产品化</strong>（Genie 4 原生音频 + 实时编辑 + 即将开放 API）—— <strong>「一句话生成可交互世界」从论文 demo 变成可嵌入产品的能力</strong>。<strong>② 端侧与垂直模型加速</strong>（蚂蚁灵光 2.0 接入 15 个国民 App、Liquid LFM3 一个底座衍生六个模型、面壁+百度 OCR 同日双开源）—— <strong>模型能力正在被拆解成场景专用的小模型，部署成本持续下降</strong>。<strong>③ 组织形态被重新定义</strong>（Anthropic 收购一人公司、Cursor 把 Bot 纳入团队）—— <strong>「一个人 + AI」的产出能力已经能被大厂收购，「Bot 是团队成员」从比喻变成产品功能</strong>。</p>
+    <p>今天最高分给到 <strong>#1 Genie 4（9.3/P0）</strong>—— 原生音频 + 实时提示词编辑让世界模型第一次逼近「完整感官体验」，即将开放 API 意味着开发者很快就能把「一句话生成可交互世界」嵌入自己的产品。</p>
+    <p>四条可以立刻执行的线索：<strong>① 世界模型 + 品牌场景</strong>（Genie 4 API 开放后，可关注「一句话生成战场环境」的互动体验，优先在概念预告片或互动 H5 中试点）；<strong>② 图像编辑能力独立评测</strong>（MAI Image 2.7 登榜说明「改图」已是独立能力维度，军事题材素材的武器替换、场景改天气/时间可优先试用）；<strong>③ OCR 作为 Agent 前置能力</strong>（竞品截图文字提取、历史素材归档检索、合同/排期文档自动解析可关注百度 Unlimited OCR 2 的多页表现）；<strong>④ 「一人 + AI」组织实验</strong>（团队内部哪些环节可以由「一个人 + AI」完成，减少协调成本）。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
