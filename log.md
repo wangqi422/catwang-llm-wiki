@@ -1,5 +1,16 @@
 # 操作日志 | Operation Log
 
+## [2026-10-29 09:42] AIGC 日报 2026.10.29（五阶段全流程 · xiaoqi-ai-daily skill）
+
+- **第 82 期**，主线「前沿模型迭代周期压缩 + 智能体渗透过临界点」：Google Gemini 4 Carbon（AA v5 登顶 59 分超 Opus 5.5 的 58 与 GPT-6 Astra 的 57，距 Argon 仅 14 天，网络安全 SOTA 88.2%/54.8%/71.0%，安全代码生成 2 倍提升，Fairwinds 分阶段开放，$2/$10 首发价，9.4/P0）+ GitHub Octoverse 2026（40% PR 由智能体起草，3 月仅 17% 半年翻倍，Copilot Fusion GA 59.9 分距 Opus 5.5 仅 2 分成本减半，GitHub 年内新增 400 万 CPU 核心，9.2/P0）+ 微软 Copilot 迄今最大更新（统一 Chat/Cowork/Autopilot/Code，开放 harness 编排层连接 20+ 模型支持 BYOK，Rust 重写 runtime，Azure 单季 332 亿同比增 48%，从 OpenAI 单季获 100 亿营收，9.0/P0）+ 美司法部问询英伟达 129.3 亿美元收购 Hugging Face（评估是否掌控 AI 核心分发枢纽，涵盖 SchedMD/Run:ai/Groq 交易，8.9/P0）+ Anthropic 致信加州州长纽森（法院应有权阻止严重风险 AI 模型发布，反对全面 kill switch 支持精准干预，8.7/P0）+ Cathedral 用 AI 智能体侵入 Anthropic 内部系统（通过第三方 SaaS 不到 12 小时接触会议/薪资/Slack，双方对范围说法不一，模型权重未泄露，8.5/P0）+ Anthropic 红队 Claude 串联 5 条攻击链（Chrome/Safari/Android/Win/Linux，Google 修复 62 个 CVE 含 13 个沙箱逃逸，8.3/P0）+ 商汤开源 SenseNova 6.8 Code2Video（代码生成短视频，8.2/P1）
+
+- 五阶段均达标：AI HOT **3 页 298 条**（hasNext=false，覆盖 2026-10-28T01:37 至 2026-10-29T01:19 完整 24h）→ 8 条选题（评分均值 8.78）→ MD → TOC H5（30436B / 8 卡，11 项校验全过）→ URL 200（gh run watch 40802063721 等部署完成后 curl 200，30436B 与本地一致）→ 海报 + 推送（PNG 537.2KB / 1440×1920，Pages 第 6 次检测 200，**3/3 群成功**）
+- Commits：`7baabb8`（MD/H5/归档）、`2050d8b`（海报），均 push 成功
+- 归档插入 126 → 127，正则置顶 + eval 校验，top3 日期正确
+- 坑位：gh 不在 Git Bash PATH（需 `export PATH="$PATH:/c/Program Files/GitHub CLI"`）；H5 模板 head 已含 `</head>` 不需重复添加
+
+---
+
 ## [2026-10-28 09:55] AIGC 日报 2026.10.28（五阶段全流程 · xiaoqi-ai-daily skill）
 
 - **第 82 期**，主线「世界模型从 demo 走向产品」：Google Genie 4 世界模型（一句话生成可交互世界 + 原生音频 + 实时提示词编辑，DOOM 演示，即将登陆 API，9.3/P0）+ 蚂蚁百灵灵光 2.0（开源 Ling-3.1-flash-base/1019，AA 44 分，接入 15 个国民 App 做 Personal Agent，8.9/P0）+ 微软 MAI Image 2.7 Preview（Arena 图像编辑第 3 / AA 第 2，8.7/P0）+ NVIDIA × Oracle OCI Superclusters 多吉瓦 + Vera Rubin NVL72（8.6/P0）+ Anthropic 收购一人公司 Mithril Medicine（创始人用 Claude 做肌肉萎缩症疗法，6 家药企真实项目，8.4/P0）+ Liquid AI LFM3 系列（1.7B 底座衍生 6 个 2B 级多模态，1.7B > 前代 2.6B，8.3/P0）+ 面壁 MiniCPM-OCR 1.0 + 百度 Unlimited OCR 2 同日双开源（SR-SWA 长文档注意力开销不随页数上涨，8.2/P1）+ Cursor design mode Annotate + Bot 纳入团队（8.0/P1）
@@ -3043,4 +3054,15 @@
 - 边界处理：NEW 窗口空 → 按 skill 回退口径改用 used_by 增量笔记作 NEW_LIST；OLD 仅 1 篇，样本极薄，口径已在 brief 内显式声明
 - 核心发现：①**10/25~10/27 三份 brief 的 capture_type 统计快照无法复现**——实测 193 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / 无标注 154（79.8%），与 10/24 逐项一致，说明 10/26 那次 181 篇批量改写只刷了 mtime、没真写入 capture_type，错误结论已污染 log.md 与 automation memory；②raw/work + raw/learn 共 17 篇 capture_type 标注为 0，ingest 强制必填在生产侧没落地；③**自 2026-06-01 起 149 天无新 pattern / idea，只产出 2 篇 visual-intel**；④竞品日报的「产品×物料类型×趋势」骨架 = capture_type 在素材层的实现，工作侧已跑通 3 期、知识侧停在 20.2%；⑤character-consistency-techniques 被 CODM S9「四猎手同框框架」反向验证；⑥CHIEF §5「distill 阈值 150 合理吗」→ 阈值是装饰性约束，无人监听
 - 统计：193 篇（wiki 176 / raw 17），pattern 13 (6.7%) / idea 5 (2.6%) / question 0 / number 0 / article 19 (9.8%) / visual-intel 2 (1.0%，非标准) / 无标注 154 (79.8%)
+- 未推送企微；未回填 used_by
+
+
+## [2026-10-29 09:00] inward-brief | 浮现 3 强连接（⭐⭐⭐）+ 2 弱连接（⭐⭐）+ 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-10-29.md
+- 扫描：NEW=0 篇（10/28 00:00 ~ 10/29 06:00 零写入，**连续第 3 天空**）→ 走回退口径：近 7 天 used_by 增量 ≥1 → 5 篇（全部 mtime 2026-10-26 09:43）/ OLD=1 篇（竞品视觉日报-20261020）
+- chief_freshness：**151 天**（🚨 超 30 天硬拒绝线，连续第 8 天加警告后继续生成）
+- 边界处理：NEW 空 → 回退 used_by 增量清单；OLD 仅 1 篇、样本极薄，口径已在 brief 内显式声明；并诚实标注 #1 是 10/28 #2 的续集、#3 是 10/28 #1 的补集，**真正全新的只有 #2**
+- 核心发现：①**"wiki 到 200 篇会变形吗"应改写为"人写占比跌破 15% 时 brief 还有没有东西可 brief"**——194 篇距 200 只差 6 篇，但近 150 天新增 2 篇全是机器产出，人写增量 0%；②**INDEX-by-type 的 dataview 有 2 块（question/number）是永久空表**，79.9% 笔记未接线 → 通电装置装好了但没电流；③**竞品日报有"可比性边界声明"、capture_type 快照没有** → 素材层做到了知识层没做到的事（10/28 #1 的反面）；④contribution_count 只在 5/194 (2.6%) 上有值，且最高分 3 篇全是元层笔记 → **指标测的是自指不是价值**；⑤本周隐性 pattern = **inward-brief 已从"浮现内容连接"漂移到"审计度量可信度"**（7 份 brief 中 5 份在证伪某个度量），构成 constraints-as-leverage 的反例：约束的可信度必须先于覆盖率
+- 统计：194 篇（wiki 177 / raw 17），pattern 13 (6.7%) / idea 5 (2.6%) / question 0 / number 0 / article 19 (9.8%) / visual-intel 2 (1.0%) / 无标注 155 (79.9%)
+- 新增边界声明：快照表加注 question/number 永久空表、visual-intel 与人写不可比、无标注不参与质量分母
 - 未推送企微；未回填 used_by
