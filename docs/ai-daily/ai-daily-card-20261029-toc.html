@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">AIGC Daily</div>
+      <h1>每日速报<br><em>2026.10.29</em></h1>
+      <div class="sidebar-meta">第 82 期 · 8 条精选</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">今日头条</div>
+      <a href="#card-1" class="nav-link"><span class="nav-num">01</span> Google 发布 Gemini 4…</a>
+          <a href="#card-2" class="nav-link"><span class="nav-num">02</span> GitHub Octoverse 2…</a>
+          <a href="#card-3" class="nav-link"><span class="nav-num">03</span> 微软 Copilot 迄今最大更新：…</a>
+          <a href="#card-4" class="nav-link"><span class="nav-num">04</span> 美国司法部就英伟达 129.3 亿美…</a>
+          <a href="#card-5" class="nav-link"><span class="nav-num">05</span> Anthropic 致信加州州长纽森…</a>
+          <a href="#card-6" class="nav-link"><span class="nav-num">06</span> Cathedral 用 AI 智能体…</a>
+          <a href="#card-7" class="nav-link"><span class="nav-num">07</span> Anthropic 红队：Claud…</a>
+          <a href="#card-8" class="nav-link"><span class="nav-num">08</span> 商汤开源 SenseNova 6.8…</a>
+    </div>
+  </nav>
+  <main class="main">
+    <header class="hero">
+      <div class="hero-brand">AIGC DAILY · 第 82 期</div>
+      <h1 class="hero-title">每日速报<br><em>2026.10.29</em></h1>
+      <p class="lead">Google 14 天连发两款旗舰，Gemini 4 Carbon 在 AA v5 登顶 59 分且网络安全全链路 SOTA；GitHub Octoverse 报告显示 40% PR 由智能体起草（半年前仅 17%），Copilot Fusion 正式把「自动选模型」变成行业标配；微软把 Copilot harness 开放为独立编排层。三条线指向同一结论：AI 从「辅助工具」变成「基础设施」的拐点已过，现在的问题是「怎么管」而不是「要不要用」。</p>
+      <div class="hero-stats">
+        <span>8 条精选</span>
+        <span>评分均值 8.78</span>
+        <span>65+ 信源</span>
+      </div>
+    </header>
+    <div class="cards">
+
+    <article class="card" id="card-1">
+      <div class="card-header">
+        <span class="card-num" style="color:#E1A4C2">01</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#E1A4C233;color:#E1A4C2">模型发布</span>
+          <span class="card-score">评分 9.4/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">Google 发布 Gemini 4 Carbon：AA v5 登顶 59 分，网络安全 SOTA</h2>
+      <p class="card-lead">14 天连发两款旗舰，Carbon 在 Artificial Analysis Intelligence Index v5.0 以 59 分登顶（超 Claude Opus 5.5 的 58 与 GPT-6 Astra 的 57），较前代 Argon 单代提升 9 分。网络安全全链路 SOTA：SEC-bench Pro 漏洞检测 88.2%、ExploitGym 54.8%、CWE-bench 修复 71.0%，安全代码生成成功率较 Argon 提升 2 倍以上。长周期智能体可连续运行数天，任务偏离率降 26%、服务不足率降 29%。本周先通过 Fairwinds 计划向筛选后的网络安全防御者开放，首发定价 $2/$10 每百万 token。</p>
+      <ul class="card-points">
+        <li>AA v5.0 登顶 59 分，超 Claude Opus 5.5（58）与 GPT-6 Astra（57），较 Argon 单代 +9 分</li>
+        <li>网络安全三基准 SOTA：SEC-bench Pro 88.2% / ExploitGym 54.8% / CWE-bench 71.0%</li>
+        <li>Chrome 团队实测：Carbon 生成高质量补丁比另一家实验室大型前沿模型好 10 倍以上</li>
+        <li>分阶段开放：先 Fairwinds 计划给网安防御者，首发 $2/$10 每百万 token（优惠期后 $4/$20）</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>Carbon 的长周期智能体能力意味着 AI 辅助安全审计可跑更长任务；模型迭代周期压缩到 14 天对竞品格局是重要信号</p>
+      </div>
+      <div class="card-source">来源：Google DeepMind Blog · The Verge · Ars Technica</div>
+    </article>
+
+    <article class="card" id="card-2">
+      <div class="card-header">
+        <span class="card-num" style="color:#D6DD63">02</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#D6DD6333;color:#D6DD63">编码生态</span>
+          <span class="card-score">评分 9.2/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">GitHub Octoverse 2026：40% PR 由智能体起草 + Copilot Fusion 正式发布</h2>
+      <p class="card-lead">GitHub Universe 2026 发布年度 Octoverse 报告：过去 12 个月开发者推送代码 179 亿次（超 2024+2025 两年之和），合并 PR 达 13 亿次（月均 2.2 亿），9 月单月超 40% 的 PR 由智能体起草——3 月仅 17%，半年翻倍。同场宣布 Copilot Fusion 正式 GA：自动挑选并组合多模型路由任务，AA 编码智能体指数 59.9 分，距 Claude Code Opus 5.5 仅 2 分，成本约一半、时间省 40%。GitHub 年内新增 400 万 CPU 核心应对智能体代码激增。</p>
+      <ul class="card-points">
+        <li>智能体起草 PR 占比：3 月 17% → 9 月 40%+，9 月智能体起始 PR 约 1.1 亿个（3 月 6 倍）</li>
+        <li>Copilot Fusion GA：AA 编码智能体指数 59.9，距 Claude Code Opus 5.5 仅 2 分，成本约一半</li>
+        <li>带智能体配置文件的仓库提交量约为普通新仓库 8 倍；两周合并率从 83% 升至 90%</li>
+        <li>模型多元化：61% Copilot 用户使用多模型，付费用户使用的模型数从 5 月 29 个涨到 47 个</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>工程侧 AI 渗透率已过临界点；内容生产侧的同类拐点（AI 起草素材初稿）也在逼近，提前布局 AI 辅助工作流是必要的</p>
+      </div>
+      <div class="card-source">来源：GitHub Blog · Simon Willison</div>
+    </article>
+
+    <article class="card" id="card-3">
+      <div class="card-header">
+        <span class="card-num" style="color:#E8C9B6">03</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#E8C9B633;color:#E8C9B6">智能体平台</span>
+          <span class="card-score">评分 9.0/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">微软 Copilot 迄今最大更新：统一 Chat/Cowork/Autopilot/Code，开放 harness</h2>
+      <p class="card-lead">微软 CEO Satya Nadella 宣布 Copilot 迄今最大更新，统一 Chat、Cowork、Autopilot 与 Code 四大产品线，同时通过 Microsoft Foundry 开放 Copilot harness——同一套多模型智能体编排层，已支撑 Copilot Code、Copilot Studio、GitHub Copilot app、CLI、VS Code 等产品。开发者可下载 SDK 自行运行或用 Foundry 全托管云运行时，已连接 20+ 前沿模型支持 BYOK。GitHub 团队将 harness runtime 移植到 Rust，会话开销与首 token 延迟显著降低。A365 智能体超 5000 万，Azure 单季 332 亿美元同比增 48%。</p>
+      <ul class="card-points">
+        <li>Copilot harness 开放：SDK 自托管或 Foundry 全托管，已连接 20+ 前沿模型支持 BYOK</li>
+        <li>GitHub 团队将 harness runtime 移植到 Rust，会话开销与首 token 延迟显著降低</li>
+        <li>Azure 单季 332 亿美元同比增 48%，连续 10 季刷新纪录；单季从 OpenAI 获营收 100 亿美元</li>
+        <li>A365 智能体超 5000 万，Windows + Agent 365 强化安全治理，Foundry 收入同比增长超两倍</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>Copilot harness 开放意味着未来可基于同一编排层接入多模型做素材生成/审核/分发自动化，降低自建 Agent 基础设施成本</p>
+      </div>
+      <div class="card-source">来源：Microsoft Official Blog · Satya Nadella X</div>
+    </article>
+
+    <article class="card" id="card-4">
+      <div class="card-header">
+        <span class="card-num" style="color:#B7C7A8">04</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#B7C7A833;color:#B7C7A8">行业监管</span>
+          <span class="card-score">评分 8.9/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">美国司法部就英伟达 129.3 亿美元收购 Hugging Face 展开反垄断问询</h2>
+      <p class="card-lead">路透社独家报道，两位知情人士透露美国司法部（DOJ）已就英伟达以 129.3 亿美元收购开源平台 Hugging Face 的交易展开问询，重点评估该交易是否会让英伟达掌控 AI 领域的核心分发枢纽。调查范围还涵盖英伟达的并购（SchedMD、Run:ai）、对外投资、销售模式，以及是否以芯片配额为筹码要求客户捆绑购买网络设备与 Groq 处理器。英伟达表示收购预计 2027 年上半年完成，并承诺 Hugging Face 将继续保持开放兼容。</p>
+      <ul class="card-points">
+        <li>DOJ 核心关切：收购是否让英伟达掌控 AI 领域基础性分发渠道并打压竞争对手</li>
+        <li>调查范围涵盖 SchedMD、Run:ai 收购及 Groq 技术许可交易，从拜登政府延续到特朗普政府</li>
+        <li>英伟达承诺 Hugging Face 收购后继续保持开放兼容，预计 2027 上半年完成</li>
+        <li>调查属司法部常规程序，不等于违法认定，但反映监管对 AI 基础设施集中度的警惕</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>Hugging Face 开源生态的独立性直接影响 AI 工具链可及性；若收购后开放承诺缩水，依赖 HF 生态的工作流可能受影响</p>
+      </div>
+      <div class="card-source">来源：Reuters 独家 · IT之家</div>
+    </article>
+
+    <article class="card" id="card-5">
+      <div class="card-header">
+        <span class="card-num" style="color:#C9BEDC">05</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#C9BEDC33;color:#C9BEDC">AI 政策</span>
+          <span class="card-score">评分 8.7/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">Anthropic 致信加州州长纽森：法院应有权阻止严重风险 AI 模型发布</h2>
+      <p class="card-lead">据路透社报道，Anthropic 在 10 月 15 日致加州州长加文·纽森的信中建议，政府应有权向法院申请禁令，阻止对公众构成「严重风险」的 AI 模型发布。这封信在 9 月纽森召集 AI 专家小组后提交，OpenAI 也于 10 月 20 日向纽森提出类似建议。Anthropic 反对要求开发者设置能关闭整个模型的「紧急关闭开关」，认为这可能给政府官员「虚假的安全感」，更支持关闭出问题的智能体、暂停特定客户权限等针对性措施。Anthropic 自身今年 6 月曾被美国政府要求限制外国用户访问 Mythos 5 和 Fable 5 模型。</p>
+      <ul class="card-points">
+        <li>Anthropic 建议：审查发现模型构成严重风险时，政府应能请法院发布禁令阻止发布</li>
+        <li>反对全面 kill switch：支持精准干预（关智能体/断客户权限），认为全面关闭不切实际</li>
+        <li>背景：9 月纽森召集 AI 专家小组，OpenAI 10 月 20 日也提交了建议；两党参议员 9 月讨论过类似法案</li>
+        <li>Anthropic 正筹备赴美 IPO，主动提出监管建议有助于塑造「负责任 AI 公司」叙事</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>AI 安全监管框架走向影响所有 AI 工具的合规边界；加州立法结果可能成为全美乃至全球 AI 治理的参考模板</p>
+      </div>
+      <div class="card-source">来源：Reuters · Politico · IT之家</div>
+    </article>
+
+    <article class="card" id="card-6">
+      <div class="card-header">
+        <span class="card-num" style="color:#E1A4C2">06</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#E1A4C233;color:#E1A4C2">安全事件</span>
+          <span class="card-score">评分 8.5/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">Cathedral 用 AI 智能体侵入 Anthropic 内部系统，双方对事件范围说法不一</h2>
+      <p class="card-lead">据《华盛顿邮报》与 The Decoder 报道，网络安全初创公司 Cathedral 通过 Anthropic 漏洞赏金计划，利用 AI 智能体和第三方业务软件渗入 Anthropic 内部系统。Cathedral 称智能体在不到 12 小时内接触到会议记录、薪资数据、招聘信息和 Slack 消息；Anthropic 确认有限访问了销售/HR/IT 系统及部分客户与合作伙伴联系方式，但坚称 Claude 对话、源代码和模型权重从未泄露。双方对事件持续时间与范围说法不一：Cathedral 称不到 12 小时，Anthropic 称尝试持续了数天且 Cathedral 只报告了两个漏洞中的一个。</p>
+      <ul class="card-points">
+        <li>入侵路径：通过第三方 SaaS（外部管理和销售应用）进入，非直接攻击模型本身</li>
+        <li>Cathedral 称不到 12 小时接触会议记录/薪资/招聘/Slack；Anthropic 称持续数天且未完全遵守项目规则</li>
+        <li>Anthropic 确认：Claude 对话、源代码、模型权重未泄露；当日切断访问、禁用第三方应用、通报联邦当局</li>
+        <li>Cathedral 创始团队含前 DOGE 员工，向政府和企业销售 AI 安全工具——更像高强度安全测试</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>使用 AI 智能体做自动化时，第三方应用权限管理是真实的安全风险点；建议定期审计连接的外部服务权限</p>
+      </div>
+      <div class="card-source">来源：The Decoder · Washington Post · Gizmodo</div>
+    </article>
+
+    <article class="card" id="card-7">
+      <div class="card-header">
+        <span class="card-num" style="color:#D6DD63">07</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#D6DD6333;color:#D6DD63">安全研究</span>
+          <span class="card-score">评分 8.3/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">Anthropic 红队：Claude 在 Chrome/Safari/Android/Win/Linux 串联 5 条攻击链</h2>
+      <p class="card-lead">Anthropic 前沿红队使用未发布的内部模型在 Chrome、Safari、Android、Windows 和 Linux 发现漏洞并串联成 5 条可工作的概念验证攻击链。Chrome 攻击链用 4 个漏洞从单次页面加载实现沙箱外代码执行，Google 分配并修复了 62 个 CVE（含 13 个沙箱逃逸和 21 个可控制网页渲染进程的漏洞），修复随 Chrome 156 发布。Safari 链绕过同源策略，Linux 链通过网络无需登录直达 root 权限，Android 链需物理接触可在 Pixel 9 锁屏状态下通过 USB 提取数据。所有漏洞在发布前均已报告给各厂商并修复。</p>
+      <ul class="card-points">
+        <li>Chrome 链：4 个漏洞实现沙箱逃逸 + 代码执行，Google 修复 62 个 CVE（含 13 个沙箱逃逸）</li>
+        <li>Safari 链绕过同源策略；Linux 链通过网络无需登录直达 root 权限</li>
+        <li>Android 链需物理接触，可在 Pixel 9 锁屏状态下通过 USB 提取照片等个人数据</li>
+        <li>所有漏洞在发布前均已负责任披露给各厂商并修复</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>AI 驱动的安全研究能力提升意味着攻防两端都在加速；对使用 AI 工具的团队来说，及时更新软件版本比以往更重要</p>
+      </div>
+      <div class="card-source">来源：IT之家 · Anthropic 博客</div>
+    </article>
+
+    <article class="card" id="card-8">
+      <div class="card-header">
+        <span class="card-num" style="color:#E8C9B6">08</span>
+        <div class="card-meta">
+          <span class="card-tag" style="background:#E8C9B633;color:#E8C9B6">国产模型</span>
+          <span class="card-score">评分 8.2/10</span>
+        </div>
+      </div>
+      <h2 class="card-title">商汤开源 SenseNova 6.8 Code2Video：用代码生成短视频</h2>
+      <p class="card-lead">商汤科技开源 SenseNova 6.8 Code2Video，可通过代码生成短视频内容。这是商汤在视频生成方向的最新开源动作，将「代码即视频」的范式引入开源生态。相比纯 diffusion 路线，以代码作为中间表示层生成视频具有更好的可控性与可编辑性。同日国产视频生成赛道密集活跃：可灵成为动画电影《Minibots》独家技术伙伴、Kling 4.0 上线 PixVerse，赛道进入产品化落地阶段。</p>
+      <ul class="card-points">
+        <li>代码生成视频：以代码作为中间表示层，可控性与可编辑性优于纯 diffusion 路线</li>
+        <li>商汤持续在开源生态发力，SenseNova 系列模型逐步开放</li>
+        <li>同日国产视频赛道活跃：可灵成为动画电影《Minibots》独家技术伙伴、Kling 4.0 上线 PixVerse</li>
+        <li>「代码即视频」范式若成熟可实现素材参数化批量生成，对 A/B 测试与本地化适配有直接价值</li>
+      </ul>
+      <div class="card-codm">
+        <span class="codm-label">CODM 宣发价值</span>
+        <p>Code2Video 的「代码即视频」范式若成熟，可实现素材参数化批量生成（换配色/换文案一键出多版本），对宣发素材 A/B 测试与本地化适配有直接价值</p>
+      </div>
+      <div class="card-source">来源：商汤官方 X</div>
+    </article>
+    </div>
+    <div class="edit-note">
+      <h3>编辑点评</h3>
+      <p>今天的新闻主线是「前沿模型迭代周期压缩 + 智能体渗透过临界点」。Google 14 天内连发 Argon 和 Carbon 两款旗舰模型，AA v5 榜首易主；GitHub Octoverse 报告显示 40% PR 由智能体起草（半年前仅 17%），Copilot Fusion 正式把「自动选模型」变成行业标配；微软把 Copilot harness 开放为独立编排层。三条线指向同一个结论：AI 从「辅助工具」变成「基础设施」的拐点已经过去，现在的问题是「怎么管」而不是「要不要用」——所以才有 Anthropic 主动提议法院有权阻止高危模型、DOJ 问询英伟达收购 Hugging Face、Cathedral 用智能体渗透 Anthropic 自身。安全与治理正在追上能力的扩张速度。</p>
+    </div>
+  </main>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
