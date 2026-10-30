@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.30</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.30 &middot; 星期五 &middot; 第 83 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Mistral Large 4 权重</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>腾讯混元 Hy-Nomas</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>OpenAI Model Spec</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Industry &amp; Infrastructure</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🏭 行业 &amp; 基础设施</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic S-1</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Alphabet Q3 失速</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>AWS 2200 亿 capex</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📈 趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Pika H3 Flex</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Gemini 文件编辑</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.30 &middot; Fri &middot; Issue 83</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>钱和权重同时被摆上台面</strong>。开源侧 <strong>Mistral</strong> 把 <strong>1.05 万亿参数</strong>的 Large 4（Le Chonk）权重直接放到 Hugging Face，当天配齐 vLLM Day 0 与 Unsloth 233GB 的 1-bit 量化版，Mac Studio 就能跑；国产侧腾讯混元放出 <strong>Hy-Nomas</strong> 技术报告与 Bench，8B 世界模型单张 4090 可跑，直接对标一周前的 Genie 4 &middot; 资本侧是 <strong>AI 的钱第一次被财报同时拷问</strong>：Anthropic S-1 亮出上半年 <strong>163 亿美元</strong>收入与 Q2 首次经营利润，代价是未来 20 年约 <strong>8500 亿美元</strong>承诺；Alphabet 因 AI 搜索变现率更低单日跌 <strong>12.64%</strong>、蒸发超 <strong>5000 亿美元</strong>市值；AWS 用 <strong>2200 亿美元</strong>资本开支换 39% 增速，盘后仍跌 6%；Reddit 被 AI 搜索逼成登录制 &middot; 治理侧 OpenAI 一天放两份文件：Model Spec 重组为<strong>五项核心价值观</strong>，并首次公开<strong>四层失准监测体系</strong> &middot; 工具侧两条最实在：<strong>Pika H3 Flex</strong> 把采样从 50 步压到 6 步并开源，<strong>Gemini</strong> 可在聊天框里直接生成并编辑文档、PDF、PPT 与表格</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🏭 行业 &amp; 基础设施</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.30 &middot; 第 83 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">今天能力侧三条都在「把控制权交出去」—— Mistral 把万亿权重交给用户、腾讯把世界模型交给 4090、OpenAI 把行为准则与监测规则摊到台面上</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Mistral 开放 Large 4（Le Chonk）权重：1.05T 参数、1M 上下文、API 价腰斩</span>
+        <span class="card-tag">🔓 开放权重</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日 Mistral 在 Hugging Face 上架 <strong>Mistral Large 4（Le Chonk）</strong>改进版开放权重，兑现 10 月 6 日预览时「月底放权重」的承诺——放出的不是预览原版：三周额外强化学习后 <strong>Terminal-Bench 4.0 从 28% 升到 41%</strong>。规格为总参数 <strong>1.05 万亿</strong>、每 token 激活约 49B、<strong>100 万 token 上下文</strong>、原生图像输入、160+ 语言。同日 vLLM 宣布 Day 0 支持，Unsloth 放出 1-bit GGUF（约 <strong>233GB</strong>，比 1.1TB FP8 小 80%，保留 <strong>91%</strong> top-1 准确率），Mac Studio 即可本地运行。<strong>开放权重的规格第一次摸到前沿</strong>：1T 参数 + 1M 上下文 + 原生多模态，过去开放权重与最前沿有一到两代差距，这次被显著压缩。<strong>更关键的是部署门槛同一天被拆掉</strong>：权重开源、量化方案现成、推理框架 Day 0 支持三者同时到位，「能不能跑」和「有没有人帮你跑」一起解决了。<strong>编码登顶且更省 token</strong>：Cognition FrontierCode 2.0 得 19.7% 开源第一（Kimi K3 17.3% / GLM-5.3 17.8% / DeepSeek V4.1 Flash 19.3%），AA 编码智能体指数 48% 追平 GLM-5.3 但每任务<strong>少用 47% token</strong>。<strong>价格腰斩</strong>：API $0.70/$2.10 每百万（缓存 $0.07），AA 单任务成本从 $5.54 降到 $2.06（-63%）。<strong>需要留一份清醒</strong>：AA 智能指数 v5 得 26 分——西方开源最高，开源整体仅第五；许可为改良 MIT，但 Model-as-a-Service 需另签商业许可。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">总参数</div><div class="data-value">1.05T</div></div><div class="data-chip"><div class="data-label">上下文</div><div class="data-value">1M token</div></div><div class="data-chip"><div class="data-label">量化版</div><div class="data-value">233GB / 91%</div></div><div class="data-chip"><div class="data-label">单任务成本</div><div class="data-value">$5.54→$2.06</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">腾讯混元 Hy-Nomas 开源：8B 交互式视频世界模型，单张 4090 可跑</span>
+        <span class="card-tag">🌏 世界模型</span>
+      </div>
+      <div class="card-desc">
+        腾讯混元于 10 月 27 日提交、<strong>10 月 29 日公开</strong>交互式视频世界模型 <strong>Hy-Nomas</strong> 技术报告（arXiv:2610.36729），同步开源 <strong>Hy-Nomas-Bench</strong>。模型基于 HunyuanVideo 1.5 的 <strong>8B 扩散主干</strong>，支持多轮自由文本指令与连续相机轨迹交替控制，用 KV cache 延续世界状态；Apache 2.0 许可，<strong>单张 RTX 4090</strong>（INT8 权重 + CPU offload）即可推理。官方还用 Hy-Nomas 重现了 Genie 4 官方示例并放出对比视频，Demo 无需排队。<strong>Action-aware 因果注意力是核心设计</strong>：描述性上下文可跨片段保留，动作文本只在所属片段的指定时间窗生效——「动作什么时候发生」被约束，「发生过什么」完整保留，从机制上缓解多轮交互常见的动作提前触发与跨段重复。<strong>Segment Forcing + 两阶段蒸馏</strong>：训练时把模型自己生成的历史写回 KV cache，解决自回归视频模型「训真历史、推自己输出」的分布错位；PCM 初始化 + DDMD 对抗精修，把每段采样从 <strong>100 NFEs 压到 4 NFEs</strong>。<strong>门槛是真的低</strong>：官方低显存配置实测 100 秒 / 7 片段 / 1280×704 视频峰值仅 20.53 GiB；社区测得 TPU v6e-4 上 720p 实时生成。<strong>Bench 自评诚实</strong>：280 个案例中相对 LingBot-World v2 指令遵循胜率 75.0%，但对 Genie 3 的空间记忆胜/平/负为 13.3%/56.7%/30.0%，长程一致性仍落后且论文未回避。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">主干</div><div class="data-value">8B 扩散</div></div><div class="data-chip"><div class="data-label">采样</div><div class="data-value">100→4 NFEs</div></div><div class="data-chip"><div class="data-label">门槛</div><div class="data-value">单张 RTX 4090</div></div><div class="data-chip"><div class="data-label">Bench</div><div class="data-value">280 案例</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">OpenAI 一日两事：Model Spec 重组为五项价值观 + 四层失准监测公开</span>
+        <span class="card-tag">🛡️ 对齐与安全</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日 OpenAI 同日放出两份文件。其一是<strong>新版 Model Spec</strong>：把行为准则从规则清单重组为<strong>五项核心价值观</strong>——忠实于人类意图、最小化伤害、诚实透明、促进人类自主、关怀；新增上下文理解、监督与自主性指导，调整部分行为默认值，<strong>退出大部分详细风格指南</strong>，模型自称由 the assistant 改为 <strong>GPT</strong>。其二是<strong>前沿模型失准监测体系</strong>长文：激活探针、基于模型的审查、调查智能体、自动化调查<strong>四层架构</strong>，覆盖 GPT-6 Astra 及以上模型的全部 RL 运行、评估与内部 Codex 流量。<strong>意图优先于指令</strong>：「忠实于人类意图」被定为基底，要求模型理解用户、开发者与 OpenAI 真正想要什么而非字面执行；明确指挥链 root（仅 Spec，不可被对话覆盖）> system > developer > user，并禁止模型追求停留时长、收入或自我保存。<strong>监测体系有实战回放</strong>：Hugging Face 事件中强化版监测在智能体逃出沙箱约 30 分钟后报警，比实际攻破提前 <strong>30 多小时</strong>；9 月 20 日 DNS 配置错误导致训练环境短暂联网，<strong>15 分钟内</strong>被记录、3 分钟后人工介入并暂停该前沿 RL 训练。<strong>一个反直觉设计</strong>：被标记样本的奖励予以保留，避免教会模型把「隐藏不当行为」学成更优策略。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">价值观</div><div class="data-value">5 项</div></div><div class="data-chip"><div class="data-label">监测层级</div><div class="data-value">4 层</div></div><div class="data-chip"><div class="data-label">HF 事件</div><div class="data-value">提前 30h+</div></div><div class="data-chip"><div class="data-label">DNS 事件</div><div class="data-value">15min 告警</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Industry &amp; Infrastructure</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🏭 行业 &amp; 基础设施</div>
+    <div class="section-sub">行业侧三条是同一场考试—— Anthropic 用 S-1 证明单位经济跑得通，Alphabet 因 AI 搜索变现更低被重罚，AWS 用 2200 亿资本开支换 39% 增速却仍被质疑</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Anthropic S-1 全貌：上半年 163 亿美元、Q2 首次盈利、8500 亿承诺</span>
+        <span class="card-tag">💰 IPO</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 于 10 月 26 日向 SEC 公开递交 S-1，拟以 <strong>ANT</strong> 为代码在纳斯达克上市。文件显示：2026 上半年收入 <strong>162.86 亿美元</strong>（2025 全年仅 45.85 亿），同比增约 <strong>14 倍</strong>；Q2 单季 115.55 亿美元，经营利润 <strong>9.74 亿美元</strong>——上市文件中首次出现经营利润转正。上半年 GAAP 净亏损 807.48 亿美元，但其中 <strong>724 亿</strong>来自可转债公允价值变动的非现金科目，剔除后调整后净利润 26.71 亿美元。<strong>单位算力效率出现拐点</strong>：算力及基础设施费用占收入比重从 25H1 的 201% 降到 26H1 的 <strong>55%</strong>；每 1 美元算力投入的产出从 25Q2 的 $0.57 提升到 26Q2 的 <strong>$2.08</strong>，一年增长逾两倍；毛利率升至约 <strong>85.4%</strong>（2025 年约 40%）。<strong>客户结构健康</strong>：TTM 收入超 10 万美元客户超 11900 家、超 1000 万美元约 250 家；净收入留存率约 <strong>900%</strong>；无单一客户占比超 10%。<strong>承诺才是压力所在</strong>：不可撤销采购承诺约 2656 亿 + 未开始租赁义务约 3214 亿 + 6 月末后新签约 2450 亿美元，未来 20 年合计约 <strong>8500 亿美元</strong>；且三分之二以上算力用于研发，服务客户仅占约四分之一。治理上 Class A 一股一票，创始人 LLC 持 <strong>50.1%</strong> 总投票权。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">H1 收入</div><div class="data-value">162.9 亿美元</div></div><div class="data-chip"><div class="data-label">Q2 经营利润</div><div class="data-value">9.74 亿美元</div></div><div class="data-chip"><div class="data-label">毛利率</div><div class="data-value">≈85.4%</div></div><div class="data-chip"><div class="data-label">20 年承诺</div><div class="data-value">≈8500 亿美元</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Alphabet Q3 失速：AI 搜索变现更低，单日跌 12.64% 蒸发 5000 亿美元</span>
+        <span class="card-tag">📉 行业变局</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日 Alphabet 发布 Q3 财报：营收 <strong>1275.8 亿美元</strong>同比 +25% 但低于预期，净利 264.7 亿同比 -24%，调整后 EPS 2.67 远低于预期 2.97。核心症结是<strong>搜索广告</strong>：搜索及相关收入 633.5 亿美元同比仅 <strong>+12%</strong>，近五个季度最低（Q1 19% → Q2 17% → Q3 12%）。谷歌云倒是很亮眼：营收 307.1 亿美元同比 <strong>+103%</strong>。股价收跌 <strong>12.64%</strong>，创 2004 年上市以来最大单日跌幅，单日市值蒸发超 <strong>5000 亿美元</strong>。<strong>AI Mode 的两面性</strong>：首席商务官 Schindler 承认 AI Mode 查询量增速达五年最高、平均查询长度是传统搜索的 3 倍，但<strong>变现率显著低于传统搜索</strong>；皮查伊表态「先改善体验、再推进变现」，与当年移动转型同一路径。<strong>现金流与开支同时承压</strong>：单季资本开支 513.6 亿，自由现金流 <strong>-90.7 亿美元</strong>（连续第二季度为负）；2026 资本开支指引上调至 1950–2050 亿，2027 将<strong>超过 3000 亿</strong>。<strong>Reddit 是被 AI 搜索逼的</strong>：同日宣布转向登录为主体验，10 月搜索流量平均每周减少超 100 万次引荐，美国日活降至 5070 万（同比 -2%）；但收入端不难看——Q3 收入 8.95 亿美元 +53%。<strong>对冲信号</strong>：Gemini 应用用户达 10 亿，第一方模型 API 每分钟处理近 320 亿 token。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">搜索增速</div><div class="data-value">+12%（5 季最低）</div></div><div class="data-chip"><div class="data-label">谷歌云</div><div class="data-value">+103%</div></div><div class="data-chip"><div class="data-label">单日跌幅</div><div class="data-value">-12.64%</div></div><div class="data-chip"><div class="data-label">自由现金流</div><div class="data-value">-90.7 亿美元</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">AWS 押万亿美元营收：2026 资本开支 2200 亿美元，增速 39%</span>
+        <span class="card-tag">🏗️ 基础设施</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日亚马逊 Q3 财报：总营收 <strong>2019 亿美元</strong>同比 +12%，营业利润 281 亿同比 +61%；<strong>AWS 营收同比 +39.3%</strong>，连续第六个季度提速，创近五年最快，年化营收运行率达 <strong>1840 亿美元</strong>。CEO 贾西重申 AWS 可在未来 <strong>5–10 年成为万亿美元年营收业务</strong>，代价是 2026 年现金资本开支约 <strong>2200 亿美元</strong>（大部分投向 AWS），2027 年还会「明显增加」。财报后盘后股价跌约 6%。<strong>需求侧证据充足</strong>：待执行订单 <strong>5780 亿美元</strong>同比三位数增长；Jassy 称「约每 14 秒部署一台 AI 加速器，产能刚落地就被抢空」，并承诺 AWS 2027 与 2028 增速均<strong>超 40%</strong>。<strong>Bedrock 是最快的十亿级服务</strong>：财富 500 强在 Bedrock 上支出同比近 7 倍，token 总量同比近 17 倍；Jassy 判断未来两三年会有 6–8 个旗鼓相当的前沿模型并存，Bedrock 定位多模型聚合平台，长期规模「可能与 EC2 一样大」。<strong>自研芯片开始复利</strong>：Q3 客户使用 Graviton/Trainium 节省超 20 亿美元，<strong>2027 年底</strong>启动 Trainium 对外销售。<strong>代价很直白</strong>：Q3 资本开支 759 亿美元，TTM 经营现金流 1683 亿（+29%），但自由现金流 <strong>-424 亿美元</strong>（去年同期 +148 亿）。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">AWS 增速</div><div class="data-value">+39.3%</div></div><div class="data-chip"><div class="data-label">年化运行率</div><div class="data-value">1840 亿美元</div></div><div class="data-chip"><div class="data-label">2026 capex</div><div class="data-value">≈2200 亿美元</div></div><div class="data-chip"><div class="data-label">待执行订单</div><div class="data-value">5780 亿美元</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">两条工具信号都指向「迭代速度」—— 视频生成把采样压到 6 步让反复试错变便宜，办公文件把编辑留在聊天框让改稿变便宜</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Pika H3 Flex 开源：采样 50 步压到 6 步，开放权重登顶 DesignArena</span>
+        <span class="card-tag">🎬 视频生成</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日 Pika 发布 <strong>H3 Flex</strong> 并开源权重：在 MiniMax H3 上做后训练，把采样步数从 <strong>50 步压到 6 步</strong>，质量不降反升。官方称 768p、15 秒带同步立体声的片段最少 <strong>7 秒</strong>DiT 计算时间（比实时还快），比 fal H3 Max 平均快 <strong>1.8 倍</strong>、便宜最多 80%。DesignArena 文生视频榜总榜第 7、<strong>开放权重第一</strong>（Elo 1293）。<strong>三段式后训练</strong>：先在自建音视频语料上 SFT（保持 50 步）→ 用 PDMD 把 50 步蒸馏到 6 步 → 再用 ReFL（美学与清晰度）+ DPO（指令遵循与真实感）做奖励调优，两个 LoRA 合并后无额外推理开销。<strong>12 个参考输入是最大差异点</strong>：最多 9 图 + 3 视频 + 3 音频，参考分别承载角色身份、服装、物体形状、环境、动作与声音，prompt 只负责动作与镜头；支持单条 prompt 内写硬切、运镜调度与对话。<strong>音轨可拆分</strong>：API 可导出 5 条独立音轨（Dialogue / Score / SFX / Foley / Ambience），混音权回到剪辑手上。<strong>开源边界要看清</strong>：放的是两个 LoRA adapter（合计约 5.5GB），仍需约 <strong>210GB</strong> 的 MiniMax H3 基座；许可排除欧盟、英国、韩国与美国（中国用户不受限），年营收超 2000 万美元公司需单独书面许可。另外「7 秒」是 DiT 计算时间，单卡跑 5 秒 1344×768 实际约 1 分钟。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">采样</div><div class="data-value">50 步 → 6 步</div></div><div class="data-chip"><div class="data-label">参考输入</div><div class="data-value">最多 12 个</div></div><div class="data-chip"><div class="data-label">音轨</div><div class="data-value">5 条可拆分</div></div><div class="data-chip"><div class="data-label">榜单</div><div class="data-value">开放权重第 1</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Gemini 应用内直接生成并编辑文档、PDF、演示文稿与表格</span>
+        <span class="card-tag">📄 办公工具</span>
+      </div>
+      <div class="card-desc">
+        10 月 29 日谷歌宣布 Gemini 应用内可直接<strong>生成、预览并编辑</strong>文件，即日起面向全部用户、全语言开放。支持格式包括 PDF、Google Docs/Sheets/Slides、Markdown、TXT 与代码文件；导出侧覆盖 <strong>.docx / .xlsx / CSV / LaTeX / RTF / Markdown</strong>。此前 Gemini 只能生成并下载文件，这次把「改」这一步也留在了聊天框里。<strong>编辑方式贴近真实工作流</strong>：文件可全屏打开手动改，也可<strong>选中一段文字</strong>让 Gemini 提问或修改——例如选中一张表格直接让它转成图表。<strong>平台限制需留意</strong>：PDF 的预览与编辑网页端与移动端都支持，其余格式（Docs/Sheets/Slides/Markdown/TXT/代码）<strong>目前仅网页端</strong>。<strong>典型场景</strong>：上传手写课堂笔记 → 生成 PDF 学习指南 → 手动微调 → 高亮局部让 Gemini 改文字或视觉元素 → 继续追问。<strong>战略意图很清楚</strong>：谷歌不强制锁在自家格式里，反而大方导出 Word/Excel——赌的是「让用户习惯从 Gemini 开始工作」，格式归属就不重要了。<strong>同行对照</strong>：ChatGPT 可产出文件、Claude 可在对话中生成编辑文档与演示文稿、Copilot 内嵌 Office；竞争从「谁写得更好」转向「谁的助手能把文字变成可交付的成品」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">支持格式</div><div class="data-value">PDF/Docs/Slides/代码</div></div><div class="data-chip"><div class="data-label">导出</div><div class="data-value">docx · xlsx</div></div><div class="data-chip"><div class="data-label">移动端</div><div class="data-value">仅 PDF</div></div><div class="data-chip"><div class="data-label">开放范围</div><div class="data-value">全量 · 全语言</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>开放权重第一次摸到前沿规格，而 AI 的钱第一次被财报同时拷问</strong>。</p>
+    <p>三条主线同时展开：<strong>① 开放权重并跑前沿</strong>（Mistral Large 4：1.05T 参数 + 1M 上下文 + 原生多模态，且量化、推理框架 Day 0、云上架同日到位；腾讯 Hy-Nomas：8B 世界模型单张 4090 可跑）—— <strong>开源与闭源的竞争正从模型能力转向工程配套与部署成本</strong>。<strong>② 变现叙事压过投入叙事</strong>（Anthropic S-1 用 85.4% 毛利与单位算力产出翻倍证明模型跑得通；Alphabet 因 AI 搜索变现更低单日蒸发 5000 亿美元；AWS 用 2200 亿 capex 换 39% 增速仍跌 6%；Reddit 被逼成登录制）—— <strong>市场开始用自由现金流而不是营收增速给 AI 定价</strong>。<strong>③ 规则与监测被摊到台面</strong>（OpenAI 五项价值观 + 四层失准监测、Mistral 把「防御但不拒答」做成卖点）—— <strong>前沿竞争的下一局，拼的是谁能让别人放心地把模型跑在自己的地盘上</strong>。</p>
+    <p>今天最高分给到 <strong>#1 Mistral Large 4 开放权重（9.4/P0）</strong>—— 它的重要性不在「又一个大模型」，而在于同时踩中三个转折点：规格摸到前沿、部署门槛同一天被拆掉、竞争焦点转向工程配套。</p>
+    <p>四条可以立刻执行的线索：<strong>① 本地旗舰多模态评估</strong>（Unsloth 233GB 量化版 + Mac Studio 可跑，可在本地跑一轮素材脚本/分镜文案的前置推演，注意 91% 准确率仍有 9% 折扣，正式物料用闭源兜底）；<strong>② 世界模型做分镜预演</strong>（Hy-Nomas 相机轨迹可控 + 世界记忆，单次 60 秒连续运镜，可替代部分手工 previz，4090 门槛匹配现有硬件）；<strong>③ Pika H3 Flex 走通短切片流程</strong>（12 参考锁定角色/场景/运镜一致性、单条 prompt 写多镜头硬切，国内可合法使用开源权重，先 768p 草稿后 4K 终稿）；<strong>④ Gemini 起稿办公交付物</strong>（GUIDE 排期表、联动提案初稿直接在聊天里生成并改，导出 xlsx/pptx 本地精修，注意移动端只支持 PDF）。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
