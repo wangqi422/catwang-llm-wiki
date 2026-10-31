@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.10.31</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.10.31 &middot; 星期六 &middot; 第 84 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">i. Capability &amp; Capital</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 能力 &amp; 资本</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Suncatcher 在轨推理</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>英特尔 1974 年来最差</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>千问进 Apple 智能</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">ii. Security &amp; Trust</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🛡️ 安全 &amp; 信任</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Wiz 黑色十月</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>GLM 5.3 补丁窗口期</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Cursor 扩展后门</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">iii. Trends &amp; Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📈 趋势 &amp; 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Stack Overflow 969 条</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Figma Weave</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.10.31 &middot; Sat &middot; Issue 84</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>算力被送上天，账单被摆上桌</strong>。一边是谷歌把数据中心级 TPU 送上近地轨道，第一次在地球之外跑出一次完整的 AI 回答——一首俳句，代价是每颗芯片只能工作 <strong>20 分钟</strong>；另一边是华尔街用英特尔 <strong>1974 年以来最惨的一天</strong>（-28.58%）把 AI 资本开支的账单拍在桌面：四大厂今年合计 <strong>7400 亿美元</strong>投入，第一次被财报同时拷问回报 &middot; 夹在中间的是信任：一个月内 <strong>9 个 AI 开发者平台</strong>接连被攻破、Cursor 市场里被塞进带 SSH 后门的 Claude Code、开源模型自己把<strong>补丁窗口期</strong>变成了武器 &middot; 而 Stack Overflow 的月提问量跌到 <strong>969 条</strong>，比 2020 年少了 <strong>99.3%</strong> &middot; 工具侧唯一的好消息来自 Figma：<strong>Weave</strong> 把创作流程做成可复用的节点工作流</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 能力 &amp; 资本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛡️ 安全 &amp; 信任</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📈 趋势 &amp; 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.10.31 &middot; 第 84 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Capability &amp; Capital</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 能力 &amp; 资本</div>
+    <div class="section-sub">三条都在讲「边界」—— 谷歌把算力边界推到近地轨道，英特尔把资本边界撞在产能上，苹果把落地边界交给一家中国模型厂商</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Project Suncatcher「Hello World」：在轨 TPU 首次产出 AI 响应，Gemma 4 在太空写俳句</span>
+        <span class="card-tag">🛰️ 太空算力</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日谷歌宣布 Project Suncatcher（逐日者计划）原型卫星达成 <strong>Hello World</strong> 里程碑：在一次地面站过站窗口内，团队上行发送首个提示词，要求星上预装的 <strong>Gemma 4</strong> 开放模型写一首关于身处太空的俳句；卫星经过挪威斯瓦尔巴上空时下行回传，确认这是<strong>数据中心级 TPU 首次在轨产出 AI 响应</strong>。这颗卫星 10 月 1 日随 SpaceX 猎鹰 9 号（Transporter-18，与 Planet 卫星同行）发射，此后约三周完成主机加电、TPU 托盘加电与早期机器学习测试的调试清单。<strong>硬件约束才是真新闻</strong>：卫星搭载 <strong>4 颗谷歌自研 TPU</strong>、发电能力上限约 <strong>1 千瓦</strong>；受供电与散热限制，一次只能启动一颗，且只能连续工作约 <strong>20 分钟</strong>，天地通信窗口因此变得极其难排。<strong>验证的是链路，不是诗</strong>：真正被证明的是「上行指令 → 在轨推理 → 下行结果」这条端到端链路成立；工程师随后还测试了太空主题打油诗与上报载荷状态的遥测类提示。<strong>下一个对手是辐射</strong>：后续重点是热应力与空间辐射下的芯片表现，辐射可能引发存储单元<strong>比特翻转</strong>，在未触发常规监控的情况下污染计算结果——谷歌此前只在地面粒子加速器做过验证，而推理对辐射的耐受性被认为优于训练。<strong>路线图</strong>：若可靠性得到验证，谷歌计划 <strong>2027 年发射两颗互联的后续卫星</strong>，拥有更强发电能力并演示星间光学（激光）通信，最终目标是近地轨道上的推理计算集群。<strong>差异化定位</strong>：Starcloud 已在 2025 年把 H100 送上天，谷歌强调的「数据中心级 TPU + 多星光学互联」是它与前者的分野；辐射错误率、热循环、单位算力成本三项指标目前都还没公布。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">TPU</div><div class="data-value">4 颗 / 1kW</div></div>
+<div class="data-chip"><div class="data-label">单次运行</div><div class="data-value">约 20 分钟</div></div>
+<div class="data-chip"><div class="data-label">发射日</div><div class="data-value">10 月 1 日</div></div>
+<div class="data-chip"><div class="data-label">下一步</div><div class="data-value">2027 双星互联</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">AI 资本开支反噬：英特尔暴跌 28.58% 创 1974 年来最差，费半跌 7.2%</span>
+        <span class="card-tag">📉 行业变局</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日美股收盘，英特尔暴跌 <strong>28.58%</strong>（收 65.76 美元），录得 <strong>1974 年以来最差单日表现</strong>，市值一夜蒸发超 1400 亿美元，美国政府所持 10% 股份价值缩水约 120 亿美元。费城半导体指数收跌 <strong>7.2%</strong>，闪迪跌 13.47%、高通跌 11.12%、AMD 跌 10.88%、SK 海力士跌 7.95%；纳指跌 2.86%，10 月累跌 5.3% 为 2025 年 3 月以来最差单月。同日苹果以 <strong>5.03 万亿美元</strong>市值反超英伟达（4.93 万亿），重回全球第一。<strong>直接的导火索是产能，不是需求</strong>：英特尔 Q3 营收 165 亿美元同比增 21%，数据中心与 AI 业务（DCAI）营收 73 亿美元同比暴增 <strong>78%</strong>；但公司承认客户需求持续显著超过现有供应能力，卡在 Intel 3 晶圆产能与<strong>先进封装用高端有机基板短缺</strong>两处，限制可能延续到 2027 年。<strong>Q4 指引全线低于预期</strong>：营收 150–160 亿美元（分析师预期约 170 亿）、Non-GAAP 毛利率从 43% 降至约 37–38%、EPS 0.25 美元（预期 0.43）、2026 全年自由现金流仍为负；10 月中旬以色列基里亚特盖特晶圆厂事故停产约两周，另减收约 3 亿美元。<strong>AI 正在挤压自己的腹地</strong>：数据中心抢走 HBM 与服务器 DRAM 产能，内存涨价传导到整机，英特尔预计 <strong>2026 年全球 PC 出货降约 12%</strong>（下半年降超 20%）、2027 年再降约 10%，客户端业务 Q3 已同比降 5%。<strong>代工仍是缺口</strong>：18A 已量产且内部产品渗透率接近三分之一，但 Q3 晶圆代工 67 亿美元营收里外部客户仅 <strong>4.11 亿美元</strong>，同期营业亏损 19 亿美元。<strong>市场情绪的转折点是回报</strong>：Alphabet、Amazon、Meta、Microsoft 今年计划资本开支合计超 <strong>7400 亿美元</strong>，投资者关注点已从奖励大额投入转向负自由现金流、债务攀升与回报不确定——这直接抬高了 Anthropic 十一月 IPO 的募资难度。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">单日跌幅</div><div class="data-value">-28.58%</div></div>
+<div class="data-chip"><div class="data-label">费城半导体</div><div class="data-value">-7.2%</div></div>
+<div class="data-chip"><div class="data-label">DCAI 增速</div><div class="data-value">+78%</div></div>
+<div class="data-chip"><div class="data-label">四大厂 capex</div><div class="data-value">超 7400 亿美元</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">苹果官宣 Apple 智能接入阿里千问：11 月 4 日 Beta，12 月随 iOS 27.3 落地</span>
+        <span class="card-tag">🍎 模型落地</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日苹果与阿里巴巴宣布达成合作，将<strong>千问集成至 Apple 智能</strong>。中国用户可在 Siri、系统级写作工具与视觉智能中直接调用千问的文本与图像理解、内容生成能力。相关功能 <strong>11 月 4 日</strong>起随最新 iOS 开发者 Beta 开放测试，<strong>12 月 iOS 27.3 正式发布</strong>时面向中国用户推出，适用于在中国购买的支持 Apple 智能的 iPhone，或设备定位与 Apple 账户地区均设为中国的用户。<strong>三个入口都是系统级的</strong>：Siri 可直接调用千问的知识作答，也能基于用户选定的文档与照片提问；写作工具里新增<strong>千问创作</strong>（Compose with Qwen），可基于任意主题生成内容甚至生成图像；视觉智能里可「询问千问」识别眼前所见，通过相机控制、操作按钮或控制中心唤起。<strong>隐私设计是这次合作的卖点</strong>：用户自主选择是否开通，启用后可用 Apple 登录或千问 App 账户登录；任何问题、文档、图片发送给千问前都会先征得用户同意；用户请求与生成的回复<strong>不会被阿里巴巴用于模型训练</strong>。<strong>苹果的中国方案终于落地</strong>：此前 Apple 智能在中国长期缺位，此次等于把最敏感的一块交给本土模型厂商——这既是合规选择，也是用户体验上的最短路。<strong>对阿里是一次量级跃迁</strong>：千问由此获得 iPhone 系统级的入口与默认心智，C 端触达规模与 AI 助手的定位都将重估；同时也把「国产模型进国际大厂系统」这件事第一次做成。<strong>对竞品的压力是即时的</strong>：国内其他手机厂商的自研大模型加系统助手叙事，需要直面一个被苹果背书、且明确不打训练算盘的对手。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">Beta 开放</div><div class="data-value">11 月 4 日</div></div>
+<div class="data-chip"><div class="data-label">正式发布</div><div class="data-value">12 月 iOS 27.3</div></div>
+<div class="data-chip"><div class="data-label">入口</div><div class="data-value">Siri · 写作 · 视觉</div></div>
+<div class="data-chip"><div class="data-label">训练承诺</div><div class="data-value">不用于训练</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Security &amp; Trust</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛡️ 安全 &amp; 信任</div>
+    <div class="section-sub">三条合起来是一次信任压力测试—— 平台侧一个月被洗掉 9 家，模型侧把补丁窗口期变成武器，工具侧连官方扩展 ID 都不可信</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Wiz 报告「黑色十月」：一个月内 9 个 AI 开发者平台披露安全事件</span>
+        <span class="card-tag">🔓 LLMJacking</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日 Wiz 研究团队发布报告，梳理 10 月内至少 <strong>9 个 AI 开发者平台</strong>披露的安全事件：Fireworks AI（10/6）、Andromeda（10/9）、Zeabur（10/14）、Lightning AI（10/15）、OpenCode（10/16–17）、Railway（10/20）、Warp（10/23）、CommandCode（10/28）、Northflank（10/30）。Wiz 的判断是：这不是散点事件，而是一轮以<strong>窃取 AI 凭据</strong>为目标的规模化行动。<strong>没有共同漏洞，只有共同目标</strong>：Fireworks、Zeabur、Lightning 归因于凭据访问；Railway 称是构建基础设施内的权限提升；Warp 指向第三方供应商依赖；OpenCode 归因于遗留系统。但所有公开报告的共性是<strong>定向搜刮环境变量</strong>，尤其是那些授予 AI 访问权限的变量。<strong>多家指向智能体蜂群</strong>：Fireworks、OpenCode、Warp 都报告了 agent swarm 攻击迹象；Andromeda 称自己是全行业攻击的一部分；OpenCode 与 CommandCode 明确归因于<strong>蒸馏</strong>企图。<strong>下游滥用快得吓人</strong>：Wiz 观察到两条被盗的企业密钥，在厂商披露凭据泄露后 <strong>30 分钟内</strong>就出现了首次未授权调用——从住宅 IP 发起的单次 InvokeModel，在一分钟内扫过多个组织测试密钥；随后数天每天只有 14–120 次心跳验证调用。<strong>一旦放行就是洪峰</strong>：其中一条密钥在初始验证四天后被轮换代理池用来做模型目录探测（Amazon Nova、DeepSeek、GPT-6 Astra、Kimi、GLM、Grok 等），30 小时内发起约 <strong>80 万次 Bedrock 调用</strong>，成功率约 90%，流量高度集中在 Opus 系列。<strong>后果已经有人承担</strong>：Zeabur 已发布完整复盘并宣布因该事件<strong>关停</strong>；社区里有约 37.1 万美元加密货币因存放在 Railway 的密钥被盗的报告（未经证实）。<strong>Wiz 的处方很朴素</strong>：没有补丁可打，只能轮换密钥、收紧密钥策略、设置配额上限。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">平台数</div><div class="data-value">9 个</div></div>
+<div class="data-chip"><div class="data-label">首次滥用</div><div class="data-value">泄露后 30 分钟内</div></div>
+<div class="data-chip"><div class="data-label">Bedrock 调用</div><div class="data-value">约 80 万次 / 30h</div></div>
+<div class="data-chip"><div class="data-label">归因</div><div class="data-value">凭据 · 蜂群 · 蒸馏</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Epoch AI：开源模型 GLM 5.3 借补丁窗口期自主攻破 6 个 Firefox 版本</span>
+        <span class="card-tag">🛡️ 模型安全</span>
+      </div>
+      <div class="card-desc">
+        Epoch AI 于 10 月 29 日发布研究：Z.ai 于 8 月发布的<strong>开源权重模型 GLM 5.3</strong>，能够利用<strong>补丁窗口期</strong>（patch gap，安全修复公开但尚未推送到用户之间的时间差）自主构建针对 Firefox 的零点击攻击。在 9 月 17 日至 10 月 26 日发布的<strong>全部六个 Firefox 版本</strong>（156.0、156.0.1、157.0、157.0.1、158.0、158.0.1）上，模型仅凭各版本发布时点可获得的公开信息就完成了攻击：用户只需访问一个网页，浏览器就会读取本地文件并发送给攻击者。<strong>成本与门槛双双塌方</strong>：搭建好 harness 后，攻破一个新 Firefox 版本的边际成本约 <strong>1000 美元</strong> API 费用；单次尝试最长 48 小时，最快 12 小时；模型在设置完成后无需人类输入。<strong>伪装过的补丁也能读出来</strong>：为了拖慢攻击者，已发布的安全修复通常被伪装成普通改进且不披露漏洞细节，GLM 5.3 仍能读代码判断哪些改动与安全相关。<strong>每次都额外挖出一个未公开漏洞</strong>：六次成功攻击全部串联了两个缺陷——一个来自补丁窗口期的落脚点，外加一个模型每次都能重新发现的<strong>未公开沙箱逃逸</strong>；Epoch 已向 Mozilla 披露，Firefox 159.0（10 月 27 日发布）已修复。<strong>没有任何护栏被触发</strong>：Epoch 通过 Z.ai 自家 API 与第三方 API 调用 GLM 5.3，包括 Z.ai 在内的所有供应商都没有触发拒答或安全护栏。<strong>Chrome 暂时没被打下来</strong>：同样的 harness 在 Chrome 上花了约 10 万美元仍未成功，但 Epoch 明确表示这不能证明 Chrome 安全；Kimi K3.1 Pro 等在攻击性网络任务上可能更强，尚未测试。<strong>真正的风险在更新慢的软件</strong>：Epoch 特别点名路由器固件、手机操作系统这类用户更新频率低的产品，补丁窗口期更长、后果更严重。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">攻破版本</div><div class="data-value">6 个 Firefox</div></div>
+<div class="data-chip"><div class="data-label">边际成本</div><div class="data-value">约 1000 美元</div></div>
+<div class="data-chip"><div class="data-label">最快用时</div><div class="data-value">12 小时</div></div>
+<div class="data-chip"><div class="data-label">护栏触发</div><div class="data-value">0 次</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Cursor 市场里的 Claude Code 扩展被植入 SSH 后门，最多波及 5000 用户</span>
+        <span class="card-tag">🧷 供应链攻击</span>
+      </div>
+      <div class="card-desc">
+        Cursor 于 10 月 29 日发布安全公告：其 VS Code 扩展市场中上架的 <strong>Anthropic.claude-code 2.1.313</strong> 版本遭恶意篡改，会运行恶意代码试图植入长期生效的 SSH 后门。暴露窗口为太平洋时间凌晨约 2:27 至下午 1:35（<strong>约 11 小时</strong>），<strong>受影响用户最多 5000 名</strong>。该恶意版本并非 Anthropic 开发；Anthropic 已发布 2.1.314 版本。Cursor 在下架该包后出于审慎<strong>全面关闭了 VSCode Marketplace</strong>，审计确认其他扩展未被篡改，并轮换自己的密钥后恢复。<strong>不是假扩展，是正版身份加恶意载荷</strong>：包名与扩展 ID 仍是官方的 anthropic.claude-code，只是在主 JS bundle 的合法代码之前插入了一段 <strong>66 行恶意 loader</strong>——开着自动更新的用户会直接吃到。<strong>行为链条完整</strong>：VS Code 启动或 webview 打开后激活，把攻击者控制的 SSH 密钥（标注为 svc-telemetry 以伪装无害）写入 authorized_keys，尝试开启本地 SSH 服务并建立反向隧道，再通过 LaunchAgent（macOS）或计划任务与 crontab（Windows/Linux）做持久化，后台脚本约每 60 秒重试一次。<strong>回传的是侦察数据</strong>：通过明文 HTTP POST 到 8099 端口的 beacon，内容包括公网 IP、主机名与用户名、操作系统与架构、主目录与工作目录、全局 Git 邮箱，以及<strong>最多 40 个含 KEY/TOKEN/SECRET/PASS/AWS/GCP 的环境变量名</strong>（不含值，但足以暴露云厂商与凭据类型）。<strong>最关键的一点</strong>：开启本地 SSH 服务需要管理员权限，在多数 macOS 与 Windows 主机上这一步会失败，攻击者无法登录；但写入 SSH 密钥、安装持久化、外发主机信息这三件事照常发生，且升级到最新版并不能清除已安装的持久化机制。<strong>不是孤例</strong>：此前一周多，攻击者刚用被劫持的贡献者 GitHub 账号，把 OVHcloud 官方 CLI 五个已发布版本的二进制替换为窃密木马（GlassWorm 行动）。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">暴露窗口</div><div class="data-value">约 11 小时</div></div>
+<div class="data-chip"><div class="data-label">影响用户</div><div class="data-value">最多 5000 名</div></div>
+<div class="data-chip"><div class="data-label">恶意 loader</div><div class="data-value">66 行</div></div>
+<div class="data-chip"><div class="data-label">环境变量名</div><div class="data-value">最多 40 个</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Trends &amp; Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📈 趋势 &amp; 工具</div>
+    <div class="section-sub">一条讲知识供给断流，一条讲流程可以沉淀—— 前者是警告，后者是解药</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Stack Overflow 月提问跌破 1000：9 月仅 969 条，较 2020 年下降 99.3%</span>
+        <span class="card-tag">📚 趋势信号</span>
+      </div>
+      <div class="card-desc">
+        本周 Hacker News 的一条讨论称 Stack Overflow 每月新增提问已不足 1000 条。开发者 frank chu 没有直接采信图表，而是调用 Stack Exchange API 的 questions 接口按月重新统计：<strong>2026 年 9 月新增提问仅 969 条</strong>（8 月 1019 条，10 月截至 29 日已 977 条），为有记录以来最低。对比之下：2025 年 10 月 5263 条（同比 <strong>-81.6%</strong>）、2024 年 10 月 23162 条（<strong>-95.8%</strong>）、2020 年 10 月 141749 条（<strong>-99.3%</strong>）；而 2014 年 3 月的峰值曾达 <strong>20.71 万条</strong>每月。<strong>数据可核验，但原因不可分离</strong>：这份统计证伪了「数据没变差、只是社区氛围悲观」的自我安慰——下滑是真实的、可通过官方 API 复核的。但它无法区分三个诱因各自的贡献：开发者转向 AI 求解、新用户留存长期走弱、长达十年的社区治理矛盾。<strong>拐点就在最近这几个月</strong>：8 月 1019、9 月 969，跌破千条的时刻恰好落在当下，说明这不是一条已经走完的长坡，而是正在发生的断点。<strong>次生影响更值得警惕</strong>：存量知识库依然庞大，但新增内容几乎停滞，平台正在从问答社区转为<strong>技术档案馆</strong>。这意味着未来模型训练所依赖的高质量人类问答语料，正在失去它的活水源头。<strong>与 Reddit 形成呼应</strong>：同一周 Reddit 宣布把登录设为默认体验，CEO 称 Google AI Mode 不带来流量、10 月每周流失超 100 万搜索访问——公开的、可被抓取的人类知识正在系统性地收口。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">2026 年 9 月</div><div class="data-value">969 条</div></div>
+<div class="data-chip"><div class="data-label">同比 2025</div><div class="data-value">-81.6%</div></div>
+<div class="data-chip"><div class="data-label">对比 2020</div><div class="data-value">-99.3%</div></div>
+<div class="data-chip"><div class="data-label">历史峰值</div><div class="data-value">20.71 万条 / 月</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Figma 发布 Weave：节点化创作工作流，让团队的创意流程可复用</span>
+        <span class="card-tag">🎨 创作工具</span>
+      </div>
+      <div class="card-desc">
+        Figma 宣布推出 <strong>Figma Weave</strong>——一个把 AI 生成与编辑工具组织成<strong>可连接、可复用工作流</strong>的创作平台，并把 Weave 的工作流与 Figma 画框打通。核心概念是三件套：<strong>Node</strong>（画布上的单个构建块）、<strong>Workflow</strong>（相互连接的节点，把起始素材变成成品）、<strong>Branch</strong>（从同一起点探索不同方向的分支路径）。<strong>把过程变成资产</strong>：节点承载图像与视频的生成与编辑并连成图，团队能回到任意早期节点改参数，也能把整套工作流套到新产品或新格式上——这是从「出一张图」到「沉淀一条产线」的转变。<strong>多模型并排对比是刚需解法</strong>：同一个提示词可以跑不同 AI 模型并排比较结果，每个版本都保留产生它的步骤链路，方便在提交方向前回到早先的方案。<strong>编辑节点补齐了后期环节</strong>：Color correction（色相与饱和度）、Compositor（图层合成）、Levels（影调）、Trim（剪辑截断）、Crop（裁切与尺寸预设）、Painter（笔刷绘制）——不必跳出 Weave 去别的软件收尾。<strong>工作流可以打包成 Weave tool</strong>：把一条跑通的工作流封装成工具，别人无需理解底层节点就能直接运行；Figma 社区已有现成工具可试用。<strong>典型用法正对着宣发场景</strong>：不做新一轮拍摄就产出产品多变的图像、把一套视觉适配到不同渠道与市场的格式、从参考图生成镜头或精修已有片段——基本就是宣发物料生产的日常。<strong>还能被智能体调用</strong>：10 月 26 日的更新显示，Weave 中的视频与图像模型（如 Seedance、Kling、Nano Banana）已可通过 Figma MCP 由外部 AI 智能体直接调用。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">核心概念</div><div class="data-value">Node · Workflow · Branch</div></div>
+<div class="data-chip"><div class="data-label">编辑节点</div><div class="data-value">6 类</div></div>
+<div class="data-chip"><div class="data-label">可封装</div><div class="data-value">Weave tool</div></div>
+<div class="data-chip"><div class="data-label">智能体调用</div><div class="data-value">已支持 MCP</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>AI 的能力已经越过某条线，而承接它的系统还没跟上</strong>。</p>
+    <p>三条主线同时展开：<strong>① 边界被推到物理极限</strong>（谷歌把数据中心级 TPU 送上天，第一次在地球之外跑完一次推理，代价是每颗芯片只能工作 20 分钟；英特尔一天跌掉 1974 年以来最大的一截，暴露的是资本与产能的边界；苹果把 Apple 智能在中国的最后一块拼图交给千问）—— <strong>AI 的扩张开始同时碰到物理、资本与合规三道墙</strong>。<strong>② 信任被系统性压测</strong>（9 个 AI 开发平台一个月内被洗一遍、开源模型把补丁窗口期变成 1000 美元一次的武器、官方扩展 ID 下被塞进 66 行后门）—— <strong>攻击者已经不攻击模型，而是攻击模型周围的凭据、市场与更新流程</strong>。<strong>③ 知识的公开增量在断流</strong>（Stack Overflow 月提问跌到 969 条，Reddit 转向登录制）—— <strong>当提问这件事被 AI 接管，下一代模型将失去活的人类推理语料来源</strong>。</p>
+    <p>今天最高分给到 <strong>#1 Project Suncatcher 在轨推理（9.4/P0）</strong>—— 它的重要性不在那首俳句，而在于第一次端到端验证了「算力可以在地球之外被调度」，同时用 20 分钟这个数字诚实地标出了它离商用还有多远。</p>
+    <p>四条可以立刻执行的线索：<strong>① 立刻做一轮凭据轮换</strong>（凡存在 Fireworks、Railway、Warp、Lightning、Zeabur、OpenCode 等第三方平台上的 API 密钥与环境变量，按已泄露假设处理并轮换，同时收紧密钥策略与配额上限）；<strong>② 检查本地 Claude Code 版本</strong>（确认已升到 2.1.314，并按 Cursor 公告清理 authorized_keys 与持久化机制，仅升级不足以清除）；<strong>③ Figma Weave 走通宣发产线</strong>（把版本物料、渠道适配与多语言尺寸的批量产出固化成节点工作流，配合 MCP 让智能体直接调用 Seedance / Kling 等模型）；<strong>④ 外链安全红线</strong>（GLM 5.3 的补丁窗口期攻击说明「访问页面即读本地文件」已是现实威胁，涉及玩家账号与兑换码的页面必须走官方域名与最小权限，不引第三方托管页）。</p>
+  </div>
+</div>
+</div>
+
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
