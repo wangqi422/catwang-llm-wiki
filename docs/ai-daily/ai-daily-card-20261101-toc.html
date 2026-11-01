@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.01 &middot; 星期日 &middot; 第 85 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>ChatGPT+Codex 合池</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>商汤 Loop-9B</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>DeepSeek Super-agent</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">Capital &amp; Industry</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>💰 资本 &amp; 行业</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 融资砍 100 亿</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Anthropic 9000 亿债务</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Roblox 7 万 AI 游戏</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">Tools &amp; Guardrails</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🛠️ 工具 &amp; 护栏</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Kimi 3D Make</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude 禁复刻游戏</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.01 &middot; Sun &middot; Issue 85</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>收紧的和放量的，是同一件事</strong>。收紧的一侧：OpenAI 把 ChatGPT 与 Codex 塞进同一个 <strong>Token 池</strong>，12 月起聊天和写代码抢同一份额度；融资目标从 300 亿美元砍到 <strong>200 亿</strong>，估值从 1.4 万亿降到 <strong>1.25 万亿</strong>；Anthropic 招股书里藏着近 <strong>9000 亿美元</strong>的表外义务，是账面负债的 8 倍 &middot; 放量的一侧：商汤用 <strong>32 层权重跑出 56 层计算</strong>，9B 参数去够 27B 的表现；DeepSeek 把 Agent 拆成 <strong>Router + Worker</strong> 双层调度，多任务完成时间从 <strong>29.5 分钟压到 12.4 分钟</strong>；Roblox 上 AI 游戏突破 <strong>7 万款</strong>，9 月时长 Top 100 里 <strong>超 80%</strong> 用了 AI 辅助；Kimi 的 <strong>3D Make</strong> 把建模压成一句话，还直接给出能改的 <strong>.blend 工程文件</strong> &middot; 而收紧的尽头是护栏 —— Anthropic 往 Claude Code 里加了一句话：<strong>不许复刻某一款具体存在的游戏</strong> &middot; 同场：谷歌编码智能体 <strong>Jules 年底关停</strong>并入 Antigravity、Claude <strong>Max 20x 更名 Ultra</strong> 并取消已验证账户的 5 小时限制</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💰 资本 &amp; 行业</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛠️ 工具 &amp; 护栏</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.01 &middot; 第 85 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">三条都在讲「把省下来的算力用得更深」—— OpenAI 把额度从两笔账并成一笔，商汤用循环把 32 层跑成 56 层，DeepSeek 把调度从人手里接走</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 12 月起 ChatGPT 与 Codex 共享统一 Token 额度，Instant 聊天不计费</span>
+        <span class="card-tag">🎟️ 订阅策略</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日深夜至 11 月 1 日凌晨，OpenAI 官方支持页面上线新文档《理解 ChatGPT 与 Codex 使用限制》，宣布<strong>从 12 月开始</strong>，随着把 ChatGPT Work 的智能体能力并入 ChatGPT 主体验，<strong>Plus、Pro、Business 三档订阅在 ChatGPT 与 Codex 之间共享同一份使用额度</strong>。<strong>计费口径同时切换</strong>：不再按「几小时内能发多少条消息」计数，而是<strong>统一按 Token 计量</strong>，实际消耗速度取决于所选模型与任务复杂度——调用更高级的模型、执行更复杂的推理和长代码任务，消耗更快。官方给了唯一的豁免：<strong>Instant Chat（即时聊天）不占额度</strong>，仍然无限量供应。<strong>额度耗尽后只有三条路</strong>：等待自动重置、升级到更贵档位、增购 Credits。官方承诺「绝大多数用户等待重置的频率不会高于此前」，但<strong>并未公布各档位的 Token 总盘子与跨模型折算表</strong>——这正是社区质疑「是否变相缩水」的焦点。<strong>配套动作几乎同时发生</strong>：OpenAI 上线了严厉的「设备绑号上限」，一台设备绑定过多付费账号会被直接封锁。<strong>背景值得注意</strong>：此前一个月内 Codex Pro 额度刚经历「先降后恢复」的运营反复，叠加 IPO 预期下的算力成本压力，这次合池被普遍解读为成本侧的必然动作。usage 面板将在设置中统一显示合并后的剩余额度与下次重置时间。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">生效时间</div><div class="data-value">2026 年 12 月</div></div>
+<div class="data-chip"><div class="data-label">计量方式</div><div class="data-value">统一按 Token</div></div>
+<div class="data-chip"><div class="data-label">豁免</div><div class="data-value">Instant 聊天</div></div>
+<div class="data-chip"><div class="data-label">覆盖套餐</div><div class="data-value">Plus/Pro/Business</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">商汤开源 SenseNova Loop-9B-Preview：32 层权重跑出 56 层计算，9B 对标 27B</span>
+        <span class="card-tag">🔁 循环架构</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日晚，商汤开源日日新 <strong>SenseNova Loop-9B-Preview</strong>，权重与代码分别上 Hugging Face 与 GitHub，<strong>Apache 2.0</strong> 许可——可商用、可修改、可再分发。核心思路是 <strong>Looped Transformer</strong>：模型共 32 个独立解码器层，首尾各 4 层正常跑，中间第 4–27 层共 24 层<strong>共享权重执行两遍</strong>（写作 B(B(h))），一次前向完成约 <strong>56 次层计算</strong>，却只需存 32 层权重。规格上：总参数约 <strong>9B</strong>、推理时实际参与计算约 <strong>14.6B</strong>，训练上下文最长 <strong>262,144 token</strong>，文本 + 图像输入、文本输出。<strong>mHC（流形约束超连接）</strong>是为防第二遍循环把信号洗糊加的关键设计：两条残差流 + Sinkhorn 归一化的可学习映射（迭代 20 次）负责路由与融合；注意力每 4 层一组，3 层线性 + 1 层全注意力，循环边界正好对齐整组。<strong>实测（厂商自报）</strong>：对 Qwen3.5-27B，BIRD-Dev <strong>71.38 : 69.84</strong>、WorkBuddy Bench <strong>66.89 : 60.53</strong>、RaccoonPPT <strong>70.70 : 59.08</strong>、TeamBench <strong>48.89 : 44.44</strong> 均反超；但 Terminal Bench 2.1 <strong>40.45 : 47.19</strong>、T³-Banking <strong>18.56 : 19.59</strong> 落后。mHC 消融：GPQA Diamond <strong>+4.42</strong>、TeamBench <strong>+13.34</strong>。<strong>代价要说清</strong>：省的是显存里的参数，不是每个 token 的算力——56 次层计算照样跑，首 token 延迟更高、长文本吞吐吃亏；技术报告仍标 TBD，RaccoonPPTBench 是商汤自研评测集。部署上 BF16 权重接近 18GB，<strong>单张 24GB 显卡可跑</strong>，加载需 <code>trust_remote_code=True</code>，10 月 31 日登上 HF 趋势榜。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">参数</div><div class="data-value">约 9B / 推理 14.6B</div></div>
+<div class="data-chip"><div class="data-label">层计算</div><div class="data-value">32 层存 · 56 次算</div></div>
+<div class="data-chip"><div class="data-label">上下文</div><div class="data-value">256K</div></div>
+<div class="data-chip"><div class="data-label">许可证</div><div class="data-value">Apache 2.0</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">DeepSeek 开源 Super-agent：Router + Worker 双层架构，多任务耗时砍半</span>
+        <span class="card-tag">🤖 Agent 架构</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日晚，DeepSeek Harness 团队发布《Super-agent 设计探索：迈向更自主的 Agent 系统》，并开源研究原型 <strong>dsh-superagent-prototype</strong>（MIT 协议，当晚接近 1095 star）。它不是新产品，而是一套把<strong>调度与上下文同步从人手上移到系统层</strong>的架构。<strong>问题定义很实在</strong>：一个人通常只能同时跟进 <strong>3–5 个活跃会话</strong>——瓶颈已经不在模型，而在人的注意力。<strong>Router 层</strong>是常驻全局节点，统一接群聊 / GitHub / 邮件入口消息，<strong>只分派不干活</strong>（甚至可以连 Bash 工具都不配），用轻量模型即可；上一轮推理期间积压的事件会自动合并批处理，单个决定分摊的推理时间从 <strong>6.4 秒降到 1.6 秒</strong>。<strong>Worker 层</strong>各自独立上下文、挂完整工具、配最强模型，负责复现问题 / 代码审查 / 功能开发；Worker 不直接对人说话，只向 Router 汇报，由 Router 统一回复。<strong>订阅与直通</strong>是省钱的关键：Worker 创建后直接订阅对应 Thread，后续事件程序直通、不再绕 Router；实测取消直通后 Router 决策次数增加约 <strong>30%</strong>，缓存读取 token 从 2323 万涨到 3177 万（<strong>+37%</strong>）。<strong>投机执行</strong>借鉴分支预测：有人反馈 Bug，Agent 先在后台复现、分析、找简单修复，确认有价值才提交，否则保持安静。配合<strong>两级事件过滤</strong>（程序规则 Fast Path 先筛噪音，LLM Slow Path 再判）、<strong>存算分离</strong>（执行在云端、状态存数据库、本地只留轻量 daemon，关机不停）与<strong>外部 Watchdog</strong>。<strong>实测数据</strong>：模拟 300 条消息 / 20 个工作请求环境，Super-agent 任务完成时间<strong>中位数 12.4 分钟、95 分位 15.7 分钟</strong>；传统单 Session + Subagent 方案 95 分位为 <strong>29.5 分钟</strong>——快了近一倍，代价是 Token 消耗上升。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">完成时间</div><div class="data-value">中位 12.4 分钟</div></div>
+<div class="data-chip"><div class="data-label">对照组</div><div class="data-value">95 分位 29.5 分钟</div></div>
+<div class="data-chip"><div class="data-label">批处理</div><div class="data-value">6.4s → 1.6s</div></div>
+<div class="data-chip"><div class="data-label">许可</div><div class="data-value">MIT 开源原型</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Capital &amp; Industry</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">💰 资本 &amp; 行业</div>
+    <div class="section-sub">三条合起来是一次「账单兑现」—— 融资目标砍掉三分之一、表外义务浮出水面，而游戏行业第一次交出了 AI 渗透率的硬数字</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">OpenAI 融资目标砍 100 亿至 200 亿美元，估值从 1.4 万亿降到 1.25 万亿</span>
+        <span class="card-tag">📉 资本纪律</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日，据 FT 与彭博援引知情人士：<strong>OpenAI 把最新一轮融资目标从 300 亿美元下调至约 200 亿美元</strong>，削减 100 亿（降幅 33.3%）；对应估值目标从 <strong>1.4 万亿美元下调至 1.25 万亿美元</strong>，缩水 1500 亿（降幅约 10.7%，约合人民币 1.06 万亿元）。公司此前把这笔交易宣传为「明年 IPO 前最后一次入场机会」。<strong>更关键的是结构变化</strong>：OpenAI 已设定出资承诺截止日（周五），部分投资者缩减认购额度，<strong>首次交割预计到位资金不足 200 亿</strong>，后续还需靠面向高净值个人的零售配售补足。目前已获约 <strong>110 亿美元</strong>承诺。<strong>为什么缩</strong>：科技股集中抛售（纳斯达克 100 当日跌 3.5%、纳指跌 2.9%、较 10 月 6 日高点回撤约 7.8%、10 月创去年 3 月以来最差单月）+ 市场对 AI 支出规模与回报周期的担忧 + <strong>Anthropic 即将上市分流同一批机构资金</strong>。<strong>谁在出钱</strong>：阿联酋财团（含国有科技基金 MGX）预计为最大参与方，OpenAI 同时获得在该地区租赁新建算力的选择权；Founders Fund、Coatue、红杉、a16z 与软银计划跟投，各方均拒绝置评。<strong>估值路径</strong>：今年 3 月上一轮融资后 8520 亿美元 → 7 月后一度喊到 1.4 万亿 → 现在 1.25 万亿。<strong>行业信号</strong>：不是 AI 需求被下调，而是<strong>风险定价被重校</strong>——融资照做，但「少拿一点、价格低一点、交割稳一点」，从估值驱动转向资本纪律。传导链条是融资 → 资本开支 → 设备订单，产业链需要重新区分「确定性订单」和「估值预期订单」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资目标</div><div class="data-value">300 亿 → 200 亿美元</div></div>
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">1.4 万亿 → 1.25 万亿</div></div>
+<div class="data-chip"><div class="data-label">已承诺</div><div class="data-value">约 110 亿美元</div></div>
+<div class="data-chip"><div class="data-label">纳指当日</div><div class="data-value">-2.9%</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Anthropic IPO 招股披露近 9000 亿美元隐性债务，黑石只给投机级评级</span>
+        <span class="card-tag">🧾 表外义务</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 于 10 月 26 日向 SEC 提交 IPO 注册文件（有望成为人类史上最大 IPO，市场预期估值约 1.5 万亿美元）。彭博 10 月 31 日报道：<strong>招股文件显示公司计划通过远期履约义务，在服务器、建筑与电力等领域投入近 9000 亿美元</strong>（约合人民币 6 万亿元）——是账面负债的近 8 倍。账面口径是负债 <strong>1175 亿美元</strong>、现金 <strong>1120 亿美元</strong>，真正的故事全在财务报表附注里。<strong>拆解表外义务</strong>：表外采购协议规模从去年 12 月到今年 6 月<strong>翻至四倍、达 2656 亿美元</strong>，多数绑定云托管与基础设施合作，期限最长 <strong>20 年</strong>；尚未起租的租约总额 <strong>3210 亿美元</strong>；其余算力安排（含租约与修订协议）远期支出 <strong>2450 亿美元</strong>；另有 210 亿短期合作项目、8 亿数据中心开发成本担保；7 月向 AMD 采购 GPU 及相关硬件超 <strong>200 亿美元</strong>。<strong>为什么看不见</strong>：公司正从「租算力」转向「自建数据中心」，德克萨斯大学会计学教授 Patrick Badolato 指出这让业绩与前几年不再可比。Zion Research 分析师 Ravi Gomatam 直言：「<strong>无论公司能不能赚到收入，这些承诺款项都必须支付</strong>。」<strong>估值预期同步下调</strong>：部分投资者讨论的上市估值已从约 2 万亿降到约 <strong>1.5 万亿美元</strong>。<strong>评级预警</strong>：刚参与一笔 630 亿美元 AI 算力设备融资交易的黑石向投资者表示，预计 Anthropic IPO 后可能拿到 <strong>BB 区间</strong>信用评级——属投机级（俗称垃圾级）中较高档。<strong>招股书自述风险</strong>：GPU 价格、未来电价、燃油附加费都可能波动，部分协议含可变成本很难锁定最终金额；社区对数据中心耗水耗电的抵制、低成本开源模型的竞争，都可能让收入覆盖不了成本。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">远期义务</div><div class="data-value">近 9000 亿美元</div></div>
+<div class="data-chip"><div class="data-label">账面负债</div><div class="data-value">1175 亿美元</div></div>
+<div class="data-chip"><div class="data-label">表外采购</div><div class="data-value">2656 亿（一年 4 倍）</div></div>
+<div class="data-chip"><div class="data-label">评级预期</div><div class="data-value">BB 投机级</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Roblox 财报：AI 游戏突破 7 万款，9 月时长 Top 100 超 80% 用 AI 辅助开发</span>
+        <span class="card-tag">🎮 游戏行业</span>
+      </div>
+      <div class="card-desc">
+        Roblox 在 2026 财年 Q3 报告中披露：平台内使用 <strong>Build</strong> 工具创建的 AI 游戏总数已超过 <strong>7 万款</strong>；<strong>9 月游玩时长排名前 100 的游戏里，超过 80% 使用了 AI 辅助开发</strong>。本季度有 <strong>2 款几乎完全由 AI 创作的游戏</strong>进入平台同时在线玩家排行前 20。Roblox 在股东信中称，近三个月「游戏行业的 AI 采用与内容生成出现<strong>拐点</strong>」。<strong>量级来自哪里</strong>：Build 功能 2026 年 7 月底才推出（移动端优先），已有超 <strong>50 万</strong>用户使用；过去五个月平台新增约 7 万款游戏，折合每月约 <strong>1.4 万款</strong>，而 Build <strong>尚未向全部用户开放</strong>。<strong>工具侧增速更陡</strong>：自 Q2 以来，头部创作者使用 AI 工具（含 Build、Studio Assistant 及通过 MCP 接入的外部 AI）的<strong>时长增至原来的 3 倍</strong>；每天使用其 <strong>MCP 服务器</strong>的创作者数量增长近 <strong>5 倍</strong>。<strong>门槛与限制</strong>：Build 面向年满 9 周岁且完成年龄验证的用户开放，已发布的 AI 生成游戏仅面向 <strong>16 岁以上</strong>用户。<strong>平台的下一步是分发</strong>：<strong>Roblox Everywhere</strong>（让 Roblox 游戏走出平台运行）+ <strong>Universal Player</strong>（用 AI 把任意已有主机 / PC / 移动游戏导入 Roblox），目标是把平台做成面向全体开发者的分发入口。<strong>用户结构</strong>：Q3 日活中 18–34 岁占 26%，未满 18 岁占 18%。<strong>股东信的战略判断值得抄下来</strong>：AI 让创作门槛下降后，<strong>分发、用户聚合、变现、发现与安全成为更关键的环节</strong>——护城河从「能不能做出来」转移到「能不能被看见」。背景上，该平台此前曾被指抓取大量三维资产用于 AI 训练。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">AI 游戏</div><div class="data-value">超 7 万款</div></div>
+<div class="data-chip"><div class="data-label">Top100 渗透</div><div class="data-value">超 80%</div></div>
+<div class="data-chip"><div class="data-label">Build 用户</div><div class="data-value">超 50 万</div></div>
+<div class="data-chip"><div class="data-label">月新增</div><div class="data-value">约 1.4 万款</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Tools &amp; Guardrails</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🛠️ 工具 &amp; 护栏</div>
+    <div class="section-sub">一手把 3D 建模压成一句话并输出能改的工程文件，一手给「不许复刻具体游戏」划下第一条 AI 与游戏 IP 的边界 —— 提速和立规发生在同一天</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Kimi 上线 3D Make：一句话或草图 → 云端跑 Blender 脚本，输出可编辑工程文件</span>
+        <span class="card-tag">🧊 3D 内容生产</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日，月之暗面随 <strong>Kimi K3.1 Pro</strong> 上线 <strong>3D Make</strong> 模块：给模型一段文字描述、一张草图或一张参考图，它先推断物体的<strong>形状、比例与空间关系</strong>，再自主编写 <strong>Blender、FreeCAD</strong> 等专业软件的可执行脚本，上传到<strong>云端运行</strong>——相当于让 AI「远程操控」建模软件完成建模。产出文件<strong>可下载、可在线预览</strong>，用户还能用自然语言让它修改尺寸与几何形状，模型重新计算生成，支持多种格式导出。<strong>关键不在精度，在输出形态</strong>：官方演示中一句话可生成带材质分层的室内场景，产出的是<strong>可编辑的 <code>.blend</code> 工程文件</strong>而非静态网格——这意味着它塞进的是现有 DCC 工作流，而不是另起一套。<strong>路径值得抄下来</strong>：自然语言 → 推断几何 → 写脚本 → 云端执行 → 回传工程文件。用可执行脚本当中间层，比端到端生成网格更能保证结构可控、可改。<strong>官方给的场景</strong>包括<strong>组装场景、开发游戏资产</strong>——这是国产模型在 3D 内容生产方向少见的工程化落地。<strong>行业坐标</strong>：Kimi、ChatGPT 等模型都在向 CAD 建模延伸，但行业普遍反映「<strong>所写非所得</strong>」——后台难以真正理解用户意图，距离成熟可用尚远。<strong>冷静看</strong>：效果与描述不吻合的情况仍然常见；脚本路线依赖 Blender / FreeCAD 的能力边界，复杂拓扑与绑定仍要人接手。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">上线时间</div><div class="data-value">2026-10-31</div></div>
+<div class="data-chip"><div class="data-label">输出</div><div class="data-value">可编辑 .blend 工程</div></div>
+<div class="data-chip"><div class="data-label">执行方式</div><div class="data-value">云端跑 Blender 脚本</div></div>
+<div class="data-chip"><div class="data-label">官方场景</div><div class="data-value">搭场景 / 游戏资产</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Anthropic 收紧 Claude：新增「不许复刻现有游戏」规则，逆向工程请求被拦</span>
+        <span class="card-tag">⚖️ 版权护栏</span>
+      </div>
+      <div class="card-desc">
+        多名开发者发现 <strong>Claude Code 与 Opus 5.5 开始拒绝复刻游戏机制、重建现有游戏</strong>。X 用户 Chasm 找到 Claude Code 规则中新增的一条（列于 tengu_heron_brook 之下）：「<strong>可以构建原创游戏、某一类型下的游戏，以及基于用户自身设计与素材的游戏。不要构建对某一特定现有游戏的复刻，即使它被改名或被称为原创。</strong>」Anthropic 技术团队成员 <strong>Addy Osmani</strong> 随后确认：「我们在 Opus 5.5 的 Claude Code 提示词里加了两句话，让它避开复刻别人的具体游戏，因为用 Claude 侵权违反我们的使用政策。」<strong>为什么是现在</strong>：近几个月「AI 克隆游戏」已形成小规模家庭作坊式产业——《堡垒之夜》《辐射》克隆、玩家自制主机移植版本层出不穷；<strong>Steam Next Fest 展示的 demo 数量比上届翻倍，增量大部分来自 AI 辅助游戏</strong>，Valve 已承认 Steam 存在 AI 灌水问题。多款游戏 demo 被威胁「在你发布前克隆成完整游戏」，已有工作室因此取消公开 demo 计划。<strong>误伤已经发生</strong>：Claude 的 GitHub 页面涌现大量 issue——有开发者报告它连自己项目早期成果都拒绝复刻，仅因后续开发需要相似机制；Reddit 用户报告影响超出游戏领域，连「Reverse Engineer Anything」这类能力也被拒，而后者此前被用于破解智能电视厂商锁定、给汽车信息娱乐系统加功能、把游戏重新编译到其他平台。<strong>安全研究也被波及</strong>：有开发者在构建反作弊系统、分析 Windows 崩溃转储、做常规代码安全审查时遭到拒绝。<strong>时间线关联</strong>：这批限制与 Anthropic 10 月 6 日上线的 Cyber Verification Program（把前沿模型的高级网络安全能力限制在 Project Glasswing 覆盖的实体内）时间上重合，但官方未确认二者直接相关。<strong>Osmani 的补充</strong>：「原创游戏、类型游戏、基于你自己设计的游戏应当继续可用。我们会持续迭代以找到合适的平衡。如果 Claude 拒绝了本属于你的东西，发给我。」外溢效应已经出现：部分开发者开始讨论转向中国模型与开源权重模型以绕过商业过滤。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">规则来源</div><div class="data-value">Claude Code 提示词</div></div>
+<div class="data-chip"><div class="data-label">确认人</div><div class="data-value">Addy Osmani</div></div>
+<div class="data-chip"><div class="data-label">起因</div><div class="data-value">Steam AI 克隆潮</div></div>
+<div class="data-chip"><div class="data-label">副作用</div><div class="data-value">逆向工程被误伤</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>AI 的钱在变贵，而 AI 的效率在变便宜——两件事第一次同时发生在一个星期天</strong>。</p>
+    <p>三条主线同时展开：<strong>① 收紧的全是入口</strong>（OpenAI 把 ChatGPT 与 Codex 并成一个 Token 池，聊天从此要跟写代码抢预算；融资目标砍掉 100 亿、估值降 1500 亿，首次交割还可能不足 200 亿；Anthropic 招股书里 9000 亿表外义务是账面负债的 8 倍，黑石只给 BB 投机级）—— <strong>钱与算力两笔账同时被重排</strong>。<strong>② 放量的全是效率</strong>（商汤 32 层权重循环出 56 层计算，把 27B 级能力压进一张 24G 显卡；DeepSeek 用 Router + Worker 把多任务完成时间从 29.5 分钟压到 12.4 分钟；Roblox 上 7 万款 AI 游戏、Top100 超八成用了 AI，Kimi 3D Make 把建模压成一句话）—— <strong>不靠更多算力，靠把同一份算力用得更深、调度得更聪明</strong>。<strong>③ 收紧的尽头必然是护栏</strong>（Anthropic 给 Claude Code 加了两句话：不许复刻任何具体存在的游戏）—— <strong>当产量被打到地板价，规则就必须跟上，AI 与游戏 IP 的第一条边界今天被划下</strong>。</p>
+    <p>今天最高分给到 <strong>#4 OpenAI 融资缩水（9.3/P0）</strong>—— 它的重要性不在少了 100 亿美元，而在于「估值驱动」这个持续两年的叙事第一次被公开市场叫停，融资照做，但价格由买方说了算。</p>
+    <p>四条可以立刻执行的线索：<strong>① 重排 AI 额度预算</strong>（12 月起 ChatGPT 与 Codex 共池，把聊天与产出分开记账的做法要作废；建议把额度集中给「出片 / 出脚本 / 出素材」类任务，日常问答改用 Instant）；<strong>② 先跑一轮 Kimi 3D Make</strong>（它输出的是可编辑的 .blend 工程文件而不是静态网格，可以直接接进现有 Blender 工作流；建议先拿简单道具 / 白模验证，再上复杂场景与材质分层）；<strong>③ 评估本地私部署</strong>（商汤 Loop-9B 是 Apache 2.0 + 单张 24G 卡可跑，适合做不出内网的文档 / PPT / 多步 Agent 流水线，先跑一轮 RaccoonPPT 类任务验证）；<strong>④ 把日报与竞品监控改成常驻 Agent</strong>（DeepSeek Super-agent 的 Router + Worker 正是这类流水线的标准形态——一个常驻调度入口 + 多个并行 Worker，而不是每天手动开七八个会话窗口；同时留意 Claude 逆向工程类请求正在变紧，需备好开源 / 国产模型的备选链路）。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>

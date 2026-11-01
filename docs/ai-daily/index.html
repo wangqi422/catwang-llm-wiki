@@ -273,6 +273,23 @@ body {
 <script>
 const DATA = [
   {
+    "date": "2026-11-01",
+    "type": "daily",
+    "title": "AIGC 每日速报 · 2026.11.01",
+    "desc": "OpenAI 官方支持文档宣布从 12 月起，随着 ChatGPT Work 的智能体能力并入 ChatGPT 主体验，Plus、Pro、Business 三档订阅在 ChatGPT 与 Codex 之间共享同一份使用额度并统一按 Token 计量，实际消耗取决于模型与任务复杂度，即时对话 Instant Chat 不占额度，额度耗尽后只能等重置、升档或增购 Credits，官方未公布各档 Token 总盘子与折算表，同时上线设备绑号上限 · 商汤开源日日新 SenseNova Loop-9B-Preview（Apache 2.0，Hugging Face 与 GitHub），采用 Looped Transformer 架构：32 个独立解码层中第 4-27 层共 24 层共享权重执行两遍写作 B(B(h))，一次前向完成约 56 次层计算却只存 32 层权重，总参数约 9B、推理实际约 14.6B、训练上下文最长 262144 token、文本加图像输入，配双流 mHC 与 Sinkhorn 归一化稳住二遍信号，官方 8 项基准中 6 项超 Qwen3.5-27B（BIRD-Dev 71.38 对 69.84、WorkBuddy 66.89 对 60.53、RaccoonPPT 70.70 对 59.08），Terminal Bench 2.1 与 T3-Banking 两项仍落后 · DeepSeek Harness 团队发布 Super-agent 设计探索并开源 MIT 原型 dsh-superagent-prototype，把调度与上下文同步从人手上移到系统层：常驻 Router 层只分派不干活并用批处理把单次决定推理时间从 6.4 秒降到 1.6 秒，上下文隔离的 Worker 层并发执行且订阅 Thread 后事件直通不再绕 Router，取消直通后 Router 决策次数增约 30%、缓存读取 token 从 2323 万涨到 3177 万，模拟 300 条消息 20 个工作请求环境下任务完成时间中位数 12.4 分钟、95 分位 15.7 分钟，对照传统单 Session 方案 95 分位 29.5 分钟 · 据 FT 与彭博援引知情人士，OpenAI 把最新一轮融资目标从 300 亿美元下调至约 200 亿美元、削减 100 亿，对应估值目标从 1.4 万亿美元降至 1.25 万亿美元、缩水 1500 亿，部分投资者缩减认购额度致首次交割预计不足 200 亿、后续靠高净值个人零售配售补足，阿联酋财团含国有科技基金 MGX 预计为最大参与方，触发点是纳指 100 当日跌 3.5%、10 月创去年 3 月以来最差单月以及 Anthropic 上市分流同一批机构资金 · Anthropic 于 10 月 26 日向 SEC 提交 IPO 注册文件（有望成为人类史上最大 IPO、预期估值约 1.5 万亿美元），彭博报道招股书显示公司计划通过远期履约义务在服务器、建筑与电力领域投入近 9000 亿美元，是账面负债 1175 亿美元的近 8 倍：表外采购协议一年翻四倍至 2656 亿美元、期限最长 20 年，尚未起租租约 3210 亿美元，其余算力安排远期支出 2450 亿美元，7 月向 AMD 采购 GPU 超 200 亿美元，黑石预计其 IPO 后可能拿到 BB 区间投机级评级 · Roblox 2026 财年 Q3 报告披露平台内使用 Build 创建的 AI 游戏总数超 7 万款，9 月游玩时长排名前 100 游戏中超 80% 使用 AI 辅助开发，2 款几乎完全由 AI 创作的游戏进入同时在线排行前 20，Build 已有超 50 万用户且尚未全量开放，过去五个月月均新增约 1.4 万款，头部创作者使用 AI 工具时长三个月增至 3 倍、每天使用其 MCP 服务器的创作者增长近 5 倍，公司启动 Roblox Everywhere 与 Universal Player 两项计划并把护城河从能不能做出来转向能不能被看见 · 月之暗面随 Kimi K3.1 Pro 上线 3D Make 模块：给模型一段文字描述、草图或参考图，先推断物体形状比例与空间关系，再自主编写 Blender、FreeCAD 等专业软件的可执行脚本上传云端运行，产出可下载可在线预览并支持多格式导出，官方演示一句话生成带材质分层的室内场景且输出可编辑的 .blend 工程文件而非静态网格，可用于组装场景与开发游戏资产 · Anthropic 收紧 Claude Code 与 Opus 5.5：新增规则「可以构建原创游戏、某一类型下的游戏以及基于用户自身设计与素材的游戏，不要构建对某一特定现有游戏的复刻，即使它被改名或被称为原创」，技术团队成员 Addy Osmani 确认为在提示词里加的两句话，起因是 Steam Next Fest 上 AI 克隆游戏泛滥与游戏工作室的版权压力，副作用是 Reverse Engineer Anything、反作弊开发、Windows 崩溃转储分析等正当任务被误伤",
+    "tags": [
+      "OpenAI", "ChatGPT", "Codex", "Token 额度", "合池", "Instant Chat", "订阅策略", "设备绑号",
+      "商汤", "SenseNova", "Loop-9B", "Looped Transformer", "mHC", "循环架构", "Apache 2.0", "开源模型", "长上下文", "本地部署",
+      "DeepSeek", "Super-agent", "Router", "Worker", "双层架构", "投机执行", "存算分离", "Watchdog", "MCP", "Agent 架构",
+      "融资", "估值", "MGX", "资本纪律", "纳斯达克", "科技股抛售", "IPO",
+      "Anthropic", "IPO 招股", "隐性债务", "表外义务", "远期履约", "AMD", "黑石", "信用评级", "SEC",
+      "Roblox", "Build", "AI 游戏", "UGC", "MCP", "游戏行业", "分发", "Universal Player",
+      "Kimi", "月之暗面", "3D Make", "Blender", "FreeCAD", "3D 建模", "游戏资产", "DCC 工作流",
+      "Claude", "Claude Code", "Opus 5.5", "游戏克隆", "逆向工程", "版权", "Addy Osmani", "Steam", "IP 护栏"
+    ],
+    "time": "09:35"
+  },
+  {
     "date": "2026-10-31",
     "type": "daily",
     "title": "AIGC 每日速报 · 2026.10.31",
