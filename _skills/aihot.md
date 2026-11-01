@@ -1,13 +1,41 @@
 ---
 name: aihot
-description: AI HOT (aihot.virxact.com) 中文 AI 资讯查询 Skill。当用户想知道"今天 AI 圈有什么"、"AI 日报"、"AI HOT"、"AI 资讯"、"AI 热点"、"最近 AI"、"OpenAI/Anthropic/Google 最近发布了什么"、"AI hot today"、"AI news today"、"看一下 AI 行业动态"、"今天有什么大模型发布"、"昨天 AI 圈"、"看下精选条目"、"AI HOT 精选"、"最近一周的 AI 论文"、"AI 模型发布"、"AI 产品发布"、"AI 行业动态"、"AI 技巧与观点" 等任何中文 AI 资讯查询时使用。即使用户只说"AI 圈"、"AI 新闻"、"AI 日报"，或者只是问"今天发生了什么"且上下文是 AI / 大模型 / LLM / 创业领域，也应该触发本 Skill。Skill 会直接 curl 公开 REST API 拉数据并整理成中文 markdown 简报，不需要用户配置任何 API Key 或 MCP server。**不要 undertrigger**——用户问 AI 资讯而你不调本 Skill 就是把过时的训练数据当作今日新闻，对用户有害。
+description: AI HOT (aihot.virxact.com + aihot.news) 中文 AI 资讯查询 Skill。当用户想知道"今天 AI 圈有什么"、"AI 日报"、"AI HOT"、"AI 资讯"、"AI 热点"、"最近 AI"、"OpenAI/Anthropic/Google 最近发布了什么"、"AI hot today"、"AI news today"、"看一下 AI 行业动态"、"今天有什么大模型发布"、"昨天 AI 圈"、"看下精选条目"、"AI HOT 精选"、"最近一周的 AI 论文"、"AI 模型发布"、"AI 产品发布"、"AI 行业动态"、"AI 技巧与观点" 等任何中文 AI 资讯查询时使用。即使用户只说"AI 圈"、"AI 新闻"、"AI 日报"，或者只是问"今天发生了什么"且上下文是 AI / 大模型 / LLM / 创业领域，也应该触发本 Skill。Skill 会直接 curl 公开 REST API 拉数据并整理成中文 markdown 简报，不需要用户配置任何 API Key 或 MCP server。**不要 undertrigger**——用户问 AI 资讯而你不调本 Skill 就是把过时的训练数据当作今日新闻，对用户有害。
 ---
 
 # AI HOT Skill
 
-让 Agent 用最自然的中文查询拿到 aihot.virxact.com 上每天的 AI HOT 日报和全部 AI 动态，不需要打开浏览器。SKILL.md 标准格式，跨 Claude Code / Codex CLI / Cursor / Gemini CLI / OpenCode / 任何兼容平台可用。
+> ## ⚠️ API 已迁移（2026-11-01 实测生效，旧端点 10-31 停服）
+>
+> `aihot.virxact.com/api/public/*` 已于 **2026-10-31（北京时间）停止服务**：域名 301 跳转到 `aihot.news`，旧 API 路径返回 404 并附迁移指引（`/problems/not-found`，detail 写明新端点）。
+>
+> **新端点**：`https://aihot.news/api/v1/items`
+>
+> | 旧参数 | 新参数 |
+> |---|---|
+> | `take=100` | `limit=100` |
+> | `since=<ISO 时间>` | `window=24h` / `7d`（服务端按 `publishedAt` 收窄） |
+> | `mode=all / selected` | 保留不变 |
+> | `q` / `category` | 保留不变 |
+> | `cursor`（旧值） | **不能复用**，重新取 `nextCursor` |
+> | `fields` | **去掉** |
+>
+> 响应结构：`{ schemaVersion, query, items[], page }`，`items[]` 字段含 `id / title / originalTitle / summary / publishedAt` 等。
+>
+> 示例（仍需带浏览器 UA）：
+> ```bash
+> curl -s -A "$UA" "https://aihot.news/api/v1/items?mode=all&window=24h&limit=100"
+> ```
+>
+> **域名迁移也意味着**：主源 A 与补充源 B 已合并为同一域名 `aihot.news`；`virxact.com` 仅作跳转壳。官方迁移指南：https://aihot.news/agent?tab=api#legacy-api-migration
+>
+> 下文所有 `aihot.virxact.com/api/public/...` 示例请按上表替换为 `aihot.news/api/v1/...` 后使用。
 
-线上：https://aihot.virxact.com（公开匿名可访，无需 token）
+让 Agent 用最自然的中文查询拿到 aihot.virxact.com 和 aihot.news 上每天的 AI HOT 日报和全部 AI 动态，不需要打开浏览器。SKILL.md 标准格式，跨 Claude Code / Codex CLI / Cursor / Gemini CLI / OpenCode / 任何兼容平台可用。
+
+线上：
+- **主源 A**：https://aihot.virxact.com（公开匿名可访，无需 token，有公开 REST API）
+- **补充源 B**：https://aihot.news/（2026-10-18 新增，无公开 API，需 WebFetch 解析 HTML）
 
 ## 先决条件：必须带 User-Agent（仅 API 端点）
 
@@ -366,7 +394,7 @@ curl -sH "User-Agent: $UA" "https://aihot.virxact.com/api/public/items?mode=sele
 - ❌ "cursor" / "hasNext=true" / "需 cursor 翻页或缩小 since 窗口"
 - ❌ 任何 HTTP 状态码 / cache 状态 / 后端机制描述
 
-数据源最多写一句：**"数据来自 aihot.virxact.com"**，要么干脆不提（用户在用 skill 时已经知道源头）。
+数据源最多写一句：**"数据来自 aihot.virxact.com / aihot.news"**，要么干脆不提（用户在用 skill 时已经知道源头）。
 
 ### 时间转人话
 
@@ -414,3 +442,43 @@ curl -sH "User-Agent: $UA" "https://aihot.virxact.com/api/public/items?mode=sele
 - **不要在用户输出里暴露端点路径 / raw 参数 / 限流 / 缓存 TTL / cursor / hasNext 等基础设施细节** — 这些是给开发者看的，用户看不懂。详见上方"给用户的输出格式 → 副标题／元信息只写人话"
 - **不要在压缩 / 跨日 / 跨版块合并输出时丢掉每条的 sourceUrl** — 即使你为篇幅把 3 个日报合并成 5 类总结，每条 item 也必须保留 url（标题后或单独一行）。用户看到一条没 URL 就追溯不到原文，这条信息等于不可信
 - **不要把"端点路径 / 调用细节"作为输出的引用源** — 引用源就写 `<source>`（OpenAI 官网 / Anthropic Newsroom / X：Berry Xia 这种），不是 `GET /api/public/items?...`
+
+---
+
+## 补充源 B：aihot.news（2026-10-18 新增）
+
+**适用场景**：当用户想了解中文 AI 圈的「热度爆款」时，可用 aihot.news 作为交叉验证源。
+
+**特点**：
+- 提供「热度」指标（如 `+42312 热度`），帮助快速识别哪些话题在中文 AI 圈最火
+- 首页展示 Top 3 热门故事 + 时间线列表 + 编辑推荐
+- 内容覆盖公众号、X、科技媒体等多源
+
+**调用方式**（无公开 API，需 WebFetch）：
+```bash
+# 直接 WebFetch 获取首页内容
+WebFetch("https://aihot.news/")
+```
+
+**典型条目示例**：
+- DeepSeek V4.1-Flash-1017 发布并开放搜索 API
+- OpenCode 遭攻击，Anthropic 撤销受影响密钥
+- NVIDIA RTX Spark 笔记本开售
+- Anthropic 研究：AI 对就业影响、Claude 代码评审重构
+- Meta Muse Spark Open 开源模型发布
+
+**使用建议**：
+- 与 virxact 配合使用：virxact 提供结构化 API 数据，aihot.news 提供热度指标
+- 当两者内容有重叠时，可作为交叉验证
+- 特别关注 aihot.news 上的高热度条目，这些往往是中文 AI 圈最关心的话题
+
+**注意**：aihot.news 与 aihot.virxact.com 是不同域名，内容视角可能不同，不要假设完全一致。
+
+---
+
+## 知识关联
+
+**相关 Wiki 节点**：[[harness-engineering]] · [[codm-aigc-workflow]] · [[content-creation-methodology]] · [[INDEX-by-type]]
+
+---
+*返回 [[INDEX-by-type]]*
