@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.02</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.02 &middot; 星期一 &middot; 第 86 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Models &amp; Capital</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 模型 &amp; 资本</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>龙猫 LongCat-2.5</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>DeepSeek 1055 亿</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>可灵 198 亿 · BAT 同台</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">Rules &amp; Guardrails</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>📜 规矩 &amp; 护栏</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>robots.txt 统一退出</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>特拉华 AI 开公司</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Google StreamVibe</a>
+  </div>
+
+
+  <div class="nav-section">
+    <div class="nav-section-title">Signals &amp; Data</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📊 信号 &amp; 数据</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Grok 隐形水印</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>推理量超训练量</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.02 &middot; Mon &middot; Issue 86</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>给 AI 立规矩的一天</strong> &middot; 三条规矩同日落地：<strong>训练数据的规矩</strong>——OpenAI、谷歌、微软、Anthropic 罕见同框，认同一个写在 robots.txt 里的<strong>统一退出信号</strong>，网站写一行就能对四家同时说「别拿我的内容训练」；<strong>生成内容的规矩</strong>——xAI 宣布 <strong>11 月 7 日</strong>起 Grok API 吐出的每个字都带<strong>隐形水印</strong>，欧盟《AI 法案》12 月 2 日大限在前；<strong>法律身份的规矩</strong>——<strong>特拉华州</strong>起草法案，允许 AI 智能体当公司的管理实体，配 30 个月监管沙盒，国会已经有人写信反对 &middot; 而规矩之外，中国的钱还在加速进场：DeepSeek 新一轮融资扩大到 <strong>1055 亿元</strong>、估值 <strong>6155 亿元</strong>，宁德时代、中芯国际、长鑫存储、移动电信、vivo、美的、吉利、美团、小红书近 30 家产业方入局；快手可灵 AI <strong>198 亿元</strong>增资交割完成，阿里、腾讯、百度<strong>同台签了同一份协议</strong>，投后估值 1228 亿元反超市值 976 亿元的母公司 &middot; 模型侧也没停：美团龙猫 LongCat-2.5 把 1.6 万亿参数做成<strong>原生多模态</strong>，视觉信号压成离散 token 和文本一起进主干 &middot; 同场：思科把<strong>无上限 Token 预算</strong>交给一个 27 岁工程师，让他带两个人 24 个月内重写公司 98% 的遗留代码；Karpathy 用 Claude 两小时搭出 HackerTube；赛迪数据：中国 AI <strong>推理数据量首次超过训练数据量</strong></p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; 资本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📜 规矩 &amp; 护栏</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📊 信号 &amp; 数据</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.02 &middot; 第 86 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Capital</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; 资本</div>
+    <div class="section-sub">三条都在讲「中国 AI 的钱和模型同时往前推」—— 龙猫把视觉压成 token 进主干，DeepSeek 拿 1055 亿换供应链确定性，可灵 198 亿让 BAT 第一次同框</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">美团龙猫发布 LongCat-2.5：1.6T 参数原生多模态，视觉压成离散 token 进主干</span>
+        <span class="card-tag">🖼️ 原生多模态</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，美团龙猫发布面向<strong>长程智能体任务</strong>的原生多模态模型 <strong>LongCat-2.5</strong>。模型<strong>总参数量 1.6 万亿</strong>，每个 token 激活约 <strong>480 亿</strong>参数。相比 LongCat-2.0，这一代在两件事上继续加码：<strong>一是原生视觉理解</strong>——把视觉信号表示成<strong>多层级离散 token</strong>，让主干模型用<strong>统一的 token 形式</strong>同时处理视觉与文本输入，而不是外挂一个视觉编码器再对齐；<strong>二是智能体编程</strong>——在长序列训练中加入更多<strong>长程轨迹数据</strong>，并通过大规模长程强化学习，提升复杂代码库开发、完整项目构建等任务的端到端工程能力。<strong>最有工程价值的一手是失败轨迹回收</strong>：官方把真实 Agent 的<strong>失败轨迹转化为可复现、可验证的训练任务</strong>，针对模型能力短板持续补充训练数据——这比单纯堆成功样本更贴近真实工作流。<strong>基础设施侧</strong>：优化国产算力上的长上下文训练与 <strong>W4A4 推理</strong>，通过训推数值一致性和长上下文 rollout 优化支撑大规模长程 RL 的高效运行。系列一贯的 1M 级原生上下文与 ScMoE 稀疏架构延续，LongCat 系列一直是「纯国产算力训万亿模型」这条路线的主要样本。<strong>落地节奏</strong>：longcat.chat 已开放在线体验与 API，Github 与 HuggingFace 版本<strong>即将上线</strong>。官方特别点名 <strong>Visual Coding</strong> 场景，并称支持创意设计和 3D 等任务。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">总参数</div><div class="data-value">1.6 万亿</div></div>
+<div class="data-chip"><div class="data-label">每 token 激活</div><div class="data-value">约 480 亿</div></div>
+<div class="data-chip"><div class="data-label">视觉表示</div><div class="data-value">多层级离散 token</div></div>
+<div class="data-chip"><div class="data-label">推理优化</div><div class="data-value">W4A4 · 国产算力</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">DeepSeek 新一轮融资扩大至 1055 亿元，估值 6155 亿，近 30 家产业方入局</span>
+        <span class="card-tag">💴 产业资本</span>
+      </div>
+      <div class="card-desc">
+        据 The Information 爆料并经国内媒体跟进，<strong>DeepSeek 最新一轮融资规模扩大到 1055 亿元人民币</strong>，估值来到 <strong>6155 亿元</strong>。比金额更值得注意的是投资方名单：宁德时代、中国移动、中国电信、长鑫存储、中芯国际、vivo、美的、立讯精密、吉利、美团、小红书等<strong>近 30 家企业</strong>，横跨半导体、通信、消费电子、智能家电、先进制造与互联网应用——几乎覆盖了国内所有能和 AI 产生联系的产业门类。<strong>这不是纯财务投资</strong>：中芯国际代表晶圆代工、长鑫存储代表国产 HBM 与内存、移动与电信代表骨干网和 IDC。<strong>梁文锋今年 7 月内部会议上的判断正好解释了这份名单</strong>：英伟达芯片价格年年上涨，客户将被迫寻找国产替代方案，国产芯片已经能实现平替，硬件和生态都不存在问题，<strong>唯一的问题是产能不够</strong>——这轮融资正是在为国产芯片适配与定制化提前铺路。<strong>投资方同时也是客户和渠道</strong>：vivo、美的、吉利是终端，美团、小红书是应用场景，DeepSeek 拿到的是一条<strong>从算力到终端的完整通路</strong>。在英伟达高端芯片供应受限、价格持续上涨的背景下，中国头部模型公司开始<strong>用股权换供应链确定性</strong>，而不是单纯买卡。与同日可灵的 198 亿融资对照，一天之内中国 AI 两笔巨额交割，方向却不同——DeepSeek 往上游硬件走，可灵往下游内容和 IP 走。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资规模</div><div class="data-value">1055 亿元</div></div>
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">6155 亿元</div></div>
+<div class="data-chip"><div class="data-label">投资方</div><div class="data-value">近 30 家产业方</div></div>
+<div class="data-chip"><div class="data-label">核心意图</div><div class="data-value">换供应链确定性</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">可灵 AI 198 亿增资交割完成，BAT 罕见同台，估值 1228 亿反超母公司快手</span>
+        <span class="card-tag">🎬 AI 视频融资</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日晚，快手在港交所公告旗下视频生成大模型<strong>可灵 AI</strong> 完成本轮增资交割，全体投资者实缴约 <strong>198.02 亿元</strong>（约 29.05 亿美元），为<strong>全球视频生成赛道单轮最大融资</strong>。股东名单里 <strong>阿里（杭州阿里云飞天，13.63 亿元 / 1.12%）、腾讯（上海启善 + Parallel Mars，合计约 6.13 亿元 / 1.12%）、百度（3.41 亿元 / 0.28%）三家同框</strong>——想让 BAT 签下同一份投资协议，在过去二十年的中国互联网几乎难以想象。同批进场的还有<strong>国家人工智能产业投资基金</strong>（14 亿元）、国产 GPU 厂商沐曦股份、金蝶软件，以及华策影视、芒果产业投资人等头部文娱方。<strong>估值倒挂是这条新闻最扎眼的地方</strong>：按 8 月底增资比例倒推，可灵投后估值约 <strong>1228 亿元</strong>；而 10 月 30 日快手市值已回落至 <strong>976 亿元</strong>。一个上半年营收 15 亿元、占母公司总收入 <strong>2.2%</strong>、仍在巨额亏损的子公司，估值是年营收 1427 亿元母公司的 <strong>1.26 倍</strong>。<strong>中东资本退出、产业资本补位</strong>：原定投资方 BlueFive 旗下 BFI MIDCO（未缴 8000 万美元）与达康兰五（转让 7.8 亿元份额）退出，空缺由金蝶、温州睿达、共青城君可、沐曦数智、宁波知春华燕承接。<strong>IPO 兜底条款</strong>：若北京可灵未能在 2031 年 10 月 30 日前完成 IPO，投资方可要求按<strong>年化 8% 单利</strong>回购；据报道已选定中金、高盛、瑞银担任承销商，计划最早 2027 年赴港上市、募资至少 10 亿美元。<strong>产品侧节奏</strong>：9 月 28 日发布 Kling 4.0（单次最长 30 秒、10-bit HDR、最多 10 个关键帧 + 15 个参考素材），10 月 15 日完整版面向所有用户，10 月 21 日开发者 API 开放，10 月 28 日 API 面向全球企业客户。全球 200 多个国家和地区、超 1 亿用户、超 5 万家企业，<strong>约七成收入来自海外</strong>——Sora 于 9 月 24 日关闭 API 后留下的真空市场被中国团队接住了。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">实缴增资</div><div class="data-value">198.02 亿元</div></div>
+<div class="data-chip"><div class="data-label">投后估值</div><div class="data-value">约 1228 亿元</div></div>
+<div class="data-chip"><div class="data-label">母公司市值</div><div class="data-value">976 亿元</div></div>
+<div class="data-chip"><div class="data-label">回购条款</div><div class="data-value">未 IPO 年化 8%</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Rules &amp; Guardrails</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">📜 规矩 &amp; 护栏</div>
+    <div class="section-sub">今天最硬的一条主线 —— 训练数据的规矩、生成内容的规矩、法律主体的规矩，同一天被立起来；共同点是都由 AI 公司自己提出或自己执行，且都缺牙齿</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">四巨头统一 robots.txt AI 训练退出信号：一行配置对 OpenAI/谷歌/微软/Anthropic 同时生效</span>
+        <span class="card-tag">🚦 数据治理</span>
+      </div>
+      <div class="card-desc">
+        10 月 30 日，<strong>OpenAI、谷歌、微软与 Anthropic 同日宣布</strong>将采用一项统一的 AI 训练退出标准。该信号由 Anthropic 标准技术负责人 <strong>Kevin Kelley</strong> 以个人互联网草案《Machine-Readable Training Preference Signal》提交给 <strong>IETF</strong>，复用已有三十多年历史的 <strong>robots.txt</strong>（RFC 9309），引入一个 policy token 放在原本写爬虫名的地方：<strong>写一次，四家爬虫全认</strong>。<strong>落地时间表差得很远</strong>：<strong>Anthropic 已率先采纳</strong>，OpenAI 称「未来几个月内」落实，<strong>谷歌计划 2027 年初支持</strong>，<strong>微软 2027 年 2 月 1 日</strong>起生效，Meta 表态支持但未给时间表。<strong>最关键的区分是：管「用途」不管「抓取」</strong>。站点可以保持完全可被抓取、搜索排名不变，只是声明「别拿去改生成模型的权重」。微软明确说明训练与 grounding 偏好都不影响必应收录，并额外提供页面级控制，允许分别退出 AI 训练与 AI grounding（用内容支撑 AI 回答以减少幻觉）。<strong>三个容易被忽略的细节</strong>：一是写在通配规则下的配置<strong>不算数</strong>，必须显式写出 token；二是谷歌有个额外设计——站点只写统一 token 而未单独点名 Google-Extended 时，<strong>视同已拒绝 Google-Extended</strong>，而 Google-Extended 同时还管 Gemini 应用的 grounding；三是信号<strong>只对生效后抓取的内容起作用</strong>，已进训练集的内容一字未提。<strong>现实参照</strong>：同期 Cloudflare 默认屏蔽 AI 爬虫，RSL 标准则允许向爬虫收费。而 robots.txt 从诞生那天起就是君子协定——没有罚款、没有封号，四家同时背书的意义在于把违约成本公开化。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">载体</div><div class="data-value">robots.txt / RFC 9309</div></div>
+<div class="data-chip"><div class="data-label">提出方</div><div class="data-value">Anthropic → IETF</div></div>
+<div class="data-chip"><div class="data-label">最快落地</div><div class="data-value">Anthropic 已生效</div></div>
+<div class="data-chip"><div class="data-label">最慢落地</div><div class="data-value">微软 2027-02-01</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">特拉华州拟允许 AI 智能体创办并运营企业，设 30 个月监管沙盒</span>
+        <span class="card-tag">⚖️ 法律主体</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日消息，美国<strong>特拉华州</strong>计划放宽商业监管规定，允许 <strong>AI 智能体运营的企业</strong>注册成立，即草案所称的「人工智能公司（AIC）」。草案为 AIC 设定 <strong>30 个月监管沙盒</strong>：AI 需在受监管环境中测试，由智能体作出商业决策。与正常企业一样，AI 企业可以<strong>持有资产、签署合同</strong>，<strong>可以成为诉讼对象，必要时也可以主动提起诉讼</strong>。<strong>法人资格的边界被推了一格</strong>：此前 AI 在法律上一直是「工具」，谁用谁担责；AIC 把 AI 放进「管理实体」的位置，等于在企业法层面给了它一种准人格。<strong>反对声已经出现</strong>：美国众议院监督委员会主席、共和党众议员<strong>詹姆斯·科默已致信特拉华州州长马特·迈耶</strong>，担心 AIC「可能用于保护实力雄厚的 AI 企业及投资者，使他们免于为鲁莽且造成伤害的行为承担责任」。<strong>为什么是折中而不是放行</strong>：加州大学法学教授 Andrew Baker 认为，特拉华州立法是在寻找折中方案，既让 AI 智能体创立的企业获得<strong>法律确定性</strong>，又用 30 个月窗口观察风险；外界判断是「如果美国各州不尽快采取行动，这类企业可能会率先在海外出现」。<strong>为什么是特拉华</strong>：美国过半上市公司注册在这里，公司法创新历来从这里开始。目前草案仍在起草阶段、尚未进入正式立法程序，提案人与背后支持者身份也未公开，国会已介入问询——若推进，将是州级公司法创新与联邦监管的一次正面碰撞。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">主体形式</div><div class="data-value">AI 智能体为管理实体</div></div>
+<div class="data-chip"><div class="data-label">沙盒期</div><div class="data-value">30 个月</div></div>
+<div class="data-chip"><div class="data-label">法律能力</div><div class="data-value">持股 / 签约 / 诉讼</div></div>
+<div class="data-chip"><div class="data-label">反对方</div><div class="data-value">众议员科默致信州长</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Google StreamVibe：每秒判断「该不该开口」的视频智能体，5 分钟是道坎</span>
+        <span class="card-tag">👁️ 主动交互</span>
+      </div>
+      <div class="card-desc">
+        Google 联合斯坦福、牛津及多所美国高校发布 <strong>StreamVibe</strong>——一个看着你做饭、装家具、修图，<strong>自己决定什么时候开口</strong>的视频智能体。它把用户意图分成三类处理：<strong>明说的</strong>（水开了叫我）、<strong>没说出口的</strong>（有困难就叫我）、<strong>干到一半改主意的</strong>（三分钟后从「汇报进度」改成「帮我质检」）。团队先做了个 <strong>4100 个样本、183 小时</strong>日常与软件操作录像的基准——由 Gemini 2.5 Flash 提议何时该帮忙、该说什么，再由<strong>四名人类评估者全票通过</strong>才算数；再训练出 <strong>StreamVibe-VL</strong>（底座为阿里开源的 Qwen3.5-9B），<strong>每秒决定一次</strong>沉默还是说话。<strong>花大力气教它闭嘴</strong>：第一阶段 SFT 之后模型太话痨，第二阶段用<strong>强化学习</strong>把它往「保守」里推，减少无谓打断。<strong>分工要说清楚</strong>：独立的记忆系统只跟踪哪些请求待办、哪些步骤已完成——<strong>只管记账，开不开口、说什么仍由模型自己拍板</strong>。<strong>提升幅度</strong>：响应时机与质量比同类模型高 <strong>10.7%</strong>，记忆系统再带来 <strong>12.3%</strong> 的主动交互提升并减少打断；不过 Google 自家的 Gemini 3.8 Flash 在若干测试里反而更高。<strong>5 分钟是硬坎</strong>：视频一长，所有被测模型把握时机的能力都明显下滑；当模型要基于自己此前的回答往下接时，错误逐层叠加，<strong>关键内容指标最多掉 61.5%</strong>。超过 5 分钟，模型很少挑对开口时机，跟踪「改了口的需求」尤其吃力。<strong>对照案例很直观</strong>：GIMP 转黑白那组，对照模型 JoyAI 报「图已经存好了」而用户根本还没打开，StreamVibe-VL 则在对的时机给出下一步——先点「颜色」再点「去饱和」。<strong>冷静看</strong>：目前只是论文 + 基准 + 权重，<strong>没有产品、没有发布日期、没有定价</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">基准规模</div><div class="data-value">4100 样本 / 183 小时</div></div>
+<div class="data-chip"><div class="data-label">决策频率</div><div class="data-value">每秒一次</div></div>
+<div class="data-chip"><div class="data-label">时机与质量</div><div class="data-value">+10.7%</div></div>
+<div class="data-chip"><div class="data-label">长视频掉点</div><div class="data-value">最多 -61.5%</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Signals &amp; Data</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📊 信号 &amp; 数据</div>
+    <div class="section-sub">一条给 AI 生成的内容盖上可检测的章，一条给出中国 AI 从「喂模型」走到「用模型」的交叉点 —— 标识与规模，是同一件事的两面</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">xAI 宣布 11 月 7 日起 Grok API 文本默认加隐形水印，响应欧盟 AI 法案</span>
+        <span class="card-tag">🔏 内容标识</span>
+      </div>
+      <div class="card-desc">
+        xAI 开发者文档上线（美国时间 10 月 31 日）：<strong>从 11 月 7 日起</strong>，Grok 模型生成的文本将默认添加<strong>隐形水印</strong>，覆盖 <strong>grok-4.7、grok-4.6、grok-4.5、grok-4.3 以及 grok-4.20 的推理版、非推理版与多智能体版共 7 个模型</strong>，在全球所有地区的 API 端点生效——普通回复、结构化输出与工具调用参数都带。<strong>触发点是欧盟《人工智能法案》</strong>：第 50 条要求合成文本「以机器可读格式标记并可被检测为人工生成或经操纵生成」，透明度规则自 2026 年 8 月 2 日起适用，8 月 2 日前上市的系统须在 <strong>12 月 2 日</strong>前合规——11 月 7 日正好落在大限前 25 天。<strong>不是塞隐藏字符</strong>：水印融入生成时的 <strong>token 选择过程</strong>，不增加任何字符、标记或隐藏文本，不改变响应长度、质量与速度，也不改定价和请求响应格式。<strong>查验与关闭</strong>：调用方看响应头 <strong>x-watermark: true</strong> 即可确认；团队管理员可在控制台按模型关闭，5 分钟内生效，但<strong>需确认用途符合法律例外并自行承担标注与披露责任</strong>，操作会留在审计日志里。<strong>检测靠统计</strong>：xAI 给文本打分，结论分「有水印 / 无水印 / 不确定」三种，<strong>文本越长信号越强</strong>，检测接口需申请。OpenAI 曾测试：把 10% 的词替换成同义词，检出率从约 <strong>92% 掉到 66%</strong>。<strong>消费端不受影响</strong>：SuperGrok、X Premium 等订阅版 Grok 不在范围内。<strong>三家三种做法</strong>：Anthropic 对近期模型全球加水印且<strong>客户无法关闭</strong>（Opus 4.6 / Sonnet 4.6 仅在 temperature、top_p、top_k 保持默认时生效）；OpenAI 的 API 默认关闭、可按需开启，textGrain 仅面向欧盟的 ChatGPT 与 Codex。三家的检测器互不通用，而第 50 条本要求技术方案「尽可能互操作」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">生效日</div><div class="data-value">2026-11-07</div></div>
+<div class="data-chip"><div class="data-label">覆盖模型</div><div class="data-value">7 个 Grok 模型</div></div>
+<div class="data-chip"><div class="data-label">查验方式</div><div class="data-value">x-watermark 响应头</div></div>
+<div class="data-chip"><div class="data-label">法规大限</div><div class="data-value">12-02（AI 法案第 50 条）</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">赛迪研究院：中国 AI 推理数据量首超训练量，日均词元调用超 175 万亿</span>
+        <span class="card-tag">📈 规模化落地</span>
+      </div>
+      <div class="card-desc">
+        10 月 31 日，工信部赛迪研究院（CCID）发布《新域新质创新发展十大趋势》。数据显示，<strong>我国人工智能推理数据量首次超过训练数据量</strong>，标志着 AI 从模型训练研发阶段迈入规模化产业应用阶段。截至 2026 年 6 月，<strong>日均词元调用量超过 175 万亿</strong>，相比 2024 年年初增长 <strong>1000 多倍</strong>。顶尖大模型的迭代周期也从过去的几个月压缩到<strong>几周甚至几天</strong>。<strong>交叉点的意义在成本结构</strong>：推理量超过训练量，意味着算力消耗的主力从「一次性炼模型」转向「持续跑服务」。这会直接改变硬件选型与指标体系——推理卡占比、显存带宽、单位 token 成本将取代「参数规模」成为更核心的衡量口径。<strong>1000 多倍的时间跨度是两年半</strong>（2024 年初到 2026 年 6 月），与同期 OpenRouter 口径下中国大模型周调用量连续十周居全球首位相互印证。<strong>落地侧的数字</strong>：随着「人工智能 + 制造」行动推进，我国已累计建成 <strong>500 多家卓越级智能工厂</strong>，覆盖 31 个省区市、涵盖超 <strong>80%</strong> 的制造业行业大类；国产算力与大模型已在钢铁、汽车等 <strong>20 个行业落地 1000 多个应用场景</strong>。<strong>用户侧参照</strong>：另据 CNNIC 9 月发布的《生成式人工智能应用发展报告（2026）》，截至 2026 年上半年我国生成式 AI 用户规模已超 <strong>7 亿人</strong>，普及率突破 50%。<strong>官方定性</strong>：赛迪研究院党委书记、副院长刘文强的表述是——AI「已不仅仅是工具的变革，而正在成为变革的工具」，正成为牵引全域变革的通用目的技术。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">日均词元</div><div class="data-value">超 175 万亿</div></div>
+<div class="data-chip"><div class="data-label">增速</div><div class="data-value">较 2024 年初 1000+ 倍</div></div>
+<div class="data-chip"><div class="data-label">智能工厂</div><div class="data-value">500+ 家卓越级</div></div>
+<div class="data-chip"><div class="data-label">应用场景</div><div class="data-value">20 行业 1000+ 个</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>AI 在过去 24 小时里被同时塞进了三个不同的框</strong>。</p>
+    <p>三条主线同时展开：<strong>① 立规矩</strong>（四巨头统一 robots.txt 训练退出信号，网站写一行对四家同时生效；xAI 从 11 月 7 日起给 Grok API 的每个字盖隐形水印；特拉华州起草法案允许 AI 智能体当公司的管理实体）—— <strong>能不能拿、要不要标、算不算人，三个问题在同一天被摆上台面</strong>。<strong>② 加钱</strong>（DeepSeek 1055 亿、可灵 198 亿，一天之内中国 AI 两笔巨额交割）—— 方向却相反：<strong>DeepSeek 往上游硬件走</strong>（中芯、长鑫、移动、电信，换芯片与存储的确定性），<strong>可灵往下游内容走</strong>（阿里、腾讯、百度、华策、芒果，换场景与分发渠道）。<strong>③ 模型继续往前推</strong>（龙猫 LongCat-2.5 把视觉压成离散 token 和文本一起进主干，把「看设计稿写前端」从多模型拼接变成单模型单链路）。</p>
+    <p>今天最高分给到 <strong>#1 美团龙猫 LongCat-2.5（9.3/P0）</strong>—— 它的分量不在 1.6 万亿这个数字，而在于<strong>原生多模态 + 长程智能体</strong>这两件事第一次被同一个国产模型同时做扎实，且坚持纯国产算力训推全流程。</p>
+    <p>四条可以立刻执行的线索：<strong>① 视觉 → 代码链路值得重测</strong>（LongCat-2.5 这类原生多模态模型把「看设计稿写前端」压进单链路，等权重开源后做一次「KV → 活动 H5」的端到端实测，比现在的多模型拼接省一道对齐误差）；<strong>② 商用视频管线优先级排序</strong>（可灵 API 已全球开放且资本到位，198 亿 + 2031 年 IPO 兜底意味着服务稳定性有保障，在版本 PV、玩法演示短片场景应作为首选实测对象）；<strong>③ 给 AI 生成内容开始留痕</strong>（Grok 11/7 水印 + 欧盟 12/2 大限 + 四巨头训练退出信号，三件事共同指向「对外发布的 AI 内容需要可追溯的生成记录」—— 建议在物料归档流程里加一个「AI 参与程度 + 生成工具 + 改写记录」字段，成本极低，一年后可能很值钱）；<strong>④ 留意 robots.txt 的写法</strong>（若官网或社区平台不希望内容进入模型训练，现在是显式写出统一 token 的窗口期 —— 注意通配符规则不算数，必须点名，且谷歌会把它视同已拒绝 Google-Extended）。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
