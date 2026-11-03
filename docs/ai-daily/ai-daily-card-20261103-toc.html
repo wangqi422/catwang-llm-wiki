@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.03 &middot; 星期二 &middot; 第 87 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Models &amp; Agents</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 模型 &amp; Agent</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Kimi 游戏开发方案</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>MIT 权重空间编程</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>混元 Hyra 2.0</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Money &amp; Power</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>💰 资本 &amp; 基建</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic S-1/A</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Grid Protectors 削峰</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>OpenAI 华盛顿布局</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Signals &amp; Trust</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📡 信号 &amp; 信任</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>GDPx 仅 12%</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>14T 假模型被扒皮</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.03 &middot; Tue &middot; Issue 87</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>账本和锤子</strong> &middot; 账本先摊开：Anthropic 递交修订版 S-1/A，第一次把第三季度写进招股书——营收 <strong>170 亿美元</strong>、同比涨 <strong>1127%</strong>，却从上一季盈利 9.74 亿掉回 <strong>亏损 5.67 亿</strong>，因为需求跑赢了锁定的算力，只能临时加购 <strong>50 亿美元</strong>高价短单；账的背面是 <strong>8954 亿美元</strong>的采购与租赁承诺，付款期排到 <strong>2045 年</strong>，其中 <strong>4475 亿</strong>必须在 2031 年前付清 &middot; 同一份文件还第一次写下：公司可能<strong>很快触及自己定义的 RSI 阈值</strong> &middot; 锤子那头，MIT CSAIL 让 GPT-6 Astra 直接读 Qwen3.5-0.8B 的权重，只动 <strong>0.016%</strong> 的参数就把 MATH-500 从 <strong>7.9% 拉到 48.1%</strong>，全程没有梯度、没有训练、没有数据 &middot; 落地侧：Kimi 发布<strong>游戏开发与创意工作解决方案</strong>，一次演示<strong>无人干预连跑 20 小时</strong>交出原生工程；腾讯混元 <strong>Hyra 2.0</strong> 把科研 Agent 从「解题」改成「造工具」，HyInv 比 ProteinMPNN 快 <strong>57 倍</strong> &middot; OpenAI 一边在佐治亚承诺电网紧张时让出<strong>最多 1000 MW</strong>，一边把<strong>前陆军部长</strong>请进国家安全顾问的新位子</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 模型 &amp; Agent</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">💰 资本 &amp; 基建</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📡 信号 &amp; 信任</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.03 &middot; 第 87 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Models &amp; Agents</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 模型 &amp; Agent</div>
+    <div class="section-sub">今天模型侧的三条都在讲「怎么让 AI 更会干活」—— Kimi 让 Agent 直接上手专业引擎，MIT 让模型直接改模型，混元让科研 Agent 从解题改成造工具</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Kimi 发布游戏开发与创意工作解决方案：Agent 直操 Godot / Blender / Unity / UE，20 小时无人干预交付原生工程</span>
+        <span class="card-tag">🎮 游戏开发 Agent</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，月之暗面 Kimi 发布「<strong>游戏开发与创意工作解决方案</strong>」。底座是 <strong>Kimi K3.1 Pro</strong> 模型，配 <strong>Kimi Code</strong>（代码开发与修改）和 <strong>Kimi Work</strong>（跨文件、多步骤制作任务）两条 Agent 产品线，再通过插件直接操作 <strong>Godot、Blender、Unity、Unreal Engine</strong> 等专业软件的现有工程，覆盖<strong>立项前玩法验证 → 美术资产适配 → 正式工程开发 → 发行与长线运营</strong>四段链条。Kimi 援引 Unity《2026 Game Development Report》说明动机：52% 的开发者优先选择小规模项目降风险，67% 把原型阶段压在三个月以内。<strong>立项前</strong>：团队给参考图、视频和玩法要求，Kimi 用 Godot 搭出可跑的 Demo，而且会<strong>真的运行游戏</strong>，结合渲染画面和试玩录像检查效果，发现问题后自主修改、重新验证，交付前完成多轮迭代。<strong>美术侧</strong>：用多视角视频与截图判断空间关系，定位比例、穿插、材质问题，再转成脚本让本地 Agent 操作 Blender 完成初步修改；官方案例是 K3.1 Pro 用 Blender 建了一座机场室内雨林山谷场景，输出 17.5 秒 1920×1080 60fps 展示视频，另一个大教堂内部场景约 <strong>330 万三角面</strong>、为 <strong>8368 个组件</strong>做了动画。<strong>正式开发</strong>：与 Unity 中国的 Tuanjie Codely Agent 及团结引擎协同，模型理解意图、生成代码、根据录屏与测试结果制定修改方案，Agent 通过 Editor / Runtime Script 直接在引擎里搭场景、改工程、跑验证——官方称一次演示中系统<strong>无人工干预连续工作 20 小时</strong>，产出了一份可持续开发的原生工程；UE 侧用 UE 5.8 建了一座天宫场景（半径 1750 米的 36 间柱廊 + 程序化巨龙，约 <strong>3600 万三角面</strong>，Nanite + Lumen）。<strong>运营侧</strong>覆盖批量制作获客素材并比较投放数据、游戏内助手接入做 NPC 问答与战报、社区反馈按故障/平衡性/付费/内容需求分类并保留原帖来源、本地化初稿与 UGC 初筛，还能设为定时任务自动批量跑。官方自己给的边界建议是：<strong>从边界明确、结果易检查的单一任务试点，由对应岗位人员检查成果</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">底座模型</div><div class="data-value">Kimi K3.1 Pro</div></div>
+<div class="data-chip"><div class="data-label">插件覆盖</div><div class="data-value">Godot / Blender / Unity / UE</div></div>
+<div class="data-chip"><div class="data-label">最长连跑</div><div class="data-value">20 小时无干预</div></div>
+<div class="data-chip"><div class="data-label">原型周期</div><div class="data-value">1–2 天可试玩</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">MIT CSAIL「权重空间编程」：GPT-6 Astra 改 0.016% 权重，小模型数学 7.9% → 48.1%</span>
+        <span class="card-tag">🧬 权重编辑 / RSI</span>
+      </div>
+      <div class="card-desc">
+        MIT CSAIL 团队公布一组实验，提出一个新说法：<strong>权重空间编程（Weight-Space Programming, WSP）</strong>——把神经网络的原始权重当成可读、可改的「代码」，用自然语言告诉前沿模型目标，让它直接在权重空间里定位、修改并验证。核心实验是让 <strong>GPT-6 Astra</strong> 检查 <strong>Qwen3.5-0.8B</strong> 的内部权重，找到它反复陷入推理循环的毛病，随后只修改约 <strong>0.016% 的参数</strong>：MATH-500 从 <strong>7.9% 升到 48.1%</strong>，小学数学 13.8% → 67.1%，指令遵循 21.0% → 62.3%，最高约 6 倍。<strong>整个过程没有重新训练，没有梯度下降，也没有训练数据。</strong>三层能力分别是：<strong>Read</strong>——把 4 个架构、输入、动作完全相同的游戏策略网络权重逐个喂给 Astra，不给工具也不给选项，它 100% 说对了 Breakout、Pong、Pac-Man、Freeway，还能从 4 层 Transformer 的中间权重里认出训练语种、定位全部归纳头；<strong>Edit</strong>——一个 PPO 汽车策略总卡在坡道，给出权重、场景和 1 条失败轨迹后，Astra 一次回复写出补丁（不用工具），只改 3.5% 权重，成功率到 100%；<strong>Write</strong>——给出 MinAtar 规则和代码，Astra 一次回复从零写出 Breakout 网络权重，零训练零工具，得分比训练 5 亿步的 PPO 高 20 倍。传统梯度优化依赖训练数据、必须反向传播、目标由损失函数定义；WSP 是推理驱动、零数据可用、无需反向传播、目标用自然语言给——<strong>成本结构完全不是一个量级</strong>。团队在博客里说，神经网络权重很快会由能主动推理权重的 LLM 原生优化，并正在构建评测基准和帮 LLM 探索、写入权重的 harness。<strong>需要保留的判断</strong>：成绩由发布方自评，尚无独立实验室按同一提示、同一推理配置和同一评分流程复测；Astra 在练习问题上用了 50 次前向传播的预算。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">改动比例</div><div class="data-value">0.016% 参数</div></div>
+<div class="data-chip"><div class="data-label">MATH-500</div><div class="data-value">7.9% → 48.1%</div></div>
+<div class="data-chip"><div class="data-label">指令遵循</div><div class="data-value">21.0% → 62.3%</div></div>
+<div class="data-chip"><div class="data-label">训练成本</div><div class="data-value">零梯度 / 零数据</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">腾讯混元 Hyra 2.0：科研 Agent 从「解题」转向「造工具」，HyInv 比 ProteinMPNN 快 57 倍</span>
+        <span class="card-tag">🔬 科研 Agent</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，腾讯混元发布 AI 科研系统 <strong>Hyra 2.0</strong>。三个月前的 Hyra 1.0 驱动开源模型 Hy3 解决了加法组合学中悬置五十多年的开放问题（和集与差集的最优指数），是国产开源模型首次全自动解决数学开放问题。这一次团队把目标往上抬了一级：<strong>不再让 Agent 直接解题，而是让它研发和升级科学模型、研究工作流与软件工具</strong>，让一次研发的成果在后续研究中被反复使用——官方的说法是从「刷题抽卡」走向「造工具」，形成智能复利。架构上用三层分工：<strong>Overall</strong> 与人类研究者对齐目标、管优先级和关键决策；<strong>Mission</strong> 长期负责一个研究问题，定路线、组织 Worker、对结论负责，并判断哪些假设值得继续投、何时换方向；<strong>Worker</strong> 独立读代码、做实验、分析失败原因，<strong>可以质疑 Mission</strong>，不同 Worker 还能用不同模型提供不同意见。它接进了真实研发环境——<strong>企业微信</strong>里和研究者对齐需求、<strong>计算平台</strong>上提交管理实验、<strong>代码仓库</strong>里实现并验证改动；任务进持久化队列后按优先级、依赖和资源上限调度，等待训练结果或人工审批时其他任务继续跑，Agent 还能设置下次唤醒时间；较大算力开销和共享知识同步<strong>仍需人工审批</strong>。记忆分三套：项目状态与 Research Board 记录协作、每个 Agent 维护分层记忆、跨任务可复用经验进共享知识库 <strong>Books</strong>（分「观察 / 已验证 / 约定」三级，必须写清做法、理由、适用条件并附原始证据），复盘时把可迁移方法整理成 skill。初步成果很硬：<strong>HyInv</strong>（196 万参数 GNN 做蛋白质逆折叠，预训练/SFT/RL/推理优化全部由 Hyra 2.0 完成，比 ProteinMPNN 序列吻合度更好、快 <strong>57 倍</strong>）；<strong>HyPLM-Flash</strong>（6.5 亿参数蛋白质语言模型，只用 7260 亿训练 token，是 ESM-2 650M 的 0.73 倍，12 个模型中推理最快、35 个评测平均第 3）；<strong>HyFF</strong>（原子级分子模拟基础模型，5 种规模 230 万–12 亿参数，覆盖 83 种元素，5 个模型<strong>全部位于精度–速度帕累托前沿</strong>）；<strong>HyQEC</strong>（构造并严格验证量子码 [488,123,22]，kd²/n 达 122.0，比原榜首提升约 <strong>48%</strong>，还把原榜首码距上界从 95 收紧到 86）；<strong>灵巧手</strong>（自主发现五指「旋梯手」布局，DR5 仿真中物体旋转比论文最优设计快 <strong>28.6%</strong>，尚未真机验证）。相关结果会持续公开到 GitHub 供社区检验复用。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">分工架构</div><div class="data-value">Overall / Mission / Worker</div></div>
+<div class="data-chip"><div class="data-label">HyInv 提速</div><div class="data-value">57 倍 vs ProteinMPNN</div></div>
+<div class="data-chip"><div class="data-label">知识库</div><div class="data-value">Books 三级沉淀</div></div>
+<div class="data-chip"><div class="data-label">量子码</div><div class="data-value">kd²/n 122.0（+48%）</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Money &amp; Power</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">💰 资本 &amp; 基建</div>
+    <div class="section-sub">账本与电闸同时被摆上台面 —— Anthropic 的 8954 亿承诺排到 2045 年，OpenAI 用 1000 MW 的可中断性换社会许可，再把前陆军部长请进国家安全顾问的新位子</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Anthropic 修订版 S-1/A：Q3 营收 170 亿由盈转亏，8954 亿算力账单排到 2045 年</span>
+        <span class="card-tag">💰 IPO / 算力账单</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，Anthropic 向 SEC 提交招股书修订稿 S-1/A，<strong>首次补上 2026 财年第三季度（截至 9 月 30 日）的财务数据</strong>。营收约 <strong>170 亿美元</strong>，环比上一季的 116 亿增长约 <strong>47%</strong>，同比去年同期的 14 亿增长逾 <strong>1127%</strong>——但增速明显放缓（Q2 环比是 144%）。更关键的是利润方向掉了头：GAAP 口径下<strong>营业亏损 5.67 亿美元</strong>，而上一季它刚实现首次经营盈利 <strong>9.74 亿美元</strong>；净亏损 <strong>233 亿美元</strong>（去年同期 121 亿），主体是可转债及衍生负债公允价值变动这类非现金费用。剔除这些项目和股权激励后，调整后营业利润约 <strong>25 亿美元</strong>，但利润率已从 <strong>19% 降到 15%</strong>。为什么会由盈转亏：Anthropic 通常提前 12–18 个月签长期合同锁定算力，但三季度用户需求增长超出预期，只能临时加购 <strong>50 亿美元短期算力</strong>，价格明显高于长期合同。结果是算力与基础设施支出环比<strong>暴增 77% 至 99 亿美元</strong>，每投入 1 美元算力与基础设施带来的收入从 <strong>2.08 美元降到 1.72 美元</strong>——这个指标首次下滑。另外新模型降价和合同折扣让收入少了约 6 亿，加上 20 亿美元员工捐赠配捐的非现金费用，利润被两头挤。<strong>账单的全貌</strong>：计入 9 月 30 日之后新签的合同，采购与租赁承诺总额约 <strong>8954 亿美元</strong>，几乎全部用于购买算力、租用数据中心，<strong>付款期一直延续到 2045 年</strong>；其中 <strong>4475 亿美元须在 2031 年前支付</strong>，只有 <strong>2138 亿美元</strong>可取消或附条件。合作方包括 Broadcom、Google、SpaceX 和 Amazon。对照的是：前 9 个月经营现金流 70 亿美元，截至 9 月 30 日流动性 1470 亿美元——公司自己也在文件里警告可能更早需要资金。<strong>招股书里的另一句话</strong>：内部估算和对未来模型的预期表明，公司<strong>可能很快达到其负责任扩展政策（RSP）中「可归因于 AI 的显著加速进展」这一档</strong>，这是把 RSI 阈值写进上市文件的少见操作。还有两条容易忽略的披露：今年前九个月有 <strong>5%–7% 的收入</strong>来自违反使用政策或商业条款的客户，8 月起加大整治，未来增速可能承压；净收入留存率约 <strong>900%</strong>。WSJ 报道大投资者希望 IPO 估值定在 <strong>1.5 万亿–1.6 万亿美元</strong>；文件还显示将在上市过程中向日本投资者出售最多约 <strong>35 亿美元</strong>新股。自救动作是推进「<strong>Anthropic Direct</strong>」——为自己打造的专属算力基础设施，用成本更低的长期产能替代短期算力。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">Q3 营收</div><div class="data-value">约 170 亿美元</div></div>
+<div class="data-chip"><div class="data-label">营业利润</div><div class="data-value">9.74 亿 → −5.67 亿</div></div>
+<div class="data-chip"><div class="data-label">采购承诺</div><div class="data-value">约 8954 亿美元</div></div>
+<div class="data-chip"><div class="data-label">付款期</div><div class="data-value">延续至 2045 年</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">OpenAI 启动 Grid Protectors：算力园区电网紧张时削峰，佐治亚试点最高 1000 MW</span>
+        <span class="card-tag">⚡ 能源与基建</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，OpenAI 发布 <strong>Grid Protectors Program（电网守护者计划）</strong>——一项全美范围的计划，与公用事业公司、监管机构和政策制定者合作，为未来的算力园区设计一套安排：<strong>电网承压时主动降低用电需求</strong>。首个样板是佐治亚州 <strong>Effingham County</strong> 拟建园区。OpenAI 承诺支付服务该项目所需的<strong>全部基础设施和电力服务成本</strong>；与 Georgia Power 的协议里包含<strong>最高 1000 兆瓦的灵活需求响应</strong>，相当于约 <strong>70 万户家庭</strong>的平均用电（OpenAI 自己补了一句：比华盛顿特区和波士顿加起来还多），可在极端高温期间释放，保障数十万户家庭的空调运转。公告最实在的部分是需求响应的三个参数——<strong>可削减多少、多快能削、能撑多久</strong>。而削减不只是「少算」，也可以是「换电」：公告说在设备及当地电网条件允许时，园区可用<strong>现场发电或储能</strong>向电网供电，并用电池和电力控制系统平滑负荷波动——这也解释了为什么它反复强调「未来的园区」，这种能力得在设计和建设阶段就留出来，老园区改不动。数字之外是政治含义：公告里有一句跟技术无关的话——<strong>家庭和小企业不应该被要求补贴算力园区的用电需求</strong>。美国输配电扩容成本是按辖区用户均摊的，一个新巨型负荷接进来等于把尖峰抬高一个台阶，这正是「居民不该补贴数据中心」争议的根源；OpenAI 同时强调灵活性不能替代新增供电和输电投资。Georgia Power 预计，包括大型负荷协议组合及预期增长在内，从 2029 年起每年可为客户节省约 <strong>9.5 亿美元</strong>，典型月用电 1000 千瓦时的居民每月至少省 <strong>15 美元</strong>。背景上，OpenAI 援引美国数据中心容量预计到 <strong>2030 年超过 100 吉瓦</strong>；同一时间，从内华达到佐治亚，美国数十个县市的选民将就限制数据中心的政策公投（征税、监管乃至直接禁止），可能影响数千亿美元投资，OpenAI 也计划把数据中心重新包装为「AI 算力园区」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">需求响应</div><div class="data-value">最高 1000 MW</div></div>
+<div class="data-chip"><div class="data-label">等效家庭</div><div class="data-value">约 70 万户</div></div>
+<div class="data-chip"><div class="data-label">首站</div><div class="data-value">佐治亚 Effingham</div></div>
+<div class="data-chip"><div class="data-label">客户节省</div><div class="data-value">2029 起年 9.5 亿</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">OpenAI 把前陆军部长请进国家安全顾问新位子，中期选举后启动华盛顿政策攻势</span>
+        <span class="card-tag">🏛️ 政策与军事</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，OpenAI 宣布任命<strong>前美国陆军部长 Dan Driscoll</strong> 出任一个新设职位——<strong>国家安全现代化高级顾问</strong>，负责为领导层提供建议，并与政府官员、行业领袖、学术机构等外部伙伴协作，探讨如何用先进 AI 加强国家安全与网络安全。Driscoll 今年早些时候因与国防部长赫格塞思长期不和而辞职，此前曾被特朗普选中参与旨在结束俄乌冲突的谈判。同期还有报道称 OpenAI 聘请了<strong>前美国国防部长 Mark Esper</strong> 扩展军事 AI 业务。人事只是其中一步：首席全球事务官 <strong>Chris Lehane</strong> 表示，公司自 8 月起就在筹备政策提案，计划在 <strong>11 月 3 日中期选举结束后</strong>、预计 11 月 9 日国会「跛脚鸭会期」启动时展开政策倡议与公关行动。重点包括：对最先进 AI 系统设置<strong>强制性安全保障</strong>、为 AI 发展设定<strong>「速度限制」</strong>并确保人类保有控制权；通过社区合作协议和州级立法建议缓解数据中心阻力；推动把新型数据中心重新定位为「<strong>AI 算力园区</strong>」；扩大 AI 教育培训与就业支持；推动美国主导基于其价值观的全球 AI 标准制定。OpenAI 已向 2028 美国大选潜在候选人分发备忘录，称 AI 将成为必答题；Lehane 判断 AI 会是 2028 年总统大选的核心议题，这次中期选举是 2028 的「预告片」。为什么值得记一笔：前沿模型公司不再只靠产品和技术影响市场，而是同时进入<strong>监管议程、选举议题和全球标准设置</strong>三条线，规则制定正从「行业自律」转向「国家议程 + 企业提案」并行推进。横向对照：同一窗口里，韩国宣布明年 AI 投资支出几乎翻倍至 <strong>21.3 万亿韩元</strong>并设「未来应对基金」；沙特阿美以约 <strong>26 亿美元</strong>收购 PIF 旗下 AI 公司 <strong>Humain 49%</strong> 股份；阿布扎比与 OpenAI 签署覆盖政府、能源、投资的四项协议，ADNOC 成为能源领域首家部署方——AI 竞争已经从参数和榜单扩展到规则、补贴、国家资本与跨国结盟四层。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">新任顾问</div><div class="data-value">前陆军部长 Driscoll</div></div>
+<div class="data-chip"><div class="data-label">政策攻势</div><div class="data-value">中期选举后启动</div></div>
+<div class="data-chip"><div class="data-label">核心诉求</div><div class="data-value">强制安全 + AI 限速</div></div>
+<div class="data-chip"><div class="data-label">目标议题</div><div class="data-value">2028 总统大选</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Signals &amp; Trust</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📡 信号 &amp; 信任</div>
+    <div class="section-sub">一个给能力边界降温，一个给来源核验敲钟 —— GDPx 上最好的模型只有 12%，而 14 万亿参数的「泄露」叙事一夜刷屏又被一夜扒干净</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">SemiAnalysis GDPx：206 项高价值专业任务，最佳模型只做到 12%，金融法律普遍 0 分</span>
+        <span class="card-tag">📐 评测基准</span>
+      </div>
+      <div class="card-desc">
+        11 月 2 日，SemiAnalysis 联合 <strong>14 家专业数据伙伴</strong>发布 <strong>GDPx</strong> 基准，定位为 GDPval 的交互式继任者。首个版本包含 <strong>206 项任务</strong>，覆盖芯片设计、网络安全、生物、金融、法律、量化交易、RSI、硬件设计、材料科学、对齐、软件工程共 <strong>11 个高经济价值领域</strong>，评估了 <strong>13 款前沿模型</strong>。结果很直白：<strong>最好的模型也只拿到 12.0%</strong>——大约 7 题对 1 题。前三名是 Claude Opus 5.5（<strong>12.0%</strong>）、Gemini 4 Carbon（10.9%，每任务平均 16.29 美元）、GPT-6 Astra（9.6%，每任务平均 <strong>53.99 美元</strong>）。这个分数可信度更高，是因为任务不是静态提示词，而是<strong>复杂真实环境</strong>——金融任务里包含约 4000 个匿名文件；任务默认设 <strong>8 小时时限</strong>，模型跑在 Claude Code、Codex、Antigravity 等原生框架里，且合作伙伴被要求在第 1 次尝试时就通过自动化质检。领域分化明显：<strong>Claude Opus 5.5</strong> 综合最强，Meta 的 Muse Wonder Full 在网络安全领先，GPT-6 Astra 在 RSI 领域领先，Gemini 4 Carbon 在生物占优，而<strong>金融与法律几乎所有模型都是 0 分</strong>。SemiAnalysis 也提醒，部分模型在网络安全等题上会被自家安全机制拦下，分数偏低。两个必须保留的限定：Ethan Mollick 指出这套测试<strong>还缺人类对照组</strong>——12% 到底是多差，得先看人能拿多少；另外安全分类器会压制部分模型的表现，分数并不纯粹是能力。行业反应上，Sundar Pichai 公开转发并称赞这份基准，特别提到 Gemini 4 Carbon 的成本曲线；SemiAnalysis 计划每 3–6 个月更新一次，把它做成演进型基准。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">任务量</div><div class="data-value">206 项 / 11 领域</div></div>
+<div class="data-chip"><div class="data-label">最佳成绩</div><div class="data-value">Opus 5.5 · 12.0%</div></div>
+<div class="data-chip"><div class="data-label">单任务成本</div><div class="data-value">最高 53.99 美元</div></div>
+<div class="data-chip"><div class="data-label">时限</div><div class="data-value">默认 8 小时</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Hugging Face 惊现 14 万亿参数「Anthropic 下一代模型」，被社区扒皮为随机数伪造</span>
+        <span class="card-tag">🕵️ 供应链安全</span>
+      </div>
+      <div class="card-desc">
+        一个 10 月 16 日才注册的账号 <strong>burner22</strong> 在 Hugging Face 上传了仓库 <strong>numbat</strong>，自称是 Anthropic 下一代 Mythos 级模型的预训练中途检查点。标称规格相当唬人：约 <strong>14 万亿参数</strong>、114 层主干、<strong>1224 个路由专家</strong>（单 token 激活 48 个 + 1 个共享）、GDN + MLA 混合注意力、NVFP4 格式、<strong>772 个 Safetensors 分片</strong>、合计约 <strong>7.72 TB</strong>，当前步数 183 万 / 目标 196 万，还配套了配置文件、架构实现代码、分词器、训练日志尾部 400 步和自报评测分数。让它在传播初期被当真的关键筹码，是内部代号 <strong>Numbat</strong> 确实出自 2026 年 3 月曝光的 Claude Code 源码。反转来自社区审计：11 月 1 日，审计者 FloxUnder 给出结论——<strong>43 个完整张量、合计 730368 个 BF16 数值，可以完全通过张量名称生成随机种子做到逐位二进制复现</strong>，也就是说权重在统计上就是合成噪声。破绽不止一处：架构被认出是 DeepSeek-V3、Qwen3-Next、Kimi 等公开设计的拼盘；权重说量化成英伟达 NVFP4，评测却说跑在 AWS Trainium2 上；训练日志里有的检查点只花 3 分钟甚至 8 秒就出一个，同一基准连续 7 次分数完全相同；归一化权重从第 0 层到第 114 层分布一致，稠密投影矩阵是教科书式的随机噪声；配置说输出头不共享，实测 lm_head 与 embed 相关系数 <strong>0.89</strong>、顶奇异值相同；门控参数在所谓 183 万步之后仍停在初始化范围。处置上，版主置顶「<strong>DO NOT download</strong>」，社区反复提醒别用 trust_remote_code 去跑仓库代码——现在看着是普通 PyTorch，但上传者随时可以改。值得留意的趋势是：近期已连续出现扩展市场投毒、第三方 Agent 越权、模型权重伪造等事件，<strong>「泄露」「内部版」「下一代旗舰」正在成为一种新的攻击面</strong>——它利用的不是技术漏洞，是人的好奇心和对稀缺信息的追逐；这跟本期 GDPx 那条对照着看很有意思，一边是模型能力的真实边界只有 12%，一边是伪造能力边界的叙事能一夜刷屏。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">标称参数</div><div class="data-value">约 14 万亿</div></div>
+<div class="data-chip"><div class="data-label">权重体积</div><div class="data-value">约 7.72 TB</div></div>
+<div class="data-chip"><div class="data-label">审计结论</div><div class="data-value">43 张量可随机复现</div></div>
+<div class="data-chip"><div class="data-label">处置</div><div class="data-value">版主置顶勿下载</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天 8 条新闻串起来是同一件事：<strong>能力、账单、叙事，三件事在同一天对齐了</strong>。</p>
+    <p><strong>① 能力这边</strong>，MIT 让人看到「改模型」可以不走训练这条路——只动 0.016% 的参数、零梯度零数据，就把小模型的数学能力拉高 6 倍；但 GDPx 同一天给出 12% 这个冷静的数字，提醒我们：<strong>能改权重不等于能在真实专业流程里把活干完</strong>，金融和法律题几乎所有模型都是 0 分。</p>
+    <p><strong>② 账单这边</strong>，Anthropic 的 S-1/A 第一次把「需求跑赢锁定算力」写成了具体代价：50 亿美元的短单、每 1 美元算力产出从 2.08 掉到 1.72、8954 亿的承诺排到 2045 年。OpenAI 的 Grid Protectors 是同一笔账的另一面——为了让园区能建起来，得先把 1000 MW 的「可中断性」摆上谈判桌，并承诺不让居民替它付扩容的钱。</p>
+    <p><strong>③ 叙事这边</strong>，14 万亿参数的假权重一夜刷屏又被一夜扒干净，说明这个行业现在最稀缺的不是算力，是<strong>可核验的来源</strong>。</p>
+    <p>今天最高分给到 <strong>#4 Anthropic 修订版 S-1/A（9.5/P0）</strong>—— 它的分量不在 170 亿这个营收数字，而在于第一次把「增长跑赢算力锁定」的代价、以及「可能很快触及 RSI 阈值」这句话，同时写进了一份要交给监管和投资者的正式文件。</p>
+    <p>四条可以立刻执行的线索：<strong>① 投放素材批量生产值得试点</strong>（Kimi 方案里最贴宣发的一段是「控制引擎录实机画面 + 批量拼多版本开场与卖点 + 汇总数据反选」，边界清晰、结果可查，正适合先拿一个单任务试）；<strong>② 知识沉淀按三级存</strong>（抄 Hyra 2.0 的 Books 结构，把踩过的坑分「观察 / 已验证 / 约定」存进共享库，宣发生图里的失败提示词、无效参数、被否风格都该这样存，而不是每次从零试）；<strong>③ 失败归因优先于盲试</strong>（MIT 那条思路可以借：某个生图模型总在同一个构图/手部/字体细节上翻车，先做一次「失败样本归因 + 定向补丁」，比盲试 100 次有效）；<strong>④ 下载前先核验来源</strong>（14T 假权重是最好的反面教材，团队里但凡有人会去下「内部版 / 泄露版」模型或插件，都要把账号年龄、组织归属、是否有官方镜像这几项前置到下载之前）。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
