@@ -1,5 +1,18 @@
 # 操作日志 | Operation Log
 
+## [2026-11-05 10:08] AIGC 日报 2026.11.05（五阶段全流程 · xiaoqi-ai-daily skill）
+
+- **第 89 期**，主线「能力越界，边界重划」：OpenAI 未发布网络安全模型跑出 **948 个 Linux 内核独立 LPE**（2308 候选 → 1724 复现 → 948 独立，API 121.34 万美元 / 单个 1279 美元，10 种经第三方核验的新利用技术、61 个已上游修复，9.5/P0）+ ChatGPT **Images 2.6**（原生 GIF + 参考图复用 + SVG，生图提速 50%、每周 40 亿张图，Flare/Sunburst 两款模型，帧数 / 画幅 / 跨帧一致性仍是实测边界，9.2/P0）+ 甲骨文迫于美方施压**取消与腾讯 70 亿美元 / 东南亚 10 万枚芯片 / 五年海外算力租约**（管制从芯片清单前置到合同层，腾讯 Q2 资本开支 527.84 亿元 +176%，9.0/P0）+ 世界模型扎堆乌镇（魔芯 **MoWorld 2.0** 昇腾原生 4D 高斯资产、视频推理 50→70 FPS、渲染 500+ FPS、成本最低 30%、6 亿参数端侧版；百度 Apollo World / 小米 WorldCast，8.8/P1）+ **AI 编码并购日**（OpenAI 收购 Pierre、Meta 收购 Conductor 且 11-20 关停云服务、Cat Wu 从 Anthropic 转投 OpenAI，8.7/P1）+ 乌镇《**智能体发展自律公约**》八条与身份注册解析平台（信通院联合腾讯阿里蚂蚁等 20 家单位，最小权限 / 行为留痕 / 异常熔断 / 一键叫停，延续昨日苹果 10-K 合规主线，8.6/P1）+ 编码模型「小而快」（Cognition SWE-2 Flash 276B 中训练 1/5 价 + Ricursive Ripple-65B Apache 2.0，8.5/P1）+ 美国中期选举**数据中心遭否决**（76% 选民反对、45 项公投 33 项限制；Uber 3.2 亿订单仅 4 单来自 Agent，8.4/P1）；**评分均值 8.84**
+
+- 五阶段均达标：AI HOT v1 新端点 **211 条 / 3 页**（`window=24h`，100+100+11，hasMore=false，cursor 逐页写回去重）+ aihot.news 热度榜 + 13 轮定向核实 → 归档逐条查重（剔除昨日已报的 Hy4 / WeVisOne / Astra / 苹果 10-K / FlashProve / 京东 300 万 / 空间智能 / fal；剔除已公告排期兑现的 Kimi K3.1 Pro 权重、Kling 4.0、国行 Apple AI 千问 Beta；保留 Oracle×腾讯因「签署后被施压取消」属新进展）→ MD（39232B，概览表 8 行 + 8 条详情 + 8 组三句话总结，编号连续，第 3 句均落 CODM 宣发价值）→ TOC H5（48066B / 8 卡 / 8 nav-sub / 32 chips / 3 章节 3-3-2 / `</head>`=1 / 无残留 11.04 旧 title、第 88 期 / `<p class="lead">` 有内容 / 返回归档按钮在）→ 归档首页 DATA 顶部追加 11-05（quoted-key 18→19）
+- **修复昨日模板缺陷**：补上 `progress-bar` / `id="progressFill"` DOM（此前 CSS 与 ScrollSpy JS 都在、HTML 元素缺失，进度条实际不工作），今日 H5 已带上
+- **阶段 4 强制关卡通过**：push 后首次 curl 返回 404，诊断 Pages 为 `build_type: workflow`（`main /`）、`git submodule status` 空、`Deploy to GitHub Pages` 于 `0779a86` completed/success → 判定为**部署延迟而非 submodule 损坏**；随后 curl 200，WebFetch 二次确认 title=2026.11.05、第 89 期、星期四、8 卡 3 章节齐全、lead 与「← 返回归档」按钮均在，方进入推群
+- 海报（PNG **601.2KB / 1440×1920**，暖纸底 #F2EEDF + 四色 + 半透白卡 rgba(255,255,255,0.55) + Cormorant Garamond 斜体数字，与 H5 同源；副标题自动取 MD 主线并清洗 `<strong>`；tagline 留空与昨日一致，因 MD 编辑点评无「一句话：」格式，脚本条件渲染不会留空块）→ 公网 PNG / H5 / 归档页均 200 → **3/3 群成功**（群 A + 群 B + 竞品视觉日报群，单条 `markdown_v2` 209/4096 字节 = 海报图 + 「点击看更多内容」），Pages 第 6 次检测 200
+- Commits：`0779a86`（MD/H5/归档）、`8c5b5fd`（H5/归档生成脚本）、`4877466`（海报 HTML+PNG），均 push 成功且远端 sha 已核对一致
+- 一条龙脚本（`publish-ai-daily-poster.js --date 20261105`）全程无人工干预跑通（generate → screenshot → commit → push → Pages 轮询 → 推 3 群）；`--dry` 预检与 `push-poster.js --dry`（打印 3 群 / URL / 209 字节消息）先于实发执行；`export PATH="$PATH:/c/Program Files/GitHub CLI"` 前置注入继续有效
+
+---
+
 ## [2026-11-04 17:55] AIGC 日报 2026.11.04（五阶段全流程 · xiaoqi-ai-daily skill）
 
 - **第 88 期**，主线「长手的一天，也是踩刹车的一天」：腾讯混元 **Hy4 正式版**（770B/49B 激活/1M 上下文，首次引入视觉理解 + 电脑操作 Computer Use，官宣首次跻身最强开源模型之列，与腾讯 IEG 游戏开发者合作深度适配 UE/Unity/Godot、GameDev +19.1%/GameLogic +9.8%，213 位专家 579 个真实金融任务众测开源第一，结合 Hyra 2.0 为 RSI 做准备并开源 HyCell/HyPDE，权重近期开放、Hy4 flash 与 Hy5 已排期，9.4/P0）+ 微信视觉团队开源 **WeVisOne-VL**（2B/4B 双版本，一个模型统一检测/指代定位/计数/指向/OCR/分割/抠图七类任务，4B 主模型 + 仅 9.6M 像素解码器、无需外挂 SAM，知识图谱驱动标注超 1 亿张图，WeRef-Bench 缺失目标拒答率 96.4%，Dense200 F1 71.3、PixMo-Count 89.6%，文字指代抠图 MAD 9.8 vs 22.4，Apache 2.0，9.0/P1）+ OpenAI **GPT-6 Astra 跨进物理世界**（两人不到一周完成可与 Codex 语音交互的便携设备全套机械/PCB/固件设计、代工厂不到一个月出原型，BenchCAD 2.0 未命名内部模型 0.875 vs Astra 0.594，与马自达合作气动/碰撞安全、扩大与 Chip Ganassi Racing 的 3D 扫描转 CAD 合作，硬件团队 Token 用量较 2 月增 23 倍，9.2/P0）+ 苹果 **2026 财年 10-K 首次警告 AI 智能体风险**（第三方智能体可能「未经指示/授权」行事、完成交易或删数据且难撤销，自承对第三方管控能力有限，上月已调整 Mac 完全磁盘访问权限，同窗口 CrowdStrike AI 终止开关 / Redwood 拆 OpenAI 对齐监控处置 / OpenAI 承认评测与生产差 10.2–37.4pp，9.0/P0）+ Anthropic 开源 **FlashProve**（zkSNARK 证明回复来自承诺的模型权重，给大模型办「防伪身份证」，比前代快几个数量级但 GPU 开销仍为 vLLM 的 72–94 倍，限整数运算/贪婪解码/1024 Token，只证身份不证正确性，延续 11-03「可核验来源」主线，8.9/P0）+ 京东「**物理 AI 加速计划**」（乌镇峰会，未来五年采购 300 万台机器人/100 万台无人车/10 万架无人机，两年采集 1000 万小时人类场景 + 100 万小时机器人数据，JoyAI-Sim 仿真一致性约 90%/效率 3.2 倍，8.7/P1）+ 普林斯顿 AI Lab「**空间智能**」大考（人类 83.3% vs 最强模型 39.7%，考换视角的三维一致性，与昨日 GDPx 12.0% 形成能力边界连续剧，8.5/P1）+ **fal 融资**（E+F 轮合计 16.5 亿美元、估值翻倍至约 160 亿，同窗口 Meta 150 亿债券超购 580 亿 / AMD 上调 2027 指引 vs PIMCO/Apollo 泡沫警告、Canva 放缓，8.3/P1）；**评分均值 8.88**
@@ -3211,4 +3224,16 @@
 - 本周隐性 pattern 命名：**自动化不对称（automation asymmetry）**——能自动化的环节全在跑（inward-brief/daily-card），需要人动手的环节全停（CHIEF 更新 157 天/audit 17 周/connection 17 周/question promote 14 天/used_by 回填从未）；vault 收敛到"只产 raw/、不改 wiki/、不闭环"的稳态
 - 今天值得想的问题：**如果 inward-brief 是唯一存活实践且被设计为不能修改状态，vault 还有没有进化可能？** 14 天 brief 语料里有没有哪怕一条结论产生了实际行为改变？
 - 缺口：14 天 brief 是否有任何下游消费（小柒是否读过？）；11/03 命名的"结论无居所"是否已被读到（有无响应？）；vault 是否已进入不可逆稳态
+- 未推送企微（vault 内产物）；未回填 used_by
+
+## [2026-11-05 09:00] inward-brief | 浮现 0 连接（NEW×OLD 双零，不凑数）+ 1 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-05.md（连续第 15 天）
+- 扫描：NEW=0（连续第 10 天）/ OLD=0（T-8=10/28，mtime 荒漠；11/04 预测命中 3/3）→ 回退池 5 篇（mtime 均 10/26 09:43；严格按字面「7天内 used_by 增量」也为 0，如实标注）
+- chief_freshness：**158 天**（连续第 15 天加警告）
+- 统计口径锁定：严格 `^capture_type:`（仅 frontmatter YAML）→ 194 篇 / pattern 13 (6.7%) / idea 5 (2.6%) / question 0 / number 0 / article 19 (9.8%) / visual-intel 2 (1.0%) / 无标注 155 (79.9%) / 有标注 39 篇
+- **今日独有发现（可验证，平反 8 天悬案）**：10/28「口径纠错」是误诊——同一批 194 篇，口径 A（严格 `^capture_type:`）= 13/5/19/2/155，口径 B（宽松匹配任意 capture_type 词）= 19/7/37/2/125，差值恒 30 篇（正文提该词但 frontmatter 无字段）。10/25~10/27 旧数 ≈ 口径 B、10/28 后新数 = 口径 A，**两者都对，只是尺子不同**；mtime 证明 11/03→11/05 零文件变动而 article 在 19→20→19 跳 → 数字抖动 100% 来自测量工具、0% 来自 vault。10/27 记录的「27 篇粗体键值」今日实测 0 篇（已统一 YAML）→ 10/28 写进 log / memory 的「污染」结论本身需平反
+- 连接：**0**（NEW×OLD=0×0，按红线明说「今天没强连接」，不凑数）；改以 🩺 元层实测发现承载（⭐⭐⭐ 但明确不计入连接数）
+- 本周隐性 pattern：**观测器没有被观测（measurement-dependence）**——11/01~11/05 五连全是「取数方式的函数」（时间源 / 字段 / 量纲 / 计数对象 / 正则）
+- 今天值得想的问题：**要修的是知识库，还是那份从来没被写进 skill 的「怎么数」？**（14 天自提 3 条规则、0 条进 skill）
+- 落点：本份起 frontmatter 加 `count_method` 字段锁定口径；建议把严格正则写进 `_skills/inward-brief.md` §5（本 LLM 无权限改 skill）
 - 未推送企微（vault 内产物）；未回填 used_by
