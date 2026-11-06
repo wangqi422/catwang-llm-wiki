@@ -3237,3 +3237,22 @@
 - 今天值得想的问题：**要修的是知识库，还是那份从来没被写进 skill 的「怎么数」？**（14 天自提 3 条规则、0 条进 skill）
 - 落点：本份起 frontmatter 加 `count_method` 字段锁定口径；建议把严格正则写进 `_skills/inward-brief.md` §5（本 LLM 无权限改 skill）
 - 未推送企微（vault 内产物）；未回填 used_by
+
+## [2026-11-06 09:00] inward-brief | 浮现 0 连接（NEW×OLD 双零，不凑数）+ 1 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-06.md（连续第 16 天）
+- 扫描：NEW=0（连续第 11 天）/ OLD=0（T-8=10/29，mtime 荒漠；11/04 预测命中 4/4）→ 回退池按字面仍为 0（5 篇 mtime 均 10/26、used_by 15 天零增量）
+- chief_freshness：**159 天**（连续第 16 天加警告）
+- 统计：沿用严格 `^capture_type:` → 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39；与 11/05 逐项一致
+- **今日独有发现（平反 11/05 两个子结论）**：四组独立计数咬合——提词 69 篇 / `capture_type:` 键值 39 篇 = 严格 frontmatter 39 篇 / 差集 30 篇；逐篇打开差集，其中 **27 篇是 `**Capture_type**:` 结构化粗体键值**（全在 wiki/，pattern 7 / idea 2 / article 18），仅 3 篇纯正文提及。与严格口径相加精确重建 10/27 旧分布 20/7/37/2 → 库里一直有 **66 篇带类型值标注（39 YAML + 27 粗体）分两种方言**。11/05 说的「27 篇粗体键值已统一 YAML、实测 0 篇」是错的；差异项不是噪声而是有效标注。有效标注 66 ≠ 提词 69（差 3 篇无类型提及）。落点：普查同时认粗体方言即可让节点 39→66，无需改 skill / 回填 / 刷 mtime
+- 连接：**0**（NEW×OLD=0×0，按红线不凑数）；以 🩺 元层实测发现承载
+- 本周隐性 pattern：**尺子越磨越利，文件一直没翻**（measurement-dependence 第 6 连，第一次把差异项从数字还原成实体）
+- 今天值得想的问题：**一份只读向内看的 brief，15 天只在数目录没「读」文件——是在向内看，还是向内数？**（解药一直在权限内：一次纯只读普查）
+- 未推送企微（vault 内产物）；未回填 used_by
+
+## [2026-11-06 10:05] daily-card | AIGC 日报第 90 期五阶段全流程（定时自动化）
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261106.md（27.3KB）/ docs/ai-daily/ai-daily-card-20261106-toc.html（42.2KB · 8 卡 · 8 nav-sub · 3 章节 · 32 chips）/ docs/ai-daily/index.html 归档顶部追加（19→20 条）/ docs/ai-daily/ai-daily-poster-20261106.png（628.5KB · 1440×1920）
+- 主线「从发模型，到发能跑起来的东西」：百度 ERNIE 5.5 Flash Base 开源(9.3) + Thinking Machines Inkling 2 Small(9.2) + Kimi Hosted Agents(9.0) + Gemini Omni 1.2 Flash(8.9) + 可灵 Kling 4.0 Flash × Adobe(8.7) + Runway 57B 实时数字人(8.5) + 混元 Hy4 扩容十倍(8.4) + Anthropic×美联社授权与 Google PLE 泡沫(8.3)；评分均值 8.79
+- 信源：AI HOT v1 聚合池 200 条 / 2 页 + aihot.news + 8 轮定向核实（含 Thinking Machines 与 Gemini Omni 1.2 官方博客二次核实）
+- 查重拦截：Images 2.6 / GPT-6 Cyber 948 漏洞 / 编码并购 / 中期选举数据中心 / Ripple-65B（11-05 期已报）、Hy4 正式版 / WeVisOne-VL / FlashProve（11-04 期已报）、K3.1 Pro 权重（11-05 期已标注排期兑现）均排除；保留 Inkling 2 Small（昨日仅作 SWE-2 Flash 底座提及）与 Hy4 扩容（运营侧新事件）形成连续剧
+- 流程：git push（5c3ca3b MD/H5/归档、87247b1 海报）→ 跨日对照（11-05 H5 与 index 均 200 排除 Pages 故障）→ gh run watch 44s 部署成功 → curl 第 1 轮即 200 + WebFetch 内容二次确认（title 2026.11.06 / 第 90 期 / 8 卡 / 3 章节 / lead / 返回归档）→ 一条龙 publish-ai-daily-poster.js 第 4 次全程无人工干预跑通（Pages 第 10 次检测 200）→ 推送 3/3 群（群 A / 群 B / 竞品视觉日报群，markdown_v2 单条 209 字节）
+- 海报视觉确认：暖纸底 + 四色系 + 半透白卡 + Cormorant Garamond 斜体数字 + 粉色 Hero，与 H5 同源；最终海报/H5/归档三 URL 均 200
