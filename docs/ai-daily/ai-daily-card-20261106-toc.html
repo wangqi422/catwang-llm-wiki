@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.06 &middot; 星期五 &middot; 第 90 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Open Weights &amp; Runtime</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧱 开放权重 · 运行环境</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>文心 5.5 开源</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Inkling 2 Small</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Kimi 托管智能体</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Generative Toolchain</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🎬 生成工具 · 剪辑工作流</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Omni 1.2 Flash</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>可灵 × Adobe</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Runway 实时数字人</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Delivery &amp; Reality</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📐 落地 · 交付边界</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Hy4 扩容十倍</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>能生成 ≠ 能交付</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.06 &middot; Fri &middot; Issue 90</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条新闻，主线是<strong>从发模型，到发能跑起来的东西</strong> &middot; 上半场交出来的不再是参数表：百度把 <strong>280B / 每 token 只激活 14B</strong> 的文心 5.5 Flash Base 连同 <strong>33.5T tokens、1M 上下文</strong>的权重放上 Hugging Face，Thinking Machines 发布 <strong>594B / 17B 激活</strong>的 Inkling 2 Small 并承诺<strong>下周 Apache 2.0 开全量权重</strong>，月之暗面干脆把 Agent 的 <strong>Harness 做成 7×24 云托管服务</strong>；同一天腾讯为 Hy4 接入 WorkBuddy 后的调用洪峰<strong>把推理集群紧急扩容十倍</strong>——发布会被鼓掌，被真实用量压着扩容才是另一种验收 &middot; 下半场生成工具把「能不能出片」改成「能不能像剪片一样改片」：Google <strong>Gemini Omni 1.2 Flash</strong> 把原生时长从 10 秒拉到 <strong>15 秒</strong>、720p 降价 <strong>30% 至 0.07 美元/秒</strong>，还加了<strong>多轮对话式改片</strong>与品牌色跨帧锁定；可灵 <strong>Kling 4.0 Flash</strong> 全面开放并钻进 <strong>Photoshop / Premiere Pro / After Effects</strong> 插件；Runway 用 <strong>57B 视频扩散模型</strong>把实时数字人从 <strong>8 张 H100 压到 4 张</strong>、跑通 24fps &middot; 收尾两盆冷水恰好说明能生成不等于能交付：<strong>Anthropic 与美联社签下首份新闻内容授权</strong>，Google PLE 测试实测工程 Agent 平均满足 <strong>91% 单项约束</strong>，但满足全部硬性要求的设计项只剩 <strong>41.3%</strong></p>
+    <div class="header-meta">
+      <span class="meta-tag">🧱 开放权重 &amp; 运行环境</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎬 生成工具 &amp; 剪辑工作流</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📐 落地 &amp; 交付边界</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.06 &middot; 第 90 期</span>
+    </div>
+  </div>
+
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Open Weights &amp; Runtime</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧱 开放权重与运行环境</div>
+    <div class="section-sub">今天交出来的不是参数表而是能直接跑的东西 —— 百度放 280B 基座权重、Thinking Machines 承诺下周开 594B 全量权重、月之暗面把 Harness 做成 7×24 云托管</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">百度开源 ERNIE 5.5 Flash Base：280B MoE / 每 token 激活 14B，33.5T tokens 预训练，推理支持 1M 上下文</span>
+        <span class="card-tag">🧱 开源基座 / 国产模型</span>
+      </div>
+      <div class="card-desc">
+        11 月 5–6 日，百度正式开源最新基座模型 <strong>文心 ERNIE 5.5 Flash Base</strong> 的预训练终点权重，FP8 与 BF16 两版已上线 Hugging Face。稀疏 MoE 架构，<strong>总参数 2800 亿、每 token 仅激活 140 亿</strong>，用 <strong>33.5 万亿 tokens</strong> 从零预训练；预训练上下文 128K，微调与推理阶段最长支持 <strong>100 万 token</strong>。官方自报 MMLU 93.3、MMLU-Pro 78.4、HumanEval+ 82.3、MBPP+ 81.5，宣称同尺寸 SOTA，超过 DeepSeek-V4-Flash-Base、Hy3-preview-Base 与 MiMo-V2.5-Base。<strong>效率是设计目标而不是堆参数</strong>：43 层中 37 层采用每 128 个 token 只缓存一条的压缩注意力，共 512 个路由专家、每 token 选 10 个；训练侧用 Muon 优化器 + FP8 混合精度 + 自研 FlashMask-4 算子，把长文本的显存与计算一起压下来。<strong>开源的是基座不是助手</strong>：纯预训练权重，未经中训练与后训练，下载后不能当成熟聊天机器人用，定位是给开发者做指令微调、领域适配与强化学习；采用自定义许可证，商用前需单独核对条款。<strong>与昨日形成对照</strong>：11-05 期讲的是 65B / 276B 的小而快编码模型，今天这条把超大容量与每 token 只算 14B 同时做进一个可自部署的国产底座。<strong>需要保留的判断</strong>：跑分均为厂商自评，评测环境与验证脚本不统一，跨实验室横比只作参考；后训练版本官方称将随后推出。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">总参 / 激活</div><div class="data-value">280B / 14B</div></div>
+<div class="data-chip"><div class="data-label">预训练</div><div class="data-value">33.5T tokens</div></div>
+<div class="data-chip"><div class="data-label">上下文</div><div class="data-value">训练 128K · 推理 1M</div></div>
+<div class="data-chip"><div class="data-label">权重</div><div class="data-value">FP8 + BF16 上 HF</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Thinking Machines 发布 Inkling 2 Small：594B MoE，AA 指数 31，下周 Apache 2.0 开放全量权重</span>
+        <span class="card-tag">🧱 模型发布 / 开放权重</span>
+      </div>
+      <div class="card-desc">
+        11 月 5 日，Mira Murati 的 Thinking Machines Lab 发布第二代模型 <strong>Inkling 2 Small</strong>：<strong>594B 总参 / 17B 激活</strong>的稀疏 MoE（48 层、每 token 路由 8 of 384 专家），原生支持图像输入与 variable effort，上下文最长 <strong>1M tokens</strong>。Artificial Analysis Intelligence Index v5 得分 <strong>31</strong>（官方模型卡列 30.6），远超第一代；Code Arena WebDev 约 <strong>1654 分</strong>被列为美国开放权重模型第一。当前先通过 <strong>Tinker</strong> 平台以闭源权重提供微调、采样与 Playground 试用，官方明确承诺<strong>下周完成外部安全测试与红队后以 Apache 2.0 开放全量权重</strong>，届时 checkpoint 可下载。<strong>训练方法比参数更值得看</strong>：更高效预训练 + 一次大规模统一 RL，在数十万条长程编码任务上跨多种 agent harness 与上下文压缩策略训练；奖励不再只有单元测试，很多任务配了 agentic RL grader 评估模型怎么解题而不只是代码是否跑通。<strong>视觉自检闭环</strong>：能读视觉反馈迭代搭建与精修网站、游戏、3D 设计——官方演示包括用 Three.js 无素材生成整座可运行的城市模拟器、用 Python 写出能启动 Linux 内核的 PC 模拟器、在 Blender 里改水面与烟囱。<strong>autoresearch 已跑通</strong>：模型自主在 Tinker 上训练 Qwen3.5-4B 做时序预测，自己写评估器、试数据集与 SFT / RL 配方，4.5 小时、426 美元把预测分翻了一倍以上。<strong>与昨日是连续剧不是重复</strong>：11-05 期的 Cognition SWE-2 Flash 正是基于 Thinking Machines 的 Inkling-Small，今天底座正式官宣并给出开放时间表。<strong>需要保留的判断</strong>：官方明确仍落后闭源模型（对齐评测低于 GPT-6.1 Sol），AA 指数 31 低于 Gemini 3.8 Flash 的 36.5；美国开放权重第一是在尚未开权重阶段的榜单表述，能否如期放出取决于外部安全测试。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">总参 / 激活</div><div class="data-value">594B / 17B</div></div>
+<div class="data-chip"><div class="data-label">AA 指数</div><div class="data-value">31 · v5.0</div></div>
+<div class="data-chip"><div class="data-label">Code Arena</div><div class="data-value">WebDev 约 1654</div></div>
+<div class="data-chip"><div class="data-label">开权重</div><div class="data-value">下周 · Apache 2.0</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">月之暗面发布 Kimi Hosted Agents：把 Agent 的 Harness 做成 7×24 云托管服务</span>
+        <span class="card-tag">🧱 托管智能体 / 企业服务</span>
+      </div>
+      <div class="card-desc">
+        11 月 5 日，月之暗面正式发布 <strong>Kimi Hosted Agents（托管智能体）</strong>，把支撑 Agent 运行的 <strong>Harness 框架作为云端服务</strong>提供给企业与开发者。企业无需自建代码执行环境，也不必自己处理上下文管理、工具调用、权限控制、任务中断恢复，即可获得 <strong>7×24 小时托管环境</strong>，支持长程任务执行与多智能体协作。服务提供独立沙箱、网络权限控制、随时中止会话与<strong>审计导出</strong>，配套 <strong>140+ Skills 与 30+ 插件</strong>，可接入自有工具与数据源；配合 Kimi Inference Hook 可在每次推理前按企业规则拦截敏感数据。首批提供 8 个金融 Agent 模板，目前仅向企业认证用户开放。计费由<strong>模型 token + 沙箱运行时长 + 插件调用次数</strong>三部分构成。<strong>卖的东西变了</strong>：从卖模型推理 API 上移到卖智能体运行环境，竞争维度从评测分数转向生态厚度与信任半径；官方称企业自建一套可靠 Harness 常需数月并持续投入维护。<strong>与前三天的连续剧</strong>：11-03 期报 Kimi 游戏开发方案（Agent 直操 Godot / Blender / Unity / UE，20 小时无人干预），11-05 期已标注 K3.1 Pro 完整权重按 10-24 承诺放出并获昇腾 0Day 适配（本期不重复展开），今天补上运行环境托管这一层——模型、方案、环境三段拼齐。<strong>成本要拆开算</strong>：token、沙箱时长、插件调用次数分别计价，长程任务的账单形态与单纯 API 调用不同。<strong>短板也清楚</strong>：AWS、阿里云等云厂商已有同类托管服务且企业客户关系与基础设施纵深更深；Kimi 优势在模型与 Agent 框架原生协同，短板在云基础设施。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">Skills / 插件</div><div class="data-value">140+ / 30+</div></div>
+<div class="data-chip"><div class="data-label">托管环境</div><div class="data-value">7×24 独立沙箱</div></div>
+<div class="data-chip"><div class="data-label">计费</div><div class="data-value">Token + 时长 + 调用</div></div>
+<div class="data-chip"><div class="data-label">开放范围</div><div class="data-value">企业认证用户</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Generative Toolchain</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🎬 生成工具与剪辑工作流</div>
+    <div class="section-sub">从能不能出片改成能不能像剪片一样改片 —— 15 秒降价三成的 Omni 1.2 Flash、钻进 Premiere 时间线的可灵插件、砍掉一半 GPU 的 Runway 实时数字人</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Google 发布 Gemini Omni 1.2 Flash：15 秒原生视频、降价 30% 至 $0.07/秒、多轮对话式改片</span>
+        <span class="card-tag">🎬 视频生成 / 宣发工具</span>
+      </div>
+      <div class="card-desc">
+        11 月 5 日，Google 发布并全量开放 <strong>Gemini Omni 1.2 Flash</strong>，覆盖 Gemini API、Google Cloud、Google Vids、Gemini for business、Flow 与 AI Studio，同步上线 OpenRouter 与 fal。原生视频生成与编辑上限从 1.1 的 <strong>10 秒提升到 15 秒</strong>，可按一秒步进指定 3–15 秒；720p 价格较 1.1 <strong>下调 30% 至 $0.07/秒</strong>。新增<strong>多轮对话式编辑</strong>：换产品、换背景、调光照、改天气、切画幅都不用重生成整段。参考图遵循显著增强，可组合角色 / 产品 / 风格图、最长 3 秒运动片段与音频线索，让人脸、服装、包装字体与<strong>品牌色跨机位保持一致</strong>。推荐工作流是 360p / 720p 出草稿 → 对话改细节 → 放大到 1080p / 4K；输出带不可见 SynthID 水印，企业可配 Provisioned Throughput，Arena 文生视频榜登顶。<strong>账单从重生成换成重编辑</strong>：改一处细节不再整段重跑，为不同受众、不同版位出多版广告的成本结构被直接改写。<strong>正好补昨天的短板</strong>：11-05 期 Images 2.6 的 GIF 实测里背景与手部逐帧漂移、品牌资产需单独过合规是主要痛点；1.2 Flash 官方点名包装字体与品牌色跨帧锁定，等于把一致性做进模型侧。<strong>与 1.1 不是同一事件</strong>：往期报道过 Omni 1.1 Flash 的 40 秒场景扩展与 4K 放大；1.2 是原生时长、降价、对话式编辑与参考遵循的版本升级，且首次在企业栈全量可用。<strong>边界要说清</strong>：官方承认快速体育动作、频繁改脚本与复杂物理仍在改进；音频参考需白名单；15 秒仍不是长片；发布时点尚无第三方质量复测。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">原生时长</div><div class="data-value">10 → 15 秒</div></div>
+<div class="data-chip"><div class="data-label">720p 单价</div><div class="data-value">$0.07/秒 · 降 30%</div></div>
+<div class="data-chip"><div class="data-label">编辑方式</div><div class="data-value">多轮对话式改片</div></div>
+<div class="data-chip"><div class="data-label">品牌一致性</div><div class="data-value">色值 / 字体跨帧</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">可灵 Kling 4.0 Flash 全面开放并接入 Adobe：PS / PR / AE 官方插件 + MCP / CLI / API</span>
+        <span class="card-tag">🎬 视频工具 / 剪辑工作流</span>
+      </div>
+      <div class="card-desc">
+        11 月 4 日晚，可灵 AI 官宣 <strong>Kling 4.0 Flash 面向全球所有用户全面开放</strong>，支持官网与 API 调用，并新增 <strong>MCP、CLI 与第三方 AI 插件</strong>接入；最关键的是打通 Adobe 专业影视软件——创作者可在 <strong>Photoshop、Premiere Pro、After Effects</strong> 内通过可灵官方插件直接调用 Flash 生成素材。Flash 是 Kling 4.0 家族的速度 / 性价比版本，生成 3–20 秒 720p 片段，支持文生视频、图生视频与 Omni Reference。完整版 Kling 4.0 已于 10 月 15 日全量开放（单次最长 30 秒、最多 10 个关键帧），Flash 于 9 月 28 日先小范围开放；本次是<strong>扩到所有人 + 扩到 API 与插件，不是新模型首发</strong>。<strong>入口变化大于能力变化</strong>：从浏览器生成、导出、导入时间线，变成在剪辑台内直接生成草稿与试镜头，省掉来回导出，官方定位是打通从创意构思、素材生成到精细剪辑的完整链路。<strong>可被 Agent 调用</strong>：API + MCP + CLI 意味着生成能嵌进既有自动化流水线、由智能体按指令触发，不必人工开网页点按钮——与本期托管 Harness 正好构成上下游。<strong>分工清楚</strong>：Flash 管快速迭代与高频创作，多关键帧、长镜头控制与高规格成片仍归完整版，本次未改变 Kling 4.0 的能力上限。<strong>需要保留的判断</strong>：本次未公布 API 定价与各插件版本的确切可用范围；部分聚合站流传的 4K@30fps / 8K@24fps / 23ms 每帧 / 13GB 显存 / 每月 5 万次免费调用等参数与可灵官方文档口径不一致，<strong>不作为事实引用</strong>，排产前以官方页为准。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">接入软件</div><div class="data-value">PS / PR / AE</div></div>
+<div class="data-chip"><div class="data-label">调用方式</div><div class="data-value">API · MCP · CLI</div></div>
+<div class="data-chip"><div class="data-label">Flash 规格</div><div class="data-value">3–20 秒 · 720p</div></div>
+<div class="data-chip"><div class="data-label">本次性质</div><div class="data-value">全面开放 · 非首发</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Runway 公开 57B 实时视频推理系统：8 → 4 张 H100 跑通 24fps 对话式数字角色</span>
+        <span class="card-tag">🎬 实时生成 / 算力</span>
+      </div>
+      <div class="card-desc">
+        11 月 5–6 日，Runway 发布技术论文，首次详细披露实时视频对话产品 <strong>Runway Characters</strong> 背后的推理系统：一款约 <strong>57B 参数</strong>的自回归视频扩散 Transformer，能把一张静态图变成可实时交流的 AI 虚拟角色（真实人像、卡通或虚构角色均可），输出 704×1088 / <strong>24fps</strong>，根据对话内容实时生成面部表情、嘴唇动作与头部运动。单会话需约 <strong>2.24 PFLOP/s</strong> 有效算力，超过单张 H100 的密集 FP8 理论峰值。团队通过缓存管理、计算流程与 GPU 间通信优化，在 4 张 H100 上把单步耗时从 <strong>240.9ms 降到 159.3ms</strong>（提速 1.51×，持续 24.5fps），再引入计算与通信融合降到 <strong>147.4ms</strong>（整体 1.63×），把单会话所需 H100 <strong>从 8 张砍到 4 张</strong>。<strong>实时视频不能靠批处理摊薄</strong>：与语言模型不同，每位用户需要独立的实时生成服务，增加第二个会话几乎让计算耗时翻倍，因此优化必须落在单会话内部。<strong>166.7ms 是硬门槛</strong>：24fps 要求每 166.7ms 产出一组四帧且整个对话持续维持，147.4ms 是压进这条线里的工程结果，缓存管理是其中关键改进。<strong>门槛砍半决定能不能排期</strong>：8 → 4 张 H100 直接决定数字人 / 虚拟主播能否从演示走进可预算的直播与互动投放。<strong>边界</strong>：论文为厂商自述，未披露商用定价与多会话并发的真实成本；704×1088 仍非广播级分辨率，长时间一致性未给出量化结果。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型规模</div><div class="data-value">57B 视频扩散</div></div>
+<div class="data-chip"><div class="data-label">GPU</div><div class="data-value">8 → 4 张 H100</div></div>
+<div class="data-chip"><div class="data-label">单步耗时</div><div class="data-value">240.9 → 147.4 ms</div></div>
+<div class="data-chip"><div class="data-label">输出</div><div class="data-value">704×1088 · 24fps</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Delivery &amp; Reality</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📐 落地与交付边界</div>
+    <div class="section-sub">被真实用量压着扩容十倍的 Hy4，以及 91% 单项正确率只换来 41.3% 可行设计的冷水 —— 能生成与能上线之间还隔着一整条链</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">腾讯混元 Hy4 上线 WorkBuddy 后调用激增，推理集群紧急扩容十倍，Hy3 限免延至 11-15</span>
+        <span class="card-tag">📐 模型落地 / 真实用量</span>
+      </div>
+      <div class="card-desc">
+        11 月 6 日，腾讯披露混元 <strong>Hy4 于 11 月 4 日在 WorkBuddy 首发接入后调用量激增</strong>，上线首日即有大量用户触及额度；团队已将 <strong>Hy4 推理集群紧急扩容十倍</strong>并提高免费体验额度，但受高端算力总量与高峰并发所限，个别时段仍可能限额。官方建议非紧急需求切换 Hy3 或错峰到晚间使用，<strong>Hy3 在 WorkBuddy 的限免延长至 11 月 15 日 23:59</strong>。同期 Arena Agent Arena 榜单显示 Hy4 登顶中国模型第一。<strong>与 11-04 期要区分</strong>：11-04 期报的是 Hy4 正式版发布（770B、首次引入视觉与电脑操作、进游戏引擎）；今天这条是发布后的<strong>运营侧事件</strong>——接入 WorkBuddy 后的调用洪峰与集群扩容，不是模型重复报道。<strong>从发布到被用的实测</strong>：11-05 期还在讲 Uber 3.2 亿订单只有 4 单来自 AI 智能体，一天之后国内办公 / Agent 场景就出现首日触及额度、集群扩容十倍——消费端冷现实与企业生产力场景的真实调用量并不在同一条曲线上。<strong>容量不等于无限</strong>：官方明确高端算力总量与高峰并发仍有限额，并给出降档到 Hy3、错峰到晚间的具体建议，等于把容量约束写进产品公告。<strong>成本口径同步变化</strong>：腾讯云积分抵扣文档显示，Hy4 preview 套餐内档在 11 月 4 日 00:30 由 66 积分（3.3 元）调到 105 积分（5.25 元），同一模型隔一天套餐内贵近四成，批量任务需按新价重算。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">扩容</div><div class="data-value">推理集群 ×10</div></div>
+<div class="data-chip"><div class="data-label">触发</div><div class="data-value">WorkBuddy 首日触额度</div></div>
+<div class="data-chip"><div class="data-label">Hy3 限免</div><div class="data-value">延至 11-15 23:59</div></div>
+<div class="data-chip"><div class="data-label">榜单</div><div class="data-value">Arena 中国模型第一</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">能生成 ≠ 能交付：Anthropic 与美联社签首份新闻内容授权；Google PLE 实测 91% 单项正确率只换来 41.3% 可行设计</span>
+        <span class="card-tag">📐 内容授权 / 落地边界</span>
+      </div>
+      <div class="card-desc">
+        11 月 5 日两条信号同时落地。其一，<strong>Anthropic 与美联社（AP）达成首份新闻内容授权协议</strong>，这是该公司在与音乐出版商、书籍作者的版权诉讼之外，第一次与新闻机构建立正式内容授权关系。其二，<strong>Google 与 Mercor 联合发布 PLE 测试</strong>，量化工程 Agent 的正确率泡沫：共同创作任务中平均满足 <strong>91% 的单项约束</strong>，但满足全部硬性安全与可行性要求的设计项仅 <strong>41.3%</strong>；Claude Opus 5.5 在 56 项隐藏测试中仅得 48.3%。研究指出复杂工程里约束彼此耦合，解决一个问题常常导致另一个问题失败。<strong>两条指向同一件事</strong>：素材能不能用（授权链）与方案能不能落地（全部硬约束同时满足），才是能生成之后真正的门槛。<strong>91% 到 41.3% 的落差</strong>：单点评测会系统性高估 Agent 在真实项目里的可用度；营销物料的审校不能只看每条要求都过了，要看整份成品是否同时过合规、品牌、法务与版位。<strong>授权正在变成基础设施</strong>：Anthropic 从被诉方转向付费授权方，说明训练 / 检索内容的来源可追溯性正成为模型厂商的固定合规成本项，与 11-02 期四巨头统一 robots.txt 退出信号是同一条主线。<strong>边界</strong>：PLE 为 Google / Mercor 自评基准，隐藏测试集未公开；AP 协议的金额、范围与期限均未披露，不宜按全面和解解读。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">单项约束</div><div class="data-value">平均满足 91%</div></div>
+<div class="data-chip"><div class="data-label">全部硬约束</div><div class="data-value">仅 41.3% 可行</div></div>
+<div class="data-chip"><div class="data-label">授权</div><div class="data-value">Anthropic × 美联社</div></div>
+<div class="data-chip"><div class="data-label">隐藏测试</div><div class="data-value">Opus 5.5 · 48.3%</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>八条其实在讲同一个动作：<strong>交付物从参数表变成了能跑起来的东西</strong>。前三名分别是开源基座、下周开权重的模型、把 Harness 做成云服务的厂商，第七条则是被真实调用量压着扩容十倍——模型侧第一次集体不再比谁更大，而是比谁能被拿去用。</p>
+    <p><strong>① 上半场交的是环境，不是分数</strong>。百度把 280B 容量、14B 激活与 1M 上下文一起放进可私有化部署的国产底座；Thinking Machines 更直接，先上 Tinker 试用、承诺下周完成外部红队后以 Apache 2.0 开全量权重，还演示了 4.5 小时 / 426 美元自主训练一个小模型；月之暗面把上下文管理、工具调用、权限控制与中断恢复打包成 7×24 托管服务。<strong>共同点是：拿到手就能接进流水线，而不是先读一遍论文。</strong></p>
+    <p><strong>② 中间三条把生成工具推进了剪辑台</strong>。Omni 1.2 Flash 把时长拉到 15 秒、价格降 30%，并用多轮对话式改片把「重生成」的账单换成「重编辑」的账单，还首次把包装字体与品牌色跨帧锁定写进官方能力；可灵 Flash 钻进 Photoshop / Premiere / After Effects 插件，试镜头不再来回导出；Runway 用缓存与通信融合把实时数字人从 8 张 H100 压到 4 张、跑通 24fps。<strong>这三条都在回答同一个问题：能不能少重跑一次。</strong></p>
+    <p><strong>③ 最后两条给这份乐观标了刻度</strong>。Hy4 扩容十倍说明企业生产力场景的真实调用量与昨天 Uber 3.2 亿订单只有 4 单的消费端冷现实并不在同一条曲线上；而 PLE 测试的 91% → 41.3%，加上 Anthropic 与美联社那份新闻内容授权协议，提醒我们能生成和能上线之间还隔着授权链、品牌规范、法务与版位同时满足的整体验收。<strong>单点跑分不再是可用度证明。</strong></p>
+    <p>今天最高分给到 <strong>#1 百度 ERNIE 5.5 Flash Base（9.3 / P0）</strong>：分量不在跑分，而在把超大容量、每 token 只算 14B 与 1M 上下文同时做成一个可私有化部署的国产底座。对宣发团队而言，这条和 #4 恰好构成一组必须同时做的动作——一边用对话式改片把产能拉满，一边把授权链与整份终审补齐。</p>
+    <p>四条可以立刻执行的线索：<strong>① 用 Gemini Omni 1.2 Flash 开一条同素材对话式出多版位试点</strong>（重点验品牌色与字体跨帧是否稳，复杂动作镜头仍人工终审）；<strong>② 在 Premiere 里试一次可灵插件的镜头草稿</strong>（先确认插件版本与 API 定价再排产，不采信聚合站流传的规格）；<strong>③ 批量生成排期错峰到晚间</strong>（WorkBuddy 扩容后高峰仍可能限额，按 11-04 调整后的积分单价重算预算）；<strong>④ 给 AI 素材补一份整份终审清单</strong>（授权链 + 品牌规范 + 法务 + 版位同时满足）。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
