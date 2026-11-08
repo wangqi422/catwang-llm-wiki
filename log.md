@@ -3256,3 +3256,37 @@
 - 查重拦截：Images 2.6 / GPT-6 Cyber 948 漏洞 / 编码并购 / 中期选举数据中心 / Ripple-65B（11-05 期已报）、Hy4 正式版 / WeVisOne-VL / FlashProve（11-04 期已报）、K3.1 Pro 权重（11-05 期已标注排期兑现）均排除；保留 Inkling 2 Small（昨日仅作 SWE-2 Flash 底座提及）与 Hy4 扩容（运营侧新事件）形成连续剧
 - 流程：git push（5c3ca3b MD/H5/归档、87247b1 海报）→ 跨日对照（11-05 H5 与 index 均 200 排除 Pages 故障）→ gh run watch 44s 部署成功 → curl 第 1 轮即 200 + WebFetch 内容二次确认（title 2026.11.06 / 第 90 期 / 8 卡 / 3 章节 / lead / 返回归档）→ 一条龙 publish-ai-daily-poster.js 第 4 次全程无人工干预跑通（Pages 第 10 次检测 200）→ 推送 3/3 群（群 A / 群 B / 竞品视觉日报群，markdown_v2 单条 209 字节）
 - 海报视觉确认：暖纸底 + 四色系 + 半透白卡 + Cormorant Garamond 斜体数字 + 粉色 Hero，与 H5 同源；最终海报/H5/归档三 URL 均 200
+
+## [2026-11-07 09:00] inward-brief | 浮现 0 连接（NEW×OLD 第 9 次双零，不凑数）+ 2 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-07.md（连续第 17 天）
+- 扫描：NEW=0（11/06 00:00~11/07 06:00）/ OLD=0（T-8~T-7=10/30~10/31）→ 回退「7 天内 used_by 增量」按字面仍为 0
+- chief_freshness：160 天（连续第 17 天加警告）｜ 统计：严格 ^capture_type: 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39（趋势线第 3 天可比）
+- 今日要点：逐篇打开 11/06 留白的 27 篇粗体方言 → **0/27 有 YAML frontmatter**（全为正文 `**Type**:`/`**Capture_type**:` 粗体键值块）→ 平反 11/06「零成本 39→66、不必改 skill/回填」落点：纳入它们必须改 skill 正则或批量回填（后者销毁 mtime），解药不在纯只读权限内；66 是「人类可读标注数」非「可见节点数」。另：7 篇粗体 pattern 的 `**Created**` 全落在 04-09~05-25、无一晚于 06-01 → CHIEF §4「自 6/1 起无新 pattern」实测成立，17 天来第一个「核对完不用改」的负结果；created 双方言并集 73/194=37.6% 仍不过半 → 11/01「时间窗改用 created 不可行」结论方向成立
+- 未推送企微；未回填 used_by；纯只读，未改任何历史文件
+
+## [2026-11-07 10:05] daily-card | AIGC 日报第 91 期五阶段全流程
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261107.md / docs/ai-daily/ai-daily-card-20261107-toc.html（44.5KB · 8 卡 · 8 nav-sub · 3 章节 · 32 chips）/ docs/ai-daily/index.html 归档顶部追加（quoted-key 20→21 条）/ docs/ai-daily/ai-daily-poster-20261107.png（624KB · 1440×1920）
+- 主线「钱开始挑项目，智能体开始常驻」：AI 资本同日重定价(9.3) + 工信部智能体终端进网管理(9.0) + Meta 暂停商业网页抓取(8.7) + Perplexity Teammates(9.1) + Meta Muse 三连发(8.9) + Google Agent Substrate 捐 CNCF(8.5) + World Labs Frameboy × NVIDIA Cosmos 3(8.9) + 蚂蚁 Ling-3.2-flash × Krea Video(8.4)；评分均值 8.8
+- 信源：AI HOT v1 聚合池 189 条 / 2 页（hasMore=false）+ aihot.news 热度榜 + 8 轮定向核实
+- 查重拦截：GPT-6 Cyber / Images 2.6 / Ripple-65B / ERNIE 5.5 Flash Base / Inkling 2 Small / Gemini Omni 1.2 Flash / Kling 4.0 Flash / Hy4 扩容 / Kimi Hosted Agents / Anthropic×美联社（89/90 期已报）均排除
+- 流程：git push（db28bb4 MD/H5/归档 + 4aa5031 MD 补 tagline + 599d0ad 海报）→ H5 URL 404 时 gh run watch 42326148334 部署成功 → curl 第 1 轮 200 + WebFetch 内容二次确认（title 2026.11.07 / 第 91 期 / lead / 3 章节 / 8 卡 / 编辑点评 / 返回归档）→ 海报生成后发现 tagline 未提取到，MD 编辑点评补「**一句话：**」行后重新生成（注意正则要求「一句话」后紧跟冒号，`**一句话：**` 写法才可匹配）→ 一条龙 publish-ai-daily-poster.js 跑通（Pages 第 6 次检测 200）→ 推送 3/3 群（群 A / 群 B / 竞品视觉日报群，markdown_v2 单条 209 字节）
+- 海报视觉确认（ViewImage 两轮）：暖纸底 + 四色圆点/数据条 + 半透白卡 + Cormorant Garamond 斜体数字 + 粉色 Hero + tagline 卡，与 H5 同源，无溢出遮挡；最终 H5/海报 PNG 双 URL 200
+
+
+## [2026-11-08 09:00] inward-brief | 浮现 0 连接（NEW×OLD 第 10 次双零，不凑数）+ 3 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-08.md（连续第 18 天）
+- 扫描：NEW=0（11/07 00:00~11/08 06:00）/ OLD=0（T-8~T-7=10/31~11/01）→ 回退「7 天内 used_by 增量」按字面仍为 0
+- chief_freshness：161 天（连续第 18 天加警告）｜ 统计：严格 ^capture_type: 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39（趋势线第 4 天可比）
+- 今日要点：解 11/01 遗留「created 数字 24 vs 46 待复原」悬案 → 46 = 24 未加引号 + 22 带引号（全部 2026、0 非法值），11/01 正则漏掉带引号变体，measurement-dependence 第 8 连（引号方言）；三种时间戳方言完整地图：YAML 未引号 24 / YAML 带引号 22 / 粗体 27，并集 73/194=37.6%，粗体方言止于 06-01（与「自 6/1 起无新 pattern」同日 = 格式拐点）；11/04「OLD 长期为 0」预测命中 6/6，但输入指纹规则 7 天未进 skill
+- 未推送企微；未回填 used_by；纯只读，未改任何历史文件
+
+## [2026-11-08 10:05] daily-card | AIGC 日报第 92 期五阶段全流程
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261108.md / docs/ai-daily/ai-daily-card-20261108-toc.html（41736B · 8 卡 · 8 nav-sub · 3 章节 3-3-2 · 32 chips）/ docs/ai-daily/index.html 归档顶部追加（quoted-key 21→22 条，eval 校验 DATA 共 137 条）/ docs/ai-daily/ai-daily-poster-20261108.png（656.9KB · 1440×1920）
+- 主线「一边抢上市，一边划红线」：Anthropic 逆势定档感恩节前 IPO(9.4) + 美国 AI 红线双线收紧 DOJ-SITF/民主党超级 AI 永久禁令/州议员禁 RSI(9.0) + 家长起诉谷歌 Gemini 与 K-12 默认关闭 AI(8.8) + Anthropic 拆解 Claude 智能体记忆 笔记/显著性/dreaming(8.7) + 编码智能体交互收口 Cursor 语音/Amp spaces/OpenCode Browse/Auto Code(8.6) + 中国移动 MobileWork 与美企开源支出 89% 流向中国模型(8.5) + 算力冷热同框 谷歌 170 亿接盘 Crusoe/内蒙 800MW/60 万块 H200 闲置香港(8.5) + 宣发创作链 Kling 4.0 Keyframes/GPT-Image-2.6 实测/Meshy Relief/TristanTube(8.3)；评分均值 8.73
+- 信源：AI HOT v1 新端点 24h 聚合池 **54 条 / 1 页**（周末低量，hasMore=false / nextCursor=null，配合 8 轮定向核实与 aihot.news 热度榜补足候选池 ≥25，**未降级深度专题**）+ 归档逐条查重
+- 查重拦截：Gemini Omni 1.2 Flash / GPT-6 Cyber / Images 2.6 发布（今日仅保留第三方实测维度）/ Inkling 2 Small / Kling 4.0 Flash×Adobe（保留 Keyframes 新功能）/ ERNIE 5.5 / Frameboy×Cosmos 3 / Perplexity Teammates / Meta Muse 三连发 / 工信部进网管理（89–91 期已报）均排除；#1 写成昨日「估值遇阻」→「逆势定档 + 具体时间表 + 上调区间 + 完整账本」的连续剧转折
+- 阶段 3：git commit 44ddd05（MD + TOC H5 + 归档 + 两个生成脚本，5 files / 913 insertions）→ push 599d0ad..44ddd05，local/remote sha 一致
+- 阶段 4 强制关卡通过：跨日对照（11-07 H5 与 index.html 均 200，排除 Pages 故障）→ gh run list 42436245596 completed/success（45s）→ 今日 H5 curl **第 1 轮即 200** → 拉取线上 HTML 结构校验（title=2026.11.08 / 第 92 期 / 8 卡 / 8 nav-sub / 32 chips / </head>=1 / 无 11-07 残留 / lead 有内容 / 返回归档在）→ WebFetch 内容二次确认（8 条标题、3 章节、编辑点评全部回读一致）方进入推群
+- 阶段 5：--dry 预检后 publish-ai-daily-poster.js --date 20261108 一条龙全程无人工干预跑通（generate-poster 3:4 → Puppeteer 截图 656.9KB → commit 97bae63 / push 44ddd05..97bae63 → Pages 第 6 次检测 200 → 推全部群）→ **3/3 群成功**（群 A / 群 B / 竞品视觉日报群，单条 markdown_v2 209/4096 字节 = 海报图 + 「点击看更多内容」链接，凭据取自 config.local.json）
+- 海报视觉确认：暖纸底 #F2EEDF + 四色系（pink #E1A4C2 / lemon #D6DD63 / blush #E8C9B6 / sage #B7C7A8）+ 半透白卡 rgba(255,255,255,0.55) + Cormorant Garamond 斜体数字，与 H5 同源；副标题自动取 TOC <p class="lead"> 并清洗 strong，tagline 取编辑点评「**一句话：**」；最终 H5 / 海报 PNG / 归档三 URL 均 200，remote main = 97bae63 与本地一致
+- 备注：export PATH="/c/Program Files/GitHub CLI:$PATH" 前置注入继续有效；config.json 公开占位符不生效，真实 3 群来自 config.local.json。坑位：单条 Bash 长校验命令内嵌复杂引号会触发 unexpected EOF while looking for matching quote，拆成独立命令或改用专用检索工具即可
