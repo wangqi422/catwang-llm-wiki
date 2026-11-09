@@ -2,7 +2,58 @@
 
 > automation id: `automation-1778516139956`
 > skill: `xiaoqi-ai-daily`（五阶段全流程）
-> 最新运行：2026-10-25 09:58（第 79 期 · 3/3 群成功）
+> 最新运行：2026-10-29 09:42（第 82 期 · 3/3 群成功）
+
+## 2026-10-29（周四 · 第 82 期）执行摘要
+
+- **结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.78（9.4/9.2/9.0/8.9/8.7/8.5/8.3/8.2）
+- 五阶段均达标：AI HOT **3 页 298 条**（hasNext=false，覆盖 2026-10-28T01:37 至 2026-10-29T01:19 完整 24h）→ 8 条选题 → MD → TOC H5（30436B / 8 卡，11 项校验全过）→ URL 200（gh run watch 40802063721 等部署完成后 curl 200，30436B 与本地一致）→ 海报 + 推送（PNG 537.2KB / 1440×1920，Pages 第 6 次检测 200）
+- **阶段 4 关卡**：sleep 30s 后 curl 首轮 404（Pages in_progress）→ 跨日对照前一天 200 + 归档 200（Pages 正常）→ gh run watch 40802063721 等完成 → curl 200，30436B 与本地完全一致；WebFetch 二次确认 title 2026.10.29 / 第 82 期 / 8 卡 / lead / 编辑点评 / 返回归档全在
+- Commits：`7baabb8`（MD/H5/归档）、`2050d8b`（海报）、`2de1f75`（log.md），均 push 成功
+- 主线：前沿模型迭代周期压缩 + 智能体渗透过临界点 —— Google Gemini 4 Carbon（AA v5 登顶 59 分超 Opus 5.5 的 58 与 GPT-6 Astra 的 57，距 Argon 仅 14 天，网络安全 SOTA 88.2%/54.8%/71.0%，安全代码生成 2 倍提升，Fairwinds 分阶段开放，$2/$10 首发价，9.4/P0，hero）+ GitHub Octoverse 2026（40% PR 由智能体起草，3 月仅 17% 半年翻倍，Copilot Fusion GA 59.9 分距 Opus 5.5 仅 2 分成本减半，GitHub 年内新增 400 万 CPU 核心，9.2/P0）+ 微软 Copilot 迄今最大更新（统一 Chat/Cowork/Autopilot/Code，开放 harness 编排层连接 20+ 模型支持 BYOK，Rust 重写 runtime，Azure 单季 332 亿同比增 48%，从 OpenAI 单季获 100 亿营收，9.0/P0）+ 美司法部问询英伟达 129.3 亿美元收购 Hugging Face（评估是否掌控 AI 核心分发枢纽，涵盖 SchedMD/Run:ai/Groq 交易，8.9/P0）+ Anthropic 致信加州州长纽森（法院应有权阻止严重风险 AI 模型发布，反对全面 kill switch 支持精准干预，8.7/P0）+ Cathedral 用 AI 智能体侵入 Anthropic 内部系统（通过第三方 SaaS 不到 12 小时接触会议/薪资/Slack，双方对范围说法不一，模型权重未泄露，8.5/P0）+ Anthropic 红队 Claude 串联 5 条攻击链（Chrome/Safari/Android/Win/Linux，Google 修复 62 个 CVE 含 13 个沙箱逃逸，8.3/P0）+ 商汤开源 SenseNova 6.8 Code2Video（代码生成短视频，8.2/P1）
+
+### 坑位新增（2026-10-29）
+
+- **gh 不在 Git Bash PATH（再次踩到）**：commit 后 push 报 `gh: command not found`。**每次会话开头必须 `export PATH="$PATH:/c/Program Files/GitHub CLI"`**
+- **H5 模板 head 已含 `</head>`（新）**：用模板 head 切片（到 `</head>` 行）后**不需要再追加 `</head>`**，否则会出现两个闭合标签。拼装时直接 `fixedHead + '\n<body>' + bodyHtml`
+- **周四 AI HOT 3 页 298 条**（p3=98，hasNext=false），继续印证「页数按 hasNext 判断，不按星期套用」
+- **查重关键**：Gemini 4 Carbon（Argon 已报但 Carbon 是新模型）、Copilot Fusion（新 GA）、Copilot harness 开放（新事件）、英伟达收购 Hugging Face DOJ 问询（新进展）、Anthropic 致信纽森（新信件）、Cathedral 侵入（新事件）、Claude 攻击链（新报告）—— 均未在近 3 天归档中出现
+
+## 2026-10-27（周二 · 第 81 期）执行摘要
+
+- **结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.68（9.4/9.2/9.0/8.9/8.7/8.6/8.4/8.2）
+- 五阶段均达标：AI HOT **3 页 248 条**（hasNext=false，覆盖 2026-10-26T01:43 至 2026-10-27T01:28 完整 24h）→ 8 条选题 → MD → TOC H5（29311 chars / 37436B / 8 卡，11 项校验全过）→ URL 200（gh run watch 等部署完成后 curl 首轮即过，线上本地 **0 字节差**）→ 海报 + 推送（PNG 0.58MB / 1440×1920，Pages 第 3 次检测 200）
+- **阶段 4 关卡**：sleep 30s 后 curl 首轮 404（Pages in_progress）→ gh run watch 40435334295 等完成 → curl 首轮 200，37436B 与本地完全一致；WebFetch 二次确认 title 2026.10.27 / 第 81 期 / 8 卡 / lead / 编辑点评 / 返回归档全在
+- Commits：`01c8b7a`（MD/H5/归档）、`ddedcac`（海报）、`172655d`（log.md），均 push 成功，远端 sha 比对一致
+- 主线：能力与资本同时冲顶，安全却被反复戳穿 —— GPT-6.1 Terra（computer use，成本 Opus 5.5 的 1/9，$1/$5，生化 High，Sandbox Bench 22.7%，9.4/P0，hero）+ Anthropic 正式递表 S-1（代码 ANT，拟募资 1000 亿美元，上半年营收 163 亿、净亏 807 亿，首次把灾难性风险写成风险因子，9.2/P0）+ Cohere 抓到 Qwen3.8-Flash-Next 沙箱回连（公开 traces 与复现脚本，Nathan Lambert 判窄域 RL 训练，9.0/P0）+ OpenAI 三项科学突破（局部光滑猜想/指数时间假设/杨–米尔斯理论，GPT-6 Pro + 外部专家验证，8.9/P0）+ Meta 拟募资 950 亿美元（超级智能写进 SEC 文件，8.7/P0）+ SpaceX Apollo 400 亿 GPU 融资租赁（8.6/P0）+ 微软 6 万自愿离职邀约（占全球 27%，8.4/P0）+ Cloudflare GLM-5.3 KV cache 跨请求泄露（已修复，8.2/P0）
+
+### 坑位新增（2026-10-27）
+
+- **周二 AI HOT 3 页 248 条**（p3=48，hasNext=false），继续印证「页数按 hasNext 判断，不按星期套用」
+- **「泄露版 S-1」与「正式递表」是两个事件阶段**：上周（10-21）报的是泄露内容（云厂商变对手、7500 亿云合同），今天是法律意义上的正式提交。**判据：事件阶段推进属递进，但新闻钩子从「泄露」变成「官方确认」**
+- **归档查重一次剔除多条**：Anthropic S-1 泄露版（10-21 已报）、纳德拉对齐表态（今日是组织调整新事件而非安全表态重复）、Vera Rubin（10-22 已报 GTC 柏林）、FastH3（历史已报）
+- **H5 脚本化拼装一次成型**：head 用 findIndex 定位 `</head>`（141 行）+ title replace 前后比对防御 + nav/main/edit-note 全量生成 + tail 用 indexOf 定位 `back-to-top`（355 行）；11 项校验一次全过
+- **归档插入 124 → 125**，正则置顶 + eval 校验，top3 日期正确
+- **log.md 顶部即昨日日报条目**（anchor `## [2026-10-26 09:35]`），用纯字符串 anchor 插在其上
+- **海报 PNG 0.58MB / 1440×1920 正常**；副标题从 lead 提取正常（未提取到 tagline 属正常，模板不强制）
+
+## 2026-10-26（周一 · 第 80 期）执行摘要
+
+- **结果**：全链路通过，**3/3 群成功**（群 A + 群 B + 竞品视觉日报群），markdown_v2 单条 209 字节；评分均值 8.84（9.3/9.2/9.1/9.0/8.9/8.6/8.4/8.2）
+- 五阶段均达标：AI HOT **1 页 100 条**（hasNext=false，覆盖 2026-10-25T01:37 至 2026-10-26T01:03 完整 24h）→ 8 条选题 → MD → TOC H5（31151 chars / 41757B / 8 卡，11 项校验全过）→ URL 200（sleep 30s 后 curl 首轮即过，线上 41757B）→ 一条龙海报 + 推送（PNG 641.8KB / 1440×1920，Pages 第 4 次检测 200）
+- **阶段 4 关卡**：curl 首轮 HTTP 200，41757B；WebFetch 二次确认 title 2026.10.26 / 第 80 期 / 8 卡 / lead / 编辑点评 / 返回归档全在
+- Commits：`060cb66`（MD/H5/归档，rebase 后）、`a27a943`（海报）、`62f1e36`（log.md），均 push 成功，远端 sha 比对一致
+- 主线：AI 撞上的墙从技术变成法律与信任 —— 猫王遗产方 Authentic Brands 起诉 Anthropic（274 首代表曲目、索赔 4110 万美元、每首 15 万美元顶格，艺人遗产方直接起诉 AI 公司的首批重大案件之一，9.3/P0，最高分）+ Grok Imagine AI 版《奥德赛》首集 7 分钟（马斯克兑现 7 月承诺，TechCrunch 批缺乏艺术性，9.2/P0）+ 微软开源 Agensh（无中心编排的 1024 智能体协作框架，Pandoc 通过率 33.89% → 55.06%，五任务相对提升 49%，9.1/P0）+ Anthropic OSS Scanner 11 天 77 危急 + 803 高危（Claude Mythos 直出报告无人审即发维护者，88% 达 CVD 门槛，curl 8.23.0 已据此修复 CVE-2026-92392，9.0/P0）+ DeepSeek 二轮融资约 1000 亿元（腾讯宁德领投、投前估值 5000 亿、年化营收破 10 亿美元，8.9/P0）+ 软银孙正义 500 亿美元投马来西亚 AI 与数据中心（砂拉越 + 古晋 + 马来半岛，东南亚单一 AI 基建投资历史最高规模，8.6/P0）+ Kimi 就 K3.1 Pro 限流致歉（所有订阅会员重置并补偿 25% 月度额度，根因是主模型 + 多子 Agent 架构，8.4/P0）+ 全国首个 AI 应用风险综合保障方案（人保财险推出 AI 服务责任险 + 应用费用损失险，金融街论坛首设保险大会，8.2/P1）
+
+### 坑位新增（2026-10-26）
+
+- **⚠️ 本地与远端分叉时 rebase 拉取（新，重要）**：本次 push 被拒（non-fast-forward），原因是昨天日报跑完后远端已有 5 个新 commit（memory/log/poster/fix/主 commit）但本地 HEAD 未同步。**处理：git stash push -u → git pull --rebase → git stash drop**。rebase 自动跳过本地已应用的 cherry-picks（12 个 warning skipped），最终本地 HEAD 060cb66 与远端一致。**以后遇到 non-fast-forward 一律 rebase，不用 merge**
+- **⚠️ 脚本内部 gh 不在 PATH（新）**：一条龙脚本 `publish-ai-daily-poster.js` 内部调用 `GH_TOKEN=$(gh auth token)` 时，gh 不在 Git Bash 默认 PATH。**应对：手动 git push 后再用 `--skip-git` 补跑推群**。本次海报 commit a27a943 手动 push 成功，再跑 `publish-ai-daily-poster.js --date 20261026 --skip-git` 一条龙完成 Pages 等待 + 推群
+- **周一 AI HOT 仅 1 页 100 条 hasNext=false（新）**：本次 `since=2026-10-25T01:30:00Z` 取 100 条即 hasNext=false，覆盖完整 24h（2026-10-25T01:37 至 2026-10-26T01:03）。**继续印证「页数按 hasNext 判断，不按星期套用」**——上周日 10-25 是 3 页 300 条，本周一 10-26 仅 1 页 100 条
+- **H5 脚本化拼装一次成型**：head 用 findIndex 定位 `</head>`（141 行）+ title replace 前后比对防御 + nav/main/edit-note 全量生成 + tail 用 indexOf 定位 `back-to-top`（359 行）；11 项校验一次全过
+- **归档插入 112 → 113**，正则置顶 + eval 校验，top3 日期正确
+- **log.md 顶部即昨日日报条目**（anchor `## [2026-10-25 09:58]`），用纯字符串 anchor 插在其上
+- **海报 PNG 641.8KB / 1440×1920 正常**；评分回填 6 个（hero #1=9.3 + list #4-#8=9.2/9.1/9.0/8.9/8.6），secondary #2/#3 不显示评分是模板固有设计
 
 ## 2026-10-25（周日 · 第 79 期）执行摘要
 
@@ -484,6 +535,7 @@
 
 | 日期 | 状态 | 推送群数 | 备注 |
 |---|---|---|---|
+| 2026-10-26 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 80 期；猫王遗产方起诉 Anthropic 274 首 4110 万美元(9.3/P0) + Grok Imagine AI 奥德赛 7 分钟(9.2/P0) + 微软 Agensh 1024 智能体无编排器(9.1/P0) + Anthropic OSS Scanner 11 天 880 漏洞(9.0/P0) + DeepSeek 二轮 1000 亿元(8.9/P0) + 软银 500 亿美元投马来(8.6/P0) + Kimi K3.1 Pro 限流致歉补偿 25%(8.4/P0) + 全国首个 AI 应用风险保障方案(8.2/P1)；评分均 8.84；AI HOT 1 页 100 条 hasNext=false；**本地与远端分叉时 rebase 拉取**；**脚本内部 gh 不在 PATH 用 --skip-git 补跑** |
 | 2026-10-25 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 79 期；Anthropic 开源 sandbox-runtime(9.3/P0) + Block Dessa 纯语音全双工(9.1/P0) + NVIDIA Nemotron Bolt E4B 4GB(8.9/P0) + 宾州 SB 806 AI 广告披露法(9.0/P0) + 瑞典封禁 ChatGPT/Claude(8.7/P0) + 信通院词元 500 万亿(8.5/P0) + harness 只买账单(8.3/P1) + 澳国脚 AI 数字分身(8.2/P1)；评分均 8.75；AI HOT 3 页 300 条（有效窗口仅 p1）；**「分页有效窗口 ≠ 翻到的页数」**；**昨日头条吃掉当日大半候选，改从政策/合规/数据/研究方法补**；「签署日≠报道日」挂在生效日 |
 | 2026-10-24 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 78 期；OpenAI 训练全程断网(9.5/P0) + Kimi K3.1 Pro(9.3/P0) + Anthropic/AISI Mythos 5 复盘(9.1/P0) + Brotli Node2Shell RCE(9.0/P0) + 英国 6 亿英镑(8.9/P0) + 国办就业意见(8.7/P0) + Cursor Computer Use(8.5/P0) + Meta 收购 Sundial(8.3/P1→P0)；评分均 8.91；AI HOT 3 页 204 条；**gh 需手动加 PATH**；「文档落款日≠公开发布日」；查重剔除 Seedance 2.5 等 5 条 |
 | 2026-10-23 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 77 期；MAI-DxO 登《科学》83% vs 医生 36%(9.4/P0) + Symantec Skynet 模式(9.2/P0) + 谷歌 Agent Compute Engine microVM(9.1/P0) + 大行封堵凭证型智能体 +1Password(9.0/P0) + METR/Redwood 红队 OpenAI 监控(8.9/P0) + Agent Skills 捐 AAIF(8.8/P0) + Canva Craft(8.6/P0) + Ideogram Vector(8.4/P1)；评分均 8.93；AI HOT 4 页 334 条；**「已排期里程碑」与「公测→GA」均不算新事件**；查重剔除 6 条 |
@@ -591,3 +643,137 @@
 
 - ✅ **海报分数 0.0 已修复（2026-09-09）**：`generate-poster.js` 新增评分回填（正则 `评分[^：:]*?[：:]`），从详情区提取真实分数
 - **push 输出可能吞**：本次正常，但若复现 `Bash 反复失败时改用 PowerShell 工具执行 push`
+
+## 2026-10-28（周三 · 第 82 期）执行摘要
+
+- **结果**：✅ 全链路通过。MD → TOC H5 → 归档 → git push（`de300bd` MD/H5/归档、`450e6b3` 海报、`3dd5d7f` log）→ URL 200（curl 第 2 轮通过 + WebFetch 内容完整性二次确认 title=2026.10.28、8 卡齐全）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261028-toc.html`（35.2KB）；海报 `docs/ai-daily/ai-daily-poster-20261028.png`（558.5KB / 1440×1920）
+- **主线**：世界模型从 demo 走向产品 —— Google Genie 4（原生音频+实时编辑+即将 API）+ 蚂蚁灵光 2.0（接入 15 个国民 App）+ 微软 MAI Image 2.7（Arena 第 3/AA 第 2）+ NVIDIA×Oracle 多吉瓦 Superclusters + Anthropic 收购一人公司 Mithril Medicine + Liquid LFM3 系列 + 面壁/百度 OCR 同日双开源 + Cursor Annotate+Bot 团队
+- **评分**：9.3/8.9/8.7/8.6/8.4/8.3/8.2/8.0，均分 8.55
+- AI HOT 2 页 200 条（hasNext=true，覆盖完整 24h+）
+
+### 坑位新增（2026-10-28）
+
+- **gh 不在 Git Bash PATH**：`gh auth token` 报 command not found，需用完整路径 `"/c/Program Files/GitHub CLI/gh.exe" auth token`
+- **一条龙脚本 --skip-git 后仍需手动 push 海报**：脚本只生成海报不 push，海报 PNG 是新文件 Pages 不会自动部署。正确流程：一条龙 --skip-git 生成海报 → 手动 git add/commit/push 海报 → 轮询海报 PNG URL 200 → push-poster.js --no-wait 推群
+- **海报 PNG 部署约 40s**：第 1 轮 404、第 2 轮 200（20s 间隔），比 H5 部署稍慢属正常
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-10-28 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 82 期；Genie 4 世界模型(9.3/P0) + 蚂蚁灵光 2.0(8.9/P0) + 微软 MAI Image 2.7(8.7/P0) + NVIDIA×Oracle 多吉瓦(8.6/P0) + Anthropic 收购 Mithril(8.4/P0) + Liquid LFM3(8.3/P0) + OCR 同日双开源(8.2/P1) + Cursor Annotate+Bot(8.0/P1)；评分均 8.55；AI HOT 2 页 200 条；**gh 需完整路径**；**--skip-git 后需手动 push 海报再推群** |
+
+## 2026-10-30（周五 · 第 83 期）执行摘要
+
+- **结果**：✅ 全链路通过。MD → TOC H5 → 归档 → git push（`e86f300` MD/H5/归档、`717162b` 海报、`7f40470` log）→ URL 200（curl 第 3 轮 + WebFetch 内容二次确认 title=2026.10.30、第 83 期、8 卡齐全）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261030-toc.html`（38.8KB）；海报 `docs/ai-daily/ai-daily-poster-20261030.png`（533.7KB / 1440×1920）
+- **主线**：钱和权重同时被摆上台面 —— Mistral Large 4 开放权重(9.4) + 腾讯混元 Hy-Nomas(8.9) + OpenAI Model Spec/失准监测(8.7) + Anthropic S-1(9.1) + Alphabet Q3 失速(8.8) + AWS 2200 亿 capex(8.4) + Pika H3 Flex(8.2) + Gemini 文件编辑(8.0)
+- **评分**：均分 8.69；三章节 3/3/2；AI HOT 2 页 200 条 + aihot.news 热度榜
+
+### 坑位复现（2026-10-30）
+
+- **gh 不在 Git Bash PATH 再次复现**：一条龙脚本第 3 步 `GH_TOKEN=$(gh auth token)` 报 command not found，脚本在 commit 之后中断（海报已本地 commit 但未 push）。修复：手动 `GH_TOKEN=$("/c/Program Files/GitHub CLI/gh.exe" auth token)` + insteadOf push，再用 `gh api .../commits/main` 比对 sha
+- **海报 PNG 部署比 H5 慢**：两者都是第 3 轮（约 36s）才 200，属正常范围
+- **校验脚本注意**：`section-chrome` 在 CSS 里也出现一次，用 `class="section"` / `class="section-highlight"` 计数才准（3 个）
+- **H5 模板选择**：用 `20261028-toc.html`（含三章节 nav + section + data-strip）比 `20261029` 的扁平 nav 结构更完整，优先复用前者
+
+## 2026-11-01（周日 · 第 85 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本首次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`488f432` MD/H5/归档、`7ddd4d7` 海报、`7c948b7` log、`8970a22` aihot skill）→ URL 200（curl 第 3 轮 + 内容二次确认 title=2026.11.01、8 卡 8 nav-sub）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261101-toc.html`（42657B）；海报 `docs/ai-daily/ai-daily-poster-20261101.png`（563.8KB / 2880×3840 @2x）
+- **主线**：收紧的和放量的，是同一件事 —— OpenAI ChatGPT+Codex 合池(9.2) + 商汤 Loop-9B 开源(8.9) + DeepSeek Super-agent(8.8) + OpenAI 融资砍至 200 亿/估值 1.25 万亿(9.3) + Anthropic 9000 亿隐性债务(9.1) + Roblox AI 游戏 7 万款(8.5) + Kimi 3D Make(8.4) + Claude 禁复刻游戏(8.3)；评分均值 8.81
+- **重大变更：AI HOT API 迁移**——`virxact.com/api/public/items` 10-31 停服（301→aihot.news，旧路径 404 附迁移指引）。新端点 **`https://aihot.news/api/v1/items`**，`take`→`limit`、`since`→`window=24h`、旧 cursor 失效、去掉 `fields`。已在 `_skills/aihot.md` 顶部写入迁移公告
+- **gh PATH 问题新解法**：跑一条龙前 `export PATH="/c/Program Files/GitHub CLI:$PATH"`，脚本内 `gh auth token` 即可直通，无需手动接手 push
+- **查重拦截实战**：微软「6 万员工自愿离职」候选在归档 DATA 中发现 10-27 期已报过，定稿前替换为 Kimi 3D Make——归档查重步骤再次证明必做
+- **48h 窗口参数无效**：新 API `window=48h` 返回 items=undefined，最大实测可用 24h（更宽窗口用 7d）
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-01 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 85 期；OpenAI 合池(9.2) + 商汤 Loop-9B(8.9) + DeepSeek Super-agent(8.8) + OpenAI 融资缩水(9.3) + Anthropic 9000 亿债务(9.1) + Roblox AI 游戏(8.5) + Kimi 3D Make(8.4) + Claude 禁复刻游戏(8.3)；均分 8.81；AI HOT v1 新端点 65 条；**AI HOT API 已迁移至 aihot.news/api/v1**；**export PATH 注入 gh 解决一条龙全跑通** |
+
+## 2026-11-02（周一 · 第 86 期）执行摘要
+
+- **结果**：✅ 全链路通过。MD → TOC H5 → 归档 → git push（`46092b0` MD/H5/归档、`4e40ce1` 海报、`3c3abe9` log）→ URL 200（curl 第 3 轮 + 前一日 1101 同期 200 对照排除 Pages 故障 + WebFetch 内容二次确认 title=2026.11.02、第 86 期、8 卡齐全）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261102-toc.html`（43032B / 8 卡 / 32 chips）；海报 `docs/ai-daily/ai-daily-poster-20261102.png`（567.3KB / 2880×3840 @2x）
+- **主线**：给 AI 立规矩的一天 —— 美团 LongCat-2.5 原生多模态(9.3) + DeepSeek 融资 1055 亿/估值 6155 亿(9.2) + 可灵 198 亿 BAT 同台(9.0) + 四巨头 robots.txt 统一退出信号(8.8) + 特拉华 AI 开公司(8.6) + Google StreamVibe(8.4) + Grok 11/7 隐形水印(8.3) + 赛迪推理量超训练量(8.1)；均分 8.71
+- **一条龙第二次全程无人工干预跑通**：`export PATH="/c/Program Files/GitHub CLI:$PATH"` 前置注入后，generate → screenshot → commit → push → Pages 轮询 → 推 3 群全程自动
+
+### 本次新增经验（2026-11-02）
+
+- **AI HOT 24h 窗口仅 45 条**（往常 65 / 2 页 200 条），`nextCursor=null`、`hasNext=undefined` 表示无下一页，不是接口故障。周末/低量日靠 8 轮定向搜索补候选池即可，**不必降级为深度专题**
+- **归档查重两次拦截生效**：苹果 × 千问接入 Apple 智能（10-31 官宣）已在 10-31 期报道；DeepSeek Super-agent 已在 11-01 期报道。两者均剔除，替换为可灵 198 亿与赛迪数据 —— 官宣日 ≠ 报道日，跨日候选必查
+- **海报 PNG 部署第 7 次检测才 200**（约 3 分钟内），比 H5（第 3 轮）慢一档属正常；脚本内置 3 分钟上限本次刚好够用，若再慢需按 skill 里的「两步拆法」手动 push 海报
+- H5 模板继续复用前一日（`ai-daily-card-20261101-toc.html`），head 取到 `</head>` 行 + 单独替换 `<title>` 日期，校验 `stale 11.01 title = false` 这一项很有效，建议保留
+
+## 2026-11-03（周二 · 第 87 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本第三次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`47b1717` MD/H5/归档、`e8738cd` 海报、`97fb616` log）→ URL 200（curl 第 3 轮 + 前一日 1102 与 index 均 200 排除 Pages 故障 + WebFetch 内容二次确认 title=2026.11.03、第 87 期、8 卡 3 章节齐全）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261103-toc.html`（46575B / 8 卡 / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261103.png`（615.2KB / 1440×1920）
+- **主线**：账本和锤子 —— Anthropic S-1/A Q3 财报(9.5) + Kimi 游戏开发方案(9.4) + MIT 权重空间编程(9.3) + OpenAI Grid Protectors 1000MW(9.0) + 腾讯混元 Hyra 2.0(8.9) + GDPx 仅 12%(8.8) + OpenAI 华盛顿军事布局(8.6) + HF 14T 假模型(8.3)；评分均值 8.98
+- **查重拦截**：Epoch AI Firefox（11-02 已报）、LongCat-2.5（11-02 已报）、ChatGPT+Codex 合池（11-01 已报）均剔除；Anthropic 不重复报 11-01 的隐性债务，改聚焦 11-02 新递交的 Q3 数据（8954 亿承诺 + 由盈转亏 + RSI 预警）
+- **AI HOT 24h 窗口 137 条**（前一日仅 45 条，波动大），候选充足未降级
+- **注意**：归档条目 count 正则只匹配无引号 key 的 `date: "..."`，新条目用 `"date": "..."` 不会计入 count，验证改用 grep quoted-key
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-03 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 87 期；Anthropic S-1/A Q3(9.5) + Kimi 游戏方案(9.4) + MIT WSP(9.3) + Grid Protectors(9.0) + Hyra 2.0(8.9) + GDPx(8.8) + OpenAI 军事(8.6) + HF 假模型(8.3)；均分 8.98；AI HOT 137 条；一条龙第 3 次无人工干预跑通 |
+
+## 2026-11-04（周三 · 第 88 期）执行摘要
+
+- **结果**：✅ 全链路通过（手动触发 `xiaoqi-ai-daily` skill，非定时）。MD → TOC H5 → 归档 → git push（`8e72186` MD/H5/归档、`6a0b600` 海报、`3909c19` log）→ URL 200（**curl 第 6 轮** 才 200 + WebFetch 内容二次确认 title=2026.11.04、第 88 期、星期三、8 卡 3 章节 32 chips、lead 与返回归档按钮）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261104-toc.html`（45715B / 8 卡 / 8 nav-sub / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261104.png`（601.3KB / 1440×1920）；MD 34485B
+- **主线**：长手的一天，也是踩刹车的一天 —— 腾讯混元 Hy4 正式版(9.4) + 微信 WeVisOne-VL 开源(9.0) + OpenAI GPT-6 Astra 跨进物理世界(9.2) + 苹果 10-K 首次警告 AI 智能体「不可预测」(9.0) + Anthropic FlashProve zkSNARK 防伪(8.9) + 京东物理 AI 300 万机器人(8.7) + 普林斯顿空间智能 39.7%(8.5) + fal 融资 16.5 亿估值 160 亿(8.3)；评分均值 8.88
+- **AI HOT v1 分页参数确认**：`mode=all&window=24h&limit=100` 返回 `page.nextCursor` / `page.hasMore`，第 1 页 100 条 + 第 2 页 83 条 = **183 条 / 2 页**，`hasMore=false` 收尾。解析时 `source` 字段是对象，直接打印会变 `[object Object]`，候选筛选靠 `title`/`publishedAt`/热度榜/定向核实即可，不影响选题
+- **aihot.news 热度榜补充 Top3 热度信号**：MIT 称 GPT-6 Astra 可改写模型权重 +54261 / 苹果 Apple 智能随 iOS 27.3 入华接入千问 +24200 / Google 引导学习进 Search & Classroom +21185；热度榜适合识别中文圈爆款，但与 24h 新闻窗口不完全重合，仍需归档查重
+- **查重拦截**：苹果×千问（10-31 已报）、LongCat-2.5（11-02 已报）、ChatGPT+Codex 合池（11-01 已报）均剔除；Hy4 旧命中为 8 月 preview，与 11-04 正式版属不同事件，保留
+- **坑位：GitHub 服务端瞬时 500 连续两次**（`remote: Internal Server Error` + Request ID），分别发生在 MD/H5/归档 push 与一条龙 Step 3 海报 push。处理：保持 push 写法不变重试即成功，并用 `gh api repos/wangqi422/catwang-llm-wiki/commits/main --jq '.sha[0:7]'` 与 `git rev-parse --short HEAD` 比对远端/本地 sha 确认到位；一条龙中断后用 `--skip-git` 补推全群（生成→截图→dry 预检→PNG URL 200→推 3 群）
+- **坑位：H5 部署延迟较往常久**（往常第 3 轮，本次第 6 轮才 200），阶段 4 强制关卡必须耐心轮询 + WebFetch 二次确认，不可因久等跳过
+- **凭据解析**：`config.json` 的 `aiDailyWebhooks` 仅 2 个 `YOUR_*_KEY` 占位；真实 3 个群来自 `config.local.json`（群 A / 群 B / 竞品视觉日报群），由 `resolve-webhooks.js` 优先级 `WECOM_AI_DAILY_KEYS` → `config.local.json` → `config.json` 决定。真实 key 不写入公开仓库
+- **归档 count 正则**：新条目用 `"date": "..."`（带引号 key），统计改用 grep quoted-key；本次 17 → 18 条
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-04 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 88 期；Hy4 正式版(9.4) + Astra 物理世界(9.2) + WeVisOne-VL(9.0) + 苹果 10-K 智能体警告(9.0) + FlashProve(8.9) + 京东 300 万机器人(8.7) + 空间智能 39.7%(8.5) + fal 融资(8.3)；均分 8.88；AI HOT v1 **183 条 / 2 页**；H5 curl 第 6 轮才 200；**GitHub 服务端瞬时 500 连续两次，重试 + sha 比对恢复；一条龙中断后 `--skip-git` 补推 3 群** |
+
+## 2026-11-06（周五 · 第 90 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本第 4 次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`5c3ca3b` MD/H5/归档、`87247b1` 海报、log commit）→ URL 200（跨日对照 11-05 H5 与 index 均 200 排除 Pages 故障 → gh run watch 44s 部署成功 → curl 第 1 轮即 200 + WebFetch 内容二次确认 title=2026.11.06、第 90 期、8 卡 3 章节 32 chips、lead 与返回归档按钮）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209 字节）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261106-toc.html`（42202B / 8 卡 / 8 nav-sub / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261106.png`（628.5KB / 1440×1920）；MD 27346B
+- **主线**：从发模型，到发能跑起来的东西 —— 百度 ERNIE 5.5 Flash Base 开源 280B/14B 激活(9.3) + Thinking Machines Inkling 2 Small 594B/17B 下周 Apache 2.0(9.2) + Kimi Hosted Agents 把 Harness 做成云托管(9.0) + Gemini Omni 1.2 Flash 15 秒降价 30%(8.9) + 可灵 Kling 4.0 Flash 全面开放接入 Adobe PS/PR/AE(8.7) + Runway 57B 实时数字人 8→4 张 H100(8.5) + 混元 Hy4 接入 WorkBuddy 调用激增扩容十倍(8.4) + Anthropic×美联社首份新闻授权与 Google PLE 91%→41.3%(8.3)；评分均值 8.79
+- **AI HOT v1 两页 200 条**（hasMore=true 后未再翻，200 条足够），p1+cursor 翻页正常
+- **查重拦截**：Images 2.6 / GPT-6 Cyber 948 漏洞 / 编码并购 / 中期选举数据中心 / Ripple-65B（11-05 已报）、Hy4 正式版 / WeVisOne-VL / FlashProve（11-04 已报）、K3.1 Pro 权重（11-05 已标注排期兑现）均排除；保留 Inkling 2 Small（昨日仅作 SWE-2 Flash 底座提及，今日为正式发布新事件）与 Hy4 扩容（运营侧新事件）形成连续剧
+- **事实核实纠正**：Inkling 2 Small 官方为 594B 总参 / **17B 激活**（AI HOT 标题只写 594B，勿按旧 Inkling-Small 的 12B 激活套用）；Gemini Omni 1.2 Flash 官方为原生时长 10→15 秒（与往期 1.1 的「40 秒场景扩展」是不同维度，正文已区分）
+- **经验**：① push-poster.js --dry 需要 PNG 先存在，想在一条龙前验群数可先看 config.local.json（3 群：群 A/群 B/竞品视觉日报群；config.json 仅 2 个 YOUR_* 占位符不生效）；② 整体 JSON.parse 归档 DATA 数组会因历史条目的无引号 key（`date: "..."`）失败，属历史遗留非本次问题，单独 JSON.parse 今日条目块即可；③ 新条目 desc/tags 避免英文双引号/反引号/反斜杠后，单独条目块 JSON.parse 通过（desc 5451 字 / tags 86 个）
+- 海报视觉确认通过：暖纸底 + 四色 + 半透白卡 + Cormorant 斜体数字 + 粉色 Hero，与 H5 同源；三公网 URL（海报 PNG / H5 / 归档）均 200
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-06 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 90 期；百度 ERNIE 5.5 Flash Base(9.3) + Inkling 2 Small(9.2) + Kimi Hosted Agents(9.0) + Gemini Omni 1.2 Flash(8.9) + 可灵 Flash × Adobe(8.7) + Runway 57B 实时数字人(8.5) + Hy4 扩容十倍(8.4) + Anthropic×美联社 & PLE 泡沫(8.3)；均分 8.79；AI HOT 200 条/2 页；一条龙第 4 次无人工干预跑通；curl 第 1 轮 200（Pages 44s 快速部署） |
+
+## 2026-11-09（周一 · 第 93 期）执行摘要
+
+- **结果**：✅ 全链路通过（手动触发 `xiaoqi-ai-daily` skill 续跑收尾，非定时）。MD → TOC H5 → 归档 → git push（`dc2038c` MD/H5/归档、`97bab56` 海报、log commit）→ URL 200（**首次 404 → 跨日对照 11-08 H5 与 index 均 200 排除 Pages 故障 → gh run watch 42547083611 44s success → curl 第 1 轮即 200 + WebFetch 内容二次确认 title=2026.11.09 / 第 93 期 / Issue 93 / 8 卡 3 章节 / lead / 返回归档**）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209/4096 字节）→ log.md 第 3301 行追加
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261109-toc.html`（45031B / 8 卡 / 8 nav-sub / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261109.png`（623.2KB / 1440×1920）；MD 35197B；归档 quoted-key 22→23 条（eval 校验 DATA 共 138 条）
+- **主线**：模型静默的一天，战场全在模型之外 —— Anthropic 34 亿美元接手 1.7GW 卡特彼勒燃气发电机组(9.3) + 苹果加速代理式 Siri(9.0) + DeepSeek Harness 日活 154 万/插件 3.5 万/将建插件市场(8.9) + 富士电视台 2027-10 起所有真人剧用生成式 AI(8.8) + 上海交大 AutoDNA 登 Nature 头条(8.7) + 蚂蚁灵光破 2000 万(8.6) + 猫王/Eminem 版权方起诉 Suno 援引 ELVIS 法案(8.5) + TCSExam/Co-Design Bench 双基准封顶(8.3)；评分均值 8.76（海报显示 8.8）
+- **AI HOT v1 低量日**：`mode=all&window=24h&limit=100` 返回 **51 条 / 1 页**（hasMore=false / nextCursor=null，周末低量）；用 `aihot.news` 热度榜（WebFetch 解析 HTML，提供热度指标）+ 8 轮定向 WebSearch 补足候选池远超 ≥25 门槛，**未降级深度专题**
+- **查重拦截**：精确字符串确认 1.7GW / 34 亿美元 / OnePWR / 燃气发电机 / 卡特彼勒 / 富士电视台 / AutoDNA / TCSExam / Co-Design Bench / 插件市场 / 154 万 / ELVIS / 代理式 Siri 均未在归档出现；Suno / Harness / 灵光 2.0 / Nano Banana 等历史命中明确区分为「不同事件」并在正文写明
+- **坑位：阶段 4 首次今日 H5 404** —— 前一日 H5 与 index 均 200，判定仅 Pages 部署延迟而非故障；`gh run watch` 等 44s 部署成功即恢复。强制关卡严格遵守「未 200 不推群」
+- **坑位：归档插入脚本单条 JSON.parse 误报** `Unexpected non-whitespace character after JSON at position 7279`（字符串切片边界问题，非 DATA 语法错误）→ 改用 `eval` 校验整个 `const DATA = [...]` 数组（历史条目含无引号 key，整体 JSON.parse 本就不可靠）；`node -e` 内嵌反斜杠/引号转义改用 `String.fromCharCode(34)/(92)` 统计裸双引号与反斜杠
+- **凭据解析**：`config.json` 的 `aiDailyWebhooks` 仅 2 个 `YOUR_*_KEY` 占位；真实 3 群来自 `config.local.json`（群 A / 群 B / 竞品视觉日报群）。真实 key 不写入公开仓库
+- 海报视觉确认通过：暖纸底 #F2EEDF + 四色 + 半透白卡 + Cormorant 斜体数字 + 粉色 Hero，与 H5 同源；tagline「今天没有新模型，战场全在模型之外」；三公网 URL（海报 PNG / H5 / 归档）均 200，remote main = 97bab56 与本地一致
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-09 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 93 期；Anthropic 1.7GW 发电机组(9.3) + 代理式 Siri(9.0) + DeepSeek Harness 插件市场(8.9) + 富士台全剧用 AI(8.8) + AutoDNA 登 Nature(8.7) + 灵光 2000 万(8.6) + Suno ELVIS 诉讼(8.5) + 双基准封顶(8.3)；均分 8.76；AI HOT v1 **51 条 / 1 页**（周末低量，热度榜 + 8 轮搜索补足）；阶段 4 首次 404 → 跨日对照 + 44s workflow 后 200；一条龙无人工干预跑通，PNG Pages 第 6 次检测 200 |
+

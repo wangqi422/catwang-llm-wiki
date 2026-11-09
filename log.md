@@ -3290,3 +3290,21 @@
 - 阶段 5：--dry 预检后 publish-ai-daily-poster.js --date 20261108 一条龙全程无人工干预跑通（generate-poster 3:4 → Puppeteer 截图 656.9KB → commit 97bae63 / push 44ddd05..97bae63 → Pages 第 6 次检测 200 → 推全部群）→ **3/3 群成功**（群 A / 群 B / 竞品视觉日报群，单条 markdown_v2 209/4096 字节 = 海报图 + 「点击看更多内容」链接，凭据取自 config.local.json）
 - 海报视觉确认：暖纸底 #F2EEDF + 四色系（pink #E1A4C2 / lemon #D6DD63 / blush #E8C9B6 / sage #B7C7A8）+ 半透白卡 rgba(255,255,255,0.55) + Cormorant Garamond 斜体数字，与 H5 同源；副标题自动取 TOC <p class="lead"> 并清洗 strong，tagline 取编辑点评「**一句话：**」；最终 H5 / 海报 PNG / 归档三 URL 均 200，remote main = 97bae63 与本地一致
 - 备注：export PATH="/c/Program Files/GitHub CLI:$PATH" 前置注入继续有效；config.json 公开占位符不生效，真实 3 群来自 config.local.json。坑位：单条 Bash 长校验命令内嵌复杂引号会触发 unexpected EOF while looking for matching quote，拆成独立命令或改用专用检索工具即可
+
+## [2026-11-09 09:00] inward-brief | 浮现 0 连接（NEW×OLD 第 11 次双零，不凑数）+ 3 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-09.md（连续第 19 天）
+- 扫描：NEW=0（11/08 00:00~11/09 06:00）/ OLD=0（T-8~T-7=11/01~11/02）→ 回退「7 天内 used_by 增量」按字面仍为 0
+- chief_freshness：162 天（连续第 19 天加警告）｜ 统计：严格 ^capture_type: 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39（趋势线第 5 天可比）
+- 今日要点：解 11/08 留白「第 9 层候选：编码 / 换行 / BOM」→ 实测 **2 篇 UTF-8 BOM**（codm-asset-pipeline / team-harness-repo，均为工作轨基础设施笔记，指向 Windows GUI/PowerShell 写入而非 ingest 模板）；三层容器完整地图：YAML 151（77.8%）/ 粗体 27（13.9%）/ 完全裸奔 16（8.2%，其中 3 篇为 find 碎片、真实裸奔 13 全在 raw/ 侧，wiki/ 侧 0 篇裸奔 18 天来首次划清）；used_by 精确重建：6 文件 12 边，constraints-as-leverage 为**空键占位**（键存在值列表空 = 第六种状态，被 brief 引用 11 天从未回填）；measurement-dependence 第 9 连（编码/BOM），第 10 层候选换行符 CRLF/LF；11/08 预测命中 7/7，但输入指纹规则 8 天未进 skill
+- 未推送企微；未回填 used_by；纯只读，未改任何历史文件
+
+## [2026-11-09 09:50] daily-card | AIGC 日报第 93 期五阶段全流程
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261109.md（35197B）/ docs/ai-daily/ai-daily-card-20261109-toc.html（45031B · 8 卡 · 8 nav-sub · 3 章节 3-3-2 · 32 chips）/ docs/ai-daily/index.html 归档顶部追加（quoted-key 22→23 条，eval 校验 DATA 共 138 条）/ docs/ai-daily/ai-daily-poster-20261109.png（623.2KB · 1440×1920）
+- 主线「模型静默的一天，战场全在模型之外」：Anthropic 34 亿美元接手 1.7GW 卡特彼勒燃气发电机组、AI 实验室首次直接持有发电设备(9.3) + 苹果加速代理式 Siri 古尔曼称最早明年推出、特努斯施压费德里吉对标 Dots/Muse/Grok(9.0) + DeepSeek Harness 日活 154 万、第三方插件约 3.5 万个、官方将建插件市场(8.9) + 富士电视台 2027 年 10 月起所有真人剧用生成式 AI、已验证工序省 70%–80%(8.8) + 上海交大 AutoDNA 登《自然》官网头条、多智能体自主跑完 1.1 万步分子生物学实验(8.7) + 蚂蚁灵光用户破 2000 万、2.0 上线一周代管 116 万项事务/执行 360 万次任务(8.6) + 猫王与 Eminem 版权方同日起诉 Suno、援引 ELVIS 法案索赔逾 4100 万美元(8.5) + 两组新基准同日给能力封顶 TCSExam 70% 定理/0 猜想 + Co-Design Bench 仅 26.4% 全对(8.3)；评分均值 8.76（海报显示 8.8）
+- 信源：AI HOT v1 新端点 https://aihot.news/api/v1/items?mode=all&window=24h&limit=100 聚合池 **51 条 / 1 页**（周末低量，hasMore=false / nextCursor=null）+ aihot.news 热度榜（WebFetch 解析 HTML，补热度指标）+ 8 轮定向 WebSearch 核实，候选池远超 ≥25 门槛，**未降级深度专题** + 归档逐条查重
+- 查重拦截：精确字符串确认 1.7GW / 34 亿美元 / OnePWR / 燃气发电机 / 卡特彼勒 / 富士电视台 / AutoDNA / TCSExam / Co-Design Bench / 插件市场 / 154 万 / ELVIS / 代理式 Siri 均未在归档出现；对 Suno / Harness / 灵光 2.0 / Nano Banana 等历史命中明确区分「不同事件」并在正文写明，避免连续剧误判
+- 阶段 3：git commit dc2038c（MD + TOC H5 + 归档 + 生成脚本）→ push dac5388..dc2038c，local/remote sha 一致
+- 阶段 4 强制关卡通过：首次今日 H5 返回 404 → 跨日对照（11-08 H5 与 index.html 均 200，排除 Pages 故障，判定仅部署延迟）→ gh run watch 42547083611 completed/success（44s）→ 今日 H5 curl **第 1 轮即 200** → WebFetch 线上内容二次确认（title=2026.11.09 / 第 93 期 / Issue 93 / 8 卡 / 3 章节 / lead 有内容 / ← 返回归档在）方进入推群；全程未在 200 前触发任何推送
+- 阶段 5：--dry 预检后 publish-ai-daily-poster.js --date 20261109 一条龙全程无人工干预跑通（generate-poster 3:4 → Puppeteer 截图 623.2KB → commit 97bab56 / push dc2038c..97bab56 → Pages 第 6 次检测 200 → 推全部群）→ **3/3 群成功**（群 A / 群 B / 竞品视觉日报群，单条 markdown_v2 209/4096 字节 = 海报图 + 「点击看更多内容」链接，凭据取自 config.local.json）
+- 海报视觉确认：暖纸底 #F2EEDF + 四色系（pink #E1A4C2 / lemon #D6DD63 / blush #E8C9B6 / sage #B7C7A8）+ 半透白卡 rgba(255,255,255,0.55) + Cormorant Garamond 斜体数字，与 H5 同源；副标题自动取 TOC <p class="lead">，tagline 取编辑点评「一句话：今天没有新模型，战场全在模型之外」；最终 H5 / 海报 PNG / 归档三 URL 均 200，remote main = 97bab56 与本地一致
+- 备注：export PATH="/c/Program Files/GitHub CLI:$PATH" 前置注入继续有效；config.json 公开占位符不生效，真实 3 群来自 config.local.json。坑位：归档插入脚本单条 JSON.parse 误报 Unexpected non-whitespace character（字符串切片边界问题，非 DATA 语法错误），改用 eval 校验整个 const DATA 数组解决；node -e 内嵌反斜杠/引号转义改用 String.fromCharCode(34)/(92) 统计裸双引号与反斜杠
