@@ -1,0 +1,173 @@
+const fs = require('fs');
+const TPL = 'docs/ai-daily/ai-daily-card-20261108-toc.html';
+const OUT = 'docs/ai-daily/ai-daily-card-20261109-toc.html';
+const lines = fs.readFileSync(TPL, 'utf8').split('\n');
+
+// head: 到含 </head> 的那一行；title 用正则强制改日期
+let headIdx = lines.findIndex(l => l.trim() === '</head>');
+let head = lines.slice(0, headIdx + 1).join('\n');
+head = head.replace(/<title>[^<]*<\/title>/, '<title>AIGC 日报 · 2026.11.09</title>');
+
+// tail: 从 <button class="back-to-top" 到文件末尾（含 ScrollSpy JS 与「← 返回归档」按钮，无日期文案）
+let tailIdx = lines.findIndex(l => l.indexOf('<button class="back-to-top"') !== -1);
+let tail = lines.slice(tailIdx).join('\n');
+
+const items = [
+  {
+    n: 1, id: 'item-1',
+    title: 'Anthropic 34 亿美元接手 1.7GW 卡特彼勒燃气发电机组，AI 实验室首次直接持有发电设备',
+    tag: '⚡ 算力基建 / 能源 / 账本',
+    desc: '11 月 8 日《金融时报》报道，Anthropic 于 9 月下旬以约 <strong>34 亿美元</strong>从得州圣安东尼奥供应商 <strong>OnePWR Solutions</strong> 手中接下一批总功率 <strong>1.7GW 的卡特彼勒重型燃气发电机组订单</strong>，交易还包含安装所需的工程与施工能力。这批设备由 OnePWR 两年前下单、因融资未完成一直未交付；Anthropic 最初只想买电，后来改为直接接手设备订单，<strong>并未收购 OnePWR 本身</strong>，对方员工也未转入。部分机组近期即可交付、其余两年内陆续到位，是已知 AI 实验室中<strong>规模最大的单笔发电设备采购</strong>，按公开测算折合约每千瓦 2000 美元，约占卡特彼勒 2026 年 Q3 发电设备销售额的 99%。<strong>从「买电」到「买发电设备」</strong>：美国主要市场电网并网排队普遍 5–7 年、燃气轮机订单排到数年后且价格上行，接手一份两年前下的旧订单等于<strong>买断排队优先权</strong>。与 11-08 期连成因果：那期报的是招股书里「到 2045 年近 9000 亿美元算力与基建承诺、约 4480 亿须 2030 年前支付」，今天是把承诺<strong>兑现成实物资产</strong>的第一笔；Q3 营收约 170 亿、净亏约 233 亿对上 34 亿设备采购，资本开支的颗粒度第一次细到发电机这一层。同期信号密集：CoreWeave 致信得州当选州长承诺自担电网接入成本、欧洲多国反数据中心示威、东南亚数据中心集体放缓、OpenAI CFO 称将直接承担电网扩建费用——<strong>瓶颈已从芯片供给移到土地、绿电、工程交付与地方许可</strong>。<strong>边界</strong>：金额、1.7GW 与交付节奏均来自 FT 援引匿名知情人士，Anthropic 与 OnePWR 均未置评、路透称无法立即核实；交易发生在 9 月下旬、首次公开披露为 11-08，不是当天新签；「最大单笔」为已知公开报道口径。',
+    chips: [['交易金额', '约 34 亿美元'], ['设备规模', '1.7GW · 卡特彼勒'], ['交付节奏', '部分近期 · 其余两年内'], ['账本对照', '9000 亿承诺 vs 34 亿实物']]
+  },
+  {
+    n: 2, id: 'item-2',
+    title: '苹果加速代理式 Siri：古尔曼称最早明年推出，特努斯施压费德里吉对标 Dots、Muse 与 Grok',
+    tag: '🍎 智能体入口 / 端侧 AI',
+    desc: '11 月 8 日彭博社记者 <strong>Mark Gurman</strong> 在《Power On》通讯中称，苹果计划<strong>最早明年推出自主、代理式的 Siri</strong>，从「等待并响应指令」转向能主动管理任务、代表用户完成事务的助手，对标 OpenAI 的 Dots、Meta 的 Muse 与 xAI 的 Grok——「它们可以跟踪目标、确定下一步并持续追求目标，而无需用户启动每一步」。报道称新任 CEO <strong>John Ternus</strong> 近期与软件工程高级副总裁 <strong>Craig Federighi</strong> 闭门会议，对其在 AI 上缺乏紧迫感表示不满，要求加快路线图、不能只满足于把 Siri 问答能力补完；苹果还在调整 <strong>iOS 28</strong> 工程流程，把 M1 节点的编码探索期由常规 4 周延长到 6 周。<strong>竞争标准被改写</strong>：对手比的不再是语音助手的回答质量，而是<strong>能否把手机、电脑、应用权限与个人数据整合成一个持续运行的智能体</strong>。已落地两步：iOS 27.3 让 Siri 细粒度操作苹果自有应用（旋转裁剪照片、整理 Safari 标签页），接入第三方应用、在 Grubhub 下单或经 OpenTable 订位预计明年春季。<strong>入口即护城河</strong>：与今日腾讯首席 AI 科学家姚顺雨「护城河在产品层而非模型层」互为印证——嵌在系统里的 AI 未必模型最强，但掌握日程、社交关系与上下文，换个更强模型也拿不到这些。<strong>组织信号</strong>：去年苹果因原 AI 负责人无法兑现 Siri 承诺而改由 Federighi 接管，此次路线图再次提速，说明管理层正重新评估此前较谨慎的 AI 开发方式。<strong>边界</strong>：全部为彭博援引匿名信源的<strong>产品规划、苹果未公开回应、未官宣时间表</strong>；「最早明年」是可能性而非发布日期；归档 10-31 期报的是「苹果智能随 iOS 27.3 入华接入千问」，与本条代理式 Siri 属不同事件。',
+    chips: [['定位转变', '应答指令 → 主动代办'], ['时间表', '最早明年 · 未官宣'], ['对标', 'Dots / Muse / Grok'], ['关键资产', '系统权限 + 个人上下文']]
+  },
+  {
+    n: 3, id: 'item-3',
+    title: 'DeepSeek Harness 日活 154 万、第三方插件约 3.5 万个，官方将建插件市场',
+    tag: '🧩 Agent 生态 / 插件 / 规模化',
+    desc: '彭博社 11 月 8 日报道，DeepSeek 官方披露：截至 <strong>11 月 4 日</strong>，开源智能体应用 <strong>DeepSeek Harness</strong> 仅统计连接官方 API 的用户，<strong>日活已达 154 万</strong>、<strong>日消耗约 92 万亿 Token</strong>（人均约 6000 万）；7 日均值从 9 月 30 日桌面版发布后的约 27.1 万一路增长。平台采用「插件即一切」架构，<strong>第三方插件约 3.5 万个、约 60% 活跃用户至少制作或安装过一款插件</strong>；官方确认将建设<strong>插件市场</strong>，并计划为创作者提供 Token 资助与技术支持，但未公布时间表。GitHub 周榜印证热度：<strong>deepseek-ai/deepseek-harness 本周 +8,639 stars</strong>、`dsh-superagent-prototype` 日榜 +474，衍生项目 `dsh-Go`（手机本机运行并遥控电脑）、`dsh-our-free-model` 进入前列。<strong>上线不到三个月的规模化样本</strong>：154 万日活 / 92 万亿 Token 是目前公开数据中开源 Agent 应用最大规模的实际使用记录之一，60% 用户参与插件说明生态是用户长出来的而非官方自建。<strong>从「模型」到「运行框架」</strong>：与 11-06 期 Kimi Hosted Agents（Harness 云托管）、11-07 期 Agent Substrate（隔离调度层）连起来看，Agent 技术栈已分层为模型 → 运行环境 → 隔离调度 → <strong>插件 / 技能生态</strong>；谁掌握插件分发，谁掌握默认工作流。<strong>官方插件市场是关键一步</strong>：一旦有官方分发与 Token 激励，插件从社区自娱变成可结算的供给侧，也把模型调用量直接绑到生态繁荣度，与 #2 苹果整合权限、#6 灵光接入 40 项连接器是同一场入口之争的三种打法。<strong>边界</strong>：154 万<strong>仅统计连接官方 API 的用户</strong>、不含纯本地部署；92 万亿与 3.5 万为厂商自报；插件市场只有意向无上线时间；星标为热度非质量背书。',
+    chips: [['日活', '154 万 · 仅官方 API'], ['日耗', '约 92 万亿 Token'], ['插件', '约 3.5 万个 · 60% 用户'], ['下一步', '官方插件市场（无时间表）']]
+  },
+  {
+    n: 4, id: 'item-4',
+    title: '富士电视台 2027 年 10 月起所有真人剧用生成式 AI，已验证工序省 70%–80%',
+    tag: '🎬 影视制作 / 生成式 AI',
+    desc: '据日经亚洲 11 月 6 日报道、11 月 8 日国内媒体集中转述，<strong>富士电视台计划从 2027 年 10 月起把生成式 AI 用于所有自制真人电视剧制作</strong>，成为日本首家全面引入 AI 参与节目制作的大型商业电视台。该台每年制作 16 部剧集，工具选定谷歌图像生成与编辑模型 <strong>Nano Banana</strong>，执行交给 2026 年 9 月成立的内部实验室 <strong>AI Sandbox</strong>，由东京制作公司 ANDENT 培训的 CG 设计师操作。已在播的医疗剧《救命病栋 24 小时》第六季第一集中，<strong>手术切口流血镜头</strong>与原本需直升机航拍的<strong>爆炸俯拍画面</strong>均已由 AI 生成。<strong>流程比工具更值得抄</strong>：做法是<strong>先用事先拍摄的素材在本地环境训练 AI，再通过提示词生成符合剧情的画面，色调等细节在后期调整</strong>；AI 被明确定位为实景拍摄与视觉特效的<strong>补充选项</strong>，是否采用取决于成片质量。技术艺术设计局真崎晋哉直言「担心把 AI 制作交给外部公司会增加成本，因此选择自己制作」——把能力收回内部是控制长期成本的关键。<strong>省的是工序不是整部剧</strong>：官方称在<strong>已验证的特定工序</strong>上比传统视效省 70%–80% 工时，媒体明确提示该比例<strong>不能推算整部剧的成本</strong>；可复用的是「高危 / 高成本镜头的替代方案」，不是「全片 AI 化」。<strong>预算收缩才是驱动力</strong>：地面电视广告收入下滑，2025 财年日本五大商业电视台节目制作投入 3657 亿日元、较九年前减少 12%，TBS、日本电视台也在推进类似计划。<strong>边界</strong>：计划为 2027-10 起实施、目前是公布阶段；70%–80% 为特定工序口径；AI 内容进入成片前的品牌一致性、演员肖像与播出合规细则未披露。',
+    chips: [['实施时间', '2027 年 10 月起'], ['工具 / 团队', 'Nano Banana · AI Sandbox'], ['工序节省', '70%–80%（特定工序）'], ['驱动力', '制作费 9 年 -12%']]
+  },
+  {
+    n: 5, id: 'item-5',
+    title: '上海交大 AutoDNA 登《自然》官网头条：多智能体自主跑完 1.1 万步分子生物学实验',
+    tag: '🔬 AI for Science / 实验室自动化',
+    desc: '上海交大 IPADS 实验室陈海波、王肇国团队与化学化工学院樊春海、王飞团队合作，依托张江高研院 DNA 存储研究中心构建 <strong>AI 原生科学实验室装置 AutoDNA（思源一号）</strong>，成果 11 月 4 日在线发表于《<strong>自然</strong>》并获该刊官网首页头条报道、配发斯坦福 James Zou 评论，11 月 8 日国内媒体集中转载。不同于以往「专家预配置仪器、AI 只做文献检索或数据分析」的外挂式方案，AutoDNA 走<strong>模型—实验—仪器协同设计</strong>路线：把实验拆成文献检索、试剂选择、方案设计、代码生成、硬件执行、结果分析与迭代优化交给多智能体分工；把各类仪器能力抽象成模型可调用的「<strong>原子服务</strong>」，以微米级定位与微升级液体处理硬件保证精度，控制终端基于 OpenHarmony。<strong>从「给建议」到「自己动手」</strong>：论文披露系统可协调 <strong>20 多类仪器、执行超过 1.1 万步硬件操作</strong>；酶促 DNA 合成单步产率 97.8%、与人工优化结果相当；端到端 DNA 存储跑了约 <strong>203.5 小时 / 11,382 步</strong>并完整恢复写入的数字内容；还从临床样本中识别并验证 <strong>KRAS G13D 突变</strong>，已在核酸检测、酶促 DNA 合成、癌症检测等场景完成验证。<strong>「原子服务」是可迁移的工程范式</strong>：把仪器能力抽象成可被模型调用的标准接口，等价于把实验室变成可编程的 Agent 运行时，与 #3 插件化 Harness、#2 系统权限整合同构。<strong>与能力边界形成对照</strong>：AutoDNA 代表「在定义清晰、可校验、有硬约束的流程里 AI 能端到端自主执行」；今日 #8 的两组基准显示开放、模糊、缺验收标准的任务里最强模型仍明显短板——<strong>边界不在模型智商，而在任务能否被形式化与校验</strong>。<strong>边界</strong>：为特定装置与受控场景验证、非通用实验室方案；1.1 万步 / 97.8% 为该装置自报结果，跨机构复现与长期稳定性待观察；不可逆步骤与生物安全仍需人工审批与硬件限位。',
+    chips: [['发表', '自然 · 官网首页头条'], ['规模', '20+ 类仪器 · 1.1 万步'], ['端到端', 'DNA 存储 203.5h / 11382 步'], ['范式', '仪器 = 原子服务']]
+  },
+  {
+    n: 6, id: 'item-6',
+    title: '蚂蚁灵光用户破 2000 万，2.0 上线一周代管 116 万项事务、执行 360 万次任务',
+    tag: '🐜 个人助手 / 主动代办 / 授权托管',
+    desc: '蚂蚁集团 11 月 5 日公布、11 月 8 日集中报道：AI 助手 <strong>灵光用户数突破 2000 万</strong>；<strong>灵光 2.0 自 10 月 27 日上线一周内，帮助用户管理超 116 万项事务、执行超 360 万次任务</strong>。2.0 的关键变化是把 AI 介入的时点<strong>前移</strong>：过去用户先发现问题再提需求，如今在获得授权后可结合已接入的信息与服务主动识别潜在需求、发起分析、监测、跟进并按时提醒。产品侧依赖跨会话记忆、长程任务调度与独立云主机，用户退出对话后任务仍可继续跑；截至 11 月 3 日已接入支付宝、钉钉、飞书、哈啰等 <strong>40 项外部连接器</strong>，并接入蚂蚁 <strong>APASS</strong> 作为跨智能体、跨设备、跨应用的统一账号与安全管理基础设施，通过授权密钥与 Agent 分离托管，用户可随时查看、调整或撤销授权。<strong>首份规模化用量数据、而非产品发布</strong>：归档 10-28 期（第 82 期）报的是「灵光 2.0 发布并接入 15 个国民级 App + 开源 Ling-3.1-flash 权重」，今天是<strong>上线后第一份用量与连接器数据</strong>（2000 万 / 116 万 / 360 万 / 40 项），属同一产品的新进展、不是重复选题。<strong>竞争从「答得准」转到「敢不敢把权限交出去」</strong>：主动代办意味着用户要交出跨应用权限与长期在线的信任，因此 APASS 的<strong>密钥与 Agent 分离托管、可随时撤销</strong>才是产品核心，与 #2 苹果整合系统权限、#3 插件分发共同构成入口之争的三种信任设计。<strong>同日反面注脚</strong>：腾讯元器 11-09 正式停服（2027-01-09 后不再受理数据导出、官方引导迁往腾讯云 ADP），字节扣子企业版分阶段下线——低门槛智能体试验场退场、能力收拢进企业级平台，<strong>平台可持续性本身成了用户要不要授权的前提</strong>。<strong>边界</strong>：2000 万 / 116 万 / 360 万均为厂商自报、口径未披露（是否去重活跃用户不明）；主动代办与 40 项连接器的完成率、误触率无第三方数据。',
+    chips: [['用户', '突破 2000 万'], ['2.0 首周', '116 万事务 · 360 万任务'], ['连接器', '40 项外部服务'], ['信任设计', 'APASS 密钥分离托管']]
+  },
+  {
+    n: 7, id: 'item-7',
+    title: '猫王与 Eminem 版权方同日起诉 Suno，援引 ELVIS 法案、索赔逾 4100 万美元',
+    tag: '⚖️ 声音权 / 版权合规',
+    desc: '猫王 <strong>Elvis Presley</strong> 音乐权利方（含 Authentic Brands Group、Raleigh Music Publishing）与 <strong>Eminem</strong> 部分代表作出版方 Eight Mile Style 于 11 月 6 日在加州北区联邦法院<strong>同日分别起诉 AI 音乐公司 Suno</strong>，两案由同一律师团队代理，11 月 8–9 日经 The Verge、Variety 等集中报道。猫王一方 51 页诉状主张 Suno 未经许可用受版权保护的录音训练模型、用户只要在提示词里写名字就能生成接近其音色的歌，据此援引田纳西州 2024 年《确保肖像声音与图像安全法》（<strong>ELVIS Act</strong>）——该法专门禁止 AI 公司克隆歌手声音；Eminem 出版方另案主张版权侵权，点名《Lose Yourself》《Without Me》《The Real Slim Shady》，<strong>索赔逾 4100 万美元</strong>。Suno 回应称产品用于帮助人们创作原创音乐、禁止未经授权使用艺人作品、不允许提示词中出现具体艺人与歌曲名，并与第三方合作筛查上传音频与歌词。<strong>合规成本前移到训练与生成环节</strong>：此前行业惯例是「上线后按需下架」，ELVIS Act 这类州级声音权立法把责任压到<strong>训练数据许可与生成时的身份过滤</strong>；诉状瞄准的正是「模型内化了谁」这件事本身。<strong>与往期要区分</strong>：归档 10-27 期前后报过「猫王权利方起诉 <strong>Anthropic</strong>、索赔约 4110 万美元」及 9-10 期「UMG × ElevenLabs 授权连续剧」、9-09 期「Suno v6」——<strong>被告、法案与诉求均不同</strong>，这次是 Suno + 田纳西 ELVIS 法案 + Eminem 出版方另案，是声音克隆立法在音乐生成场景的首次集中落地。<strong>连锁效应</strong>：Sony、UMG、Reservoir Media 及 Jason Isbell 等此前已起诉 Suno，州级声音权立法与集体诉讼同时推进，「授权曲库 + 可审计生成日志」将成 AI 音乐与配音工具准入门槛。<strong>边界</strong>：两案 11-06 提交、目前为<strong>原告指控、法院尚未认定</strong>；4100 万美元为索赔金额非判决；Suno 过滤机制无第三方审计；ELVIS Act 适用限于田纳西州，跨州与联邦层面适用待司法检验。',
+    chips: [['原告', '猫王权利方 + Eminem 出版方'], ['法案', '田纳西 ELVIS Act'], ['索赔', '逾 4100 万美元'], ['责任前移', '训练许可 + 生成过滤']]
+  },
+  {
+    n: 8, id: 'item-8',
+    title: '两组新基准同日给能力封顶：TCSExam 70% 定理 / 0 猜想 + Co-Design Bench 仅 26.4% 全对',
+    tag: '📐 评测基准 / 能力边界',
+    desc: '11 月 8–9 日两组新基准同时给前沿模型能力划边界。其一，<strong>清华与月之暗面 Moonshot AI 等发布 TCSExam</strong>：用 100 道专家评审任务评估大模型在理论计算机研究全谱系的能力，涵盖 Lean 定理证明、求解器工程、构造纪录与 <strong>30 个公开猜想</strong>，所有提交由 Lean 内核或任务检查器验证；<strong>GPT-6 Astra 证明其中 70.0% 的研究级定理，但解不开任何一个公开猜想</strong>。其二，<strong>阿里与多所亚洲高校构建 Co-Design Bench</strong>：从 26,314 个真实编码会话中筛出 37,390+ 条请求做成 273 个任务（100 个多模态局部编辑 + 173 个跨文件仓库修改），用 2,331 条隐藏验收标准与「先判后驳」复核评分；十个模型中最好的 GPT-6 Astra 平均满足约 <strong>69.9%</strong> 的要求，但<strong>仅 26.4% 的任务完全做对</strong>（Claude Opus 5 为 18.3%、Qwen3.8-Max 为 16.5%、Grok 4.6 垫底），且同一模型换工作环境得分能差 <strong>19 个百分点</strong>，团队主张「连模型带环境一起报」。<strong>「部分做对」与「完全做对」之间的鸿沟</strong>：70% 定理 / 0 猜想、69.9% 满足 / 26.4% 全对，从数学与工程两个方向指向同一件事——<strong>前沿模型擅长在已形式化、可验证的局部拿分，在开放、需全局自洽、缺明确验收标准的任务上仍要人收尾</strong>，正好解释 #5 AutoDNA 为何成功：它把实验拆成可校验的原子步骤。<strong>基准自身也在被审计</strong>：同日 Amazon 论文审计 9 个政策类决策基准，发现评分器与参考答案本身有错、常把正确答案判错；斯坦福 & DeepMind 用 AlphaEvolve 对 AppWorld 等静态工具调用基准做变异（TURTLE）把过易任务改难——<strong>「跑分」正从结果变成被审查的对象</strong>。<strong>环境口径必须一起报</strong>：与 10 月山东大学 / UC Berkeley「花哨 harness 只买账单不买通过率」呼应，选型含义是<strong>别只看榜单分数、要在自己的真实工作流里复测</strong>。<strong>边界</strong>：两基准均为新发布、尚无独立复测；100 道 / 273 个任务样本有限；「70%」「26.4%」为特定任务集与评分口径下的结果，不等于通用能力上限；Amazon 与 TURTLE 部分仍处预印本阶段。',
+    chips: [['TCSExam', '70% 定理 · 0 猜想'], ['Co-Design', '69.9% 满足 · 26.4% 全对'], ['环境差', '换环境 ±19 个百分点'], ['基准审计', 'Amazon 9 个 + TURTLE']]
+  }
+];
+
+function cardHtml(it) {
+  let s = '';
+  s += '    <div class="card" id="' + it.id + '">\n';
+  s += '      <div class="card-chrome">\n';
+  s += '        <span class="card-num">' + it.n + '</span>\n';
+  s += '        <span class="card-title">' + it.title + '</span>\n';
+  s += '        <span class="card-tag">' + it.tag + '</span>\n';
+  s += '      </div>\n';
+  s += '      <div class="card-desc">\n        ' + it.desc + '\n      </div>\n';
+  s += '      <div class="data-strip">\n';
+  it.chips.forEach(c => {
+    s += '<div class="data-chip"><div class="data-label">' + c[0] + '</div><div class="data-value">' + c[1] + '</div></div>\n';
+  });
+  s += '      </div>\n';
+  s += '    </div>\n\n';
+  return s;
+}
+
+const LEAD = '今天的 8 条新闻，主线是<strong>模型静默的一天，战场全在模型之外</strong> &middot; 上半场是三件抢：<strong>Anthropic 用 34 亿美元直接接手 1.7GW 卡特彼勒燃气发电机组</strong>，AI 公司第一次从向电网买电走到自己持有发电设备；<strong>苹果被曝最早明年推出代理式 Siri</strong>，把 Siri 从应答指令改成主动追目标、代用户办事；<strong>DeepSeek 开源智能体 Harness 日活冲到 154 万、第三方插件约 3.5 万个</strong>，官方将建插件市场 &middot; 中场是三件焊进流程：<strong>富士电视台 2027-10 起所有真人剧用生成式 AI</strong>、已验证工序省 70%–80%，<strong>上海交大 AutoDNA 登自然官网头条</strong>自主跑完 1.1 万步分子生物学实验，<strong>蚂蚁灵光用户破 2000 万</strong>、2.0 一周代管 116 万项事务 &middot; 收尾两条在划线：<strong>猫王与 Eminem 版权方同日起诉 Suno</strong> 援引 ELVIS 法案，以及 <strong>TCSExam 与 Co-Design Bench 两组新基准</strong> 同时给能力封顶';
+
+const navSub = [
+  ['发电机 1.7GW', '代理式 Siri', 'Harness 154 万'],
+  ['富士台全剧用 AI', 'AutoDNA 登 Nature', '灵光 2000 万'],
+  ['Suno 声音权诉讼', '双基准封顶']
+];
+
+let body = '\n<body>\n\n<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>\n\n<nav class="sidebar" id="sidebar">\n';
+body += '  <div class="sidebar-header">\n';
+body += '    <div class="sidebar-brand">AI Daily Report</div>\n';
+body += '    <h1>AIGC <em>日报</em></h1>\n';
+body += '    <div class="sidebar-meta">2026.11.09 &middot; 星期一 &middot; 第 93 期 &middot; 8 条速报</div>\n';
+body += '  </div>\n\n';
+body += '  <div class="nav-section">\n    <div class="nav-section-title">Overview</div>\n';
+body += '    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>\n  </div>\n\n';
+
+const secMeta = [
+  ['Power, Entry &amp; Ecosystem', '⚡ 抢电 · 入口 · 生态', '#s1', navSub[0]],
+  ['AI in the Pipeline', '🎬 把 AI 焊进流程', '#s2', navSub[1]],
+  ['Lines Being Drawn', '⚖️ 划线的两处', '#s3', navSub[2]]
+];
+secMeta.forEach((sm, i) => {
+  body += '  <div class="nav-section">\n    <div class="nav-section-title">' + sm[0] + '</div>\n';
+  body += '    <a href="' + sm[2] + '" class="nav-link"><span class="nav-num">&sect;' + (i + 1) + '</span>' + sm[1] + '</a>\n';
+  sm[3].forEach((t, j) => {
+    body += '    <a href="#item-' + (i * 3 + j + 1) + '" class="nav-link nav-sub"><span class="nav-num">' + (j + 1) + '.</span>' + t + '</a>\n';
+  });
+  body += '  </div>\n\n';
+});
+body += '  <div class="sidebar-dots">\n    <i style="background:var(--pink)"></i>\n    <i style="background:var(--lemon)"></i>\n    <i style="background:var(--blush)"></i>\n    <i style="background:var(--sage)"></i>\n  </div>\n';
+body += '</nav>\n<div class="main">\n<div class="page">\n';
+
+body += '<div class="header" id="top">\n';
+body += '    <div class="swatches">\n      <i style="background:var(--pink)"></i>\n      <i style="background:var(--lemon)"></i>\n      <i style="background:var(--blush)"></i>\n      <i style="background:var(--sage)"></i>\n    </div>\n';
+body += '    <div class="header-kicker">AI Daily Report &middot; 2026.11.09 &middot; Mon &middot; Issue 93</div>\n';
+body += '    <h1>AIGC <em>日报</em></h1>\n';
+body += '    <p class="lead">' + LEAD + '</p>\n';
+body += '    <div class="header-meta">\n      <span class="meta-tag">⚡ 抢电 &amp; 入口 &amp; 生态</span>\n      <span class="meta-tag">&middot;</span>\n      <span class="meta-tag">🎬 把 AI 焊进流程</span>\n      <span class="meta-tag">&middot;</span>\n      <span class="meta-tag">⚖️ 划线的两处</span>\n      <span class="meta-tag">&middot;</span>\n      <span class="meta-tag">2026.11.09 &middot; 第 93 期</span>\n    </div>\n  </div>\n\n\n';
+
+const secInfo = [
+  ['i. Power, Entry &amp; Ecosystem', '⚡ 抢电 · 入口 · 生态', '模型静默的一天外围先动 —— Anthropic 买下发电机组、苹果重做 Siri、DeepSeek 把插件生态做成规模化', 'section', '3 items'],
+  ['ii. AI in the Pipeline', '🎬 把 AI 焊进流程', '从能不能生成到能不能直接交付 —— 富士台影视产线、AutoDNA 自主实验室、灵光主动代办', 'section-highlight', '3 items'],
+  ['iii. Lines Being Drawn', '⚖️ 划线的两处', '一条法律边界、一条能力边界 —— Suno 声音权诉讼与 TCSExam / Co-Design Bench 双基准', 'section', '2 items']
+];
+
+secInfo.forEach((si, i) => {
+  body += '  <div class="' + si[3] + '" id="s' + (i + 1) + '">\n';
+  body += '    <div class="section-chrome">\n      <span class="section-kicker">' + si[0] + '</span>\n      <span class="section-count">' + si[4] + '</span>\n    </div>\n';
+  body += '    <div class="section-title">' + si[1] + '</div>\n';
+  body += '    <div class="section-sub">' + si[2] + '</div>\n\n';
+  const start = i * 3;
+  const count = (i === 2) ? 2 : 3;
+  for (let k = 0; k < count; k++) body += cardHtml(items[start + k]);
+  body += '  </div>\n\n\n';
+});
+
+body += '  <div class="edit-note">\n';
+body += '    <p>编辑点评</p>\n';
+body += '    <p>八条其实在讲同一件事：<strong>当模型本身暂时停下，竞争就全部转移到模型的外围</strong>。今天几乎没有新模型发布，但支付电费的、掌握入口的、分发插件的、把 AI 写进制作流程的、以及被法院和基准划线的，全都在同一天动了起来。</p>\n';
+body += '    <p><strong>① 上半场是三件抢（#1–#3）</strong>。Anthropic 用 34 亿美元把买电升级成持有发电设备，抢的是交付周期；苹果把 Siri 从应答改成常驻代办，抢的是系统权限与个人上下文；DeepSeek 用 154 万日活、3.5 万插件与官方插件市场，抢的是默认工作流。三者对应电力、入口、生态——没有一样是参数，却共同决定模型能被多少人用、用得多便宜。与 11-08 期 9000 亿算力承诺连起来看，昨日报的是账本上的数字，今天报的是数字怎么变成实物与路线图。</p>\n';
+body += '    <p><strong>② 中间三条是焊进流程（#4–#6）</strong>。富士电视台把 AI 定为所有真人剧的固定工序、AutoDNA 把 20 多类仪器变成可调用的原子服务、灵光把助手从你问它答改成授权后主动代办——共同点都是 AI 不再是临时调用的工具，而是产线里有验收标准的工位。判据随之改变：不问能不能生成，问<strong>能不能直接交付</strong>。富士台特意强调 70%–80% 只适用于特定工序，这种克制恰恰是最值得抄的工程态度。</p>\n';
+body += '    <p><strong>③ 收尾两条在划线（#7–#8）</strong>。Suno 被援引 ELVIS 法案起诉，划的是法律边界——合规成本从事后下架前移到训练许可与生成过滤；TCSExam 与 Co-Design Bench 划的是能力边界——可形式化、可校验的局部能拿分，开放且需全局自洽的交付仍要人收尾。前六条讲扩张，最后两条讲边界，一起看才不会把「AI 能省 80% 工序」误读成「AI 能交付整片」。</p>\n';
+body += '    <p>今天最高分给到 <strong>#1 Anthropic 34 亿美元接手 1.7GW 发电机组（9.3 / P0）</strong>：分量不在金额大，而在它是算力承诺到实物资产的第一笔兑现，把 AI 竞争的瓶颈从芯片明确推到电力与工程交付，也直接决定了未来两年 API 单价与容量的底层成本。</p>\n';
+body += '    <p>四条可以立刻执行的线索：<strong>① 把航拍 / 爆炸 / 高危镜头列为 AI 替代清单</strong>，按富士台本地素材训练 → 提示词生成 → 品牌资产与色调校验 → 人工终审固化三道工序，节省比例只按工序级写进排期；<strong>② 建立 AI 素材合规三件套</strong>——禁用艺人与声线名单、生成提示词留痕、授权曲库白名单，商用前过一遍音乐与声音权利核验；<strong>③ 把日报 / 竞品采集流程整理成可分发插件模板</strong>，盯住官方插件市场规则，别把内部工作流绑死在单一客户端；<strong>④ 用 70% 满足 / 26.4% 全对做出稿预期管理</strong>，首次生成按草稿计、终审留人，用自建小型验收集在自家工作流里复测再换模型。</p>\n';
+body += '  </div>\n</div>\n</div>\n\n';
+
+fs.writeFileSync(OUT, head + body + tail, 'utf8');
+const out = fs.readFileSync(OUT, 'utf8');
+console.log('written', OUT, fs.statSync(OUT).size, 'bytes');
+console.log('title 2026.11.09 =', out.indexOf('<title>AIGC 日报 · 2026.11.09</title>') !== -1);
+console.log('stale 2026.11.08 =', out.indexOf('2026.11.08') !== -1);
+console.log('stale 第 92 期 =', out.indexOf('第 92 期') !== -1);
+console.log('stale Issue 92 =', out.indexOf('Issue 92') !== -1);
+console.log('</head> count =', (out.match(/<\/head>/g) || []).length);
+console.log('cards =', (out.match(/class="card"/g) || []).length);
+console.log('nav-sub =', (out.match(/nav-link nav-sub/g) || []).length);
+console.log('sections =', (out.match(/class="section"/g) || []).length + (out.match(/class="section-highlight"/g) || []).length);
+console.log('chips =', (out.match(/class="data-chip"/g) || []).length);
+console.log('progressFill DOM =', out.indexOf('id="progressFill"') !== -1);
+console.log('lead has content =', /<p class="lead">\S/.test(out));
+console.log('back-to-archive =', out.indexOf('返回归档') !== -1);
