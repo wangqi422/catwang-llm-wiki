@@ -3308,3 +3308,20 @@
 - 阶段 5：--dry 预检后 publish-ai-daily-poster.js --date 20261109 一条龙全程无人工干预跑通（generate-poster 3:4 → Puppeteer 截图 623.2KB → commit 97bab56 / push dc2038c..97bab56 → Pages 第 6 次检测 200 → 推全部群）→ **3/3 群成功**（群 A / 群 B / 竞品视觉日报群，单条 markdown_v2 209/4096 字节 = 海报图 + 「点击看更多内容」链接，凭据取自 config.local.json）
 - 海报视觉确认：暖纸底 #F2EEDF + 四色系（pink #E1A4C2 / lemon #D6DD63 / blush #E8C9B6 / sage #B7C7A8）+ 半透白卡 rgba(255,255,255,0.55) + Cormorant Garamond 斜体数字，与 H5 同源；副标题自动取 TOC <p class="lead">，tagline 取编辑点评「一句话：今天没有新模型，战场全在模型之外」；最终 H5 / 海报 PNG / 归档三 URL 均 200，remote main = 97bab56 与本地一致
 - 备注：export PATH="/c/Program Files/GitHub CLI:$PATH" 前置注入继续有效；config.json 公开占位符不生效，真实 3 群来自 config.local.json。坑位：归档插入脚本单条 JSON.parse 误报 Unexpected non-whitespace character（字符串切片边界问题，非 DATA 语法错误），改用 eval 校验整个 const DATA 数组解决；node -e 内嵌反斜杠/引号转义改用 String.fromCharCode(34)/(92) 统计裸双引号与反斜杠
+
+
+## [2026-11-10 09:00] inward-brief | 浮现 0 连接（NEW×OLD 第 12 次双零，不凑数）+ 3 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-10.md（连续第 20 天）
+- 扫描：NEW=0（11/09 00:00~11/10 06:00）/ OLD=0（T-8~T-7=11/02~11/03）→ 回退「7 天内 used_by 增量」按字面仍为 0（194 篇 mtime 最新仍 2026-10-26 09:43）；按 skill 边界本应只出 2 节，按用户当日指令出完整 6 节，已在 brief 内声明
+- chief_freshness：163 天（连续第 20 天加警告）｜ 统计：严格 ^capture_type: 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39（趋势线第 6 天可比）
+- 今日要点：解 11/09 留白「第 10 层候选：换行符 CRLF/LF」→ 实测 **CRLF 182（93.8%）/ LF 12（6.2%）/ 混合 0 / 空 0**，且分裂与 10/26 批量改写 100% 咬合（181 篇全 CRLF，非 10/26 的 13 篇里 LF 12）；12 篇 LF 全在 wiki/insights/（11）+ CODM_竞品日报/（1），与 11/03 mtime「幸存 13 篇」跨层交叉验证 12/13 重合——measurement-dependence 第 10 连第一次指向 vault 真实写入事件而非观测工具；预测命中 8/8 但理由猜错（以为是方言噪声，实为批量改写边界）。平反 11/09「3 篇 find 碎片实际不存在」：实为 3 个含空格/emoji 的真实文件（llm wiki.md / lm wiki.md / 🚀视觉中枢重塑），0 个碎片文件，find 分词造了假实体。used_by 严格解析 6 文件 12 边（与 11/09 一致），现场抓到一次把 surfaced_with 计入的误测得 34 边（已剔除），constraints-as-leverage 为 used_by: [] 行内空数组 + surfaced_with 6 条、被引用 12 天从未回填。第 11 层候选：git 对象层 core.autocrlf
+- 未推送企微；未回填 used_by；纯只读，未改任何历史文件（仅新增本 brief + log 本区块）
+
+## [2026-11-10 10:30] daily-card | AIGC 日报第 94 期五阶段全流程
+- 产物：raw/daily-reports/AIGC_Daily_Report_20261110.md（197 行）/ docs/ai-daily/ai-daily-card-20261110-toc.html（433 行 · 8 卡 · 3 章节 3-3-2）/ docs/ai-daily/index.html 归档顶部追加 / docs/ai-daily/ai-daily-poster-20261110.html + .png（691.3KB · 1440×1920）
+- 主线「冲最强与拼最省，是同一天」：Anthropic Fable 5.2 / Mythos 5.2 登顶 AA 指数 65 分 + API 降价 20%(9.5) + Meta Muse Ember 36 分追平 Haiku 5.5 成本仅 1/3 + 字节 Seedream 5.5（100 轮像素级编辑 + 原生 RGBA）+ Google 第八代 TPU 扩至四款（8tx 机密计算 / 8i Max 双芯片长上下文）+ Anthropic S-1 冷静期届满最快本周 IPO 路演（估值讨论 1.1–1.7 万亿）+ 参议院审议 BAAJA 让数据中心自担电网成本（高盛估暂停令或影响 45% 规划产能）+ 百度 ERNIE Evolve 自动化研究系统 + Zyphra 开源端侧 TTS ZONOS3-Mini；评分均值 8.8
+- 阶段 3：git commit 29105df（MD + TOC H5 + 归档 + poster HTML + 两个生成脚本，6 files / 1051 insertions）→ push，local/remote sha 一致
+- 阶段 4 强制关卡：push 触发的部署 42739456565 卡 `syncing_files` 10m36s 超时 failure（Pages 端偶发，非代码/submodule 问题）→ 手动 workflow_dispatch 42740813699 50s success → 今日 H5 / 11-09 H5 / 归档 curl **均 200** → WebFetch 线上内容二次确认（title=2026.11.10 / 第 94 期 / 8 卡 / 3 章节 / 编辑点评一句话在 / ← 返回归档在 / 无 11-09 残留）方进入推群。**新坑位：`gh run watch --exit-status | tail -20` 管道会吞掉 watch 退出码（`$?` 取的是 tail 的 0），不能以 "watch exit=0" 判定部署成功，必须 gh run view 看 conclusion**
+- 阶段 5：push-poster.js --dry 真预检（3 群 / 凭据 config.local.json / 单条 markdown_v2 209/4096 字节）+ 一条龙 --dry 预演后，publish-ai-daily-poster.js --date 20261110 正式全程跑通（tagline 提取成功「冲最强的和拼最省的同一天登场，而电网与国会开始给这场竞赛划线」→ Puppeteer 691.3KB → commit 9418d73（仅新增 PNG，重生成 HTML 与 29105df 版本一致）/ push 29105df..9418d73 → Pages 第 14 次检测 200 → 推全部群）→ **3/3 群成功**（群 A / 群 B / 竞品视觉日报群）
+- 海报视觉确认（ViewImage）：暖纸底 #F2EEDF + 四色圆点/数据卡（精选 8 条 / 均分 8.8 / 日期 / 周二）+ 半透白卡 + Cormorant Garamond 斜体 O1–O3 序号 + 粉色 Hero + tagline 卡完整，无溢出遮挡；最终 H5 / 海报 PNG / 归档三 URL 均 200，remote main = 9418d73 与本地一致
+- 备注：一条龙 push 需前置 export PATH="/c/Program Files/GitHub CLI:$PATH"（gh auth token）；Pages 再卡 syncing_files 时的兜底 = `gh api repos/wangqi422/catwang-llm-wiki/pages/builds --method POST` 或 workflow_dispatch rebuild 成功后单独跑 push-poster.js --date 20261110 补推
