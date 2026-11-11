@@ -777,3 +777,21 @@
 |---|---|---|---|
 | 2026-11-09 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 93 期；Anthropic 1.7GW 发电机组(9.3) + 代理式 Siri(9.0) + DeepSeek Harness 插件市场(8.9) + 富士台全剧用 AI(8.8) + AutoDNA 登 Nature(8.7) + 灵光 2000 万(8.6) + Suno ELVIS 诉讼(8.5) + 双基准封顶(8.3)；均分 8.76；AI HOT v1 **51 条 / 1 页**（周末低量，热度榜 + 8 轮搜索补足）；阶段 4 首次 404 → 跨日对照 + 44s workflow 后 200；一条龙无人工干预跑通，PNG Pages 第 6 次检测 200 |
 
+## 2026-11-11（周三 · 第 95 期）执行摘要
+
+- **结果**：✅ 全链路通过（用户手动指定 `xiaoqi-ai-daily` skill 五阶段完整发布）。MD → TOC H5 → 归档 → git push（`f1b5d0d` MD/H5/归档/2 脚本、`fca1a4c` 海报）→ URL 200（**首次 404 → 跨日对照 11-10 H5 与 index 均 200 排除 Pages 故障 → curl 第 4 轮 200 + WebFetch 内容二次确认 title=2026.11.11 / 第 95 期 / Issue 95 / 8 卡 / 3 章节 / 32 chips / lead / 返回归档**）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209/4096 字节）→ log.md 尾部追加
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261111-toc.html`（50928B / 8 卡 / 8 nav-sub / 32 chips）；海报 `docs/ai-daily/ai-daily-poster-20261111.png`（705.6KB / 1440×1920）；MD 50903B；归档 DATA eval count=140
+- **主线**：从锁在保险柜，到铺进每个人的工位 —— Gemini 4 Carbon 全面 GA(9.4) + Anthropic IPO 路演启动 + Claude 办公套件 + Stripe 完成收购 OpenRouter + MiniMax H3-Image 开源 + OpenAI Businesses in ChatGPT + Adobe MAX 2026 + GR00T 2 / Gemini Robotics 2.5；评分均值 8.9
+- **AI HOT v1 新端点**：`https://aihot.news/api/v1/items?mode=all&window=24h&limit=100`，浏览器 UA，cursor 分页字段 `page.nextCursor` / `page.hasMore`，两页各 100 条（TOTAL 200 / hasMore=true）；叠 `aihot.news` 热度榜 + 8 轮定向 WebSearch，候选池远超 ≥25
+- **查重拦截**：Gemini 4 Carbon / Stripe×OpenRouter / Anthropic IPO / MiniMax 均有历史命中，逐一确认是不同阶段新事件（首发→GA / 敲定→交割 / 预告→正式路演 / 泛化→H3-Image 精确 0），正文写明避免连续剧误判
+- **坑位：阶段 4 首次今日 H5 404** —— 前一日 H5 与 index 均 200 判定仅 Pages 部署延迟；轮询至第 4 轮恢复 200，未触发 5 步 submodule 修复流程；严格「未 200 不推群」
+- **坑位：H5 残留日期假阳性** —— `grep -c "11.10"` 未转义点号把 `11.11` 一并计入，改 `grep -n "11\.10"` 精确匹配为 0；复用模板后排查残留务必用转义精确匹配
+- **凭据解析**：`config.json` 的 `aiDailyWebhooks` 仅 `YOUR_*_KEY` 占位；真实 3 群来自 `config.local.json`（群 A / 群 B / 竞品视觉日报群）
+- 海报视觉确认通过：暖纸底 #F2EEDF + 四色 + 半透白卡 + Cormorant 斜体数字 + 粉色 Hero，与 H5 同源；三公网 URL（海报 PNG / H5 / 归档）均 200，remote main = fca1a4c 与本地一致
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-11 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 95 期；Gemini 4 Carbon GA + Anthropic IPO 路演 + Claude 办公套件 + Stripe×OpenRouter 交割 + H3-Image + Businesses in ChatGPT + Adobe MAX + GR00T 2；均分 8.9；**AI HOT 新端点 aihot.news/api/v1/items**（200 条 / 2 页 / cursor 分页）；阶段 4 首次 404 → 跨日对照 + curl 第 4 轮 200；一条龙无人工干预跑通，PNG Pages 第 6 次检测 200 |
+
