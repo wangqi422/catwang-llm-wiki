@@ -795,3 +795,53 @@
 |---|---|---|---|
 | 2026-11-11 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 95 期；Gemini 4 Carbon GA + Anthropic IPO 路演 + Claude 办公套件 + Stripe×OpenRouter 交割 + H3-Image + Businesses in ChatGPT + Adobe MAX + GR00T 2；均分 8.9；**AI HOT 新端点 aihot.news/api/v1/items**（200 条 / 2 页 / cursor 分页）；阶段 4 首次 404 → 跨日对照 + curl 第 4 轮 200；一条龙无人工干预跑通，PNG Pages 第 6 次检测 200 |
 
+## 2026-11-12（周四 · 第 96 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本第 5 次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`acc11d1` MD/H5/归档/生成脚本、`e6d32dd` MD 编辑点评、`1331992` 海报、`8fe8277` log）→ URL 200（首次 404 → 跨日对照 11-11 H5 与 index 均 200 排除 Pages 故障 → gh run watch 43137235021 36s success → curl 第 1 轮 200 + WebFetch 内容二次确认 title=2026.11.12 / 第 96 期 / Issue 96 / 星期四 / 8 卡 / 3 章节 / 32 chips / lead / 返回归档）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209/4096 字节）
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261112-toc.html`（46106B / 8 卡 / 8 nav-sub / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261112.png`（667.8KB / 2880×3840 @2x）；MD 含「## 编辑点评」章节
+- **主线**：从会答，到会判、会交、会干活 —— Google Gemini Decision 1 决策模型(9.4/P0) + A2UI 1.0 生成式 UI 协议(9.1/P0) + AlphaGenome 2 单细胞基因组(8.9/P0) + 阿里 Qwen4-Max 预览版(8.8) + xAI Grok Bot 1.0(8.6) + 腾讯元宝搜索/字节中国版 Muse(8.4) + Anthropic IPO 认购数倍超额 904 亿(8.3) + fal/Luma 换角不重拍(8.1)；评分均值 8.7
+- **AI HOT v1**：`aihot.news/api/v1/items?mode=all&window=24h&limit=100` 两页各 100 条（共 200 / hasMore=true），cursor 分页正常；叠 aihot.news 热度榜 + 8 轮 WebSearch，候选池远超 ≥25
+- **查重拦截**：Seedream 5.5（11-10 已报）、Runway Praxis-1（10-01 已报）、MiMo-V2.6（10-11 已报）均剔除；Anthropic IPO 明确区分 11-11「启动路演」与 11-12「认购超额 + 新账本」两个阶段并在正文写明
+- **坑位新增：海报 tagline 源 = MD「## 编辑点评 → 一句话：」**（generate-poster.js 正则 `一句话[：:]\s*\*{0,2}([^*\n。]{4,60}[。！]?)`，限 4–60 字、不含 `*` 与 `。`）——MD 尾部只写「编辑说明」而不写「## 编辑点评」会导致 `(未提取到)`、tagline 圆角卡片不渲染；修复只需补 MD 章节 + 一句话后重新 generate + screenshot，无需改已 push 的 H5
+- **视觉确认（ViewImage）通过**：暖纸底 #F2EEDF + 四色圆点 + 粉色 Hero + 半透白卡 + Cormorant 斜体序号 + 底部四色数据卡（精选 8 条 / 均分 8.7 / 2026.11.12 / 周四），与 H5 同源
+- **凭据解析**：config.json 的 aiDailyWebhooks 仅 YOUR_* 占位；真实 3 群来自 config.local.json（群 A / 群 B / 竞品视觉日报群）
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-12 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 96 期；Gemini Decision 1(9.4) + A2UI 1.0(9.1) + AlphaGenome 2(8.9) + Qwen4-Max(8.8) + Grok Bot 1.0(8.6) + 元宝搜索(8.4) + Anthropic IPO 超额(8.3) + 换角不重拍(8.1)；均分 8.7；AI HOT 200 条/2 页；**海报 tagline 源 = MD「## 编辑点评 → 一句话：」（≤60 字），缺失时补 MD 而非改 H5**；阶段 4 首次 404 → 跨日对照 + 36s workflow 后 curl 第 1 轮 200；一条龙第 5 次无人工干预跑通，PNG Pages 第 6 次检测 200 |
+
+
+
+## 2026-11-14（周六 · 第 98 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本第 6 次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`c329320` MD/H5/归档/生成脚本）→ URL 200（首次 404 → 跨日对照 11-13 H5 与 index 均 200 排除 Pages 故障 → gh run watch 43544313952 部署成功 → curl 第 1 轮 200 + WebFetch 内容二次确认 title=2026.11.14 / 第 98 期 / 8 卡 / 3 章节 / 32 chips / lead / 返回归档）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209/4096 字节）→ log commit `bb6beb8`
+- **产物**：H5 `docs/ai-daily/ai-daily-card-20261114-toc.html`（45742B / 8 卡 / 8 nav-sub / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261114.png`（689.7KB / 2880×3840 @2x）；归档 DATA eval count=143（quoted-key 24）
+- **主线**：昨天交出去的是权，今天补上的是账本和规矩 —— ChatGPT Wallet 智能体代付(9.5) + 美联储 AI 头号金融风险(9.2) + Poppy v1.0 协议(9.0) + Inkling 2 Small 权重开源·原生4-bit(8.9) + DeepSeek 全家桶 API(8.8) + Antigravity /teamwork(8.6) + llama.cpp 1.0.0(8.5) + Cursor 安全事件(8.3)；评分均值 8.9
+- **AI HOT v1**：`aihot.news/api/v1/items?mode=all&window=24h&limit=100` 两页 193 条（hasMore=false）+ 热度榜 15 条 + 8 轮 WebSearch
+- **查重拦截**：11-13 期 8 条（黄仁勋辞任/Hydrogen/Opus 5.5/Atlas/眼镜/Replit/Epoch/OpenRouter）全部剔除；Inkling（11-06 预告→兑现）与 Poppy（PAP v0.1→v1.0 GA）按「预告→兑现」新阶段保留并正文写明；Antigravity 区分远程智能体（旧）与 /teamwork 科研成果（新）
+- **坑位提示**：H5 desc 里裸 `<0.01%` 会被浏览器当无效标签，需转义 `&lt;`；其余流程顺畅（ Pages 部署 404 为延迟惯例，跨日对照 + gh run watch 即可）
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-14 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 98 期；ChatGPT Wallet(9.5) + 美联储 AI 风险(9.2) + Poppy v1.0(9.0) + Inkling 2 Small 开源(8.9) + DeepSeek 全家桶 API(8.8) + /teamwork(8.6) + llama.cpp 1.0.0(8.5) + Cursor 安全事件(8.3)；均分 8.9；AI HOT 193 条/2 页；一条龙第 6 次无人工干预跑通，Pages 第 7 次检测 200；**裸 `<0.01%` 需转义 `&lt;`** |
+
+
+## 2026-11-15（周日 · 第 99 期）执行摘要
+
+- **结果**：✅ 全链路通过，一条龙脚本第 7 次全程无人工干预跑通。MD → TOC H5 → 归档 → git push（`168baf9` MD/H5/归档/2 生成脚本，5 files / 871 insertions）→ URL 200（首次 404 → 跨日对照 11-14 H5 与 index 均 200 排除 Pages 故障 → gh run watch 43664573145 部署成功 → curl 第 1 轮 200 + WebFetch 二次确认 title=2026.11.15 / 第 99 期 / 星期日 / 8 卡 / 3 章节 / 32 chips / lead / 返回归档）→ 海报推送 **3/3 群**（群 A + 群 B + 竞品视觉日报群，markdown_v2 单条 209/4096 字节）→ log commit（本次收尾）
+- **产物**：MD `raw/daily-reports/AIGC_Daily_Report_20261115.md`（42330B）；H5 `docs/ai-daily/ai-daily-card-20261115-toc.html`（46725B / 8 卡 / 8 nav-sub / 32 chips / 3-3-2）；海报 `docs/ai-daily/ai-daily-poster-20261115.png`（796.2KB / 2880×3840 @2x）；归档 DATA eval count=144
+- **主线**：没有一款新模型发布，全在给这轮震荡补账、标价和动手术 —— 英伟达治理危机(9.4/P0) + AMD MEXT(9.1/P0) + OpenAI 具身团队重组(8.9/P0) + 资本反向加码四笔(8.8) + WeatherNext 3 双数据集(8.6) + 百度词元所(8.5) + Anthropic 五大架构原语(8.3) + AIGC 工具明码标价(8.1)；评分均值 8.7
+- **AI HOT v1**：`aihot.news/api/v1/items?mode=all&window=24h&limit=100` **66 条 / 1 页**（hasMore=false，周日低量日）+ aihot.news 热度榜（11/15 3 条 + 11/14 17 条）+ 8 轮 WebSearch；低量日靠热度榜 + 搜索补足 ≥25 候选，**未触发「深度专题」降级**
+- **查重拦截**：11-13「黄仁勋辞任」→ 今日治理危机第二阶段（请愿 / 国会 / 市值 / 2500 亿担保）按连续剧新一幕保留并正文写明；Meta × Conductor 与 OpenAI × Pierre（11-05 已报）只作并购潮背景不重复计分；GPT-6 Astra 便携设备（11-04 个体项目）/ GR00T 2 / Gemini Robotics 2.5（11-11/12 产品）与今日 OpenAI 组织级重组区分；AlphaGenome 2（11-12 基因组）与今日气象数据集不同域；Claude Duet（11-07 仅作对标提及）→ 今日等候名单全量发邀请新阶段；Opus 5.5 转正（11-13 已报）只取成本数据与架构原语
+- **坑位/要点**：①归档首页 DATA 新条目**必须带 `url` 字段**，否则首页拼出 `href="undefined"` 导致 404；②海报 tagline 仍取 MD「## 编辑点评 → 一句话：」（≤60 字、不含 `*` 与 `。`），今日「没有新模型的一天，全在给这轮震荡补账、标价和动手术」正常渲染、无「未提取到」；③阶段 4 的 404 为 Pages 部署延迟惯例，跨日对照 + gh run watch 即可，**未 200 前不推群**；④config.json 的 aiDailyWebhooks 仅 YOUR_* 占位，真实 3 群来自 config.local.json
+- **视觉确认（ViewImage）通过**：暖纸底 #F2EEDF + 四色圆点 + 粉色 Hero + 半透白卡 + Cormorant 斜体序号 + 评分列 + 底部四色数据卡（8 条 / 均分 8.7 / 2026.11.15 / 周日），与 H5 同源；三公网 URL（PNG / H5 / index）均 200，remote/local sha 一致（5052130）
+
+## 历史执行结果（追加）
+
+| 日期 | 状态 | 推送群数 | 备注 |
+|---|---|---|---|
+| 2026-11-15 | ✅ 成功 | 3/3（群 A + 群 B + 竞品视觉日报群） | 第 99 期；英伟达治理危机(9.4) + AMD MEXT(9.1) + OpenAI 具身重组(8.9) + 资本四笔(8.8) + WeatherNext 3(8.6) + 词元所(8.5) + Anthropic 原语(8.3) + AIGC 明码标价(8.1)；均分 8.7；**AI HOT 66 条/1 页周日低量 + 热度榜 3+17 补足**；一条龙第 7 次无人工干预跑通，Pages 第 6 次检测 200；归档 DATA 新条目必须带 url 字段 |
