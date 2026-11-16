@@ -12,7 +12,7 @@
 | 3 | 代码化视频工具链成形：HeyGen 开源 HyperFrames（网页→确定性 MP4 / Apache 2.0）、cinecode 再登 GitHub 趋势榜、Remotion Agent Skills 30 分钟出片 | The Agent Times / dev.to / HM.AI / GitHub 月榜 | 视频基建 / 智能体原生 / P1 | 8.7 |
 | 4 ⭐ | 美团开源 LongCat-2.5 权重：1.6 万亿 MoE / 约 48B 激活，全程昇腾训练未用英伟达 GPU，194 块 Atlas A2 部署、W4A4 吞吐 +43% | The Decoder / GPTOnline / AI News Todays / UltraThink / Hugging Face | 国产算力 / 开源权重 / P0 | 9.2 |
 | 5 | 华为云 MaaS 上线 openPangu-2.1-Pro：主攻 Agent 开发 / AI 编码 / 推理优化，深挖鸿蒙操控与昇腾算子生成，权重开放下载 | 界面新闻 / ITHome / 华为云公告 / Stillflood | 国产生态 / 软硬协同 / P1 | 8.8 |
-| 6 | 美国国会推进把三项芯片出口管制塞进 NDAA：Remote Access / MATCH / AI OVERWATCH，连「云端远程租算力」也要纳入许可，黄仁勋离任后政治阻力消退 | East Asia Brief / CBS Face the Nation / Politico / 中华网 / 中评网 | 出口管制 / 供应链 / P1 | 8.6 |
+| 6 | 美国国会推进把三项芯片出口管制塞进 NDAA：Remote Access / MATCH / AI OVERWATCH，连「云端远程租算力」也要纳入许可 | East Asia Brief / CBS Face the Nation / Politico / 中华网 / 中评网 | 出口管制 / 供应链 / P1 | 8.6 |
 | 7 | AI 就业账本三份数据对撞：澳央行称冲击最先落在年轻劳动者（软件 / 客服降幅最大）、Gartner 却预测 2030 净增约 170 万岗位、斯坦福 AI Index 指投资破万亿与公众情绪落差 | IT之家 / 澳大利亚央行 / Gartner / 斯坦福 AI Index / aihot.news | 就业数据 / 趋势信号 / P2 | 8.4 |
 | 8 | 中科院自动化所 × 美团等发布 LLM Agent 递归自我改进（RSI）综述：Prompt / Memory / Skill / Harness 四主线、40 项研究、七步生命周期 | 机器之心 Pro / OpenReview / 网易 / GitHub Daily 11-15 | Agent 架构 / 经验复利 / P2 | 8.1 |
 
