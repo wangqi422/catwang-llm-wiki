@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.16 &middot; 星期一 &middot; 第 100 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Code as Brush</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🖌️ 代码即画笔 · 确定性</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>Fable 5.2 代码作画</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>1.4M HTML 3D 游戏</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>代码化视频工具链</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Domestic Silicon Stack</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🧱 国产算力栈 · 去 CUDA</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>LongCat-2.5 昇腾栈</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>openPangu-2.1-Pro</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>NDAA 出口管制</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Ledgers & Compounding</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>📒 账本 · 复利 · 边界</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>三份就业数据对撞</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>RSI 综述四主线</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.16 &middot; Mon &middot; Issue 100</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>不调模型调代码，不靠 CUDA 靠昇腾</strong> —— 都在把创作与算力，从别人定价的地方挪回自己手里 &middot; 周一没有一款新旗舰模型，动作全落在两条「把能力从最贵的供应链上挪开」的路上：<strong>Fable 5.2 不调用图像模型、用 1000–2000 行 Python 逐笔作画，约 70 万笔触画出照片级购物车、111 笔画日出鸟且落笔不可撤销</strong>；<strong>1.4M 纯 HTML 3D 游戏</strong>被扒出 700KB 只是打包的 Three.js、其余全程序化生成；<strong>HeyGen 把 HyperFrames 按 Apache 2.0 开源</strong>，配合 cinecode 与 Remotion Agent Skills，把「写网页 = 出片」做成可复现流水线 &middot; 下半场是国产算力栈：<strong>美团以 MIT 放出 LongCat-2.5 权重（1.6T MoE / 48B 激活），全程昇腾训练、194 块 Atlas A2 参考部署</strong>；<strong>华为云 MaaS 同晚上线 openPangu-2.1-Pro</strong> 补齐 Agent / 编码 / 推理与鸿蒙场景；而<strong>美国国会正把三项芯片出口管制推进 NDAA、连云端远程访问都要管</strong>——一边锁、一边自建，因果摆在同一天 &middot; 收尾是账本与复利：澳央行 / Gartner / 斯坦福 AI Index 三份就业数据彼此对撞，中科院 × 美团等把「Agent 如何把经验变成结构」写成 RSI 综述。今天没人比参数，比的是谁先把创作与算力，从别人定价的地方挪回自己手里</p>
+    <div class="header-meta">
+      <span class="meta-tag">🖌️ 代码即画笔</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧱 国产算力栈</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📒 账本 · 复利</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.16 &middot; 第 100 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Code as Brush</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🖌️ 代码即画笔 · 确定性视觉产出</div>
+    <div class="section-sub">Fable 5.2 用 70 万笔触画购物车、1.4M 纯 HTML 算出 3D 世界、HyperFrames / cinecode 把视频变成可版本控制的确定性渲染 —— 视觉产出正从「采样」往「计算」迁移</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Claude Fable 5.2 不调用图像模型，用 Python 代码逐笔作画：约 70 万笔触画照片级购物车、111 笔画日出鸟、落笔不可撤销</span>
+        <span class="card-tag">🖌️ 确定性创作 / 代码画笔 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 15–16 日，Anthropic 员工集中展示 Fable 5.2 一种「异类生图」能力并刷屏中文科技媒体：<strong>不调用任何扩散 / 图像生成模型</strong>，而是<strong>编写 1000–2000 行 Python</strong> 在虚拟画布上模拟刷毛纹理、颜料湿度与画布质感，把画面拆成大量独立笔触坐标逐笔执行。开发者 <strong>Jake Eaton</strong> 要求「画一幅尽量接近照片」，最终得到<strong>停车场里的购物车、约 70 万次模拟笔触</strong>，无外部图像模型、无预渲染底图，整幅画本质是一段可运行的 Python 程序。工程师 <strong>Michael Graczyk</strong> 做了更硬的实验：画「日出时的鸟」时<strong>每一笔单独输出为坐标、落笔后不能撤销</strong>，21 秒视频共 <strong>111 笔</strong>，第一笔用 <strong>#30346a</strong> 色号、90px 笔宽、5 个抖动路径点，模型自述约 7px 摆动是刻意的「人的手臂画不出绝对直线」；另一幅 280 笔黄昏场景里，后期光照糊掉桌上颜料管，模型主动用新笔触重画。<strong>这是「生成式」之外的第二条路，而且天然可编辑</strong>：扩散模型改一个细节得整张重抽，代码作画是<strong>逐笔可寻址的程序</strong>——改坐标重跑即可，确定性、可版本控制、可局部重绘，正好补上商业化物料最被诟病的一致性缺口。<strong>no-undo 约束把每一步变成不可回退的决策</strong>，是一次完整的 agentic loop。<strong>边界</strong>：70 万笔 / 111 笔 / 1000–2000 行均为开发者自报的演示元数据、非产品规格；逐笔输出坐标极耗 token；RoboDojo Sim 报 64.9% 但真实机械臂测试中对手更快，<strong>仿真强 ≠ 物理精细控制强</strong>。<strong>查重</strong>：模型本身 11-09 发布，今日报的是 11-15/16 集中曝光的能力与工程复现方法，属新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">笔触</div><div class="data-value">70 万笔 · 111 笔 no-undo</div></div>
+<div class="data-chip"><div class="data-label">路径</div><div class="data-value">1000–2000 行 Python</div></div>
+<div class="data-chip"><div class="data-label">复核</div><div class="data-value">观察画布自纠错</div></div>
+<div class="data-chip"><div class="data-label">边界</div><div class="data-value">自报 demo · 非产品规格</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">1.4M 纯 HTML 3D 游戏走红：约 700KB 是打包的 Three.js，其余全程序化生成、零图片零模型，卡兹克给出提示词模板与自查迭代法</span>
+        <span class="card-tag">🎮 程序化生成 / 单文件交付 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 16 日 aihot.news 热度榜第 2 位，一个近期疯传的 <strong>1.4M 单文件纯 HTML 3D 游戏</strong>被「数字生命卡兹克」拆解：其中<strong>约 700KB 其实是打包进 HTML 的 Three.js 库</strong>，剩下部分<strong>全部由代码程序化生成</strong>——没有图片、没有 3D 模型、没有录音，场景、材质、几何体、交互逻辑都在一份文件里由 JS 现场算出。文章还给出<strong>可直接复用的提示词模板</strong>与「自查 → 迭代」的调试方法，把「一个能跑的 3D 场景」降维成「一段可让模型反复改的 HTML」。<strong>它和 #1 是同一件事的两个尺度</strong>：Fable 5.2 用代码算出一幅静态画，这个用代码算出可交互 3D 世界，#3 用代码算出一段视频——今天最清晰的信号不是某个模型更强，而是<strong>视觉产出正从「采样」往「计算」迁移</strong>，只要能写成代码就能确定、能复现、能 diff。<strong>单文件交付是被低估的分发优势</strong>：一个 .html 双击即开、无需构建 / CDN、可离线、可直接塞进落地页或企微 H5，对轻互动宣发物料 / 小游戏试玩 / 活动页这类短周期、强传播场景比整套资源包轻得多。真正值钱的不是这个游戏，而是「怎么让模型一次性生成可运行场景、跑不通时怎么让它自己读报错修」的工作流。<strong>边界</strong>：1.4M / 700KB 为拆解者口径；程序化生成在写实贴图、大体量资产上仍远不及现成资源，适合几何 / 风格化 / 概念验证；单文件含第三方库时注意许可证与体积合规。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">体积</div><div class="data-value">1.4M 单文件 · 700KB Three.js</div></div>
+<div class="data-chip"><div class="data-label">资产</div><div class="data-value">零图片 · 零模型 · 零录音</div></div>
+<div class="data-chip"><div class="data-label">可复用</div><div class="data-value">提示词模板 + 自查迭代</div></div>
+<div class="data-chip"><div class="data-label">边界</div><div class="data-value">几何 / 风格化 · 非美术管线</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">代码化视频工具链成形：HeyGen 开源 HyperFrames（网页→确定性 MP4 / Apache 2.0）、cinecode 再登 GitHub 趋势榜、Remotion Agent Skills 30 分钟出片</span>
+        <span class="card-tag">🎬 视频基建 / 智能体原生 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月中旬，「把视频变成可调用的代码原语」在同一周集中成形：① <strong>HeyGen 开源 HyperFrames（Apache 2.0）</strong>，把任意用 <strong>HTML + CSS + JavaScript</strong> 写的场景，经 Puppeteer 渲染 + FFmpeg 编码 + GSAP / Lottie 动画<strong>本地渲染成 MP4</strong>，主打<strong>逐帧确定性</strong>——同样输入必得同样输出，agent-native、无需 API key，可与 Claude Code 等编码智能体直接配合，GitHub 月榜显示已约 84.7K stars。② 开源技能包 <strong>cinecode</strong>（MIT，11-03 建仓、<strong>11-15 再登 GitHub 趋势榜约 2.5K</strong>）让 Claude Code / Cursor「从代码导演整部电影」：五阶段 Plan → 剧本分镜 → 用 Canvas 2D / three.js 把每帧写成时间的纯函数 → Headless Chrome 逐帧捕获 → Web Audio 离线混音到 -14 LUFS 再 mux 成 MP4，<strong>不用视频模型、不用渲染队列、不烧积分</strong>，还带「先出两张静帧 + 低清草稿、留两轮改稿」的审批闸。③ <strong>Remotion Agent Skills</strong> 演示用 4–5 轮提示、约 30 分钟产出一条完整宣传片。<strong>三者拼出一条完整替代链</strong>：#1 静态画、#2 可交互 3D、这一条成片，共同点是「不调用生成式视频模型，改用代码确定性渲染」，收益是<strong>可编辑、可版本控制、可批量改价改字改结尾</strong>，恰好打中扩散视频「改一处全片重抽、角色脸会变」的老大难。<strong>「确定性」才是能进流水线的关键</strong>：批量本地化要求同一模板稳定复现，HyperFrames 的逐帧一致与 cinecode 的「改代码重渲染」把视频拉近软件工程 CI 范式。<strong>审批闸值得抄</strong>：在昂贵全片渲染前先给静帧 + 低清草稿，是把人工审片前置到最便宜的时刻。<strong>边界</strong>：案例均为作者自述、非独立评测；擅长信息流广告 / 数据可视化 / 倒计时 / Motion Graphics，复杂叙事与写实人物仍要专业剪辑介入。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">HyperFrames</div><div class="data-value">Apache 2.0 · 逐帧确定性</div></div>
+<div class="data-chip"><div class="data-label">cinecode</div><div class="data-value">MIT · 11-15 再登趋势榜</div></div>
+<div class="data-chip"><div class="data-label">Remotion</div><div class="data-value">30 分钟 · 4–5 提示出片</div></div>
+<div class="data-chip"><div class="data-label">审批闸</div><div class="data-value">静帧 + 草稿 · 留两轮改稿</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Domestic Silicon Stack</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧱 国产算力栈 · 去 CUDA 化</div>
+    <div class="section-sub">美团以 MIT 放出 1.6T 权重并首次披露全程昇腾栈、华为云 openPangu-2.1-Pro 补齐算子与鸿蒙场景、美国国会同日把云端算力也锁进许可 —— 一边锁、一边自建</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">美团开源 LongCat-2.5 权重：1.6 万亿 MoE / 约 48B 激活，全程昇腾训练未用英伟达 GPU，194 块 Atlas A2 部署、W4A4 吞吐 +43%</span>
+        <span class="card-tag">🧱 国产算力 / 开源权重 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 15 日 The Decoder 集中报道，把美团 <strong>LongCat-2.5 权重开源</strong>推成「年度最重要开放权重发布之一」。模型为<strong>原生多模态 MoE、总参 1.6 万亿、每 token 激活约 48B</strong>，面向长程 Agent / 软件工程，API 支持 <strong>100 万 token 上下文、单次输出 12.8 万 token</strong>，图像被转成离散 token 与文本同一 backbone 处理，同时兼容 OpenAI / Anthropic 两种 API 格式、可直接插进 Claude Code / Codex 等 harness。<strong>最硬的看点是硬件栈</strong>：美团称训练与微调<strong>全程跑在国产 AI 加速器上、没有任何英伟达 GPU</strong>，用 W4A4（权重 + 激活 4-bit）让国产芯片跑原生 INT4，相较 W8A8 基线 <strong>prefill 吞吐 +43.3%、decode +42.77%</strong> 且精度基本持平；自托管指南给出的参考集群是 <strong>194 块华为昇腾 Atlas A2</strong>（2 块图像 token 化、64 块 prefill、128 块 decode），<strong>完全没有英伟达配置选项</strong>。自报 Terminal Bench v2.1 <strong>88.4</strong>、DeepSWE v1.1 从上代 9.7 跃至 <strong>64.6</strong>；强化学习任务取自真实 GitHub PR、沙箱断网抹掉 Git 历史与构建缓存、并用 LLM 裁判反 reward hacking。权重按 <strong>MIT</strong> 放出，11-10 官方正式宣布、11-15 因报道再度发酵。<strong>这是「预告 → 兑现」的新阶段，不是旧闻复读</strong>：归档 11-02（第 86 期）报的是「模型亮相」，今天报的是<strong>权重真正放出 + 昇腾训练与部署栈首度完整披露</strong>——首次证明万亿级开源智能体模型可在纯国产算力栈完成训练与自托管。<strong>和 #6 是同一天的因果两面</strong>：一边把云端远程租算力也纳入许可，一边给出一份可复现替代方案。<strong>评分表要会读</strong>：88.4 是美团 in-house 跑分（模型卡明确未标星号的均为内部测试），更难的 Terminal Bench v4.0 只有 38.5；1.6T 为官方口径、safetensors 元数据约 1.78T 的差额官方未解释；194 块昇腾与「未用英伟达」是媒体表述，模型卡只说「国产 NPU 平台」——<strong>写进对外物料须按「厂商 / 媒体自报」标注，独立第三方复测尚未出现</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">规模</div><div class="data-value">1.6T MoE · 48B 激活</div></div>
+<div class="data-chip"><div class="data-label">硬件</div><div class="data-value">全程昇腾 · 无英伟达选项</div></div>
+<div class="data-chip"><div class="data-label">部署</div><div class="data-value">194 块 Atlas A2 · W4A4</div></div>
+<div class="data-chip"><div class="data-label">许可</div><div class="data-value">MIT · 100 万上下文</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">华为云 MaaS 上线 openPangu-2.1-Pro：主攻 Agent 开发 / AI 编码 / 推理优化，深挖鸿蒙操控与昇腾算子生成，权重开放下载</span>
+        <span class="card-tag">🧩 国产生态 / 软硬协同 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 15 日晚，华为云宣布开源盘古 <strong>openPangu-2.1-Pro</strong> 正式上线其 <strong>MaaS（Model-as-a-Service）平台</strong>，权重开放下载。升级集中在三条线：<strong>Agent 开发、AI 编码、推理优化</strong>，官方点名的增强场景包括<strong>深度研究、鸿蒙系统操控、鸿蒙 APP 开发、昇腾算子生成、推理链路优化</strong>；模型将接入华为云「智果 AgentArts / 码道 CodeArts / 国办 OfficeAce」，并由「华为小艺 Celia Work」首发集成。<strong>官方公告未给出参数量、上下文长度与跑分</strong>。同期背景：华为云 11-01 已公告 openPangu-2.0-Flash / 2.0-Pro 将于 <strong>11-30 停售下线</strong>，并建议存量客户迁移到 <strong>DeepSeek-V4.1-Flash 与 GLM-5.3</strong>。<strong>增量在「软硬协同与场景」，不在榜单</strong>：没有参数 / 跑分，却把场景钉死在鸿蒙操控、鸿蒙 APP 开发、昇腾算子生成上——把模型和自家 OS、芯片、开发工具绑成一条闭环，走「场景反哺模型」而非「刷榜」路线，与 #4 的国产算力栈是同一套叙事的上下游。<strong>「算子生成」是最实在的一格</strong>：让模型写昇腾算子，本质是用 AI 补国产芯片软件生态最缺的人力密集环节，若跑通等于给「去 CUDA 化」补上工具链。<strong>停旧推新 + 建议迁到友商模型是个不常见但诚实的信号</strong>：说明 MaaS 在把「平台」做成中立货架、把自研模型放在特定场景里竞争，对采购方选型更灵活，但也意味要重新评估存量集成的迁移成本。<strong>边界</strong>：无参数 / 上下文 / 基准，能力无法与 #4 或闭源旗舰直接对比；「鸿蒙 Agent 场景率先起量」目前是战略意图而非已验证结果，别把「上线 MaaS」写成「全面可用」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">上线</div><div class="data-value">华为云 MaaS · 权重开放</div></div>
+<div class="data-chip"><div class="data-label">场景</div><div class="data-value">鸿蒙操控 · APP 开发</div></div>
+<div class="data-chip"><div class="data-label">算子</div><div class="data-value">昇腾算子生成 · 推理优化</div></div>
+<div class="data-chip"><div class="data-label">边界</div><div class="data-value">无参数 · 无跑分</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">美国国会推进把三项芯片出口管制塞进 NDAA：Remote Access / MATCH / AI OVERWATCH，连「云端远程租算力」也要纳入许可</span>
+        <span class="card-tag">📜 出口管制 / 云端算力 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 15 日，众议员 <strong>Carlos Gimenez</strong> 在电视访谈中称必须消除「第三国分销与云端漏洞」，让受管制 AI 处理器无法经数字网络被远程租用；同日 CBS《Face the Nation》播出众院中国特别委员会主席 <strong>John Moolenaar</strong> 专访，明确「接下来几周的重点就是把出口管制写进《国防授权法》（NDAA）」。立法组合为三项：<strong>Remote Access Security Act（H.R. 2683，2026-01-12 众院以 369:22 通过）</strong> 修订 2018 年《出口管制改革法》，把「刻意的境外远程访问」定义为可管辖的技术转移、授权 BIS 对远程服务器连接发许可证、要求云厂商做 KYC 与最终受益人核验；<strong>MATCH Act</strong> 收紧半导体制造设备管制并促盟国跟进；<strong>AI OVERWATCH Act</strong> 让国会获得审查 / 否决高端 AI 芯片出口许可的权力、并将部分旗舰芯片直接列入禁运。触发点：11-13 众院三委员会联名致函，要求就 Megaspeed 等中间商把受控加速器转至境外、以及东南亚 / 中东 GB200 云租赁出席说明；两院协商目标是在 <strong>12 月会期休会前</strong>敲定 NDAA 文本，商务部同月须提交远程算力监控的执法方案。<strong>管制对象从「实体芯片」扩到「算力使用权」</strong>：现行规则管物理跨境运输，新法案把「在中立司法辖区远程租一台 GB200 集群训模型」也定义为需许可的转移——不是「机器在哪」，而是「谁在用它、最终受益人是谁」。<strong>与 #4 / #5 构成同一天的因果闭环</strong>：一边把云端算力也锁进许可，一边放出 194 块昇腾跑通万亿级的替代栈。<strong>日历风险比法条本身更该盯</strong>：12 月 NDAA 协商 + 商务部执法方案 + 已排定的 12/1–12/3 三场听证，意味着 12 月是特定加速器供货与报价的高波动窗口。<strong>边界与克制</strong>：三项法案尚在协商、<strong>尚无最终成文文本</strong>，相关表态均为议员 / 媒体口径而非立法结果；本条只记录立法进程与合规口径变化对产业供应链的影响，不对各方立场作评判，对采购的实际影响以正式生效文本与企业法务口径为准。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">三案</div><div class="data-value">Remote Access · MATCH · OVERWATCH</div></div>
+<div class="data-chip"><div class="data-label">变化</div><div class="data-value">实体芯片 → 算力使用权</div></div>
+<div class="data-chip"><div class="data-label">节奏</div><div class="data-value">12 月 NDAA 协商</div></div>
+<div class="data-chip"><div class="data-label">边界</div><div class="data-value">尚无成文文本</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Ledgers & Compounding</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">📒 账本与复利 · 经验成结构</div>
+    <div class="section-sub">澳央行 / Gartner / 斯坦福三份就业数据彼此对撞、RSI 综述把「Agent 把经验变成结构」拆成四层 —— 净增为正不代表过渡期无痛</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">AI 就业账本三份数据对撞：澳央行称冲击最先落在年轻劳动者（软件 / 客服降幅最大）、Gartner 却预测 2030 净增约 170 万岗位、斯坦福 AI Index 指投资破万亿与公众情绪落差</span>
+        <span class="card-tag">📒 就业数据 / 口径对撞 / P2</span>
+      </div>
+      <div class="card-desc">
+        11 月 14–15 日，三份口径完全不同的 AI 就业 / 投资数据同框：① <strong>澳大利亚央行</strong>研究称 AI 冲击<strong>集中落在年轻劳动者</strong>上，<strong>软件开发与客服岗位降幅最大</strong>——被替代的不是「低端重复劳动」的旧叙事，而是入行门槛岗与可被结构化的白领任务。② <strong>Gartner</strong> 预测到 <strong>2030 年 AI 将使全球净增约 170 万个工作岗位</strong>，强调净效应为正、只是结构重排。③ <strong>斯坦福 AI Index</strong> 新数据揭示 <strong>AI 投资突破万亿</strong>，与<strong>公众情绪、就业体感</strong>之间存在明显落差。同期 Hugging Face CEO Clement Delangue 重申「<strong>权力集中才是 AI 最大风险</strong>」、呼吁更强的开源。<strong>三份数据不矛盾，是三把不同的尺</strong>：澳央行量的是<strong>分布</strong>（谁先受影响、哪类岗位）、Gartner 量的是<strong>净总量</strong>、斯坦福量的是<strong>投入与体感的落差</strong>——<strong>净增不等于均匀分布，总量为正不代表过渡期无痛</strong>。<strong>对内容 / 宣发岗的直接含义</strong>：软件开发与客服「降幅最大」指向的正是<strong>可被模板化、可被 Agent 化的产出</strong>，这恰好解释了今天 #1–#3 的价值——当「会写网页 / 会出图」变成可调用原语，人的位置往「定义约束、审片、把关品牌与合规」上移。<strong>边界</strong>：澳央行结论基于单一经济体研究、Gartner 是 2030 年长期预测、斯坦福为指数口径，三者样本 / 方法 / 时间尺度均不同，<strong>不能相加、不能互算、不按数字直接排名次</strong>；均为媒体转述摘要，正式引用须回原始报告。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">澳央行</div><div class="data-value">年轻劳动者先受冲击</div></div>
+<div class="data-chip"><div class="data-label">Gartner</div><div class="data-value">2030 净增约 170 万</div></div>
+<div class="data-chip"><div class="data-label">斯坦福</div><div class="data-value">投资破万亿 · 情绪落差</div></div>
+<div class="data-chip"><div class="data-label">边界</div><div class="data-value">三把尺 · 不可相加</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">中科院自动化所 × 美团等发布 LLM Agent 递归自我改进（RSI）综述：Prompt / Memory / Skill / Harness 四主线、40 项研究、七步生命周期</span>
+        <span class="card-tag">🔁 Agent 架构 / 经验复利 / P2</span>
+      </div>
+      <div class="card-desc">
+        11 月 15 日，中国科学院自动化研究所联合<strong>美团</strong>、山东大学、中国人民大学、中科院微电子所、上海交通大学、理想汽车等单位发布 <strong>LLM Agent 递归自我改进（RSI）综述</strong>《When, Where, and How Experience Becomes Structure》。核心命题：<strong>模型权重不变，Agent 也能积累能力</strong>——把一次任务里留下的工具调用记录、执行结果、用户纠正、失败修复，转化为下次能用的结构。综述沿 <strong>Prompt 优化 / Memory 进化 / Skill 进化 / Harness 进化</strong>四条主线，用<strong>三个问题</strong>（何时该改、改哪里、怎样把经验变成经得起验证、能长期复用的改进）与<strong>七步生命周期</strong>串起框架，选取 <strong>40 项代表性研究</strong>绘制全景、对 <strong>20 项</strong>研究的具体更新闭环做对照分析。同期 GitHub 11-15 趋势榜被概括为「AI 生产力与 Agent 协作的<strong>接口之战</strong>」：<strong>Univer</strong> 开源面向人与 AI Agent 的 Office SDK、<strong>AG-UI</strong> 定义智能体—前端交互协议、<strong>腾讯 LoopForge</strong>（Go、自托管）编排多个 coding agent 并带<strong>人工审批闸</strong>、plannotator 登顶。<strong>它给「越用越强」提供了工程语法</strong>：改一句 Prompt、存一条 Memory、固化一个 Skill、调整 Harness 的工具接口与检查逻辑，且强调「经得起验证」而非「改了就算改进」。<strong>Harness 进化与「人工审批闸」是今天最实用的一格</strong>：#3 的 cinecode 在昂贵渲染前留两轮改稿、腾讯 LoopForge 在编排里放人工审批，本质都是把「验证」做成流程节点而非事后补救。<strong>边界</strong>：这是<strong>综述 / 框架</strong>而非新模型或新基准，不含可直接跑的实现与实测提升；40 项研究的对照多为定性归纳，「自我改进」在开放环境下的稳定性、错误累积与回滚仍是开放问题。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">命题</div><div class="data-value">权重不变 · 经验成结构</div></div>
+<div class="data-chip"><div class="data-label">四主线</div><div class="data-value">Prompt · Memory · Skill · Harness</div></div>
+<div class="data-chip"><div class="data-label">框架</div><div class="data-value">三问题 · 七步 · 40 项</div></div>
+<div class="data-chip"><div class="data-label">落点</div><div class="data-value">验证 + 人工审批闸</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>八条其实在讲同一件事：<strong>不调模型调代码，不靠 CUDA 靠昇腾，都在把创作与算力从别人定价的地方挪回自己手里</strong>。第 100 期恰逢周一，大厂集体没发新旗舰，反而把这两条「去依赖」的路亮得格外清楚——前几期是「补账本、明码标价」，今天更进一步：不只要算清成本，还要把生产资料的<strong>控制权</strong>换回来。</p>
+    <p><strong>① 上半场（#1–#3）是「代码即画笔」的三个尺度</strong>。<strong>Fable 5.2 用 70 万笔触画购物车</strong>（#1）证明不调图像模型也能出照片级作品，而且每一笔是可寻址坐标；<strong>1.4M 纯 HTML 3D 游戏</strong>（#2）把同样的思路推到可交互世界，还附赠提示词模板；<strong>HyperFrames / cinecode / Remotion</strong>（#3）补齐成片，把视频变成可版本控制的确定性渲染。三者共同点不是「更强」，而是<strong>确定、可复现、可局部改</strong>——改 logo 不用重抽卡，改价格不用重拍片。</p>
+    <p><strong>② 下半场（#4–#6）是「国产算力栈」的因果闭环</strong>。<strong>美团把 1.6T 的 LongCat-2.5 权重放进 MIT，并首次完整披露「全程昇腾、194 块 A2、无英伟达选项」</strong>（#4），是 11-02「亮相」之后的兑现新阶段；<strong>华为云同晚上线 openPangu-2.1-Pro</strong>（#5），用鸿蒙场景与昇腾算子生成补齐工具链；而<strong>美国国会正把三项管制写进 NDAA、连云端租算力都要许可</strong>（#6）。一边锁、一边自建，两件事摆在同一天——但也要克制：88.4 是厂商自报、法案尚无成文文本，两个都不能写死进对外承诺。</p>
+    <p><strong>③ 收尾两条（#7–#8）是账本与复利</strong>。<strong>澳央行 / Gartner / 斯坦福三份数据彼此对撞</strong>（#7），提醒「净增 170 万」与「年轻软件岗先受冲击」并不矛盾，是三把不同的尺；<strong>RSI 综述</strong>（#8）则把「Agent 把经验变成结构」拆成 Prompt / Memory / Skill / Harness 四层。#7 说被结构化最深的恰是模板化白领产出，#8 就给出「把每次修复沉淀成可复用结构」的方法——今天这两条其实是一问一答。</p>
+    <p>一组对照值得记：<strong>#1 的「落笔不可撤销」、#3 的「静帧审批闸」、#8 的「人工审批 + 经验证才叫改进」，都在做同一件事——把「验证」前置到最便宜的时刻</strong>。逐笔作画不许反悔，所以每一笔都得预判；全片渲染前先出草稿，所以改稿不烧钱；经验要先通过验证才配沉淀成 Skill。今天没有谁更聪明，比的是谁先把「不可逆」的成本管住。</p>
+    <p>一句话：<strong>不调模型调代码，不靠 CUDA 靠昇腾，都在把创作从最贵的供应链上挪开</strong></p>
+    <p>今天最高分给到 <strong>#1 Fable 5.2 代码逐笔作画（9.4 / P0）</strong>：分量不在「画得像照片」，而在它给出了生成式之外的第二条可商业化路径——每一笔是可寻址坐标、整幅画是可运行程序，确定性、可版本控制、可局部重绘，正好补上扩散模型在品牌一致性物料里最被诟病的缺口；且与 #2 / #3 连成画、3D、视频的完整光谱，是今天唯一一条能直接改写宣发工作流的线索。</p>
+    <p>五条可以立刻执行的线索：<strong>① 用一下午做「单文件 HTML 概念小场景」试玩页</strong>，嵌进 H5 或企微卡片；<strong>② 把模板化短片迁到「改数据重渲染」的确定性工具链</strong>，并把「静帧 + 草稿、留两轮改稿」的审批闸写进自动化出片 SOP；<strong>③ 云渲染 / 批量出图 / 长周期 GPU 合同标注「12 月 NDAA + 出口管制 + 12/1–12/3 听证」外部变量</strong>；<strong>④ 所有厂商自报数据一律标「演示 / 自报、未经第三方复测」</strong>；<strong>⑤ 把 RSI 四主线做成常驻 Agent 自检表</strong>，以「30 天内是否被再次调用」衡量沉淀价值，并给所有自动化发布流程保留人工审批与合规审片节点。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
