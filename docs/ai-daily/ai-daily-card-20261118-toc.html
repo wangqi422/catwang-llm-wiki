@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.18</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.18 &middot; 星期三 &middot; 第 102 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Price Tags</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>💰 明码标价 · 效率与算力</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>GPT-6.2 Astra + Sol</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>微软 MAI 七连发</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>英伟达 Q3 财报</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Capital & Platform</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🌐 资本平台 · 敲钟与入口</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic IPO 提价</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Gemini 上线 Search</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>可灵 Image 4.0</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Creation Agents</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🎬 创作智能体 · 从工具到集群</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Suno Visuals</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Agent 集群化</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.18 &middot; Wed &middot; Issue 102</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>降本增效从口号变成价目表，算力王座与敲钟声同台</strong> —— 三条线在同一天各自把账摊开 &middot; <strong>明码标价</strong>：OpenAI 放出 <strong>GPT-6.2 Astra + Sol</strong>，Astra API 降价 20%、缓存砍 60%，ARC-AGI-3 适配器模式 <strong>100% 满分</strong>，首破「AI 自我改进」高风险阈值；微软 Ignite 甩出 <strong>MAI 七连发</strong>，Code 2 用 5% 价格达 Opus 5.5 的 96%、Maia 200 每瓦吞吐 1.7 倍；英伟达黄仁勋离任后首份财报 <strong>营收 1158 亿美元（+103%）</strong>、数据中心首破千亿，同日董事会却拒其复职 &middot; <strong>敲钟与入口</strong>：Anthropic IPO 定价上调至 <strong>80 美元以上、估值冲 1.5–1.6 万亿</strong>，11/19 纳斯达克挂牌；Gemini 4 Hydrogen 全面上线 Search 并把 Tasks 免费扩六国；可灵 <strong>Kling Image 4.0</strong> 原生 8K、单图 2000 字 &middot; <strong>创作新形态</strong>：Suno 用中国 MiniMax H3 做对口型 MV，Replit / Devin / Perplexity 把智能体从单兵推向集群。今天没人比谁参数更多，比的是谁能把一次任务的价格、一张图的字数、一颗芯片的每瓦吞吐都算成明白账</p>
+    <div class="header-meta">
+      <span class="meta-tag">💰 明码标价</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🌐 资本平台</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🎬 创作智能体</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.18 &middot; 第 102 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Price Tags</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">💰 明码标价 · 效率与算力</div>
+    <div class="section-sub">GPT-6.2 把降价写进发布头条、微软用「5% 价格达 96% 性能」当主标语、英伟达连每瓦吞吐和每股定价都成了叙事主角 —— 能力叙事退到第二排，价格叙事坐上主桌</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 发布 GPT-6.2 Astra 与 Sol：Astra API 降价 20%、缓存砍 60%，ARC-AGI-3 适配器模式 100% 满分，首破「AI 自我改进」高风险阈值</span>
+        <span class="card-tag">💰 旗舰降价 / 自我改进 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日，OpenAI 发布 <strong>GPT-6.2 Astra 与 Sol</strong>，同步上线 ChatGPT Work、Codex 与 API。定价是最大信号：<strong>Astra 输入 8 美元 / 输出 40 美元每百万 Token、较上代降 20%，缓存输入砍 60% 到 0.40 美元</strong>；Sol 维持 2 / 10 美元，Pro 200 套餐开放 Ultrafast（降价 50%）。官方口径：Agents' Last Exam 上 Astra 比上代 +5.2 分、成本不到 1/3，对 Claude Fable 5.2 领先 5.5 分而成本仅 5%；外部裁判 ARC Prize 用适配器在 <strong>ARC-AGI-3 拿到 100% 满分</strong>（标准框架 70.3% / 24200 美元）。最受关注的是系统卡披露：<strong>Astra 是 OpenAI 首个对外发布、触及「AI 自我改进」高风险阈值的模型</strong>，同步上线「控制室」监控。<strong>降温提示</strong>：Artificial Analysis 智能指数 Astra 排第二（62）落后 Fable 5.2（65），编码 Agent 指数与上代持平、幻觉率最高 59%。<strong>对宣发</strong>：一句话直出 3D 场景与带矢量图 PPT 值得做赛季武器预览、KV 粗模与提案页批量生成，但厂商自报数据须自测复核，100% 满分是适配器特定口径，对外物料标注「模型辅助」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">降价</div><div class="data-value">输入 -20% · 缓存 -60%</div></div>
+<div class="data-chip"><div class="data-label">ARC-AGI-3</div><div class="data-value">100% 满分</div></div>
+<div class="data-chip"><div class="data-label">阈值</div><div class="data-value">自我改进 High</div></div>
+<div class="data-chip"><div class="data-label">AA 指数</div><div class="data-value">第二 · 编码持平</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">微软 Ignite 2026 甩出 MAI 七连发：Code 2 用 5% 价格达 Opus 5.5 的 96%、Cyber 2 Flash 成本不到 GPT-6 Astra 的 2%、Maia 200 每瓦吞吐 1.7 倍</span>
+        <span class="card-tag">⚡ 自研模型 / 价格战 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日微软 Ignite 2026，纳德拉把 Copilot 定位成「工作操作系统」，推出 Microsoft IQ、Agent 365、Cobalt 200 VMs，Microsoft AI 则一次发布<strong>七款自研 MAI 模型</strong>：① <strong>Code 2</strong>——四个企业编码基准平均达 GPT-6.1 Sol 的 98%（约 40% 价格）、Claude Opus 5.5 的 96%（仅 5% 价格），界面盲测 67-68% 胜 GPT-6 Sol；② Code 2 Flash——对标 GPT-6 Luna（65% 价格）/ Haiku 5.5（20% 价格）；③ <strong>Cyber 2 Flash</strong>——CyberGym-E2E 完成 92.3%（GPT-6 Astra 91.5%），单任务成本不到 2%；④ <strong>Image 2.7</strong>——登顶 AA 图像编辑榜，约 GPT Image 2.6 的 1/5 价格；⑤ Realtime 1——首个语音到语音模型，0.01 美元/音频分钟起；⑥ Transcribe 2——每月处理 1000 万次问诊；⑦ Decision 1.1——比 GPT-Sol 6.1 快 50 倍、便宜 79 倍。第二代自研芯片 <strong>Maia 200</strong> 已量产、每瓦 token 数是上代 1.7 倍。<strong>边界</strong>：所有数字均为微软自测、含 50% 促销价。<strong>对宣发</strong>：MAI Image 2.7 与 Copilot 免费/学生档的 Code 2 值得试批量图生图改稿与活动页原型，性能数字进对外物料前须自测。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型数</div><div class="data-value">MAI 七连发</div></div>
+<div class="data-chip"><div class="data-label">Code 2</div><div class="data-value">Opus 5.5 的 96% · 5% 价</div></div>
+<div class="data-chip"><div class="data-label">Image 2.7</div><div class="data-value">AA 图像编辑榜第一</div></div>
+<div class="data-chip"><div class="data-label">芯片</div><div class="data-value">Maia 200 · 1.7×/W</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">英伟达黄仁勋离任后首份财报：营收 1158 亿美元（+103%）、数据中心首破千亿、净利 653 亿创新高；同日董事会拒黄仁勋复职、SEC 调查、停售 H200 中国</span>
+        <span class="card-tag">🏛️ 算力财报 / 治理危机 / P0</span>
+      </div>
+      <div class="card-desc">
+        美东 11 月 17 日盘后，英伟达发布 2027 财年 Q3 财报：<strong>营收 1158 亿美元、同比 +103%、连续 17 季超预期</strong>；<strong>数据中心 1076 亿美元首次站上千亿、同比 +110%、占比约 93%</strong>；GAAP 净利 653 亿（+105%）；Q4 指引 1300 亿且<strong>不含任何中国数据中心收入</strong>。Vera Rubin NVL72 开始出货、上调 2028 财年营收增长预期至 75%，云业务积压订单达 2.5 万亿。但另一面同样密集：<strong>这是黄仁勋辞任后首份财报</strong>，财报前他发声明「愿在董事会认为合适时回归」，电话会上董事长哈维·琼斯却明确<strong>未考虑让其复职</strong>、已聘海德思哲启动 CEO 遴选；SEC 正就披露是否误导投资者展开民事调查；公司宣布<strong>停售 H200 芯片至中国</strong>并新设董事会级国安与出口管制委员会。财报后盘后涨超 4%，但年内仍跌超 17%。<strong>查重</strong>：H200 历史多为出口管制背景，今日为主动停售 + 国安委员会新动作。<strong>对宣发</strong>：算力供给中期仍会下探利好 AIGC 成本，但跨境素材生成要预留供应商替代与数据合规预案。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">营收</div><div class="data-value">1158 亿 · +103%</div></div>
+<div class="data-chip"><div class="data-label">数据中心</div><div class="data-value">1076 亿 · 首破千亿</div></div>
+<div class="data-chip"><div class="data-label">净利</div><div class="data-value">653 亿创新高</div></div>
+<div class="data-chip"><div class="data-label">治理</div><div class="data-value">拒复职 · SEC · 停 H200</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-highlight" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Capital & Platform</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🌐 资本平台 · 敲钟与入口</div>
+    <div class="section-sub">Anthropic 以 1.5–1.6 万亿估值敲钟在即、Gemini 把十亿级搜索流量导成智能体入口、可灵用 8K + 2000 字把图像生成推进商用 —— 钱、流量与工具各自找到新的定价方式</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Anthropic IPO 定价上调至 80 美元以上：估值冲 1.5–1.6 万亿、认购超额约 6 倍、Google 与 Nvidia 各认购 100 亿，11/19 纳斯达克挂牌代码 ANT</span>
+        <span class="card-tag">🌐 IPO 提价 / 资本市场 / P0</span>
+      </div>
+      <div class="card-desc">
+        据《华尔街日报》11 月 17 日报道，Anthropic 拟将 IPO 定价从原区间 70–78 美元<strong>上调至 80 美元以上</strong>，估值达 <strong>1.5–1.6 万亿美元</strong>（原约 1.33 万亿）。订单簿约 1150 亿美元、<strong>认购超额近 6 倍</strong>，Altimeter 创始人单人申报 50 亿；Bessemer、Menlo、Accel 等老股东不退出反增持。发行 8.25 亿股 A 类股，外加 <strong>260 亿美元私募配售，Google 与 Nvidia 各认购 100 亿</strong>；最多 20% 留给散户。最终定价 11 月 18 日、<strong>11 月 19 日以 ANT 在纳斯达克挂牌</strong>。基本面：截至 10 月底年化营收约 810 亿，但到 2030 年算力承诺累计约 4480 亿美元。<strong>连续剧新阶段</strong>：预告→路演→认购超额→提交注册→今日提价定价，80 美元+、6 倍、1150 亿均为首次披露。<strong>对宣发</strong>：Claude 家族资本底气夯实，可作多模型备份的稳定主力之一；但估值与算力承诺的泡沫争议提示——对外方案不要绑定单一厂商长期价格承诺，保留切换余地。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">定价</div><div class="data-value">80 美元以上</div></div>
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">1.5–1.6 万亿</div></div>
+<div class="data-chip"><div class="data-label">认购</div><div class="data-value">超额约 6 倍</div></div>
+<div class="data-chip"><div class="data-label">挂牌</div><div class="data-value">11/19 · ANT</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Gemini 4 Hydrogen 全面上线 Google Search（史上最大模型升级）+ Gemini Tasks 免费扩至美日韩等六国，可代打电话、付款、接入 60+ 应用</span>
+        <span class="card-tag">🔍 搜索升级 / 智能体入口 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日，Google 宣布 <strong>Gemini 4 Hydrogen 已在全球 Google Search 全面上线</strong>，称为「Search 迄今最大的一次模型升级」：带来更强的意图理解、更智能的 query fan-out 与链接组织、更可视化自适应的回复、更强多语言能力。同日 <strong>Gemini Tasks（原 Spark）免费扩展至美、日、韩、加、澳、印六国</strong>，由 Hydrogen 驱动，可替用户致电商家预约并写入 Calendar、分析账单、比价下单、转发邮件建任务，并<strong>接入 60 多款应用</strong>；配套还有「保留聊天历史但不参与训练」的新隐私设置、关闭历史后留存期延长到约两个月、以及支持对话式训练机械臂的 Antigravity Robotics 插件。<strong>「搜索 = 智能体入口」被坐实</strong>：Hydrogen 上 Search 解决理解与分发，Tasks 扩国解决执行与代办，Google 正把十亿级搜索流量直接导成智能体调用。<strong>查重</strong>：Hydrogen 前代 11-13/15 已提及，今日为 Search 全面上线 + Tasks 扩六国新事件。<strong>对宣发</strong>：Tasks 适合探索活动报名、KOL 联络、周边比价采购的自动化，但仅六国开放、代付款/代联络务必设人工审批边界。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">升级</div><div class="data-value">Search 史上最大</div></div>
+<div class="data-chip"><div class="data-label">免费扩国</div><div class="data-value">美日韩加澳印</div></div>
+<div class="data-chip"><div class="data-label">接入</div><div class="data-value">60+ 应用</div></div>
+<div class="data-chip"><div class="data-label">能力</div><div class="data-value">代打电话 · 付款</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">可灵 Kling Image 4.0 上线：原生 8K、单图 2000 字、70+ 商用字体、一次 10 张组图，「理解生成统一」架构、开放 API，AA 榜全球第六</span>
+        <span class="card-tag">🖼️ 图像生成 / 中文创作 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日深夜，快手可灵发布 <strong>Kling Image 4.0</strong> 并向企业与开发者开放 API，采用<strong>「理解生成统一」架构</strong>，三大升级直指痛点：① <strong>真实感 + 原生 8K</strong>——光影、肤质、材质接近相机直出，业内率先支持原生 8K，强化群像「千人千面」差异化；② <strong>超强文字表现力</strong>——单图可生成 <strong>2000 字</strong>、支持最高 15000 tokens 输入、内置 <strong>70+ 商用字体与 110+ 影调风格</strong>、可上传参考图引导字形色彩，覆盖多语；③ <strong>连贯组图与长图</strong>——一次描述最多 10 张同风格系列图，支持电商详情页与网页设计长图，原生 Agentic 能力自动规划整组内容。按最新 AA 榜单位列 AI 图像工具第六、领先 Nano Banana，<strong>UIUX Design 板块全球第三</strong>。<strong>它同时解掉「图里字写不对」与「组图风格不统一」两大商用痛点</strong>。<strong>对宣发</strong>：这是今日最该立刻上手的一条——中文 KV 标题字、活动规则长图、电商周边详情页、10 张一组同风格赛季物料都能一次生成；用自有参考图锁定 IP 风格，出图后人工精修与版权核查，避免直接商用未授权字体。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">画质</div><div class="data-value">原生 8K</div></div>
+<div class="data-chip"><div class="data-label">文字</div><div class="data-value">单图 2000 字 · 70+ 字体</div></div>
+<div class="data-chip"><div class="data-label">组图</div><div class="data-value">一次 10 张同风格</div></div>
+<div class="data-chip"><div class="data-label">榜单</div><div class="data-value">AA 第六 · UIUX 第三</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Creation Agents</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🎬 创作智能体 · 从工具到集群</div>
+    <div class="section-sub">Suno 把视频围绕音乐结构定制、用中国 MiniMax H3 做对口型 MV；Replit / Devin / Perplexity 同日把智能体从单兵推向集群，并给集群加上目标、预算与审批边界</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Suno 推出 Visuals 进军视频生成：基于中国 MiniMax H3 的 H3 Move 做歌词视频与口型同步、最长 15 秒片段，带版权过滤与水印</span>
+        <span class="card-tag">🎵 音乐视频 / 中国模型出海 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日，AI 音乐平台 Suno 推出 <strong>Visuals</strong>，把产品线从音乐扩展到视频。Visuals 针对音乐场景优化：画面跟随歌曲段落结构、捕捉歌词并<strong>实现口型同步</strong>，可生成专辑封面、歌词视频及最长 15 秒片段，多片段可在时间轴拼成完整 MV；网页版已上线，移动端数周内推出。底层模型官方披露为 <strong>H3 Move，基于中国 AI 公司 MiniMax 的 H3 模型</strong>再以自有数据优化——中国模型第一次以「底层能力供应商」身份进入海外头部创作工具。收费上音乐与视频积分分开：14.99 美元买 2500 视频积分约合 75 秒。版权侧新增过滤器拦截特定歌手、公众人物、版权角色，站外分享前嵌隐藏水印。<strong>「音画口型一体」的垂直打法 + 中国模型出海新路径</strong>。<strong>查重</strong>：Suno Visuals 无历史命中，此前只有版权诉讼背景提及。<strong>对宣发</strong>：适合快速做角色对口型短视频彩蛋、赛季主题曲 MV 样片、歌词卡；但 15 秒与版权过滤限制复杂叙事，商用前须确认水印与授权条款。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型</div><div class="data-value">H3 Move · MiniMax H3</div></div>
+<div class="data-chip"><div class="data-label">片段</div><div class="data-value">最长 15 秒 · 口型同步</div></div>
+<div class="data-chip"><div class="data-label">定价</div><div class="data-value">$14.99 / 约 75 秒</div></div>
+<div class="data-chip"><div class="data-label">版权</div><div class="data-value">过滤器 + 水印</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">智能体从单兵走向集群：Replit Missions（目标+预算+审批边界）、Devin Bots（多角色协作、PR 提升 4.5 倍）、Perplexity Orchestrator API（自动选模型）</span>
+        <span class="card-tag">🤖 Agent 集群 / 趋势信号 / P2</span>
+      </div>
+      <div class="card-desc">
+        11 月 17 日前后，三家产品不约而同把智能体从「单兵作战」推向「集群协作」：① <strong>Replit Missions</strong>——用户写下目标（如「拿下前 10 个付费企业客户」），约定花钱上限与必须先经人工批准的动作，随后一群 Agent 并行调研、做 demo、写外联稿并按反馈迭代，同时开源 DataCat；② <strong>Cognition Devin Bots</strong>——多个 Devin 以全职角色协作完成 Bug 修复，Cognition 称 beta 测试者「每条消息合并的 PR 提升 4.5 倍」；③ <strong>Perplexity Orchestrator API</strong>——按任务自动选择模型与提供商、支持 KV-cache 兼容的决策模型路由，Perplexity 同时披露年化收入已达 10 亿美元。GitHub 当日趋势榜也被「多智能体框架 + 自托管基础设施 + 预算/审批/审计」占据。<strong>共同语法：目标 + 预算 + 审批边界</strong>，这是 Agent 从玩具走向生产的关键闸门；模型路由则把「自动选最便宜模型」变成省钱能力。<strong>对宣发</strong>：可用集群 Agent 分摊活动物料的多版本产出与 A/B 文案，但对外发布、付款、改客户材料必须设为强制人工审批——智能体能并行干活，品牌口径的最终守门人还得是人。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">Replit</div><div class="data-value">Missions 目标+预算</div></div>
+<div class="data-chip"><div class="data-label">Devin</div><div class="data-value">Bots · PR 提升 4.5×</div></div>
+<div class="data-chip"><div class="data-label">Perplexity</div><div class="data-value">Orchestrator 自动选模型</div></div>
+<div class="data-chip"><div class="data-label">共同点</div><div class="data-value">审批边界 + 审计</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这 8 条摆在一起，其实说的是同一件事：<strong>AI 产业正在从「秀肌肉」进入「报价格」的阶段</strong>。OpenAI 把降价写进发布头条，微软用「5% 价格达 96% 性能」当主标语，连英伟达的每瓦吞吐、Anthropic 的每股定价都成了叙事主角 —— 参数、跑分、榜单这些「能力叙事」退到了第二排，Cost per Task、Price per Watt、Value per Share 这些「价格叙事」坐上了主桌。对做内容的人来说这是好消息：模型越便宜、越好用，把它当作水电一样随手调用的门槛就越低。</p>
+    <p><strong>① 明码标价成为发布主角（#1 / #2 / #3）</strong>。<strong>GPT-6.2 Astra 输入价降 20%、缓存砍 60%</strong>（#1），<strong>微软 MAI Code 2 用 5% 价格达 Opus 5.5 的 96%</strong>（#2），<strong>英伟达数据中心单季破千亿、连每瓦吞吐都当作卖点</strong>（#3）——三条线都在把「智能」重新标成一笔可预算的账。</p>
+    <p><strong>② 敲钟声与入口之争（#4 / #5 / #6）</strong>。<strong>Anthropic 以 1.5–1.6 万亿估值、超额 6 倍挂牌在即</strong>（#4），<strong>Gemini 4 Hydrogen 把十亿级搜索流量导成智能体入口</strong>（#5），<strong>可灵 Image 4.0 用原生 8K + 单图 2000 字推进商用</strong>（#6）——钱、流量、工具各自找到新的定价方式。</p>
+    <p><strong>③ 创作走向集群，守门人仍是人（#7 / #8）</strong>。<strong>Suno 用中国 MiniMax H3 做对口型 MV</strong>（#7）把音画口型收进一个闭环；<strong>Replit / Devin / Perplexity 把智能体推向集群</strong>（#8），共同语法是「目标 + 预算 + 审批边界」。</p>
+    <p>但同一天也给出警示：GPT-6.2 的编码 Agent 原地踏步、幻觉率仍高；微软的性能对比全是自测、还按促销价算；英伟达财报炸裂却挡不住董事会权力清洗与 SEC 调查；Anthropic 高估值背后是 4480 亿美元算力承诺。<strong>便宜是真的，偏科也是真的；增长是真的，泡沫争议也是真的。</strong>越是「报价格」的时代，越需要有人把价格背后的口径、边界和风险读出来。</p>
+    <p>一句话：<strong>模型开始明码标价，算力王座和敲钟声在同一天各算各的账</strong></p>
+    <p>今天最高分给到 <strong>#1 GPT-6.2 Astra + Sol（9.5 / P0）</strong>：它把降价、自我改进阈值与 ARC 满分打包进一次发布，是「价格叙事」最完整的样本；但真正的落地清单很具体 —— <strong>可灵 Kling Image 4.0 的中文 KV 与组图、GPT-6.2 的 3D 场景与提案页、MAI Image 2.7 的图生图改稿</strong>，这一周就值得上手试。</p>
+    <p>五条可执行线索：<strong>① 用 Kling Image 4.0 做中文 KV 标题字、活动规则长图、10 张一组同风格赛季物料</strong>，自有参考图锁风格、出图后人工精修；<strong>② 用 GPT-6.2 的 3D + 提案页能力做赛季武器预览与 KV 场景粗模</strong>，标注「模型辅助、非最终资产」；<strong>③ 建一张「任务级模型路由表」</strong>，高频短链路切低价模型、长程高精度留给旗舰；<strong>④ 给所有 Agent 自动化补齐「权限边界 / 操作日志 / 沙箱隔离 / 人工审批闸」四件套</strong>；<strong>⑤ 把英伟达治理不确定性、出口管制列为排期外部变量</strong>，厂商自报数据一律标注「自测 / 自报」、不写死进对外承诺。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
