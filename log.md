@@ -1,5 +1,14 @@
 # 操作日志 | Operation Log
 
+## [2026-11-18 09:40] AIGC 每日速报 2026.11.18发布完成（xiaoqi-ai-daily skill 五阶段）
+
+- **第 102 期**主线「降本增效从口号变成价目表，算力王座与敲钟声同台」：GPT-6.2 Astra+Sol（API 降20%/缓存砍60%/ARC-AGI-3 100%满分/首破自我改进阈值，9.5/P0）+ 微软 Ignite MAI 七连发（Code 2 用5%价达Opus 5.5的96%/Maia 200每瓦1.7倍，9.4/P0）+ 英伟达Q3财报营收1158亿(+103%)/数据中心首破千亿/董事会拒黄仁勋复职+SEC调查+停售H200（9.3/P0）+ Anthropic IPO提价80美元+/估值1.5-1.6万亿/11-19挂牌ANT（9.0/P0）+ Gemini 4 Hydrogen上线Search+Tasks免费扩六国（8.7/P1）+ 可灵Kling Image 4.0原生8K/单图2000字（8.6/P1）+ Suno Visuals基于MiniMax H3对口型MV（8.4/P1）+ Agent集群Replit/Devin/Perplexity（8.2/P2）；均分8.9
+- **产物**：MD raw/daily-reports/AIGC_Daily_Report_20261118.md（32.6KB）；H5 docs/ai-daily/ai-daily-card-20261118-toc.html（39KB / 432行 / 8卡 / 8 nav-sub / 32 chips / 3-3-2 / </head>=1 / 无残留11.17）；海报 docs/ai-daily/ai-daily-poster-20261118.png（740.2KB / 1440×1920）；归档 DATA eval count=147（今日置顶含url）
+- **采集**：AI HOT v1 mode=all&window=24h&limit=100 两页200条（hasMore=true）+ aihot.news热度榜Top5（GPT-6.2 +65617 / 黄仁勋 +59494 / Qwen4-Max +51196 / Anthropic IPO +19163 / 算力管制 +18137）+ 8轮中英WebSearch
+- **查重**：GPT-6.2/MAI/Kling Image4.0/英伟达财报/Suno Visuals/Devin Bots/Replit Missions零命中；Anthropic IPO(14篇)/Gemini Hydrogen(3篇)/H200(7篇)为连续剧新阶段，正文写明区隔
+- **发布**：commit 91365e0（MD/H5/归档）+ c720b49（海报）；阶段4跨日对照昨日H5/index均200→今日首轮404（部署44217803492 in_progress）→gh run watch部署成功→curl第1轮200+WebFetch二次确认第102期/8卡3章节/lead/返回归档；阶段5一条龙无人工干预跑通，PNG Pages第6次检测200，**3/3群推送成功**（群A/群B/竞品视觉日报群，markdown_v2单条209/4096字节）；三公网URL全200，remote/local SHA一致
+- **坑位**：push-poster --dry 需PNG先存在（一条龙dry不打印凭据，群数看config.local.json）；tagline正则从MD「一句话：」正确提取27字无抢匹配
+
 ## [2026-11-16 10:30] AIGC 日报 2026.11.16（五阶段全流程 · xiaoqi-ai-daily skill）
 
 - **第 100 期**，主线「不调模型调代码，不靠 CUDA 靠昇腾，都在把创作从最贵的供应链上挪开」：**Claude Fable 5.2 代码逐笔作画**（不调用图像模型、1000–2000 行 Python 模拟画笔，约 70 万笔触照片级购物车、111 笔不可撤销日出鸟，逐笔可寻址 / 可局部重绘，9.4/P0）+ **1.4M 纯 HTML 3D 游戏**（700KB 是打包 Three.js、其余全程序化生成，零图片零模型，附提示词模板与自查迭代法，8.9/P1）+ **代码化视频工具链成形**（HeyGen 开源 HyperFrames Apache 2.0 网页→确定性 MP4、cinecode 11-15 再登 GitHub 趋势榜、Remotion Agent Skills 30 分钟出片，8.7/P1）+ **美团开源 LongCat-2.5 权重**（1.6T MoE / 48B 激活、全程昇腾训练未用英伟达 GPU、194 块 Atlas A2 + W4A4 吞吐 +43%、MIT，9.2/P0）+ **华为云 MaaS 上线 openPangu-2.1-Pro**（Agent / 编码 / 推理优化 + 鸿蒙操控 + 昇腾算子生成，权重开放，官方无参数无跑分，8.8/P1）+ **美国国会推进三项芯片出口管制入 NDAA**（Remote Access / MATCH / AI OVERWATCH，云端远程租算力纳入许可 + KYC，12 月协商窗口，8.6/P1）+ **AI 就业账本三份数据对撞**（澳央行年轻人先受冲击 / Gartner 2030 净增 170 万 / 斯坦福投资破万亿与情绪落差，8.4/P2）+ **中科院 × 美团等发布 Agent RSI 综述**（Prompt / Memory / Skill / Harness 四主线、40 项研究、七步生命周期，8.1/P2）；**评分均值 8.76（海报口径 8.8）**
@@ -3455,3 +3464,10 @@
 - **坑位：一条龙在推群阶段中断**——海报 push(7237930) 后新部署 workflow 43997789535 的 Deploy 步骤报 `Found 0 artifact(s)`（Upload artifact 实际 success，GitHub Actions 瞬时抖动）→ PNG URL 3 分钟未就绪、脚本中断未推群；按 skill 排查：`gh run rerun 43997789535` 重跑部署成功、PNG 200 → 改用 `push-poster.js --date 20261117` 单独补推，`--no-wait` 未用（PNG 已 200 第 1 次检测即过）
 - 推送：markdown_v2 单条 209/4096 字节（海报图 + 点击看更多内容链接），3/3 群全成功（群 A / 群 B / 竞品视觉日报群），凭据来自 config.local.json（config.json 仅 YOUR_* 占位）
 - **坑位：海报 tagline 正则抢匹配**——`一句话[：:]` 会匹配编辑点评①里的「同一句话：」并把 tagline 提取成该句；修复：把正文「同一句话：」改为「同一个逻辑：」（MD 与 H5 同步），重新 generate 后 tagline 正确为「模型拼效率资本抢人，安全问责终于有了价钱」
+
+## [2026-11-18 09:00] inward-brief | 浮现 0 连接（NEW×OLD 第 20 次双零，不凑数）+ 3 元层实测发现 + 1 pattern + 1 question
+- 产物：raw/inward-briefs/2026-11-18.md（连续第 28 天）
+- 扫描：NEW=0（11/17 00:00~11/18 06:00）/ OLD=0（T-8~T-7=11/10~11/11，单日 [11/10,11/11) 与双日 [11/10,11/12) 口径均为 0）→ 回退「7 天内 used_by 增量」按字面仍为 0（194 篇 mtime 最新仍 2026-10-26 09:43:44 / wiki/黑天鹅.md 等 181 篇同秒）；按 skill 边界本应只出 2 节，按用户当日指令出完整 6 节，已在 brief 内声明
+- chief_freshness：171 天（连续第 28 天加警告）｜ 统计：严格 ^capture_type: 194 篇 / pattern 13 / idea 5 / article 19 / visual-intel 2 / question 0 / number 0 / 无标注 155 / 有标注 39（趋势线第 14 天可比，逐项零变化）；used_by 严格 6 文件 12 边（5 非空 + constraints-as-leverage 行内空数组 0 边），与 11/10~11/17 逐项一致
+- 今日要点：**第一次把 NEW 窗口当自变量做平移对照实验，修订昨天「3 小时相位差」的归因** → ①**五窗口对照**：A 原窗口(0-6)/B 修正相位(6-次日6)/C 全天(0-24)/D 对齐作息(9-次日9) 四种口径下 scan 区 NEW **一律 0**，只有 E 近30天=183 篇；B 窗口下全库含排除区实有 11 次写入且 0 次在 scan 区（1 产物 + 2 automation memory + 2 aihot json + 4 docs + 1 daily-report + 1 log）→ 相位差是真的但只是旁因（解释为何拍不到排除区写入），主因是 181 篇 mtime 被 10/26 09:43:44 一次批量改写统一冻住、知识层自此再无写入；昨天「尺子和 vault 错开 3 小时」修订为「vault 心脏停在同一秒、尺子反复量同一秒」；②**跨层自指**：inward-briefs 28 份中**前 7 份（05-31 + 10-22~10-26）mtime 也全 = 10-26 09:43:44**（和 wiki 181 篇同一秒），第 8 份起才恢复真实 09 点 mtime → 观测者用来诊断 vault 心跳停止的钟，起点处和病灶共用脉搏；③账本 --all **845** / main **444** 精确 +4/+4，昨日 4 commits 全是 Issue 101 AIGC daily 流水线（e34f3e9→7237930→e495e8e→1183e66）、scan 区 commit 仍 0；scan 区 git status M 30 / ?? 130（M 较昨差1）；**措辞探针**：最近 10 份 brief「连续 N 天」自称的 N 在 1~17 间波动、从未单调 → 「第 N 连」是每份现写非累积状态；inward-briefs 28 份 / 328,367B。本周隐性 pattern：**「追了 28 天，昨天以为找到的是尺子和 vault 之间错开的钟；今天把窗口当自变量平移才发现——钟没错开，是 vault 的心脏 23 天前就停在同一秒，而尺子最初的秒针，是被那只停住的心脏亲手拨的」**（from the observer's clock to the frozen heartbeat / 被冻结的心跳与借来的时间，第 18 连）。今天值得想的问题：尺子连续 23 天报「昨天什么都没发生」，今天发现自己每天都在量同一个冻住的秒针——它该修自己的腿、承认被量的东西停了、还是追问它自己的时间原本就是被测对象拨给的？缺口新增：知识层静默是事实还是定义 vault 内不可判 / 观测者起点时间被污染 / 窗口平移实验未固化进 skill / 今天是周三而周一 09:30 CHIEF 槽位空置 171 天
+- 未推送企微；未回填 used_by；纯只读，未改任何历史文件（仅新增本 brief + log 本区块）
