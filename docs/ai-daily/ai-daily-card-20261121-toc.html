@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.21 &middot; 星期六 &middot; 第 105 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Mind & Machine</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🧠 智力天花板</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>AI 证明黎曼猜想</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Inkling 2 Mini</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>DeepSeek 千亿融资</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Chips & Foresight</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🌐 资源与预言</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>87.9 万芯片出口</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>2027 超级智能</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Gemini 进 Search</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Compute & Science</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🚀 算力 · 科学</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>SpaceX 320 亿 · Grok</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>OpenAI 医疗 AI</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.21 &middot; Sat &middot; Issue 105</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>AI 一天顶破两层天花板：智力与资源</strong> —— <strong>智力层</strong>：Anthropic 数学家宣称借 Claude <strong>证明了悬置 167 年的黎曼猜想</strong>（4 页说明 + 约 1700 万行 Lean 代码，陶哲轩称「历史性时刻但仍待验证」），Thinking Machines 开源 <strong>Inkling 2 Mini</strong>（26B 循环模型、约 20GB 显存、笔记本离线可跑）；<strong>资源层</strong>：DeepSeek 二轮 <strong>1055 亿元融资</strong>工商落地、估值约 860 亿美元，美国众院曝光批准约 <strong>87.9 万颗</strong>AI 芯片出口中国（约申请量 1/4）。再加 Anthropic 研究员预言 <strong>2027 年底超级智能</strong>、Google 把 <strong>Gemini 4 Hydrogen 塞进 Search</strong>、SpaceX 拿下 <strong>320 亿美元</strong>芯片融资、xAI <strong>Grok Bot 美国上线</strong>、OpenAI 连发 <strong>MedChemBench + GPT-Rosalind</strong> 医疗 AI。今天不是比谁分高，是 AI 证明它既能碰人类最难的题，也能撬最硬的资金与地缘</p>
+    <div class="header-meta">
+      <span class="meta-tag">🧠 智力天花板</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🌐 资源与预言</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🚀 算力 · 科学</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.21 &middot; 第 105 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Mind & Machine</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 智力天花板 · AI 碰到了人类最难的题</div>
+    <div class="section-sub">黎曼猜想被 AI 辅助证明、26B 模型塞进笔记本、DeepSeek 千亿融资落地 —— 智力与资本在同一天冲顶</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">Anthropic 数学家 Alpöge 宣称与 Claude 合作证明黎曼猜想：4 页说明 + 约 1700 万行 Lean 形式化代码（文稿逾 25 万页），称可推广至广义黎曼猜想</span>
+        <span class="card-tag">🧮 AI 数学 / 待核验 / P0</span>
+      </div>
+      <div class="card-desc">
+        美东 11 月 20 日，34 岁的 Anthropic 数学家 <strong>Levent Alpöge</strong> 在个人网站发布仅 4 页的声明《Remark》，宣称「我相信我已与 Claude 合作找到了黎曼猜想的证明」，并称方法可推广至<strong>广义黎曼猜想</strong>。真正承载论证的是脚注指向的 <strong>14 个 Lean 压缩分卷——约 1700 万行形式化代码</strong>，转成文稿<strong>超过 25 万页</strong>；Alpöge 称形式化已完成、不依赖额外猜想，但坦言自己尚未掌握论证周边的全部数学。方法上借鉴函数域的 <strong>Stepanov 方法</strong>，由 Claude 提出关键建议——通过自守形式框架下连续的 <strong>Theta 提升</strong>逐步累积重数（对长度 X 的 von Mangoldt 求和，提升链长度取 √X）。消息震动数学界：菲尔兹奖得主<strong>陶哲轩</strong>称初步分析显示证明似综合朗兰兹纲领与算术几何成果、验证尚需时日；MIT 数学家 Andrew Sutherland 独立编译部分代码后称「历史性时刻，世界已经改变」。<strong>关键限定：截至发稿完整工程尚未通过独立核验</strong>，能否宣布「黎曼猜想已解决」仍待数学界检查。<strong>查重</strong>：AI 破解千禧年难题此前仅作背景提及，今日为全新事件且标注待核验。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">难题</div><div class="data-value">悬置 167 年 · 悬赏百万</div></div>
+<div class="data-chip"><div class="data-label">代码</div><div class="data-value">约 1700 万行 Lean</div></div>
+<div class="data-chip"><div class="data-label">文稿</div><div class="data-value">逾 25 万页</div></div>
+<div class="data-chip"><div class="data-label">状态</div><div class="data-value">宣称证明 · 待核验</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">Thinking Machines 开源 Inkling 2 Mini：26B 循环 Transformer、约 20GB 显存、笔记本离线可跑，Apache 2.0</span>
+        <span class="card-tag">💻 开源模型 / 端侧 / P0</span>
+      </div>
+      <div class="card-desc">
+        北京时间 11 月 21 日凌晨，Thinking Machines Lab 发布并开源 <strong>Inkling 2 Mini</strong>——一款「小到能装进笔记本」的循环 Transformer。<strong>26.4B 总参数、3.4B 激活</strong>（计入循环每 token 约 5.4B 权重激活），稀疏 MoE（128 专家选 8），24 层中中间 12 层共享权重、每 token 运行 3 次、等效 48 层计算；支持 <strong>1M token 上下文</strong>、图文输入，多数权重以 4-bit NVFP4 训练部署，**末 4 层 MXFP8**，<strong>整体显存约 20GB</strong>，官方门槛 32GB 内存 Mac。性能上，在总参数 &lt;100B 的开源模型中 DeepSWE v1.1 达 <strong>48.2%</strong>、SWE-bench Pro v2 Hard 达 77.9%、Artificial Analysis 智能指数 <strong>20.1</strong> 与 Qwen3.8-27B 并列。演示中研究者用 M5 Pro MacBook Pro <strong>离线几分钟生成可玩的飞行模拟器</strong>，还用一台离线 Mac 驱动像素小镇 Thinkyville 全部 20 位村民。权重以 <strong>Apache 2.0</strong> 开放，Day-0 适配 Ollama/vLLM/llama.cpp/MLX/SGLang。局限：中文输出可能截断，多轮/强约束任务不如 Qwen3.8-27B。<strong>查重</strong>：Inkling 2 Small（11-06/14 已报）为不同型号，今日 2 Mini 是「26B 笔记本可跑」新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">参数</div><div class="data-value">26.4B · 激活 3.4B</div></div>
+<div class="data-chip"><div class="data-label">显存</div><div class="data-value">约 20GB · 笔记本可跑</div></div>
+<div class="data-chip"><div class="data-label">上下文</div><div class="data-value">1M token</div></div>
+<div class="data-chip"><div class="data-label">协议</div><div class="data-value">Apache 2.0 开源</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">DeepSeek 第二轮融资工商落地：1055 亿元（158 亿美元）、投后估值约 860 亿美元，31 家出资方含腾讯/宁德时代，刷新中国 AI 单轮纪录</span>
+        <span class="card-tag">💰 融资 / 国产 AI / P0</span>
+      </div>
+      <div class="card-desc">
+        工商信息显示，杭州深度求索（DeepSeek）已于 11 月 17 日完成变更，注册资本由约 1645 万元增至 1991.87 万元（+21.1%），新增股东<strong>杭州程砚</strong>——合伙人由 1 名增至 32 名、登记出资额增至约 <strong>34.39 亿元</strong>，现持有 DeepSeek <strong>17.265%</strong>、为第三大股东。这标志传闻近两个月的第二轮融资在工商层面正式落定：本轮募集约 <strong>1055 亿元人民币（158 亿美元）</strong>、投后估值约 <strong>6155 亿元（860 亿美元）</strong>，刷新中国 AI 单轮融资纪录。31 家外部出资方中，腾讯（上海珩岫）与宁德时代（三只基金）各持程砚 <strong>9.5653%</strong>、按口径各约出资 100 亿元并列第一大外部出资方；中国移动、中信证券各 7.6522%，另有美团龙珠、vivo、网易、小红书、B站、完美世界、华策等文娱产业方及中芯聚源、长鑫存储等国资金融机构。梁文锋已退出程砚直接合伙人名单，但通过持执行事务方杭州程策 99% 股权掌握控制权，直接+间接持股约 67.42%。不到四个月，DeepSeek 两轮累计吸金超 <strong>1500 亿元</strong>。<strong>查重</strong>：二轮此前为传闻，今日为「工商落地 + 31 家名单公开 + 估值 860 亿」新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资额</div><div class="data-value">1055 亿元 · 158 亿美元</div></div>
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">约 860 亿美元</div></div>
+<div class="data-chip"><div class="data-label">股东</div><div class="data-value">31 家 · 腾讯宁德领投</div></div>
+<div class="data-chip"><div class="data-label">累计</div><div class="data-value">两轮超 1500 亿元</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Chips & Foresight</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🌐 资源与预言 · 资本闸门与地缘闸门同时松动</div>
+    <div class="section-sub">87.9 万颗芯片获批出口、2027 超级智能预言、Gemini 塞进搜索 —— 钱、芯片、算力全在给「AI 加速度」做注脚</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">美国众院公开许可数据：批准约 87.9 万颗英伟达/AMD AI 芯片出口中国（约申请量 1/4），逾三成流向五角大楼清单企业</span>
+        <span class="card-tag">🌐 芯片出口 / 地缘 / P0</span>
+      </div>
+      <div class="card-desc">
+        美国众议院外交事务委员会 11 月 19 日罕见公开进出口许可数据，披露 2025 年 12 月至 2026 年 5 月间批准英伟达与 AMD 向中国企业出口约 <strong>879,868 颗（近 88 万）</strong>先进 AI 芯片，包括英伟达 <strong>H200</strong> 与 AMD <strong>MI325X</strong>；两家公司此期间申请超过 <strong>340 万颗</strong>，获批比例约<strong>四分之一</strong>。获批名单中，腾讯及子公司 15 万颗、阿里 7.5 万颗、百度 4.3 万颗、比亚迪 4000 颗——四家合计 27.2 万颗、约占 31%，均在美国国防部「中国军方关联企业」清单上；字节、京东、快手、米哈游、理想、特斯拉上海等也在名单中。委员会主席 Brian Mast 援引《出口管制改革法》公布文件，称其为「该法史上最详细的公开披露」，并指英伟达许可申请中两家潜在接收方为「空壳/走私前线」。<strong>关键限定：获批不等于已出货</strong>，多数许可为「批准未发货」，实际运抵数量不明；英伟达称已停供 H200。叠加加州传票、黄仁勋 12 月 1 日国会闭门问询。<strong>查重</strong>：11-20 已报停供中国，今日新增「许可数据首次公开 + 买家逐点名」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">获批</div><div class="data-value">约 87.9 万颗</div></div>
+<div class="data-chip"><div class="data-label">申请</div><div class="data-value">340 万 · 约 1/4</div></div>
+<div class="data-chip"><div class="data-label">头部</div><div class="data-value">腾讯 15 万 · 阿里 7.5 万</div></div>
+<div class="data-chip"><div class="data-label">状态</div><div class="data-value">批准未发货为主</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Anthropic 研究员 Tao Lin 预测广义超级智能 2027 年底到来，主张前沿研发减速到当前 1/4</span>
+        <span class="card-tag">🔮 超级智能 / 个人预测 / P1</span>
+      </div>
+      <div class="card-desc">
+        Anthropic 负责 Claude 安全防护的技术团队成员（MTS）<strong>Tao Lin</strong> 在 11 月 15 日发布、近日引发热议的 Palisade Research 访谈中预测：距「广义超级智能」到来约剩 <strong>1.3 年，即 2027 年底左右</strong>，届时 AI 可在编程、电影制作、政治等几乎所有领域<strong>媲美或超越世界顶尖专家</strong>。他描述了一条渐进的就业冲击链：AI 先接手现有工作，劳动者转向新职业，新职业随后也被自动化——最终「几乎所有人都可能永久失去就业能力、依赖政府福利」。但他强调这是<strong>个人预测、非 Anthropic 官方立场</strong>，且数字世界自动化会快于依赖机器人的物理世界，2027 年出现大规模失业的可能性极低；其引用的研究显示 <strong>68% 的 Claude 使用涉及理论上可由 AI 单独完成的任务</strong>，但不等于岗位被取代。他给出约 <strong>20%</strong> 概率认为先进 AI 最终可能让人类出局，并主张把前沿研发<strong>减速到当前约 1/4</strong>。注意：Anthropic 3 月研究显示高 AI 暴露职业迄今未出现系统性失业上升。<strong>查重</strong>：Tao Lin 及该预测为全新条目。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">时点</div><div class="data-value">2027 年底 · 约 1.3 年</div></div>
+<div class="data-chip"><div class="data-label">覆盖</div><div class="data-value">几乎所有专业领域</div></div>
+<div class="data-chip"><div class="data-label">主张</div><div class="data-value">研发减速到 1/4</div></div>
+<div class="data-chip"><div class="data-label">定性</div><div class="data-value">个人预测 · 非官方</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Google 把 Gemini 4 Hydrogen 上线 Search 与 Gemini 应用，ARC-AGI-2 得分 92.5%，搜索首页全球改版</span>
+        <span class="card-tag">🔍 Gemini 4 / 搜索改版 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 20 日，Google 将 <strong>Gemini 4 Hydrogen</strong> 正式上线 Gemini 应用与 Google Search，ARC Prize 同步公布其 <strong>ARC-AGI (Verified)</strong> 成绩——<strong>ARC-AGI-2 达 92.5%</strong>、ARC-AGI-1 亦有高分，成为当前公开模型第一梯队。伴随上线，Google 对桌面搜索首页进行全球改版：<strong>移除传统搜索按钮</strong>、加入可折叠侧边栏与更醒目的 <strong>AI Mode 入口</strong>，把用户直接引向对话式搜索；同日 Gemini 4 Neon 上线 OpenClaw、Gemini 4 系列多款更新集中放出，Gemini 3.5 Transcribe 语音编辑能力也开放 API。<strong>搜索的「去按钮化」是产品范式信号</strong>：从「输入关键词→点搜索」改成「直接对话」，标志搜索从信息检索入口转向 AI 交互入口。ARC-AGI-2 高分反映抽象推理跃升，但仍属受控基准、不等于真实任务表现。<strong>查重</strong>：Gemini 4 Carbon/Neon/Hydrogen（11-11/12/18/19 已报）为同一产品族，今日增量是「进 Search + ARC 成绩 + 首页改版」。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型</div><div class="data-value">Gemini 4 Hydrogen</div></div>
+<div class="data-chip"><div class="data-label">基准</div><div class="data-value">ARC-AGI-2 达 92.5%</div></div>
+<div class="data-chip"><div class="data-label">改版</div><div class="data-value">移除搜索按钮</div></div>
+<div class="data-chip"><div class="data-label">入口</div><div class="data-value">AI Mode 侧边栏</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Compute & Science</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🚀 算力 · 科学 · 智能体走进信息流</div>
+    <div class="section-sub">SpaceX 320 亿押注 Rubin、Grok Bot 在 X 上线、OpenAI 连发医疗 AI —— 算力杠杆与科学发现双线推进</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">SpaceX 完成 320 亿美元 AI 芯片债务融资采购英伟达 Rubin GPU；xAI Grok Bot 在美国正式上线</span>
+        <span class="card-tag">🚀 算力融资 / 智能体 / P1</span>
+      </div>
+      <div class="card-desc">
+        两条算力与产品的落地消息同日出现。<strong>其一</strong>，<strong>SpaceX 完成约 320 亿美元 AI 芯片债务融资</strong>，资金用于采购英伟达下一代 <strong>Rubin GPU</strong>——继太空数据中心芯片融资难题被讨论后，这笔巨额债务融资把「算力基建」的资本杠杆推到新量级，呼应 Anthropic「9000 亿算力」式的长期采购叙事。<strong>其二</strong>，<strong>xAI 的 Grok Bot 于 11 月 20 日在美国正式上线</strong>，用户可直接在 X 上 <strong>@bot</strong> 调用，把智能体嵌入社交信息流；同日 HeyGen Decision 1 上架 OpenRouter、登陆 AI/ML API，可对多模态输入返回校准概率，Perplexity Computer 也扩展支持在 Chrome/Chromium 上委派任务。<strong>算力基建「以债锁芯」成常规打法</strong>，智能体则沿「模型 API → 平台入口 → 浏览器/社交插件」路径加速渗透、分发成本显著降低。<strong>查重</strong>：Grok Bot 1.0（11-11 已报）为同一产品线，今日增量是「美国正式上线 + @bot 调用」，SpaceX 融资为全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">融资</div><div class="data-value">SpaceX 320 亿美元</div></div>
+<div class="data-chip"><div class="data-label">采购</div><div class="data-value">英伟达 Rubin GPU</div></div>
+<div class="data-chip"><div class="data-label">上线</div><div class="data-value">Grok Bot 登陆美国</div></div>
+<div class="data-chip"><div class="data-label">调用</div><div class="data-value">X 上 @bot 即用</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">OpenAI 连发两项医疗 AI 成果：MedChemBench 基准与 GPT-Rosalind，Isomorphic Labs 携 Merck 设计癌症新药</span>
+        <span class="card-tag">🧬 医疗 AI / 科学基准 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 20 日，OpenAI 连发两项面向药物研发的科学 AI 成果。<strong>MedChemBench</strong> 是新的评估基准，用于衡量 AI 模型解读分子结构与实验数据、辅助药物化学研发的能力；<strong>GPT-Rosalind</strong> 面向神经退行性疾病，目标是帮助发现药物研发的新线索。同日，Google DeepMind CEO Demis Hassabis 宣布 <strong>Isomorphic Labs 与 Merck（默克）合作设计新的癌症药物</strong>，把 AI 药物设计推进到具体药企合作。<strong>从「生成」到「发现」</strong>：MedChemBench 这类基准把 AI 能力评估从文本/图像扩展到分子与实验数据，标志科学发现成为模型竞争的新战场；GPT-Rosalind 是通用模型向高价值科学场景下沉的典型；Isomorphic Labs × Merck 则跑通「模型 → 药企 → 临床前」的商业闭环。这一波延续了今年 AI for Science 的密集突破：从数学（黎曼猜想，见 #1）到药物研发，AI 正系统性进入基础科学的核心环节。<strong>查重</strong>：MedChemBench、GPT-Rosalind 均为全新条目。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">基准</div><div class="data-value">MedChemBench</div></div>
+<div class="data-chip"><div class="data-label">模型</div><div class="data-value">GPT-Rosalind</div></div>
+<div class="data-chip"><div class="data-label">方向</div><div class="data-value">神经退行性疾病</div></div>
+<div class="data-chip"><div class="data-label">合作</div><div class="data-value">Isomorphic × Merck</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这 8 条摆在一起，主线只有一句：<strong>AI 一天顶破了两层天花板——智力的，和资源的</strong>。</p>
+    <p><strong>① 智力天花板（#1–#3）</strong>。Anthropic 数学家 Alpöge 借 Claude 宣称证明了黎曼猜想——一道悬了 167 年、悬赏百万美元的题，被「人掌舵 + AI 推理 + Lean 机器校验」组合捅开一道口子；陶哲轩称是历史性时刻，但 1700 万行代码尚未独立核验，所以本王把「待验证」写进标题。同天 Thinking Machines 开源 <strong>Inkling 2 Mini</strong>（#2），26B、20GB 显存、笔记本离线跑出接近前沿的推理。<strong>一个往上够人类智力极限，一个往下把智力塞进每个人的电脑</strong>。</p>
+    <p><strong>② 资源天花板（#3–#6）</strong>。DeepSeek 二轮 <strong>1055 亿融资</strong>工商落地、估值 860 亿美元，腾讯宁德各掏 100 亿（#3）；美国众院曝光批准 <strong>87.9 万颗</strong>AI 芯片出口中国（#4）——资本与地缘的闸门同周松动。再叠加 Tao Lin 预言 2027 年底超级智能（#5）、Google 把 Gemini 塞进搜索首页（#6）。<strong>钱、芯片、算力、预言，全在给「AI 加速度」做注脚。</strong></p>
+    <p><strong>③ 算力与科学（#7–#8）</strong>。SpaceX 320 亿债务押注 Rubin、Grok Bot 在 X 上 @bot 即用（#7）；OpenAI 连发 MedChemBench + GPT-Rosalind 医疗 AI、Isomorphic × Merck 设计癌症新药（#8）——算力杠杆与科学发现双线推进。</p>
+    <p>今天最该拎出来的不是「黎曼被破解」这个爆点，而是两个方法论：一是<strong>「宣称」和「验证」必须分开写</strong>——AI 时代最稀缺的不是结论，是可核查的过程；二是<strong>「数字工作先被自动化」</strong>已从预言变成进行式，文案初稿、素材整理、多语版本会最先被改写，团队价值重心得往创意判断与质量把关上挪。</p>
+    <p>一句话：<strong>AI 一天顶破两层天花板，智力上证明黎曼，资源上千亿融资加芯片开闸</strong></p>
+    <p>今天最高分给到 <strong>#1 AI 证明黎曼猜想（9.5 / P0）</strong>：悬置 167 年的难题被 AI 辅助攻破，1700 万行 Lean 代码把「AI 是否证对」变成可机器核验的工程——但完整工程尚待独立核验，热度之下更要留一分冷静。</p>
+    <p>五条可执行线索：<strong>① Inkling 2 Mini 本地跑</strong>，做不含敏感信息的文案初稿与玩家评论聚类，数据不出本机；<strong>② Gemini 进 Search</strong>，把活动页关键信息写成结构化、可被 AI 引用的表述；<strong>③ AI for Science（黎曼 / 医疗 AI）</strong>做轻量热点科普素材（标注待验证、不夸大疗效）；<strong>④ 智能体 @bot 入口</strong>提前设想品牌轻交互，但官方账号与玩家数据须走合规审批；<strong>⑤ 涉及未发布 KV、玩家数据、账号支付的动作一律人工审批</strong>，对外 AI 玩法宣传的隐私与责任口径提前和法务对齐。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
