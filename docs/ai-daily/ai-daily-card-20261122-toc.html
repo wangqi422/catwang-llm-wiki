@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.22 &middot; 星期日 &middot; 第 106 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Capital & Deals</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>💰 资本三笔</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>亚马逊 75 亿收 Decart</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>英伟达 5 亿收 Inception</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>Cognition 750 亿估值</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Math & Boundary</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🧠 数学 · 边界</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Claude 破 3SUM/APSP</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Signal 屏蔽截图</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Together AI 泄露</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Privacy & Tools</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🔐 隐私 · 工具</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>200 万金丝雀</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>browser-use 1.0</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.22 &middot; Sun &middot; Issue 106</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>资本抢团队，AI 破数学，隐私筑高墙</strong> —— <strong>资本侧</strong>三笔天价同台：FT 报道<strong>亚马逊接近以约 75 亿美元收购 Decart</strong>（跨芯片调度软件 + Lucy/Oasis 世界模型、创始人留任 5 年），The Information 披露<strong>英伟达拟至少 5 亿收购扩散模型公司 Inception</strong>（Mercury 3 每秒 1068 token），<strong>Cognition 洽谈 750 亿美元估值融资</strong>、两个月估值近乎翻倍；<strong>能力侧</strong>，Columbia 与 MIT 论文展示 <strong>Claude 发现的算法把 3SUM、APSP 复杂度上限分别压到 O(n^1.9992)、O(n^2.9995)</strong>，用 Lean 4 形式化验证、推翻数十年假设；<strong>边界侧</strong>集体拉响警报：<strong>Signal 移动端默认屏蔽截图</strong>阻挡 Siri/Gemini 读屏、<strong>Together AI 通报提示词泄露</strong>、<strong>200 万金丝雀</strong>揭示「零数据保留也照漏不误」，<strong>browser-use 1.0</strong> 则用单一 Python REPL 收敛 24 个浏览器动作。钱在买时间，AI 在算人类没算出的题，隐私在给无孔不入的智能体装门闩</p>
+    <div class="header-meta">
+      <span class="meta-tag">💰 资本三笔</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧠 数学 · 边界</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔐 隐私 · 工具</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.22 &middot; 第 106 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Capital & Deals</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">💰 资本三笔 · 钱在买时间，也在买架构</div>
+    <div class="section-sub">亚马逊 75 亿收 Decart、英伟达 5 亿收 Inception、Cognition 估值冲 750 亿 —— 资本在为「能干活」的团队与架构下注</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">亚马逊接近以约 75 亿美元收购 Decart：跨芯片调度软件 + Lucy/Oasis 世界模型，Trainium 3 早期采用者，三位创始人承诺留任 5 年</span>
+        <span class="card-tag">💰 并购 / 算力 / 世界模型 / P0</span>
+      </div>
+      <div class="card-desc">
+        英国《金融时报》11 月 21 日报道，亚马逊正与以色列 AI 初创 <strong>Decart</strong> 深入谈判，交易价值约 <strong>75 亿美元</strong>——现金、股票与延期对价并含业绩对赌，较 5 月其 3 亿美元融资时的 <strong>40 亿估值近乎翻倍</strong>。Calcalist 称法律结构近几周已重构、大部分问题已解决，<strong>最快下周敲定</strong>，官宣可能落在 <strong>11/30 的 AWS re:Invent</strong>。Decart 两大技术资产极具战略价值：一是<strong>跨芯片调度软件</strong>，让开发者数周内把模型从一家加速器迁到另一家；二是 <strong>Lucy、Oasis 两款实时交互世界模型</strong>。它是亚马逊自研 <strong>Trainium 3</strong> 的早期采用者。三位创始人已同意留任 5 年、大笔对价第 5 年才付——被形容为「穿并购外衣的 acquihire」。Anthropic 曾 8 月以约 60 亿尽调后放弃，Decart 找英伟达重启也被拒，最终亚马逊接手抬价。<strong>查重</strong>：10-12 期曾报「约 70 亿洽谈」，今日为 FT 确认进入最后阶段、金额上修至 75 亿的新节点。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">收购价</div><div class="data-value">约 75 亿美元</div></div>
+<div class="data-chip"><div class="data-label">估值跃升</div><div class="data-value">5月40亿 → 近乎翻倍</div></div>
+<div class="data-chip"><div class="data-label">核心资产</div><div class="data-value">跨芯片软件 + 世界模型</div></div>
+<div class="data-chip"><div class="data-label">状态</div><div class="data-value">最快下周敲定</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">英伟达拟至少 5 亿美元收购扩散模型公司 Inception：Mercury 3 每秒 1068 token，补 Nemotron 与机器人物理 AI</span>
+        <span class="card-tag">🧩 并购 / 扩散模型 / 物理 AI / P0</span>
+      </div>
+      <div class="card-desc">
+        The Information 援引三位知情人士报道，英伟达正接近以<strong>至少 5 亿美元</strong>收购成立仅两年的扩散式大语言模型公司 <strong>Inception</strong>，交易含 30 多名员工的业绩激励，条款仍可能变动。公司由斯坦福、UCLA、康奈尔三位教授创办，核心路线是<strong>扩散式文本生成</strong>——不像 GPT/Claude 逐 token 输出，而是从噪声草稿起步、多轮并行去噪精炼整段回答。旗舰 <strong>Mercury 3</strong>（10 月发布）自称在英伟达 GPU 上达 <strong>每秒 1068 token</strong>、首字延迟低于 300ms、吞吐较传统模型高 5–7 倍、单任务成本最高降 70%，上下文扩至 100 万 token（均为公司自测、未经第三方验证）。收购意图明确：把扩散技术并入<strong>开源 Nemotron 家族</strong>（已被 Palantir、美国多机构用作中国模型替代），并延伸到<strong>机器人等物理 AI</strong>。谈判在黄仁勋 11/12 辞任 CEO 前已启动，微软此前也表达过兴趣。<strong>查重</strong>：Mercury 2.5 产品（9-09）、微软 10 亿洽购（5-14）已报，今日为英伟达正式进入后期谈判、三创始人加盟的新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">收购价</div><div class="data-value">≥ 5 亿美元</div></div>
+<div class="data-chip"><div class="data-label">速度</div><div class="data-value">1068 token/秒</div></div>
+<div class="data-chip"><div class="data-label">延迟</div><div class="data-value">首字 &lt; 300ms</div></div>
+<div class="data-chip"><div class="data-label">落点</div><div class="data-value">Nemotron + 物理 AI</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">Cognition 洽谈 750 亿美元估值融资：拟募 20 亿以上，两个月估值近乎翻倍，编码智能体成资本最热赛道</span>
+        <span class="card-tag">💸 融资 / 编码智能体 / P0</span>
+      </div>
+      <div class="card-desc">
+        彭博与路透 11 月 20–21 日报道，AI 编码智能体公司 <strong>Cognition</strong> 正洽谈按 <strong>750 亿美元估值</strong>融资，拟募资 <strong>20 亿美元以上</strong>。这家以「能直接替代工程师写代码」的 Agent 闻名的公司，估值曲线极陡：今年 5 月约 260 亿，约两个月前（9 月）以 480 亿完成 20 亿 E 轮，如今再抬至 750 亿——<strong>半年接近三倍、两个月近乎翻倍</strong>；公司此前披露年化收入已突破 <strong>10 亿美元</strong>。在二级市场连续杀跌 AI 股的同一周，一级市场反而给「能干活」的软件开出更高报价，资金正从「买算力」向「买能交付的软件」迁移。<strong>查重</strong>：480 亿融资（9-09）、SWE-2 Flash 产品（11-05/06）已报，今日为估值上修至 750 亿、拟募 20 亿+的新一轮融资阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">750 亿美元</div></div>
+<div class="data-chip"><div class="data-label">募资</div><div class="data-value">20 亿美元+</div></div>
+<div class="data-chip"><div class="data-label">间隔</div><div class="data-value">距上轮仅 2 个月</div></div>
+<div class="data-chip"><div class="data-label">年化收入</div><div class="data-value">破 10 亿美元</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Math & Boundary</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧠 数学 · 边界 · AI 算出人类没算出的题，隐私同时拉警报</div>
+    <div class="section-sub">Claude 破 3SUM/APSP 数十年上限、Signal 屏蔽截图挡 AI 读屏、Together AI 提示词泄露 —— 能力与防线同步升级</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">Columbia 与 MIT 论文：Claude 发现的算法将 3SUM 压到 O(n^1.9992)、APSP 压到 O(n^2.9995)，推翻两项长期算法假设，并用 Lean 4 形式化验证</span>
+        <span class="card-tag">🧮 AI 数学 / 算法突破 / P0</span>
+      </div>
+      <div class="card-desc">
+        Columbia 与 MIT 研究者发表论文，展示由 <strong>Claude 发现的算法</strong>在两项经典算法难题上取得多项式改进：<strong>3SUM 问题达 O(n^1.9992)</strong>、<strong>全对最短路径（APSP）达 O(n^2.9995)</strong>，双双突破长期被认为难以逾越的复杂度上限，等于<strong>推翻了沿用数十年的 3SUM 与 APSP 假设</strong>。更关键的是，团队用 <strong>Lean 4</strong> 对新算法做了形式化验证，正确性可被机器逐步核验。这与昨日「Claude 参与黎曼猜想证明」呼应但<strong>主题不同</strong>：黎曼是数论千禧年难题、仍待学界核验；本次是算法复杂度的具体改进、已形式化落地，是可验证、可复现的工程成果。算法突破有实际价值——3SUM/APSP 是计算几何、图分析的基础原语，复杂度下降理论上会传导到依赖它们的工程系统。<strong>查重</strong>：黎曼证明（11-21）已报，本条为算法复杂度独立论文，全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">3SUM</div><div class="data-value">O(n^1.9992)</div></div>
+<div class="data-chip"><div class="data-label">APSP</div><div class="data-value">O(n^2.9995)</div></div>
+<div class="data-chip"><div class="data-label">验证</div><div class="data-value">Lean 4 形式化</div></div>
+<div class="data-chip"><div class="data-label">意义</div><div class="data-value">推翻数十年假设</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Signal 移动端默认屏蔽截图：iOS 27 与 Android 版阻止 Siri、Gemini 等系统级 AI 读取聊天，称屏幕读取是「生存级隐私威胁」</span>
+        <span class="card-tag">🔒 隐私 / 智能体对抗 / P1</span>
+      </div>
+      <div class="card-desc">
+        加密通讯应用 <strong>Signal</strong> 在 iOS 27 与 Android 版中<strong>默认屏蔽截图</strong>：一旦检测到截屏尝试即拦截，目的是阻止 <strong>Siri、Gemini 等操作系统级 AI 智能体</strong>通过屏幕读取聊天内容。Signal 将「智能体屏幕读取」定性为对隐私的<strong>生存级威胁（existential privacy threat）</strong>——当 AI 能代替用户看屏、读消息，端到端加密保护的「传输安全」就形同虚设，因为数据在被读取那一刻已泄露。该动向在 AI HOT 热度榜获关注（+1183 热度），是「AI 无孔不入」后，应用侧以产品手段正面设防的标志性动作。<strong>攻防焦点从传输管道转到「屏幕」</strong>，这是智能体普及后全新的攻击面；Signal 默认开启而非可选开关，把隐私从「用户责任」拉回「产品责任」，对同行有示范压力。业界趋势一致：让 AI 通过合规接口取数据，而非靠屏幕抓取。<strong>查重</strong>：该主题归档零命中，为全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">平台</div><div class="data-value">iOS 27 / Android</div></div>
+<div class="data-chip"><div class="data-label">动作</div><div class="data-value">默认屏蔽截图</div></div>
+<div class="data-chip"><div class="data-label">针对</div><div class="data-value">Siri / Gemini 读屏</div></div>
+<div class="data-chip"><div class="data-label">定性</div><div class="data-value">生存级隐私威胁</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Together AI 通报 serverless 提示词泄露事件：AI 编码 agent 把私有凭证提交到公开 GitHub，6–7 月多家模型提示词样本被下载</span>
+        <span class="card-tag">⚠️ 安全 / 供应链 / P1</span>
+      </div>
+      <div class="card-desc">
+        Together AI 发布安全事件通报：因一个 <strong>AI 编码 agent 把私有 Hugging Face 仓库凭证提交到了公开 GitHub 仓库 <span class="mono">xorl</span></strong>，未授权方据此下载了 2026 年 <strong>6–7 月提交给 MiniMax M3、GLM-5.2、Kimi K2.6 等 serverless 推理服务的存储提示词样本</strong>，并在其中搜索其他服务凭证。官方披露了泄露范围、成因与已落实的整改，建议用户评估自身是否受影响、以及是否开启 <strong>ZDR（零数据保留）</strong>。这是又一起「AI 编码 agent 因凭证管理不当导致供应链数据外泄」的真实案例——<strong>能自动写代码、提交仓库的 agent，一旦凭证管理失当，会「规模化」地犯错</strong>，破坏力远超人工误操作；泄露的不只是数据，还有提示词样本——对依赖专有 prompt 的工作流等同于核心方法外泄。<strong>查重</strong>：该主题归档零命中，为全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">成因</div><div class="data-value">私有凭证上公开 GitHub</div></div>
+<div class="data-chip"><div class="data-label">范围</div><div class="data-value">6–7 月提示词样本</div></div>
+<div class="data-chip"><div class="data-label">涉及</div><div class="data-value">MiniMax / GLM / Kimi</div></div>
+<div class="data-chip"><div class="data-label">建议</div><div class="data-value">开启 ZDR</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Privacy & Tools</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🔐 隐私 · 工具 · 给智能体装门闩，也给它减负担</div>
+    <div class="section-sub">200 万金丝雀戳破「零数据保留」神话、browser-use 1.0 用单一 REPL 收敛 24 个动作 —— 一边设防，一边提效</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">研究者在 AI 服务链埋入 200 万个金丝雀链接：「零数据保留」承诺也照漏不误</span>
+        <span class="card-tag">🕵️ 隐私研究 / 供应链 / P1</span>
+      </div>
+      <div class="card-desc">
+        研究者在经过 <strong>OpenRouter 等 AI 路由</strong>的请求中埋入约 <strong>200 万个金丝雀链接（canary links）</strong>，用来追踪敏感信息是否会沿 AI 服务链外泄。结果显示，这些数据「像筛子一样」大量外泄——即便服务方承诺「零数据保留（zero data retention）」，敏感内容仍会在多个环节被记录、转发或缓存。报道给出具体泄露路径与 OpenRouter 的回应细节，为「AI 供应链到底安不安全」提供可测量的实证，而非停留在厂商承诺层面。<strong>厂商政策承诺与实际数据流向之间存在落差</strong>，金丝雀方法让这种落差变得可观测、可量化；请求经过多个中间路由与服务商，每一跳都可能留存数据，「链条长度」本身就是风险。与 #6 Together AI 泄露构成同一主题簇：一个是已知事故，一个是系统性测量，共同指向 AI 供应链隐私亟需第三方验证。<strong>查重</strong>：该主题归档零命中，为全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">投放</div><div class="data-value">200 万金丝雀链接</div></div>
+<div class="data-chip"><div class="data-label">渠道</div><div class="data-value">OpenRouter 等路由</div></div>
+<div class="data-chip"><div class="data-label">结果</div><div class="data-value">敏感数据大量外泄</div></div>
+<div class="data-chip"><div class="data-label">结论</div><div class="data-value">零保留也失效</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">browser-use 1.0 发布：单一 Python REPL 替代 24 个浏览器动作，原生 CDP 驱动并给出同基准分数与成本对比</span>
+        <span class="card-tag">🛠️ 开源工具 / AI agent / P1</span>
+      </div>
+      <div class="card-desc">
+        <strong>Browser Use</strong> 发布 <strong>browser-use 1.0</strong>，用<strong>单一的 Python 持久 REPL（交互式解释器）加上原生 Chrome DevTools Protocol (CDP) 访问</strong>，替代了 0.x 版本的 <strong>24 个独立浏览器动作</strong>。官方用同一基准的分数与成本对比，说明把大量离散工具收敛成一个可编程 REPL 的取舍与适用边界。这一思路与近期 agent 工具链「从多工具调用走向少而强的执行原语」的趋势一致，项目也进入 GitHub Trending 榜单。<strong>工具收敛 = 更少的幻觉面</strong>：动作越少、越接近通用编程原语，agent 需要「猜」的工具选择就越少，稳定性和可控性更高；原生 CDP 绕过层层封装直接驱动浏览器，延迟更低、能力更完整，适合复杂网页交互自动化。<strong>查重</strong>：该主题归档零命中，为全新事件。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">核心</div><div class="data-value">单一 Python REPL</div></div>
+<div class="data-chip"><div class="data-label">替代</div><div class="data-value">24 个浏览器动作</div></div>
+<div class="data-chip"><div class="data-label">底座</div><div class="data-value">原生 CDP</div></div>
+<div class="data-chip"><div class="data-label">定位</div><div class="data-value">开源 / agent 工具</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这 8 条摆在一起，主线只有一句：<strong>资本抢团队，AI 破数学，隐私筑高墙</strong>。</p>
+    <p><strong>① 资本三笔（#1–#3）</strong>。亚马逊约 <strong>75 亿收 Decart</strong>、英伟达至少 <strong>5 亿收 Inception</strong>、Cognition 估值冲 <strong>750 亿</strong>——三笔同台，买的不是当下营收，而是「跨芯片迁移」「扩散生成」「能写代码的 Agent」这些<strong>下一代架构与能干的团队</strong>。二级市场在杀 AI 股，一级市场却在给「能交付的软件」加价，钱正在从「买算力」转向「买干活的人和产品」。</p>
+    <p><strong>② 数学与边界（#4–#6）</strong>。Claude 发现的算法把 3SUM/APSP 的数十年复杂度上限往前推了一步（#4），并用 Lean 4 形式化验证——AI 已从「解已知题」迈向「产出人类未得结果」；与此同时 Signal 默认屏蔽截图挡 AI 读屏（#5）、Together AI 因 agent 误提交凭证泄露提示词（#6），<strong>能力与防线在同一天升级</strong>。</p>
+    <p><strong>③ 隐私与工具（#7–#8）</strong>。200 万金丝雀戳破「零数据保留」神话（#7），提醒我们厂商承诺须经第三方验证；browser-use 1.0 用单一 Python REPL 收敛 24 个动作（#8），则是 agent 工具链「少而强」的提效样本。</p>
+    <p>今天最该拎出来的不是某笔天价并购的爆点，而是两个方法论：一是<strong>「宣称」和「验证」必须分开写</strong>——AI 时代最稀缺的不是结论，是可核查的过程，这点在 #4 的 Lean 形式化里体现得最纯粹；二是<strong>「可验证的边界」正在成为刚需</strong>——从 Signal 的门闩到金丝雀的实测，给无孔不入的智能体装上可审计的护栏，和给它更强的能力一样重要。</p>
+    <p>一句话：<strong>资本用三笔天价买卖抢团队抢架构，AI 破数学上限，隐私侧被迫筑墙</strong></p>
+    <p>今天最高分给到 <strong>#1 亚马逊 75 亿收 Decart（9.4 / P0）</strong>：一家被 Anthropic 尽调后放弃、被英伟达拒绝的公司，最终被亚马逊以近乎翻倍的价格收入囊中——买的正是「削弱英伟达软件锁定 + 补齐 Trainium 生态」的战略能力，是这轮「抢架构」并购潮最清晰的一笔。</p>
+    <p>五条可执行线索：<strong>① 浏览器自动化 agent（browser-use）</strong>做竞品官网/活动页定期快照、社媒数据巡检，先用非敏感页面小范围试点；<strong>② 编码 Agent（Cognition 类）</strong>用于活动 H5 小工具的快速原型，缩短创意到 demo 的距离；<strong>③ 扩散生成（Mercury 类）</strong>在 12/28 API 关停前可低成本实测批量草稿图/分镜，厂商自测性能需自建基准复核；<strong>④ 权限 hygiene</strong>——检查是否有 AI 工具把含密钥/凭证的代码提交到公开仓库，给 agent 的凭证最小权限、定期轮换；<strong>⑤ 未发布物料与玩家数据默认按「可能被留存」处理</strong>，能脱敏就脱敏、能本地就本地，把数据处理链路透明度纳入工具选型。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
+</html>
