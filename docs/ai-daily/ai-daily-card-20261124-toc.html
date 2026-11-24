@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.24 &middot; 星期二 &middot; 第 108 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Power · Capital</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>👑 王座 · 账本 · 架构</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>黄仁勋全票复职</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Sierra 估值 300 亿</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>GLM-5.4 循环架构</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Delivery · M&amp;A</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🧩 模型 · 交付 · 版图</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>GPT-6.2 Sol 进 Chat</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>Claude Ship 包干 PR</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>CrowdStrike 439 亿并购</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Security · Science</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🛡️ 自防御 · 科研</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>Shirudo 临时盾</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>量子算法提速 290 倍</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.24 &middot; Tue &middot; Issue 108</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>王座归来，资本给智能体标价，AI 学会给自己打补丁</strong> —— <strong>权力与资本侧</strong>，英伟达董事会全票请回辞任仅 11 天的黄仁勋，特朗普亲自背书、股价单日暴涨 31.5%、市值一天增加约 9520 亿美元刷新全球纪录；客服智能体 Sierra 以 17.5 亿美元 F 轮把估值半年翻倍到 300 亿、坚持「按结果收费」；CrowdStrike 用 439 亿美元收购 Zscaler 创网安史上最大并购。<strong>能力侧</strong>，智谱 GLM-5.4 用全球首个旗舰级 Loop Transformer 以 750B 打到 2–3T 级智能、开启「泛 Coding」，GPT-6.2 Sol 补上普通聊天入口（看图 71.7% vs 47.4%），Claude Ship 把 PR 从审查、修复到批准整段交给智能体。<strong>安全与科研侧</strong>，OpenAI 携手思科开源 Shirudo 用 eBPF 给运行中的 Linux 装上「不用重启」的临时盾，谷歌 Gemini 4 智能体团队借 Lean 验证把量子算法最高提速 290 倍。能力、权力和钱在同一天被重新结算</p>
+    <div class="header-meta">
+      <span class="meta-tag">👑 王座 · 账本 · 架构</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧩 模型 · 交付 · 版图</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🛡️ 自防御 · 科研</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.24 &middot; 第 108 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Power · Capital · Architecture</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">👑 王座 · 账本 · 架构 · 权力和钱被重新结算</div>
+    <div class="section-sub">黄仁勋 11 天后再坐王座、Sierra 估值半年翻倍、GLM-5.4 用循环架构换智能 —— 定价权、审批权、架构路线都在同一天改写</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">英伟达董事会全票恢复黄仁勋总裁/CEO/董事职务，特朗普发文力挺称「正确且恰当」；股价收涨 31.5%、市值单日增约 9520 亿美元创全球纪录，12 月 3 日出席参议院听证会</span>
+        <span class="card-tag">👑 连续剧终章 / 治理 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，英伟达董事会<strong>一致投票</strong>即日起恢复黄仁勋总裁、CEO 及董事职务，声明称已听取美国政府高层意见、确信复职<strong>「不构成国家安全风险」</strong>；特朗普同日发文称决定「正确且恰当」，司法部长称无违法证据，副总统万斯周末介入协调。黄仁勋 11 月 12 日才辞任，距复职仅 <strong>11 天</strong>，将于 <strong>12 月 3 日</strong>出席参议院银行委员会听证会。独立董事调查将继续，另设国安与出口管制委员会、招聘首席合规官。市场反应剧烈：股价收涨 <strong>31.48%</strong>（2003 年 5 月以来最大单日涨幅），单日市值增约 <strong>9520 亿美元</strong>刷新全球纪录，费半涨 14.03%、纳指涨 6.51%。该话题以 <strong>+106873 热度</strong>居今日榜首。<strong>查重</strong>：11-13 报辞任、11-19 报拒复职、11-15 报治理危机；今日为「请愿→抗辩→全票复职+市场确认」连续剧终章新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">辞任到复职</div><div class="data-value">仅 11 天</div></div>
+<div class="data-chip"><div class="data-label">股价单日</div><div class="data-value">+31.5%</div></div>
+<div class="data-chip"><div class="data-label">市值增量</div><div class="data-value">9520 亿$</div></div>
+<div class="data-chip"><div class="data-label">热度榜</div><div class="data-value">+106873</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">客服智能体公司 Sierra 完成 17.5 亿美元 F 轮、估值半年翻倍至 300 亿美元，ARR 超 4 亿、坚持「按结果收费」，服务近半数财富 50 强</span>
+        <span class="card-tag">💰 融资 / 智能体商业化 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，前 Salesforce 联席 CEO <strong>Bret Taylor</strong> 联合创办的企业客服智能体公司 <strong>Sierra</strong> 宣布完成 <strong>17.5 亿美元 F 轮</strong>、估值达 <strong>300 亿美元</strong>，Greenoaks 与 Lightspeed 领投，红杉、GV、Tiger Global 等跟投——距上一轮（约 150–158 亿）不到半年，估值翻倍。公司称 ARR 10 月已超 <strong>4 亿美元</strong>、仅三季度增逾 1.5 亿，服务近半数《财富》50 强（BNY、汇丰、富国、摩根大通等）。最特别的是<strong>按业务结果而非调用量/token 收费</strong>——按问题解决、贷款发放、理赔完成、用户留存收钱。Dealroom 测算 300 亿估值约为收入 run-rate 的 <strong>75 倍</strong>；同日全市场约 22.3 亿美元 AI 融资中 Sierra 一家占近 78%。<strong>查重</strong>：零命中；与 11-14「Sierra 发布 Poppy v1.0 协议」不同，今日为融资与估值里程碑。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">F 轮融资</div><div class="data-value">17.5 亿$</div></div>
+<div class="data-chip"><div class="data-label">估值</div><div class="data-value">300 亿$</div></div>
+<div class="data-chip"><div class="data-label">ARR</div><div class="data-value">超 4 亿$</div></div>
+<div class="data-chip"><div class="data-label">收费模式</div><div class="data-value">按结果</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">智谱发布旗舰 GLM-5.4：全球首个 Loop Transformer 架构，750B 基座 28 层循环两轮达 2–3T 级智能，开启「泛 Coding」可代码生成视频/游戏/3D</span>
+        <span class="card-tag">🧠 国产模型 / 架构创新 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日晚，智谱发布旗舰 <strong>GLM-5.4</strong>，全球首个采用 <strong>Loop Transformer</strong> 架构的旗舰模型：对约 750B 基座第 27–54 层（28 层）做两轮共享权重循环，不增参数量却获更深推理，官方称智能水平达 <strong>2–3T 参数级</strong>。三项工程改动支撑循环落地：逐 token 门控渐进更新、KV Cache 全局共享 + 滑窗独立、稀疏注意力索引复用；同构 30B 模型同参数对比训练算力仅增约 10%，GPQA-Diamond 从 47.58 升至 <strong>56.26</strong>、MMLU-Pro 从 71.65 升至 75.05，且输出 token 下降 10%–14%。主打<strong>「泛 Coding」</strong>：代码能力延伸到视频动效、完整游戏、3D 建模与机械设计。即日起向 GLM Coding Plan 全量开放，同步上线 ZCode、Trae、WorkBuddy、Qoder，API 待安全评估后开放、权重计划开源。<strong>查重</strong>：零命中；11-17 Qwen4-Max、11-18 GPT-6.2 首发均不同。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">基座规模</div><div class="data-value">750B</div></div>
+<div class="data-chip"><div class="data-label">等效智能</div><div class="data-value">2–3T 级</div></div>
+<div class="data-chip"><div class="data-label">循环层数</div><div class="data-value">28 层 ×2</div></div>
+<div class="data-chip"><div class="data-label">GPQA 提升</div><div class="data-value">47.6→56.3</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Delivery · M&amp;A</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧩 模型 · 交付 · 版图 · AI 从写代码走到批准代码</div>
+    <div class="section-sub">GPT-6.2 Sol 补上日常聊天、Claude Ship 包干 PR 审批、CrowdStrike 439 亿买下 Zscaler —— 从体验到交付到版图，全线重画</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">GPT-6.2 Sol 正式登陆 ChatGPT 普通聊天页：图像理解 71.7%（GPT-6 为 47.4%）、复杂指令遵循 78.1%，GPT-5.6 Sol/Terra 将于 12 月 23 日退役</span>
+        <span class="card-tag">💬 模型迭代 / 端侧体验 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日（北京时间 24 日凌晨），OpenAI 宣布 <strong>GPT-6.2 Sol 正式登陆 ChatGPT 的 Chat 标签页</strong>，面向全球 Plus、Pro、Business、Enterprise 推送——11 月 18 日首发只落在 Work、Codex 与 API，普通聊天入口本轮才补上。此次针对日常对话优化：图像理解 <strong>71.7%</strong>（GPT-6 为 47.4%，+24.3 个百分点），复杂指令遵循从 62.5% 升至 <strong>78.1%</strong>，专业任务内部最低推理档 65%（GPT-6 为 52%），内部版 BrowseComp 在 Extra high 档 64.5% vs 54.4%。功能上更会识别照片里标签文字、路牌符号，比较酒店时能综合步行距离/房价权衡，还会在你关注某商品时主动问「要不要降价时提醒」。同时公布退役安排：<strong>GPT-5.6 Sol 12 月 23 日</strong>从 Chat、Work、Codex 全部下线，Terra 同日退出 Work 与 Codex。<strong>查重</strong>：11-18 报首发；今日为「补 Chat 入口 + 官方评测 + 退役时间表」新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">图像理解</div><div class="data-value">71.7%</div></div>
+<div class="data-chip"><div class="data-label">指令遵循</div><div class="data-value">78.1%</div></div>
+<div class="data-chip"><div class="data-label">看图提升</div><div class="data-value">+24.3pt</div></div>
+<div class="data-chip"><div class="data-label">旧模型退役</div><div class="data-value">12·23</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">Anthropic 推出 Claude Ship 测试版：Code Review、PR Steward、Claude Approvals 三件套，自动审查 PR、修复冲突并按仓库内自然语言策略批准合并</span>
+        <span class="card-tag">🤖 AI 编程 / 智能体交付 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，Anthropic 宣布推出 <strong>Claude Ship（beta）</strong>——把代码提交后「审查—修复—批准」整段流水线交给 AI，面向 GitHub 的 Claude Team 与 Enterprise 团队，按 token 计费。三件套：<strong>Code Review</strong>（已正式可用）负责审查；<strong>PR Steward</strong>（beta）处理 CI 失败、合并冲突与审查反馈，每次推送后说明改了什么、必要时如何撤销；<strong>Claude Approvals</strong>（beta）依据团队写进仓库、可用自然语言编写的审批策略执行批准，并综合 Code Review 结果与企业分类器信号。Anthropic 强调 PR Steward 本身<strong>不批准或合并</strong>、审批权限受策略限制；因仍处 beta，建议先以「观察模式」运行（只出判断不执行）、先单仓库试点、设每月支出上限。目标是把交付速度拉到接近编写速度。<strong>查重</strong>：零命中；与 11-20 Codex 性能工厂、11-23 Claude Code 撼 IDE 不同域。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">组件数</div><div class="data-value">3 件套</div></div>
+<div class="data-chip"><div class="data-label">已正式</div><div class="data-value">Code Review</div></div>
+<div class="data-chip"><div class="data-label">审批依据</div><div class="data-value">自然语言策略</div></div>
+<div class="data-chip"><div class="data-label">起步建议</div><div class="data-value">观察模式</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">CrowdStrike 以约 439 亿美元全股票收购 Zscaler，创网络安全史上最大并购，把端点防护与零信任合一、明确定位「让企业更安全地使用 AI」</span>
+        <span class="card-tag">🔐 并购 / AI 安全 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，网安公司 <strong>CrowdStrike</strong> 与云安全公司 <strong>Zscaler</strong> 签署最终收购协议：以<strong>全股票交易</strong>收购，价值约 <strong>439 亿美元</strong>，有望创网安史上最大并购。按换股比例 Zscaler 每股换 1.135 股 CrowdStrike，隐含约 260.41 美元/股、溢价约 <strong>34%</strong>；完成后 CrowdStrike 股东持股约 84.1%。CrowdStrike 专注端点安全（Falcon 平台），Zscaler 提供云端零信任连接、服务约 8000 家企业客户，合并意在把端点防护与零信任并入同一平台。CEO George Kurtz 表述直指 AI：<strong>「过去，安全重点是把攻击者挡在门外；如今，为了让 AI 进入企业，我们必须确保安全。」</strong>交易仍需股东与监管批准，预计 2027 下半年至 2028 年 1 月完成；公告当日盘前 CrowdStrike 跌超 8%、Zscaler 涨超 17%。<strong>查重</strong>：零命中；与 11-22 亚马逊收 Decart、英伟达收 Inception 不同赛道。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">交易金额</div><div class="data-value">439 亿$</div></div>
+<div class="data-chip"><div class="data-label">溢价</div><div class="data-value">约 34%</div></div>
+<div class="data-chip"><div class="data-label">Zscaler 客户</div><div class="data-value">约 8000 家</div></div>
+<div class="data-chip"><div class="data-label">行业地位</div><div class="data-value">史上最大</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Security · Science</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🛡️ 自防御 · 科研 · AI 学会给自己打补丁</div>
+    <div class="section-sub">OpenAI 与思科用 eBPF 给未打补丁的 Linux 装临时盾、Gemini 4 智能体把量子算法提速 290 倍 —— 安全与科研都在走向「可验证的自动化」</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">OpenAI 携手思科开源安全运行时 Shirudo：用 eBPF 为运行中的 Linux 提供「无需重启」的临时漏洞防护，Codex 生成的盾成功拦截 Elasticsearch 上的 Java4Shell 攻击</span>
+        <span class="card-tag">🛡️ 开源 / AI 安全 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，OpenAI 与思科联合开源安全运行时 <strong>Shirudo</strong>（日语「盾」），目标是在永久补丁到位前就能自我保护——基于 <strong>eBPF</strong> 技术，可在<strong>不重启系统</strong>前提下向运行中的 Linux 加载名为「shield」的临时防护，阻断漏洞利用而不影响合法请求。四大能力：实时防护（生效前可先观察）、机器速度防御（AI 智能体调查漏洞、写盾并验证）、可信部署（shield 加密签名 + eBPF 验证器校验）、硬件支撑验证（用 TPM 记录加载/移除）。在受控测试中，OpenAI 用 <strong>Codex 生成的 shield</strong> 为 Java Base64 解码器加入输入检查、直接挂到运行中的 Elasticsearch 进程，成功拦截针对「Java4Shell」的攻击且服务不中断，对近期一个 PHP 漏洞也完成拦截。项目以 BSD 2-Clause 开源、BPF 程序 BSD/GPL 双许可。<strong>查重</strong>：零命中；与 11-14 Cursor 安全事件、11-22 ARTEX 攻击框架不同——今日为防守侧开源基础设施。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">核心技术</div><div class="data-value">eBPF</div></div>
+<div class="data-chip"><div class="data-label">重启需求</div><div class="data-value">零重启</div></div>
+<div class="data-chip"><div class="data-label">验证案例</div><div class="data-value">Java4Shell</div></div>
+<div class="data-chip"><div class="data-label">开源许可</div><div class="data-value">BSD 2-Clause</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">谷歌 DeepMind 用多个 Gemini 4 智能体团队 + Lean 形式化验证优化量子算法：反正弦电路最高提速 290 倍、聚变算力降 11.8 倍，Lean 库与验证方案全部开源</span>
+        <span class="card-tag">⚛️ AI4S / 形式化验证 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 23 日，谷歌 DeepMind 与 Google Quantum AI 发布联合研究：让多个 <strong>Gemini 4 智能体团队</strong>协同优化经典量子算法、生成高效量子电路，并用形式化定理证明器 <strong>Lean</strong> 对每个结果做数学验证——因资源密集的量子电路无法在经典计算机或现有量子处理器上实测，只能靠数学证明正确性。成果覆盖多个「人类重大挑战」场景：惯性约束聚变关键属性计算算力成本降 <strong>11.8 倍</strong>（纠错量子比特从 5650 降至 4338），光敏分子模拟成本降约 <strong>8 倍</strong>，细胞色素 P450 酶模拟性能提升 2.5 倍（内存 481→333 量子比特），基础算法 Grover 提速 2.57 倍、反正弦（arcsin）子程序最高提速 <strong>290 倍</strong>。团队把 Lean 函数库（基于 Lean 4、扩展 Mathlib/Physlib，Apache 2.0）、问题规格与经形式化验证的解法<strong>全部开源至 GitHub</strong>；智能体协调系统仍为内部专有。需注意：即便优化后，科学模拟所需算力仍超出第一代纠错量子计算机能力——成果是「资源需求降低」，不等于现有硬件已能跑通。<strong>查重</strong>：与 11-21/23 黎曼证明同属 AI+形式化验证主线，但学科不同（量子电路优化 vs 数学猜想）。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">最高提速</div><div class="data-value">290 倍</div></div>
+<div class="data-chip"><div class="data-label">聚变算力</div><div class="data-value">降 11.8 倍</div></div>
+<div class="data-chip"><div class="data-label">验证工具</div><div class="data-value">Lean</div></div>
+<div class="data-chip"><div class="data-label">开源许可</div><div class="data-value">Apache 2.0</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这批 8 条，被两股力量同时拽着：<strong>一边是权力与资本的重新结算</strong>——英伟达把辞任仅 11 天的黄仁勋请回王座、股价一天涨回近万亿，Sierra 靠「按结果收费」把估值半年翻倍到 300 亿，CrowdStrike 用 439 亿买下 Zscaler 把端点与零信任并成一张网；<strong>另一边是 AI 开始接管交付与安全</strong>——GLM-5.4 用「循环深度」换智能、GPT-6.2 Sol 补上日常聊天、Claude Ship 把 PR 从审查到批准一条龙包干、OpenAI 与思科用 eBPF 给未打补丁的 Linux 装临时盾、Gemini 4 智能体把量子算法提速 290 倍还附上数学证明。</p>
+    <p><strong>① 王座 · 账本 · 架构（#1–#3）</strong>。黄仁勋全票复职（#1）与调查委员会同步推进，是「信任」与「合规」的双轨补位；Sierra 300 亿估值（#2）把「按结果收费」变成可核验的定价范式；GLM-5.4（#3）则在「扩参数」之外走出「循环深度换智能」的第三条路。三件事的共同点是：老规则都被重画了一遍。</p>
+    <p><strong>② 模型 · 交付 · 版图（#4–#6）</strong>。GPT-6.2 Sol 补上 Chat 入口（#4），把模型能力沉淀成日常体验；Claude Ship（#5）把 AI 从「写代码」推到「批准代码上生产」；CrowdStrike 439 亿收购 Zscaler（#6）则用并购把「AI 安全」从概念做成版图。能力、交付、资本在同一条线上收束。</p>
+    <p><strong>③ 自防御 · 科研（#7–#8）</strong>。Shirudo（#7）给未打补丁的 Linux 装「不用重启」的临时盾，把 AI 从「发现漏洞」延伸到「先挡住攻击」；Gemini 4 智能体配合 Lean 验证优化量子算法（#8），展示了「AI 搜索 + 机器可证明正确」的科研闭环。两者都在回答同一个问题：AI 交出的活，怎么让人放心。</p>
+    <p>今天最该拎出来的，是<strong>「交权」与「护栏」同步</strong>这条暗线——所有把权力交出去的动作，都配了一道可核验的护栏：复职配调查委员会、AI 批代码配观察模式、临时盾配人类批准、智能体搞科研配 Lean 验证。交出去的是活，攥在手里的是规矩。</p>
+    <p>说到底：王座上的、账本上的、流水线上的位置今天都被重新标了价，而我们要做的是——把「谁来背书、如何复核」写进每一份交付里。</p>
+    <p>一句话：<strong>王座迎回旧主，资本给智能体标价，AI 学会给自己打补丁</strong></p>
+    <p>今天最高分给到 <strong>#1 黄仁勋全票复职（9.6 / P0）</strong>：单日近万亿市值回升 + 半导体全线反弹，说明市场把这轮治理震荡的核心不确定性视为解除；但调查未结、12·3 听证会未至，「信任」与「合规」的双轨补位才刚开始，仍是观察 AI 巨头治理走向的关键样本。</p>
+    <p>五条可执行线索：<strong>① 危机公关节奏</strong>——核心人物/合作方风波靠「制度补位 + 权威背书 + 明确时间表」关住不确定性，别只用一句「无事发生」；<strong>② 按结果对账</strong>——与 AI 素材/代运营团队合作用可核验的业务结果（转化、留存、采用率）结算，而非「产出多少张图」；<strong>③ 规则文件定边界</strong>——借鉴 Claude Ship 的「AI 出活 + 策略文件定边界 + 人签字放行」三级结构做内容审核流；<strong>④ 可逆的临时开关</strong>——线上漏洞/配置错误先上可撤销的临时止损方案再修根因，呼应 Shirudo 的临时盾；<strong>⑤ 机器初筛 + 独立复核</strong>——凡涉及数值、榜单、规则的对外物料建立双保险，「模型说对」不等于「事实对」。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
