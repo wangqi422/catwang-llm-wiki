@@ -1,0 +1,230 @@
+const fs = require('fs');
+const path = require('path');
+const repo = __dirname;
+const src = path.join(repo, 'docs/ai-daily/ai-daily-card-20261124-toc.html');
+const out = path.join(repo, 'docs/ai-daily/ai-daily-card-20261125-toc.html');
+
+const lines = fs.readFileSync(src, 'utf8').split(/\r?\n/);
+// head = 1..142 (index 0..141), tail = 395..433 (index 394..end)
+const head = lines.slice(0, 142).join('\n');
+const tail = lines.slice(394).join('\n');
+
+// patch title date
+const head2 = head.replace('AIGC 日报 · 2026.11.24', 'AIGC 日报 · 2026.11.25');
+
+const nav = `  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Proof · Capital</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>∑ 数学 · 主权 · 资本</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>AI 双证 VP≠VNP</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>矩阵乘法指数 9/4</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>欧盟 500 亿基金</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Market · Tools</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>📉 破发 · 视频 · 端侧</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>Anthropic 破发</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>MAGI-2 视频模型</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Hy4 flash 开源</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Science · Rules</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🧬 蛋白 · 内容治理</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>GPT-6 设计蛋白</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Tidal 封禁 AI 音乐</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.25 &middot; Wed &middot; Issue 109</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>AI 一夜攻破两座数学圣杯，转头就给资本和算力算起了成本账</strong> —— <strong>数学侧</strong>，Anthropic 与 OpenAI 相隔不到 4 小时先后证明「代数版 P≠NP」的 VP≠VNP 猜想，OpenAI 同日再把矩阵乘法指数钉死在精确 9/4、推翻「ω=2」主流猜想，两份证明都附 Lean 形式化代码也都坦承无人类核验；<strong>资本侧</strong>，欧盟拟设 500 亿欧元主权科技股权基金 STEF 押注 AI 与量子（1 欧元撬动 6 欧元），而上市仅 4 日的 Anthropic 跌破 83 美元发行价、市值一度失守万亿；<strong>产业侧</strong>，Sand.ai 用 480B 的 MAGI-2 把 30 秒有声 1080p 打到 0.5 元/秒，腾讯混元把 224B 的 Hy4 flash 塞进 64GB Mac mini，OpenAI 让 GPT-6 独立设计出湿实验可结合的新蛋白，Tidal 则宣布 12 月 9 日起下架 2900 万首纯 AI 歌曲。AI 往上捅破天花板，往下要在一张张成本表里证明自己值这个价</p>
+    <div class="header-meta">
+      <span class="meta-tag">∑ 数学 · 主权 · 资本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">📉 破发 · 视频 · 端侧</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧬 蛋白 · 内容治理</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.25 &middot; 第 109 期</span>
+    </div>
+  </div>`;
+
+const cards = {
+1: {
+  num: 1,
+  title: 'Anthropic 与 OpenAI 相隔不到 4 小时先后公布 VP≠VNP 证明：Claude 70 页论文 + 7.3 万行 Lean、OpenAI 30 页 + 44 万行 Lean，均在一切域成立却都无人类数学家核验，破解 1979 年悬置 47 年的「代数版 P≠NP」',
+  tag: '∑ 数学突破 / 形式化验证 / P0',
+  desc: '北京时间 11 月 24 日凌晨 5:43，Anthropic 在 GitHub 贴出 <strong>70 页论文《VP ≠ VNP over every field》</strong>、作者写「Claude (Anthropic)」，附约 <strong>7.3 万行 Lean</strong>；同日 9:30 OpenAI 放出 30 页论文、附 <strong>44 万行 Lean</strong>，两者相隔不到 4 小时。两家都主张分离「对一切域成立」、且在更强 border 意义下成立。VP/VNP 是算术电路版的 P/NP：行列式有高效电路、积和式（permanent）至今只有指数算法。两篇下界都达拟多项式级，远低于此前最佳电路规模；但均<strong>明确警告无人类数学家完整核验</strong>，Lean 只能证明「每步可推演」，不保证形式化陈述与英文结论等价。剑桥大学 Tom Gur 称「短短几天见证过去可能数十年才有的进展」。<strong>查重</strong>：与 11-21 黎曼、11-22 3SUM 同属 AI+形式化验证主线但学科不同，正文区隔。',
+  chips: [['悬置年数','47 年'],['Lean 行数','7.3万/44万'],['发布时间差','<4 小时'],['人工核验','无']]
+},
+2: {
+  num: 2,
+  title: 'OpenAI 预印本证明矩阵乘法指数 ω 精确等于 9/4：上界 O(n^2.25) 加匹配下界首次闭合、推翻「ω=2」主流猜想与 Strassen 1994 预测，111 页论文登上 HN 首页 460+ 分',
+  tag: '∑ 计算复杂度 / AI 科研 / P0',
+  desc: '11 月 24 日，OpenAI 向 openai/math 推送 <strong>111 页预印本</strong>，声称矩阵乘法指数 ω 在一切域上精确等于 <strong>9/4（2.25）</strong>。人类把 ω 上界从 1969 年 Strassen 的约 2.807 磨到 2026 年 8 月 DeepMind AlphaEvolve 的约 2.371，下界却只有平凡的 n²，主流猜想是 ω=2。本次真正新意是<strong>补上匹配下界</strong>：任意 n≥2，算术电路乘两个 n×n 矩阵至少需 ⌈n^(9/4)/2⌉ 个非标量门；配合 10 月上界与人类数学家数周内扩展到一切域，上下界首次闭合。还推翻 Strassen 1994 年「tight 张量」预测、给出对偶指数 α∈[1/2,2/3]。登上 HN 首页 <strong>460+ 分</strong>，但仍是预印本、未经同行评议。<strong>提醒</strong>：这是「银河算法」，现实硬件用不上，意义在图算法/格问题等理论下游。',
+  chips: [['精确指数','2.25'],['论文页数','111 页'],['HN 热度','460+ 分'],['推翻猜想','ω=2']]
+},
+3: {
+  num: 3,
+  title: '欧盟拟设 500 亿欧元（548 亿美元）「主权科技股权基金 STEF」：主投 AI 与量子、以欧盟资金作种子钱 1 欧元撬动 6 欧元、EIB 提供专业支持，11 月 26 日欧委会讨论、明年 2 月披露运作细节',
+  tag: '🏛️ 政策 / 主权 AI / P0',
+  desc: '11 月 25 日，英国《金融时报》援引两名官员披露：欧盟拟投入最高 <strong>500 亿欧元（约 548 亿美元）</strong>设立「主权科技股权基金」（STEF），对欧洲 AI 与量子企业做「规模更大、风险更高、周期更长」的投资，降低对美中技术依赖。官员称这是「针对高风险领域的长期稳定投资，与欧盟平时做法恰好相反」。细节仍在商议：以欧盟资金作种子钱、目标 <strong>1 欧元撬动 6 欧元</strong>；科技事务主管 Virkkunen 已与欧洲投资银行探讨；基金由独立管理人运营保证决策不受政治影响。欧委会预计 11 月 26 日讨论并提出量子战略、2027 年 2 月披露方案。500 亿仅相当于「全面科技主权」总成本约十分之一；现有欧洲规模化基金目标仅 50 亿欧元，而欧盟股权融资只占全球风投约 <strong>5%</strong>（美国 52%、中国 40%）。',
+  chips: [['基金规模','500 亿€'],['撬动比','1:6'],['主投赛道','AI+量子'],['全球风投占比','仅 5%']]
+},
+4: {
+  num: 4,
+  title: 'Anthropic 上市 4 个交易日跌破 83 美元 IPO 发行价：11-24 收 81.91 美元（-6.54%）、盘中最低 75.61 美元、市值一度失守 1 万亿美元，首日浮盈全数回吐，9009 亿美元算力采购承诺成估值压力核心',
+  tag: '📉 资本市场 / 估值 / P0',
+  desc: '11 月 24 日，Anthropic（ANT.O）收跌 <strong>6.54% 报 81.91 美元</strong>，跌破 83 美元发行价，盘中最低 75.61 美元。公司 11 月 19 日登陆纳斯达克，首日开盘 111.50 美元、盘中最高 115.10、完全摊薄估值逼近 2 万亿，募资约 1048.4 亿创史上最大 IPO；仅 4 日即破发，盘中市值一度约 <strong>9995 亿美元失守万亿</strong>，较首日高点最大回撤约 34%。四重压力：① 招股书披露算力及基础设施采购承诺约 <strong>9009 亿美元</strong>（4516 亿 2030 年前、未来 12 月约 707 亿需付）；② token 使用量增速放缓、降价削弱定价；③ Q3 经营利润率从约 8% 转为约 -3%；④ 数据中心建设放缓。叠加创始人上市次日套现约 5.6 亿、绿鞋提前全额行使。<strong>查重</strong>：11-19 定价、11-20 首日收涨连续剧新阶段，以本次破发数据为准。',
+  chips: [['收盘价','81.91$'],['单日跌幅','-6.54%'],['盘中市值','失守 1 万亿'],['算力承诺','9009 亿$']]
+},
+5: {
+  num: 5,
+  title: 'Sand.ai 发布 480B 视频模型 MAGI-2：原生 30 秒 1080p 有声、一次参考 20 份素材、50 毫秒级镜头控制，国内 0.5 元/秒（30 秒 15 元）约为 Seedance 2.5 的 1/10，Video Arena 盲测全球第二',
+  tag: '🎬 国产模型 / AI 视频 / P1',
+  desc: '11 月 24 日，北京 Sand.ai 发布旗舰视频模型 <strong>MAGI-2</strong>：总参数 480B、每 token 激活约 28B、预训练约 4T tokens，原生生成最长 <strong>30 秒 1080p 25fps 音画同步</strong>视频，单次最多参考 20 份素材（10 图/5 视频/5 音频）、支持 6 画幅与 50 毫秒级镜头切点、可对已有视频定向编辑。定价国内 <strong>0.5 元/秒（30 秒 15 元）</strong>、海外 0.08 美元/秒，约为 Seedance 2.5 的 1/10。Artificial Analysis Video Arena v2.1 四任务均分 998.5→1150.3、盲测<strong>全球第二</strong>（1146 分，仅次 Seedance 2.5 的 1219；对 2.0 胜率 71%、对 2.5 仅 39%）。采用 Multi-Head Latent MoE + Head Parallel，已适配海光、摩尔线程等国产芯片；8 月 Preview 已开源、旗舰权重承诺「很快」但未放出。实测画质约 Seedance 2.3、声音是短板。',
+  chips: [['总参数','480B'],['视频时长','30 秒 1080p'],['国内单价','0.5 元/秒'],['盲测排名','全球第二']]
+},
+6: {
+  num: 6,
+  title: '腾讯混元通过 AngelSlim 开源 Hy4 flash GGUF 量化权重：224B 模型最小版仅原始 30%、IQ2-AH 125.73GiB 降 69%，借 Strata offload 塞进 64GB Mac mini，48GB 显存每秒最高 89 token、四项评测分差 ≤0.4',
+  tag: '💻 国产模型 / 开源 / P1',
+  desc: '11 月 25 日，腾讯混元通过压缩加速工具箱 <strong>AngelSlim</strong> 开源 Hy4 flash 的 GGUF 量化权重及推理代码。这款 224B 模型原始权重约 410.27 GiB，最小版仅约原始 30%：Q3_K 144.70 GiB（约 35%）、<strong>IQ2-AH 125.73 GiB</strong>（降约 69%）、另有 Spark 4-bit 版。借 <strong>Strata offload</strong>（内存受限时按需从存储加载）+ DFly2 投机解码，已在 RTX/DGX Spark 128GB、M5 Max 128GB、<strong>64GB Mac mini</strong>、4090D 上完成本地部署；48GB 显存 10K 上下文每秒最高 <strong>89 token</strong>，M5 Max 跑 Q3_K 在 32K 上下文每秒 47 token。四项评测量化前后分差均 ≤0.4（DeepSWE v1.1 64.6→64.3）。权重已上架 GitHub/Hugging Face/ModelScope。<strong>查重</strong>：11-17 报发布时称「权重将开源」，本次为承诺兑现新阶段。',
+  chips: [['模型规模','224B'],['最小权重','125.73GiB'],['最低配置','64GB Mac'],['峰值速度','89 tok/s']]
+},
+7: {
+  num: 7,
+  title: 'OpenAI 发布蛋白质设计预印本：GPT-6.2 仅靠推理 + 通用代码设计新蛋白，与 Onava 湿实验 322 个微型结合蛋白 35 个（10.9%）结合成功、5 靶点全覆盖，抗体环重设计 70% 保活，但完整结构预测仍远逊专用模型',
+  tag: '🧬 AI4S / 蛋白质设计 / P1',
+  desc: '11 月 24 日，OpenAI 发布预印本《GPT-6 as a Universal Foundation Model for Protein Biology》，称 GPT-6 系列仅凭推理与通用编程工具即可设计新蛋白三维结构与序列、生成环节无需专用生物模型，并与 Onava 完成两轮湿实验。第一轮：GPT-6.2 写代码生成 <strong>322 个微型结合蛋白</strong>，35 个（<strong>10.9%</strong>）检出结合、5 个靶点（PD-L1/IL-7Rα/TrkA/VEGF-A/IL-17A）均有阳性；第二轮抗体环重设计 182 个中 128 个（<strong>70%</strong>）保活、272 个抗体片段中 179 个（66%）保留结合。计算评测 MotifBench 43.7%（RFdiffusion 27.8%）、对接 93%（DiffDock-L 50%）；但从序列预测完整结构 TM-score 仅 <strong>0.38 vs ESMFold2 0.93</strong>。OpenAI 自注命中率低于 RFdiffusion 原始 19%、流程仍依赖专用模型筛候选，属研究里程碑而非产品。',
+  chips: [['结合成功','35/322'],['命中率','10.9%'],['抗体保活','70%'],['结构预测','TM 0.38']]
+},
+8: {
+  num: 8,
+  title: 'Tidal 宣布 12 月 9 日起下架纯 AI 生成音乐：年底预计删超 2900 万首（现占曲库 6.3%、96% 零播放），日拒收 8–8.5 万首，用 Ircam Amplify + 元数据双重识别，成首个全面封禁纯 AI 音乐的订阅流媒体',
+  tag: '🎵 内容治理 / 版权 / P1',
+  desc: '11 月 24 日，音乐流媒体 Tidal 宣布 12 月 9 日起下架完全由 AI 生成的音乐、年底预计删除超 <strong>2900 万首</strong>。负责人 Robert Andersen 披露：过去 90 天上传曲目 <strong>43%</strong> 被检测为 AI 生成，现有纯 AI 曲目约 2700 万、占曲库 6.3%，但 <strong>96% 零播放</strong>，真实音乐人被淹没；新规后每天拒收 8–8.5 万首，分发商投递纯 AI 曲目也拒、元数据标注完全 AI 的直接拦截。识别由法国 Ircam Amplify 提供（宣称准确率 99%、误报 1%，推算约 29 万首可能误下架）。这是政策掉头——今年 6 月还只是「打标签 + 停付版税」。Tidal 仍接受「AI 辅助创作」曲目。同业分裂：Bandcamp 全面禁售、Deezer 上过滤开关、Spotify/YouTube Music 仅标注、Apple Music 计划年内上标签。',
+  chips: [['下架数量','2900 万首'],['AI 上传占比','43%'],['零播放率','96%'],['误报率','约 1%']]
+}
+};
+
+function cardBlock(c) {
+  const chips = c.chips.map(([l,v])=>`<div class="data-chip"><div class="data-label">${l}</div><div class="data-value">${v}</div></div>`).join('\n');
+  return `    <div class="card" id="item-${c.num}">
+      <div class="card-chrome">
+        <span class="card-num">${c.num}</span>
+        <span class="card-title">${c.title}</span>
+        <span class="card-tag">${c.tag}</span>
+      </div>
+      <div class="card-desc">
+        ${c.desc}
+      </div>
+      <div class="data-strip">
+${chips}
+      </div>
+    </div>`;
+}
+
+const body = `${head2}
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.25 &middot; 星期三 &middot; 第 109 期 &middot; 8 条速报</div>
+  </div>
+
+${nav}
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Proof · Capital · Sovereignty</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">∑ 数学 · 主权 · 资本 · AI 一夜捅破两座天花板</div>
+    <div class="section-sub">AI 双证 VP≠VNP、矩阵乘法指数钉死 9/4、欧盟 500 亿欧元入场 —— 智力边界与资本版图在同一天被重画</div>
+
+${cardBlock(cards[1])}
+
+${cardBlock(cards[2])}
+
+${cardBlock(cards[3])}
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Market · Video · Edge</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">📉 破发 · 视频 · 端侧 · 能力开始算成本账</div>
+    <div class="section-sub">Anthropic 上市 4 日破发、MAGI-2 把视频打到五毛一秒、Hy4 flash 塞进 Mac mini —— 市场与工程都在追问「值不值」</div>
+
+${cardBlock(cards[4])}
+
+${cardBlock(cards[5])}
+
+${cardBlock(cards[6])}
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Science · Rules</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🧬 蛋白 · 内容治理 · 能力狂奔，规矩补位</div>
+    <div class="section-sub">GPT-6 湿实验真做出可结合的新蛋白、Tidal 下架 2900 万首纯 AI 歌 —— 每条「AI 能做到」后面都跟着「怎么验证、怎么划边界」</div>
+
+${cardBlock(cards[7])}
+
+${cardBlock(cards[8])}
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这批 8 条，被一条暗线串着：<strong>AI 在同一天既捅破了天花板，又被按回成本表。</strong>数学侧，Anthropic 与 OpenAI 相隔 4 小时攻下 VP≠VNP，OpenAI 又把矩阵乘法指数钉死在 9/4——两件事都带 Lean 证明、也都带「无人核验」的坦白，像两个天才少年交卷时说「答案我算对了，你们自己看吧」。镜头一转，欧盟掏 500 亿欧元给 AI 和量子当耐心资本，Anthropic 自己却在上市第 4 天跌破发行价、市值一度失守万亿——一级市场抢着下注，二级市场追着算账。</p>
+    <p><strong>① 数学 · 主权 · 资本（#1–#3）</strong>。VP≠VNP（#1）与矩阵指数 9/4（#2）把 AI 数学推到「署名作者」位置，但都坦承无人工核验；欧盟 STEF（#3）把「技术主权」从口号升级为国家级耐心资本。智力边界与资本版图同日重画。</p>
+    <p><strong>② 破发 · 视频 · 端侧（#4–#6）</strong>。Anthropic 破发（#4）是市场从「信仰定价」转向「成本账定价」的信号；MAGI-2（#5）把竞争从画质推向「可控性 + 成本」；Hy4 flash 开源（#6）让 224B 旗舰跑进个人设备。能力、价格、部署方式一起被重新结算。</p>
+    <p><strong>③ 蛋白 · 内容治理（#7–#8）</strong>。GPT-6 湿实验（#7）让通用模型首次拿到「可结合」证据，却也诚实标出结构预测的短板；Tidal 封禁纯 AI 音乐（#8）则是平台级规则落地。一个证明 AI 能做到，一个规定 AI 不能怎么发。</p>
+    <p>往下看更清楚：MAGI-2 把 30 秒有声片打到五毛一秒，Hy4 flash 把 224B 塞进 Mac mini，GPT-6 真做出了新蛋白，而 Tidal 转头下架 2900 万首纯 AI 歌。能力在狂奔，规矩也在补位。</p>
+    <p>说到底：天花板被捅破了，账单也跟着送到了——AI 证明自己有多强，和 AI 证明自己值这个价，是两道不同的题。</p>
+    <p>一句话：<strong>AI 一夜破两座数学圣杯，转头给资本和算力算起了成本账</strong></p>
+    <p>今天最高分给到 <strong>#1 AI 双证 VP≠VNP（9.5 / P0）</strong>：两家相隔不到 4 小时攻下悬置 47 年的猜想、各附数万行 Lean 形式化，却都坦承无人类核验——这是 AI 数学能力的里程碑，也是「机器可检 ≠ 人类可信」信任缺口的最清晰样本。</p>
+    <p>五条可执行线索：<strong>① 机器初筛 + 独立复核</strong>——数学证明都需人工核验，凡涉及数值/榜单/规则的对外物料更要双保险；<strong>② 预算叙事要算成本账</strong>——对外讲 AI 提效别只报「省了多少人力」，把可核验的投入产出和边界一起说清；<strong>③ 可控性优先于画质</strong>——视频工具选型看时间轴控制、参考锁定、声画同步，先 4–5 秒短片试提示词再上长片；<strong>④ 本地部署保合规</strong>——旗舰模型能跑进个人设备，未发布物料不出内网，适合脚本打磨与文档比对；<strong>⑤ 留 AI 辅助证据</strong>——用 AI 做音乐/音效的物料，保留人类贡献证据、确认各平台标注与分发规则，避免误下架打乱上线节奏。</p>
+  </div>
+</div>
+</div>
+
+${tail}`;
+
+fs.writeFileSync(out, body, 'utf8');
+console.log('WROTE', out);
+console.log('SIZE', fs.statSync(out).size);
