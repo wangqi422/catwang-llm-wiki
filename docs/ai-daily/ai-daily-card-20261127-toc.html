@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.27 &middot; 星期五 &middot; 第 111 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Compute · Capital</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>🛰️ 算力 · 资本 · 账本</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>SpaceX 百万 AI 卫星</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>英伟达东南亚停运</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>GPT-6.2 计费出错</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Research · Design</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🧬 科研 · 设计 · 实战</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>腾讯 ORIDTP 登 Nature</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>蚂蚁 Ming-Image 开源</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Karpathy 文明地图</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Rules · Privacy</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>⚖️ 规则 · 隐私</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>国家数据局用数规则</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>Character.AI 拍卖被拦</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.27 &middot; Fri &middot; Issue 111</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>算力被搬上了天，账本被重新算过，AI 开始自己做科研和设计——而规则还在后面追</strong> —— <strong>算力侧</strong>，FCC 批准 SpaceX 部署最多 100 万颗 Starmind AI 卫星、把数据中心搬上近地轨道，英伟达同日叫停东南亚四国出货、BIS 远程访问管制落到发货端；<strong>账本侧</strong>，OpenAI 承认 GPT-6.2 算错了账、Astra 触顶快 40%、Sol 快 25%；<strong>能力侧</strong>，腾讯以第一单位登 Nature 主刊用 ORIDTP 从头设计双靶点多肽（抑瘤 94.2%），蚂蚁开源 Ming-Image-0.2-Design 登顶开放权重图像榜，Karpathy 七小时写出 4.5 万行代码做「美国文明」地图；<strong>规则侧</strong>，国家数据局明确「为数据付费」、42 州总检察长拦下 Character.AI 的聊天记录拍卖。天花板在往天上抬，规矩在往地上补</p>
+    <div class="header-meta">
+      <span class="meta-tag">🛰️ 算力 · 资本 · 账本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧬 科研 · 设计 · 实战</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">⚖️ 规则 · 隐私</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.27 &middot; 第 111 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Compute · Capital · Ledger</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🛰️ 算力 · 资本 · 账本 · 天花板与地线同时移动</div>
+    <div class="section-sub">百万 AI 卫星上天、英伟达叫停四国出货、GPT-6.2 算错账 —— 算力从未同时显得无限和稀缺</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">美国 FCC 有条件批准 SpaceX 部署最多 100 万颗 Starmind AI 卫星：首个太空数据中心星座、六个轨道壳层 550~1002 公里、星间激光通信、理论峰值算力负载 250 吉瓦，2033 年首发、2040 年建成</span>
+        <span class="card-tag">🛰️ 太空算力 / 重大监管 / P0</span>
+      </div>
+      <div class="card-desc">
+        美国东部时间 11 月 25 日，FCC 以文件 DA 26-1273「部分批准、部分暂缓」授权 SpaceX 部署最多 <strong>100 万颗</strong>搭载 AI 芯片的卫星，组建 Starmind（星脑）太空数据中心星座——美国史上首次为太空数据中心星座颁发授权。六个标称壳层、运行高度 <strong>550~1002 公里</strong>，主用星间激光通信、Ka 频段仅作备份；单星 AI1 翼展 75 米、峰值计算负载 250 千瓦、基于优化版英伟达 Vera Rubin NVL72，百万颗理论峰值功率达 <strong>250 吉瓦</strong>。授权附带硬期限：2033 年首发至少 1 颗、2035 年 10 万颗、2038 年 50 万颗、2040 年 100 万颗，未按期则失效。马斯克称首批预计 2027 年三季度发射。FCC 同时以「信息不足」搁置 600 公里以上卫星转入「坟墓轨道」的处置豁免。<strong>关键</strong>：批的是上限不是任务量——与星链申请 4.2 万、实际在轨约 1.1 万同理，真实节奏取决于运力与芯片；百万颗按单星 4 吨估算需 2 万~4 万次星舰发射。当日以 <strong>+28171 热度</strong>登 aihot.news 榜首。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">卫星上限</div><div class="data-value">100 万颗</div></div>
+<div class="data-chip"><div class="data-label">轨道高度</div><div class="data-value">550-1002km</div></div>
+<div class="data-chip"><div class="data-label">峰值功率</div><div class="data-value">250 GW</div></div>
+<div class="data-chip"><div class="data-label">建成节点</div><div class="data-value">2040 年</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">英伟达叫停向马来西亚、新加坡、泰国、印尼四国出货 AI 服务器：戴尔、超微已通知买家暂不发货，导火索是 BIS「远程访问管制」11-19 生效，数千颗 B300 转售、四国数据中心项目停滞</span>
+        <span class="card-tag">🌐 出口管制 / 算力合规 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 26 日，《金融时报》援引三名知情人士报道：英伟达已通知戴尔、超微等合作伙伴，<strong>暂停向马来西亚、新加坡、泰国、印尼</strong>发运搭载其 AI 芯片的服务器，买家已收到订单暂不发货通知、恢复时间未定。直接诱因是 BIS 于 11-16 发布、<strong>11-19 生效</strong>的「远程访问管制」临时最终规则：向四国及巴西出口先进芯片须申请许可，云服务商有 <strong>90 天</strong>举证最终用户不含受限实体，管制阈值约 1200 万 TPP（约合 750 张 H100 级算力）。此前 CBS 披露装有 Blackwell 芯片的服务器经东南亚流向 Megaspeed、Aolani，为中国企业提供云端 AI 服务。事件后 GPU 转售平台挂牌量骤增、<strong>数千颗 B300</strong> 寻售，深圳华强北灰色渠道价被炒至美国同类的五到七倍，合规市场却「有价无市」。<strong>转变</strong>：管制从「硬件目的地」转向「谁能远程用算力」。<strong>查重</strong>：11-20「停供中国含 H200」、11-25/26「B300 抛售」的发货端落地新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">停运国家</div><div class="data-value">4 国</div></div>
+<div class="data-chip"><div class="data-label">新规生效</div><div class="data-value">11-19</div></div>
+<div class="data-chip"><div class="data-label">举证窗口</div><div class="data-value">90 天</div></div>
+<div class="data-chip"><div class="data-label">转售规模</div><div class="data-value">数千颗 B300</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">OpenAI 承认 GPT-6.2 计费出错并修复：Astra、Sol 上线时用量被错误打折，修复后同样工作 Astra 触顶快 40%、Sol 快 25%，不追收旧账、四档套餐各补一次预存重置（+21151 热度）</span>
+        <span class="card-tag">💳 商业模式 / 订阅计费 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 26 日，OpenAI 的 Codex 与 ChatGPT 负责人 Tibo 发推承认：GPT-6.2 上线时计费出错，错误地对大多数用户的 Astra 和 Sol 用量<strong>打了折</strong>。现已修复——与上周相比，完成相同工作量触及上限的速度 Astra 快 <strong>40%</strong>、Sol 快 <strong>25%</strong>；其他模型不受影响、过去少计部分不追收。作为致歉，Go、Plus、Pro、Business 每位用户补一次<strong>预存重置</strong>（banked reset），当天已上线；Business 另可在 12-31 前免费使用 Fast Mode。按帮助页，重置需主动选用、涵盖额度至少一项剩余不足 80% 才能用。该消息以 <strong>+21151 热度</strong>登 aihot.news 榜。Reddit 上不少用户不买账：在模型能力不占优时性价比本就是核心卖点，有人怀疑是「先靠错误计费让额度翻倍、再取消翻倍」变相缩水。<strong>关键</strong>：这是口径修正不是降价，用户体感等于变相加价——决定体验的不是跑分，是计量口径。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">Astra 触顶</div><div class="data-value">+40%</div></div>
+<div class="data-chip"><div class="data-label">Sol 触顶</div><div class="data-value">+25%</div></div>
+<div class="data-chip"><div class="data-label">补偿重置</div><div class="data-value">1 次</div></div>
+<div class="data-chip"><div class="data-label">当日热度</div><div class="data-value">+21151</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Research · Design · Practice</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧬 科研 · 设计 · 实战 · AI 开始自己干活</div>
+    <div class="section-sub">腾讯登 Nature 设计多肽、蚂蚁开源登顶生图、Karpathy 七小时造文明地图 —— 能力在往真活里沉</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">腾讯生命科学实验室以第一单位登上《Nature》主刊：AI 平台 ORIDTP 从头设计高活性双靶点多肽，双激动剂以 1/10 剂量减重控糖、双抑制剂让荷瘤小鼠肿瘤缩小 94.2%，四个月连发 Cell 与 Nature</span>
+        <span class="card-tag">🧬 AI 制药 / 科研成果 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 25 日，《Nature》主刊在线刊发腾讯生命科学实验室主导的论文《De novo design of high-potency dual-target therapeutic peptides with ORIDTP》，这是该团队<strong>首次以第一单位</strong>登上 Nature 主刊。ORIDTP 串联三大模块：PepDif（靶点条件扩散生成）、PepDRL（双目标强化学习 + 蒙特卡洛树搜索）、PepDAF（柔性多肽亲和力建模），以<strong>干湿实验双反馈</strong>闭环迭代，每轮从约 5000 条候选筛 15 条送实验。代谢方向设计 GLP-1R/GCGR 双激动剂，先导肽 GA-Dual.R5.S3 以低至对照药 <strong>1/10</strong> 剂量显著减重控糖、不诱发恶心；免疫方向零样本设计 PD-1/CTLA-4 双抑制剂，15 条候选 8 条命中双阻断，先导肽 IC-Dual.P3 让荷瘤小鼠肿瘤体积缩小 <strong>94.2%</strong>。平台已部署至腾讯健康 BioNexus。此前 7 月 UniPert-G2CP 登上 Cell，四个月连发两刊。<strong>提醒</strong>：全部为小鼠临床前结果、尚未人体试验，不等于新药诞生。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">抑瘤率</div><div class="data-value">94.2%</div></div>
+<div class="data-chip"><div class="data-label">给药剂量</div><div class="data-value">1/10</div></div>
+<div class="data-chip"><div class="data-label">双阻断命中</div><div class="data-value">8/15</div></div>
+<div class="data-chip"><div class="data-label">连发主刊</div><div class="data-value">Cell+Nature</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">蚂蚁百灵开源 Ming-Image-0.2-Design（6B）：以 1095 Elo 登顶 Artificial Analysis AA-Image-T2I v2.1 开放权重榜（超 MiniMax H3 的 1066、Qwen-Image-2.1 的 1049），MIT 协议、主打电商主图与 UI 设计稿</span>
+        <span class="card-tag">🎨 国产开源 / AI 生图 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 26 日，蚂蚁百灵（inclusionAI）在 Hugging Face 发布并开源 6B 参数图像生成模型 <strong>Ming-Image-0.2-Design</strong>（MIT 协议、支持透明通道），在 Artificial Analysis 的 AA-Image-T2I v2.1 开放权重榜以 <strong>1095 Elo</strong> 位列第一，领先 MiniMax H3-Image（1066）与 Qwen-Image-2.1（1049）。官方称其强化复杂构图、光照与文字渲染，电商标签、UI 文字更清晰可读，适用于电商主图、UI 设计稿、空间效果图。配套图层级模型 Design-Layer 计划下周开源：支持角色级精细拆分，单张图最多拆 <strong>35 个子层</strong>、近乎无损重组；结合 Ling-3.2-Flash + Design Skill 可从视觉参考直接生成可交互网页。第三方实测指出公开 Space 版存在宽高反转与小字乱码——属实测反馈、非官方口径，生产前须自行复核。<strong>查重</strong>：11-26 已报商汤 U1.6 开源生图，本次为蚂蚁百灵不同厂商、不同模型。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型参数</div><div class="data-value">6B</div></div>
+<div class="data-chip"><div class="data-label">榜单 Elo</div><div class="data-value">1095</div></div>
+<div class="data-chip"><div class="data-label">最多拆层</div><div class="data-value">35 子层</div></div>
+<div class="data-chip"><div class="data-label">协议</div><div class="data-value">MIT</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Karpathy 用 Claude Code + Opus 5.5 七小时产出 4.5 万行代码：整合 31 个真实数据源做「美国文明」风格游戏地图，25km 六边形网格、524 个都市视图、3100+ 县 Explorer 并已部署上线</span>
+        <span class="card-tag">🗺️ Vibe Coding / 实战案例 / P2</span>
+      </div>
+      <div class="card-desc">
+        Andrej Karpathy 用 Claude Code 桌面版加 Opus 5.5（开启 ultracode），在 <strong>7 小时</strong>内生成约 <strong>4.5 万行</strong>代码，构建出一张「美国文明」风格游戏地图：整合 Census、BEA、BLS、EIA、NOAA 等 <strong>31 个</strong>真实数据源，统一映射到 25km 六边形网格——GDP 映射为金产量、城市按真实产业分化，含 19 个视图、覆盖 524 个都市的 City View 与 3100 多个县的 Explorer，并已部署上线。项目由 Anthropic 开发者关系 Ado Kukic 转引后登上 aihot.news。同期社区还有一批「可验证再放手」的样本：有人用 Claude 通过一枚 3 美元芯片读取 1994 年 Jeep 发动机电脑排查尾气故障（整套约 15 美元）。<strong>关键</strong>：难点不在代码量，而在把 31 个口径各异的数据源对齐到同一张网格并保持可用——这比基准分数更接近真实项目复杂度，也印证「结果可验证才敢放手」的 Vibe Coding 生产原则。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">用时</div><div class="data-value">7 小时</div></div>
+<div class="data-chip"><div class="data-label">代码量</div><div class="data-value">45K 行</div></div>
+<div class="data-chip"><div class="data-label">数据源</div><div class="data-value">31 个</div></div>
+<div class="data-chip"><div class="data-label">都市视图</div><div class="data-value">524</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Rules · Privacy</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">⚖️ 规则 · 隐私 · 一边把数据变成资产，一边攥回用户手里</div>
+    <div class="section-sub">国家数据局明确「为数据付费」、42 州拦下聊天记录拍卖 —— 制度在追赶现实的速度差清晰可见</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">国家数据局就《关于完善数据规则 赋能人工智能创新发展的若干意见》征求意见：三大方面十二项举措，明确合法数据可用于 AI 训练推理、鼓励「为数据付费」、建立输出风险防控与流通责任认定机制，征求至 12-06</span>
+        <span class="card-tag">📜 政策监管 / 数据要素 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 26 日，国家数据局发布《关于完善数据规则 赋能人工智能创新发展的若干意见》公开征求意见稿，征求意见至 <strong>12 月 6 日</strong>，后续通过试点落实。文件从三大方面提出<strong>十二项举措</strong>：一是把数据产权制度引入 AI 用数领域，明确合法采集数据、授权服务商采集数据、加工形成的衍生数据、协议取得的数据在「不违反法律法规和合同约定、不侵犯他人合法权益」前提下可用于训练和推理；二是依法保护主体权益，明确<strong>支持和鼓励为数据付费</strong>（合法采集、协议购买、以数换数、模型换数据），要求 AI 企业建立输出风险防控、应急处置与用户投诉机制；三是完善流通责任认定与安全治理，探索以数据产权登记凭证判断买受方是否尽到合理注意义务，防范数据投毒、篡改、伪造、违规缓存与跨境风险。同日广东印发算力「十五五」规划、八部门推动大模型服务出海，构成配套信号。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">举措数</div><div class="data-value">12 项</div></div>
+<div class="data-chip"><div class="data-label">征求截止</div><div class="data-value">12-06</div></div>
+<div class="data-chip"><div class="data-label">核心导向</div><div class="data-value">为数据付费</div></div>
+<div class="data-chip"><div class="data-label">三权分置</div><div class="data-value">持有/使用/经营</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">42 位州检察长介入 Character.AI 破产程序、反对拍卖 2100 万美国用户聊天记录（含 210 万未成年人账户与 IP 地址）：唯一披露竞买方为 11-13 新注册公司，拍卖定于 12-01</span>
+        <span class="card-tag">🔒 数据隐私 / 未成年人保护 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 25 日，TechCrunch 报道：<strong>42 位州检察长</strong>组团介入 AI 聊天机器人公司 Character.AI 的破产程序，试图阻止其拍卖 <strong>2100 万个</strong>美国用户的聊天记录及 IP 地址等个人信息，其中包含超过 <strong>210 万个未成年人</strong>账户。拍卖拟定于 12 月 1 日，唯一公开披露的竞买方是 11 月 13 日在特拉华州新注册的 Smirks and Pangs Acquisition LLC，其收购用途尚不明确。Character.AI 曾面临多起涉及未成年人安全的诉讼；10 月 12 日申请自愿破产，拟将部分知识产权许可出售给迪士尼（对价 2000 万美元），迪士尼另同意三年内支付 1.8 亿美元雇佣其 60 多名员工。<strong>对照</strong>：一边是 #7 国家数据局在给 AI 用数「立规矩」，一边是存量数据在破产清算中暴露保护真空。<strong>查重</strong>：归档「Runway Characters」为视频虚拟角色产品，与本次是不同主体。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">州检察长</div><div class="data-value">42 位</div></div>
+<div class="data-chip"><div class="data-label">用户账户</div><div class="data-value">2100 万</div></div>
+<div class="data-chip"><div class="data-label">未成年人</div><div class="data-value">210 万+</div></div>
+<div class="data-chip"><div class="data-label">拍卖日期</div><div class="data-value">12-01</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这 8 条，被一条线串着：<strong>大家不再只比谁的脑子更快，而是开始比谁能把脑子放到更便宜、更合规、更远的地方去。</strong></p>
+    <p><strong>① 算力 · 资本 · 账本（#1–#3）</strong>。FCC 一纸授权让 SpaceX 把数据中心搬上近地轨道，一百万颗 AI 卫星听着像科幻，落到纸面却是一张写满期限和条件的许可证——批的是上限，拼的是运力，卡的是碎片处置（#1）。地上这头，英伟达叫停东南亚四国出货，BIS 的远程访问管制从条文变成了停发的订单（#2）。一个往上抬天花板，一个往下划地线，算力从未像今天这样同时显得无限和稀缺。而 OpenAI 承认算错了账、修完反而更快烧完额度（#3）则提醒：决定体验的不是跑分，是计量口径。</p>
+    <p><strong>② 科研 · 设计 · 实战（#4–#6）</strong>。AI 自己开始干活了：腾讯把双靶点多肽设计送上 Nature 主刊、抑瘤 94.2%（#4），蚂蚁把登顶榜单的生图模型开源（#5），Karpathy 让 Claude 七小时写出一座「美国文明」地图（#6）。能力在往科研、设计、可视化这些真活里沉——但越是漂亮的结果，越要独立核对。</p>
+    <p><strong>③ 规则 · 隐私（#7–#8）</strong>。国家数据局开始给 AI 用数立规矩、明说「为数据付费」（#7），42 位州检察长则拦下了一场可能卖掉 2100 万份聊天记录的拍卖（#8）。一边是把数据变成资产，一边是把数据攥回用户手里——这两件事同时发生，才是今天最值得记住的张力。</p>
+    <p>说到底：天花板往天上抬，规矩往地上补，中间是每一个用 AI 干活的人，重新算自己的那本账。</p>
+    <p>一句话：<strong>算力搬上了天、账本被重算，AI 开始自己做科研和设计，而规矩还在后面追</strong></p>
+    <p>今天最高分给到 <strong>#1 SpaceX 百万 AI 卫星（9.5 / P0）</strong>：算力基础设施第一次越出地面边界，美国史上首个太空数据中心星座落地——这是「算力从机房往外搬」的极端版本，也是监管、运力与碎片处置的一次正面摊牌。</p>
+    <p>五条可执行线索：<strong>① 算力供应商合规</strong>——用海外云跑渲染/训练，把「司法辖区」列入选型清单、预留多区备份；<strong>② 用量自建计数</strong>——季度物料排期把 AIGC 预算建在自己的任务计数上，别只盯厂商面板百分比；<strong>③ 科研数字带限定</strong>——94.2% 抑瘤是小鼠临床前数据，做健康向物料必须标注阶段、别讲成「治愈」；<strong>④ 生图先抽检</strong>——登顶榜单不等于开箱即用，中文小字与活动编号上线前跑一轮错字检查；<strong>⑤ 用户数据先过合规</strong>——玩家 UGC 做训练前留意「授权凭证可追溯」，涉及未成年人的用途一律先过合规。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
+</body>
