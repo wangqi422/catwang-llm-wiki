@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIGC 日报 · 2026.11.28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2EEDF; --paper-2: #ECE6D2;
+  --ink: #2A241B; --ink-soft: #5C5345; --ink-faint: rgba(42,36,27,0.35);
+  --pink: #E1A4C2; --lemon: #D6DD63; --blush: #E8C9B6; --sage: #B7C7A8; --lilac: #C9BEDC;
+  --card-bg: rgba(255,255,255,0.55); --border: rgba(42,36,27,0.14); --border-strong: rgba(42,36,27,0.3);
+  --sidebar-w: 260px; --sidebar-bg: #2A241B;
+  --sidebar-text: rgba(242,238,223,0.6); --sidebar-text-hover: #F2EEDF;
+  --sidebar-accent: #D6DD63; --sidebar-active-bg: rgba(214,221,99,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--paper); color:var(--ink);
+  font-family:"Work Sans","Noto Sans SC",system-ui,sans-serif;
+  font-weight:300; font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--sidebar-bg); overflow-y:auto; z-index:100; padding:32px 0 40px;
+  transition:transform 0.3s;
+}
+.sidebar::-webkit-scrollbar { width:3px; }
+.sidebar::-webkit-scrollbar-thumb { background:rgba(242,238,223,0.2); border-radius:3px; }
+.sidebar-header { padding:0 24px 24px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:16px; }
+.sidebar-brand {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:12px;
+  letter-spacing:2px; color:var(--sidebar-accent); text-transform:uppercase; margin-bottom:10px;
+}
+.sidebar-header h1 {
+  font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; font-size:22px;
+  color:var(--sidebar-text-hover); line-height:1.2;
+}
+.sidebar-header h1 em { font-style:italic; font-weight:400; }
+.sidebar-meta { margin-top:8px; font-family:"Work Sans",sans-serif; font-size:11px; color:rgba(242,238,223,0.35); }
+.nav-section { padding:8px 16px; }
+.nav-section-title {
+  font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px;
+  letter-spacing:1.5px; color:rgba(242,238,223,0.3); text-transform:uppercase; padding:12px 8px 6px;
+}
+.nav-link {
+  display:block; padding:8px 12px; color:var(--sidebar-text); text-decoration:none;
+  font-family:"Noto Sans SC",sans-serif; font-size:13px; font-weight:400;
+  border-radius:6px; transition:all 0.2s; margin-bottom:2px;
+}
+.nav-link:hover { color:var(--sidebar-text-hover); background:rgba(255,255,255,0.04); }
+.nav-link.active { color:var(--sidebar-accent); background:var(--sidebar-active-bg); font-weight:500; }
+.nav-link .nav-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; margin-right:6px; opacity:0.6; }
+.nav-link.active .nav-num { opacity:1; }
+.nav-sub { padding-left:28px; font-size:12px !important; }
+.sidebar-dots { display:flex; gap:8px; padding:20px 24px 0; border-top:1px solid rgba(255,255,255,0.06); padding-top:20px; }
+.sidebar-dots i { width:10px; height:10px; border-radius:50%; }
+.main { margin-left:var(--sidebar-w); min-height:100vh; }
+.page { max-width:860px; margin:0 auto; padding:56px 56px 60px; }
+h1,h2,h3 { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-weight:500; color:var(--ink); line-height:1.1; }
+h1 em,h2 em { font-style:italic; font-weight:400; }
+.header { margin-bottom:48px; position:relative; scroll-margin-top:32px; }
+.header-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:16px; }
+.header h1 { font-size:56px; line-height:0.95; letter-spacing:-0.015em; margin-bottom:16px; }
+.header .lead { font-family:"Noto Sans SC",sans-serif; font-size:17px; font-weight:400; color:var(--ink-soft); max-width:560px; line-height:1.7; }
+.header .swatches { position:absolute; right:0; top:8px; display:flex; gap:12px; }
+.header .swatches i { width:32px; height:32px; border-radius:50%; }
+.header-meta { margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; padding-top:20px; border-top:1px solid var(--border); }
+.meta-tag { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-soft); letter-spacing:0.04em; }
+.section { margin-bottom:48px; scroll-margin-top:32px; }
+.section-chrome { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+.section-kicker { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:16px; color:var(--ink-soft); }
+.section-count { font-family:"Work Sans",sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; }
+.section-title { font-family:"Noto Sans SC",sans-serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.section-sub { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:15px; color:var(--ink-soft); margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.card { background:var(--card-bg); border-radius:28px; padding:24px 28px; margin-bottom:16px; scroll-margin-top:32px; }
+.card-chrome { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.card-num { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:36px; line-height:1; color:var(--ink); }
+.card-title { font-family:"Noto Sans SC",sans-serif; font-size:16px; font-weight:600; color:var(--ink); flex:1; }
+.card-tag { font-family:"Work Sans",sans-serif; font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--ink-soft); padding:4px 12px; border-radius:999px; background:var(--paper-2); }
+.card-desc { font-family:"Noto Sans SC","Work Sans",sans-serif; font-size:14px; font-weight:300; line-height:1.85; color:var(--ink-soft); }
+.card-desc strong { font-weight:500; color:var(--ink); }
+.section-highlight {
+  background:var(--blush); margin-left:-56px; margin-right:-56px;
+  padding:48px 56px; margin-bottom:48px; scroll-margin-top:32px;
+}
+.section-highlight .section-kicker,
+.section-highlight .section-sub { color:var(--ink-soft); border-color:var(--border-strong); }
+.section-highlight .card { background:rgba(255,255,255,0.7); }
+.data-strip { display:flex; gap:12px; margin-top:8px; }
+.data-chip {
+  flex:1; border-radius:16px; padding:14px 16px; text-align:center;
+}
+.data-chip:nth-child(4n+1) { background:var(--pink); }
+.data-chip:nth-child(4n+2) { background:var(--lemon); }
+.data-chip:nth-child(4n+3) { background:var(--blush); }
+.data-chip:nth-child(4n)   { background:var(--sage); }
+.data-label { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:11px; color:var(--ink); opacity:0.6; margin-bottom:2px; }
+.data-value { font-family:"Cormorant Garamond",serif; font-size:24px; font-weight:500; color:var(--ink); }
+.edit-note { margin:0 -56px; margin-top:48px; padding:48px 56px; background:var(--paper-2); }
+.edit-note p { font-family:"Noto Sans SC",sans-serif; font-size:15px; font-weight:300; line-height:1.9; color:var(--ink-soft); margin-bottom:16px; }
+.edit-note p:first-child { font-family:"Cormorant Garamond","Noto Serif SC",serif; font-size:20px; font-weight:500; color:var(--ink); margin-bottom:24px; }
+.edit-note p strong { font-weight:500; color:var(--ink); }
+.footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.footer-left { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; color:var(--ink-soft); line-height:1.7; }
+.footer-right { font-family:"Work Sans",sans-serif; font-size:12px; font-weight:400; color:var(--ink-faint); }
+.progress-bar { position:fixed; top:0; left:var(--sidebar-w); width:calc(100% - var(--sidebar-w)); height:3px; z-index:99; }
+.progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--lemon),var(--pink),var(--sage)); transition:width 0.1s ease-out; }
+.back-to-top {
+  position:fixed; bottom:32px; right:32px; width:44px; height:44px;
+  background:rgba(42,36,27,0.08); border:1px solid var(--border); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; visibility:hidden; transition:all 0.3s; z-index:999; backdrop-filter:blur(8px);
+}
+.back-to-top:hover { background:rgba(214,221,99,0.25); border-color:var(--lemon); transform:scale(1.1); }
+.back-to-top.visible { opacity:1; visibility:visible; }
+.back-to-top svg { width:18px; height:18px; fill:var(--ink); }
+.menu-toggle {
+  display:none; position:fixed; top:16px; left:16px; z-index:200;
+  width:40px; height:40px; background:var(--sidebar-bg); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; color:var(--sidebar-text-hover); font-size:18px; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-100%); }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; }
+  .page { padding:48px 24px 80px; }
+  .header h1 { font-size:38px; }
+  .menu-toggle { display:flex; }
+  .progress-bar { left:0; width:100%; }
+  .section-highlight { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .edit-note { margin-left:-24px; margin-right:-24px; padding:36px 24px; }
+  .data-strip { flex-wrap:wrap; }
+  .data-chip { flex:1 1 45%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">AI Daily Report</div>
+    <h1>AIGC <em>日报</em></h1>
+    <div class="sidebar-meta">2026.11.28 &middot; 星期六 &middot; 第 112 期 &middot; 8 条速报</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Overview</div>
+    <a href="#top" class="nav-link active"><span class="nav-num">&middot;</span>今日速览</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Court · Server · Ledger</div>
+    <a href="#s1" class="nav-link"><span class="nav-num">&sect;1</span>⚖️ 法庭 · 机房 · 账本</a>
+    <a href="#item-1" class="nav-link nav-sub"><span class="nav-num">1.</span>OpenAI 反诉苹果</a>
+    <a href="#item-2" class="nav-link nav-sub"><span class="nav-num">2.</span>Blackwell 现身上海</a>
+    <a href="#item-3" class="nav-link nav-sub"><span class="nav-num">3.</span>央行警告 AI 借贷</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Model · Governance</div>
+    <a href="#s2" class="nav-link"><span class="nav-num">&sect;2</span>🧬 模型 · 治理 · 人才</a>
+    <a href="#item-4" class="nav-link nav-sub"><span class="nav-num">1.</span>混元 Hy3D 3.6</a>
+    <a href="#item-5" class="nav-link nav-sub"><span class="nav-num">2.</span>微信 WeMM-Ecom</a>
+    <a href="#item-6" class="nav-link nav-sub"><span class="nav-num">3.</span>Anthropic 锁权与留存</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Security · Skill</div>
+    <a href="#s3" class="nav-link"><span class="nav-num">&sect;3</span>🔐 安全 · Skill</a>
+    <a href="#item-7" class="nav-link nav-sub"><span class="nav-num">1.</span>MiniMax 隐私漏洞</a>
+    <a href="#item-8" class="nav-link nav-sub"><span class="nav-num">2.</span>16 行 Deep Research</a>
+  </div>
+
+  <div class="sidebar-dots">
+    <i style="background:var(--pink)"></i>
+    <i style="background:var(--lemon)"></i>
+    <i style="background:var(--blush)"></i>
+    <i style="background:var(--sage)"></i>
+  </div>
+</nav>
+<div class="main">
+<div class="page">
+<div class="header" id="top">
+    <div class="swatches">
+      <i style="background:var(--pink)"></i>
+      <i style="background:var(--lemon)"></i>
+      <i style="background:var(--blush)"></i>
+      <i style="background:var(--sage)"></i>
+    </div>
+    <div class="header-kicker">AI Daily Report &middot; 2026.11.28 &middot; Sat &middot; Issue 112</div>
+    <h1>AIGC <em>日报</em></h1>
+    <p class="lead">今天的 8 条，主线是<strong>法庭、机房、账本三线同时收紧，而工具还在往生产流程里长</strong> —— <strong>法庭线</strong>，OpenAI 81 页诉状反诉苹果窃取商业机密、胁迫供应商，两大巨头从抢人打到抢证据（+12120 热度登顶）；<strong>机房线</strong>，彭博用序列号实锤受管制的英伟达 Blackwell 已现身上海数据中心、还被拿去抵押贷款；<strong>账本线</strong>，英国央行把超大云厂商 AI 借贷算成略高于 4 万亿美元的潜在敞口。缝隙里工具仍在走：腾讯一天发布 3D 大模型 Hy3D 3.6、开源电商多模态基座 WeMM-Ecom，Anthropic 招股书被扒「1 股锁 50.1% 投票权」，Dragos 金丝雀戳破 MiniMax「不存储」承诺，Google 用 16 行 Skill 让编码智能体变研究员。钱、权、证据都在被重新核算</p>
+    <div class="header-meta">
+      <span class="meta-tag">⚖️ 法庭 · 机房 · 账本</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🧬 模型 · 治理 · 人才</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">🔐 安全 · Skill</span>
+      <span class="meta-tag">&middot;</span>
+      <span class="meta-tag">2026.11.28 &middot; 第 112 期</span>
+    </div>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-chrome">
+      <span class="section-kicker">i. Court · Server · Ledger</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">⚖️ 法庭 · 机房 · 账本 · 三线同时收紧</div>
+    <div class="section-sub">OpenAI 反诉苹果、Blackwell 现身上海、央行算出 4 万亿敞口 —— 钱、权、证据都在被重新核算</div>
+
+    <div class="card" id="item-1">
+      <div class="card-chrome">
+        <span class="card-num">1</span>
+        <span class="card-title">OpenAI 在加州联邦法院正式反诉苹果：81 页诉状指控苹果窃取商业机密、胁迫共同供应商，称一名任职 6 个月的前员工把 76 页检验程序与未发布硬件路线图带回苹果（+12120 热度登顶）</span>
+        <span class="card-tag">⚖️ 法律战 / 商业机密 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 27 日，OpenAI 在加州北区联邦地区法院提交 <strong>81 页</strong>诉状反诉苹果，指控苹果窃取商业机密、并利用市场支配力胁迫双方共同的硬件供应商不与 OpenAI 合作。源于苹果 7 月先诉 OpenAI 挖角（前 iPhone 硬件工程副总裁 Tang Tan、工程师 Chang Liu）。关键新指控：一名 2025-12 至 2026-06 短暂入职 OpenAI 约 <strong>6 个月</strong>的前苹果员工（Employee X），在职期间把一款即将推出硬件的压缩包、截图及一份 <strong>76 页检验程序</strong>转发到个人手机，返回苹果后向亚太运营高层展示了 OpenAI 未发布产品路线图。OpenAI 还批评苹果用工制度「困住」员工、在离职时「监控并设局陷害」跳槽者，称迄今已有 <strong>400 名</strong>员工从苹果转投 OpenAI。苹果否认全部指控，称反诉是「转移注意力的明显企图」。背景：富士康旗下富智康 11-19 获 OpenAI 手机整机组装订单，而富士康正是 iPhone 主力组装商。<strong>关键</strong>：竞争维度从产品前移到证据——抢人不不如说是抢「人脑子里带走的东西」。当日以 <strong>+12120 热度</strong>登顶 aihot.news 榜首。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">诉状页数</div><div class="data-value">81 页</div></div>
+<div class="data-chip"><div class="data-label">前员工在职</div><div class="data-value">6 个月</div></div>
+<div class="data-chip"><div class="data-label">检验证明</div><div class="data-value">76 页</div></div>
+<div class="data-chip"><div class="data-label">当日热度</div><div class="data-value">+12120</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-2">
+      <div class="card-chrome">
+        <span class="card-num">2</span>
+        <span class="card-title">彭博实锤英伟达 Blackwell 芯片已进入中国：与黄乐关联的公司在上海数据中心安装含 GB300 NVL72 机架的设备，拿去抵押贷出 1.86 亿元，技嘉组装、序列号可查</span>
+        <span class="card-tag">🌐 出口管制 / 算力合规 / P0</span>
+      </div>
+      <div class="card-desc">
+        11 月 27 日，彭博社报道：两家中国企业在上海一座与争议人物黄乐（Alice Huang，Megaspeed 前 CEO）关联的数据中心安装了英伟达 Blackwell 芯片，而这类芯片未获美国许可出口中国一直违法。关键证据来自 11 月提交中国监管的文件序列号：安装在「长三角项目」的设备含一套 <strong>GB300 NVL72</strong> 机架——内含 72 颗 Blackwell Ultra 与 36 颗 Grace 处理器、重超 <strong>1500 公斤</strong>、体积堪比巨型冰箱。贷款文件显示，上海硕曜以这批硬件抵押从上海科创银行贷 <strong>9600 万元</strong>；另一家上海科栈以同地点一台 GB200 服务器及 32 台 H200 贷 <strong>9000 万元</strong>。彭博把序列号输入保修数据库，查出机架由台湾技嘉组装；贸易数据还显示一批报关写「储存机箱」的 1100 万美元货物从马来西亚空运至浦东。彭博明确表示：目前没有证据表明是 Megaspeed 把设备非法运到现场，设备如何入境仍不清楚。<strong>查重</strong>：11-20「停供中国含 H200」、11-25「B300 抛售」、11-27「东南亚四国停运」之后的序列号级实证新阶段。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">机架型号</div><div class="data-value">GB300 NVL72</div></div>
+<div class="data-chip"><div class="data-label">机架重量</div><div class="data-value">1500 kg</div></div>
+<div class="data-chip"><div class="data-label">Blackwell Ultra</div><div class="data-value">72 颗</div></div>
+<div class="data-chip"><div class="data-label">抵押贷款</div><div class="data-value">1.86 亿元</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-3">
+      <div class="card-chrome">
+        <span class="card-num">3</span>
+        <span class="card-title">英国央行金融稳定报告警告 AI 借贷风险：超大云厂商 2026 年发债超 3050 亿美元约占全球投资级 8%，计入表外承诺潜在敞口略高于 4 万亿美元，前沿模型与量子计算并列为银行业安全威胁</span>
+        <span class="card-tag">🏦 金融风险 / 监管 / P0</span>
+      </div>
+      <div class="card-desc">
+        英国央行在最新《金融稳定报告》中示警：为满足 AI 基础设施扩张的巨额资金需求，大型云服务厂商的大规模发债与复杂融资正累积系统性风险。报告估算，超大云厂商 <strong>2026 年发债总额将超 3050 亿美元</strong>、约占全球投资级债券发行的 <strong>8%</strong>；若计入表外承诺，潜在总敞口<strong>略高于 4 万亿美元</strong>。央行指出相关融资日益复杂、具有循环性且不透明——芯片公司投模型公司、模型公司承诺采购芯片与云服务、云公司再投数据中心、数据中心又采购芯片——这条「循环融资」链上任一环节承压，风险都可能向外蔓延。报告同时把前沿 AI 模型与量子计算并列为银行业安全威胁，呼吁加速迁移到<strong>抗量子密码</strong>。这一警告与 Anthropic 招股书「到 2045 年近 9000 亿美元算力承诺」、Gartner「2026 年 AI 基建近 1 万亿美元」形成呼应：AI 资本叙事正被监管者用资产负债表语言重新核算。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">2026 发债</div><div class="data-value">3050 亿$</div></div>
+<div class="data-chip"><div class="data-label">占投资级</div><div class="data-value">8%</div></div>
+<div class="data-chip"><div class="data-label">潜在敞口</div><div class="data-value">&gt;4 万亿$</div></div>
+<div class="data-chip"><div class="data-label">安全威胁</div><div class="data-value">AI+量子</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-chrome">
+      <span class="section-kicker">ii. Model · Governance · Talent</span>
+      <span class="section-count">3 items</span>
+    </div>
+    <div class="section-title">🧬 模型 · 治理 · 人才 · 一天三连发与 1 股锁权</div>
+    <div class="section-sub">腾讯连发 3D/多模态/翻译三件套、Anthropic 用 1 股锁 50.1% 投票权 —— 工具与规则同步往前长</div>
+
+    <div class="card" id="item-4">
+      <div class="card-chrome">
+        <span class="card-num">4</span>
+        <span class="card-title">腾讯混元发布专业级原生 3D 大模型 Hy3D 3.6：优化高模几何与 PBR 材质贴图，数百位专业美术盲测显著优于同类，已上线腾讯云 API，接入 Miora、游戏资产平台 LAP、影视平台 WorkRally</span>
+        <span class="card-tag">🧊 国产模型 / 3D 生成 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 27 日，腾讯混元发布新一代原生 3D 大模型 <strong>Hy3D 3.6</strong>，面向专业 3D 创作，重点优化高模几何与 PBR 材质贴图。与通用语言模型「写代码、拼图元」不同，它是原生 3D 生成模型——训练阶段直接学习 3D 资产的几何、纹理与材质分布，更擅长<strong>角色、生物、服装、复杂道具</strong>，能还原原画剪影与细腻曲面并生成 PBR 贴图。四个专项优化直指生产痛点：几何表面整洁（告别「泥塑感」）、模型结构清晰（护甲分层可辨）、高模刻画细腻（面部与服装褶皱稳定）、材质贴图合理（皮肤/布料/金属/皮革质感）。腾讯内部数百位专业 3D 美术盲测显示，其在几何、纹理与可用性上显著优于同类。已上线腾讯云 Token Hub 提供 API（限时 8 折至 2027-01-03），并接入 Miora、游戏资产生成平台 LAP、影视平台 WorkRally。混元 3D 系列社区下载量已超 <strong>653 万</strong>。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">模型类型</div><div class="data-value">原生 3D</div></div>
+<div class="data-chip"><div class="data-label">材质贴图</div><div class="data-value">PBR</div></div>
+<div class="data-chip"><div class="data-label">系列下载</div><div class="data-value">653 万+</div></div>
+<div class="data-chip"><div class="data-label">盲测美术</div><div class="data-value">数百位</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-5">
+      <div class="card-chrome">
+        <span class="card-num">5</span>
+        <span class="card-title">微信视觉团队开源电商多模态基座 WeMM-Ecom：0.8B~35B-A3B 五款尺寸、双思考模式、全套量化权重，35B-A3B 以 74.4 分登顶电商榜、2B 夺通用轻量第一，已服务微信电商日均调用十亿级</span>
+        <span class="card-tag">🎨 国产开源 / 多模态 / P1</span>
+      </div>
+      <div class="card-desc">
+        11 月 27 日，腾讯微信视觉团队开源 <strong>WeMM-Ecom</strong>——兼顾前沿电商理解与领先通用能力的多模态基础模型家族，涵盖 0.8B、2B、4B、9B 四款稠密模型与一款 <strong>35B-A3B</strong> 混合专家模型（总参 350 亿、每次仅激活 30 亿），全系列原生支持「快速直答」与「深度思考」双模式，同步开放 BF16、FP8、GPTQ、GGUF 全套权重。在 28 项电商基准与 64 项通用基准中，35B-A3B 以 <strong>74.4 分</strong>登顶电商总榜、领先数百 B 通用旗舰；轻量级 2B 在 64 项通用基准的轻量模型中排名第一。训练基于 Qwen3.5 与自研 WeChat-YATT 框架：先以约 4470 亿 token 两阶段继续预训练，再用在线策略蒸馏、约 31K 难题 GRPO 强化学习后训练，把两种思考模式按 4:1 放进同一套权重。目前已服务微信电商数百业务流程、<strong>日均调用十亿量级</strong>，覆盖自动填商品档案、跨店分辨规格、合规审核、直播挂车核验。论文、代码与权重已全部公开。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">旗舰得分</div><div class="data-value">74.4</div></div>
+<div class="data-chip"><div class="data-label">模型尺寸</div><div class="data-value">5 款</div></div>
+<div class="data-chip"><div class="data-label">MoE 激活</div><div class="data-value">3B/35B</div></div>
+<div class="data-chip"><div class="data-label">日均调用</div><div class="data-value">十亿级</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-6">
+      <div class="card-chrome">
+        <span class="card-num">6</span>
+        <span class="card-title">Anthropic IPO 招股书被扒治理结构：7 创始人以 7 美元持 1 股 F 类股锁定 50.1% 投票权且永不稀释，另 1 股 T 类股让长期利益信托掌握董事会多数；SignalFire 报告其两年人才留存率 80% 领先同行</span>
+        <span class="card-tag">🏛️ 公司治理 / IPO / P2</span>
+      </div>
+      <div class="card-desc">
+        随着 Anthropic（纳斯达克 ANT）IPO 落地，招股书披露的治理结构成为 11 月 27-28 日热议话题。核心是把「股权（钱）」与「投票权（权）」彻底分开：IPO 前向 Founder LLC 发行 <strong>1 股 F 类普通股</strong>，7 位联合创始人各出资 1 美元、合计 <strong>7 美元</strong>认购；该股不可公开交易，却自动拥有全部投票权的 <strong>50.1%</strong>，且明确「不受未来股本发行影响」——A 类投票权被永久结构性控制在 49.9% 以内。另有 1 股 T 类股由长期利益信托（LTBT）掌握董事会多数席位（7 席中 4 席），形成「创始人控表决权 + 信托控董事会」双层锁定。同时 SignalFire 报告：2021-2023 初入职员工两年留存率，Anthropic 达 <strong>80%</strong>，高于 DeepMind（78%）、OpenAI（67%）、Meta（64%）；工程师从 OpenAI 流向 Anthropic 的概率约为反向的 <strong>8 倍</strong>。<strong>查重</strong>：11-19 定价、11-20 首日涨、11-25 破发之后的治理结构与人才留存全新维度。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">锁权成本</div><div class="data-value">7 美元</div></div>
+<div class="data-chip"><div class="data-label">F 股投票权</div><div class="data-value">50.1%</div></div>
+<div class="data-chip"><div class="data-label">董事会席位</div><div class="data-value">4/7</div></div>
+<div class="data-chip"><div class="data-label">两年留存</div><div class="data-value">80%</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-chrome">
+      <span class="section-kicker">iii. Security · Skill</span>
+      <span class="section-count">2 items</span>
+    </div>
+    <div class="section-title">🔐 安全 · Skill · 信任被戳洞，方法论被写成 16 行</div>
+    <div class="section-sub">MiniMax「不存储」被金丝雀戳破、Google 用 16 行让编码智能体变研究员 —— 一边补信任，一边提效率</div>
+
+    <div class="card" id="item-7">
+      <div class="card-chrome">
+        <span class="card-num">7</span>
+        <span class="card-title">Dragos 200 万条金丝雀测试点名 MiniMax：号称不存储数据，提示词里的私有链接仍被打开、24 天后出现在飞书聊天、事后有 git 客户端试图克隆私有仓库；Atlas Cloud 停转发、OpenRouter 下架 3 家供应商</span>
+        <span class="card-tag">🔒 AI 安全 / 隐私 / P1</span>
+      </div>
+      <div class="card-desc">
+        据美国安全公司 Dragos 调查，MiniMax 在用户明确要求「不存储数据」时，仍收集并打开了提示词中的私有链接——这条以 AI 评分 <strong>84</strong> 成为 aihot.news 当日最高分条目。Dragos 在发给众多 AI 服务的近 <strong>200 万条</strong>提示词中埋设陷阱链接与虚假登录页。结果只有到达 MiniMax 服务器的链接在数天后被不明第三方打开，即使用户要求不存储。其中一个链接 <strong>24 天后</strong>出现在字节飞书聊天中，北京上海的 3 台台式机与 3 部手机 2 分钟内打开——研究员判断「更像有人在分享，而非扫描器」。链接抓取约 10-22 停止后，一个 git 客户端试图克隆提示词中提到的私有代码仓库。MiniMax 回应称是自动安全扫描、未保留完整对话、已删除存储地址、未发现第三方泄露证据。但云服务商 Atlas Cloud 已停止转发、告知 M3/M2.7/M3.1 Flash 用户视密钥为已泄露，OpenRouter 移除 3 家供应商并收紧隐私规则。<strong>查重</strong>：11-22 期第 106 期已报金丝雀测试整体结论，本次是同一批测试中 MiniMax 被单独点名 + 下游连锁反应。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">金丝雀提示</div><div class="data-value">200 万条</div></div>
+<div class="data-chip"><div class="data-label">链接重现</div><div class="data-value">24 天后</div></div>
+<div class="data-chip"><div class="data-label">当日 AI 评分</div><div class="data-value">84</div></div>
+<div class="data-chip"><div class="data-label">OpenRouter</div><div class="data-value">下架 3 家</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="item-8">
+      <div class="card-chrome">
+        <span class="card-num">8</span>
+        <span class="card-title">Google DeepMind 开源 16 行 Deep Research Skill：把 Gemini 4 Neon 编码智能体变研究员，宽问题拆 3-5 视角派并行子代理、只引一手 PDF、自动取消停滞 worker，盲测约 90% 胜过无技能版（Apache-2.0）</span>
+        <span class="card-tag">🛠️ Agent Skill / 实战工具 / P2</span>
+      </div>
+      <div class="card-desc">
+        11 月 27 日，Google DeepMind 团队成员 Philipp Schmid 发布实验性 Deep Research Skill：仅用 <strong>16 行</strong>指令，就能把 Gemini 4 Neon 的编码智能体变成研究员。该 Skill 已放入官方 google-gemini/demolab 仓库（Apache-2.0），可通过 <code>npx skills add google-gemini/demolab --skill deep-research</code> 一行安装到 Antigravity 等智能体，安装后显示为 <code>/deep-research</code> 斜杠命令。工作流体现「把方法论写进 Skill」：简单问题直接答，宽问题拆成 <strong>3-5 个</strong>不重叠视角派并行子代理、每个限 8-12 步；质量规则要求对照招股书、PDF 等<strong>一手来源</strong>核实、引用关键数字，来源冲突或数据缺失时自动写「Unresolved」章节；停滞 worker 会被取消。Schmid 称该 Skill 在数百次盲测中「超过 <strong>90%</strong> 的情况下优于不使用 Skill 的版本」，但评测方法与数据未公开、无第三方复测。<strong>关键</strong>：16 行的价值在方法论而非代码——拆视角、限步数、只引一手、不会就写不会。
+      </div>
+      <div class="data-strip">
+<div class="data-chip"><div class="data-label">指令行数</div><div class="data-value">16 行</div></div>
+<div class="data-chip"><div class="data-label">研究视角</div><div class="data-value">3-5 个</div></div>
+<div class="data-chip"><div class="data-label">盲测胜率</div><div class="data-value">~90%</div></div>
+<div class="data-chip"><div class="data-label">开源协议</div><div class="data-value">Apache-2.0</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="edit-note">
+    <p>编辑点评</p>
+    <p>今天这 8 条，如果只挑一个词，是<strong>「核算」</strong>。</p>
+    <p><strong>① 法庭 · 机房 · 账本（#1–#3）</strong>。法庭在核算证据：OpenAI 和苹果把 400 人的流动、76 页检验程序、一台手机里的截图全摆上桌面——当硬件成为下一个战场，抢人不如说是抢「人脑子里带走的东西」（#1）。机房在核算来源：彭博用序列号告诉我们，那台 1.5 吨的「冰箱」确实到了上海、还被抵押贷了款；禁运清单挡得住报关单，挡不住一张写错商品代码的空运单（#2）。账本在核算风险：英国央行第一次用「占全球投资级发行 8%」这种宏观口径描述 AI 发债，把循环融资、表外承诺、量子威胁写进金融稳定报告（#3）。当监管者开始用资产负债表说话，再性感的叙事也要回答「链条断了怎么办」。</p>
+    <p><strong>② 模型 · 治理 · 人才（#4–#6）</strong>。工具在核算怎么用：腾讯一天把 3D 生成（Hy3D 3.6，#4）、电商多模态（WeMM-Ecom，#5）、翻译模型 GGUF 三样东西摆上货架，而且直接嵌进自家的游戏、影视、电商生产管线；Anthropic 用 1 股锁住 50% 投票权、用 80% 留存证明文化凝聚力（#6）——「清晰的长期规则」比短期口号更有说服力。</p>
+    <p><strong>③ 安全 · Skill（#7–#8）</strong>。Dragos 用 200 万条金丝雀戳破「不存储」的承诺，Atlas Cloud 与 OpenRouter 立刻切割（#7）；Google 用 16 行 Skill 教智能体「只引一手、不会就写不会」（#8）。当外部世界充满法律战、灰色供应链和宏观风险，可验证、可复用的方法反而是最稳的护城河。</p>
+    <p>说到底：钱、权、证据都在被重新核算，而能落到工作流里的工具，才是这轮震荡里唯一还在加速的东西。</p>
+    <p>一句话：<strong>法庭、机房、账本三线同时收紧，而工具还在往生产流程里长</strong></p>
+    <p>今天最高分给到 <strong>#1 OpenAI 反诉苹果（9.5 / P0）</strong>：+12120 热度登顶，两大巨头从抢人打到抢证据，富士康同时组装 iPhone 与 OpenAI 手机让供应链成为关键暗线——AI 硬件战的竞争维度，正式从产品前移到证据。</p>
+    <p>五条可执行线索：<strong>① 算力供应商尽调</strong>——把「芯片来源与司法辖区」列入选型清单、预留多区备份；<strong>② 合作方资本稳定性</strong>——AI 泡沫与金融风险成大众叙事，选工具也看背后公司能不能撑过账本重算；<strong>③ 3D/多模态先复测</strong>——Hy3D 出的是资产底稿、WeMM-Ecom 登顶不等于开箱即用，中文小字与活动编号上线前跑一轮抽检；<strong>④ 提示词别塞敏感信息</strong>——私有链接、未发布素材地址、代码仓库凭证一律不进 AI 服务商，密钥按「可能泄露」管理；<strong>⑤ 情报调研立方法</strong>——借鉴 16 行 Skill 的「并行多源 + 只引一手 + 未解决留白」，降低串台与张冠李戴。</p>
+  </div>
+</div>
+</div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<script>
+(function() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.getElementById(href.slice(1));
+      if (target) sections.push({ el: target, link: link });
+    }
+  });
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    for (const s of sections) { if (s.el.offsetTop <= scrollY) current = s; }
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    document.getElementById('progressFill').style.width = progress + '%';
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+})();
+</script>
+<a href="index.html" style="position:fixed;top:18px;right:24px;z-index:9999;padding:9px 18px;border-radius:999px;background:rgba(42,36,27,0.88);color:#F2EEDF;font-family:Noto Sans SC,sans-serif;font-size:13px;font-weight:500;text-decoration:none;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='rgba(225,164,194,0.95)';this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(42,36,27,0.88)';this.style.transform='scale(1)'">&larr; 返回归档</a>
